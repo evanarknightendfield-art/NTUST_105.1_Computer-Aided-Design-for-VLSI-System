@@ -1,0 +1,51 @@
+.limit
+fanout 1		# maximum fanouts for SRC
+length 60	# maximum length for SRC
+.dimx 1000	# chip dimension in x-axis
+.dimy 1000	# chip dimension in y-axis
+.e
+
+.buflib 3
+# type	#F	#L	#C #fanout/length/cost
+SMALL	3	90	10
+MEDIUM	6	120	16
+LARGE	9	190	22
+.e
+
+.objective
+w_skew 1
+.e
+
+.pin 31		# number of pins
+346 162		# clock SRC coordinates
+145 208		# clock sink S1 coordinates
+30 256		# clock sink S2 coordinates
+850 533		# clock sink S3 coordinates
+198 153		# clock sink S4 coordinates
+415 399		# clock sink S5 coordinates
+920 477		# clock sink S6 coordinates
+891 957		# clock sink S7 coordinates
+484 361		# clock sink S8 coordinates
+166 613		# clock sink S9 coordinates
+884 560		# clock sink S10 coordinates
+126 638		# clock sink S11 coordinates
+543 226		# clock sink S12 coordinates
+729 998		# clock sink S13 coordinates
+845 953		# clock sink S14 coordinates
+901 910		# clock sink S15 coordinates
+511 225		# clock sink S16 coordinates
+503 366		# clock sink S17 coordinates
+200 931		# clock sink S18 coordinates
+900 765		# clock sink S19 coordinates
+785 503		# clock sink S20 coordinates
+869 608		# clock sink S21 coordinates
+524 879		# clock sink S22 coordinates
+546 672		# clock sink S23 coordinates
+335 515		# clock sink S24 coordinates
+405 95		# clock sink S25 coordinates
+790 622		# clock sink S26 coordinates
+153 795		# clock sink S27 coordinates
+703 28		# clock sink S28 coordinates
+714 909		# clock sink S29 coordinates
+228 699		# clock sink S30 coordinates
+.e
