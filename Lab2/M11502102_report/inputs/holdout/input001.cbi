@@ -1,0 +1,26 @@
+.limit
+fanout 2		# maximum fanouts for SRC
+length 58	# maximum length for SRC
+.dimx 65	# chip dimension in x-axis
+.dimy 65	# chip dimension in y-axis
+.e
+
+.buflib 3
+# type	#F	#L	#C #fanout/length/cost
+SMALL	3	45	10
+MEDIUM	6	60	16
+LARGE	9	95	22
+.e
+
+.objective
+w_skew 5
+.e
+
+.pin 6		# number of pins
+0 9		# clock SRC coordinates
+40 18		# clock sink S1 coordinates
+51 29		# clock sink S2 coordinates
+41 25		# clock sink S3 coordinates
+48 21		# clock sink S4 coordinates
+40 16		# clock sink S5 coordinates
+.e

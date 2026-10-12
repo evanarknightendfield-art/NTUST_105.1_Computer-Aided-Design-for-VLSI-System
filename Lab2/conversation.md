@@ -477,16 +477,6 @@ Three of the four sets are still running. I'll wait for the background job to fi
 
 I'm waiting for the last re-runs (holdout3, holdout4 and testcases) of the final `_3`. When they finish I'll aggregate all 111 cases, re-measure the three very large inputs with the final code, and run the full grading pipeline.
 
-## 🧑 我
-
-<task-notification>
-<task-id>b0kzsg91v</task-id>
-<tool-use-id>toolu_01J4SophtWCRHDXQPSDvpaHa</tool-use-id>
-<output-file>/tmp/claude-1000/-home-evan-Desktop-EDA-Lab2/3e117fbe-a4bc-4cac-9b01-04bb05a14f0d/tasks/b0kzsg91v.output</output-file>
-<status>completed</status>
-<summary>Background command "Fresh holdout5 for all three; rerun final _3 on all sets" completed (exit code 0)</summary>
-</task-notification>
-
 ## 🤖 Claude
 
 I built [M11502102_ClaudeOpus55Ultracode_3/](M11502102_ClaudeOpus55Ultracode_3/README.md). On 111 test cases it beats both Ultracode_2 and AstraUltra, but only slightly overall (0.4% and 0.2%). The real gains are on large cases; small and medium cases are tied.
@@ -529,54 +519,278 @@ I built [M11502102_ClaudeOpus55Ultracode_3/](M11502102_ClaudeOpus55Ultracode_3/R
 
 ## 🧑 我
 
-可以將你這段次 完整的對話+每次的思考過程完整存在 Lab02 裡 用 markdown
+幫我閱讀所有檔案，並詳細解釋Lab2 每個小專案的演算法 時間由遠至近
 
 ## 🤖 Claude
 
-API Error: Opus 5.5's safeguards flagged this message (https://www.anthropic.com/legal/aup). This sometimes happens with safe, normal conversations. Claude Code can't respond to this message with Opus 5.5.
+我正在逐一讀 Lab2 各專案的 README 和原始碼，接著會整理出各版演算法的說明。
 
-Try rephrasing the request in a new session or change your model.
+## 🤖 Claude
 
-Learn more: https://support.claude.com/en/articles/8106465
+參考解的建構與放置已讀完，接著讀平衡（balance）、退火（optimizer）與 main 流程。
 
-Details: `[reasoning_extraction]`
+## 🤖 Claude
 
-Request ID: req_011Cfx3TYtgsHBN9TLLRTkQQ
+已讀到 Ultracode_2 的平行分工；接著看 AstraUltra 的 FLUTE 式建樹和 Ultracode_3 的分群改動，然後開始寫說明。
 
-Message ID: msg_011Cfx3TaMjZGh6QDmWa4Vdc
+## 🤖 Claude
+
+Lab2 共有 9 個專案資料夾，下面按時間由遠到近說明。時間依據是資料夾修改時間和 git log。這些專案的程式碼大致是兩條路線：
+
+- **路線 A：基本版。** Morton 排序分群，加上 hill climbing（只隨機移動 buffer）。包括 `my_cbi`、`M11502102`、`GPT61Sol`。
+- **路線 B：三階段版。** 建構、插繞路 buffer 平衡、模擬退火。從 `claude_reference` 開始，後面每一版都在前一版上改。
+
+```
+claude_reference ─► Ultracode ─► AstraMedium ─► Ultracode_2 ─► AstraUltra ─► Ultracode_3
+    (10/8)          (10/12 04:54)  (10:07)        (12:16)         (12:57)        (15:06)
+my_cbi 骨架 ─► M11502102（空骨架）   GPT61Sol（照 TUTORIAL 基本版寫）
+```
+
+---
+
+## 0. 題目重點（所有版本都要處理）
+
+- **輸入：** SRC 和 N 個 sink 的座標、buffer 型號庫（每型號有 fanout 上限 F、總線長上限 L、成本 C）、`w_skew`。
+- **要做的事：** 插入 buffer，組成一棵以 SRC 為根的樹。
+- **限制：** 每個 parent 的 child 數 ≤ F，且到所有 child 的 Manhattan 距離**總和** ≤ L。
+- **到達時間：** sink 的 arrival = 路徑邊長總和，buffer 本身沒有延遲。
+- **目標：** **Score = Σ buffer cost + w_skew × (T_max − T_min)**，越小越好。
+- **關鍵觀念：** buffer 的位置和 children 決定之後，「最便宜的合法型號」就確定了，所以演算法只需要決定「樹的形狀」和「buffer 的座標」。
+
+---
+
+## 1. `my_cbi` 骨架（10/8）與 `M11502102`（10/12 02:25）
+
+- 這兩個是同一份 229 行的骨架，`diff` 結果完全相同，`readProblem`、`evaluate`、`buildInitial`、`optimize` 都還是 TODO。
+- [TUTORIAL.md](TUTORIAL.md) 給的「基本版」演算法就是下一節 GPT61Sol 實際寫出來的內容。
+- 骨架的 `main` 已經寫好一個保險：最佳化後如果不合法或分數變差，就退回初始解。
+
+## 2. `claude_reference`（10/8，第一個完整解）
+
+後面每一版都以它為基礎，所以這裡講最詳細。
+
+### 資料結構（`tree.h/.cpp`）：增量計算 + transaction
+
+- **每個節點記錄子樹統計：**
+  - `lo` / `hi`：從自己往下到子樹內 sink 的最短 / 最長路徑。
+  - `cnt`：子樹內的 sink 數。
+  - `s1` / `s2`：latency 的總和與平方和，用來算標準差 σ。
+- **整棵樹的值直接從根讀：** `T_max = nd[0].hi`、`T_min = nd[0].lo`。
+- **只往上重算：** 修改一個節點後，`refreshUp` 沿祖先往上重算，統計不再改變就停，不用整棵 O(N) 重算。
+- **型號自動選：** `recompute` 會挑「能撐住目前 fanout 與總線長」的最便宜型號，並同步更新 `totalCost`。
+- **Transaction：** `begin()` 之後的所有修改都記進 journal，包括節點內容、佔用座標、free list。`rollback()` 完整還原，`commit()` 確定修改。所以任何 move 都可以「先試做 → 檢查 → 不行就還原」，全程保持合法。
+
+### Stage 1 建構（`construct.cpp`）：由下往上分群
+
+1. `frontier` 一開始是所有 sinks。
+2. 如果 frontier 數量 ≤ SRC 的 F，且總長 ≤ SRC 的 L，就全部接到 SRC，結束。
+3. 否則做**遞迴二分**（`partition`）：
+   - 沿 bounding box 的長軸排序，切成兩半；
+   - 一直切到每群 ≤ Fg 個，且在中位數放 buffer 時總長 ≤ 某型號的 L。
+   - Fg 取 `C/(F−1)` 最小的型號的 F。原因是 N 個 sink 大約需要 N/(F−1) 個 buffer，這個比值越小越省。
+4. 每群放一個 parent buffer（`placeGroup`），放不下就再切半。新 buffer 成為下一輪的 frontier。
+5. 如果一群都合不起來（點彼此太遠），就在離 SRC 遠的節點上方插 **relay buffer**（`relayToward`），往 SRC 方向前進一步，步長取 `C/L` 最便宜型號的 L。
+6. 收尾有兩種，兩種都做，最後取好的：
+   - attach-early：能接 SRC 就直接接；
+   - single-root：先合成單一根，讓 SRC 的子樹在根部就能平衡。
+
+### Buffer 位置（`placement.cpp: findParentSpot`）
+
+- **不是只取中位數。** 它在 children 的 bounding box 內先用 12×12 格點粗搜，保留最好的 3 個起點，再把步長減半，在 5×5 鄰域細搜。
+- **目標函數：** `w·(max(d+hi) − min(d+lo)) + 型號 cost`，也就是讓各 child 的 latency 對齊。
+- **只搜 bounding box 的理由：** 在 box 外移動時，到每個 child 的距離同步增加，range 不會變好。
+
+### Stage 2 平衡（`balance.cpp`）：插繞路 buffer 拉高 T_min
+
+- **兩個量：** 對節點 v，
+  - `slack = T_max − (A_v + hi_v)`：整棵子樹最多還能延後多少；
+  - `need = low − (A_v + lo_v)`：要讓子樹最早的 sink 達到目標 `low`，至少要延後多少。
+- **找插入點：** 從上往下走，第一個 `need ≤ slack` 的節點，只要插**一個** delay buffer 就能解決整棵子樹。
+- **找繞路點（`pointOnDiamond`）：** 繞路點 n 要滿足 `d(n,v)=a`、`d(p,n)=b`，也就是兩個 Manhattan 菱形的交點。
+- **奇偶性：** 繞路長度一定是偶數，所以 **sink 的 arrival 奇偶性由 (x+y) 決定，永遠改不了**。sinks 的奇偶不一致時，skew ≥ 1。範例的 37 = 36 + 1，已經碰到這個下限。
+- **一次插不夠：** 先插一個盡量長的，剩下的再串一串 buffer。
+- **選 `low`：** 掃描 128 個均勻值，加上抽樣的 sink arrival，估計 `插入成本 + w·(T_max − low)`，取最小的方案。
+
+### Stage 3 模擬退火（`optimizer.cpp`）
+
+- **能量函數：** `E = cost + w·(skew + 0.3σ)`。skew 只看最大最小值，大部分 move 改不到它（能量是平的），所以加 σ 提供方向感。最佳解仍然以真正的 Score 記錄。
+- **溫度尺度：** 以「最便宜 buffer 的 cost」為單位，指數降溫。
+- **7 種 move：**
+
+| Move | 機率 | 作用 |
+|---|---|---|
+| Shift | 40% | buffer 隨機移動，半徑 1、2、4…（30% 挑關鍵路徑上的） |
+| Replace | 10% | 用 `findParentSpot` 移到最佳位置 |
+| Reparent | 20% | 節點換到附近 buffer 底下；原 parent 變空就連鎖刪除，省 cost |
+| Swap | 10% | 兩個節點交換 parent |
+| Dissolve | 7% | 刪掉一個 buffer，children 分給附近的 buffer |
+| Pad | 9% | 在太早到的節點上方插繞路 buffer |
+| Split | 4% | 把一個 buffer 的部分 children 拉出來給新 buffer |
+
+- **找附近 buffer：** 用空間格網，定期重建。
+- **最後驗證：** 每個階段結束都用獨立的 `evaluate()` 從頭驗證，失敗就退回上一階段的解。
+
+## 3. `M11502102_GPT61Sol`（10/12 03:32）：基本版
+
+就是 TUTORIAL 的 Milestone 3 + 4，寫在單一檔案 [main.cpp](M11502102_GPT61Sol/src/main.cpp)，共 998 行。
+
+- **建構：**
+  - frontier 用 **Morton（Z-order）key** 排序，也就是把 x、y 的 bit 交錯，讓空間上相鄰的點排在一起。
+  - 從左到右貪心地加點，直到放不下 buffer。放 buffer 的方法是從中位數往外最多 8 圈找空位。
+  - 一輪都合不起來，就插 relay 往 SRC 靠近。
+- **最佳化：** 純 hill climbing。隨機挑一個 buffer、隨機移動半徑 1～32，**每次整棵樹重算**，合法且 Score 不變差才保留。
+- **弱點**（第二次對話的比較結果）：
+  - 不會改樹的結構；
+  - 沒辦法讓太早到的 sink 變晚；
+  - 整棵重算很慢；
+  - 找空位時要掃過所有節點，10 萬個 sinks 要 55 秒；
+  - 建樹卡住時直接 `exit(1)`，不寫輸出檔。
+- **分數：** 平均是 claude_reference 的 1.67～2.11 倍。
+
+## 4. `M11502102_ClaudeOpus55Ultracode`（04:54）
+
+以 claude_reference 為基礎，分析後發現 buffer cost 佔 Score 的 90～99%，而且搜尋速度是瓶頸。
+
+- **4 種新 move，加上 Reparent 新增 relocate 版本，共 11 種：**
+  - **Merge：** 兩個鄰近 buffer 合成一個，或把 buffer child 收進 parent，直接省一個 buffer。先用「中位數總線長 > 最大 L」快速排除不可能的組合。
+  - **Rebalance：** 兩個鄰近 buffer 的 children 沿兩者的連線排序，枚舉切點重新分成兩群，再各自重新放置。
+  - **Retarget：** 關鍵路徑上的 buffer 以「絕對目標 T_max」重新放置。超過目標的懲罰是不足的 2 倍。
+  - **SkewRepar：** 關鍵路徑上的節點換到「arrival 最合適」的鄰近 buffer 底下，不加 buffer 就能平衡 skew。
+  - **Reparent 的 relocate 版：** 換完 parent 後，新舊 parent 都重新放置。
+- **速度約 4 倍**（每秒 70～90 萬個 move）：
+  - 佔用表從 hash set 改成 bitmap；
+  - `searchSpot` 改成 template，讓評估函式 inline；
+  - 最佳化時用便宜的 `fastSearch`（只保留 1 個起點、3×3 鄰域）。
+- **時間上限：** 改成 `10 + N/100` 秒，最多 30 秒。
+- **效果：** 比第一版好約 2.7%，約是 GPT61Sol 的 0.46～0.58 倍。
+
+## 5. `M11502102_Chatgpt6AstraMedium`（10:07）
+
+以 Ultracode 為基礎，只改約 200 行。
+
+1. **全樹精確的 Retarget：**
+   - 沿祖先收集兄弟子樹的最早 / 最晚 arrival，得到「不受這個 buffer 移動影響」的範圍。
+   - 每個候選座標只要 O(fanout) 就能算出**全樹**的 skew 和 σ，成本也計入 parent 型號的變化。
+   - 這種評估只佔 Retarget 的 25%，其餘 75% 用原版方法。
+2. **`diamond.h`：** 用解析解求兩個 Manhattan 菱形的交點，取代逐點掃描。複雜度與半徑無關，選出的點和原版相同，所以只加速、不改變分數。
+3. **立即保存最佳解：** 每次 Score 創新低就存一次。原版是每隔一段操作才存。
+
+結果和 Ultracode 打平（1.0001）。
+
+## 6. `M11502102_ClaudeOpus55Ultracode_2`（12:16）：平行化
+
+評分 VM 是 2 核心，但前面的版本都只用 1 核心。
+
+- **分工模式**（N ≥ 1500 且最大 L ≤ 0.65 × 晶片邊長時啟用，`parallel.cpp`）：
+  1. `makeCut`：從 SRC 往下，反覆展開 sink 最多的節點，直到每棵子樹 ≤ N/3 個 sink。上層節點凍結。
+  2. 剩下的子樹根沿 x 或 y 排序，按 sink 數分成兩組，兩條執行緒各負責一組。
+  3. 每個 move 用 transaction journal 檢查有沒有碰到別組的節點，越界就 rollback。
+  4. `mergeCut`：每個 epoch 結束把兩半合併，新 buffer 重新編號，再整棵重新驗證。
+  5. 奇數 epoch 和最後 30% 的時間，兩條鏈都看整棵樹，因為上層凍結時 skew 修不好。
+- **其他測資：** 兩條鏈用不同 seed 從同一個解出發，每個 epoch 取較好的那條繼續。
+- **降溫不中斷：** 同步之後接著原本的溫度繼續降，不重新加熱。重新加熱的版本實驗上完全沒有幫助。
+- **效果：** 整體好 0.6%，大且線長短的測資好 1.4%（8 筆全勝）。
+
+## 7. `M11502102_Chatgpt6AstraUltra`（12:57）
+
+以 Ultracode_2 為基礎。
+
+1. **保存所有創新低的候選：** 只要合法候選的 Score 創新低就存，即使退火因為 σ 拒絕了它。用 sparse checkpoint，只複製有變動的節點。
+2. **合併後保留三個候選：** chain 0、chain 1、合併解分別驗證，取最好的。
+3. **FLUTE 啟發的分群**（`construct_spatial.cpp`）：
+   - 試 x、y 兩個方向和多個切點，用「每群平均最小總線長」篩選；
+   - 底層最多試 6 個候選，實際建出兩層子樹，算成本與 skew 後 rollback，挑最好的。
+   - 它沒有套用 FLUTE 的查表或 RSMT 最佳解，原因是本題不共用線段，而且每個分支點都是要付錢的 buffer。
+4. **精確座標搜尋**（`exact_placement.cpp`）：已實作並測試過，但沒有得分收益，預設關閉。
+
+結果約和 Ultracode_2 打平（0.998）。
+
+## 8. `M11502102_ClaudeOpus55Ultracode_3`（15:06，目前最強）
+
+以 Ultracode_2 為基礎，逐項測過 AstraUltra 和 FLUTE 的想法後：
+
+1. **多方向、多切點分群**（借用 FLUTE net breaking 的「試多種切法、取最好」）：
+   - 每一刀試 4 個方向：x、y、x+y、x−y。對角線方向在 Manhattan 距離下也重要。
+   - 每個方向試 3 個切點：平均切點，以及前後各移一群。
+   - 最後一刀直接比兩群的實際型號成本；上層則比兩半的外框半周長總和，越小越緊密。
+   - 起點的 Score 好 2～3%。
+2. **修正「重新放置一定會移動」的問題：** 以前 buffer 自己的座標被當成已佔用，所以即使原地就是最佳也會被移走。現在只在新位置更好時才移動，並用 children 的指紋快取上次的結果。每秒 move 數約多 18%。
+3. **採用 AstraUltra 的三候選合併。**
+4. **大測資（N ≥ 1500）的時間上限從 30 秒放寬到 45 秒。**
+
+測過但沒採用的：Hanan grid 起點、AstraUltra 的 FLUTE 式建樹、保存被拒絕的最佳候選、大鄰域重建（ruin-and-rebuild）。
+
+結果：111 筆測資上，比 Ultracode_2 好 0.37%，比 AstraUltra 好 0.2%。10 萬個 sinks 的 Score 是 294863。
+
+## 9. `my_cbi` 目前狀態（最新）
+
+- HEAD（commit a523927）裡的 `my_cbi/src/main.cpp` 和 GPT61Sol **完全相同**。
+- 工作目錄裡它已被改回空骨架，還沒 commit。看起來你正準備自己從頭寫。
+
+---
+
+## 演進重點
+
+| 版本 | 主要貢獻 | 相對前一版 |
+|---|---|---|
+| GPT61Sol | Morton 分群 + hill climbing | 基準（最弱） |
+| claude_reference | 增量樹 + transaction、bounding box 位置搜尋、繞路平衡、7 種 move 的退火 | 約好 40～50% |
+| Ultracode | 4 種新 move + 搜尋快 4 倍 | 約好 2.7% |
+| AstraMedium | 全樹精確 Retarget、解析菱形交點 | 持平 |
+| Ultracode_2 | 2 執行緒分工 / 雙鏈 | 約好 0.6% |
+| AstraUltra | 保存創新低候選、FLUTE 式分群 | 持平 |
+| Ultracode_3 | 4 方向 × 3 切點分群、修正重新放置、大測資 45 秒 | 約好 0.4% |
+
+結論：真正的大躍進只有兩次。一次是 GPT61Sol → claude_reference，原因是演算法本身變了（可以改結構、可以插繞路）；另一次是 Ultracode 的新 move 加上提速。之後各版的差距都在 1% 以內，小、中型測資基本上已經收斂。
+
+**兩件要注意的事：**
+- **Ultracode_3 的 README 過期了。** [M11502102_ClaudeOpus55Ultracode_3/README.md](M11502102_ClaudeOpus55Ultracode_3/README.md) 在 commit a523927 被換成 Ultracode_2 的內容，寫的是 30 秒上限和 Ultracode_2 的數據。但程式碼（[main.cpp:129](M11502102_ClaudeOpus55Ultracode_3/src/main.cpp:129)）實際用的是 45 秒。正確的版本在 commit bec91b1，要交這版的話記得還原。
+- **報告可用的觀察：** 奇偶性下限（skew ≥ 1）、buffer cost 佔 Score 90% 以上，都適合寫進報告。
 
 ## 🧑 我
 
-可以將你這段次 完整的對話 有打在此對話的任何字 完整存在 Lab02 裡 用 markdown
+進入 Conda 環境 指令
 
 ## 🤖 Claude
 
-API Error: Opus 5.5's safeguards flagged this message (https://www.anthropic.com/legal/aup). This sometimes happens with safe, normal conversations. Claude Code can't respond to this message with Opus 5.5.
+要進入這次建的 `eda` 環境，執行：
 
-Try rephrasing the request in a new session or change your model.
+```bash
+conda activate eda
+```
 
-Learn more: https://support.claude.com/en/articles/8106465
+離開環境：
 
-Details: `[reasoning_extraction]`
+```bash
+conda deactivate
+```
 
-Request ID: req_011Cfx3ndQaTDpvhfwYrRkf7
+如果出現 `conda: command not found`，或提示要先執行 `conda init`，先跑這行（只需要做一次），然後重開 terminal：
 
-Message ID: msg_011Cfx3ney63DMMzd4XXkkLo
+```bash
+conda init bash
+```
+
+`eda` 環境裡有 Python 3.12、cmake 3.31 和 matplotlib。評分機上不需要這個環境，只有本機編譯和跑 `tools/` 裡的 Python 工具時才要啟用。
 
 ## 🧑 我
 
-可以將你這段次 完整的對話 有打在此對話的任何字 不用思考過程 完整存在 Lab02 裡 用 markdown
+Ultracode_3 的 README 過期了。 M11502102_ClaudeOpus55Ultracode_3/README.md 在 commit a523927 被換成 Ultracode_2 的內容，寫的是 30 秒上限和 Ultracode_2 的數據。但程式碼（main.cpp:129）實際用的是 45 秒。正確的版本在 commit bec91b1，要交這版的話記得還原。
+
+幫我改正確
 
 ## 🤖 Claude
 
-API Error: Opus 5.5's safeguards flagged this message (https://www.anthropic.com/legal/aup). This sometimes happens with safe, normal conversations. Claude Code can't respond to this message with Opus 5.5.
+我已經從 commit bec91b1 把 [M11502102_ClaudeOpus55Ultracode_3/README.md](M11502102_ClaudeOpus55Ultracode_3/README.md) 還原成正確版本，現在和程式碼一致：
 
-Try rephrasing the request in a new session or change your model.
+- **時間上限：** N ≥ 1500 時最多 45 秒，和 [main.cpp:129](M11502102_ClaudeOpus55Ultracode_3/src/main.cpp:129) 相同。
+- **改進說明：** 寫的是相對 Ultracode_2 的四項改進：多方向切分、修正「重新放置一定會移動」、三候選合併、45 秒上限。
+- **其他內容：** 也包含 Ultracode_3 自己的實驗數據、FLUTE 的比較表，以及環境變數 `CBI_PART`。
 
-Learn more: https://support.claude.com/en/articles/8106465
+這個修改已經 stage，但還沒 commit。要提交的話：
 
-Details: `[reasoning_extraction]`
+```bash
+git commit -m "Restore Ultracode_3 README" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+```
 
-Request ID: req_011Cfx3qheQWfkELMmxU5NQv
-
-Message ID: msg_011Cfx3qjCAMvTUjm5D6LDXw
+工作目錄裡另外還有你原本未 commit 的修改：`.gitignore`、`conversation.md`、`my_cbi`。這些我都沒動，上面的指令也不會把它們一起提交。
