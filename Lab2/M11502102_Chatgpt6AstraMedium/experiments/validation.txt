@@ -1,0 +1,6 @@
+C++17 Release build: PASS
+Course verifier: 42 final comparison pairs (84 outputs), all VALID; stdout matches independent scores.
+Diamond intersection: 250000 old/new comparisons, same feasibility and same first coordinate, with random parent locations, obstacles, boundary cases and parity cases. UBSan: PASS.
+Billion-scale diamond query: PASS.
+Tangent microbenchmark with radius 2000000, UBSan build: original scan 0.028498068 s, analytic 0.000000374 s. This is a single geometry microbenchmark, not overall solver acceleration.
+Instrumented global placement prediction vs updated tree energy + UBSan + course verifier: 39 cases PASS.

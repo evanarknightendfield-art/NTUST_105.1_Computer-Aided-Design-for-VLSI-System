@@ -1,0 +1,101 @@
+.limit
+fanout 2		# maximum fanouts for SRC
+length 210	# maximum length for SRC
+.dimx 300	# chip dimension in x-axis
+.dimy 300	# chip dimension in y-axis
+.e
+
+.buflib 3
+# type	#F	#L	#C #fanout/length/cost
+SMALL	3	90	10
+MEDIUM	6	120	16
+LARGE	9	190	22
+.e
+
+.objective
+w_skew 1
+.e
+
+.pin 81		# number of pins
+0 214		# clock SRC coordinates
+12 278		# clock sink S1 coordinates
+110 69		# clock sink S2 coordinates
+82 245		# clock sink S3 coordinates
+147 149		# clock sink S4 coordinates
+176 207		# clock sink S5 coordinates
+45 156		# clock sink S6 coordinates
+89 220		# clock sink S7 coordinates
+196 53		# clock sink S8 coordinates
+124 194		# clock sink S9 coordinates
+84 9		# clock sink S10 coordinates
+244 36		# clock sink S11 coordinates
+10 213		# clock sink S12 coordinates
+150 120		# clock sink S13 coordinates
+73 168		# clock sink S14 coordinates
+80 223		# clock sink S15 coordinates
+289 174		# clock sink S16 coordinates
+24 102		# clock sink S17 coordinates
+138 181		# clock sink S18 coordinates
+225 40		# clock sink S19 coordinates
+243 27		# clock sink S20 coordinates
+172 56		# clock sink S21 coordinates
+124 50		# clock sink S22 coordinates
+84 223		# clock sink S23 coordinates
+24 41		# clock sink S24 coordinates
+75 101		# clock sink S25 coordinates
+111 204		# clock sink S26 coordinates
+48 250		# clock sink S27 coordinates
+99 235		# clock sink S28 coordinates
+197 103		# clock sink S29 coordinates
+175 60		# clock sink S30 coordinates
+183 170		# clock sink S31 coordinates
+262 19		# clock sink S32 coordinates
+259 203		# clock sink S33 coordinates
+249 230		# clock sink S34 coordinates
+0 18		# clock sink S35 coordinates
+63 188		# clock sink S36 coordinates
+124 27		# clock sink S37 coordinates
+127 244		# clock sink S38 coordinates
+200 15		# clock sink S39 coordinates
+295 147		# clock sink S40 coordinates
+243 270		# clock sink S41 coordinates
+260 120		# clock sink S42 coordinates
+14 29		# clock sink S43 coordinates
+252 20		# clock sink S44 coordinates
+178 80		# clock sink S45 coordinates
+181 138		# clock sink S46 coordinates
+163 268		# clock sink S47 coordinates
+59 101		# clock sink S48 coordinates
+54 113		# clock sink S49 coordinates
+212 73		# clock sink S50 coordinates
+179 165		# clock sink S51 coordinates
+158 283		# clock sink S52 coordinates
+185 281		# clock sink S53 coordinates
+56 9		# clock sink S54 coordinates
+40 99		# clock sink S55 coordinates
+73 11		# clock sink S56 coordinates
+151 261		# clock sink S57 coordinates
+191 106		# clock sink S58 coordinates
+207 292		# clock sink S59 coordinates
+107 255		# clock sink S60 coordinates
+102 164		# clock sink S61 coordinates
+257 164		# clock sink S62 coordinates
+246 94		# clock sink S63 coordinates
+75 244		# clock sink S64 coordinates
+37 126		# clock sink S65 coordinates
+198 34		# clock sink S66 coordinates
+60 152		# clock sink S67 coordinates
+277 165		# clock sink S68 coordinates
+222 12		# clock sink S69 coordinates
+221 254		# clock sink S70 coordinates
+81 27		# clock sink S71 coordinates
+246 128		# clock sink S72 coordinates
+280 122		# clock sink S73 coordinates
+22 258		# clock sink S74 coordinates
+120 252		# clock sink S75 coordinates
+95 103		# clock sink S76 coordinates
+84 244		# clock sink S77 coordinates
+283 55		# clock sink S78 coordinates
+203 30		# clock sink S79 coordinates
+76 41		# clock sink S80 coordinates
+.e

@@ -1,0 +1,11 @@
+Release C++17 build: PASS
+UBSan CTest: 3/3 passed
+checkpoint_test: 128000 randomized transactions; 58235 comparisons, all five Snapshot arrays equal
+diamond_test: 250000 scan-vs-analytic comparisons passed
+exact_placement_test: 4386 line searches match exhaustive minimum legal Score (move disabled by default)
+UBSan solver smoke: 70 runs over 35 cases, each tested with 1 and 2 threads; all independently verified
+Stage dump outputs: 3 independently verified; stage2 equals final at -t 0, and stage2 Score <= stage1
+Missing-argument behavior: returns 1 with usage
+All benchmark outputs independently verified: tuning 40, holdout 36, existing cases 30, 100000-sink case 2; total 108 VALID outputs.
+Final version vs baseline: 28 case pairs.
+Both baseline and final source SHA-256 match manifest.json after benchmarks.

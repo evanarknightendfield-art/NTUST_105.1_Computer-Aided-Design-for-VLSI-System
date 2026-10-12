@@ -1,0 +1,11 @@
+[input] sinks=1 chip=50x50 buflib=3 w_skew=1 SRC(F=1,L=10)
+[stage1-construct(attach-early)] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 levels=2 time=0.00s
+  (+0 delay buffers)
+[stage2-balance(attach-early)] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 levels=2 time=0.00s
+[stage1-construct(single-root)] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 levels=2 time=0.00s
+  (+0 delay buffers)
+[stage2-balance(single-root)] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 levels=2 time=0.00s
+[spatial-portfolio] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 levels=2 time=0.00s
+[spatial-portfolio] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 levels=2 time=0.00s
+[anneal] threads=2 runs=6 decomposition=0 (merged 0, failed 0) iterations=52651520
+[stage3-anneal] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 levels=2 time=5.00s
