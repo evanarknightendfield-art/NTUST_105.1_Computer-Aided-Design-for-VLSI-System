@@ -1,0 +1,7 @@
+T_max: 73, T_min: 71, Score: 30
+[stage1] legal=1 buffers=2 cost=32 skew=7 T_max=71 T_min=64 score=67 time=0.00s
+[optimize] iterations=3827712 accepted=37184 T0=3.00 T1=0.05
+[optimize] iterations=3883008 accepted=36845 T0=3.00 T1=0.05
+[optimize] iterations=4153344 accepted=12219 T0=3.00 T1=0.05
+[optimize] iterations=4103168 accepted=17031 T0=3.00 T1=0.05
+[stage2] legal=1 buffers=2 cost=20 skew=2 T_max=73 T_min=71 score=30 time=2.02s

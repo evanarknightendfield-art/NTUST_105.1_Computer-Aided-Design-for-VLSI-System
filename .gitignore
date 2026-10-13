@@ -25,20 +25,19 @@ venv/
 .ruff_cache/
 
 # Local grader runtime artifacts
-/Lab2/step2_grader/local_run/
-/Lab2/local_grade_*/
+/Lab2/Grader/step2_grader/local_run/
+/Lab2/Grader/local_grade_*/
+
+# Generated testcases (regenerate with Lab2/Testcases/make_testcases.sh)
+/Lab2/Testcases/*/
 
 # Generated results from student projects
-/Lab2/my_cbi/results/
+/Lab2/MyCode/*/results/
 /Lab2/M*/results/
 /Lab2/B*/results/
 
-# Generated experiment reports (tables, plots, and CBI outputs)
-/Lab2/my_cbi_report/
-/Lab2/my_cbi_morton_report/
-
-# Keep source code, testcases, supplied examples, reference reports,
-# course PDFs, and final submission documents trackable.
+# Everything else is tracked: source code, experiment results (SA is random,
+# so they cannot be regenerated exactly), reports, examples and course PDFs.
 
 # Editor and operating system temporary files
 *.swp

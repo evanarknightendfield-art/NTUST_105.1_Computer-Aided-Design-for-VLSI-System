@@ -1,0 +1,8 @@
+.buffer 1
+B1 SMALL 32 1
+.e
+
+.level 2
+1 SRC:{B1}
+2 B1:{S1}
+.e

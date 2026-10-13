@@ -1,0 +1,7 @@
+T_max: 290, T_min: 269, Score: 177
+[stage1] legal=1 buffers=9 cost=150 skew=439 T_max=469 T_min=30 score=589 time=0.00s
+[optimize] iterations=3068928 accepted=80044 T0=3.00 T1=0.01
+[optimize] iterations=3227648 accepted=90311 T0=3.00 T1=0.01
+[optimize] iterations=3219456 accepted=66359 T0=3.00 T1=0.01
+[optimize] iterations=3145728 accepted=73109 T0=3.00 T1=0.01
+[stage2] legal=1 buffers=9 cost=156 skew=21 T_max=290 T_min=269 score=177 time=2.04s
