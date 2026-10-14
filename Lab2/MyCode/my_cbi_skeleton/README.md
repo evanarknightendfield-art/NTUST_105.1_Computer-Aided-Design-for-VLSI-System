@@ -32,6 +32,6 @@ cmake --build build
 | v2 | `v2_hill_climbing` | 第 4 課：+ hill climbing（Pad / Shift / Reparent） | 0.630 | 0.452 |
 | v3 | `v3_simulated_annealing` | 第 5 課：+ 模擬退火、σ 能量、小測資重啟 | 0.521 | 0.380 |
 | v4 | `v4_incremental` | 第 6 課：+ 增量計算（lo / hi）、對準關鍵路徑 | 0.487 | 0.313 |
-| v5 | `v5_balanced_swap` | 講義改進：零 skew 合併點 + 交換 parent + 40 秒（= 交出去的 `M11502102`） | **0.469** | **0.301** |
+| v5 | `v5_balanced_swap` | 講義改進：零 skew 合併點 + 交換 parent + Merge / Split + 改接到較遠的 buffer + 45 秒（= 交出去的 `M11502102`） | **0.409** | **0.258** |
 
 每個版本的 README 都有詳細說明、和上一版的逐筆比較。

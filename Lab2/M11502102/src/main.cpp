@@ -151,6 +151,14 @@ public:
                std::llabs((long long)nodes_[a].y - nodes_[b].y);
     }
 
+    bool isAncestor(int a, int v) const {
+        while (v >= 0) {
+            if (v == a) return true;
+            v = nodes_[v].parent;
+        }
+        return false;
+    }
+
     int addBuffer(int x, int y) {
         Node b;
         b.x = x;
@@ -642,14 +650,53 @@ int criticalNode(const Tree& T, bool minPath, std::mt19937& rng) {
     return path[rng() % path.size()];
 }
 
-void optimize(const Problem& P, Tree& T, double seconds, unsigned seed) {
+int nearNode(const Tree& T, int v, std::mt19937& rng) {
+    int u = T.node(v).parent;
+    if (u < 0) return -1;
+    int up = 1 + (int)(rng() % 3);
+    for (int i = 0; i < up && T.node(u).parent >= 0; ++i) u = T.node(u).parent;
+    int down = (int)(rng() % (up + 2));
+    for (int i = 0; i < down; ++i) {
+        const std::vector<int>& ch = T.node(u).children;
+        int next = -1;
+        for (int k = 0; k < 4 && !ch.empty(); ++k) {
+            int c = ch[rng() % ch.size()];
+            if (T.node(c).kind == BUF) {
+                next = c;
+                break;
+            }
+        }
+        if (next < 0) break;
+        u = next;
+    }
+    return u;
+}
+
+void removeEmpty(Tree& T, int u, std::vector<std::pair<int, int>>& removed) {
+    while (T.node(u).kind == BUF && T.node(u).children.empty()) {
+        int up = T.node(u).parent;
+        T.removeBuffer(u);
+        removed.push_back({u, up});
+        u = up;
+    }
+}
+
+void reviveAll(Tree& T, const std::vector<std::pair<int, int>>& removed) {
+    for (int i = (int)removed.size() - 1; i >= 0; --i) T.revive(removed[i].first, removed[i].second);
+}
+
+long long optimize(const Problem& P, Tree& T, double seconds, unsigned seed) {
     auto start = std::chrono::steady_clock::now();
     std::mt19937 rng(seed);
     std::uniform_real_distribution<double> uni(0.0, 1.0);
     const double beta = 0.3;
 
     long long minCost = P.buflib[0].cost;
-    for (const Bufferlibrary& b : P.buflib) minCost = std::min(minCost, b.cost);
+    int maxFanout = 0;
+    for (const Bufferlibrary& b : P.buflib) {
+        minCost = std::min(minCost, b.cost);
+        maxFanout = std::max(maxFanout, b.fanout);
+    }
     double c = (double)std::max(1LL, minCost);
     double f0 = std::min(0.3, std::max(0.03, 0.3 * std::sqrt(50.0 / std::max(1, T.numSinks()))));
     double T0 = f0 * c;
@@ -659,38 +706,54 @@ void optimize(const Problem& P, Tree& T, double seconds, unsigned seed) {
     auto energy = [&]() { return (double)T.score() + beta * (double)P.w_skew * T.sigma(); };
     double current = energy();
     Tree best = T;
-    long long bestScore = T.score();
+    long long savedScore = T.score();
+    long long lastSave = 0;
+    const long long saveGap = 4LL * T.size();
     bool bestDirty = false;
 
     int maxLog = 0;
     while ((1 << (maxLog + 1)) <= std::max(P.dimx, P.dimy) / 2) ++maxLog;
 
+    long long iter = 0;
     auto accept = [&]() {
         double next = energy();
         double d = next - current;
         if (d > 0 && uni(rng) >= std::exp(-d / temp)) return false;
         current = next;
-        if (T.score() < bestScore) {
-            bestScore = T.score();
-            bestDirty = true;
+        if (T.score() < savedScore) {
+            if (iter - lastSave >= saveGap) {
+                best = T;
+                savedScore = T.score();
+                lastSave = iter;
+                bestDirty = false;
+            } else {
+                bestDirty = true;
+            }
         }
         return true;
     };
 
-    long long iter = 0, accepted = 0;
+    // pad, shift, reparent, replace, swap, merge, split
+    const int weight[7] = {15, 25, 25, 8, 8, 9, 10};
+    int cum[7];
+    for (int k = 0, s = 0; k < 7; ++k) cum[k] = (s += weight[k]);
+
     while (true) {
         if ((iter & 1023) == 0) {
             double used = std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count();
             if (used >= seconds) break;
             temp = T0 * std::pow(T1 / T0, used / seconds);
-            if (bestDirty) {
+            if (bestDirty && T.score() < savedScore) {
                 best = T;
-                bestDirty = false;
+                savedScore = T.score();
+                lastSave = iter;
             }
+            bestDirty = false;
         }
         ++iter;
-        int roll = (int)(rng() % 100);
-        int move = roll < 20 ? 0 : roll < 50 ? 1 : roll < 80 ? 2 : roll < 90 ? 3 : 4;
+        int roll = (int)(rng() % cum[6]);
+        int move = 0;
+        while (roll >= cum[move]) ++move;
         int v = -1;
         if (rng() % 10 < 3) v = criticalNode(T, move == 0 ? true : (rng() % 2 == 0), rng);
         if (v < 0) v = 1 + (int)(rng() % (T.size() - 1));
@@ -705,10 +768,7 @@ void optimize(const Problem& P, Tree& T, double seconds, unsigned seed) {
             int nb = T.addBuffer(x, y);
             T.link(v, nb);
             T.link(nb, p);
-            if (nodeOK(P, T, nb) && nodeOK(P, T, p) && accept()) {
-                ++accepted;
-                continue;
-            }
+            if (nodeOK(P, T, nb) && nodeOK(P, T, p) && accept()) continue;
             T.link(v, p);
             T.removeBuffer(nb);
         } else if (move == 1) {
@@ -719,67 +779,105 @@ void optimize(const Problem& P, Tree& T, double seconds, unsigned seed) {
             if (!insideChip(P, x, y) || !T.isFree(x, y)) continue;
             int oldX = T.node(v).x, oldY = T.node(v).y;
             T.moveTo(v, x, y);
-            if (nodeOK(P, T, v) && nodeOK(P, T, T.node(v).parent) && accept()) {
-                ++accepted;
-                continue;
-            }
+            if (nodeOK(P, T, v) && nodeOK(P, T, T.node(v).parent) && accept()) continue;
             T.moveTo(v, oldX, oldY);
+        } else if (move == 2) {
+            int p = T.node(v).parent;
+            int q = -1;
+            if (rng() % 2 == 0) {
+                q = nearNode(T, v, rng);
+            } else {
+                int gp = T.node(p).parent;
+                if (gp < 0) continue;
+                std::vector<int> cand = {gp};
+                for (int ch : T.node(gp).children)
+                    if (ch != p && T.node(ch).kind == BUF) cand.push_back(ch);
+                q = cand[rng() % cand.size()];
+            }
+            if (q < 0 || q == p || T.node(q).kind == SINK || T.isAncestor(v, q)) continue;
+            T.link(v, q);
+            std::vector<std::pair<int, int>> removed;
+            removeEmpty(T, p, removed);
+            if (nodeOK(P, T, q) && accept()) continue;
+            reviveAll(T, removed);
+            T.link(v, p);
         } else if (move == 3) {
             if (T.node(v).kind != BUF) continue;
             int qx, qy;
             if (!balancedSpot(P, T, T.node(v).children, 6, qx, qy)) continue;
             int oldX = T.node(v).x, oldY = T.node(v).y;
             T.moveTo(v, qx, qy);
-            if (nodeOK(P, T, v) && nodeOK(P, T, T.node(v).parent) && accept()) {
-                ++accepted;
-                continue;
-            }
+            if (nodeOK(P, T, v) && nodeOK(P, T, T.node(v).parent) && accept()) continue;
             T.moveTo(v, oldX, oldY);
         } else if (move == 4) {
             int p1 = T.node(v).parent;
-            int gp = T.node(p1).parent;
-            if (gp < 0) continue;
-            const std::vector<int>& uncles = T.node(gp).children;
-            int p2 = uncles[rng() % uncles.size()];
-            if (p2 == p1 || T.node(p2).kind != BUF || T.node(p2).children.empty()) continue;
+            int p2 = -1;
+            if (rng() % 2 == 0) {
+                p2 = nearNode(T, v, rng);
+            } else {
+                int gp = T.node(p1).parent;
+                if (gp < 0) continue;
+                const std::vector<int>& uncles = T.node(gp).children;
+                p2 = uncles[rng() % uncles.size()];
+            }
+            if (p2 < 0 || p2 == p1 || T.node(p2).kind != BUF || T.node(p2).children.empty()) continue;
             int u = T.node(p2).children[rng() % T.node(p2).children.size()];
+            if (u == v || T.isAncestor(v, p2) || T.isAncestor(u, p1)) continue;
             T.link(v, p2);
             T.link(u, p1);
-            if (nodeOK(P, T, p1) && nodeOK(P, T, p2) && accept()) {
-                ++accepted;
-                continue;
-            }
+            if (nodeOK(P, T, p1) && nodeOK(P, T, p2) && accept()) continue;
             T.link(v, p1);
             T.link(u, p2);
-        } else {
-            int p = T.node(v).parent;
-            int gp = T.node(p).parent;
-            if (gp < 0) continue;
-            std::vector<int> cand = {gp};
-            for (int ch : T.node(gp).children)
-                if (ch != p && T.node(ch).kind == BUF) cand.push_back(ch);
-            int q = cand[rng() % cand.size()];
-
-            T.link(v, q);
+        } else if (move == 5) {
+            if (T.node(v).kind != BUF) continue;
+            int b2 = -1;
+            if (rng() % 3 == 0) {
+                const std::vector<int>& ch = T.node(v).children;
+                b2 = ch[rng() % ch.size()];
+            } else {
+                b2 = nearNode(T, v, rng);
+            }
+            if (b2 < 0 || b2 == v || T.node(b2).kind != BUF || T.isAncestor(b2, v)) continue;
+            std::vector<int> kids = T.node(b2).children;
+            int fan = (int)(T.node(v).children.size() + kids.size()) - (T.node(b2).parent == v ? 1 : 0);
+            if (fan > maxFanout) continue;
+            int oldX = T.node(v).x, oldY = T.node(v).y;
+            for (int k : kids) T.link(k, v);
             std::vector<std::pair<int, int>> removed;
-            int u = p;
-            while (T.node(u).kind == BUF && T.node(u).children.empty()) {
-                int up = T.node(u).parent;
-                T.removeBuffer(u);
-                removed.push_back({u, up});
-                u = up;
+            removeEmpty(T, b2, removed);
+            bool moved = false;
+            int qx, qy;
+            if (rng() % 2 == 0 && balancedSpot(P, T, T.node(v).children, 6, qx, qy)) {
+                T.moveTo(v, qx, qy);
+                moved = true;
             }
-            if (nodeOK(P, T, q) && accept()) {
-                ++accepted;
-                continue;
-            }
-            for (int i = (int)removed.size() - 1; i >= 0; --i) T.revive(removed[i].first, removed[i].second);
-            T.link(v, p);
+            if (nodeOK(P, T, v) && nodeOK(P, T, T.node(v).parent) && accept()) continue;
+            if (moved) T.moveTo(v, oldX, oldY);
+            reviveAll(T, removed);
+            for (int k : kids) T.link(k, b2);
+        } else {
+            if (T.node(v).kind != BUF) continue;
+            const std::vector<int>& ch = T.node(v).children;
+            int k = (int)ch.size();
+            if (k < 3) continue;
+            int c0 = ch[rng() % k];
+            std::vector<int> kids = ch;
+            std::sort(kids.begin(), kids.end(), [&](int a, int b) { return T.dist(a, c0) < T.dist(b, c0); });
+            kids.resize(2 + rng() % (k - 2));
+            int qx, qy;
+            if (!balancedSpot(P, T, kids, 4, qx, qy)) continue;
+            int host = (rng() % 2 == 0) ? T.node(v).parent : v;
+            int nb = T.addBuffer(qx, qy);
+            for (int u : kids) T.link(u, nb);
+            T.link(nb, host);
+            if (nodeOK(P, T, nb) && nodeOK(P, T, v) && nodeOK(P, T, host) && accept()) continue;
+            for (int u : kids) T.link(u, v);
+            T.removeBuffer(nb);
         }
     }
-    if (T.score() <= bestScore) best = T;
+    if (T.score() < savedScore) best = T;
     T = best;
-    std::cerr << "[optimize] iterations=" << iter << " accepted=" << accepted << " T0=" << T0 << " T1=" << T1 << "\n";
+    return iter;
 }
 
 void logStage(const char* name, const Eval& e, std::chrono::steady_clock::time_point start) {
@@ -812,12 +910,19 @@ int main(int argc, char** argv) {
     Eval e = evaluate(P, T);
     logStage("stage1", e, start);
 
-    double seconds = std::min(40.0, 2.0 + T.numSinks() / 250.0);
+    double seconds = T.numSinks() <= 12 ? 5.0 : std::min(45.0, 10.0 + T.numSinks() / 100.0);
+    unsigned seed = 1;
+    for (int i = 3; i + 1 < argc; i += 2) {
+        std::string flag = argv[i];
+        if (flag == "-t") seconds = std::atof(argv[i + 1]);
+        else if (flag == "-s") seed = (unsigned)std::atoi(argv[i + 1]);
+    }
     int runs = T.numSinks() <= 50 ? 4 : 1;
+    long long iterations = 0;
     Tree best = T;
     for (int r = 0; r < runs; ++r) {
         T = best;
-        optimize(P, T, seconds / runs, 1 + 7919u * r);
+        iterations += optimize(P, T, seconds / runs, seed + 7919u * r);
         Eval e2 = evaluate(P, T);
         if (e2.legal && e2.score == T.score() && e2.score < e.score) {
             e = e2;
@@ -825,6 +930,7 @@ int main(int argc, char** argv) {
         }
     }
     T = best;
+    std::cerr << "[optimize] iterations=" << iterations << "\n";
     logStage("stage2", e, start);
 
     if (!T.write(P, argv[2])) {

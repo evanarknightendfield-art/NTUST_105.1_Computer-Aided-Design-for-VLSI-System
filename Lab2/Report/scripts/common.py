@@ -14,7 +14,7 @@ VERSIONS = [
     ('v2', 'Hill climbing', 'MyCode/v2_hill_climbing'),
     ('v3', 'Simulated annealing', 'MyCode/v3_simulated_annealing'),
     ('v4', 'Incremental SA', 'MyCode/v4_incremental'),
-    ('v5', 'Balanced + swap', 'MyCode/v5_balanced_swap'),
+    ('v5', 'Balanced + structural moves', 'MyCode/v5_balanced_swap'),
 ]
 
 PLOT_VERSIONS = ['v2', 'v4', 'v5']

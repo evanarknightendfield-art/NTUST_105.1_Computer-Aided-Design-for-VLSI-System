@@ -1,7 +1,4 @@
 T_max: 22, T_min: 22, Score: 10
 [stage1] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 time=0.00s
-[optimize] iterations=8882176 accepted=339392 T0=3.00 T1=0.01
-[optimize] iterations=8555520 accepted=354801 T0=3.00 T1=0.01
-[optimize] iterations=8503296 accepted=353657 T0=3.00 T1=0.01
-[optimize] iterations=8632320 accepted=358399 T0=3.00 T1=0.01
-[stage2] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 time=2.00s
+[optimize] iterations=84908032
+[stage2] legal=1 buffers=1 cost=10 skew=0 T_max=22 T_min=22 score=10 time=5.00s

@@ -59,6 +59,8 @@ def main():
             print(f"  {r['version']} {r['case']}: {r['status']:<8} score={r['score']:<8} {r['seconds']}s", flush=True)
 
     summary = os.path.join(RESULT_DIR, a.set, 'summary.csv')
+    if os.path.exists(summary):
+        rows += [r for r in csv.DictReader(open(summary)) if r['version'] not in tags]
     with open(summary, 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         w.writeheader()

@@ -16,6 +16,21 @@ conda activate eda
 3. `scripts/run_all.py`：每個版本跑每筆測資，輸出與 log 存到 `results/<set>/<版本>/`，並用課程 verifier 檢查 VALID
 4. `scripts/make_tables.py`：表格到 `tables/<set>/`（`.md` 和 `.csv` 各一份）
 5. `scripts/make_figures.py`：圖到 `figures/<set>/`
+6. `scripts/make_arrival.py`：A-004 的 v1 / v5 sink 到達時間比較圖（報告圖 1）
+
+**只想重跑某個版本（例如改了 v5）：** 不要跑 `run_everything.sh`，否則 v1～v4 的分數也會因為隨機性而改變，報告裡的數字要全部重填。改用：
+
+```bash
+cd scripts
+python build_all.py
+python run_all.py --set testcases --versions v5
+python run_all.py --set holdout --versions v5
+python make_tables.py --set testcases && python make_tables.py --set holdout
+python make_figures.py --set testcases --trees 001,004 && python make_figures.py --set holdout --trees ""
+python make_arrival.py --set testcases --case 004
+```
+
+`run_all.py` 只會覆寫被重跑版本的結果，`summary.csv` 裡其他版本的資料會保留。
 
 ## 版本
 
@@ -25,7 +40,7 @@ conda activate eda
 | v2 | Hill climbing | `MyCode/v2_hill_climbing` | 第 4 課：+ hill climbing（Shift / Reparent / Pad） |
 | v3 | Simulated annealing | `MyCode/v3_simulated_annealing` | 第 5 課：+ 模擬退火、σ 能量、小測資重啟 |
 | v4 | Incremental SA | `MyCode/v4_incremental` | 第 6 課：+ 增量計算（lo/hi）、對準關鍵路徑 |
-| v5 | Balanced + swap | `MyCode/v5_balanced_swap` | brief 改進：零 skew 合併點（L04 Tsay / DME / GMA）+ 交換 parent（L06 TimberWolf、L10 KL），時間上限 40 秒（= 交出去的版本） |
+| v5 | Balanced + structural moves | `MyCode/v5_balanced_swap` | brief 改進：零 skew 合併點（L04 Tsay / DME / GMA）+ 交換 parent（L06 TimberWolf、L10 KL）+ Merge / Split + 改接到較遠的鄰近 buffer，時間上限 `min(45, 10 + N/100)` 秒（= 交出去的版本） |
 
 要加新版本：在 `scripts/common.py` 的 `VERSIONS` 加一行。分數圖最多畫 3 個版本（`PLOT_VERSIONS`），樹狀圖畫 4 個（`TREE_VERSIONS`）。
 
@@ -63,6 +78,7 @@ python make_figures.py --set testcases --trees 001,004,006 # 指定要畫樹的�
 | `fig_trees_XXX.png` | 同一筆測資 v1 / v2 / v4 / v5 的樹（2×2），標題有 cost / skew / Score。sink 顏色 = arrival time |
 | `fig_score_by_version.png` | 每筆測資 v2 / v4 / v5 的 Score ÷ 初始建構 Score（越左越好） |
 | `fig_cost_skew_split.png` | 每筆測資初始 / 最終的 Score 拆成 buffer cost 與 w_skew × skew 兩段 |
+| `fig_arrival_004.png` | A-004 的 v1 / v5 sink 到達時間分布（`make_arrival.py`） |
 
 ### 配色
 
@@ -97,21 +113,25 @@ node /tmp/claude-1000/bundled-skills/2.1.295/b9a997ced0aab1736bc5c8b24f865ec5/da
 | 4. Experiments | 0.9 頁 | 各階段表格、版本比較、新測資驗證、執行時間 | `stages.md`、`versions.md`、`fig_score_by_version.png` |
 | 5. Observations | 0.3 頁 | 奇偶性下限、cost 下限與差距、最佳化主要是降 skew（cost 幾乎不變）、w_skew 大時插繞路 buffer 很划算 | `fig_cost_skew_split.png`、`bounds.md` |
 
-## 目前的重點數據（`./run_everything.sh` 跑一次的結果）
+## 目前的重點數據
+
+v1～v4 是 `./run_everything.sh` 跑一次的結果；v5 換成新版程式後，只重跑了 v5（v1～v4 的結果沒有動）。
 
 - **全部 VALID：** testcases 15 筆、holdout 12 筆，5 個版本都是。
 - **相對初始建構的 Score（幾何平均）：**
 
-  | 測資組 | Hill climbing | Simulated annealing | Incremental SA | Balanced + swap |
+  | 測資組 | Hill climbing | Simulated annealing | Incremental SA | Balanced + structural moves |
   |---|---:|---:|---:|---:|
-  | testcases（15 筆） | 0.630 | 0.521 | 0.487 | **0.469** |
-  | holdout（12 筆） | 0.452 | 0.380 | 0.313 | **0.301** |
+  | testcases（15 筆） | 0.630 | 0.521 | 0.487 | **0.409** |
+  | holdout（12 筆） | 0.452 | 0.380 | 0.313 | **0.258** |
 
-- **最佳化主要降低 skew：** 例如 010 的 skew 從 4250 降到 336，cost 只從 18294 變成 18776。
-- **大測資接近 cost 下限：** 011 最終 Score / 下限 = 1.21、013 = 1.17。小測資的差距主要來自 skew。
-- **速度（v3 → v4）：** 1 萬 sinks 在 20 秒內的嘗試次數從約 166 萬次增加到約 3384 萬次（約 20 倍）。
+- **v5 沒有任何一筆比 v4 差：** testcases 13 筆變好、2 筆持平；holdout 10 筆變好、2 筆持平。
+- **方法 vs. 時間：** v5 的時間上限改回和 v4 相同（`min(20, 2 + N/500)`）時，幾何平均仍是 v4 的 0.869 / 0.846（testcases / holdout）；用自己的時間上限是 0.840 / 0.823。大部分改善來自方法。
+- **最佳化主要降低 skew：** 例如 010 的 skew 從 3007 降到 176，cost 從 18414 降到 16862。
+- **大測資接近 cost 下限：** 011 最終 Score / 下限 = 1.16、013 = 1.07。
+- **速度（v3 → v4）：** 1 萬 sinks 在 20 秒內的嘗試次數從約 171 萬次增加到約 3420 萬次（約 20 倍）。
 - **退火的設定實驗（第 5 課）：** 不加 σ 差 3%、起始溫度 ×0.3 差 4%、所有測資都重啟差 0.4%，所以只在 N ≤ 50 時重啟。
-- **brief 改進的實驗（v4 → v5 的來源，各跑 2 次取平均）：** 零 skew 合併點 −2.0% / −4.0%（testcases / holdout）、交換 parent ±0% / −2.5%、兩者一起 −3.4% / −3.6%、再加 40 秒 −4.5% / −4.8%；TimberWolf range limiter +0.4% / +0.7%（變差，未採用）。
-- **執行時間：** 每筆 2～40 秒（`min(40, 2 + N/250)`），限制是 60 秒。
+- **v5 各項改動的實驗（`AI_Solutions/ClaudeOpus55_v6/README.md`）：** 改接到較遠的 buffer + 最佳解保存修正約 −7～8%、Merge / Split 約 −2% / −6%（testcases / holdout）、時間上限約 −2.5%。
+- **執行時間：** v5 每筆 5～45 秒（N ≤ 12 為 5 秒，其他 `min(45, 10 + N/100)`），最長 45.05 秒，限制是 60 秒。
 
-**注意：** 模擬退火有隨機性，每次跑的分數會有幾 % 的差異，報告的數字以你最後一次 `run_everything.sh` 的結果為準。
+**注意：** 模擬退火有隨機性，每次跑的分數會有幾 % 的差異，報告的數字以 `results/` 裡的結果為準。

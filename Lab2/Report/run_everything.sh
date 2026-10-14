@@ -11,4 +11,5 @@ for set in testcases holdout; do
 done
 
 python make_figures.py --set testcases --trees 001,004
+python make_arrival.py --set testcases --case 004
 python make_figures.py --set holdout --trees ""
