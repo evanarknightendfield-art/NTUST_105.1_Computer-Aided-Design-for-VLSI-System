@@ -1,0 +1,9 @@
+warning: NetDegree differs from actual pins in net 28; using listed pins (course toy contains this inconsistency)
+[read] 31 movable cells, 38 nets, 132 segments
+[refine] pass 1, improvements 15
+[refine] pass 2, improvements 3
+[refine] pass 3, improvements 1
+[legal] seconds 0.00179502
+[SA] restart from best at attempt 3000064
+[SA] attempts 5000021, accepted 1334703, seconds 3.55772
+[done] seconds 3.56004

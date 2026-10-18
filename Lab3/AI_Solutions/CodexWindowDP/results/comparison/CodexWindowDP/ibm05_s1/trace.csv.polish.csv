@@ -1,0 +1,14 @@
+pass,phase,hpwl,changes
+0,start,10909591,0
+1,slide,10908093,557
+1,relocate,10895626,760
+1,matching,10892965.5,75
+1,reorder,10889573,695
+2,slide,10888968,169
+2,relocate,10885664.5,254
+2,matching,10884836,32
+2,reorder,10883675,176
+3,slide,10883416,65
+3,relocate,10880867.5,94
+3,matching,10880496,21
+3,reorder,10880147,65

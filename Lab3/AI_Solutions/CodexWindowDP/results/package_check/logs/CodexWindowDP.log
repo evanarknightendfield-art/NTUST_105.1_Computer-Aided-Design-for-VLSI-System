@@ -1,0 +1,75 @@
+$ cmake -S . -B build
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexWindowDP/results/package_check/home/CodexWindowDP/build
+
+$ cmake --build build -j
+[ 14%] Building CXX object CMakeFiles/dp.dir/src/legalizer.cpp.o
+[ 28%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 42%] Building CXX object CMakeFiles/dp.dir/src/placedb.cpp.o
+[ 57%] Building CXX object CMakeFiles/dp.dir/src/optimizer.cpp.o
+[ 71%] Building CXX object CMakeFiles/dp.dir/src/window.cpp.o
+[ 85%] Building CXX object CMakeFiles/dp.dir/src/annealer.cpp.o
+[100%] Linking CXX executable dp
+[100%] Built target dp
+
+
+===== toy: OK 1.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexWindowDP/results/package_check/home/CodexWindowDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexWindowDP/results/package_inputs/toy/toy output --effort 200 --time 1000 --trace trace.csv -v
+Total displacement (legal): 43769
+Maximum displacement (legal): 2007.9
+Total HPWL (legal): 111684
+Total HPWL (SA): 46644
+ax 2028.4
+[legal] total-refine pass 3: 0 moves  total 44180.6  max 2028.4
+[legal] max-refine 1 moves  total 44377.2  max 2024.1
+[legal] matching d0 1923: 9 windows, cells above d0 9 -> 8  total 44168.4  max 2014.0
+[legal] row-opt (d0 2014): 2 segments  total 44168.4  max 2012.6
+[legal] matching sweep: total 44136.6  max 2012.6
+[legal] total-refine pass 0: 2 moves  total 44132.6  max 2012.6
+[legal] max-refine 1 moves  total 44451.2  max 2007.9
+[legal] matching d0 1908: 11 windows, cells above d0 12 -> 11  total 44375.6  max 2007.9
+[legal] row-opt (d0 2008): 0 segments  total 44375.6  max 2007.9
+[legal] matching sweep: total 44375.6  max 2007.9
+[legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9
+[legal] max-refine 0 moves  total 44375.6  max 2007.9
+[legal] matching d0 1908: 11 windows, cells above d0 12 -> 11  total 44375.6  max 2007.9
+[legal] row-opt (d0 2008): 0 segments  total 44375.6  max 2007.9
+[legal] matching sweep: total 44375.6  max 2007.9
+[legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9
+[legal] row-opt (d0 2008): 1 segments  total 44375.6  max 2007.9
+[legal] matching sweep: total 44375.6  max 2007.9
+[legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9
+[legal] plain: total 45938.8 max 2072.0 | spread: total 44375.6 max 2007.9 -> spread
+[pareto] pass 1: 2 groups, total 44375.600000, max 2007.900000
+[pareto] pass 2: 0 groups, total 44375.600000, max 2007.900000
+[window-disp] pass 0: 4/11 accepted, 44375.600000 -> 44076.800000, max 2007.900000
+[window-disp] pass 1: 2/7 accepted, 44076.800000 -> 43769.000000, max 2007.900000
+[stage1] done  0.01s
+[sa] HPWL 111684  T0 3.137e+04  alpha 0.9333  5000000 moves in 100 steps
+[sa] step   0  T 3.137e+04  acc 0.824  win 4616 x 4602  cur 277224  best 111684  0.0s
+[sa] step  20  T 7879  acc 0.518  win 6673 x 6653  cur 181500  best 111684  0.4s
+[sa] step  40  T 1979  acc 0.358  win 3100 x 3090  cur 86586  best 71052  0.7s
+[sa] step  60  T 497.1  acc 0.145  win 3015 x 756  cur 51504  best 47820  1.0s
+[sa] step  80  T 124.9  acc 0.044  win 3015 x 756  cur 47814  best 47106  1.3s
+[sa] step  99  T 33.61  acc 0.042  win 3015 x 756  cur 48078  best 47106  1.5s
+[sa] proposals failed 15.7%
+[sa] slide      4.9% of attempts, accepted  43.6%, improving  17.1%
+[sa] move      35.0% of attempts, accepted  35.5%, improving  18.0%
+[sa] swap      37.6% of attempts, accepted  36.1%, improving  13.7%
+[sa] reorder    6.7% of attempts, accepted  17.9%, improving   6.3%
+[sa] rowopt     0.2% of attempts, accepted 100.0%, improving  77.5%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  96.9%
+[polish] pass 1: 47106.000000 -> 46644.000000; slide 2, relocate 0, assignment 0, reorder 0
+[polish] pass 2: 46644.000000 -> 46644.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 0/13 accepted, 46644.000000 -> 46644.000000, max 85072.700000
+[order-hpwl] pass 0: 0 accepted, 46644.000000 -> 46644.000000
+[polish-total] 47106.000000 -> 46644.000000
+[stage2] done  1.52s
+

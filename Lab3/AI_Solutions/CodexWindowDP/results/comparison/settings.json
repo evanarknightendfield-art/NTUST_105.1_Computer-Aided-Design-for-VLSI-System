@@ -1,0 +1,75 @@
+{
+  "seed": 1,
+  "effort": 200,
+  "time": 1000,
+  "all_baselines": true,
+  "seeds": "1",
+  "benches": "",
+  "labels": "",
+  "suite": "comparison",
+  "candidate_only": true,
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "sources": {
+    "ClaudeOpus55": {
+      "AI_Solutions/ClaudeOpus55/src/annealer.cpp": "921a4c6a66fdde23d46a34c03b7ba6d31a86edf3357134ff87ad00cd03c163bb",
+      "AI_Solutions/ClaudeOpus55/src/annealer.hpp": "0d6c6eb44264e29926c91987484d56d0755a25badda4a8a69e212822e19cc86c",
+      "AI_Solutions/ClaudeOpus55/src/legalizer.cpp": "1247cff6661a4120777e2d5d76dbc5bda2bf09d2570b3d949c78172933dad89c",
+      "AI_Solutions/ClaudeOpus55/src/legalizer.hpp": "4bfb6d1b986bbdd094129122b6fe8fcc06cfafa027a688f88673347f758a5c9c",
+      "AI_Solutions/ClaudeOpus55/src/main.cpp": "ee22f169a9214b09a45344ddc7a1e2db8dfda73203dc7806fa8ef515bfcd070c",
+      "AI_Solutions/ClaudeOpus55/src/placedb.cpp": "22134c4bd3b3d4a2456bbdeb28c4865b77cb0e053ae75d6806f2791e2c5c77ee",
+      "AI_Solutions/ClaudeOpus55/src/placedb.hpp": "b6493b3c19457c554a525191ddf7dceea915dfd4686d9ecbc6e23bf5393cc1d8",
+      "AI_Solutions/ClaudeOpus55/src/rowmap.hpp": "6c08c23a543eaf0aa29f857b252412cf741c2de80a73593705364bfbfd9953ec"
+    },
+    "CodexGapSA": {
+      "AI_Solutions/CodexGapSA/src/db.cpp": "f76a22837924a6cd6dd3acf464cda797a73532530cf61565cda666e61d6548e6",
+      "AI_Solutions/CodexGapSA/src/db.hpp": "2e69652d3d1de2ee537ae28f77984fc29e701ac448d078d0dd94b944d64fa313",
+      "AI_Solutions/CodexGapSA/src/placer.cpp": "c0477ee0e111236964548df0554c14ce26eb6148e7e611fc8bbdb79680b2622b"
+    },
+    "ClaudeOpus55_v2": {
+      "AI_Solutions/ClaudeOpus55_v2/src/annealer.cpp": "b62dcdcad1212dea276caa98cadf2de6c2f3e30c8a11019e76e9b5e1b84d5e18",
+      "AI_Solutions/ClaudeOpus55_v2/src/annealer.hpp": "de655f0da6746b98273ecb95f812f4b3fcd0c37a16a40fe4e738f9d2a162222f",
+      "AI_Solutions/ClaudeOpus55_v2/src/legalizer.cpp": "f41881f5bf5b2253163e783336f63b74bf3e4d89224029e061703a7e1a249462",
+      "AI_Solutions/ClaudeOpus55_v2/src/legalizer.hpp": "79ea307d4238828b301ed3b940395dbbd91fd69d0b4bb93cc6309af52959d554",
+      "AI_Solutions/ClaudeOpus55_v2/src/main.cpp": "c79a92016944f7b87661a203cbcbb719f5123e03cda02af50c8830dd2875769e",
+      "AI_Solutions/ClaudeOpus55_v2/src/placedb.cpp": "4d4f7c1c791000446f78314f8155edfa5bfe20c2e9277983a609235eaee8adbc",
+      "AI_Solutions/ClaudeOpus55_v2/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/ClaudeOpus55_v2/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+    },
+    "CodexParetoDP": {
+      "AI_Solutions/CodexParetoDP/src/annealer.cpp": "acc978ab96bd0dd9c86ba3838a1aa4d23a2d56c73b67485cde692c58f2ca1241",
+      "AI_Solutions/CodexParetoDP/src/annealer.hpp": "de655f0da6746b98273ecb95f812f4b3fcd0c37a16a40fe4e738f9d2a162222f",
+      "AI_Solutions/CodexParetoDP/src/legalizer.cpp": "f41881f5bf5b2253163e783336f63b74bf3e4d89224029e061703a7e1a249462",
+      "AI_Solutions/CodexParetoDP/src/legalizer.hpp": "79ea307d4238828b301ed3b940395dbbd91fd69d0b4bb93cc6309af52959d554",
+      "AI_Solutions/CodexParetoDP/src/main.cpp": "eb6cc5c960ff4b368537122dbc382a3ce38f59e0a508bc10fb3f3b0992c34641",
+      "AI_Solutions/CodexParetoDP/src/optimizer.cpp": "0f56207238b55e83da3b06d3ea615eb8bc107a135052882ed5697b3edc47a3dd",
+      "AI_Solutions/CodexParetoDP/src/optimizer.hpp": "e75dc5b2467309c86678e0829061e59c4dd038a60553054eee6ca68a6ba61628",
+      "AI_Solutions/CodexParetoDP/src/placedb.cpp": "0bb605a376b1b3624e45d868387a3c305e711333ccdd0e77ff9a73f425ee0751",
+      "AI_Solutions/CodexParetoDP/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/CodexParetoDP/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+    },
+    "ClaudeOpus55_v3": {
+      "AI_Solutions/ClaudeOpus55_v3/src/annealer.cpp": "c3b80c2a3c6dba2f2d4f6898aa5c6feec0e366f8771be22b4360e8b54fe01c70",
+      "AI_Solutions/ClaudeOpus55_v3/src/annealer.hpp": "60938b83f787430846e37b15dabc521d734740c121eb3c29781fd9ef88d5e497",
+      "AI_Solutions/ClaudeOpus55_v3/src/legalizer.cpp": "d95e258d2677cf08f4c81965f193f18fb62e96c5844e6e9eef5608d8194e94ba",
+      "AI_Solutions/ClaudeOpus55_v3/src/legalizer.hpp": "8a550f1d70037bbb8e3c00dfde1e1157738762246a12bcee8046f31fe3961261",
+      "AI_Solutions/ClaudeOpus55_v3/src/main.cpp": "1f0c49347685e2d1ec80c41e1e2020d24e072e2eb6312c8bb45db9686f42bb7f",
+      "AI_Solutions/ClaudeOpus55_v3/src/placedb.cpp": "4d4f7c1c791000446f78314f8155edfa5bfe20c2e9277983a609235eaee8adbc",
+      "AI_Solutions/ClaudeOpus55_v3/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/ClaudeOpus55_v3/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+    },
+    "CodexWindowDP": {
+      "AI_Solutions/CodexWindowDP/src/annealer.cpp": "39a5c8e3f8ab1dc3bcafa5b820060f47ddb0a9ea85376a380fbda3eb42af3ea9",
+      "AI_Solutions/CodexWindowDP/src/annealer.hpp": "60938b83f787430846e37b15dabc521d734740c121eb3c29781fd9ef88d5e497",
+      "AI_Solutions/CodexWindowDP/src/legalizer.cpp": "d95e258d2677cf08f4c81965f193f18fb62e96c5844e6e9eef5608d8194e94ba",
+      "AI_Solutions/CodexWindowDP/src/legalizer.hpp": "8a550f1d70037bbb8e3c00dfde1e1157738762246a12bcee8046f31fe3961261",
+      "AI_Solutions/CodexWindowDP/src/main.cpp": "946df73cd3a2ac5a918c9cf24f77bb328e606ca7c28a1a6376fc8c38d107d102",
+      "AI_Solutions/CodexWindowDP/src/optimizer.cpp": "0f56207238b55e83da3b06d3ea615eb8bc107a135052882ed5697b3edc47a3dd",
+      "AI_Solutions/CodexWindowDP/src/optimizer.hpp": "e75dc5b2467309c86678e0829061e59c4dd038a60553054eee6ca68a6ba61628",
+      "AI_Solutions/CodexWindowDP/src/placedb.cpp": "0bb605a376b1b3624e45d868387a3c305e711333ccdd0e77ff9a73f425ee0751",
+      "AI_Solutions/CodexWindowDP/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/CodexWindowDP/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635",
+      "AI_Solutions/CodexWindowDP/src/window.cpp": "2a29a149aa967b2cf1ae920fe24af11b7c5934e8a51345880d902486854738d9",
+      "AI_Solutions/CodexWindowDP/src/window.hpp": "e642387b467e664dd97d9b770e8136fdb9131f1543cd2549093350fcddc42f49"
+    }
+  }
+}

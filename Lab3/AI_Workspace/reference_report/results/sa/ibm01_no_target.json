@@ -1,0 +1,19 @@
+{
+ "bench": "ibm01",
+ "tag": "no_target",
+ "args": [
+  "--target",
+  "0",
+  "--time",
+  "1000",
+  "--trace",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Report/results/sa/ibm01_no_target_trace.csv"
+ ],
+ "seconds": 10.255186319351196,
+ "returncode": 0,
+ "total_disp": 27235500.7959,
+ "max_disp": 10578.29,
+ "hpwl_legal": 90945258.0,
+ "hpwl_sa": 81966186.0,
+ "stderr": ""
+}

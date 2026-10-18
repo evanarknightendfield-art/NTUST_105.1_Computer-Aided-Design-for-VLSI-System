@@ -1,0 +1,17 @@
+2026-10-19 verification of final C++ sources
+
+Compiler: g++ -std=c++17 -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer
+ASAN_OPTIONS=detect_leaks=0 (LeakSanitizer unavailable under this environment ptrace; this is not a leak check)
+
+window_test: PASS 400 exhaustive arbitrary-cost two-row comparisons and coordinated row-exchange fixture
+window_test: PASS 150 exhaustive shared-net HPWL ordering comparisons
+optimizer_test: PASS 250 exhaustive assignment/bottleneck cases and 100 randomized placement cases including both new DP refinements
+make: PASS, -O2 -Wall -Wextra, no warnings
+edge_cases.py: PASS fully blocked row, fixed-only design, disconnected design, input overwrite rejection
+CMake Release build: PASS
+Final-source comparison: 66/66 PASS (all six versions, 11 benchmarks)
+Additional seeds: 20/20 PASS (v3 / WindowDP, five benchmarks, seeds 2 and 3)
+Package -> extract -> CMake rebuild -> toy: 1/1 PASS
+Final comparison and multiseed C++/header SHA-256 checks: PASS
+Full enumeration toy certificate: MIP gap=0, total optimum=42890.2 under cap=2007.9
+Full enumeration h01 certificate: MIP time limit; incumbent=2295.79, dual bound=2281.57 under cap=31.67; NOT proven optimal

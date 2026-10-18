@@ -1,0 +1,18 @@
+{
+  "bench": "h01",
+  "cells": 300,
+  "columns": 32862,
+  "cap": 31.669999999999995,
+  "incumbent_total": 2385.2700000000004,
+  "lp_lower_bound": 2234.897123958332,
+  "mip_status": 1,
+  "mip_message": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "mip_value": 2295.790000000001,
+  "mip_dual_bound": 2281.57,
+  "scope": "all legal grid positions with displacement <= incumbent maximum",
+  "mip_gap": 0.0061939463104206845,
+  "globally_optimal_under_cap": false,
+  "maximum_lp_lower_bound": 26.47993957519531,
+  "maximum_lp_feasible_upper_endpoint": 26.480060386657712,
+  "seconds": 125.25645396098844
+}

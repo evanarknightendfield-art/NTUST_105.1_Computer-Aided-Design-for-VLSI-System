@@ -1,0 +1,17 @@
+{
+ "bench": "ibm05",
+ "tag": "effort500",
+ "args": [
+  "--effort",
+  "500",
+  "--time",
+  "1000"
+ ],
+ "seconds": 16.384424924850464,
+ "returncode": 0,
+ "total_disp": 1431841.6898,
+ "max_disp": 217.613,
+ "hpwl_legal": 11997198.5,
+ "hpwl_sa": 11144977.0,
+ "stderr": ""
+}

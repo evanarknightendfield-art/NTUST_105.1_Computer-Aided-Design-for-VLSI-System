@@ -1,0 +1,105 @@
+[read] 15205 nodes (15000 movable), 15135 nets, 134 rows, 182 segments, utilization 0.747  0.05s
+[legal] abacus  total 181444.7  max 82.6
+[legal] row-opt (d0 0): 151 segments  total 181242.1  max 82.6
+[legal] max-refine 842 moves  total 180560.5  max 53.0
+[legal] matching d0 50: 10 windows, cells above d0 228 -> 7  total 177348.0  max 50.3
+[legal] matching d0 48: 18 windows, cells above d0 434 -> 11  total 177135.7  max 48.0
+[legal] matching d0 46: 5 windows, cells above d0 529 -> 62  total 177118.3  max 48.0
+[legal] row-opt (d0 48): 102 segments  total 172895.6  max 48.0
+[legal] matching sweep: total 171508.1  max 48.0
+[legal] total-refine pass 0: 5862 moves  total 135287.3  max 48.0
+[legal] total-refine pass 1: 2710 moves  total 130597.5  max 48.0
+[legal] total-refine pass 2: 1324 moves  total 129290.8  max 48.0
+[legal] total-refine pass 3: 731 moves  total 128536.8  max 48.0
+[legal] total-refine pass 4: 395 moves  total 128221.4  max 48.0
+[legal] total-refine pass 5: 179 moves  total 128085.0  max 48.0
+[legal] total-refine pass 6: 124 moves  total 127973.6  max 48.0
+[legal] total-refine pass 7: 76 moves  total 127921.0  max 48.0
+[legal] max-refine 0 moves  total 127921.0  max 48.0
+[legal] matching d0 46: 0 windows, cells above d0 447 -> 447  total 127921.0  max 48.0
+[legal] row-opt (d0 48): 136 segments  total 127894.9  max 48.0
+[legal] matching sweep: total 127616.4  max 48.0
+[legal] total-refine pass 0: 1126 moves  total 125766.5  max 48.0
+[legal] total-refine pass 1: 366 moves  total 125471.7  max 48.0
+[legal] total-refine pass 2: 91 moves  total 125425.7  max 48.0
+[legal] row-opt (d0 48): 49 segments  total 125413.8  max 48.0
+[legal] matching sweep: total 125355.7  max 48.0
+[legal] total-refine pass 0: 591 moves  total 124470.2  max 48.0
+[legal] total-refine pass 1: 189 moves  total 124339.7  max 48.0
+[legal] total-refine pass 2: 56 moves  total 124296.0  max 48.0
+[legal] row-opt (d0 48): 12 segments  total 124293.5  max 48.0
+[legal] matching sweep: total 124236.2  max 48.0
+[legal] total-refine pass 0: 336 moves  total 123802.8  max 48.0
+[legal] total-refine pass 1: 147 moves  total 123694.8  max 48.0
+[legal] total-refine pass 2: 43 moves  total 123674.3  max 48.0
+[legal] row-opt (d0 48): 12 segments  total 123671.3  max 48.0
+[legal] matching sweep: total 123652.5  max 48.0
+[legal] total-refine pass 0: 253 moves  total 123374.0  max 48.0
+[legal] total-refine pass 1: 78 moves  total 123318.5  max 48.0
+[legal] row-opt (d0 48): 11 segments  total 123315.4  max 48.0
+[legal] matching sweep: total 123303.4  max 48.0
+[legal] total-refine pass 0: 153 moves  total 123096.0  max 48.0
+[legal] total-refine pass 1: 33 moves  total 123078.8  max 48.0
+[spread] round 0 B 51: 145 bins over by 5140 sites, moves 3124
+[spread] round 1 B 77: 117 bins over by 1782 sites, moves 4001
+[spread] round 2 B 115: 96 bins over by 1011 sites, moves 4359
+[spread] round 3 B 173: 71 bins over by 713 sites, moves 4546
+[legal] spread: 10 x 67 bins, 4546 path moves, 11093 cells retargeted, max shift 91.9, B 259
+[legal] abacus  total 214292.3  max 110.9
+[legal] row-opt (d0 0): 151 segments  total 213358.1  max 110.9
+[legal] max-refine 1383 moves  total 196465.7  max 59.1
+[legal] matching d0 56: 21 windows, cells above d0 278 -> 6  total 190070.6  max 55.3
+[legal] matching d0 52: 9 windows, cells above d0 410 -> 34  total 188247.9  max 53.6
+[legal] matching d0 51: 0 windows, cells above d0 379 -> 379  total 188247.9  max 53.6
+[legal] row-opt (d0 54): 133 segments  total 175539.4  max 53.6
+[legal] matching sweep: total 172906.9  max 53.6
+[legal] total-refine pass 0: 6752 moves  total 130009.0  max 53.6
+[legal] total-refine pass 1: 2815 moves  total 125838.0  max 53.6
+[legal] total-refine pass 2: 1304 moves  total 124610.3  max 53.6
+[legal] total-refine pass 3: 646 moves  total 124118.9  max 53.6
+[legal] total-refine pass 4: 348 moves  total 123842.7  max 53.6
+[legal] total-refine pass 5: 202 moves  total 123653.2  max 53.6
+[legal] total-refine pass 6: 101 moves  total 123573.9  max 53.6
+[legal] total-refine pass 7: 59 moves  total 123532.7  max 53.6
+[legal] max-refine 0 moves  total 123532.7  max 53.6
+[legal] matching d0 51: 0 windows, cells above d0 292 -> 292  total 123532.7  max 53.6
+[legal] row-opt (d0 54): 144 segments  total 123492.9  max 53.6
+[legal] matching sweep: total 123270.3  max 53.6
+[legal] total-refine pass 0: 999 moves  total 121931.0  max 53.6
+[legal] total-refine pass 1: 353 moves  total 121707.2  max 53.6
+[legal] total-refine pass 2: 130 moves  total 121633.0  max 53.6
+[legal] total-refine pass 3: 48 moves  total 121608.7  max 53.6
+[legal] row-opt (d0 54): 39 segments  total 121601.8  max 53.6
+[legal] matching sweep: total 121565.4  max 53.6
+[legal] total-refine pass 0: 416 moves  total 121151.5  max 53.6
+[legal] total-refine pass 1: 189 moves  total 120993.1  max 53.6
+[legal] total-refine pass 2: 56 moves  total 120952.1  max 53.6
+[legal] row-opt (d0 54): 13 segments  total 120949.0  max 53.6
+[legal] matching sweep: total 120931.6  max 53.6
+[legal] total-refine pass 0: 277 moves  total 120594.7  max 53.6
+[legal] total-refine pass 1: 71 moves  total 120553.4  max 53.6
+[legal] row-opt (d0 54): 4 segments  total 120553.2  max 53.6
+[legal] matching sweep: total 120535.8  max 53.6
+[legal] total-refine pass 0: 169 moves  total 120366.2  max 53.6
+[legal] total-refine pass 1: 54 moves  total 120337.3  max 53.6
+[legal] row-opt (d0 54): 5 segments  total 120334.9  max 53.6
+[legal] matching sweep: total 120326.8  max 53.6
+[legal] total-refine pass 0: 161 moves  total 120186.6  max 53.6
+[legal] total-refine pass 1: 41 moves  total 120169.5  max 53.6
+[legal] plain: total 123078.8 max 48.0 | spread: total 120169.5 max 53.6 -> plain
+[stage1] done  9.72s
+[sa] HPWL 367086  T0 101.8  alpha 0.9333  5010000 moves in 100 steps
+[sa] step   0  T 101.8  acc 0.703  win 13 x 14  cur 524940  best 367059  0.0s
+[sa] step  20  T 25.57  acc 0.571  win 21 x 21  cur 487447  best 367059  0.8s
+[sa] step  40  T 6.424  acc 0.392  win 17 x 17  cur 254309  best 254174  1.6s
+[sa] step  60  T 1.614  acc 0.299  win 6 x 2  cur 192819  best 192809  2.4s
+[sa] step  80  T 0.4053  acc 0.117  win 6 x 2  cur 178206  best 178204  3.3s
+[sa] step  99  T 0.1091  acc 0.057  win 6 x 2  cur 175985  best 175985  4.1s
+[sa] proposals failed 10.1%
+[sa] slide      2.2% of attempts, accepted  80.2%, improving  26.6%
+[sa] move      15.1% of attempts, accepted  44.4%, improving  23.1%
+[sa] swap      62.3% of attempts, accepted  35.7%, improving  16.5%
+[sa] reorder    9.9% of attempts, accepted  47.1%, improving  19.1%
+[sa] rowopt     0.4% of attempts, accepted 100.0%, improving  82.5%
+[sa] ism        0.1% of attempts, accepted 100.0%, improving  92.1%
+[stage2] done  13.86s

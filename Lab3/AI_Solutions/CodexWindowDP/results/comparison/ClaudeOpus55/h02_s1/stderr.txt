@@ -1,0 +1,18 @@
+[read] 1043 nodes (1000 movable), 1003 nets, 37 rows, 66 segments  0.00s
+[legal] abacus  total 619314.2  max 3826.3
+[legal] max-refine 54 moves  total 682903.1  max 2727.9
+[legal] total-refine pass 0: 281 moves  total 550757.5  max 2727.9
+[legal] total-refine pass 1: 59 moves  total 535999.6  max 2727.9
+[legal] total-refine pass 2: 11 moves  total 534298.7  max 2727.9
+[legal] total-refine pass 3: 3 moves  total 534211.0  max 2727.9
+[legal] max-refine 0 moves  total 534211.0  max 2727.9
+[legal] total-refine pass 0: 0 moves  total 534211.0  max 2727.9
+[stage1] done  0.01s
+[sa] HPWL 3846611  T0 1.139e+04  alpha 0.9333  5000000 moves in 100 steps
+[sa] step   0  T 1.139e+04  acc 0.477  win 1893 x 967  cur 6216878  best 3843443  0.0s
+[sa] step  20  T 2861  acc 0.383  win 1826 x 788  cur 4360911  best 3843443  0.4s
+[sa] step  40  T 718.6  acc 0.238  win 1826 x 756  cur 2918235  best 2869741  0.8s
+[sa] step  60  T 180.5  acc 0.113  win 1826 x 756  cur 2424988  best 2419147  1.1s
+[sa] step  80  T 45.34  acc 0.055  win 1826 x 756  cur 2354992  best 2353912  1.5s
+[sa] step  99  T 12.2  acc 0.045  win 1826 x 756  cur 2346451  best 2346385  1.8s
+[stage2] done  1.78s

@@ -1,0 +1,12 @@
+{
+ "bench": "h05",
+ "tag": "final",
+ "args": [],
+ "seconds": 5.743478298187256,
+ "returncode": 0,
+ "total_disp": 1658808.996,
+ "max_disp": 1398.412,
+ "hpwl_legal": 26246164.9,
+ "hpwl_sa": 18320012.1,
+ "stderr": ""
+}

@@ -1,0 +1,17 @@
+{
+ "bench": "toy",
+ "tag": "tetris",
+ "args": [
+  "--legalizer",
+  "tetris",
+  "--no-refine",
+  "--no-sa"
+ ],
+ "seconds": 0.0025866031646728516,
+ "returncode": 0,
+ "total_disp": 60495.6,
+ "max_disp": 2913.0,
+ "hpwl_legal": 126966.0,
+ "hpwl_sa": 126966.0,
+ "stderr": ""
+}

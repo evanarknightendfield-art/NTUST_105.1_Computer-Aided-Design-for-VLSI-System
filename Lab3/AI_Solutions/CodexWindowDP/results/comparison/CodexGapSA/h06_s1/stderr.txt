@@ -1,0 +1,8 @@
+[read] 10000 movable cells, 10137 nets, 85 segments
+[refine] pass 1, improvements 1729
+[refine] pass 2, improvements 1379
+[refine] pass 3, improvements 1240
+[legal] seconds 0.855598
+[SA] restart from best at attempt 3000064
+[SA] attempts 5000000, accepted 1234292, seconds 10.2196
+[done] seconds 11.0824

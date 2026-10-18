@@ -1,0 +1,22 @@
+{
+ "bench": "ibm05",
+ "tag": "no_range_limit",
+ "args": [
+  "--win0",
+  "1",
+  "--minwin",
+  "1e12",
+  "1e12",
+  "--time",
+  "1000",
+  "--trace",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Report/results/sa/ibm05_no_range_limit_trace.csv"
+ ],
+ "seconds": 45.32359051704407,
+ "returncode": 0,
+ "total_disp": 1431841.6898,
+ "max_disp": 217.613,
+ "hpwl_legal": 11997198.5,
+ "hpwl_sa": 11447454.5,
+ "stderr": ""
+}

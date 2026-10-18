@@ -1,0 +1,6 @@
+UCLA nodes 1.0
+NumNodes : 3
+NumTerminals : 1
+block 10 1 terminal
+a 2 1
+b 1 1

@@ -1,0 +1,66 @@
+[read] 31 nodes (31 movable), 38 nets, 132 rows, 132 segments, utilization 0.003  0.00s
+[legal] abacus  total 48976.8  max 2226.0
+[legal] row-opt (d0 0): 6 segments  total 48689.6  max 2292.0
+[legal] max-refine 3 moves  total 48895.0  max 2116.9
+[legal] matching d0 2011: 7 windows, cells above d0 7 -> 6  total 48671.0  max 2106.0
+[legal] row-opt (d0 2106): 1 segments  total 48605.0  max 2106.0
+[legal] matching sweep: total 48605.0  max 2106.0
+[legal] total-refine pass 0: 7 moves  total 46933.4  max 2106.0
+[legal] total-refine pass 1: 3 moves  total 46315.6  max 2106.0
+[legal] total-refine pass 2: 4 moves  total 45950.6  max 2072.0
+[legal] total-refine pass 3: 0 moves  total 45950.6  max 2072.0
+[legal] max-refine 0 moves  total 45950.6  max 2072.0
+[legal] matching d0 1968: 7 windows, cells above d0 8 -> 7  total 45938.8  max 2072.0
+[legal] row-opt (d0 2072): 1 segments  total 45938.8  max 2072.0
+[legal] matching sweep: total 45938.8  max 2072.0
+[legal] total-refine pass 0: 0 moves  total 45938.8  max 2072.0
+[legal] row-opt (d0 2072): 0 segments  total 45938.8  max 2072.0
+[legal] matching sweep: total 45938.8  max 2072.0
+[legal] total-refine pass 0: 0 moves  total 45938.8  max 2072.0
+[spread] round 0 B 26172: 0 bins over by 0 sites, moves 18
+[legal] spread: 6 x 66 bins, 18 path moves, 18 cells retargeted, max shift 2701.0, B 26172
+[legal] abacus  total 68936.2  max 4462.0
+[legal] row-opt (d0 0): 6 segments  total 48263.0  max 2920.5
+[legal] max-refine 18 moves  total 45607.4  max 2045.0
+[legal] matching d0 1943: 11 windows, cells above d0 13 -> 10  total 44910.4  max 2035.6
+[legal] row-opt (d0 2036): 5 segments  total 44795.4  max 2028.4
+[legal] matching sweep: total 44795.4  max 2028.4
+[legal] total-refine pass 0: 6 moves  total 44578.0  max 2028.4
+[legal] total-refine pass 1: 5 moves  total 44207.0  max 2028.4
+[legal] total-refine pass 2: 3 moves  total 44180.6  max 2028.4
+[legal] total-refine pass 3: 0 moves  total 44180.6  max 2028.4
+[legal] max-refine 1 moves  total 44377.2  max 2024.1
+[legal] matching d0 1923: 9 windows, cells above d0 9 -> 8  total 44168.4  max 2014.0
+[legal] row-opt (d0 2014): 2 segments  total 44168.4  max 2012.6
+[legal] matching sweep: total 44136.6  max 2012.6
+[legal] total-refine pass 0: 2 moves  total 44132.6  max 2012.6
+[legal] max-refine 1 moves  total 44451.2  max 2007.9
+[legal] matching d0 1908: 11 windows, cells above d0 12 -> 11  total 44375.6  max 2007.9
+[legal] row-opt (d0 2008): 0 segments  total 44375.6  max 2007.9
+[legal] matching sweep: total 44375.6  max 2007.9
+[legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9
+[legal] max-refine 0 moves  total 44375.6  max 2007.9
+[legal] matching d0 1908: 11 windows, cells above d0 12 -> 11  total 44375.6  max 2007.9
+[legal] row-opt (d0 2008): 0 segments  total 44375.6  max 2007.9
+[legal] matching sweep: total 44375.6  max 2007.9
+[legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9
+[legal] row-opt (d0 2008): 1 segments  total 44375.6  max 2007.9
+[legal] matching sweep: total 44375.6  max 2007.9
+[legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9
+[legal] plain: total 45938.8 max 2072.0 | spread: total 44375.6 max 2007.9 -> spread
+[stage1] done  0.00s
+[sa] HPWL 107022  T0 3.08e+04  alpha 0.9333  5000021 moves in 100 steps
+[sa] step   0  T 3.08e+04  acc 0.826  win 4624 x 4611  cur 324678  best 106230  0.0s
+[sa] step  20  T 7736  acc 0.525  win 6673 x 6653  cur 181548  best 99390  0.3s
+[sa] step  40  T 1943  acc 0.346  win 3148 x 3138  cur 94338  best 68340  0.7s
+[sa] step  60  T 488.1  acc 0.117  win 3015 x 756  cur 51834  best 47562  1.0s
+[sa] step  80  T 122.6  acc 0.048  win 3015 x 756  cur 47190  best 46200  1.2s
+[sa] step  99  T 33  acc 0.045  win 3015 x 756  cur 46530  best 46200  1.4s
+[sa] proposals failed 16.7%
+[sa] slide      4.5% of attempts, accepted  44.9%, improving  17.8%
+[sa] move      34.4% of attempts, accepted  35.7%, improving  18.1%
+[sa] swap      37.4% of attempts, accepted  36.4%, improving  13.8%
+[sa] reorder    6.9% of attempts, accepted  17.1%, improving   6.0%
+[sa] rowopt     0.1% of attempts, accepted 100.0%, improving  84.7%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  96.1%
+[stage2] done  1.41s

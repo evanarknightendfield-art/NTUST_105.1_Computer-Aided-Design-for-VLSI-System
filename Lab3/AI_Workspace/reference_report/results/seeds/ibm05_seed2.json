@@ -1,0 +1,17 @@
+{
+ "bench": "ibm05",
+ "tag": "seed2",
+ "args": [
+  "--seed",
+  "2",
+  "--time",
+  "1000"
+ ],
+ "seconds": 50.08170747756958,
+ "returncode": 0,
+ "total_disp": 1431841.6898,
+ "max_disp": 217.613,
+ "hpwl_legal": 11997198.5,
+ "hpwl_sa": 10314673.0,
+ "stderr": ""
+}

@@ -1,0 +1,19 @@
+{
+ "bench": "ibm05",
+ "tag": "greedy",
+ "args": [
+  "--p0",
+  "1e-12",
+  "--time",
+  "1000",
+  "--trace",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Report/results/sa/ibm05_greedy_trace.csv"
+ ],
+ "seconds": 45.29924774169922,
+ "returncode": 0,
+ "total_disp": 1431841.6898,
+ "max_disp": 217.613,
+ "hpwl_legal": 11997198.5,
+ "hpwl_sa": 10638397.0,
+ "stderr": ""
+}

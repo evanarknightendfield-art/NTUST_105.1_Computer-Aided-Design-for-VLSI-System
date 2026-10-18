@@ -1,0 +1,16 @@
+{
+ "bench": "ibm05",
+ "tag": "abacus_own",
+ "args": [
+  "--own-cost",
+  "--no-refine",
+  "--no-sa"
+ ],
+ "seconds": 0.1249997615814209,
+ "returncode": 0,
+ "total_disp": 1804387.549,
+ "max_disp": 282.3,
+ "hpwl_legal": 12102959.5,
+ "hpwl_sa": 12102959.5,
+ "stderr": ""
+}

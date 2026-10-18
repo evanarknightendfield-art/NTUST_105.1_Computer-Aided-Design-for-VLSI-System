@@ -1,0 +1,18 @@
+{
+  "bench": "toy",
+  "cells": 31,
+  "columns": 7517,
+  "cap": 2007.8999999999978,
+  "incumbent_total": 43769.0,
+  "lp_lower_bound": 42832.44999999999,
+  "mip_status": 0,
+  "mip_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "mip_value": 42890.19999999972,
+  "mip_dual_bound": 42890.19999999972,
+  "scope": "all legal grid positions with displacement <= incumbent maximum",
+  "mip_gap": 0.0,
+  "globally_optimal_under_cap": true,
+  "maximum_lp_lower_bound": 1938.397418975828,
+  "maximum_lp_feasible_upper_endpoint": 1938.4050785064678,
+  "seconds": 7.003524102008669
+}
