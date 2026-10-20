@@ -1,0 +1,35 @@
+{
+  "max_no_case_regression": true,
+  "max_geomean_ratio": 0.9580149660004198,
+  "total_geomean_ratio": 0.9994225801930569,
+  "total_within_one_percent": true,
+  "equal_budget_hpwl_holdout_ratio": 1.0152726201611377,
+  "equal_budget_hpwl_edge_ratio": 1.0144285447937822,
+  "hpwl_both_groups_better": false,
+  "strict_equal_elapsed_test_performed": false,
+  "fresh_comparison": {
+    "cases": 16,
+    "all_pass": true,
+    "max_geomean": 0.9439967472244046,
+    "disp_geomean": 0.9969228631137695,
+    "max_regressions": []
+  },
+  "required_default_and_unseen_pass": 44,
+  "L1_seconds": 196.36,
+  "L1_within_240_seconds": true,
+  "frozen_sources_unchanged": true,
+  "original_edge_reproduced": true,
+  "final_global_asan_ubsan_pass": true,
+  "comparison_counts": {
+    "baseline_default": 27,
+    "default": 11,
+    "edge_CodexChainDP": 16,
+    "large_L1": 1,
+    "fixed_work_holdout": 48,
+    "fixed_work_edge": 96,
+    "equal_total_time": 144,
+    "equal_time_default": 144,
+    "edge_seed2": 16,
+    "baseline_seed2": 16
+  }
+}

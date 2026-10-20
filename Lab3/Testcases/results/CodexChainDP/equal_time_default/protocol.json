@@ -1,0 +1,5 @@
+{
+  "schedule": "default",
+  "suite": "equal_time_default",
+  "reuse_stage1": "equal_total_time"
+}

@@ -1,0 +1,5 @@
+bench,version,seed,trace_rows,first_step_attempts,last_attempts,temperature_ratio
+h06,ClaudeOpus55_v4,1,101,49997492,78577607,0.0010715193052376027
+h06,CodexChainDP,1,2,27801296,27801296,1.0
+h08,ClaudeOpus55_v4,1,101,79979900,79979900,0.0010715193052376027
+h08,CodexChainDP,1,2,26230490,26230490,1.0

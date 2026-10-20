@@ -1,0 +1,3 @@
+bench,minimum_max,status,seconds,command
+toy,1938.4,EXACT,9.4,Grader/tools/exact_bound.py --max --max-ilp --time-limit 600
+h01,26.5,EXACT,729.7,Grader/tools/exact_bound.py --max --max-ilp --time-limit 600

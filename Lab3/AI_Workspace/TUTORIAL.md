@@ -15,19 +15,21 @@
 | `Example/` | 題目給的範例：toy + PDF 裡的輸入 / 輸出圖（PDF 的數字對不起來，見裡面的 README） |
 | `Testcases/testcases/{toy,ibm01,ibm05}/` | 課程測資（`Testcases/bench.tgz` 解壓出來的） |
 | `Testcases/holdout/h01..h08/` | 報告 / 穩健度測試用的新測資：有 macro、split row、pad、小數座標 |
+| `Testcases/edge/e01..e16/` | 過擬合檢查：現有測資沒測到的情況（本來就合法的輸入、97% 擠、沒有可移動 cell、不同 site 寬度、CRLF、`terminal_NI` …，表在 `Testcases/README.md`） |
 | `M11502102/` | **你的繳交資料夾**（目前是骨架的複本），在這裡寫 |
 | `MyCode/my_dp_skeleton/` | 原始骨架；之後每個版本也存在 `MyCode/`（v1_tetris、v2_abacus…） |
 | `AI_Solutions/ClaudeOpus55/` | **參考解**（先別看！每個 Milestone 自己做完再對照） |
-| `AI_Solutions/ClaudeOpus55_v2/` | 改良版：查論文後加的同寬匹配、每 row 精確重排、流量式 spreading、SA 補救 move（11 筆測資 HPWL 平均 −5%），自己的版本做完再看 |
-| `AI_Solutions/ClaudeOpus55_v3/` | 第三版：講義 L07 的 linear placement、independent set matching、Stage 1 收尾輪（HPWL 比 v1 平均 −7%） |
-| `AI_Solutions/COMPARISON.md` | 五個版本（v1、v2、v3、兩個 Codex 版）的比較、離最佳解多遠（toy、h01 的精確最佳解）、還能改良的地方 |
+| `AI_Solutions/CodexWindowDP/` | Codex 版：v3 + 兩個 row 的子集合 DP（總位移 −3.6%）、同 row 的精確 HPWL 排序 DP |
+| `AI_Solutions/ClaudeOpus55_v4/` | 第四版：DP 跑到收斂 + 三個 row 的 DP、多執行緒 SA、每個階段都有時間預算（20 萬 cell 3 分鐘跑完，舊版 40 ~ 56 分鐘）。HPWL 最好 |
+| `AI_Solutions/CodexChainDP/` | Codex 版：v4 + 最大位移的全域上限修復（最大位移比 v4 再少 4.2%）。位移最好 |
+| `AI_Solutions/COMPARISON.md` | 所有版本的比較、離最佳解多遠（toy、h01 的精確最佳解）、大設計、還能改良的地方。中間的 v2、v3 等版本已移除（在 git commit `e1fd81f`），數字還在這份文件裡 |
 | `AI_Workspace/step1_example/` | 參考解跑 toy 的輸出和圖 |
 | `AI_Workspace/reference_report/` | 參考解的實驗表格、圖、範例報告 |
 | `Grader/tools/check_pl.py` | 獨立檢查器：合法性 + 總位移 + 最大位移 + HPWL（**debug 最好用**） |
 | `Grader/tools/plot_pl.py` | 畫 placement（題目說 GUI 加分，這就是一個） |
 | `Grader/tools/plot_trace.py` | 畫 SA 的 current / best-so-far 曲線（報告必備的圖） |
 | `Grader/tools/local_grade.py` | 模擬繳交：打包 → 編譯 → 跑全部測資 → 檢查 |
-| `Grader/step2_grader/` | 檢查器對 1 個正確、10 個故意做錯的輸出的判斷 |
+| `Grader/step2_grader/` | 檢查器對 1 個正確、10 個故意做錯的輸出的判斷（結果在 `Testcases/results/step2_grader/`） |
 | `Report/` | 你的報告（`draft/`、`completed/`）和跑實驗的腳本（`run_everything.sh`） |
 
 測資資料夾不放進 git，重新 clone 的話先產生：
@@ -122,12 +124,14 @@ python3 ../Grader/tools/plot_pl.py ../Testcases/testcases/ibm01/ibm01 -o ibm01_g
 # SA 曲線（要先用 --trace 輸出 CSV）
 python3 ../Grader/tools/plot_trace.py out/ibm01_trace.csv -o trace.png
 
-# 模擬繳交：打包 → 解壓 → 編譯 → 11 筆測資 → 檢查（結果在 Grader/local_grade_M11502102/record.csv）
+# 模擬繳交：打包 → 解壓 → 編譯 → 11 筆測資 → 檢查（結果在 Testcases/results/local_grade/M11502102/record.csv）
 python3 ../Grader/tools/local_grade.py . M11502102 ../Testcases/testcases ../Testcases/holdout
+# 再加 16 筆沒見過的情況（過擬合 / 穩健度檢查）
+python3 ../Grader/tools/local_grade.py . M11502102 ../Testcases/edge --work ../Testcases/results/local_grade/M11502102_edge
 ```
 
 `check_pl.py` 跟你的程式**完全獨立**（自己讀 `.scl` 檢查幾何），所以它說 LEGAL 才算數。
-想知道它會抓哪些錯，看 `Grader/step2_grader/record.csv`（重疊、沒對齊 site、不在 row 上、超出 subrow、
+想知道它會抓哪些錯，看 `Testcases/results/step2_grader/record.csv`（重疊、沒對齊 site、不在 row 上、超出 subrow、
 放在 split row 缺口、疊在 macro 上、fixed 被移動、方向被改、少 cell）。
 
 ---
@@ -357,7 +361,7 @@ for step in 1..S:                    ← 每個 step 一個溫度
 
 ```bash
 cd Lab3/Report
-./run_everything.sh              # 你的程式（M11502102）：main + holdout → Report/{results,tables,figures}
+./run_everything.sh              # 你的程式（M11502102）：main + holdout → 原始結果 Testcases/results/report/，表和圖 Report/{tables,figures}
 ./run_everything.sh reference    # 參考解的全部實驗 → AI_Workspace/reference_report/（約 5 分鐘）
 ONLY=main,stage1 ./run_everything.sh     # 指定要跑哪幾組
 ```
@@ -399,6 +403,8 @@ holdout（`Testcases/holdout/`）的 global placement 是合成的，SA 降 HPWL
 - [ ] 用乾淨的資料夾從頭編譯一次（`rm -rf build && cmake -S . -B build && cmake --build build`），沒有 warning
 - [ ] `dp` 不帶參數會印用法；輸入檔不存在會印錯誤，不會 crash
 - [ ] `local_grade.py` 跑 `testcases` + `holdout` 全部 PASS（合法、7 個輸出檔都有、stdout 的數字跟 `check_pl.py` 一致）
+- [ ] `local_grade.py` 跑 `Testcases/edge` 也全部 PASS。參考解 v1 ~ v3 在 `e14_fixedonly`（沒有可移動的 cell）會 segfault：
+      合法化之後找「位移最大的 cell」時直接讀了 `movable[0]`；陣列是空的就當掉。你的程式如果照 v1 的架構寫，要先處理這種情況
 - [ ] stdout 4 行格式跟題目一樣
 - [ ] `Total HPWL (SA) <= Total HPWL (legal)`
 - [ ] ReadMe（純文字）寫怎麼編譯、怎麼執行、選項
@@ -410,6 +416,6 @@ tar czf M11502102.tgz --exclude=build --exclude=out M11502102
 tar tzf M11502102.tgz            # 確認裡面只有 src/、CMakeLists.txt、Makefile、README
 ```
 
-（`local_grade.py` 也會在 `Grader/local_grade_M11502102/submissions/M11502102.tgz` 產生一份一樣的。）
+（`local_grade.py` 也會在 `Testcases/results/local_grade/M11502102/submissions/M11502102.tgz` 產生一份一樣的。）
 
 - [ ] 報告 PDF 另外上傳（≤ 3 頁）

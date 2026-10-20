@@ -1,0 +1,143 @@
+$ cmake -S . -B build
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build
+
+$ cmake --build build -j
+[ 60%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 60%] Building CXX object CMakeFiles/dp.dir/src/legalizer.cpp.o
+[ 60%] Building CXX object CMakeFiles/dp.dir/src/placedb.cpp.o
+[ 80%] Building CXX object CMakeFiles/dp.dir/src/annealer.cpp.o
+[100%] Linking CXX executable dp
+[100%] Built target dp
+
+
+===== e01_nearlegal: OK 9.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e01_nearlegal/e01_nearlegal output
+Total displacement (legal): 23080.617
+Maximum displacement (legal): 5.595
+Total HPWL (legal): 698138
+Total HPWL (SA): 545010.5
+
+
+===== e02_legalgp: OK 3.9s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e02_legalgp/e02_legalgp output
+Total displacement (legal): 0
+Maximum displacement (legal): 0
+Total HPWL (legal): 14678898.5
+Total HPWL (SA): 10415365
+
+
+===== e03_dense97: OK 6.1s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e03_dense97/e03_dense97 output
+Total displacement (legal): 186563.784
+Maximum displacement (legal): 158.193
+Total HPWL (legal): 626324
+Total HPWL (SA): 378166.5
+
+
+===== e04_sparse10: OK 1.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e04_sparse10/e04_sparse10 output
+Total displacement (legal): 698.0739
+Maximum displacement (legal): 1.7841
+Total HPWL (legal): 47411.966
+Total HPWL (SA): 17816.767
+
+
+===== e05_bignets: OK 25.3s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e05_bignets/e05_bignets output
+Total displacement (legal): 80843.906
+Maximum displacement (legal): 64
+Total HPWL (legal): 1004240
+Total HPWL (SA): 762558
+
+
+===== e06_tallnarrow: OK 4.1s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e06_tallnarrow/e06_tallnarrow output
+Total displacement (legal): 36706.415
+Maximum displacement (legal): 121.719
+Total HPWL (legal): 2137210
+Total HPWL (SA): 1140391
+
+
+===== e07_tworows: OK 2.8s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e07_tworows/e07_tworows output
+Total displacement (legal): 20854.595
+Maximum displacement (legal): 29.796
+Total HPWL (legal): 991778.5
+Total HPWL (SA): 287246.5
+
+
+===== e08_fragmented: OK 6.8s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e08_fragmented/e08_fragmented output
+Total displacement (legal): 100802.429
+Maximum displacement (legal): 77.929
+Total HPWL (legal): 714190
+Total HPWL (SA): 421301.5
+
+
+===== e09_offgrid: OK 7.8s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e09_offgrid/e09_offgrid output
+Total displacement (legal): 16029.0597
+Maximum displacement (legal): 36.6912
+Total HPWL (legal): 201894.7126
+Total HPWL (SA): 65394.1269
+
+
+===== e10_mixedsites: OK 11.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e10_mixedsites/e10_mixedsites output
+Total displacement (legal): 67455.814
+Maximum displacement (legal): 53.908
+Total HPWL (legal): 1232693.5
+Total HPWL (SA): 819114
+
+
+===== e11_format: OK 1.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e11_format/e11_format output
+Total displacement (legal): 7971.723
+Maximum displacement (legal): 14.642
+Total HPWL (legal): 121845
+Total HPWL (SA): 78628.5
+
+
+===== e12_collapse: OK 3.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e12_collapse/e12_collapse output
+Total displacement (legal): 342337.243
+Maximum displacement (legal): 235
+Total HPWL (legal): 2382092
+Total HPWL (SA): 185649.5
+
+
+===== e13_onecell: OK 0.0s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e13_onecell/e13_onecell output
+Total displacement (legal): 4.57
+Maximum displacement (legal): 4.57
+Total HPWL (legal): 36.5
+Total HPWL (SA): 36.5
+
+
+===== e14_fixedonly: EXIT rc=-11 1.1s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e14_fixedonly/e14_fixedonly output
+
+
+===== e15_realistic: OK 39.8s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e15_realistic/e15_realistic output
+Total displacement (legal): 16377912.148
+Maximum displacement (legal): 5855.076
+Total HPWL (legal): 126259182.5
+Total HPWL (SA): 96474857.5
+
+
+===== e16_rowgaps: OK 8.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/local_grade/edge_ClaudeOpus55/home/ClaudeOpus55/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e16_rowgaps/e16_rowgaps output
+Total displacement (legal): 104296.714
+Maximum displacement (legal): 68.373
+Total HPWL (legal): 760797
+Total HPWL (SA): 490986.5
+

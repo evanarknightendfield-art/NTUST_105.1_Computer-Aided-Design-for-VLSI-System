@@ -11,7 +11,7 @@ checker = root.parents[1] / 'Grader/tools/check_pl.py'
 
 
 def fixture(name, fixed_only=False, no_nets=False):
-    folder = root / 'results/edge_cases' / name
+    folder = root.parents[1] / 'Testcases/results' / root.name / 'edge_cases' / name
     folder.mkdir(parents=True, exist_ok=True)
     prefix = folder / 'input'
     cells = 'block 10 1 terminal\n' + ('' if fixed_only else 'a 2 1\nb 1 1\n')

@@ -1,0 +1,282 @@
+{
+  "invocations": [
+    {
+      "arguments": {
+        "labels": "ClaudeOpus55,CodexGapSA,ClaudeOpus55_v2,CodexParetoDP,ClaudeOpus55_v3,CodexWindowDP,ClaudeOpus55_v4,CodexAugmentDP",
+        "benches": "",
+        "seeds": "1",
+        "suite": "fixed_work",
+        "effort": 200,
+        "min_attempts": 5000000,
+        "time": 1000.0,
+        "stage1_time": 1000.0,
+        "polish_time": 1000.0,
+        "timeout": 3600,
+        "build_timeout": 300,
+        "compiler": "g++",
+        "candidate_args": "",
+        "keep_copies": false,
+        "skip_build": false,
+        "resume": false,
+        "skip_skeletons": false
+      },
+      "command": [
+        "/home/evan/anaconda3/bin/python3",
+        "Lab3/AI_Solutions/CodexChainDP/tests/compare.py",
+        "--labels",
+        "ClaudeOpus55,CodexGapSA,ClaudeOpus55_v2,CodexParetoDP,ClaudeOpus55_v3,CodexWindowDP,ClaudeOpus55_v4,CodexAugmentDP",
+        "--suite",
+        "fixed_work",
+        "--effort",
+        "200",
+        "--min-attempts",
+        "5000000",
+        "--time",
+        "1000",
+        "--stage1-time",
+        "1000",
+        "--polish-time",
+        "1000"
+      ],
+      "started_utc": "2026-10-19T07:49:05Z"
+    },
+    {
+      "arguments": {
+        "labels": "ClaudeOpus55,CodexGapSA,ClaudeOpus55_v2,CodexParetoDP,ClaudeOpus55_v3,CodexWindowDP,ClaudeOpus55_v4,CodexAugmentDP",
+        "benches": "",
+        "seeds": "1",
+        "suite": "fixed_work",
+        "effort": 200,
+        "min_attempts": 5000000,
+        "time": 1000.0,
+        "stage1_time": 1000.0,
+        "polish_time": 1000.0,
+        "timeout": 3600,
+        "build_timeout": 300,
+        "compiler": "g++",
+        "candidate_args": "",
+        "keep_copies": false,
+        "skip_build": false,
+        "resume": true,
+        "skip_skeletons": false
+      },
+      "command": [
+        "/home/evan/anaconda3/bin/python3",
+        "Lab3/AI_Solutions/CodexChainDP/tests/compare.py",
+        "--labels",
+        "ClaudeOpus55,CodexGapSA,ClaudeOpus55_v2,CodexParetoDP,ClaudeOpus55_v3,CodexWindowDP,ClaudeOpus55_v4,CodexAugmentDP",
+        "--suite",
+        "fixed_work",
+        "--effort",
+        "200",
+        "--min-attempts",
+        "5000000",
+        "--time",
+        "1000",
+        "--stage1-time",
+        "1000",
+        "--polish-time",
+        "1000",
+        "--resume"
+      ],
+      "started_utc": "2026-10-19T13:02:00Z"
+    }
+  ],
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread"
+  ],
+  "threads": 1,
+  "metric_source": "independent check_pl parser, full precision; independent CLI legality check",
+  "comparison_scope": "equal SA proposal budget, not equal total CPU time",
+  "checker_sha256": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3",
+  "sources": {
+    "ClaudeOpus55": {
+      "AI_Solutions/ClaudeOpus55/src/annealer.cpp": "921a4c6a66fdde23d46a34c03b7ba6d31a86edf3357134ff87ad00cd03c163bb",
+      "AI_Solutions/ClaudeOpus55/src/annealer.hpp": "0d6c6eb44264e29926c91987484d56d0755a25badda4a8a69e212822e19cc86c",
+      "AI_Solutions/ClaudeOpus55/src/legalizer.cpp": "1247cff6661a4120777e2d5d76dbc5bda2bf09d2570b3d949c78172933dad89c",
+      "AI_Solutions/ClaudeOpus55/src/legalizer.hpp": "4bfb6d1b986bbdd094129122b6fe8fcc06cfafa027a688f88673347f758a5c9c",
+      "AI_Solutions/ClaudeOpus55/src/main.cpp": "ee22f169a9214b09a45344ddc7a1e2db8dfda73203dc7806fa8ef515bfcd070c",
+      "AI_Solutions/ClaudeOpus55/src/placedb.cpp": "22134c4bd3b3d4a2456bbdeb28c4865b77cb0e053ae75d6806f2791e2c5c77ee",
+      "AI_Solutions/ClaudeOpus55/src/placedb.hpp": "b6493b3c19457c554a525191ddf7dceea915dfd4686d9ecbc6e23bf5393cc1d8",
+      "AI_Solutions/ClaudeOpus55/src/rowmap.hpp": "6c08c23a543eaf0aa29f857b252412cf741c2de80a73593705364bfbfd9953ec"
+    },
+    "CodexGapSA": {
+      "AI_Solutions/CodexGapSA/src/db.cpp": "f76a22837924a6cd6dd3acf464cda797a73532530cf61565cda666e61d6548e6",
+      "AI_Solutions/CodexGapSA/src/db.hpp": "2e69652d3d1de2ee537ae28f77984fc29e701ac448d078d0dd94b944d64fa313",
+      "AI_Solutions/CodexGapSA/src/placer.cpp": "c0477ee0e111236964548df0554c14ce26eb6148e7e611fc8bbdb79680b2622b"
+    },
+    "ClaudeOpus55_v2": {
+      "AI_Solutions/ClaudeOpus55_v2/src/annealer.cpp": "b62dcdcad1212dea276caa98cadf2de6c2f3e30c8a11019e76e9b5e1b84d5e18",
+      "AI_Solutions/ClaudeOpus55_v2/src/annealer.hpp": "de655f0da6746b98273ecb95f812f4b3fcd0c37a16a40fe4e738f9d2a162222f",
+      "AI_Solutions/ClaudeOpus55_v2/src/legalizer.cpp": "f41881f5bf5b2253163e783336f63b74bf3e4d89224029e061703a7e1a249462",
+      "AI_Solutions/ClaudeOpus55_v2/src/legalizer.hpp": "79ea307d4238828b301ed3b940395dbbd91fd69d0b4bb93cc6309af52959d554",
+      "AI_Solutions/ClaudeOpus55_v2/src/main.cpp": "c79a92016944f7b87661a203cbcbb719f5123e03cda02af50c8830dd2875769e",
+      "AI_Solutions/ClaudeOpus55_v2/src/placedb.cpp": "4d4f7c1c791000446f78314f8155edfa5bfe20c2e9277983a609235eaee8adbc",
+      "AI_Solutions/ClaudeOpus55_v2/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/ClaudeOpus55_v2/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+    },
+    "CodexParetoDP": {
+      "AI_Solutions/CodexParetoDP/src/annealer.cpp": "acc978ab96bd0dd9c86ba3838a1aa4d23a2d56c73b67485cde692c58f2ca1241",
+      "AI_Solutions/CodexParetoDP/src/annealer.hpp": "de655f0da6746b98273ecb95f812f4b3fcd0c37a16a40fe4e738f9d2a162222f",
+      "AI_Solutions/CodexParetoDP/src/legalizer.cpp": "f41881f5bf5b2253163e783336f63b74bf3e4d89224029e061703a7e1a249462",
+      "AI_Solutions/CodexParetoDP/src/legalizer.hpp": "79ea307d4238828b301ed3b940395dbbd91fd69d0b4bb93cc6309af52959d554",
+      "AI_Solutions/CodexParetoDP/src/main.cpp": "eb6cc5c960ff4b368537122dbc382a3ce38f59e0a508bc10fb3f3b0992c34641",
+      "AI_Solutions/CodexParetoDP/src/optimizer.cpp": "0f56207238b55e83da3b06d3ea615eb8bc107a135052882ed5697b3edc47a3dd",
+      "AI_Solutions/CodexParetoDP/src/optimizer.hpp": "e75dc5b2467309c86678e0829061e59c4dd038a60553054eee6ca68a6ba61628",
+      "AI_Solutions/CodexParetoDP/src/placedb.cpp": "0bb605a376b1b3624e45d868387a3c305e711333ccdd0e77ff9a73f425ee0751",
+      "AI_Solutions/CodexParetoDP/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/CodexParetoDP/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+    },
+    "ClaudeOpus55_v3": {
+      "AI_Solutions/ClaudeOpus55_v3/src/annealer.cpp": "c3b80c2a3c6dba2f2d4f6898aa5c6feec0e366f8771be22b4360e8b54fe01c70",
+      "AI_Solutions/ClaudeOpus55_v3/src/annealer.hpp": "60938b83f787430846e37b15dabc521d734740c121eb3c29781fd9ef88d5e497",
+      "AI_Solutions/ClaudeOpus55_v3/src/legalizer.cpp": "d95e258d2677cf08f4c81965f193f18fb62e96c5844e6e9eef5608d8194e94ba",
+      "AI_Solutions/ClaudeOpus55_v3/src/legalizer.hpp": "8a550f1d70037bbb8e3c00dfde1e1157738762246a12bcee8046f31fe3961261",
+      "AI_Solutions/ClaudeOpus55_v3/src/main.cpp": "1f0c49347685e2d1ec80c41e1e2020d24e072e2eb6312c8bb45db9686f42bb7f",
+      "AI_Solutions/ClaudeOpus55_v3/src/placedb.cpp": "4d4f7c1c791000446f78314f8155edfa5bfe20c2e9277983a609235eaee8adbc",
+      "AI_Solutions/ClaudeOpus55_v3/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/ClaudeOpus55_v3/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+    },
+    "CodexWindowDP": {
+      "AI_Solutions/CodexWindowDP/src/annealer.cpp": "39a5c8e3f8ab1dc3bcafa5b820060f47ddb0a9ea85376a380fbda3eb42af3ea9",
+      "AI_Solutions/CodexWindowDP/src/annealer.hpp": "60938b83f787430846e37b15dabc521d734740c121eb3c29781fd9ef88d5e497",
+      "AI_Solutions/CodexWindowDP/src/legalizer.cpp": "d95e258d2677cf08f4c81965f193f18fb62e96c5844e6e9eef5608d8194e94ba",
+      "AI_Solutions/CodexWindowDP/src/legalizer.hpp": "8a550f1d70037bbb8e3c00dfde1e1157738762246a12bcee8046f31fe3961261",
+      "AI_Solutions/CodexWindowDP/src/main.cpp": "946df73cd3a2ac5a918c9cf24f77bb328e606ca7c28a1a6376fc8c38d107d102",
+      "AI_Solutions/CodexWindowDP/src/optimizer.cpp": "0f56207238b55e83da3b06d3ea615eb8bc107a135052882ed5697b3edc47a3dd",
+      "AI_Solutions/CodexWindowDP/src/optimizer.hpp": "e75dc5b2467309c86678e0829061e59c4dd038a60553054eee6ca68a6ba61628",
+      "AI_Solutions/CodexWindowDP/src/placedb.cpp": "0bb605a376b1b3624e45d868387a3c305e711333ccdd0e77ff9a73f425ee0751",
+      "AI_Solutions/CodexWindowDP/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/CodexWindowDP/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635",
+      "AI_Solutions/CodexWindowDP/src/window.cpp": "2a29a149aa967b2cf1ae920fe24af11b7c5934e8a51345880d902486854738d9",
+      "AI_Solutions/CodexWindowDP/src/window.hpp": "e642387b467e664dd97d9b770e8136fdb9131f1543cd2549093350fcddc42f49"
+    },
+    "ClaudeOpus55_v4": {
+      "AI_Solutions/ClaudeOpus55_v4/src/annealer.cpp": "1ae5159393d9bb0906a82aadbbe1609dc026f04a5dace74f43d116fdf068d913",
+      "AI_Solutions/ClaudeOpus55_v4/src/annealer.hpp": "0d88f110de3565e370320ca315cc35233b0b2ed2bea6e94b5ca2ff8d7af102e2",
+      "AI_Solutions/ClaudeOpus55_v4/src/legalizer.cpp": "5439c77fd7377511d38182dea36669fc76bb5936d4eb080f6b3bbbc3988086fd",
+      "AI_Solutions/ClaudeOpus55_v4/src/legalizer.hpp": "74ae9c1eb11cdb967f387995b913bf4b22fe2534eebf35b3a3cf241fd53af789",
+      "AI_Solutions/ClaudeOpus55_v4/src/main.cpp": "bafa4764f3a321af7c06528847f1a988a360b003493676c2d97fab6990ec5fdd",
+      "AI_Solutions/ClaudeOpus55_v4/src/optimizer.cpp": "e87a0af4555697244999f14d5e6cc441bcc78bea5e0aa3153b90d263f7ba41fb",
+      "AI_Solutions/ClaudeOpus55_v4/src/optimizer.hpp": "43ddc4b1e1193612f17c3bbaff2928221caea3f563714c08aab39917217b6217",
+      "AI_Solutions/ClaudeOpus55_v4/src/placedb.cpp": "f6f164bf3f0e00fbd3a1d1f7817e956f88fd8fec72bf6b55509409a0d6e98ca7",
+      "AI_Solutions/ClaudeOpus55_v4/src/placedb.hpp": "0e49c4a74b30ff7448c025cdda5092ca640302741ac9f11589ad270bda29162b",
+      "AI_Solutions/ClaudeOpus55_v4/src/pool.hpp": "d320b9909ee0d0e7bee5ead7466827a9cc5d27b6e80272c0126eeb0c38fd1409",
+      "AI_Solutions/ClaudeOpus55_v4/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635",
+      "AI_Solutions/ClaudeOpus55_v4/src/window.cpp": "bc3f99e15aa0bc8d4fda6369d8ea4c3a08f0dbc688346185c7d120a56e15aa1f",
+      "AI_Solutions/ClaudeOpus55_v4/src/window.hpp": "11b50758933a7d663786ed9468982bcb497404ef770cb02b212305cc51e9ea43"
+    },
+    "CodexAugmentDP": {
+      "AI_Solutions/CodexAugmentDP/src/annealer.cpp": "61b2409d0e06f1535ab0608e2104478adb4710e002cbf225eee8796a08a7245c",
+      "AI_Solutions/CodexAugmentDP/src/annealer.hpp": "0d88f110de3565e370320ca315cc35233b0b2ed2bea6e94b5ca2ff8d7af102e2",
+      "AI_Solutions/CodexAugmentDP/src/augment.cpp": "671e30f2de917e31c71b4f1277307aecf8f2f85c1d5298378666f250f92679ed",
+      "AI_Solutions/CodexAugmentDP/src/augment.hpp": "3c1a66ac263e768b07aa53761f4de9fad32a42755cc281c8d4899d8726321c0a",
+      "AI_Solutions/CodexAugmentDP/src/legalizer.cpp": "5439c77fd7377511d38182dea36669fc76bb5936d4eb080f6b3bbbc3988086fd",
+      "AI_Solutions/CodexAugmentDP/src/legalizer.hpp": "74ae9c1eb11cdb967f387995b913bf4b22fe2534eebf35b3a3cf241fd53af789",
+      "AI_Solutions/CodexAugmentDP/src/main.cpp": "bafa4764f3a321af7c06528847f1a988a360b003493676c2d97fab6990ec5fdd",
+      "AI_Solutions/CodexAugmentDP/src/optimizer.cpp": "e87a0af4555697244999f14d5e6cc441bcc78bea5e0aa3153b90d263f7ba41fb",
+      "AI_Solutions/CodexAugmentDP/src/optimizer.hpp": "43ddc4b1e1193612f17c3bbaff2928221caea3f563714c08aab39917217b6217",
+      "AI_Solutions/CodexAugmentDP/src/placedb.cpp": "f6f164bf3f0e00fbd3a1d1f7817e956f88fd8fec72bf6b55509409a0d6e98ca7",
+      "AI_Solutions/CodexAugmentDP/src/placedb.hpp": "0e49c4a74b30ff7448c025cdda5092ca640302741ac9f11589ad270bda29162b",
+      "AI_Solutions/CodexAugmentDP/src/pool.hpp": "da0b2eb9d2f7458ddea82c103276dc076e67ffa6f61fe7985f28224c992fc956",
+      "AI_Solutions/CodexAugmentDP/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635",
+      "AI_Solutions/CodexAugmentDP/src/window.cpp": "bc3f99e15aa0bc8d4fda6369d8ea4c3a08f0dbc688346185c7d120a56e15aa1f",
+      "AI_Solutions/CodexAugmentDP/src/window.hpp": "11b50758933a7d663786ed9468982bcb497404ef770cb02b212305cc51e9ea43"
+    }
+  },
+  "inputs": {
+    "ibm01": {
+      "Testcases/testcases/ibm01/ibm01.aux": "62a6aa78b37e6c23dd0426b106b4920ff069ba3d070af35934bc9fcf4a6decf7",
+      "Testcases/testcases/ibm01/ibm01.nodes": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd",
+      "Testcases/testcases/ibm01/ibm01.nets": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b",
+      "Testcases/testcases/ibm01/ibm01.wts": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7",
+      "Testcases/testcases/ibm01/ibm01.pl": "d003573ae03d3413714c3ac89d99e00bc5f131e5f0cbff1e3a7f9430cbfdcaca",
+      "Testcases/testcases/ibm01/ibm01.scl": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc"
+    },
+    "ibm05": {
+      "Testcases/testcases/ibm05/ibm05.aux": "173db66078531d61e1b94b0c47f2b007d3024d52984649dd89d233e376062a06",
+      "Testcases/testcases/ibm05/ibm05.nodes": "83c9acbee7c43b4c5288f8867f2db1988ffdc1d9d424aedf6cede0c935dcea41",
+      "Testcases/testcases/ibm05/ibm05.nets": "7a1cbb6bab44d95893e0ca2304f84eb1737c72a9823d09a14679e9fcbfc34c2b",
+      "Testcases/testcases/ibm05/ibm05.wts": "b9162b7e4dc187ee1075b155d6cc1f6bbaa13165889b1ea1d7f3fc4cde0d26bb",
+      "Testcases/testcases/ibm05/ibm05.pl": "bdbfcceef50fb3260d60f8b52c7292a41c9d77d9afec297e17ecd492c1ed584f",
+      "Testcases/testcases/ibm05/ibm05.scl": "60c1593e1a7558bbd273731248e91cf0ab1549778a28accc7dce7e3be03e592a"
+    },
+    "toy": {
+      "Testcases/testcases/toy/toy.aux": "7c1e2044cc41a001647823bc969831b3f7d5bbdc90720fe357896e8445442ad9",
+      "Testcases/testcases/toy/toy.nodes": "775f0bf23ddb00bfc20d26cdbe2d1ea99e266d6e6f848ad107f2d3509605d17a",
+      "Testcases/testcases/toy/toy.nets": "038aca10169c0f07636444898d4cfceccd89ac602014cb481b8d5c639f5c4c84",
+      "Testcases/testcases/toy/toy.wts": "78487846435e8114a65b9eb061d8e90da63be644b89a484426c905f455d1f3f3",
+      "Testcases/testcases/toy/toy.pl": "57e2575466c488e20ed8871ffd2a6733f0a46d5eba8b4a4463de1d563e562eca",
+      "Testcases/testcases/toy/toy.scl": "c27e581e161d0f4fbe540a2f8a19ee8fcf9708355f3c4af113b19fd672630e38"
+    },
+    "h01": {
+      "Testcases/holdout/h01/h01.aux": "1b1b685a53ae5cdaf1cdaa2257dca9cbfe9b8d1a4b0e2a2120a6607efc34edbd",
+      "Testcases/holdout/h01/h01.nodes": "c848add221ed66bb484bc9321477f3cc02bcff7e29eae09dc91f6ee184a20e21",
+      "Testcases/holdout/h01/h01.nets": "c0347a3286ca2f742ecf361bfb32c1eec2abce23c2eb67931ce96fdecd9c4462",
+      "Testcases/holdout/h01/h01.wts": "2c6f8cb43f3688b210d8274ee4f664e2280432d42b8ae4c2b3b46284121c1536",
+      "Testcases/holdout/h01/h01.pl": "8630fbe758b479c20dea3e53090a793ac91ea87298fe3ea3dead4b4c0ca33aa8",
+      "Testcases/holdout/h01/h01.scl": "12c7f725802d81ec5e35f1fec337d6f48a2a71285c8e926db5fb5bc601b386ab"
+    },
+    "h02": {
+      "Testcases/holdout/h02/h02.aux": "2db103abc7646ae4d0dfa942cff4c63f29ffafa04c49f850b51157f7c5f42c48",
+      "Testcases/holdout/h02/h02.nodes": "6a285c8d292d1bb9123628bcdc48cf5e5cf7b5b6bd522b443c9d8d100deddb49",
+      "Testcases/holdout/h02/h02.nets": "4266e66864c6f28f07a90eb4fc306aa20d1030e55ba507172732f825c7d3aadf",
+      "Testcases/holdout/h02/h02.wts": "fd21c09b348da236d7e40629e40e84897a0488d7dd600913bfa658b885a4abb9",
+      "Testcases/holdout/h02/h02.pl": "16895312438cf757e56f16d013bb9e00783a6454f5d4a21970a64490235562c3",
+      "Testcases/holdout/h02/h02.scl": "5a7e233d004d9ddc3b0d1db6d22fe298da4f3b105982f171402823508c8e7bbc"
+    },
+    "h03": {
+      "Testcases/holdout/h03/h03.aux": "30e59164904bfece7696c5492397f599872933bb5b871d93bff3dde19d8f3b68",
+      "Testcases/holdout/h03/h03.nodes": "7932e5e2a98c7a483a3663b5366436c1677b05b96d8c239f5638996d95d3c6cb",
+      "Testcases/holdout/h03/h03.nets": "29e1ebfd5e708d09ceb39c993a95e7ea4e01d9f23bcf304994b944c5aa2334b8",
+      "Testcases/holdout/h03/h03.wts": "6566591a4cb6e2c287dce4f6cec308775fa2fbc1d82527baf7ed172633a61a29",
+      "Testcases/holdout/h03/h03.pl": "809dc57773a0f3da54a4edc8e7f9b4ffe3b77c06fbbda4e0dc5af0234350459e",
+      "Testcases/holdout/h03/h03.scl": "32adf0240d0ccc65b4add1297a1b0e981a5deb527eb4d278b127d342eeb852fe"
+    },
+    "h04": {
+      "Testcases/holdout/h04/h04.aux": "238370114843d35b76cc203b958d623f2e77a21ba06494012796453b6d7bd908",
+      "Testcases/holdout/h04/h04.nodes": "b5e27b6d867edb6f83cea5a55da09801652f0341e9eb586651c7c349ee5dd4c1",
+      "Testcases/holdout/h04/h04.nets": "4c0fe2143a6e93aab37e1f9aa9e25810e48475042f2c943f949d59db66545d11",
+      "Testcases/holdout/h04/h04.wts": "86adf48855bc8de4ab31c6704e4de0553ef901b5226c00b5a3e2b20f4dba1b77",
+      "Testcases/holdout/h04/h04.pl": "50062abbbd7da974c05f7d23157e4b5bab9e81ba471892140707758488fa046d",
+      "Testcases/holdout/h04/h04.scl": "29961dfdad8a747669f7082110b18bfffba2b89ce709288781bb9b3e65732cc6"
+    },
+    "h05": {
+      "Testcases/holdout/h05/h05.aux": "a0936428ca5ee3ff17aaa1a31c0c2f5b2240d9c62d344e0379f7175d0e97543e",
+      "Testcases/holdout/h05/h05.nodes": "c14a46407eb0338d45334890d4d495f0ade1e43f922e87c728734bc6b6b8037f",
+      "Testcases/holdout/h05/h05.nets": "b29fe1c1ab687895f75582fc97c64b649f2e938e775831861172095aadfd4d01",
+      "Testcases/holdout/h05/h05.wts": "8551d1a4034dc62238b44d21345922b83ab6ee7b8aae61175aee3efdd72d58be",
+      "Testcases/holdout/h05/h05.pl": "cecca007a3d20eeb4c1228bc8d1dd8f88a4d62bf646dbe15fa283f1b3fcfaf98",
+      "Testcases/holdout/h05/h05.scl": "8393ed0c392159d69049491d9553c357dcca15b2f8268ffbc7a56378a973273e"
+    },
+    "h06": {
+      "Testcases/holdout/h06/h06.aux": "e0c4949b05a5cb4e453212be28674a03845051dd69d241bad1c8e04376a41929",
+      "Testcases/holdout/h06/h06.nodes": "5516df202d293c68616f3f603439c11784f0d99765b3fe8c442690be65d983a0",
+      "Testcases/holdout/h06/h06.nets": "022e018ebc24a84bcf3f8d645628940eb2549444148d3a7d902b63d559f343e7",
+      "Testcases/holdout/h06/h06.wts": "94dbe1e7c4bcd79b1fa1405d4db389877217c7841db8a87ac65efa5332457184",
+      "Testcases/holdout/h06/h06.pl": "76877cb2ff4041f9f5bc4ed0c158b66b00afd7b8eec311adec59c7207a616074",
+      "Testcases/holdout/h06/h06.scl": "e19f929cbf3fc9b021475f3a91563b0e04e8142f0889a11cdd4de3869c733379"
+    },
+    "h07": {
+      "Testcases/holdout/h07/h07.aux": "7976c645227792a23044d0f5b8e3c7749c798dc512f35b6cce600a985c529362",
+      "Testcases/holdout/h07/h07.nodes": "9afd47d51cf5b62f1252b22e68fc2b35d300ca35b063c471c8c51171852264d1",
+      "Testcases/holdout/h07/h07.nets": "26dfff163cc74463701c88fe6f463240a084734ee6bcab4eed8b16d197368f73",
+      "Testcases/holdout/h07/h07.wts": "f5dcf7b7beda6b9a111e24be9a7bc30d7b80a480dbad9fcd28f560cfe385f828",
+      "Testcases/holdout/h07/h07.pl": "15410d04a661b2accd892b43a5a5e0b716c67cbcfaa88fdf41d814884aed3591",
+      "Testcases/holdout/h07/h07.scl": "ce1e7e759409071318358eb8d501579ef56d25147be7a64c027a6ea1c82dd712"
+    },
+    "h08": {
+      "Testcases/holdout/h08/h08.aux": "411d3f311f25a40ee093c6957f3be698f05df51131c38199d14e0859c2a3fa12",
+      "Testcases/holdout/h08/h08.nodes": "bf0edfd911be22877243ff5836b1280c2ef39bf481767e0a6e33f9bc317d15fe",
+      "Testcases/holdout/h08/h08.nets": "ab0ee74c3eda0a5c5457d7d542201320c4a91db4657e8806cb02c311b5ce0fbf",
+      "Testcases/holdout/h08/h08.wts": "8e11c57dd514b10259adfeecd2b17afcf62259741576a42a868f9c4f9598e9ba",
+      "Testcases/holdout/h08/h08.pl": "13e2f7c8789159f67759eee350234f471787a202ef49f2198beda2dbbed7ce9e",
+      "Testcases/holdout/h08/h08.scl": "1c920efed67adad76a0a720da06a496c7c1af06b64273f628d60e380e92b9ce8"
+    }
+  }
+}

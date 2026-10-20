@@ -1,0 +1,49 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/baseline_default/submissions/ClaudeOpus55_v4.tgz  (19 files)
+       ClaudeOpus55_v4/CMakeLists.txt
+       ClaudeOpus55_v4/Makefile
+       ClaudeOpus55_v4/README.md
+       ClaudeOpus55_v4/src/annealer.cpp
+       ClaudeOpus55_v4/src/annealer.hpp
+       ClaudeOpus55_v4/src/legalizer.cpp
+       ClaudeOpus55_v4/src/legalizer.hpp
+       ClaudeOpus55_v4/src/main.cpp
+       ClaudeOpus55_v4/src/optimizer.cpp
+       ClaudeOpus55_v4/src/optimizer.hpp
+       ClaudeOpus55_v4/src/placedb.cpp
+       ClaudeOpus55_v4/src/placedb.hpp
+       ClaudeOpus55_v4/src/pool.hpp
+       ClaudeOpus55_v4/src/rowmap.hpp
+       ClaudeOpus55_v4/src/window.cpp
+       ClaudeOpus55_v4/src/window.hpp
+       ClaudeOpus55_v4/tests/multirow_test.cpp
+       ClaudeOpus55_v4/tests/optimizer_test.cpp
+       ClaudeOpus55_v4/tests/window_test.cpp
+[build] OK build/dp  3.3s
+[run] ibm01    PASS  OK          64.1s  disp=23052066.0387 max=10596.97 legal=87274410.0 sa=50859276.0
+[run] ibm05    PASS  OK          80.7s  disp=1327775.23 max=202.747 legal=11826195.0 sa=9722279.0
+[run] toy      PASS  OK           2.0s  disp=43261.6 max=2007.9 legal=103854.0 sa=45570.0
+[run] h01      PASS  OK           5.3s  disp=2347.85 max=31.39 legal=25476.0 sa=14074.0
+[run] h02      PASS  OK          14.7s  disp=461858.173 max=2607.298 legal=3796606.0 sa=2317329.7
+[run] h03      PASS  OK          12.6s  disp=7059.9267 max=20.9775 legal=26514.2 sa=12092.5
+[run] h04      PASS  OK          26.8s  disp=180570.93 max=241.55 legal=538008.5 sa=229214.5
+[run] h05      PASS  OK          20.8s  disp=1551912.46 max=1494.987 legal=26225705.3 sa=18034677.3
+[run] h06      PASS  OK          79.6s  disp=889102.88 max=434.81 legal=2143757.5 sa=667526.0
+[run] h07      PASS  OK          65.4s  disp=109194.0426 max=48.0254 legal=355957.485 sa=165134.836
+[run] h08      PASS  OK         103.9s  disp=125041527.025 max=28600.483 legal=307767677.0 sa=101539964.2
+[run] e01_nearlegal PASS  OK          48.9s  disp=23080.617 max=5.595 legal=698132.0 sa=486857.5
+[run] e02_legalgp PASS  OK          18.3s  disp=0.0 max=0.0 legal=14678898.5 sa=9882912.0
+[run] e03_dense97 PASS  OK          33.2s  disp=141862.626 max=144.25 legal=570506.0 sa=290405.0
+[run] e04_sparse10 PASS  OK          13.3s  disp=693.1025 max=1.7841 legal=47376.166 sa=14284.332
+[run] e05_bignets PASS  OK          47.5s  disp=76852.568 max=64.0 legal=1003735.0 sa=718014.5
+[run] e06_tallnarrow PASS  OK          13.9s  disp=32349.421 max=41.719 legal=2139083.0 sa=943400.5
+[run] e07_tworows PASS  OK          14.1s  disp=19789.411 max=29.997 legal=991521.5 sa=200288.0
+[run] e08_fragmented PASS  OK          25.0s  disp=91137.457 max=74.604 legal=709246.0 sa=409930.0
+[run] e09_offgrid PASS  OK          54.8s  disp=15040.2171 max=36.6912 legal=201495.3132 sa=59042.768
+[run] e10_mixedsites PASS  OK          53.7s  disp=63123.586 max=51.763 legal=1229520.0 sa=802871.0
+[run] e11_format PASS  OK           6.7s  disp=7683.675 max=14.327 legal=121499.0 sa=75667.0
+[run] e12_collapse PASS  OK          21.2s  disp=322120.975 max=233.0 legal=2381011.0 sa=180378.0
+[run] e13_onecell PASS  OK           0.2s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          60.8s  disp=13816276.35 max=4891.49 legal=125295767.0 sa=88768525.5
+[run] e16_rowgaps PASS  OK          54.3s  disp=96320.81 max=66.479 legal=755863.5 sa=456356.5
+[summary] 27/27 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/baseline_default/record.csv

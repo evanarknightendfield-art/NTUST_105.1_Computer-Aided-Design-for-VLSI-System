@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 一行重跑報告用的實驗：編譯 → 產生測資（還沒有的話）→ 跑實驗 → 表格與圖
-#   ./run_everything.sh              你的程式 Lab3/M11502102，結果放 Report/{results,tables,figures}
-#   ./run_everything.sh reference    參考解，全部實驗，結果放 AI_Workspace/reference_report/
+#   ./run_everything.sh              你的程式 Lab3/M11502102：原始結果放 Testcases/results/report/，表格和圖放 Report/{tables,figures}
+#   ./run_everything.sh reference    參考解，全部實驗：原始結果放 Testcases/results/reference_report/，表格和圖放 AI_Workspace/reference_report/
 #   ONLY=main ./run_everything.sh    只跑某幾組（main,holdout,stage1,sa,effort,seeds）
 set -e
 cd "$(dirname "$0")"

@@ -1,0 +1,17 @@
+bench,verdict,status,seconds,disp,max,hpwl_legal,hpwl_sa,legal_ok,sa_ok,missing,problems
+e01_nearlegal,PASS,OK,15.52,23080.617,5.595,698132.0,515847.5,True,True,,
+e02_legalgp,PASS,OK,6.76,0.0,0.0,14678898.5,10342110.0,True,True,,
+e03_dense97,PASS,OK,10.35,168091.668,144.532,590543.5,305519.0,True,True,,
+e04_sparse10,PASS,OK,2.36,695.6306,1.7841,47400.166,14495.433,True,True,,
+e05_bignets,PASS,OK,39.86,80320.074,64.0,1004322.0,749303.5,True,True,,
+e06_tallnarrow,PASS,OK,4.76,35900.395,105.719,2138174.5,967021.0,True,True,,
+e07_tworows,PASS,OK,4.88,20765.925,31.796,991929.0,193582.0,True,True,,
+e08_fragmented,PASS,OK,7.46,98776.431,74.63,710440.0,419867.5,True,True,,
+e09_offgrid,PASS,OK,12.58,16014.4064,36.6912,201862.8315,63302.3268,True,True,,
+e10_mixedsites,PASS,OK,11.81,67323.856,53.908,1232694.0,811492.5,True,True,,
+e11_format,PASS,OK,2.11,7997.679,14.507,121830.5,78111.0,True,True,,
+e12_collapse,PASS,OK,6.82,344084.663,233.0,2408383.5,187078.5,True,True,,
+e13_onecell,PASS,OK,0.24,4.57,4.57,36.5,36.5,True,True,,
+e14_fixedonly,FAIL,EXIT rc=-11,1.1,,,,,,,output.aux output.nodes output.nets output.wts output.scl output.pl output_legal.pl,missing output.aux output.nodes output.nets output.wts output.scl output.pl output_legal.pl; stdout has 0 of 4 lines
+e15_realistic,PASS,OK,55.74,15784897.684,4896.965,125876615.5,91940988.5,True,True,,
+e16_rowgaps,PASS,OK,11.98,103257.474,66.479,758770.0,487959.0,True,True,,

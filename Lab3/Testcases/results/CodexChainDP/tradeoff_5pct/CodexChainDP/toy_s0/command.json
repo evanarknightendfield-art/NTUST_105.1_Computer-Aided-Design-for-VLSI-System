@@ -1,0 +1,9 @@
+[
+  "Testcases/results/CodexChainDP/development/dp5",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/tradeoff_5pct/CodexChainDP/toy_s0/output",
+  "--no-sa",
+  "-v",
+  "--total-ratio",
+  "1.05"
+]

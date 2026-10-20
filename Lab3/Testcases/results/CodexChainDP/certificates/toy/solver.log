@@ -1,0 +1,14 @@
+COMMAND: ["/home/evan/anaconda3/bin/python3", "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Grader/tools/exact_bound.py", "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy", "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/smoke/toy/output_legal.pl", "--cap", "-1", "--full", "--ilp", "--time-limit", "120.0", "--write-pl", "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/certificates/toy/optimum.pl"]
+
+STDOUT
+toy: 31 cells; ours: total 43261.6, max 2007.9
+  (only positions with displacement <= 2007.9)
+  total displacement: LP lower bound 42832.4   ours/LB = 1.0100   (0.5s)
+  total displacement: ILP 42890.2 [OPTIMAL (complete model, zero gap)]   ours/ILP = 1.0087
+  wrote /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/certificates/toy/optimum.pl
+
+STDERR
+  complete model: 9432 positions
+    LP 1: 7517 columns, value 42832.4 (0.4s)
+    + 46 columns
+    LP 2: 7517 columns, value 42832.4 (0.1s)

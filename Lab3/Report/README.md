@@ -6,8 +6,8 @@
 |---|---|
 | `draft/` | 你的報告初稿（docx / pdf） |
 | `completed/` | 你的最終版報告 |
-| `scripts/run_experiments.py` | 跑實驗，原始結果（每次執行一個 `.json`）放 `results/<組>/` |
-| `scripts/make_assets.py` | `results/` → `tables/*.md` 和 `figures/*.png` |
+| `scripts/run_experiments.py` | 跑實驗，原始結果（每次執行一個 `.json`）放 **`../Testcases/results/report/<組>/`**（Lab3 的規則：跑出來的結果都在 `Testcases/results/`） |
+| `scripts/make_assets.py` | 原始結果 → `tables/*.md` 和 `figures/*.png` |
 | `run_everything.sh` | 上面兩個一起跑（含編譯、產生測資） |
 
 參考解的實驗、表格、圖和範例報告在 `../AI_Workspace/reference_report/`（同樣的腳本跑出來的）。
@@ -44,7 +44,7 @@ conda activate eda
 
 ```bash
 cd scripts
-python3 run_experiments.py --dp ../../MyCode/v2_abacus/build/dp --out ../v2 --only main
+python3 run_experiments.py --dp ../../MyCode/v2_abacus/build/dp --out ../v2 --only main   # 原始結果 → Testcases/results/v2/
 python3 make_assets.py --root ../v2
 ```
 

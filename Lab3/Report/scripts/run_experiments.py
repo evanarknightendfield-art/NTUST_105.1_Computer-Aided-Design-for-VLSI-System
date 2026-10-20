@@ -4,7 +4,9 @@
 usage: python3 run_experiments.py [--dp PATH] [--out DIR] [--jobs N] [--only main,holdout,...]
 
   --dp    program to run (default: Lab3/M11502102/build/dp, your submission)
-  --out   report root; results go to OUT/results/<experiment>/ (default: Lab3/Report)
+  --out   report root (tables / figures are made there; default: Lab3/Report)
+  --results  where the raw results go (default: Lab3/Testcases/results/<name of OUT, lower case>/,
+             e.g. Testcases/results/report/ and Testcases/results/reference_report/)
   --only  experiments, comma separated (default: main,holdout)
             main     toy / ibm01 / ibm05 with default options, SA trace; one at a time (clean runtimes)
             holdout  Testcases/holdout/h01..h08 with default options
@@ -30,6 +32,11 @@ LAB3 = os.path.abspath(os.path.join(HERE, '..', '..'))
 TESTCASES = os.path.join(LAB3, 'Testcases', 'testcases')
 HOLDOUT = os.path.join(LAB3, 'Testcases', 'holdout')
 BENCHES = ['toy', 'ibm01', 'ibm05']
+
+
+def results_dir(out):
+    """Lab3 convention: every run output lives in Testcases/results/, one folder per report."""
+    return os.path.join(LAB3, 'Testcases', 'results', os.path.basename(os.path.abspath(out)).lower())
 
 STAGE1 = {   # name -> extra args (all with --no-sa)
     'tetris': ['--legalizer', 'tetris', '--no-refine'],
@@ -100,10 +107,11 @@ def main():
     ap.add_argument('--out', default=os.path.join(LAB3, 'Report'))
     ap.add_argument('--jobs', type=int, default=6)
     ap.add_argument('--only', default='main,holdout')
+    ap.add_argument('--results')
     a = ap.parse_args()
     only = a.only.split(',')
     dp = os.path.abspath(a.dp)
-    results = os.path.join(os.path.abspath(a.out), 'results')
+    results = os.path.abspath(a.results or results_dir(a.out))
     if not os.path.isfile(dp):
         raise SystemExit(f'{dp} not found: build it first')
     if not os.path.isdir(TESTCASES):

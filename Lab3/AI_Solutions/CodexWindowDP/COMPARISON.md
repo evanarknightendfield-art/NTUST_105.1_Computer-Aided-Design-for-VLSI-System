@@ -4,7 +4,7 @@
 
 本次 11 筆總位移都是六個版本最低；HPWL 的 3 筆退步是 toy、h03、h05，因此不能宣稱全面優於 v3。新版總時間相對 v3 的幾何平均增加 13.08%。
 
-![各測資相對 v3 的變化](results/figures/comparison.png)
+![各測資相對 v3 的變化](../../Testcases/results/CodexWindowDP/figures/comparison.png)
 
 ## 共同實驗條件
 
@@ -13,7 +13,7 @@
 - `--time 1000` 只用來避免依機器速度截斷搜尋；不是每筆真的跑 1000 秒。各版額外收尾與每次 proposal 工作不同，所以同 attempts **不是同 CPU 時間**；時間另列。
 - 11 筆＝3 筆課程資料＋8 筆合成 holdout；holdout 不是 TA 官方隱藏測資。
 - 每筆檢查 7 個輸出檔、4 行 stdout、兩個 placement 的 row/site/subrow/重疊/fixed/orientation、獨立計算指標、最終 HPWL 不高於該版本合法化結果。
-- 原始資料在 `results/comparison/records.csv`；編譯器與所有 `.cpp/.hpp` SHA-256 在 `settings.json`；每次 stdout/stderr、trace、輸出及 checker 結果均保留。
+- 原始資料在 `../../Testcases/results/CodexWindowDP/comparison/records.csv`；編譯器與所有 `.cpp/.hpp` SHA-256 在 `settings.json`；每次 stdout/stderr、trace、輸出及 checker 結果均保留。
 - 本次重跑全部版本，未混入根目錄 `../COMPARISON.md` 的預設 effort 測試。那份表中 v3 額外給較多 SA 次數，不能與本表直接相減。
 
 ## 四項指標（越低越好）
@@ -104,7 +104,7 @@
 | h07 | 123,078.84 | 118,403.08 | 3.80% | 351,696.93 | 176,876.36 | 175,423.91 |
 | h08 | 146,044,300.09 | 139,934,750.54 | 4.18% | 297,097,737.90 | 117,967,317.30 | 114,865,389.50 |
 
-![ibm01 的 SA 軌跡](results/figures/sa_ibm01.png)
+![ibm01 的 SA 軌跡](../../Testcases/results/CodexWindowDP/figures/sa_ibm01.png)
 
 高溫時 current HPWL 上升是 SA 接受 uphill moves 的結果；best-so-far 保留原本較佳解，之後隨降溫降低。圖上的菱形才是包含確定性收尾的 Stage 2 最終值，沒有把收尾冒充 SA iterations。
 
@@ -133,7 +133,7 @@ seed 1 使用完整比較的結果；另外重跑 seed 2、3。只對 v3 與新�
 
 toy 的完整 ILP incumbent 與 dual bound 都是 42,890.2，已在零 MIP gap 下證明。h01 在 120 秒 MIP 上限內找到 2,295.79，dual bound 為 2,281.57，**尚未證明最優**；其最優總位移位於兩者之間，不能再引用原先受限模型的 2,383.6 作全域最佳值。
 最大位移 LP 下界是有效的下界，但不是整數最優值：toy 約 1,938.40，h01 約 26.48。因此現有 2,007.9／31.67 並不能據此宣稱只差 2–4%。
-完整位置集合的結果及 dual bound 保留於 `results/bounds/*.json`。既有 `Grader/tools/exact_bound.py` 的受限列 LP 不可行不能直接當全域不可行、受限列 ILP 的最優也不等於完整 ILP 最優；還有晶片外左側 pad 的負索引遮罩問題，詳見 `READING_NOTES.md`。本版另做完整列枚舉與正確的遮罩，沒有改寫其他人的實驗記錄。
+完整位置集合的結果及 dual bound 保留於 `../../Testcases/results/CodexWindowDP/bounds/*.json`。既有 `Grader/tools/exact_bound.py` 的受限列 LP 不可行不能直接當全域不可行、受限列 ILP 的最優也不等於完整 ILP 最優；還有晶片外左側 pad 的負索引遮罩問題，詳見 `READING_NOTES.md`。本版另做完整列枚舉與正確的遮罩，沒有改寫其他人的實驗記錄。
 
 ## 我認為值得繼續改良的地方
 

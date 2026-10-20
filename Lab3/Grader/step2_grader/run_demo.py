@@ -3,10 +3,12 @@
 
 usage: python3 run_demo.py [--dp PATH]
 
-1. copies holdout h01 (300 cells, 2 fixed macros inside the rows, split rows, pads) to inputs/
-2. runs the reference dp on it → results/GOOD/  (legal)
-3. breaks GOOD's output_legal.pl in one way each → results/BAD_*/
-4. runs check_pl.py on every result → record.csv, summary.csv
+Everything it writes goes to Lab3/Testcases/results/step2_grader/ (OUT below;
+the Lab3 convention: testcases and run outputs live under Testcases/):
+1. copies holdout h01 (300 cells, 2 fixed macros inside the rows, split rows, pads) to OUT/inputs/
+2. runs the reference dp on it → OUT/GOOD/  (legal)
+3. breaks GOOD's output_legal.pl in one way each → OUT/BAD_*/
+4. runs check_pl.py on every result → OUT/record.csv, OUT/summary.csv
 """
 import argparse
 import csv
@@ -22,6 +24,7 @@ from check_pl import read_aux, read_nodes, read_pl, read_scl  # noqa: E402
 
 CHECK = os.path.join(LAB3, 'Grader', 'tools', 'check_pl.py')
 SRC = os.path.join(LAB3, 'Testcases', 'holdout', 'h01')
+OUT = os.path.join(LAB3, 'Testcases', 'results', 'step2_grader')
 
 
 def write_pl(path, pl, order):
@@ -38,8 +41,8 @@ def main():
     ap.add_argument('--dp', default=os.path.join(LAB3, 'AI_Solutions', 'ClaudeOpus55', 'build', 'dp'))
     a = ap.parse_args()
 
-    inputs = os.path.join(HERE, 'inputs')
-    results = os.path.join(HERE, 'results')
+    inputs = os.path.join(OUT, 'inputs')
+    results = OUT
     os.makedirs(inputs, exist_ok=True)
     for f in os.listdir(SRC):
         shutil.copy(os.path.join(SRC, f), inputs)
@@ -110,11 +113,11 @@ def main():
                         'ok': verdict == expect, 'first_problem': reason})
         print(f'{name:18s} {verdict:8s} {"ok" if verdict == expect else "WRONG"}  {reason}')
 
-    with open(os.path.join(HERE, 'record.csv'), 'w', newline='') as f:
+    with open(os.path.join(OUT, 'record.csv'), 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=list(records[0]))
         w.writeheader()
         w.writerows(records)
-    with open(os.path.join(HERE, 'summary.csv'), 'w', newline='') as f:
+    with open(os.path.join(OUT, 'summary.csv'), 'w', newline='') as f:
         w = csv.writer(f)
         w.writerow(['cases', 'checker_correct'])
         w.writerow([len(records), sum(r['ok'] for r in records)])

@@ -16,6 +16,6 @@ cd Lab3/Report
 | `tables/sa_ablation.md` | SA 對照（貪心、p0、optimal region、range limiter） |
 | `tables/effort.md`、`seeds.md` | 嘗試次數、seed 變異 |
 | `figures/` | 報告用的圖（說明見 `Report/README.md`） |
-| `results/` | 每次執行的原始結果（`.json`）、SA trace（`.csv`）、main 的輸出 `.pl` |
+| `../../Testcases/results/reference_report/` | 每次執行的原始結果（`.json`）、SA trace（`.csv`）、main 的輸出 `.pl`（Lab3 的規則：跑出來的結果都在 `Testcases/results/`） |
 
-testcases 那幾組是 2026-10-15 跑的（`results/run_log_2026-10-15.txt`），holdout 是 2026-10-18 跑的。
+testcases 那幾組是 2026-10-15 跑的（`Testcases/results/reference_report/run_log_2026-10-15.txt`），holdout 是 2026-10-18 跑的。

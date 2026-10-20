@@ -1,0 +1,39 @@
+{
+  "sources": {
+    "AI_Solutions/ClaudeOpus55_v3/src/annealer.cpp": "c3b80c2a3c6dba2f2d4f6898aa5c6feec0e366f8771be22b4360e8b54fe01c70",
+    "AI_Solutions/ClaudeOpus55_v3/src/annealer.hpp": "60938b83f787430846e37b15dabc521d734740c121eb3c29781fd9ef88d5e497",
+    "AI_Solutions/ClaudeOpus55_v3/src/legalizer.cpp": "d95e258d2677cf08f4c81965f193f18fb62e96c5844e6e9eef5608d8194e94ba",
+    "AI_Solutions/ClaudeOpus55_v3/src/legalizer.hpp": "8a550f1d70037bbb8e3c00dfde1e1157738762246a12bcee8046f31fe3961261",
+    "AI_Solutions/ClaudeOpus55_v3/src/main.cpp": "1f0c49347685e2d1ec80c41e1e2020d24e072e2eb6312c8bb45db9686f42bb7f",
+    "AI_Solutions/ClaudeOpus55_v3/src/placedb.cpp": "4d4f7c1c791000446f78314f8155edfa5bfe20c2e9277983a609235eaee8adbc",
+    "AI_Solutions/ClaudeOpus55_v3/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+    "AI_Solutions/ClaudeOpus55_v3/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+  },
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread"
+  ],
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v3/3d6b01f50fbef0b39fd2e684c69e59e364a0034a2f0978462ae455bee3166e34/annealer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v3/3d6b01f50fbef0b39fd2e684c69e59e364a0034a2f0978462ae455bee3166e34/legalizer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v3/3d6b01f50fbef0b39fd2e684c69e59e364a0034a2f0978462ae455bee3166e34/main.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v3/3d6b01f50fbef0b39fd2e684c69e59e364a0034a2f0978462ae455bee3166e34/placedb.cpp",
+    "-o",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/bin/ClaudeOpus55_v3"
+  ],
+  "fingerprint": "14f9c14a2bac2d7d6fd6bc4d169a48cb34ac04dad8a289779c21e3d6d25fd7c8",
+  "returncode": 0,
+  "timeout": false,
+  "seconds": 4.624285679998138,
+  "binary_sha256": "ff801f890228cea6cd4a30ae7578ee11134bb9e7aa86f523d5c4873bc8b33a75"
+}

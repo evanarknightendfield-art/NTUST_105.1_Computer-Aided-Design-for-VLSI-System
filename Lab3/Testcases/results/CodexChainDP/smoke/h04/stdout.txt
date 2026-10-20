@@ -1,0 +1,4 @@
+Total displacement (legal): 180690.19
+Maximum displacement (legal): 241.54
+Total HPWL (legal): 538350
+Total HPWL (SA): 538350

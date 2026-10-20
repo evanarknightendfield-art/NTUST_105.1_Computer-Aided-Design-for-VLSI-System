@@ -1,0 +1,72 @@
+{
+  "scope": "Minimum total L1 displacement with maximum L1 displacement capped at the supplied placement maximum + 1e-6.",
+  "not_proven": [
+    "Minimum maximum displacement",
+    "Unconstrained minimum total displacement",
+    "Stage 2 HPWL optimality"
+  ],
+  "benchmark": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy",
+  "placement": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/smoke/toy/output_legal.pl",
+  "model_assumptions": {
+    "errors": [],
+    "movable_cells": 31,
+    "rows": 132,
+    "subrows": 132,
+    "site_spacing": 66.0,
+    "row_height": 504.0,
+    "input_metrics": {
+      "total_displacement": 43261.599999999984,
+      "maximum_displacement": 2007.8999999999978
+    }
+  },
+  "input_check": {
+    "returncode": 0,
+    "stdout": "LEGAL\nTotal displacement: 43261.6\nMaximum displacement: 2007.9  (a7459)\nTotal HPWL: 103854.0\n",
+    "stderr": "",
+    "legal": true
+  },
+  "sha256": {
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nodes": "775f0bf23ddb00bfc20d26cdbe2d1ea99e266d6e6f848ad107f2d3509605d17a",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nets": "038aca10169c0f07636444898d4cfceccd89ac602014cb481b8d5c639f5c4c84",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.wts": "78487846435e8114a65b9eb061d8e90da63be644b89a484426c905f455d1f3f3",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.pl": "57e2575466c488e20ed8871ffd2a6733f0a46d5eba8b4a4463de1d563e562eca",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.scl": "c27e581e161d0f4fbe540a2f8a19ee8fcf9708355f3c4af113b19fd672630e38",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/smoke/toy/output_legal.pl": "57689e07b63d7739cc82448b4020b2da49604c9813e00044d8a34bb0fa12b51a",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Grader/tools/exact_bound.py": "54ce8d16eb43c290f6a8584d6c5777e2f0877d4597f84954343ab6125445b35d",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Grader/tools/check_pl.py": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3"
+  },
+  "command": [
+    "/home/evan/anaconda3/bin/python3",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Grader/tools/exact_bound.py",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/smoke/toy/output_legal.pl",
+    "--cap",
+    "-1",
+    "--full",
+    "--ilp",
+    "--time-limit",
+    "120.0",
+    "--write-pl",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/certificates/toy/optimum.pl"
+  ],
+  "maximum_displacement_cap": 2007.900000999998,
+  "returncode": 0,
+  "seconds": 5.515332835002482,
+  "log_sha256": "c2e026efa1074852cea75541acbbdeb4a34a879164a5051aef4c3e3b4b8a3599",
+  "lp_lower_bound_rounded_to_0_1": 42832.4,
+  "optimum_check": {
+    "returncode": 0,
+    "stdout": "LEGAL\nTotal displacement: 42890.2\nMaximum displacement: 2007.9  (a7459)\nTotal HPWL: 107964.0\n",
+    "stderr": "",
+    "legal": true
+  },
+  "optimum_metrics": {
+    "total_displacement": 42890.19999999999,
+    "maximum_displacement": 2007.8999999999978
+  },
+  "optimum_sha256": "3025b38aff7986d59bc702c431eebcbade98d33987b4fc3ea7b030b40385c0e2",
+  "status": "OPTIMAL_TOTAL_AT_FIXED_MAX_CAP",
+  "candidate_minus_incumbent_total": 371.3999999999942,
+  "candidate_matches_certified_optimum": false,
+  "proof_caveat": "Floating-point HiGHS certificate under checked model assumptions; not a formal rational-arithmetic proof. Rounded log bounds are not used as exact equality evidence."
+}

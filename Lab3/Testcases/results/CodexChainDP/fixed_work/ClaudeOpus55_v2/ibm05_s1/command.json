@@ -1,0 +1,14 @@
+[
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/fixed_work/bin/ClaudeOpus55_v2",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.aux",
+  "output",
+  "--seed",
+  "1",
+  "--time",
+  "1000.0",
+  "--effort",
+  "200",
+  "--trace",
+  "trace.csv",
+  "-v"
+]

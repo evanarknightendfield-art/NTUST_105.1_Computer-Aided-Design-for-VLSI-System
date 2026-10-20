@@ -1,0 +1,132 @@
+{
+  "command": [
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/fixed_work/bin/ClaudeOpus55_v3",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.aux",
+    "output",
+    "--seed",
+    "1",
+    "--time",
+    "1000.0",
+    "--effort",
+    "416",
+    "--trace",
+    "trace.csv",
+    "-v"
+  ],
+  "inputs": {
+    "Testcases/testcases/ibm01/ibm01.aux": "62a6aa78b37e6c23dd0426b106b4920ff069ba3d070af35934bc9fcf4a6decf7",
+    "Testcases/testcases/ibm01/ibm01.nodes": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd",
+    "Testcases/testcases/ibm01/ibm01.nets": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b",
+    "Testcases/testcases/ibm01/ibm01.wts": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7",
+    "Testcases/testcases/ibm01/ibm01.pl": "d003573ae03d3413714c3ac89d99e00bc5f131e5f0cbff1e3a7f9430cbfdcaca",
+    "Testcases/testcases/ibm01/ibm01.scl": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc"
+  },
+  "build": {
+    "sources": {
+      "AI_Solutions/ClaudeOpus55_v3/src/annealer.cpp": "c3b80c2a3c6dba2f2d4f6898aa5c6feec0e366f8771be22b4360e8b54fe01c70",
+      "AI_Solutions/ClaudeOpus55_v3/src/annealer.hpp": "60938b83f787430846e37b15dabc521d734740c121eb3c29781fd9ef88d5e497",
+      "AI_Solutions/ClaudeOpus55_v3/src/legalizer.cpp": "d95e258d2677cf08f4c81965f193f18fb62e96c5844e6e9eef5608d8194e94ba",
+      "AI_Solutions/ClaudeOpus55_v3/src/legalizer.hpp": "8a550f1d70037bbb8e3c00dfde1e1157738762246a12bcee8046f31fe3961261",
+      "AI_Solutions/ClaudeOpus55_v3/src/main.cpp": "1f0c49347685e2d1ec80c41e1e2020d24e072e2eb6312c8bb45db9686f42bb7f",
+      "AI_Solutions/ClaudeOpus55_v3/src/placedb.cpp": "4d4f7c1c791000446f78314f8155edfa5bfe20c2e9277983a609235eaee8adbc",
+      "AI_Solutions/ClaudeOpus55_v3/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/ClaudeOpus55_v3/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+    },
+    "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread"
+    ],
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v3/src/annealer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v3/src/legalizer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v3/src/main.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v3/src/placedb.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/fixed_work/bin/ClaudeOpus55_v3"
+    ],
+    "fingerprint": "f0e8bcdd1bc11cc32aba6642ca3bc6c2427a2942d73e56d15fc8d5cfb99f94e2",
+    "returncode": 0,
+    "timeout": false,
+    "binary_sha256": "ff801f890228cea6cd4a30ae7578ee11134bb9e7aa86f523d5c4873bc8b33a75"
+  },
+  "checker_sha256": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3",
+  "timeout": 3600,
+  "fingerprint": "36d0cfab4ad805f1603343a6b07ef0b95642cf9f96520e0e094ee6e949ec36a2",
+  "record": {
+    "solution": "ClaudeOpus55_v3",
+    "bench": "ibm01",
+    "seed": 1,
+    "movable": 12028,
+    "effort": 416,
+    "planned_attempts": 5003648,
+    "sa_attempts": 5003600,
+    "work_complete": true,
+    "verdict": "PASS",
+    "seconds": 10.689193,
+    "disp": 25359086.09013,
+    "max": 10620.36,
+    "hpwl_legal": 88963974.0,
+    "hpwl_final": 59135388.0,
+    "returncode": 0,
+    "problems": "",
+    "fingerprint": "36d0cfab4ad805f1603343a6b07ef0b95642cf9f96520e0e094ee6e949ec36a2"
+  },
+  "reported_metrics": {
+    "Total displacement (legal)": 25359086.0901,
+    "Maximum displacement (legal)": 10620.36,
+    "Total HPWL (legal)": 88963974.0,
+    "Total HPWL (SA)": 59135388.0
+  },
+  "independent_metrics": {
+    "legal": {
+      "disp": 25359086.09013,
+      "max": 10620.36,
+      "hpwl": 88963974.0
+    },
+    "sa": {
+      "disp": 102056074.07601,
+      "max": 95660.5,
+      "hpwl": 59135388.0
+    }
+  },
+  "output_sha256": {
+    "output.pl": "338857831c728e754466d76f32f7e6a1483be0b0e45cf572e4cbd771bfa76528",
+    "output_legal.pl": "f1c652e0d2a9317315a94e11de3ab6e67b3711bd01806b7fec7d211e5a558eca",
+    "trace.csv": "5597916541b866a9fecbb441a09ca77413ceb74c2c7ed76c236972d8d2cd06c0",
+    "stdout.txt": "fb6f741d03e2ceb02698129e88c37c9978192509605f836ff67a9a7040db88c2",
+    "stderr.txt": "a893009a77ee909c43164eb6cf9ff83f9db79891ebc188e50f1b49caeb075bb4",
+    "command.json": "58d71903645374bc862a9b3385bd166b0527f34e5b6eeb41993c3ed80e594d13",
+    "check_legal_stdout.txt": "7b34a78d25d8bfbb80112cc5a64ceab331083a0a2988439d985be807e1ae1cb2",
+    "check_legal_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "check_sa_stdout.txt": "24615d35a1c5b702f5c609e263ccc584d4d4c9248db1c9cd9552cfebcc4d231e",
+    "check_sa_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "all_deliverable_sha256": {
+    "output.aux": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7",
+    "output.nodes": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd",
+    "output.nets": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b",
+    "output.wts": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7",
+    "output.scl": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc",
+    "output.pl": "338857831c728e754466d76f32f7e6a1483be0b0e45cf572e4cbd771bfa76528",
+    "output_legal.pl": "f1c652e0d2a9317315a94e11de3ab6e67b3711bd01806b7fec7d211e5a558eca"
+  },
+  "pruned_redundant_copies": [
+    "output.aux",
+    "output.nodes",
+    "output.nets",
+    "output.wts",
+    "output.scl"
+  ],
+  "expected_attempts": 5003600,
+  "time_limit_message": false
+}

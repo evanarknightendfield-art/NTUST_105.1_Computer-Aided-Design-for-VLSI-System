@@ -19,6 +19,8 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 LAB = ROOT.parents[1]
+# Lab3 convention: run outputs go to Lab3/Testcases/results/<solution>/ (not into the solution folder)
+RESULTS = LAB / 'Testcases' / 'results' / ROOT.name
 LABELS = ('ClaudeOpus55', 'CodexGapSA', 'ClaudeOpus55_v2', 'CodexParetoDP', 'ClaudeOpus55_v3', 'CodexWindowDP')
 KEYS = ('Total displacement (legal)', 'Maximum displacement (legal)', 'Total HPWL (legal)', 'Total HPWL (SA)')
 
@@ -41,7 +43,7 @@ def main():
     parser.add_argument('--suite', default='comparison')
     parser.add_argument('--candidate-only', action='store_true', help='reuse verified baseline runs with matching settings and source hashes')
     args = parser.parse_args()
-    out = ROOT / 'results' / args.suite
+    out = RESULTS / args.suite
     out.mkdir(parents=True, exist_ok=True)
     sources = {}
     previous = []
@@ -125,7 +127,7 @@ def main():
                 writer.writerows(records)
             print(f'{label:18s} {bench.stem:6s} seed={seed} {record["verdict"]} {elapsed:6.2f}s HPWL={record["hpwl_final"]}', flush=True)
     if any(r['verdict'] != 'PASS' for r in records):
-        raise SystemExit('A comparison run failed; inspect results/comparison/records.csv')
+        raise SystemExit('A comparison run failed; inspect Testcases/results/CodexWindowDP/comparison/records.csv')
     print(f'{len(records)}/{len(records)} verified runs passed.', flush=True)
 
 

@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-"""Turn ROOT/results/*/ into report tables (ROOT/tables/*.md) and figures (ROOT/figures/*.png).
+"""Turn the raw results into report tables (ROOT/tables/*.md) and figures (ROOT/figures/*.png).
 
-usage: python3 make_assets.py [--root DIR]      (default ROOT: Lab3/Report)
+usage: python3 make_assets.py [--root DIR] [--results DIR]   (default ROOT: Lab3/Report)
+
+The raw results are read from Lab3/Testcases/results/<name of ROOT, lower case>/
+(where run_experiments.py writes them), unless --results says otherwise.
 
 Run run_experiments.py first. Sections whose results are missing are skipped,
 so this works both for your program (main, holdout) and for the reference
@@ -88,8 +91,12 @@ def main():
     global RES, TAB, FIG
     ap = argparse.ArgumentParser()
     ap.add_argument('--root', default=os.path.join(LAB3, 'Report'))
-    root = os.path.abspath(ap.parse_args().root)
-    RES, TAB, FIG = (os.path.join(root, d) for d in ('results', 'tables', 'figures'))
+    ap.add_argument('--results')
+    args = ap.parse_args()
+    root = os.path.abspath(args.root)
+    TAB, FIG = (os.path.join(root, d) for d in ('tables', 'figures'))
+    # Lab3 convention: raw run outputs live in Testcases/results/, one folder per report
+    RES = os.path.abspath(args.results or os.path.join(LAB3, 'Testcases', 'results', os.path.basename(root).lower()))
     os.makedirs(TAB, exist_ok=True)
     os.makedirs(FIG, exist_ok=True)
     benches = ['toy', 'ibm01', 'ibm05']

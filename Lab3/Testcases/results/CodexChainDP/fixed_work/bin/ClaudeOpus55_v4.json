@@ -1,0 +1,46 @@
+{
+  "sources": {
+    "AI_Solutions/ClaudeOpus55_v4/src/annealer.cpp": "1ae5159393d9bb0906a82aadbbe1609dc026f04a5dace74f43d116fdf068d913",
+    "AI_Solutions/ClaudeOpus55_v4/src/annealer.hpp": "0d88f110de3565e370320ca315cc35233b0b2ed2bea6e94b5ca2ff8d7af102e2",
+    "AI_Solutions/ClaudeOpus55_v4/src/legalizer.cpp": "5439c77fd7377511d38182dea36669fc76bb5936d4eb080f6b3bbbc3988086fd",
+    "AI_Solutions/ClaudeOpus55_v4/src/legalizer.hpp": "74ae9c1eb11cdb967f387995b913bf4b22fe2534eebf35b3a3cf241fd53af789",
+    "AI_Solutions/ClaudeOpus55_v4/src/main.cpp": "bafa4764f3a321af7c06528847f1a988a360b003493676c2d97fab6990ec5fdd",
+    "AI_Solutions/ClaudeOpus55_v4/src/optimizer.cpp": "e87a0af4555697244999f14d5e6cc441bcc78bea5e0aa3153b90d263f7ba41fb",
+    "AI_Solutions/ClaudeOpus55_v4/src/optimizer.hpp": "43ddc4b1e1193612f17c3bbaff2928221caea3f563714c08aab39917217b6217",
+    "AI_Solutions/ClaudeOpus55_v4/src/placedb.cpp": "f6f164bf3f0e00fbd3a1d1f7817e956f88fd8fec72bf6b55509409a0d6e98ca7",
+    "AI_Solutions/ClaudeOpus55_v4/src/placedb.hpp": "0e49c4a74b30ff7448c025cdda5092ca640302741ac9f11589ad270bda29162b",
+    "AI_Solutions/ClaudeOpus55_v4/src/pool.hpp": "d320b9909ee0d0e7bee5ead7466827a9cc5d27b6e80272c0126eeb0c38fd1409",
+    "AI_Solutions/ClaudeOpus55_v4/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635",
+    "AI_Solutions/ClaudeOpus55_v4/src/window.cpp": "bc3f99e15aa0bc8d4fda6369d8ea4c3a08f0dbc688346185c7d120a56e15aa1f",
+    "AI_Solutions/ClaudeOpus55_v4/src/window.hpp": "11b50758933a7d663786ed9468982bcb497404ef770cb02b212305cc51e9ea43"
+  },
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread"
+  ],
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v4/261d397a4d17cd65166db871e6dd314fb686e05be4ca6d2eb419d7087f5850c0/annealer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v4/261d397a4d17cd65166db871e6dd314fb686e05be4ca6d2eb419d7087f5850c0/legalizer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v4/261d397a4d17cd65166db871e6dd314fb686e05be4ca6d2eb419d7087f5850c0/main.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v4/261d397a4d17cd65166db871e6dd314fb686e05be4ca6d2eb419d7087f5850c0/optimizer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v4/261d397a4d17cd65166db871e6dd314fb686e05be4ca6d2eb419d7087f5850c0/placedb.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55_v4/261d397a4d17cd65166db871e6dd314fb686e05be4ca6d2eb419d7087f5850c0/window.cpp",
+    "-o",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/bin/ClaudeOpus55_v4"
+  ],
+  "fingerprint": "e5b1f2b0bfe20588a68e8ab100cc2c3b8441ea65c6a9571d589c4a8c60f308b1",
+  "returncode": 0,
+  "timeout": false,
+  "seconds": 8.43219505199886,
+  "binary_sha256": "7c61a4045e52dfeac532ab3577e36b4a0fb63fd83e1414acbe4cc73dbddcd7d9"
+}

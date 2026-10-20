@@ -1,0 +1,39 @@
+{
+  "sources": {
+    "MyCode/my_dp_skeleton/src/annealer.cpp": "e314e9f0437a9c631b300ba2fe771b09db3046685e5206ba6c896ff8de6b3b24",
+    "MyCode/my_dp_skeleton/src/annealer.hpp": "9c352896d052dfcc8fd48aeecb590fa15172745b382f74c38156bf856074ed3a",
+    "MyCode/my_dp_skeleton/src/legalizer.cpp": "b7cd5bcc9f071b45f65cf2c97751309333953ac11e39b4721a675c3e7ec6fe4e",
+    "MyCode/my_dp_skeleton/src/legalizer.hpp": "77c01b5d27dc90640c4a7628ff885dbb161cec9b756b21311a5dcc1d7c5daccb",
+    "MyCode/my_dp_skeleton/src/main.cpp": "e968f6670751a46c276fefb7eee0a6416cbdf6eee9bc3f2fca65ef0f1543f5cb",
+    "MyCode/my_dp_skeleton/src/placedb.cpp": "5759edf391faac704c8e33d28b9e83fa3ed55a65e8cd91454a1d30bae94e4dd0",
+    "MyCode/my_dp_skeleton/src/placedb.hpp": "928a2b405f6bf4bb116a345125930623e3fe2af0eac923af2204ad1876de2791",
+    "MyCode/my_dp_skeleton/src/rowmap.hpp": "8e46186648f4d56f8f141d5ab3c6cc6671e841d485fb9674b6ef397b4f7e6a8d"
+  },
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread"
+  ],
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/my_dp_skeleton/8dbac151cc94b3c6de6f56bbee35089d5af32352afdf60c263a1087a0ca5e0d5/annealer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/my_dp_skeleton/8dbac151cc94b3c6de6f56bbee35089d5af32352afdf60c263a1087a0ca5e0d5/legalizer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/my_dp_skeleton/8dbac151cc94b3c6de6f56bbee35089d5af32352afdf60c263a1087a0ca5e0d5/main.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/my_dp_skeleton/8dbac151cc94b3c6de6f56bbee35089d5af32352afdf60c263a1087a0ca5e0d5/placedb.cpp",
+    "-o",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/bin/my_dp_skeleton"
+  ],
+  "fingerprint": "5404d4332c4252ecc105f0afab5a6774b547fa0e48b4581e4202cd90aac12410",
+  "returncode": 0,
+  "timeout": false,
+  "seconds": 1.5164110379992053,
+  "binary_sha256": "2a711ff84705af7f04ea7c11d5f566b047548c982381d486521b4167c6b969e0"
+}

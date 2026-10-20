@@ -1,0 +1,2 @@
+{"group": "testcases", "bench": "toy", "version": "CodexChainDP", "seed": 0, "verdict": "PASS", "seconds": 2.6688269099977333, "disp": 43261.6, "max": 2007.9, "hpwl": 103854.0, "attempts": "", "sa_seconds": "", "stage2_seconds": ""}
+{"group": "holdout", "bench": "h01", "version": "CodexChainDP", "seed": 0, "verdict": "PASS", "seconds": 6.074348926998937, "disp": 2353.81, "max": 31.13, "hpwl": 25525.0, "attempts": "", "sa_seconds": "", "stage2_seconds": ""}

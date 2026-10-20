@@ -1,0 +1,3 @@
+{"group": "testcases", "bench": "toy", "version": "CodexChainDP", "seed": 0, "verdict": "PASS", "seconds": 4.072286356000404, "disp": 43261.6, "max": 2007.9, "hpwl": 103854.0, "attempts": "", "sa_seconds": "", "stage2_seconds": ""}
+{"group": "holdout", "bench": "h01", "version": "CodexChainDP", "seed": 0, "verdict": "PASS", "seconds": 17.947179589998996, "disp": 2360.57, "max": 29.89, "hpwl": 25511.0, "attempts": "", "sa_seconds": "", "stage2_seconds": ""}
+{"group": "holdout", "bench": "h02", "version": "CodexChainDP", "seed": 0, "verdict": "PASS", "seconds": 31.62280144900069, "disp": 462165.837, "max": 2517.795, "hpwl": 3789708.8, "attempts": "", "sa_seconds": "", "stage2_seconds": ""}

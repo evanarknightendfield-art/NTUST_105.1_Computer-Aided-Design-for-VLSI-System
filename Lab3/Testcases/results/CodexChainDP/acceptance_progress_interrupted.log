@@ -1,0 +1,17 @@
+START baseline_default
+DONE baseline_default rc=0
+START default
+DONE default rc=0
+START edge_default
+DONE edge_default rc=0
+Traceback (most recent call last):
+  File "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/tests/acceptance.py", line 40, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/tests/acceptance.py", line 33, in main
+    rows=list(csv.DictReader((OUT/'edge_CodexChainDP/record.csv').open()))
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/evan/anaconda3/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/edge_CodexChainDP/record.csv'

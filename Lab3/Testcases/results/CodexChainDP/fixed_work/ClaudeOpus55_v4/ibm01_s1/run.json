@@ -1,0 +1,146 @@
+{
+  "command": [
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/fixed_work/bin/ClaudeOpus55_v4",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.aux",
+    "output",
+    "--seed",
+    "1",
+    "--time",
+    "1000.0",
+    "--effort",
+    "416",
+    "--trace",
+    "trace.csv",
+    "-v",
+    "--threads",
+    "1",
+    "--stage1-time",
+    "1000.0",
+    "--polish-time",
+    "1000.0"
+  ],
+  "inputs": {
+    "Testcases/testcases/ibm01/ibm01.aux": "62a6aa78b37e6c23dd0426b106b4920ff069ba3d070af35934bc9fcf4a6decf7",
+    "Testcases/testcases/ibm01/ibm01.nodes": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd",
+    "Testcases/testcases/ibm01/ibm01.nets": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b",
+    "Testcases/testcases/ibm01/ibm01.wts": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7",
+    "Testcases/testcases/ibm01/ibm01.pl": "d003573ae03d3413714c3ac89d99e00bc5f131e5f0cbff1e3a7f9430cbfdcaca",
+    "Testcases/testcases/ibm01/ibm01.scl": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc"
+  },
+  "build": {
+    "sources": {
+      "AI_Solutions/ClaudeOpus55_v4/src/annealer.cpp": "1ae5159393d9bb0906a82aadbbe1609dc026f04a5dace74f43d116fdf068d913",
+      "AI_Solutions/ClaudeOpus55_v4/src/annealer.hpp": "0d88f110de3565e370320ca315cc35233b0b2ed2bea6e94b5ca2ff8d7af102e2",
+      "AI_Solutions/ClaudeOpus55_v4/src/legalizer.cpp": "5439c77fd7377511d38182dea36669fc76bb5936d4eb080f6b3bbbc3988086fd",
+      "AI_Solutions/ClaudeOpus55_v4/src/legalizer.hpp": "74ae9c1eb11cdb967f387995b913bf4b22fe2534eebf35b3a3cf241fd53af789",
+      "AI_Solutions/ClaudeOpus55_v4/src/main.cpp": "bafa4764f3a321af7c06528847f1a988a360b003493676c2d97fab6990ec5fdd",
+      "AI_Solutions/ClaudeOpus55_v4/src/optimizer.cpp": "e87a0af4555697244999f14d5e6cc441bcc78bea5e0aa3153b90d263f7ba41fb",
+      "AI_Solutions/ClaudeOpus55_v4/src/optimizer.hpp": "43ddc4b1e1193612f17c3bbaff2928221caea3f563714c08aab39917217b6217",
+      "AI_Solutions/ClaudeOpus55_v4/src/placedb.cpp": "f6f164bf3f0e00fbd3a1d1f7817e956f88fd8fec72bf6b55509409a0d6e98ca7",
+      "AI_Solutions/ClaudeOpus55_v4/src/placedb.hpp": "0e49c4a74b30ff7448c025cdda5092ca640302741ac9f11589ad270bda29162b",
+      "AI_Solutions/ClaudeOpus55_v4/src/pool.hpp": "d320b9909ee0d0e7bee5ead7466827a9cc5d27b6e80272c0126eeb0c38fd1409",
+      "AI_Solutions/ClaudeOpus55_v4/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635",
+      "AI_Solutions/ClaudeOpus55_v4/src/window.cpp": "bc3f99e15aa0bc8d4fda6369d8ea4c3a08f0dbc688346185c7d120a56e15aa1f",
+      "AI_Solutions/ClaudeOpus55_v4/src/window.hpp": "11b50758933a7d663786ed9468982bcb497404ef770cb02b212305cc51e9ea43"
+    },
+    "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread"
+    ],
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v4/src/annealer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v4/src/legalizer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v4/src/main.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v4/src/optimizer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v4/src/placedb.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v4/src/window.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/fixed_work/bin/ClaudeOpus55_v4"
+    ],
+    "fingerprint": "eca07c2a80f78e136d4db1a5eff401faa9228b64068b5473bbb54a3b152ee09e",
+    "returncode": 0,
+    "timeout": false,
+    "binary_sha256": "7c61a4045e52dfeac532ab3577e36b4a0fb63fd83e1414acbe4cc73dbddcd7d9"
+  },
+  "checker_sha256": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3",
+  "timeout": 3600,
+  "fingerprint": "ded66b64e837081f5027c9abc74cfbb32955166735796556c8b3e875d9222455",
+  "record": {
+    "solution": "ClaudeOpus55_v4",
+    "bench": "ibm01",
+    "seed": 1,
+    "movable": 12028,
+    "effort": 416,
+    "planned_attempts": 5003648,
+    "sa_attempts": 5003600,
+    "work_complete": true,
+    "verdict": "PASS",
+    "seconds": 54.167212,
+    "disp": 23004903.90027,
+    "max": 10615.98,
+    "hpwl_legal": 87050730.0,
+    "hpwl_final": 58982700.0,
+    "returncode": 0,
+    "problems": "",
+    "fingerprint": "ded66b64e837081f5027c9abc74cfbb32955166735796556c8b3e875d9222455"
+  },
+  "reported_metrics": {
+    "Total displacement (legal)": 23004903.9003,
+    "Maximum displacement (legal)": 10615.98,
+    "Total HPWL (legal)": 87050730.0,
+    "Total HPWL (SA)": 58982700.0
+  },
+  "independent_metrics": {
+    "legal": {
+      "disp": 23004903.90027,
+      "max": 10615.98,
+      "hpwl": 87050730.0
+    },
+    "sa": {
+      "disp": 105169760.72349,
+      "max": 98473.2,
+      "hpwl": 58982700.0
+    }
+  },
+  "output_sha256": {
+    "output.pl": "f355e4a2efc47276e8a02167eb6200b3be78e544c4f5098fa5e4a2cdd68624ff",
+    "output_legal.pl": "78a31c3753dfe118428514ffd662f86f257e88415499546dfc334b57e1b9709a",
+    "trace.csv": "833115dcb9ca6acb4c11988bb155b46c220e6a13660dc17985b42a55734236cf",
+    "trace.csv.polish.csv": "b556640516b07543a484c84705ee33c34231682a1597f2d098125de42f167ee3",
+    "stdout.txt": "c012d19c60f2859d016806e4dff7f2a09707503f8dfc8a94971fff4f9d77a2fb",
+    "stderr.txt": "055d15f28fa527aa06de6528a0b16d9ed0941583af465304b0b8a402c60539c3",
+    "command.json": "126e940f3affe5e8fcd89210d0d7338794cb6bfd6f8bf20fdac7cda65ffaf403",
+    "check_legal_stdout.txt": "86d74d6d4f44f9a0f2aa4159e6660092dbd89d3b01efc18147decd8544659497",
+    "check_legal_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "check_sa_stdout.txt": "ddf383cca5c051b0f2992b0ac6c270d649ea10d7e1e87da0e4445b8726110877",
+    "check_sa_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "all_deliverable_sha256": {
+    "output.aux": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7",
+    "output.nodes": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd",
+    "output.nets": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b",
+    "output.wts": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7",
+    "output.scl": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc",
+    "output.pl": "f355e4a2efc47276e8a02167eb6200b3be78e544c4f5098fa5e4a2cdd68624ff",
+    "output_legal.pl": "78a31c3753dfe118428514ffd662f86f257e88415499546dfc334b57e1b9709a"
+  },
+  "pruned_redundant_copies": [
+    "output.aux",
+    "output.nodes",
+    "output.nets",
+    "output.wts",
+    "output.scl"
+  ],
+  "expected_attempts": 5003600,
+  "time_limit_message": false
+}

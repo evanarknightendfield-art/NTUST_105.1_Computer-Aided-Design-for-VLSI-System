@@ -1,0 +1,14 @@
+{
+  "AI_Solutions/CodexChainDP/tests/sa_bench.cpp": "a78665b16c0886a0fda28c92db4afde23aa8959807401e635dcb14206f586887",
+  "AI_Solutions/ClaudeOpus55_v4/src/annealer.hpp": "0d88f110de3565e370320ca315cc35233b0b2ed2bea6e94b5ca2ff8d7af102e2",
+  "AI_Solutions/ClaudeOpus55_v4/src/legalizer.hpp": "74ae9c1eb11cdb967f387995b913bf4b22fe2534eebf35b3a3cf241fd53af789",
+  "AI_Solutions/ClaudeOpus55_v4/src/optimizer.hpp": "43ddc4b1e1193612f17c3bbaff2928221caea3f563714c08aab39917217b6217",
+  "AI_Solutions/ClaudeOpus55_v4/src/placedb.hpp": "0e49c4a74b30ff7448c025cdda5092ca640302741ac9f11589ad270bda29162b",
+  "AI_Solutions/ClaudeOpus55_v4/src/pool.hpp": "d320b9909ee0d0e7bee5ead7466827a9cc5d27b6e80272c0126eeb0c38fd1409",
+  "AI_Solutions/ClaudeOpus55_v4/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635",
+  "AI_Solutions/ClaudeOpus55_v4/src/window.hpp": "11b50758933a7d663786ed9468982bcb497404ef770cb02b212305cc51e9ea43",
+  "AI_Solutions/ClaudeOpus55_v4/src/annealer.cpp": "1ae5159393d9bb0906a82aadbbe1609dc026f04a5dace74f43d116fdf068d913",
+  "AI_Solutions/ClaudeOpus55_v4/src/optimizer.cpp": "e87a0af4555697244999f14d5e6cc441bcc78bea5e0aa3153b90d263f7ba41fb",
+  "AI_Solutions/ClaudeOpus55_v4/src/window.cpp": "bc3f99e15aa0bc8d4fda6369d8ea4c3a08f0dbc688346185c7d120a56e15aa1f",
+  "AI_Solutions/ClaudeOpus55_v4/src/placedb.cpp": "f6f164bf3f0e00fbd3a1d1f7817e956f88fd8fec72bf6b55509409a0d6e98ca7"
+}

@@ -1,0 +1,136 @@
+{
+  "command": [
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/fixed_work/bin/CodexParetoDP",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.aux",
+    "output",
+    "--seed",
+    "1",
+    "--time",
+    "1000.0",
+    "--effort",
+    "416",
+    "--trace",
+    "trace.csv",
+    "-v"
+  ],
+  "inputs": {
+    "Testcases/testcases/ibm01/ibm01.aux": "62a6aa78b37e6c23dd0426b106b4920ff069ba3d070af35934bc9fcf4a6decf7",
+    "Testcases/testcases/ibm01/ibm01.nodes": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd",
+    "Testcases/testcases/ibm01/ibm01.nets": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b",
+    "Testcases/testcases/ibm01/ibm01.wts": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7",
+    "Testcases/testcases/ibm01/ibm01.pl": "d003573ae03d3413714c3ac89d99e00bc5f131e5f0cbff1e3a7f9430cbfdcaca",
+    "Testcases/testcases/ibm01/ibm01.scl": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc"
+  },
+  "build": {
+    "sources": {
+      "AI_Solutions/CodexParetoDP/src/annealer.cpp": "acc978ab96bd0dd9c86ba3838a1aa4d23a2d56c73b67485cde692c58f2ca1241",
+      "AI_Solutions/CodexParetoDP/src/annealer.hpp": "de655f0da6746b98273ecb95f812f4b3fcd0c37a16a40fe4e738f9d2a162222f",
+      "AI_Solutions/CodexParetoDP/src/legalizer.cpp": "f41881f5bf5b2253163e783336f63b74bf3e4d89224029e061703a7e1a249462",
+      "AI_Solutions/CodexParetoDP/src/legalizer.hpp": "79ea307d4238828b301ed3b940395dbbd91fd69d0b4bb93cc6309af52959d554",
+      "AI_Solutions/CodexParetoDP/src/main.cpp": "eb6cc5c960ff4b368537122dbc382a3ce38f59e0a508bc10fb3f3b0992c34641",
+      "AI_Solutions/CodexParetoDP/src/optimizer.cpp": "0f56207238b55e83da3b06d3ea615eb8bc107a135052882ed5697b3edc47a3dd",
+      "AI_Solutions/CodexParetoDP/src/optimizer.hpp": "e75dc5b2467309c86678e0829061e59c4dd038a60553054eee6ca68a6ba61628",
+      "AI_Solutions/CodexParetoDP/src/placedb.cpp": "0bb605a376b1b3624e45d868387a3c305e711333ccdd0e77ff9a73f425ee0751",
+      "AI_Solutions/CodexParetoDP/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+      "AI_Solutions/CodexParetoDP/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+    },
+    "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread"
+    ],
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParetoDP/src/annealer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParetoDP/src/legalizer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParetoDP/src/main.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParetoDP/src/optimizer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParetoDP/src/placedb.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/fixed_work/bin/CodexParetoDP"
+    ],
+    "fingerprint": "ef3639078dd5825bf937478abd9985d0a3c80f992ddbef1822d009cb64969ff8",
+    "returncode": 0,
+    "timeout": false,
+    "binary_sha256": "d842bea53a44d48e79f10c623d8273eaf4109a82b6f870fe3c1d6846499edba7"
+  },
+  "checker_sha256": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3",
+  "timeout": 3600,
+  "fingerprint": "cc653476fc1ae6c881d58aae0793eff4ebcbe897bbd7b62144055a2ee90abd50",
+  "record": {
+    "solution": "CodexParetoDP",
+    "bench": "ibm01",
+    "seed": 1,
+    "movable": 12028,
+    "effort": 416,
+    "planned_attempts": 5003648,
+    "sa_attempts": 5003600,
+    "work_complete": true,
+    "verdict": "PASS",
+    "seconds": 9.881828,
+    "disp": 25414553.07291,
+    "max": 10620.07,
+    "hpwl_legal": 88228164.0,
+    "hpwl_final": 59727960.0,
+    "returncode": 0,
+    "problems": "",
+    "fingerprint": "cc653476fc1ae6c881d58aae0793eff4ebcbe897bbd7b62144055a2ee90abd50"
+  },
+  "reported_metrics": {
+    "Total displacement (legal)": 25414553.0729,
+    "Maximum displacement (legal)": 10620.07,
+    "Total HPWL (legal)": 88228164.0,
+    "Total HPWL (SA)": 59727960.0
+  },
+  "independent_metrics": {
+    "legal": {
+      "disp": 25414553.07291,
+      "max": 10620.07,
+      "hpwl": 88228164.0
+    },
+    "sa": {
+      "disp": 112459108.81363,
+      "max": 91670.5,
+      "hpwl": 59727960.0
+    }
+  },
+  "output_sha256": {
+    "output.pl": "927b5dd075eeb71a8cb300ba7c70d24eb21b1dea46b34afdd326832eb71f5ca6",
+    "output_legal.pl": "08fcde4e90154ed1fa9e2177a6d184e789454b61163d5b3b7f04af9d09fe8b38",
+    "trace.csv": "cbd0ef0839e488aa52557a9b24992978834ce1f54242f33f8f80151233fffd41",
+    "trace.csv.polish.csv": "cb28eb1396458c0e1c1a8382ee4af61af1414fb76fd222248653e29adea61a40",
+    "stdout.txt": "b0e488a88abbaada9534083883b201564d67c69907a0d05eb0e338c33342f831",
+    "stderr.txt": "370f2ec5fe495294747180c93aec03682cda26ebae9de855423ac76062b69d64",
+    "command.json": "d777e13b6e64eb579e5a2c203651a6cc2ac5142504bb42d82a82d1d2e12c935a",
+    "check_legal_stdout.txt": "29e9cee0d1fa3d26dbcd5bc17440f13e71526200d1cd4a80b933c6c0833bbfab",
+    "check_legal_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "check_sa_stdout.txt": "c4c17ef047c764a23f6c613b009abafedd8f8cbf7ffa21da86b1d9182768fa11",
+    "check_sa_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "all_deliverable_sha256": {
+    "output.aux": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7",
+    "output.nodes": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd",
+    "output.nets": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b",
+    "output.wts": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7",
+    "output.scl": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc",
+    "output.pl": "927b5dd075eeb71a8cb300ba7c70d24eb21b1dea46b34afdd326832eb71f5ca6",
+    "output_legal.pl": "08fcde4e90154ed1fa9e2177a6d184e789454b61163d5b3b7f04af9d09fe8b38"
+  },
+  "pruned_redundant_copies": [
+    "output.aux",
+    "output.nodes",
+    "output.nets",
+    "output.wts",
+    "output.scl"
+  ],
+  "expected_attempts": 5003600,
+  "time_limit_message": false
+}

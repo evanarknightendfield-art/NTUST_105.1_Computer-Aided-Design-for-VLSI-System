@@ -1,0 +1,11 @@
+[ 33%] Built target dp_core
+[ 41%] Built target dp
+[ 50%] Built target multirow_test
+[ 58%] Built target window_test
+[ 66%] Built target optimizer_test
+[ 79%] Building CXX object CMakeFiles/global_test.dir/tests/global_test.cpp.o
+[ 79%] Built target pool_test
+[ 87%] Built target chain_test
+[ 95%] Built target parallel_sa_test
+[100%] Linking CXX executable global_test
+[100%] Built target global_test

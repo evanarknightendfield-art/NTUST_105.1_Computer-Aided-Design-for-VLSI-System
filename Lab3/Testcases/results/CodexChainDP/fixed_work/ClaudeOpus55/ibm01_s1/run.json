@@ -1,0 +1,132 @@
+{
+  "command": [
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/bin/ClaudeOpus55",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.aux",
+    "output",
+    "--seed",
+    "1",
+    "--time",
+    "1000.0",
+    "--effort",
+    "416",
+    "--trace",
+    "trace.csv",
+    "-v"
+  ],
+  "inputs": {
+    "Testcases/testcases/ibm01/ibm01.aux": "62a6aa78b37e6c23dd0426b106b4920ff069ba3d070af35934bc9fcf4a6decf7",
+    "Testcases/testcases/ibm01/ibm01.nodes": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd",
+    "Testcases/testcases/ibm01/ibm01.nets": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b",
+    "Testcases/testcases/ibm01/ibm01.wts": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7",
+    "Testcases/testcases/ibm01/ibm01.pl": "d003573ae03d3413714c3ac89d99e00bc5f131e5f0cbff1e3a7f9430cbfdcaca",
+    "Testcases/testcases/ibm01/ibm01.scl": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc"
+  },
+  "build": {
+    "sources": {
+      "AI_Solutions/ClaudeOpus55/src/annealer.cpp": "921a4c6a66fdde23d46a34c03b7ba6d31a86edf3357134ff87ad00cd03c163bb",
+      "AI_Solutions/ClaudeOpus55/src/annealer.hpp": "0d6c6eb44264e29926c91987484d56d0755a25badda4a8a69e212822e19cc86c",
+      "AI_Solutions/ClaudeOpus55/src/legalizer.cpp": "1247cff6661a4120777e2d5d76dbc5bda2bf09d2570b3d949c78172933dad89c",
+      "AI_Solutions/ClaudeOpus55/src/legalizer.hpp": "4bfb6d1b986bbdd094129122b6fe8fcc06cfafa027a688f88673347f758a5c9c",
+      "AI_Solutions/ClaudeOpus55/src/main.cpp": "ee22f169a9214b09a45344ddc7a1e2db8dfda73203dc7806fa8ef515bfcd070c",
+      "AI_Solutions/ClaudeOpus55/src/placedb.cpp": "22134c4bd3b3d4a2456bbdeb28c4865b77cb0e053ae75d6806f2791e2c5c77ee",
+      "AI_Solutions/ClaudeOpus55/src/placedb.hpp": "b6493b3c19457c554a525191ddf7dceea915dfd4686d9ecbc6e23bf5393cc1d8",
+      "AI_Solutions/ClaudeOpus55/src/rowmap.hpp": "6c08c23a543eaf0aa29f857b252412cf741c2de80a73593705364bfbfd9953ec"
+    },
+    "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread"
+    ],
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55/61eded8a794268abd2b1c3449b0f3bf49f617f6d2d624dfa664fe6423fb9dcb0/annealer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55/61eded8a794268abd2b1c3449b0f3bf49f617f6d2d624dfa664fe6423fb9dcb0/legalizer.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55/61eded8a794268abd2b1c3449b0f3bf49f617f6d2d624dfa664fe6423fb9dcb0/main.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/ClaudeOpus55/61eded8a794268abd2b1c3449b0f3bf49f617f6d2d624dfa664fe6423fb9dcb0/placedb.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/bin/ClaudeOpus55"
+    ],
+    "fingerprint": "bf7987124d2d54277bae7f393df6b5e0bb55c0a4ff884ea7be0fdc1c0c1defcc",
+    "returncode": 0,
+    "timeout": false,
+    "binary_sha256": "b50c2a2b99b6b3f5dae177bddd63532bf9c1c532fc548d10e8650dd99e23ba04"
+  },
+  "checker_sha256": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3",
+  "timeout": 3600,
+  "fingerprint": "166d9bfaa87c9c7634fb15865e78c98de88e439a85fdf5dce3495b305b7437cb",
+  "record": {
+    "solution": "ClaudeOpus55",
+    "bench": "ibm01",
+    "seed": 1,
+    "movable": 12028,
+    "effort": 416,
+    "planned_attempts": 5003648,
+    "sa_attempts": 5003600,
+    "work_complete": true,
+    "verdict": "PASS",
+    "seconds": 3.36989,
+    "disp": 27235500.79591,
+    "max": 10578.289999999999,
+    "hpwl_legal": 90945258.0,
+    "hpwl_final": 68713950.0,
+    "returncode": 0,
+    "problems": "",
+    "fingerprint": "166d9bfaa87c9c7634fb15865e78c98de88e439a85fdf5dce3495b305b7437cb"
+  },
+  "reported_metrics": {
+    "Total displacement (legal)": 27235500.7959,
+    "Maximum displacement (legal)": 10578.29,
+    "Total HPWL (legal)": 90945258.0,
+    "Total HPWL (SA)": 68713950.0
+  },
+  "independent_metrics": {
+    "legal": {
+      "disp": 27235500.79591,
+      "max": 10578.289999999999,
+      "hpwl": 90945258.0
+    },
+    "sa": {
+      "disp": 62208433.87849,
+      "max": 70532.5,
+      "hpwl": 68713950.0
+    }
+  },
+  "output_sha256": {
+    "output.pl": "2b42dd5096f9154c8ee49bb6e5984f4070d158918e96d80db4a84dcf80ed05d3",
+    "output_legal.pl": "4902105bfee15f8a089b6d3ba6a3ab61ff799610a5680ca0cc961ca6cce146b3",
+    "trace.csv": "bdbb2ffc05c78a35a0e8a430fbf5f920df3bd219ba12ffc769ab97714291d8e5",
+    "stdout.txt": "9102611bcf105d6ebe4fe5ff461a3b810a8db6892f8e85d6465d51920dc728db",
+    "stderr.txt": "a0d2c1742c2ffa3766f2d8a96c63939aebe02d2b154d24c84fc939c5c364933d",
+    "command.json": "ede4bb2fa806c65dc3e5e6a8398e8f662518da74c05fa560457fb793aba2ecad",
+    "check_legal_stdout.txt": "21e43e45bb5403b285832b2cab7f0be8e47dbc137c9f65ca93d4127f04856d7a",
+    "check_legal_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "check_sa_stdout.txt": "8063e11d5aa0542dd68a0769a77f09c8285acf60527117d549fc2c6076c22d03",
+    "check_sa_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "all_deliverable_sha256": {
+    "output.aux": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7",
+    "output.nodes": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd",
+    "output.nets": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b",
+    "output.wts": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7",
+    "output.scl": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc",
+    "output.pl": "2b42dd5096f9154c8ee49bb6e5984f4070d158918e96d80db4a84dcf80ed05d3",
+    "output_legal.pl": "4902105bfee15f8a089b6d3ba6a3ab61ff799610a5680ca0cc961ca6cce146b3"
+  },
+  "pruned_redundant_copies": [
+    "output.aux",
+    "output.nodes",
+    "output.nets",
+    "output.wts",
+    "output.scl"
+  ],
+  "expected_attempts": 5003600,
+  "time_limit_message": false
+}

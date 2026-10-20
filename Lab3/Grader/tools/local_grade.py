@@ -9,6 +9,7 @@ usage:
   PROJECT_DIR   你的專案資料夾（src/、CMakeLists.txt 或 Makefile、ReadMe）
   SID           學號（檔名用），例如 M11502102
   TESTCASE_DIR  放 benchmark 的資料夾：裡面每個子資料夾 X/ 有 X.aux（例如 Testcases/testcases）
+  --work        輸出資料夾，預設 Lab3/Testcases/results/local_grade/<SID>/（不進 git）
 
 流程：
   1. 打包 PROJECT_DIR → WORKDIR/submissions/<SID>.tgz（不含 build/ out/ results/）   ← 你要交的 tgz
@@ -93,7 +94,8 @@ def main():
     ap.add_argument('--dp-args', default='')
     a = ap.parse_args()
 
-    work = os.path.abspath(a.work or os.path.join(HERE, '..', f'local_grade_{a.sid}'))
+    # Lab3 convention: run outputs live in Testcases/results/ (local_grade/ is not in git)
+    work = os.path.abspath(a.work or os.path.join(HERE, '..', '..', 'Testcases', 'results', 'local_grade', a.sid))
     for sub in ('submissions', 'home', 'results', 'logs'):
         os.makedirs(os.path.join(work, sub), exist_ok=True)
     tgz = os.path.join(work, 'submissions', f'{a.sid}.tgz')

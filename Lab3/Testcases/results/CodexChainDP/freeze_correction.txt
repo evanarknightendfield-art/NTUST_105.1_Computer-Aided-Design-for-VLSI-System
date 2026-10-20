@@ -1,0 +1,1 @@
+Before candidate default/edge evaluation: corrected discrete L1 cluster minimizer. Rounding the median is not sufficient on fractional targets; compare floor and ceil costs. Regression fixture targets 0.9, 1.49, 2.45 gives total 1.16, not 1.84. Baseline v4 source unchanged. Candidate grading has not started. Updated only global.cpp hash.

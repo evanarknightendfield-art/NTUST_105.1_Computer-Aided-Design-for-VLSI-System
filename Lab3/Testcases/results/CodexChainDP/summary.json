@@ -1,0 +1,327 @@
+{
+  "all": {
+    "cases": 27,
+    "all_pass": true,
+    "max_regressions": [],
+    "disp_geomean": 0.9994225801930569,
+    "max_geomean": 0.9580149660004198,
+    "hpwl_sa_geomean": 0.9955221646577348,
+    "v4_seconds": 941.94,
+    "chain_seconds": 1213.3799999999999
+  },
+  "testcases": {
+    "cases": 3,
+    "all_pass": true,
+    "max_regressions": [],
+    "disp_geomean": 0.9996430282586253,
+    "max_geomean": 0.9994766206177538,
+    "hpwl_sa_geomean": 1.0041852399389009,
+    "v4_seconds": 146.74,
+    "chain_seconds": 170.35000000000002
+  },
+  "holdout": {
+    "cases": 8,
+    "all_pass": true,
+    "max_regressions": [],
+    "disp_geomean": 1.0048831197173584,
+    "max_geomean": 0.9649217551500359,
+    "hpwl_sa_geomean": 0.9992990416851408,
+    "v4_seconds": 329.17,
+    "chain_seconds": 458.95
+  },
+  "edge": {
+    "cases": 16,
+    "all_pass": true,
+    "max_regressions": [],
+    "disp_geomean": 0.9962685189352788,
+    "max_geomean": 0.9454675264063731,
+    "hpwl_sa_geomean": 0.9920261524258615,
+    "v4_seconds": 466.03000000000003,
+    "chain_seconds": 584.08
+  },
+  "fixed_work": {
+    "holdout": {
+      "cases": 8,
+      "hpwl_geomean": 0.9935976656455044,
+      "mean_ratio": 0.993609455839759
+    },
+    "edge": {
+      "cases": 16,
+      "hpwl_geomean": 0.993052571022043,
+      "mean_ratio": 0.9930849410594217
+    }
+  },
+  "equal_total_time": {
+    "holdout": {
+      "cases": 8,
+      "hpwl_geomean": 1.0949720944881527,
+      "mean_ratio": 1.1173531480517653
+    },
+    "edge": {
+      "cases": 16,
+      "hpwl_geomean": 1.0303729304436988,
+      "mean_ratio": 1.0330338056333195
+    }
+  },
+  "equal_time_default": {
+    "holdout": {
+      "cases": 8,
+      "hpwl_geomean": 1.0152726201611377,
+      "mean_ratio": 1.0155577392163433
+    },
+    "edge": {
+      "cases": 16,
+      "hpwl_geomean": 1.0144285447937822,
+      "mean_ratio": 1.014858594772243
+    }
+  },
+  "L1": [
+    {
+      "bench": "L1",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "196.36",
+      "disp": "2441140222.48",
+      "max": "50390.273",
+      "hpwl_legal": "5569323563.2",
+      "hpwl_sa": "1783212801.1",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    }
+  ],
+  "fresh_edge": [
+    {
+      "bench": "e01_nearlegal",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "45.15",
+      "disp": "23277.025",
+      "max": "5.361",
+      "hpwl_legal": "685565.5",
+      "hpwl_sa": "476562.0",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e02_legalgp",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "18.84",
+      "disp": "0.0",
+      "max": "0.0",
+      "hpwl_legal": "14626605.0",
+      "hpwl_sa": "9734517.5",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e03_dense97",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "50.76",
+      "disp": "147864.895",
+      "max": "123.988",
+      "hpwl_legal": "581659.0",
+      "hpwl_sa": "291173.5",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e04_sparse10",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "10.97",
+      "disp": "741.2137",
+      "max": "1.2718",
+      "hpwl_legal": "49952.765",
+      "hpwl_sa": "13613.402",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e05_bignets",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "56.33",
+      "disp": "76287.047",
+      "max": "40.766",
+      "hpwl_legal": "1003526.0",
+      "hpwl_sa": "712313.5",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e06_tallnarrow",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "18.8",
+      "disp": "34298.996",
+      "max": "44.91",
+      "hpwl_legal": "2153346.5",
+      "hpwl_sa": "976120.5",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e07_tworows",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "28.19",
+      "disp": "20816.105",
+      "max": "22.784",
+      "hpwl_legal": "1002136.5",
+      "hpwl_sa": "202686.0",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e08_fragmented",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "40.45",
+      "disp": "72232.501",
+      "max": "79.07",
+      "hpwl_legal": "666823.5",
+      "hpwl_sa": "402744.0",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e09_offgrid",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "60.29",
+      "disp": "13625.8091",
+      "max": "37.984",
+      "hpwl_legal": "187894.0589",
+      "hpwl_sa": "58848.688",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e10_mixedsites",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "65.47",
+      "disp": "61842.82",
+      "max": "32.914",
+      "hpwl_legal": "1214753.0",
+      "hpwl_sa": "787250.0",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e11_format",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "12.48",
+      "disp": "8919.07",
+      "max": "16.036",
+      "hpwl_legal": "122378.5",
+      "hpwl_sa": "74810.0",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e12_collapse",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "37.41",
+      "disp": "302147.761",
+      "max": "229.0",
+      "hpwl_legal": "2253123.0",
+      "hpwl_sa": "180078.0",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e13_onecell",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "0.25",
+      "disp": "4.57",
+      "max": "4.57",
+      "hpwl_legal": "36.5",
+      "hpwl_sa": "36.5",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e14_fixedonly",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "0.0",
+      "disp": "0.0",
+      "max": "0.0",
+      "hpwl_legal": "73.0",
+      "hpwl_sa": "73.0",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e15_realistic",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "72.75",
+      "disp": "12133670.046",
+      "max": "3017.558",
+      "hpwl_legal": "120870572.0",
+      "hpwl_sa": "87508502.0",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    },
+    {
+      "bench": "e16_rowgaps",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "46.1",
+      "disp": "102471.864",
+      "max": "70.734",
+      "hpwl_legal": "741210.0",
+      "hpwl_sa": "447655.5",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    }
+  ],
+  "fresh_comparison": {
+    "cases": 16,
+    "all_pass": true,
+    "max_geomean": 0.9439967472244046,
+    "disp_geomean": 0.9969228631137695,
+    "max_regressions": []
+  }
+}

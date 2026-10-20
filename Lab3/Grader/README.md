@@ -8,11 +8,14 @@ Project 3 沒有給 TA 的 grader / verifier，這裡是自己做的版本。
 | `tools/plot_pl.py` | 畫 placement（`--heat` 位移熱圖、`--arrows N` 位移最大的 N 個箭頭、`--window` 放大） |
 | `tools/plot_trace.py` | 畫 SA 的 current / best-so-far 曲線（`dp --trace` 的 CSV） |
 | `tools/local_grade.py` | 模擬繳交：打包 tgz → 解壓 → 編譯 → 每筆測資執行 → 檢查 |
-| `tools/gen_bench.py` | 產生 Bookshelf 測資（`Testcases/holdout/` 就是它產生的） |
-| `tools/exact_bound.py` | Stage 1 的**下界 / 最佳解**：site 層級的 LP（column generation）＝總位移下界；`--ilp` 小設計直接解出最佳解；`--max` 最大位移下界；`--cap -1` 限制最大位移不超過自己的（公平比較）。需要 scipy（`/home/evan/anaconda3/bin/python3`） |
+| `tools/gen_bench.py` | 產生 Bookshelf 測資（`Testcases/holdout/`、`large/` 就是它產生的） |
+| `tools/gen_edge.py` | 產生 `Testcases/edge/` 的 16 筆「現有測資沒測到的情況」；先排出保證合法的 placement 再推出 global placement，`--check` 會驗證並留下 `NAME_ref.pl` |
+| `tools/exact_bound.py` | Stage 1 的**下界 / 最佳解**：site 層級的 LP（column generation）＝總位移下界；`--ilp` 整數規劃；`--full` 列舉上限內所有位置（完整模型，`--ilp` 才是證明過的最佳解）；`--max` 最大位移的 LP 下界、`--max-ilp` 最大位移的精確最小值；`--cap -1` 限制最大位移不超過自己的（公平比較）。需要 scipy（`/home/evan/anaconda3/bin/python3`） |
 | `tools/lower_bound.py` | 比較粗的 bin 版下界（很鬆，只當參考） |
-| `step2_grader/` | 示範：檢查器對 1 個正確、10 個故意做錯的輸出的判斷（`record.csv`） |
-| `local_grade_<SID>/` | `local_grade.py` 的輸出（不放進 git） |
+| `step2_grader/run_demo.py` | 示範：檢查器對 1 個正確、10 個故意做錯的輸出的判斷；結果在 `../Testcases/results/step2_grader/`（`record.csv`） |
+
+跑出來的東西都不放在這裡：`local_grade.py` 的輸出預設在 `../Testcases/results/local_grade/<SID>/`（不放進 git），
+step2_grader 的輸入和結果在 `../Testcases/results/step2_grader/`。
 
 ## 常用指令
 
@@ -26,7 +29,7 @@ python3 Grader/tools/check_pl.py Testcases/testcases/ibm01/ibm01 out/ibm01_legal
 python3 Grader/tools/local_grade.py M11502102 M11502102 Testcases/testcases Testcases/holdout
 ```
 
-`local_grade.py` 每筆測資會在 `local_grade_<SID>/results/<SID>/<bench>/` 執行 `dp <bench> output`（跟 PDF 範例一樣），
+`local_grade.py` 每筆測資會在 `Testcases/results/local_grade/<SID>/results/<SID>/<bench>/` 執行 `dp <bench> output`（跟 PDF 範例一樣），
 然後檢查：
 
 1. 7 個輸出檔都有（`output.{aux,nodes,nets,wts,scl,pl}`、`output_legal.pl`）
@@ -34,8 +37,8 @@ python3 Grader/tools/local_grade.py M11502102 M11502102 Testcases/testcases Test
 3. `output_legal.pl`、`output.pl` 都合法
 4. `Total HPWL (SA) <= Total HPWL (legal)`
 
-結果在 `local_grade_<SID>/record.csv`（每筆）、`summary.csv`、`logs/<SID>.log`（編譯和執行的完整輸出）；
-要交的檔案在 `local_grade_<SID>/submissions/<SID>.tgz`。
+結果在 `Testcases/results/local_grade/<SID>/record.csv`（每筆）、`summary.csv`、`logs/<SID>.log`（編譯和執行的完整輸出）；
+要交的檔案在 `Testcases/results/local_grade/<SID>/submissions/<SID>.tgz`。
 
 參考解的結果：11/11 PASS（ibm05 最久，約 41 秒）。
 
@@ -43,20 +46,30 @@ python3 Grader/tools/local_grade.py M11502102 M11502102 Testcases/testcases Test
 
 ```bash
 P=/home/evan/anaconda3/bin/python3          # 有 scipy 的環境
-$P Grader/tools/exact_bound.py Testcases/testcases/toy/toy out/toy_legal.pl --ilp --max
-$P Grader/tools/exact_bound.py Testcases/holdout/h01/h01 out/h01_legal.pl --ilp --cap -1
+# 最大位移不變的前提下，總位移的最佳解（完整模型、零 gap → 印 OPTIMAL 才算證明）
+$P Grader/tools/exact_bound.py Testcases/holdout/h01/h01 out/h01_legal.pl --cap -1 --full --ilp
+# 最大位移能低到多少：LP 下界 + 整數規劃二分出的精確最小值（h01 約 15 分鐘）
+$P Grader/tools/exact_bound.py Testcases/testcases/toy/toy out/toy_legal.pl --max --max-ilp
 ```
 
-- `total displacement: LP lower bound` 一定 ≤ 任何合法解的總位移；`ILP` 是小設計的最佳解（toy、h01 幾秒內解完）。
+- `total displacement: LP lower bound` 一定 ≤ 任何合法解的總位移。
+- `ILP ... [OPTIMAL (complete model, zero gap)]` 才是證明過的最佳解；沒加 `--full` 時只在 column generation
+  留下的位置上解，結果標成 `upper bound (restricted columns)`，只是一個可行解。
 - `--cap -1`：只允許位移 ≤ 自己的最大位移 → 「在最大位移不變的前提下，總位移最低能到多少」。
 - 1000 個 cell 以上會很慢（h02 的 ILP 要 10 分鐘以上），大設計只能算 LP 或放棄。
+
+**2026-10-19 修正**（CodexWindowDP 的 `READING_NOTES.md` 找到的問題）：晶片左邊外面的 pad 讓 numpy 切片的右端變負數，
+把那幾個 row 幾乎整條封住；`--max` 原本在「column generation 留下的位置」上判斷不可行，那不代表真的不可行；
+MIP 用的是 HiGHS 預設的非零 gap。三個都改了：兩端都夾在 `[0, ns]`、`--max` 每一步列舉完整的位置集合、
+MIP gap 設 0。舊版用這支工具得到的「最大位移離下界 2 ~ 4%」等結論已經在 `AI_Solutions/COMPARISON.md` 更正。
 
 結果整理在 `AI_Solutions/COMPARISON.md`。
 
 ## step2_grader
 
 ```bash
-cd Grader/step2_grader && python3 run_demo.py
+cmake -S AI_Solutions/ClaudeOpus55 -B AI_Solutions/ClaudeOpus55/build && cmake --build AI_Solutions/ClaudeOpus55/build   # 用參考解產生 GOOD
+cd Grader/step2_grader && python3 run_demo.py     # 輸出到 Testcases/results/step2_grader/
 ```
 
 | case | 改了什麼 | check_pl.py |

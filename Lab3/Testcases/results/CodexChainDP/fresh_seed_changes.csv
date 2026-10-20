@@ -1,0 +1,17 @@
+bench,changed,changed_files
+e01_nearlegal,True,e01_nearlegal.nets;e01_nearlegal.nodes;e01_nearlegal.pl;e01_nearlegal.scl;e01_nearlegal.wts
+e02_legalgp,True,e02_legalgp.nets;e02_legalgp.nodes;e02_legalgp.pl;e02_legalgp.scl;e02_legalgp.wts
+e03_dense97,True,e03_dense97.nets;e03_dense97.nodes;e03_dense97.pl;e03_dense97.scl;e03_dense97.wts
+e04_sparse10,True,e04_sparse10.nets;e04_sparse10.nodes;e04_sparse10.pl;e04_sparse10.wts
+e05_bignets,True,e05_bignets.nets;e05_bignets.nodes;e05_bignets.pl;e05_bignets.scl;e05_bignets.wts
+e06_tallnarrow,True,e06_tallnarrow.nets;e06_tallnarrow.nodes;e06_tallnarrow.pl;e06_tallnarrow.wts
+e07_tworows,True,e07_tworows.nets;e07_tworows.nodes;e07_tworows.pl;e07_tworows.wts
+e08_fragmented,True,e08_fragmented.nets;e08_fragmented.nodes;e08_fragmented.pl;e08_fragmented.scl;e08_fragmented.wts
+e09_offgrid,True,e09_offgrid.nets;e09_offgrid.nodes;e09_offgrid.pl;e09_offgrid.wts
+e10_mixedsites,True,e10_mixedsites.nets;e10_mixedsites.nodes;e10_mixedsites.pl;e10_mixedsites.wts
+e11_format,True,e11_format.nets;e11_format.nodes;e11_format.pl;e11_format.scl;e11_format.wts
+e12_collapse,True,e12_collapse.nets;e12_collapse.nodes;e12_collapse.pl;e12_collapse.wts
+e13_onecell,False,
+e14_fixedonly,False,
+e15_realistic,True,e15_realistic.nets;e15_realistic.nodes;e15_realistic.pl;e15_realistic.scl;e15_realistic.wts
+e16_rowgaps,True,e16_rowgaps.nets;e16_rowgaps.nodes;e16_rowgaps.pl;e16_rowgaps.scl;e16_rowgaps.wts

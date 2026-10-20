@@ -1,0 +1,4 @@
+group,bench,version,seed,verdict,seconds,disp,max,hpwl,attempts,sa_seconds,stage2_seconds
+testcases,toy,CodexChainDP,0,PASS,4.072286356000404,43261.6,2007.9,103854.0,,,
+holdout,h01,CodexChainDP,0,PASS,17.947179589998996,2360.57,29.89,25511.0,,,
+holdout,h02,CodexChainDP,0,PASS,31.62280144900069,462165.837,2517.795,3789708.8,,,

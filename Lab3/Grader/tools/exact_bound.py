@@ -17,7 +17,18 @@ covered by at most one cell. This is exactly the legalization problem.
              (HiGHS MIP): an OPTIMAL legalization if the LP columns cover it
              (they do when LP == ILP), otherwise an upper bound.
   --max      lower bound on the maximum displacement: the largest D for which
-             the LP with only positions of cost <= D is infeasible (bisection).
+             the LP with ALL positions of cost <= D is infeasible (bisection).
+             Every step enumerates the complete position set; infeasibility of
+             a restricted column set would prove nothing. --max-ilp then
+             bisects with the integer model: the exact minimum maximum.
+  --full     (with a cap) enumerate every position of cost <= cap instead of
+             column generation; then the ILP is over the COMPLETE model and
+             'proven' is printed only when the MIP dual bound meets the
+             incumbent. Small designs only (<= ~1000 cells).
+
+Fixed 2026-10-19 (found by CodexWindowDP/READING_NOTES.md): a pad left of the
+chip blocked most of its rows (negative slice end); --max bisected on
+restricted columns; the MIP used HiGHS' default nonzero relative gap.
 """
 import argparse
 import math
@@ -58,9 +69,12 @@ class Model:
                 continue
             for ri, y in enumerate(self.ys):
                 if fy < y + rh - 1e-9 and y < fy + h - 1e-9:
-                    a = max(0, int(math.floor((x - X0) / sp + 1e-9)))
-                    b = min(ns, int(math.ceil((x + w - X0) / sp - 1e-9)))
-                    self.free[ri, a:b] = False
+                    # clip BOTH ends: a pad left of the chip gives b < 0, and
+                    # free[r, 0:b] with a negative b would block most of the row
+                    a = max(0, min(ns, int(math.floor((x - X0) / sp + 1e-9))))
+                    b = max(0, min(ns, int(math.ceil((x + w - X0) / sp - 1e-9))))
+                    if a < b:
+                        self.free[ri, a:b] = False
         self.W = np.array([int(round(nodes[n][0] / sp)) for n in self.mov])
         self.GX = np.array([gp[n][0] for n in self.mov])
         self.GY = np.array([gp[n][1] for n in self.mov])
@@ -98,6 +112,11 @@ class Model:
                     n += 1
         return n
 
+    def add_all(self, limit):
+        """Every legal position with displacement <= limit (complete model)."""
+        for i in range(len(self.mov)):
+            self.add_window(i, 0, len(self.ys) - 1, 0, self.ns - 1, limit=limit + 1e-7)
+
     def solve_lp(self, keys=None, integer=False, time_limit=None, cost_cap=None):
         from scipy.optimize import linprog, milp, LinearConstraint, Bounds
         from scipy.sparse import coo_matrix
@@ -121,7 +140,7 @@ class Model:
         if integer:
             from scipy.sparse import vstack
             cons = [LinearConstraint(A_eq, 1, 1), LinearConstraint(A_ub, -np.inf, 1)]
-            opts = {'disp': False}
+            opts = {'disp': False, 'mip_rel_gap': 0.0}   # default gap is not 0
             if time_limit:
                 opts['time_limit'] = time_limit
             res = milp(cost, constraints=cons, integrality=np.ones(m), bounds=Bounds(0, 1), options=opts)
@@ -201,6 +220,8 @@ def main():
     ap.add_argument('--max', action='store_true')
     ap.add_argument('--radius-rows', type=int, default=1)
     ap.add_argument('--time-limit', type=float, default=600)
+    ap.add_argument('--full', action='store_true', help='complete position set below the cap (needs --cap)')
+    ap.add_argument('--max-ilp', action='store_true', help='with --max: exact minimum maximum displacement (integer bisection)')
     ap.add_argument('--write-pl', help='write the ILP solution as a .pl (needs --ilp)')
     ap.add_argument('--cap', type=float, help='only positions with displacement <= CAP; '
                     'a negative value = our maximum (best total that keeps our max)')
@@ -220,26 +241,66 @@ def main():
     if a.cap is not None:
         cap = mx + 1e-6 if a.cap < 0 else a.cap
         print(f'  (only positions with displacement <= {cap:.1f})')
+    if a.full:
+        if cap is None:
+            raise SystemExit('--full needs --cap')
+        M.add_all(cap)
+        print(f'  complete model: {len(M.cols)} positions', file=sys.stderr)
     lp = M.column_generation(cost_cap=cap)
     print(f'  total displacement: LP lower bound {lp:.1f}   ours/LB = {tot / lp:.4f}   ({time.time() - t0:.1f}s)')
     if a.ilp:
         res, keys, _ = M.solve_lp(integer=True, time_limit=a.time_limit, cost_cap=cap)
         if res.x is not None:
-            print(f'  total displacement: ILP {res.fun:.1f} (status {res.status}: {res.message})   ours/ILP = {tot / res.fun:.4f}')
+            dual = getattr(res, 'mip_dual_bound', None)
+            proven = a.full and res.status == 0 and dual is not None and abs(res.fun - dual) < 1e-5
+            what = 'OPTIMAL (complete model, zero gap)' if proven else \
+                ('best found, dual bound %.1f' % dual if a.full and dual is not None else
+                 'upper bound (restricted columns)')
+            print(f'  total displacement: ILP {res.fun:.1f} [{what}]   ours/ILP = {tot / res.fun:.4f}')
             if a.write_pl:
                 write_solution(M, a.bench, a.legal_pl, keys, res.x, a.write_pl)
     if a.max:
         lo, hi = 0.0, mx
+        base = dict(M.cols)
         for _ in range(16):
             mid = (lo + hi) / 2
-            saved = dict(M.cols)
-            v = M.column_generation(verbose=False, cost_cap=mid)
-            M.cols = saved
-            if v is None:
+            M.cols = {}
+            M.add_all(mid)
+            if len({k[0] for k in M.cols}) < len(M.mov):
+                lo = mid           # some cell has no position at all
+                continue
+            res, _, _ = M.solve_lp()
+            if res.status == 2:
                 lo = mid
-            else:
+            elif res.status == 0:
                 hi = mid
+            else:
+                raise SystemExit('LP failed: ' + res.message)
+        M.cols = base
         print(f'  max displacement: LP lower bound {lo:.1f}   ours/LB = {mx / max(lo, 1e-9):.4f}   ({time.time() - t0:.1f}s)')
+        if a.max_ilp:
+            # integer feasibility, bisection over the distinct displacement values in [lo, mx]
+            M.cols = {}
+            M.add_all(mx)
+            vals = sorted({round(c, 6) for c in M.cols.values() if lo - 1e-6 <= c <= mx + 1e-6})
+            full, ilo, ihi, unknown = dict(M.cols), 0, len(vals) - 1, False
+            while ilo < ihi:
+                mid = (ilo + ihi) // 2
+                M.cols = {k: c for k, c in full.items() if c <= vals[mid] + 1e-6}
+                if len({k[0] for k in M.cols}) < len(M.mov):
+                    ilo = mid + 1
+                    continue
+                res, _, _ = M.solve_lp(integer=True, time_limit=a.time_limit)
+                if res.x is not None:
+                    ihi = mid
+                elif res.status == 2 or 'infeasible' in res.message.lower():
+                    ilo = mid + 1
+                else:
+                    unknown = True     # time limit without a verdict: stay conservative
+                    ilo = mid + 1
+            M.cols = base
+            tag = ' (some steps timed out: upper value only)' if unknown else ' (exact)'
+            print(f'  max displacement: ILP minimum {vals[ihi]:.1f}{tag}   ours/min = {mx / vals[ihi]:.4f}   ({time.time() - t0:.1f}s)')
 
 
 if __name__ == '__main__':

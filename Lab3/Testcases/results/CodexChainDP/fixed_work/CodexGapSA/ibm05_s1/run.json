@@ -1,0 +1,125 @@
+{
+  "command": [
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/fixed_work/bin/CodexGapSA",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.aux",
+    "output",
+    "--seed",
+    "1",
+    "--time",
+    "1000.0",
+    "--effort",
+    "200",
+    "--trace",
+    "trace.csv",
+    "-v"
+  ],
+  "inputs": {
+    "Testcases/testcases/ibm05/ibm05.aux": "173db66078531d61e1b94b0c47f2b007d3024d52984649dd89d233e376062a06",
+    "Testcases/testcases/ibm05/ibm05.nodes": "83c9acbee7c43b4c5288f8867f2db1988ffdc1d9d424aedf6cede0c935dcea41",
+    "Testcases/testcases/ibm05/ibm05.nets": "7a1cbb6bab44d95893e0ca2304f84eb1737c72a9823d09a14679e9fcbfc34c2b",
+    "Testcases/testcases/ibm05/ibm05.wts": "b9162b7e4dc187ee1075b155d6cc1f6bbaa13165889b1ea1d7f3fc4cde0d26bb",
+    "Testcases/testcases/ibm05/ibm05.pl": "bdbfcceef50fb3260d60f8b52c7292a41c9d77d9afec297e17ecd492c1ed584f",
+    "Testcases/testcases/ibm05/ibm05.scl": "60c1593e1a7558bbd273731248e91cf0ab1549778a28accc7dce7e3be03e592a"
+  },
+  "build": {
+    "sources": {
+      "AI_Solutions/CodexGapSA/src/db.cpp": "f76a22837924a6cd6dd3acf464cda797a73532530cf61565cda666e61d6548e6",
+      "AI_Solutions/CodexGapSA/src/db.hpp": "2e69652d3d1de2ee537ae28f77984fc29e701ac448d078d0dd94b944d64fa313",
+      "AI_Solutions/CodexGapSA/src/placer.cpp": "c0477ee0e111236964548df0554c14ce26eb6148e7e611fc8bbdb79680b2622b"
+    },
+    "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "flags": [
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread"
+    ],
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-pthread",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexGapSA/src/db.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexGapSA/src/placer.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexChainDP/results/fixed_work/bin/CodexGapSA"
+    ],
+    "fingerprint": "289acae41f3c23862cc0c281022ef400819b9a86d92c83a1451e6266d65ac064",
+    "returncode": 0,
+    "timeout": false,
+    "binary_sha256": "c45eb2f6f22cdf3e9ca73d3e92bc096de9802c8d340d3dfafa5ac4ad5a9cfa17"
+  },
+  "checker_sha256": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3",
+  "timeout": 3600,
+  "fingerprint": "3259e69e4e7e69465a07c9a7a5d942e743feb23596d48dcac37ea0872d189a03",
+  "record": {
+    "solution": "CodexGapSA",
+    "bench": "ibm05",
+    "seed": 1,
+    "movable": 28146,
+    "effort": 200,
+    "planned_attempts": 5629200,
+    "sa_attempts": 5629200,
+    "work_complete": true,
+    "verdict": "PASS",
+    "seconds": 24.061456,
+    "disp": 2115318.80665,
+    "max": 559.79,
+    "hpwl_legal": 12431984.0,
+    "hpwl_final": 11200985.5,
+    "returncode": 0,
+    "problems": "",
+    "fingerprint": "3259e69e4e7e69465a07c9a7a5d942e743feb23596d48dcac37ea0872d189a03"
+  },
+  "reported_metrics": {
+    "Total displacement (legal)": 2115318.80665,
+    "Maximum displacement (legal)": 559.79,
+    "Total HPWL (legal)": 12431984.0,
+    "Total HPWL (SA)": 11200985.5
+  },
+  "independent_metrics": {
+    "legal": {
+      "disp": 2115318.80665,
+      "max": 559.79,
+      "hpwl": 12431984.0
+    },
+    "sa": {
+      "disp": 2547192.14105,
+      "max": 2370.0899999999997,
+      "hpwl": 11200985.5
+    }
+  },
+  "output_sha256": {
+    "output.pl": "591023d72f8c5536bb7a4132449438bec2a78485a0c60b257455d810afc42314",
+    "output_legal.pl": "5713f5c68c9bcef00bd3cd9ad9551e6248b7f96586d9f68009725ae3c1db1523",
+    "trace.csv": "ecd66bb618882c26d36f11eae702f9526219d6b4cc36b47d8efd63801f17639f",
+    "stdout.txt": "e27d4c3e2e31fa13f69b42463c5fe38eb8242fcd238f2fd470b769c493cec866",
+    "stderr.txt": "949fcf6b0b438e33e487beb603bc3111a3f99936b9b8be5a25af95a09b41c1b3",
+    "command.json": "48dc4871354075277d15b0b0e0fa4775ce4b6e766a1a92891bc3f997562d9842",
+    "check_legal_stdout.txt": "6ea880c83014bac8469b118a8525e2a85de395a0940583c7d20c9c64d0ae4382",
+    "check_legal_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "check_sa_stdout.txt": "507c576353edb35fa971c8aa65a1f34b7c498a036af2188a5b5454b84096afcf",
+    "check_sa_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "all_deliverable_sha256": {
+    "output.aux": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7",
+    "output.nodes": "83c9acbee7c43b4c5288f8867f2db1988ffdc1d9d424aedf6cede0c935dcea41",
+    "output.nets": "7a1cbb6bab44d95893e0ca2304f84eb1737c72a9823d09a14679e9fcbfc34c2b",
+    "output.wts": "b9162b7e4dc187ee1075b155d6cc1f6bbaa13165889b1ea1d7f3fc4cde0d26bb",
+    "output.scl": "60c1593e1a7558bbd273731248e91cf0ab1549778a28accc7dce7e3be03e592a",
+    "output.pl": "591023d72f8c5536bb7a4132449438bec2a78485a0c60b257455d810afc42314",
+    "output_legal.pl": "5713f5c68c9bcef00bd3cd9ad9551e6248b7f96586d9f68009725ae3c1db1523"
+  },
+  "pruned_redundant_copies": [
+    "output.aux",
+    "output.nodes",
+    "output.nets",
+    "output.wts",
+    "output.scl"
+  ],
+  "expected_attempts": 5629200,
+  "time_limit_message": false
+}

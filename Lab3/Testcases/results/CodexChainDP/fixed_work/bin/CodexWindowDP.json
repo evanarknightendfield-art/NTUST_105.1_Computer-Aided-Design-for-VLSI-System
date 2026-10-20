@@ -1,0 +1,45 @@
+{
+  "sources": {
+    "AI_Solutions/CodexWindowDP/src/annealer.cpp": "39a5c8e3f8ab1dc3bcafa5b820060f47ddb0a9ea85376a380fbda3eb42af3ea9",
+    "AI_Solutions/CodexWindowDP/src/annealer.hpp": "60938b83f787430846e37b15dabc521d734740c121eb3c29781fd9ef88d5e497",
+    "AI_Solutions/CodexWindowDP/src/legalizer.cpp": "d95e258d2677cf08f4c81965f193f18fb62e96c5844e6e9eef5608d8194e94ba",
+    "AI_Solutions/CodexWindowDP/src/legalizer.hpp": "8a550f1d70037bbb8e3c00dfde1e1157738762246a12bcee8046f31fe3961261",
+    "AI_Solutions/CodexWindowDP/src/main.cpp": "946df73cd3a2ac5a918c9cf24f77bb328e606ca7c28a1a6376fc8c38d107d102",
+    "AI_Solutions/CodexWindowDP/src/optimizer.cpp": "0f56207238b55e83da3b06d3ea615eb8bc107a135052882ed5697b3edc47a3dd",
+    "AI_Solutions/CodexWindowDP/src/optimizer.hpp": "e75dc5b2467309c86678e0829061e59c4dd038a60553054eee6ca68a6ba61628",
+    "AI_Solutions/CodexWindowDP/src/placedb.cpp": "0bb605a376b1b3624e45d868387a3c305e711333ccdd0e77ff9a73f425ee0751",
+    "AI_Solutions/CodexWindowDP/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+    "AI_Solutions/CodexWindowDP/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635",
+    "AI_Solutions/CodexWindowDP/src/window.cpp": "2a29a149aa967b2cf1ae920fe24af11b7c5934e8a51345880d902486854738d9",
+    "AI_Solutions/CodexWindowDP/src/window.hpp": "e642387b467e664dd97d9b770e8136fdb9131f1543cd2549093350fcddc42f49"
+  },
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread"
+  ],
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexWindowDP/5176b7e75e1ae11e29a19a4e842762e222af00a2dc668bd282300a367485b34a/annealer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexWindowDP/5176b7e75e1ae11e29a19a4e842762e222af00a2dc668bd282300a367485b34a/legalizer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexWindowDP/5176b7e75e1ae11e29a19a4e842762e222af00a2dc668bd282300a367485b34a/main.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexWindowDP/5176b7e75e1ae11e29a19a4e842762e222af00a2dc668bd282300a367485b34a/optimizer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexWindowDP/5176b7e75e1ae11e29a19a4e842762e222af00a2dc668bd282300a367485b34a/placedb.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexWindowDP/5176b7e75e1ae11e29a19a4e842762e222af00a2dc668bd282300a367485b34a/window.cpp",
+    "-o",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/bin/CodexWindowDP"
+  ],
+  "fingerprint": "0bfc9e37cd99e63e04db86d0223c50c8aef2c93afc9648580d477ce616e13e8b",
+  "returncode": 0,
+  "timeout": false,
+  "seconds": 6.929975156999717,
+  "binary_sha256": "69dcc5baad4cd6e9df0c7ad54aaa9577d0b75a5f741d382618a3b6372a87cf28"
+}

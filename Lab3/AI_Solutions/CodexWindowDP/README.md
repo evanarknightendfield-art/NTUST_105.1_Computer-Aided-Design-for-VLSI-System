@@ -1,5 +1,9 @@
 # CodexWindowDP：兩個 row 的聯合子集合動態規劃
 
+> **2026-10-20 整理：** 本版的基礎 `ClaudeOpus55_v3`、`CodexParetoDP` 已從 `AI_Solutions/` 移除（原始碼在 git commit `e1fd81f`，
+> `git checkout e1fd81f -- Lab3/AI_Solutions/<資料夾>` 拿回來）。下面提到它們的地方是出處說明；`tests/compare.py` 要重跑六個版本的比較，
+> 也要先把它們拿回來。實驗結果在 `../../Testcases/results/CodexWindowDP/`。
+
 本版在 `ClaudeOpus55_v3` 的合法化與 SA 上，整合 `CodexParetoDP` 的瓶頸匹配及 HPWL 收尾，**新增自己實作的兩個 row 聯合動態規劃**。新增核心為 `src/window.cpp`，不是獨立重寫全部 placer，也不宣稱發明了動態規劃這個方法。其餘五個版本保留原樣。
 
 實測比較與「是否最佳」見 [COMPARISON.md](COMPARISON.md)。閱讀範圍、評分文件與下界工具的限制見 [READING_NOTES.md](READING_NOTES.md)。
@@ -88,7 +92,7 @@ SA 之後的收尾不會增加 HPWL，但 Stage 1 改變會使 SA 經過不同�
 
 ## 測試及重現
 
-已實際完成：六版本 66/66 次比較、20/20 次額外 seed、重新打包編譯後 toy 1/1、400 組跨 row DP 窮舉、150 組共享 net 排序窮舉、250 組指派／瓶頸及 100 組隨機 placement 測試。窮舉／隨機測試也以 ASan/UBSan 跑過；此環境不支援 LeakSanitizer，沒有宣稱做漏記憶體驗證。紀錄見 `results/verification.txt`，完整原始測試數據保留在 `results/`。
+已實際完成：六版本 66/66 次比較、20/20 次額外 seed、重新打包編譯後 toy 1/1、400 組跨 row DP 窮舉、150 組共享 net 排序窮舉、250 組指派／瓶頸及 100 組隨機 placement 測試。窮舉／隨機測試也以 ASan/UBSan 跑過；此環境不支援 LeakSanitizer，沒有宣稱做漏記憶體驗證。紀錄見 `../../Testcases/results/CodexWindowDP/verification.txt`，完整原始測試數據保留在 `../../Testcases/results/CodexWindowDP/`。
 
 ```bash
 # 六個版本、全部 11 筆、共同 SA 嘗試預算、獨立檢查器

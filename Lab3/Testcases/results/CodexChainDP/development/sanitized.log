@@ -1,0 +1,13 @@
+build_annealer: PASS
+build_chain: PASS
+build_global: PASS
+build_legalizer: PASS
+build_optimizer: PASS
+build_placedb: PASS
+build_window: PASS
+link_window: PASS
+window: FAIL
+==30==LeakSanitizer has encountered a fatal error.
+==30==HINT: For debugging, try setting environment variable LSAN_OPTIONS=verbosity=1:log_threads=1
+==30==HINT: LeakSanitizer does not work under ptrace (strace, gdb, etc)
+

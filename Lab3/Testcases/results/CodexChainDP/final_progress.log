@@ -1,0 +1,13 @@
+START equal_total_time
+DONE equal_total_time rc=0
+START fixed_work_edge
+DONE fixed_work_edge rc=0
+START generator_default_replay
+DONE generator_default_replay rc=0
+START generate_seed2
+DONE generate_seed2 rc=0
+START edge_seed2
+DONE edge_seed2 rc=0
+START summarize
+DONE summarize rc=0
+FINAL VALIDATION COMPLETE

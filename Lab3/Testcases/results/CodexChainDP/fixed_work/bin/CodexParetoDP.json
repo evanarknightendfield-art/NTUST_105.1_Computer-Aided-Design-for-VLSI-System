@@ -1,0 +1,42 @@
+{
+  "sources": {
+    "AI_Solutions/CodexParetoDP/src/annealer.cpp": "acc978ab96bd0dd9c86ba3838a1aa4d23a2d56c73b67485cde692c58f2ca1241",
+    "AI_Solutions/CodexParetoDP/src/annealer.hpp": "de655f0da6746b98273ecb95f812f4b3fcd0c37a16a40fe4e738f9d2a162222f",
+    "AI_Solutions/CodexParetoDP/src/legalizer.cpp": "f41881f5bf5b2253163e783336f63b74bf3e4d89224029e061703a7e1a249462",
+    "AI_Solutions/CodexParetoDP/src/legalizer.hpp": "79ea307d4238828b301ed3b940395dbbd91fd69d0b4bb93cc6309af52959d554",
+    "AI_Solutions/CodexParetoDP/src/main.cpp": "eb6cc5c960ff4b368537122dbc382a3ce38f59e0a508bc10fb3f3b0992c34641",
+    "AI_Solutions/CodexParetoDP/src/optimizer.cpp": "0f56207238b55e83da3b06d3ea615eb8bc107a135052882ed5697b3edc47a3dd",
+    "AI_Solutions/CodexParetoDP/src/optimizer.hpp": "e75dc5b2467309c86678e0829061e59c4dd038a60553054eee6ca68a6ba61628",
+    "AI_Solutions/CodexParetoDP/src/placedb.cpp": "0bb605a376b1b3624e45d868387a3c305e711333ccdd0e77ff9a73f425ee0751",
+    "AI_Solutions/CodexParetoDP/src/placedb.hpp": "134e6fe4b501eb9f45c0365cce61e1040faf7a708cf9d4ce8707208b4f5d9b9e",
+    "AI_Solutions/CodexParetoDP/src/rowmap.hpp": "c686bd60d698a96c9ed361c7d27f56ef054b006e717e1a5ffa281206c56bc635"
+  },
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread"
+  ],
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-pthread",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexParetoDP/f49745d391fcc03337bae08cd31d57dbce28afb149e49952ed54cb262174778e/annealer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexParetoDP/f49745d391fcc03337bae08cd31d57dbce28afb149e49952ed54cb262174778e/legalizer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexParetoDP/f49745d391fcc03337bae08cd31d57dbce28afb149e49952ed54cb262174778e/main.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexParetoDP/f49745d391fcc03337bae08cd31d57dbce28afb149e49952ed54cb262174778e/optimizer.cpp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/sources/CodexParetoDP/f49745d391fcc03337bae08cd31d57dbce28afb149e49952ed54cb262174778e/placedb.cpp",
+    "-o",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/bin/CodexParetoDP"
+  ],
+  "fingerprint": "a336a4f0cfb6f684ff88ccc392bdf75704d09f223351cd9b707a68a47ff78955",
+  "returncode": 0,
+  "timeout": false,
+  "seconds": 5.578524789001676,
+  "binary_sha256": "d842bea53a44d48e79f10c623d8273eaf4109a82b6f870fe3c1d6846499edba7"
+}

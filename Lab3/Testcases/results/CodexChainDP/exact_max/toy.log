@@ -1,0 +1,15 @@
+    LP 1: 4341 columns, value 42349.8 (0.3s)
+    + 304 columns
+    LP 2: 4645 columns, value 42122.6 (0.1s)
+    + 87 columns
+    LP 3: 4732 columns, value 42106.4 (0.1s)
+    + 35 columns
+    LP 4: 4767 columns, value 42106.4 (0.1s)
+    + 24 columns
+    LP 5: 4791 columns, value 42106.4 (0.1s)
+    + 4 columns
+    LP 6: 4795 columns, value 42106.4 (0.1s)
+toy: 31 cells; ours: total 43261.6, max 2007.9
+  total displacement: LP lower bound 42106.4   ours/LB = 1.0274   (0.6s)
+  max displacement: LP lower bound 1938.4   ours/LB = 1.0359   (3.2s)
+  max displacement: ILP minimum 1938.4 (exact)   ours/min = 1.0359   (9.4s)

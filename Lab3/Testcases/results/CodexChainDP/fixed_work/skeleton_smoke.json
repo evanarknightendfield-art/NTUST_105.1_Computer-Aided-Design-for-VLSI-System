@@ -1,0 +1,50 @@
+[
+  {
+    "solution": "M11502102",
+    "status": "TODO_NONWORKING",
+    "returncode": 1,
+    "timeout": false,
+    "seconds": 0.0016365869996661786,
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/bin/M11502102",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.aux",
+      "output",
+      "--no-sa"
+    ],
+    "source_sha256": {
+      "M11502102/src/annealer.cpp": "e314e9f0437a9c631b300ba2fe771b09db3046685e5206ba6c896ff8de6b3b24",
+      "M11502102/src/annealer.hpp": "9c352896d052dfcc8fd48aeecb590fa15172745b382f74c38156bf856074ed3a",
+      "M11502102/src/legalizer.cpp": "b7cd5bcc9f071b45f65cf2c97751309333953ac11e39b4721a675c3e7ec6fe4e",
+      "M11502102/src/legalizer.hpp": "77c01b5d27dc90640c4a7628ff885dbb161cec9b756b21311a5dcc1d7c5daccb",
+      "M11502102/src/main.cpp": "e968f6670751a46c276fefb7eee0a6416cbdf6eee9bc3f2fca65ef0f1543f5cb",
+      "M11502102/src/placedb.cpp": "5759edf391faac704c8e33d28b9e83fa3ed55a65e8cd91454a1d30bae94e4dd0",
+      "M11502102/src/placedb.hpp": "928a2b405f6bf4bb116a345125930623e3fe2af0eac923af2204ad1876de2791",
+      "M11502102/src/rowmap.hpp": "8e46186648f4d56f8f141d5ab3c6cc6671e841d485fb9674b6ef397b4f7e6a8d"
+    },
+    "stderr": "error: TODO(M1): parse .nodes/.pl/.nets/.scl\n"
+  },
+  {
+    "solution": "my_dp_skeleton",
+    "status": "TODO_NONWORKING",
+    "returncode": 1,
+    "timeout": false,
+    "seconds": 0.003765962999750627,
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexChainDP/fixed_work/bin/my_dp_skeleton",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.aux",
+      "output",
+      "--no-sa"
+    ],
+    "source_sha256": {
+      "MyCode/my_dp_skeleton/src/annealer.cpp": "e314e9f0437a9c631b300ba2fe771b09db3046685e5206ba6c896ff8de6b3b24",
+      "MyCode/my_dp_skeleton/src/annealer.hpp": "9c352896d052dfcc8fd48aeecb590fa15172745b382f74c38156bf856074ed3a",
+      "MyCode/my_dp_skeleton/src/legalizer.cpp": "b7cd5bcc9f071b45f65cf2c97751309333953ac11e39b4721a675c3e7ec6fe4e",
+      "MyCode/my_dp_skeleton/src/legalizer.hpp": "77c01b5d27dc90640c4a7628ff885dbb161cec9b756b21311a5dcc1d7c5daccb",
+      "MyCode/my_dp_skeleton/src/main.cpp": "e968f6670751a46c276fefb7eee0a6416cbdf6eee9bc3f2fca65ef0f1543f5cb",
+      "MyCode/my_dp_skeleton/src/placedb.cpp": "5759edf391faac704c8e33d28b9e83fa3ed55a65e8cd91454a1d30bae94e4dd0",
+      "MyCode/my_dp_skeleton/src/placedb.hpp": "928a2b405f6bf4bb116a345125930623e3fe2af0eac923af2204ad1876de2791",
+      "MyCode/my_dp_skeleton/src/rowmap.hpp": "8e46186648f4d56f8f141d5ab3c6cc6671e841d485fb9674b6ef397b4f7e6a8d"
+    },
+    "stderr": "error: TODO(M1): parse .nodes/.pl/.nets/.scl\n"
+  }
+]

@@ -1,0 +1,26 @@
+[read] 12028 nodes (12028 movable), 11507 nets, 132 rows, 132 segments  0.06s
+[legal] abacus  total 36759608.4  max 17782.7
+[legal] max-refine 285 moves  total 37780870.3  max 10604.6
+[legal] total-refine pass 0: 6778 moves  total 29130558.1  max 10604.6
+[legal] total-refine pass 1: 2894 moves  total 27923830.5  max 10604.6
+[legal] total-refine pass 2: 1215 moves  total 27619251.1  max 10604.6
+[legal] total-refine pass 3: 500 moves  total 27501600.9  max 10604.6
+[legal] total-refine pass 4: 224 moves  total 27460636.0  max 10604.6
+[legal] total-refine pass 5: 92 moves  total 27446101.0  max 10604.6
+[legal] total-refine pass 6: 45 moves  total 27439498.3  max 10604.6
+[legal] max-refine 18 moves  total 27724594.2  max 10578.3
+[legal] total-refine pass 0: 703 moves  total 27332864.1  max 10578.3
+[legal] total-refine pass 1: 305 moves  total 27259021.3  max 10578.3
+[legal] total-refine pass 2: 106 moves  total 27239525.9  max 10578.3
+[legal] total-refine pass 3: 17 moves  total 27236330.5  max 10578.3
+[legal] max-refine 0 moves  total 27236330.5  max 10578.3
+[legal] total-refine pass 0: 7 moves  total 27235500.8  max 10578.3
+[stage1] done  0.95s
+[sa] HPWL 90945258  T0 2.784e+04  alpha 0.9333  5003648 moves in 100 steps
+[sa] step   0  T 2.784e+04  acc 0.295  win 2852 x 2843  cur 115537074  best 90944250  0.0s
+[sa] step  20  T 6993  acc 0.311  win 2493 x 756  cur 127595046  best 90944250  0.5s
+[sa] step  40  T 1757  acc 0.238  win 2493 x 756  cur 93123864  best 90944250  1.0s
+[sa] step  60  T 441.2  acc 0.140  win 2493 x 756  cur 75815268  best 75813666  1.5s
+[sa] step  80  T 110.8  acc 0.069  win 2493 x 756  cur 70311468  best 70311402  1.9s
+[sa] step  99  T 29.83  acc 0.047  win 2493 x 756  cur 68713950  best 68713950  2.4s
+[stage2] done  3.32s

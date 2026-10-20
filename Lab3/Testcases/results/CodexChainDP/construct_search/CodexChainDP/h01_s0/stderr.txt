@@ -1,0 +1,96 @@
+[read] 318 nodes (300 movable), 304 nets, 17 rows, 29 segments, utilization 0.500  0.00s
+[legal] abacus: 1.55e+03 exact cost steps
+[legal] abacus  total 2781.3  max 45.1  0.0s
+[legal] row-opt (d0 0): 17 segments  total 2761.4  max 48.1
+[legal] max-refine 19 moves  total 2836.7  max 34.1
+[legal] matching d0 32: 7 windows, cells above d0 8 -> 7  total 2834.8  max 34.1
+[legal] row-opt (d0 34): 3 segments  total 2800.6  max 34.1
+[legal] matching sweep: total 2780.4  max 34.1
+[legal] total-refine pass 0: 57 moves  total 2568.8  max 34.1
+[legal] total-refine pass 1: 10 moves  total 2538.7  max 34.1
+[legal] total-refine pass 2: 1 moves  total 2536.8  max 34.1
+[legal] total-refine pass 3: 0 moves  total 2536.8  max 34.1
+[legal] max-refine 0 moves  total 2536.8  max 34.1
+[legal] matching d0 32: 9 windows, cells above d0 9 -> 9  total 2536.8  max 34.1
+[legal] row-opt (d0 34): 6 segments  total 2535.7  max 34.1
+[legal] matching sweep: total 2535.7  max 34.1
+[legal] total-refine pass 0: 0 moves  total 2535.7  max 34.1
+[spread] round 0 B 292: 0 bins over by 0 sites, moves 6
+[legal] spread: 3 x 9 bins, 6 path moves, 155 cells retargeted, max shift 14.3, B 292
+[legal] abacus: 1.52e+03 exact cost steps
+[legal] abacus  total 2988.5  max 43.5  0.0s
+[legal] row-opt (d0 0): 19 segments  total 2939.6  max 52.9
+[legal] max-refine 20 moves  total 3096.4  max 35.0
+[legal] matching d0 33: 8 windows, cells above d0 12 -> 8  total 3037.1  max 33.7
+[legal] matching d0 32: 8 windows, cells above d0 8 -> 8  total 3039.0  max 33.7
+[legal] row-opt (d0 34): 5 segments  total 2927.8  max 33.7
+[legal] matching sweep: total 2927.0  max 33.7
+[legal] total-refine pass 0: 64 moves  total 2656.2  max 33.7
+[legal] total-refine pass 1: 15 moves  total 2610.6  max 33.7
+[legal] total-refine pass 2: 13 moves  total 2536.8  max 33.7
+[legal] total-refine pass 3: 6 moves  total 2506.5  max 33.7
+[legal] total-refine pass 4: 0 moves  total 2506.5  max 33.7
+[legal] max-refine 0 moves  total 2506.5  max 33.7
+[legal] matching d0 32: 8 windows, cells above d0 10 -> 8  total 2506.5  max 33.7
+[legal] row-opt (d0 34): 6 segments  total 2497.6  max 33.6
+[legal] matching sweep: total 2497.6  max 33.6
+[legal] total-refine pass 0: 3 moves  total 2489.1  max 33.6
+[legal] total-refine pass 1: 0 moves  total 2489.1  max 33.6
+[legal] max-refine 10 moves  total 2615.6  max 31.7
+[legal] matching d0 30: 7 windows, cells above d0 7 -> 7  total 2615.6  max 31.7
+[legal] row-opt (d0 32): 1 segments  total 2600.2  max 31.7
+[legal] matching sweep: total 2600.0  max 31.7
+[legal] total-refine pass 0: 13 moves  total 2528.0  max 31.7
+[legal] total-refine pass 1: 0 moves  total 2528.0  max 31.7
+[legal] max-refine 0 moves  total 2528.0  max 31.7
+[legal] matching d0 30: 8 windows, cells above d0 8 -> 8  total 2528.0  max 31.7
+[legal] row-opt (d0 32): 0 segments  total 2528.0  max 31.7
+[legal] matching sweep: total 2528.0  max 31.7
+[legal] total-refine pass 0: 0 moves  total 2528.0  max 31.7
+[legal] plain: total 2535.7 max 34.1 | spread: total 2528.0 max 31.7 -> spread
+[legal] row-opt (d0 32): 0 segments  total 2528.0  max 31.7
+[legal] matching sweep: total 2528.0  max 31.7
+[legal] total-refine pass 0: 0 moves  total 2528.0  max 31.7
+[window-disp] 2 rows x 5 cells: 235 windows solved, 25 improved: total 2528.0 -> 2352.6 (max 31.5600)  0.24s
+[window-disp] 3 rows x 4 cells: 158 windows solved, 0 improved: total 2352.6 -> 2352.6 (max 31.5600)  1.07s
+[window-disp] 2 rows x 5 cells: 0 windows solved, 0 improved: total 2352.6 -> 2352.6 (max 31.5600)  0.00s
+[window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 2352.6 -> 2352.6 (max 31.5600)  0.00s
+[legal] final round 0: total 2352.6  1.3s
+[legal] row-opt (d0 32): 0 segments  total 2352.6  max 31.6
+[legal] matching sweep: total 2352.6  max 31.6
+[legal] total-refine pass 0: 4 moves  total 2337.8  max 31.6
+[legal] total-refine pass 1: 0 moves  total 2337.8  max 31.6
+[window-disp] 2 rows x 5 cells: 40 windows solved, 0 improved: total 2337.8 -> 2337.8 (max 31.5600)  0.04s
+[window-disp] 3 rows x 4 cells: 60 windows solved, 0 improved: total 2337.8 -> 2337.8 (max 31.5600)  0.41s
+[legal] final round 1: total 2337.8  1.8s
+[legal] row-opt (d0 32): 1 segments  total 2337.8  max 31.6
+[legal] matching sweep: total 2337.8  max 31.6
+[legal] total-refine pass 0: 0 moves  total 2337.8  max 31.6
+[window-disp] 2 rows x 5 cells: 33 windows solved, 0 improved: total 2337.8 -> 2337.8 (max 31.5600)  0.03s
+[window-disp] 3 rows x 4 cells: 45 windows solved, 0 improved: total 2337.8 -> 2337.8 (max 31.5600)  0.27s
+[legal] final round 2: total 2337.8  2.1s
+[legal] max-refine 1 moves  total 2359.3  max 31.4
+[legal] matching d0 30: 4 windows, cells above d0 5 -> 4  total 2359.3  max 31.4
+[window-disp] 2 rows x 5 cells: 36 windows solved, 3 improved: total 2359.3 -> 2347.9 (max 31.3900)  0.03s
+[window-disp] 3 rows x 4 cells: 42 windows solved, 0 improved: total 2347.9 -> 2347.9 (max 31.3900)  0.21s
+[window-disp] 2 rows x 5 cells: 0 windows solved, 0 improved: total 2347.9 -> 2347.9 (max 31.3900)  0.00s
+[window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 2347.9 -> 2347.9 (max 31.3900)  0.00s
+[legal] final max pass: max 31.5600 -> 31.3900, total 2347.9  2.3s
+[pareto] pass 1: 0 groups, total 2347.850000, max 31.390000
+[window-disp] 2 rows x 5 cells: 126 windows solved, 0 improved: total 2347.9 -> 2347.9 (max 31.3900)  0.13s
+[window-disp] 3 rows x 4 cells: 158 windows solved, 0 improved: total 2347.9 -> 2347.9 (max 31.3900)  1.06s
+[target-window] 0/300 improved: total 2347.850000 -> 2347.850000, max 31.390000 -> 31.390000  0.01s
+[chain] pass 0: 0 chains, total 2347.850000 -> 2347.850000, max 31.390000 -> 31.390000
+[chain] 300 roots, 23673 nodes, 146390 candidates, 0 accepted, longest 0, 0 multi-blocker placements
+[global-cap] D 28.25100000 unresolved (not proven infeasible)
+[global-cap] D 29.82050000 unresolved (not proven infeasible)
+[global-cap] D 30.60525000 feasible: total 2402.770000 (+2.339%), max 30.550000, total budget rejected
+[global-cap] D 30.99762500 feasible: total 2393.650000 (+1.951%), max 30.960000, total budget rejected
+[global-cap] D 31.19381250 feasible: total 2353.810000 (+0.254%), max 31.130000, accepted
+[global-cap] D 15.56500000 unresolved (not proven infeasible)
+[global-cap] D 23.34750000 unresolved (not proven infeasible)
+[global-cap] D 27.23875000 unresolved (not proven infeasible)
+[global-cap] D 29.18437500 unresolved (not proven infeasible)
+[global-cap] D 30.15718750 unresolved (not proven infeasible)
+[stage1] done  6.05s
+[stage2] done  6.05s

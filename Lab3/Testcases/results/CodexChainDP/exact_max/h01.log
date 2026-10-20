@@ -1,0 +1,11 @@
+    LP 1: 22651 columns, value 2177.1 (0.4s)
+    + 291 columns
+    LP 2: 22942 columns, value 2134.2 (0.2s)
+    + 19 columns
+    LP 3: 22961 columns, value 2134.1 (0.2s)
+    + 2 columns
+    LP 4: 22963 columns, value 2134.1 (0.2s)
+h01: 300 cells; ours: total 2349.6, max 30.6
+  total displacement: LP lower bound 2134.1   ours/LB = 1.1010   (1.1s)
+  max displacement: LP lower bound 26.5   ours/LB = 1.1552   (6.2s)
+  max displacement: ILP minimum 26.5 (exact)   ours/min = 1.1552   (729.7s)

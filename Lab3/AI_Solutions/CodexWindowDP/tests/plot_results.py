@@ -8,9 +8,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 ROOT=Path(__file__).resolve().parents[1]
-DEST=ROOT/'results/figures'
+RES=ROOT.parents[1]/'Testcases/results'/ROOT.name   # Lab3 convention: run outputs live in Testcases/results
+DEST=RES/'figures'
 DEST.mkdir(parents=True,exist_ok=True)
-rows=list(csv.DictReader((ROOT/'results/comparison/records.csv').open()))
+rows=list(csv.DictReader((RES/'comparison/records.csv').open()))
 assert len(rows)==66 and all(r['verdict']=='PASS' for r in rows)
 data={(r['solution'],r['bench']):r for r in rows}
 benches=['toy','ibm01','ibm05']+[f'h{i:02d}' for i in range(1,9)]
@@ -27,7 +28,7 @@ plt.close(fig)
 
 fig,axes=plt.subplots(2,1,figsize=(9,6),sharex=True,layout='constrained',gridspec_kw={'height_ratios':[2,1]})
 for label,color in [('ClaudeOpus55_v3','#7d8590'),('CodexWindowDP','#277d9b')]:
-    trace=list(csv.DictReader((ROOT/f'results/comparison/{label}/ibm01_s1/trace.csv').open()))
+    trace=list(csv.DictReader((RES/f'comparison/{label}/ibm01_s1/trace.csv').open()))
     it=np.array([float(r['iteration']) for r in trace])/1e6
     axes[0].plot(it,[float(r['current'])/1e6 for r in trace],color=color,lw=0.7,alpha=0.5,label=label+' current')
     axes[0].plot(it,[float(r['best'])/1e6 for r in trace],color=color,lw=1.5,label=label+' best')
