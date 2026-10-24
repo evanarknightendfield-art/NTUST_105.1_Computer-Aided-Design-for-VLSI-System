@@ -1,0 +1,72 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexChainDP_27/submissions/CodexChainDP.tgz  (42 files)
+       CodexChainDP/CMakeLists.txt
+       CodexChainDP/Makefile
+       CodexChainDP/READING_NOTES.md
+       CodexChainDP/README.md
+       CodexChainDP/WORK_STATE.md
+       CodexChainDP/src/annealer.cpp
+       CodexChainDP/src/annealer.hpp
+       CodexChainDP/src/chain.cpp
+       CodexChainDP/src/chain.hpp
+       CodexChainDP/src/global.cpp
+       CodexChainDP/src/global.hpp
+       CodexChainDP/src/legalizer.cpp
+       CodexChainDP/src/legalizer.hpp
+       CodexChainDP/src/main.cpp
+       CodexChainDP/src/optimizer.cpp
+       CodexChainDP/src/optimizer.hpp
+       CodexChainDP/src/placedb.cpp
+       CodexChainDP/src/placedb.hpp
+       CodexChainDP/src/pool.hpp
+       CodexChainDP/src/rowmap.hpp
+       CodexChainDP/src/window.cpp
+       CodexChainDP/src/window.hpp
+       CodexChainDP/tests/acceptance.py
+       CodexChainDP/tests/certify.py
+       CodexChainDP/tests/chain_test.cpp
+       CodexChainDP/tests/compare.py
+       CodexChainDP/tests/edge_cases.py
+       CodexChainDP/tests/fair_time.py
+       CodexChainDP/tests/final_audit.py
+       CodexChainDP/tests/final_validation.py
+       CodexChainDP/tests/global_test.cpp
+       CodexChainDP/tests/measure.py
+       CodexChainDP/tests/multirow_test.cpp
+       CodexChainDP/tests/optimizer_test.cpp
+       CodexChainDP/tests/parallel_sa_test.cpp
+       CodexChainDP/tests/pool_test.cpp
+       CodexChainDP/tests/run_tests.py
+       CodexChainDP/tests/sa_bench.cpp
+       CodexChainDP/tests/sanitize_global.py
+       CodexChainDP/tests/summarize.py
+       CodexChainDP/tests/update_docs.py
+       CodexChainDP/tests/window_test.cpp
+[build] OK build/dp  16.8s
+[run] ibm01    PASS  OK          74.3s  disp=23027754.8485 max=10580.34 legal=87255096.0 sa=49585566.0
+[run] ibm05    PASS  OK          97.1s  disp=1327754.08 max=202.747 legal=11826069.0 sa=9645885.5
+[run] toy      PASS  OK           8.1s  disp=43261.6 max=2007.9 legal=103854.0 sa=47436.0
+[run] h01      PASS  OK          20.8s  disp=2367.09 max=29.39 legal=25541.0 sa=14051.0
+[run] h02      PASS  OK          34.3s  disp=466109.499 max=2541.499 legal=3753652.0 sa=2294345.1
+[run] h03      PASS  OK          32.3s  disp=7040.1975 max=20.9394 legal=26501.6 sa=12105.4
+[run] h04      PASS  OK          45.3s  disp=181950.51 max=231.76 legal=540042.0 sa=230078.0
+[run] h05      PASS  OK          28.9s  disp=1549278.908 max=1337.305 legal=26207147.2 sa=17954110.7
+[run] h06      PASS  OK         101.5s  disp=893601.32 max=426.65 legal=2147734.5 sa=667323.5
+[run] h07      PASS  OK          89.0s  disp=109981.9989 max=47.3388 legal=356301.091 sa=164052.022
+[run] h08      PASS  OK         129.6s  disp=126046414.845 max=28421.64 legal=309964244.0 sa=100632658.7
+[run] e01_nearlegal PASS  OK          54.7s  disp=23081.091 max=5.423 legal=698133.0 sa=486298.0
+[run] e02_legalgp PASS  OK          19.7s  disp=0.0 max=0.0 legal=14678898.5 sa=9878992.5
+[run] e03_dense97 PASS  OK          49.3s  disp=141994.142 max=129.829 legal=569413.5 sa=287330.0
+[run] e04_sparse10 PASS  OK           8.5s  disp=689.1627 max=1.7841 legal=47356.566 sa=14169.832
+[run] e05_bignets PASS  OK          63.9s  disp=76818.278 max=61.401 legal=1003930.5 sa=713196.5
+[run] e06_tallnarrow PASS  OK          21.0s  disp=32179.555 max=31.652 legal=2139586.5 sa=937959.0
+[run] e07_tworows PASS  OK          29.0s  disp=19793.389 max=26.997 legal=991627.0 sa=190470.0
+[run] e08_fragmented PASS  OK          34.3s  disp=89415.317 max=74.535 legal=708848.0 sa=406724.5
+[run] e09_offgrid PASS  OK          58.4s  disp=15001.3766 max=36.6912 legal=201498.4862 sa=59144.7234
+[run] e10_mixedsites PASS  OK          60.9s  disp=62765.168 max=46.25 legal=1229869.0 sa=790967.5
+[run] e11_format PASS  OK          11.3s  disp=7611.135 max=13.315 legal=121442.5 sa=75335.5
+[run] e12_collapse PASS  OK          40.2s  disp=325111.047 max=228.259 legal=2382466.5 sa=179295.5
+[run] e13_onecell PASS  OK           0.3s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          78.3s  disp=13756833.986 max=4890.885 legal=125359547.5 sa=86274412.5
+[run] e16_rowgaps PASS  OK          64.6s  disp=95347.098 max=65.29 legal=755575.5 sa=455281.5
+[summary] 27/27 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexChainDP_27/record.csv

@@ -1,0 +1,4 @@
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/ClaudeOpus55_v6/CMakeFiles/dp_core.dir
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/ClaudeOpus55_v6/CMakeFiles/dp.dir
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/ClaudeOpus55_v6/CMakeFiles/edit_cache.dir
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/ClaudeOpus55_v6/CMakeFiles/rebuild_cache.dir

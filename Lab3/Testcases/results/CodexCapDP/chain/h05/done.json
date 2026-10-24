@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/bin/diagnostic_experiments",
+    "chain",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_C/h05/diag_prechain.pl",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/chain/h05/result",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_C/h05/diag_prechain.memo"
+  ],
+  "seconds": 5.224344343994744,
+  "returncode": 0
+}

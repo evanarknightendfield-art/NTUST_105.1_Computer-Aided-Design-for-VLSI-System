@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/bin/diagnostic_experiments",
+    "dp",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_C/h06/diag_attempt8_from.pl",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/local_dp/h06/result",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_C/h06/diag_attempt8_raw.pl",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_C/h06/diag_attempt8.memo",
+    "430.545"
+  ],
+  "seconds": 13.501955134008313,
+  "returncode": 0
+}

@@ -1,0 +1,4 @@
+fraction,cap,cells,segments,max_per_segment,movable,total_segments
+0.005,29.91965,1,1,1,300,29
+0.01,29.7693,2,2,1,300,29
+0.02,29.4686,5,3,2,300,29

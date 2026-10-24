@@ -1,0 +1,20 @@
+[
+  {
+    "schedule_index": 0,
+    "returncode": 0,
+    "output": "LEGAL\nTotal displacement: 2115121820.9\nMaximum displacement: 17526.2\nTotal HPWL: 1671621238.0\n",
+    "stderr": ""
+  },
+  {
+    "schedule_index": 1,
+    "returncode": 0,
+    "output": "LEGAL\nTotal displacement: 2098951096.4\nMaximum displacement: 16953.4\nTotal HPWL: 1616395826.5\n",
+    "stderr": ""
+  },
+  {
+    "schedule_index": 2,
+    "returncode": 0,
+    "output": "LEGAL\nTotal displacement: 2120392264.9\nMaximum displacement: 19019.2\nTotal HPWL: 1783175009.0\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "protected_counts": {
+    "ClaudeOpus55": 11,
+    "CodexWindowDP": 24,
+    "ClaudeOpus55_v4": 19,
+    "CodexChainDP": 42,
+    "ClaudeOpus55_v5": 37,
+    "CodexCapDP": 53,
+    "ClaudeOpus55_v6": 56
+  },
+  "authorized_document_changes": [],
+  "unexpected_changes": [],
+  "current_aggregates": {
+    "ClaudeOpus55": "6fd0ece3a247dd81004393196cea5e24b321e6e26c0bd4fb5382e049af51d525",
+    "CodexWindowDP": "fbd5ba8b8aeb9147f447995cbe8ae98ec0a4ab3708cd4bac0428b72cad1fdf85",
+    "ClaudeOpus55_v4": "ce2da35f8837f2e7c35a083c7508682fafaea4b530bf8547564f8dbe13937a91",
+    "CodexChainDP": "319cdbbdce5b897374997e08068ebb6e0dbbdb851236d71f11d228f82efc23be",
+    "ClaudeOpus55_v5": "909d1f41de3757fb72742b6a92b07edb20c84811fcbadc83d84bc1feaa1ba18f",
+    "CodexCapDP": "e95580ea4d7f85c9fb364489f20bb6643938eaf8f6e5e6d3dc462c7787ed9b8e",
+    "ClaudeOpus55_v6": "7063d8e56d290972721766127d1486e4de54e7b9442a2cf63e272c97b538e520"
+  },
+  "frozen_files_verified": 53,
+  "frozen_manifest_sha256": "2960fb38797b9262133b83c9ba3ebe1c97e00c6790dc13abf5ae4b3e1cbfcf35",
+  "comparison_before_sha256": "2187435dae2a0a563a053e7c3e1a1e24fa36a41f2660c693272696de4503b911",
+  "comparison_prefix_verified": true,
+  "history_old_rows_unchanged": true,
+  "summary_sha256": "8d86179ce1b9ff0ad7ec7e775ef4477afc0cc3eaead1bdfd9c76d1d3b00a6090"
+}

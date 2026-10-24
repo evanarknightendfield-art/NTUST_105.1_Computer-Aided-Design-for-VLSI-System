@@ -1,0 +1,14 @@
+[04:43:53] sources match frozen hashes
+[04:43:53] local_grade v5: testcases + holdout
+[04:54:37] run_edge.sh ClaudeOpus55_v5
+[05:04:23] local_grade v5 L1
+[05:07:37] local_grade v5 L2
+[05:11:35] Stage 1 cache v5 (holdout + edge)
+[05:17:12] HPWL same SA attempts (5M, 1 thread, common start = v4 Stage 1)
+[05:25:47] HPWL same total time (slower Stage 1 + 12 s)
+[05:47:51] generate new edge seed 20261021 -> Testcases/edge_seed3
+[05:47:57] local_grade ClaudeOpus55_v4 on edge_seed3
+[05:55:42] local_grade CodexChainDP on edge_seed3
+[06:05:26] local_grade ClaudeOpus55_v5 on edge_seed3
+[06:15:32] HPWL default parameters (SA 60 s + polish 30 s from each version's own Stage 1)
+[07:16:50] final runs done

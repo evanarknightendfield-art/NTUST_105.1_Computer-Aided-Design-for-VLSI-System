@@ -1,0 +1,16 @@
+{
+  "freeze": "b9d4ac797f3804a1eded6e4975ebfdb15dc2756e23212fcc5f5bcae0c67cc08b",
+  "command": [
+    "taskset",
+    "-c",
+    "16-19",
+    "/home/evan/anaconda3/bin/python3",
+    "Grader/tools/check_pl.py",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e07_tworows/e07_tworows",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/ts_new_stage1/e07_tworows/output_legal.pl",
+    "--quiet"
+  ],
+  "started": 1792579975.9102595,
+  "returncode": 0,
+  "seconds": 0.04477953910827637
+}

@@ -1,0 +1,5 @@
+{
+ "tag": "thr16",
+ "src_sha256": "6bc0a96ef648f47ce3c17bc68b06c86adb5f0d3c25f6e8067af11c1a182610f2",
+ "dp_args": "--threads 16"
+}

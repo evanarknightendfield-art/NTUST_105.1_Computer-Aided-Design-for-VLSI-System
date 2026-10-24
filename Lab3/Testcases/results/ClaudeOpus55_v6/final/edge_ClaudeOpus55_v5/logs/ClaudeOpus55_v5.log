@@ -1,0 +1,871 @@
+$ cmake -S . -B build
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build
+
+$ cmake --build build -j
+[ 11%] Building CXX object CMakeFiles/dp_core.dir/src/annealer.cpp.o
+[ 11%] Building CXX object CMakeFiles/dp_core.dir/src/chain.cpp.o
+[ 11%] Building CXX object CMakeFiles/dp_core.dir/src/capsearch.cpp.o
+[ 14%] Building CXX object CMakeFiles/dp_core.dir/src/global.cpp.o
+[ 18%] Building CXX object CMakeFiles/dp_core.dir/src/legalizer.cpp.o
+[ 22%] Building CXX object CMakeFiles/dp_core.dir/src/optimizer.cpp.o
+[ 25%] Building CXX object CMakeFiles/dp_core.dir/src/placedb.cpp.o
+[ 29%] Building CXX object CMakeFiles/dp_core.dir/src/window.cpp.o
+[ 33%] Linking CXX static library libdp_core.a
+[ 33%] Built target dp_core
+[ 37%] Building CXX object CMakeFiles/parallel_sa_test.dir/tests/parallel_sa_test.cpp.o
+[ 40%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 44%] Building CXX object CMakeFiles/optimizer_test.dir/tests/optimizer_test.cpp.o
+[ 51%] Building CXX object CMakeFiles/window_test.dir/tests/window_test.cpp.o
+[ 51%] Building CXX object CMakeFiles/multirow_test.dir/tests/multirow_test.cpp.o
+[ 55%] Building CXX object CMakeFiles/chain_test.dir/tests/chain_test.cpp.o
+[ 59%] Building CXX object CMakeFiles/pool_test.dir/tests/pool_test.cpp.o
+[ 62%] Building CXX object CMakeFiles/capsearch_test.dir/tests/capsearch_test.cpp.o
+[ 66%] Building CXX object CMakeFiles/global_test.dir/tests/global_test.cpp.o
+[ 70%] Linking CXX executable pool_test
+[ 70%] Built target pool_test
+[ 74%] Linking CXX executable parallel_sa_test
+[ 77%] Linking CXX executable global_test
+[ 77%] Built target parallel_sa_test
+[ 81%] Linking CXX executable chain_test
+[ 81%] Built target global_test
+[ 81%] Built target chain_test
+[ 85%] Linking CXX executable window_test
+[ 85%] Built target window_test
+[ 88%] Linking CXX executable multirow_test
+[ 88%] Built target multirow_test
+[ 92%] Linking CXX executable optimizer_test
+[ 92%] Built target optimizer_test
+[ 96%] Linking CXX executable capsearch_test
+[ 96%] Built target capsearch_test
+[100%] Linking CXX executable dp
+[100%] Built target dp
+In file included from /usr/include/x86_64-linux-gnu/c++/15/bits/c++allocator.h:33,
+                 from /usr/include/c++/15/bits/allocator.h:46,
+                 from /usr/include/c++/15/string:45,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/placedb.hpp:4,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/global.hpp:2,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/global.cpp:1:
+In member function ‘void std::__new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = int; _Args = {int}; _Tp = int]’,
+    inlined from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = int; _Args = {int}; _Tp = int]’ at /usr/include/c++/15/bits/alloc_traits.h:674:17,
+    inlined from ‘void std::vector<_Tp, _Alloc>::_M_insert_aux(iterator, _Arg&&) [with _Arg = int; _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/vector.tcc:430:31,
+    inlined from ‘std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::insert(const_iterator, const value_type&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/vector.tcc:162:21,
+    inlined from ‘bool {anonymous}::constructCap(const PlaceDB&, Placement&, double, double)’ at /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/global.cpp:101:45:
+/usr/include/c++/15/bits/new_allocator.h:191:11: warning: array subscript -1 is outside array bounds of ‘int [2305843009213693951]’ [-Warray-bounds=]
+  191 |         { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In member function ‘_Tp* std::__new_allocator<_Tp>::allocate(size_type, const void*) [with _Tp = int]’,
+    inlined from ‘static _Tp* std::allocator_traits<std::allocator<_CharT> >::allocate(allocator_type&, size_type) [with _Tp = int]’ at /usr/include/c++/15/bits/alloc_traits.h:614:28,
+    inlined from ‘std::_Vector_base<_Tp, _Alloc>::pointer std::_Vector_base<_Tp, _Alloc>::_M_allocate(std::size_t) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:387:33,
+    inlined from ‘void std::_Vector_base<_Tp, _Alloc>::_M_create_storage(std::size_t) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:405:44,
+    inlined from ‘std::_Vector_base<_Tp, _Alloc>::_Vector_base(std::size_t, const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:341:26,
+    inlined from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:633:61,
+    inlined from ‘bool {anonymous}::constructCap(const PlaceDB&, Placement&, double, double)’ at /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/global.cpp:101:30:
+/usr/include/c++/15/bits/new_allocator.h:151:73: note: at offset -4 into object of size [0, 9223372036854775804] allocated by ‘operator new’
+  151 |         return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+      |                                                                         ^
+
+
+===== e01_nearlegal: OK 65.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e01_nearlegal/e01_nearlegal output -v
+Total displacement (legal): 23081.091
+Maximum displacement (legal): 5.423
+Total HPWL (legal): 698133
+Total HPWL (SA): 486586.5
+595000  0.01s
+[chain] pass 0: 0 chains, total 23080.617000 -> 23080.617000, max 5.595000 -> 5.595000
+[chain] 9719 roots, 34555 nodes, 37401 candidates, 0 accepted, longest 0, 0 multi-blocker placements
+[cap] probe D 5.035500: unresolved  1.85s
+[cap] probe D 5.315250: unresolved  1.98s
+[cap] probe D 5.455125: feasible (rows)  1.98s
+[cap] probe D 5.378625: unresolved  2.11s
+[cap] probe D 5.410313: unresolved  2.24s
+[cap] probe D 5.426156: feasible (rows)  2.24s
+[cap] probe D 5.416656: unresolved  2.37s
+[cap] D 5.552000: feasible (rows), accepted, total 23081.0910 max 5.442000  2.41s
+[cap] D 5.432500: feasible (rows), accepted, total 23081.0910 max 5.423000  2.50s
+[cap] probe D 4.880700: unresolved  2.63s
+[cap] probe D 5.151850: unresolved  2.76s
+[cap] probe D 5.287425: unresolved  2.88s
+[cap] probe D 5.355213: unresolved  3.01s
+[cap] probe D 5.389106: unresolved  3.14s
+[cap] probe D 5.406053: unresolved  3.27s
+[cap] probe D 5.414527: unresolved  3.40s
+[cap] probe D 4.880700: unresolved  3.53s
+[cap] probe D 5.151850: unresolved  3.66s
+[cap] probe D 5.287425: unresolved  3.78s
+[cap] probe D 5.355213: unresolved  3.91s
+[cap] probe D 5.389106: unresolved  4.04s
+[cap] probe D 5.406053: unresolved  4.17s
+[cap] probe D 5.414527: unresolved  4.30s
+[cap] probe D 4.880700: unresolved  4.43s
+[cap] probe D 5.151850: unresolved  4.56s
+[cap] probe D 5.287425: unresolved  4.69s
+[cap] probe D 5.355213: unresolved  4.81s
+[cap] probe D 5.389106: unresolved  4.94s
+[cap] probe D 5.406053: unresolved  5.07s
+[cap] probe D 5.414527: unresolved  5.20s
+[cap] 30 attempts, 4 feasible, 2 accepted: max 5.595000 -> 5.423000, total 23080.6170 -> 23081.0910 (+0.002%)  3.48s
+[stage1] done  5.20s
+[sa] parallel: 7 bands/threads  HPWL 698133  T0 567.4  340165000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 567.4  acc 0.790  win 61 x 97  cur 2714624  best 698133  0.6s
+[sa] step  20  T 142.5  acc 0.560  win 90 x 144  cur 1562968  best 698133  12.3s
+[sa] step  40  T 35.8  acc 0.388  win 70 x 113  cur 723058  best 698133  23.5s
+[sa] step  60  T 8.992  acc 0.328  win 28 x 24  cur 517934  best 516606  35.4s
+[sa] step  80  T 2.259  acc 0.129  win 28 x 24  cur 489240  best 489110  47.9s
+[sa] step  99  T 0.6079  acc 0.053  win 28 x 24  cur 486772  best 486747  59.5s
+[sa] 35078 sync rounds, 332181614 attempts (15.5% proposals failed)  59.5s (moves 53.7s, merge 5.2s)
+[polish] pass 1: 486747.000000 -> 486661.500000; slide 10, relocate 3, assignment 0, reorder 58
+[polish] pass 2: 486661.500000 -> 486660.000000; slide 1, relocate 0, assignment 0, reorder 1
+[polish] pass 3: 486660.000000 -> 486660.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 6/2463 accepted, 486660.000000 -> 486635.000000
+[window-hpwl] pass 1: 6/2402 accepted, 486635.000000 -> 486613.500000
+[order-hpwl] pass 0: 13 accepted, 486613.500000 -> 486593.500000
+[order-hpwl] pass 1: 4 accepted, 486593.500000 -> 486586.500000
+[polish-total] 486747.000000 -> 486586.500000
+[stage2] done  65.58s
+
+
+===== e02_legalgp: OK 19.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e02_legalgp/e02_legalgp output -v
+Total displacement (legal): 0
+Maximum displacement (legal): 0
+Total HPWL (legal): 14678898.5
+Total HPWL (SA): 9878992.5
+x 0.0
+[legal] total-refine pass 12: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 13: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 14: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 15: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 16: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 17: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 18: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 19: 0 moves  total 0.0  max 0.0
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 0.0 -> 0.0 (max 0.0000)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 0.0 -> 0.0 (max 0.0000)  0.00s
+[legal] final round 3: total 0.0  0.9s
+[legal] max-refine 0 moves  total 0.0  max 0.0
+[legal] matching d0 0: 0 windows, cells above d0 0 -> 0  total 0.0  max 0.0
+[legal] final max pass: max 0.0000 -> 0.0000, total 0.0  0.9s
+[pareto] pass 1: 0 groups, total 0.000000, max 0.000000
+[window-disp] 2 rows x 4 cells: 2221 windows solved, 0 improved: total 0.0 -> 0.0 (max 0.0000)  0.18s
+[window-disp] 3 rows x 3 cells: 2958 windows solved, 0 improved: total 0.0 -> 0.0 (max 0.0000)  0.62s
+[target-window] 0/0 improved: total 0.000000 -> 0.000000, max 0.000000 -> 0.000000  0.00s
+[chain] pass 0: 0 chains, total 0.000000 -> 0.000000, max 0.000000 -> 0.000000
+[chain] 4562 roots, 0 nodes, 0 candidates, 0 accepted, longest 0, 0 multi-blocker placements
+[stage1] done  1.67s
+[sa] HPWL 14678898  T0 1.781e+04  alpha 0.9333  22810000 moves in 100 steps
+[sa] step   0  T 1.781e+04  acc 0.838  win 3230 x 2114  cur 40694289  best 14678898  0.2s
+[sa] step  20  T 4475  acc 0.549  win 4620 x 3024  cur 25329596  best 14678898  3.3s
+[sa] step  40  T 1124  acc 0.364  win 2659 x 1740  cur 13688854  best 13615034  6.5s
+[sa] step  60  T 282.3  acc 0.204  win 1831 x 756  cur 10380589  best 10361829  10.1s
+[sa] step  80  T 70.92  acc 0.066  win 1831 x 756  cur 9911980  best 9910336  13.9s
+[sa] step  99  T 19.09  acc 0.039  win 1831 x 756  cur 9884440  best 9884408  17.5s
+[sa] proposals failed 12.9%
+[sa] slide      1.8% of attempts, accepted  80.8%, improving  27.4%
+[sa] move      10.0% of attempts, accepted  47.6%, improving  23.8%
+[sa] swap      65.3% of attempts, accepted  33.4%, improving  14.7%
+[sa] reorder    9.7% of attempts, accepted  39.6%, improving  15.6%
+[sa] rowopt     0.3% of attempts, accepted 100.0%, improving  61.9%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  89.0%
+[polish] pass 1: 9884407.500000 -> 9884152.500000; slide 1, relocate 1, assignment 1, reorder 5
+[polish] pass 2: 9884152.500000 -> 9884152.500000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 13/1156 accepted, 9884152.500000 -> 9880213.500000
+[window-hpwl] pass 1: 7/1116 accepted, 9880213.500000 -> 9879025.500000
+[order-hpwl] pass 0: 1 accepted, 9879025.500000 -> 9878992.500000
+[order-hpwl] pass 1: 0 accepted, 9878992.500000 -> 9878992.500000
+[polish-total] 9884407.500000 -> 9878992.500000
+[stage2] done  19.57s
+
+
+===== e03_dense97: OK 39.7s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e03_dense97/e03_dense97 output -v
+Total displacement (legal): 141293.464
+Maximum displacement (legal): 138.173
+Total HPWL (legal): 572726
+Total HPWL (SA): 292686.5
+4.250000 -> 144.250000  0.17s
+[chain] pass 0: 0 chains, total 140838.344000 -> 140838.344000, max 144.250000 -> 144.250000
+[chain] 323 roots, 48868 nodes, 180970 candidates, 0 accepted, longest 0, 0 multi-blocker placements (time limit)
+[window-disp] 2 rows x 4 cells: 436 windows solved, 9 improved: total 140838.3 -> 140780.7 (max 144.2500)  0.03s
+[window-disp] 3 rows x 3 cells: 362 windows solved, 2 improved: total 140780.7 -> 140775.7 (max 144.2500)  0.07s
+[chain-round] 2: 6 target windows, 0 chains, longest 0, total 140884.400000 -> 140775.714000, max 144.250000 -> 144.250000
+[cap] probe D 129.825000: feasible (rows)  11.17s
+[cap] probe D 77.441500: unresolved  11.28s
+[cap] probe D 103.618250: unresolved  11.39s
+[cap] probe D 116.706625: unresolved  11.50s
+[cap] probe D 123.250812: feasible (rows)  11.58s
+[cap] probe D 119.976312: feasible (rows)  11.65s
+[cap] probe D 118.332312: unresolved  11.76s
+[cap] probe D 119.145156: unresolved  11.87s
+[cap] D 138.177000: feasible (rows), accepted, total 141293.4640 max 138.173000  13.44s
+[cap] D 129.065500: feasible (rows), rejected (total budget), total 143751.6840 max 129.043000  15.39s
+[cap] D 133.619250: feasible (rows), rejected (total budget), total 145139.9740 max 133.445000  15.61s
+[cap] 11 attempts, 6 feasible, 1 accepted: max 144.250000 -> 138.173000, total 140775.7140 -> 141293.4640 (+0.368%)  4.50s
+[stage1] done  15.61s
+[sa] HPWL 572726  T0 379.2  alpha 0.9333  29360000 moves in 100 steps
+[sa] step   0  T 379.2  acc 0.584  win 34 x 64  cur 1282891  best 572726  0.2s
+[sa] step  20  T 95.25  acc 0.413  win 54 x 100  cur 754014  best 572726  4.8s
+[sa] step  40  T 23.93  acc 0.378  win 27 x 40  cur 398436  best 397066  9.2s
+[sa] step  60  T 6.01  acc 0.255  win 27 x 24  cur 304910  best 304560  14.0s
+[sa] step  80  T 1.51  acc 0.094  win 27 x 24  cur 294308  best 294294  19.0s
+[sa] step  99  T 0.4063  acc 0.042  win 27 x 24  cur 293402  best 293384  23.6s
+[sa] proposals failed 27.5%
+[sa] slide      0.5% of attempts, accepted  85.3%, improving  31.3%
+[sa] move       0.9% of attempts, accepted  32.8%, improving  16.1%
+[sa] swap      61.2% of attempts, accepted  38.0%, improving  17.1%
+[sa] reorder    9.7% of attempts, accepted  48.0%, improving  19.5%
+[sa] rowopt     0.1% of attempts, accepted 100.0%, improving  71.5%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  85.8%
+[polish] pass 1: 293384.000000 -> 293363.000000; slide 1, relocate 0, assignment 1, reorder 22
+[polish] pass 2: 293363.000000 -> 293325.500000; slide 0, relocate 1, assignment 1, reorder 2
+[polish] pass 3: 293325.500000 -> 293320.500000; slide 0, relocate 1, assignment 0, reorder 1
+[window-hpwl] pass 0: 36/1485 accepted, 293320.500000 -> 293054.500000
+[window-hpwl] pass 1: 25/1443 accepted, 293054.500000 -> 292944.000000
+[order-hpwl] pass 0: 52 accepted, 292944.000000 -> 292716.500000
+[order-hpwl] pass 1: 15 accepted, 292716.500000 -> 292686.500000
+[polish-total] 293384.000000 -> 292686.500000
+[stage2] done  39.69s
+
+
+===== e04_sparse10: OK 8.8s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e04_sparse10/e04_sparse10 output -v
+Total displacement (legal): 689.1627
+Maximum displacement (legal): 1.7841
+Total HPWL (legal): 47356.566
+Total HPWL (SA): 14169.832
+ 2 rows x 4 cells: 99 windows solved, 0 improved: total 689.2 -> 689.2 (max 1.7841)  0.06s
+[window-disp] 3 rows x 3 cells: 231 windows solved, 0 improved: total 689.2 -> 689.2 (max 1.7841)  0.53s
+[chain-round] 1: 0 target windows, 9 chains, longest 2, total 693.239694 -> 689.162738, max 1.784095 -> 1.784095
+[target-window] 0/732 improved: total 689.162738 -> 689.162738, max 1.784095 -> 1.784095  0.03s
+[chain] pass 0: 0 chains, total 689.162738 -> 689.162738, max 1.784095 -> 1.784095
+[chain] 1404 roots, 3315 nodes, 7640 candidates, 0 accepted, longest 0, 0 multi-blocker placements
+[cap] probe D 1.605686: unresolved  3.18s
+[cap] probe D 1.694890: unresolved  3.26s
+[cap] probe D 1.739493: unresolved  3.33s
+[cap] probe D 1.761794: unresolved  3.41s
+[cap] probe D 1.772944: unresolved  3.49s
+[cap] probe D 1.778520: unresolved  3.56s
+[cap] probe D 1.781307: unresolved  3.64s
+[cap] probe D 1.605686: unresolved  3.71s
+[cap] probe D 1.694890: unresolved  3.79s
+[cap] probe D 1.739493: unresolved  3.87s
+[cap] probe D 1.761794: unresolved  3.95s
+[cap] probe D 1.772944: unresolved  4.02s
+[cap] probe D 1.778520: unresolved  4.10s
+[cap] probe D 1.781307: unresolved  4.18s
+[cap] probe D 1.605686: unresolved  4.25s
+[cap] probe D 1.694890: unresolved  4.33s
+[cap] probe D 1.739493: unresolved  4.41s
+[cap] probe D 1.761794: unresolved  4.48s
+[cap] probe D 1.772944: unresolved  4.56s
+[cap] probe D 1.778520: unresolved  4.64s
+[cap] probe D 1.781307: unresolved  4.71s
+[cap] 21 attempts, 0 feasible, 0 accepted: max 1.784095 -> 1.784095, total 689.1627 -> 689.1627 (+0.000%)  1.61s
+[stage1] done  4.71s
+[sa] HPWL 47357  T0 132.9  alpha 0.9333  7020000 moves in 100 steps
+[sa] step   0  T 132.9  acc 0.898  win 29 x 6  cur 54414  best 46661  0.0s
+[sa] step  20  T 33.37  acc 0.622  win 40 x 8  cur 41474  best 40009  0.7s
+[sa] step  40  T 8.383  acc 0.385  win 32 x 6  cur 22424  best 22159  1.4s
+[sa] step  60  T 2.106  acc 0.280  win 6 x 2  cur 15711  best 15606  2.2s
+[sa] step  80  T 0.529  acc 0.120  win 6 x 2  cur 14335  best 14317  3.1s
+[sa] step  99  T 0.1424  acc 0.061  win 6 x 2  cur 14175  best 14173  3.9s
+[sa] proposals failed 26.4%
+[sa] slide      4.2% of attempts, accepted  80.4%, improving  21.3%
+[sa] move      29.2% of attempts, accepted  56.3%, improving  27.0%
+[sa] swap      30.1% of attempts, accepted  44.0%, improving  18.9%
+[sa] reorder    9.7% of attempts, accepted  39.8%, improving  14.2%
+[sa] rowopt     0.4% of attempts, accepted 100.0%, improving  74.9%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  94.9%
+[polish] pass 1: 14172.832000 -> 14171.732000; slide 1, relocate 2, assignment 0, reorder 3
+[polish] pass 2: 14171.732000 -> 14171.732000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 3/327 accepted, 14171.732000 -> 14170.432000
+[window-hpwl] pass 1: 2/312 accepted, 14170.432000 -> 14169.832000
+[order-hpwl] pass 0: 0 accepted, 14169.832000 -> 14169.832000
+[polish-total] 14172.832000 -> 14169.832000
+[stage2] done  8.81s
+
+
+===== e05_bignets: OK 71.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e05_bignets/e05_bignets output -v
+Total displacement (legal): 76871.608
+Maximum displacement (legal): 58.445
+Total HPWL (legal): 1004512.5
+Total HPWL (SA): 712596
+otal 76763.458000 -> 76756.944000, max 64.000000 -> 64.000000
+[cap] probe D 57.600000: unresolved  5.39s
+[cap] probe D 60.800000: feasible (rows)  5.40s
+[cap] probe D 59.095500: unresolved  5.53s
+[cap] probe D 59.843250: feasible (rows)  5.66s
+[cap] probe D 59.392250: unresolved  5.80s
+[cap] probe D 59.540625: unresolved  5.93s
+[cap] probe D 59.614813: unresolved  6.09s
+[cap] D 62.922250: feasible (rows), accepted, total 76818.0360 max 62.738000  6.55s
+[cap] D 61.213500: unresolved, total 0.0000 max 0.000000  6.99s
+[cap] D 61.975750: feasible (sites), accepted, total 76723.3540 max 61.738000  8.00s
+[cap] D 61.475750: feasible (rows), accepted, total 76714.2500 max 61.401000  8.14s
+[cap] D 61.307250: feasible (rows), accepted, total 76714.4820 max 61.282000  8.28s
+[cap] probe D 55.153800: unresolved  8.41s
+[cap] probe D 58.217900: unresolved  8.55s
+[cap] probe D 59.749950: feasible (rows)  8.55s
+[cap] probe D 58.953450: feasible (rows)  8.61s
+[cap] probe D 58.557950: feasible (rows)  8.64s
+[cap] probe D 58.309450: feasible (rows)  8.70s
+[cap] D 60.532000: feasible (rows), accepted, total 76751.7000 max 60.445000  8.91s
+[cap] D 59.363500: feasible (rows), accepted, total 76906.8660 max 59.282000  9.31s
+[cap] D 58.782000: feasible (rows), accepted, total 76867.6180 max 58.626000  9.52s
+[cap] D 58.454000: feasible (rows), accepted, total 76871.6080 max 58.445000  9.62s
+[cap] D 58.363500: unresolved, total 0.0000 max 0.000000  9.70s
+[cap] probe D 52.600500: unresolved  9.75s
+[cap] probe D 52.600500: unresolved  9.81s
+[cap] 25 attempts, 14 feasible, 8 accepted: max 64.000000 -> 58.445000, total 76756.9440 -> 76871.6080 (+0.149%)  4.56s
+[stage1] done  9.81s
+[sa] parallel: 8 bands/threads  HPWL 1004512  T0 660.4  460960000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 660.4  acc 0.828  win 69 x 111  cur 3678988  best 1004512  1.0s
+[sa] step  20  T 165.9  acc 0.598  win 100 x 160  cur 2152318  best 1004512  12.9s
+[sa] step  40  T 41.67  acc 0.399  win 88 x 140  cur 1045427  best 1004512  25.1s
+[sa] step  60  T 10.47  acc 0.339  win 28 x 31  cur 766748  best 764780  37.3s
+[sa] step  80  T 2.629  acc 0.151  win 28 x 24  cur 716556  best 716490  48.9s
+[sa] step  99  T 0.7076  acc 0.060  win 28 x 24  cur 712870  best 712854  60.0s
+[sa] 24730 sync rounds, 279722451 attempts (13.6% proposals failed)  60.0s (moves 54.2s, merge 5.2s)
+[polish] pass 1: 712853.500000 -> 712707.000000; slide 14, relocate 5, assignment 0, reorder 118
+[polish] pass 2: 712707.000000 -> 712706.000000; slide 1, relocate 0, assignment 0, reorder 1
+[polish] pass 3: 712706.000000 -> 712706.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 10/2909 accepted, 712706.000000 -> 712695.500000
+[window-hpwl] pass 1: 12/2859 accepted, 712695.500000 -> 712665.000000
+[order-hpwl] pass 0: 16 accepted, 712665.000000 -> 712607.000000
+[order-hpwl] pass 1: 3 accepted, 712607.000000 -> 712596.000000
+[polish-total] 712853.500000 -> 712596.000000
+[stage2] done  71.63s
+
+
+===== e06_tallnarrow: OK 20.7s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e06_tallnarrow/e06_tallnarrow output -v
+Total displacement (legal): 32181.985
+Maximum displacement (legal): 28.246
+Total HPWL (legal): 2139726.5
+Total HPWL (SA): 931851
+x 28.005000  7.01s
+[cap] probe D 25.509600: feasible (rows)  7.01s
+[cap] probe D 16.973500: unresolved  7.11s
+[cap] probe D 21.241250: unresolved  7.21s
+[cap] probe D 23.375125: unresolved  7.31s
+[cap] probe D 24.442063: feasible (rows)  7.33s
+[cap] probe D 23.902562: feasible (rows)  7.34s
+[cap] probe D 23.637563: unresolved  7.37s
+[cap] D 27.233000: feasible (rows), rejected (total budget), total 32251.9530 max 27.168000  7.45s
+[cap] D 27.788500: feasible (rows), rejected (total budget), total 32214.0330 max 27.756000  7.53s
+[cap] D 28.066250: feasible (rows), rejected (total budget), total 32199.6750 max 28.056000  7.61s
+[cap] D 28.205125: feasible (rows), rejected (total budget), total 32229.0350 max 28.056000  7.67s
+[cap] D 28.274563: feasible (rows), accepted, total 32181.9850 max 28.246000  7.73s
+[cap] probe D 25.421400: feasible (rows)  7.73s
+[cap] probe D 16.914000: unresolved  7.83s
+[cap] probe D 21.152000: unresolved  7.83s
+[cap] D 27.532000: feasible (rows), rejected (total budget), total 32294.6070 max 27.263000  7.91s
+[cap] D 27.889000: feasible (rows), rejected (total budget), total 32209.4390 max 27.795000  7.98s
+[cap] D 28.067500: feasible (rows), rejected (total budget), total 32198.1050 max 28.056000  8.04s
+[cap] 70 attempts, 48 feasible, 5 accepted: max 41.719000 -> 28.246000, total 32057.7050 -> 32181.9850 (+0.388%)  4.64s
+[stage1] done  8.04s
+[sa] HPWL 2139726  T0 2789  alpha 0.9333  20110000 moves in 100 steps
+[sa] step   0  T 2789  acc 0.697  win 26 x 805  cur 4401380  best 2138476  0.1s
+[sa] step  20  T 700.6  acc 0.509  win 26 x 1280  cur 2187016  best 2133213  2.4s
+[sa] step  40  T 176  acc 0.432  win 26 x 1249  cur 1201116  best 1190422  4.7s
+[sa] step  60  T 44.21  acc 0.403  win 26 x 815  cur 996598  best 993386  7.2s
+[sa] step  80  T 11.1  acc 0.299  win 26 x 127  cur 951113  best 950088  9.9s
+[sa] step  99  T 2.989  acc 0.156  win 26 x 24  cur 934070  best 933898  12.4s
+[sa] proposals failed 22.1%
+[sa] slide      1.1% of attempts, accepted  87.7%, improving  43.2%
+[sa] move       8.4% of attempts, accepted  46.0%, improving  25.3%
+[sa] swap      58.3% of attempts, accepted  49.2%, improving  23.4%
+[sa] reorder    9.5% of attempts, accepted  76.7%, improving  31.4%
+[sa] rowopt     0.4% of attempts, accepted 100.0%, improving  91.6%
+[sa] ism        0.1% of attempts, accepted 100.0%, improving  95.0%
+[polish] pass 1: 933898.000000 -> 932422.000000; slide 195, relocate 97, assignment 16, reorder 256
+[polish] pass 2: 932422.000000 -> 932296.000000; slide 30, relocate 20, assignment 3, reorder 27
+[polish] pass 3: 932296.000000 -> 932265.000000; slide 8, relocate 2, assignment 5, reorder 6
+[window-hpwl] pass 0: 85/1315 accepted, 932265.000000 -> 931998.000000
+[window-hpwl] pass 1: 25/903 accepted, 931998.000000 -> 931964.000000
+[order-hpwl] pass 0: 47 accepted, 931964.000000 -> 931856.000000
+[order-hpwl] pass 1: 3 accepted, 931856.000000 -> 931851.000000
+[polish-total] 933898.000000 -> 931851.000000
+[stage2] done  20.65s
+
+
+===== e07_tworows: OK 20.8s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e07_tworows/e07_tworows output -v
+Total displacement (legal): 19713.287
+Maximum displacement (legal): 29.21
+Total HPWL (legal): 992017.5
+Total HPWL (SA): 197060.5
+[window-disp] 2 rows x 4 cells: 8 windows solved, 0 improved: total 19705.6 -> 19705.6 (max 29.9970)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 19705.6 -> 19705.6 (max 29.9970)  0.00s
+[chain-round] 1: 8 target windows, 15 chains, longest 10, total 19789.411000 -> 19705.611000, max 29.997000 -> 29.997000
+[target-window] 1/4000 improved: total 19705.611000 -> 19687.289000, max 29.997000 -> 29.997000  0.10s
+[chain] pass 0: 0 chains, total 19687.289000 -> 19687.289000, max 29.997000 -> 29.997000
+[chain] 2719 roots, 296898 nodes, 1098258 candidates, 0 accepted, longest 0, 0 multi-blocker placements
+[window-disp] 2 rows x 4 cells: 799 windows solved, 3 improved: total 19687.3 -> 19685.9 (max 29.9970)  0.09s
+[window-disp] 3 rows x 3 cells: 1094 windows solved, 0 improved: total 19685.9 -> 19685.9 (max 29.9970)  0.02s
+[chain-round] 2: 1 target windows, 0 chains, longest 0, total 19705.611000 -> 19685.871000, max 29.997000 -> 29.997000
+[cap] probe D 26.997300: feasible (rows)  2.54s
+[cap] probe D 17.744500: unresolved  3.50s
+[cap] probe D 22.370750: unresolved  4.71s
+[cap] D 29.247000: feasible (rows), accepted, total 19713.2870 max 29.210000  5.52s
+[cap] D 28.103500: unresolved, total 0.0000 max 0.000000  6.92s
+[cap] 5 attempts, 2 feasible, 1 accepted: max 29.997000 -> 29.210000, total 19685.8710 -> 19713.2870 (+0.139%)  4.66s
+[stage1] done  6.92s
+[sa] HPWL 992018  T0 3705  alpha 0.9333  13595000 moves in 100 steps
+[sa] step   0  T 3705  acc 0.837  win 838 x 24  cur 2944208  best 991861  0.1s
+[sa] step  20  T 930.8  acc 0.613  win 1200 x 24  cur 1329663  best 991861  2.7s
+[sa] step  40  T 233.8  acc 0.494  win 1200 x 24  cur 431402  best 419670  5.2s
+[sa] step  60  T 58.73  acc 0.405  win 1006 x 24  cur 256404  best 253854  8.0s
+[sa] step  80  T 14.75  acc 0.332  win 198 x 24  cur 213768  best 213024  11.0s
+[sa] step  99  T 3.97  acc 0.272  win 28 x 24  cur 199663  best 199534  13.7s
+[sa] proposals failed 15.9%
+[sa] slide      0.8% of attempts, accepted  89.2%, improving  29.1%
+[sa] move      11.9% of attempts, accepted  44.3%, improving  23.9%
+[sa] swap      61.4% of attempts, accepted  55.0%, improving  24.6%
+[sa] reorder    9.7% of attempts, accepted  79.6%, improving  32.4%
+[sa] rowopt     0.2% of attempts, accepted 100.0%, improving  94.0%
+[sa] ism        0.1% of attempts, accepted 100.0%, improving  92.6%
+[polish] pass 1: 199534.000000 -> 197755.500000; slide 13, relocate 22, assignment 7, reorder 422
+[polish] pass 2: 197755.500000 -> 197652.500000; slide 3, relocate 4, assignment 1, reorder 33
+[polish] pass 3: 197652.500000 -> 197624.500000; slide 0, relocate 0, assignment 1, reorder 8
+[window-hpwl] pass 0: 8/345 accepted, 197624.500000 -> 197576.500000
+[window-hpwl] pass 1: 6/337 accepted, 197576.500000 -> 197539.500000
+[order-hpwl] pass 0: 87 accepted, 197539.500000 -> 197142.500000
+[order-hpwl] pass 1: 23 accepted, 197142.500000 -> 197060.500000
+[polish-total] 199534.000000 -> 197060.500000
+[stage2] done  20.81s
+
+
+===== e08_fragmented: OK 32.8s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e08_fragmented/e08_fragmented output -v
+Total displacement (legal): 90333.825
+Maximum displacement (legal): 73.024
+Total HPWL (legal): 709409.5
+Total HPWL (SA): 408250
+.5 (max 74.6040)  0.01s
+[window-disp] 3 rows x 3 cells: 338 windows solved, 0 improved: total 90005.5 -> 90005.5 (max 74.6040)  0.07s
+[chain-round] 2: 3 target windows, 0 chains, longest 0, total 90038.675000 -> 90005.467000, max 74.604000 -> 74.604000
+[cap] probe D 67.143600: feasible (rows)  6.59s
+[cap] probe D 52.070500: unresolved  6.70s
+[cap] probe D 59.597750: unresolved  6.82s
+[cap] probe D 63.361375: feasible (rows)  6.86s
+[cap] probe D 61.477375: feasible (rows)  6.90s
+[cap] probe D 60.518375: feasible (rows)  6.96s
+[cap] probe D 60.042375: unresolved  7.08s
+[cap] probe D 60.264688: unresolved  7.20s
+[cap] D 71.074750: feasible (rows), rejected (total budget), total 90723.2770 max 71.067000  8.15s
+[cap] D 72.839375: feasible (rows), rejected (total budget), total 90395.1070 max 72.703000  8.98s
+[cap] D 73.721688: feasible (rows), accepted, total 90273.5570 max 73.703000  9.60s
+[cap] D 73.271188: feasible (rows), accepted, total 90286.5530 max 73.244000  10.11s
+[cap] D 73.041688: feasible (rows), accepted, total 90333.8250 max 73.024000  10.38s
+[cap] probe D 65.721600: feasible (rows)  10.39s
+[cap] probe D 51.366500: unresolved  10.50s
+[cap] probe D 58.541750: unresolved  10.62s
+[cap] probe D 62.129375: unresolved  10.63s
+[cap] D 71.197250: feasible (rows), rejected (total budget), total 90522.3170 max 71.179000  11.13s
+[cap] 18 attempts, 11 feasible, 3 accepted: max 74.604000 -> 73.024000, total 90005.4670 -> 90333.8250 (+0.365%)  4.54s
+[stage1] done  11.13s
+[sa] HPWL 709410  T0 456.3  alpha 0.9333  35905000 moves in 100 steps
+[sa] step   0  T 456.3  acc 0.470  win 31 x 99  cur 1674758  best 709408  0.2s
+[sa] step  20  T 114.6  acc 0.399  win 27 x 86  cur 1034172  best 709408  3.9s
+[sa] step  40  T 28.79  acc 0.350  win 27 x 24  cur 576844  best 576592  7.5s
+[sa] step  60  T 7.232  acc 0.200  win 27 x 24  cur 425122  best 424323  11.9s
+[sa] step  80  T 1.816  acc 0.083  win 27 x 24  cur 409734  best 409671  16.6s
+[sa] step  99  T 0.4889  acc 0.040  win 27 x 24  cur 408448  best 408426  21.0s
+[sa] proposals failed 46.7%
+[sa] slide      2.6% of attempts, accepted  81.7%, improving  23.6%
+[sa] move       8.1% of attempts, accepted  56.4%, improving  26.5%
+[sa] swap      32.6% of attempts, accepted  44.0%, improving  19.1%
+[sa] reorder    9.7% of attempts, accepted  45.5%, improving  17.5%
+[sa] rowopt     0.3% of attempts, accepted 100.0%, improving  64.5%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  87.2%
+[polish] pass 1: 408425.500000 -> 408396.500000; slide 5, relocate 5, assignment 1, reorder 23
+[polish] pass 2: 408396.500000 -> 408396.500000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 18/1895 accepted, 408396.500000 -> 408343.000000
+[window-hpwl] pass 1: 10/1758 accepted, 408343.000000 -> 408302.500000
+[order-hpwl] pass 0: 13 accepted, 408302.500000 -> 408269.000000
+[order-hpwl] pass 1: 2 accepted, 408269.000000 -> 408250.000000
+[polish-total] 408425.500000 -> 408250.000000
+[stage2] done  32.82s
+
+
+===== e09_offgrid: OK 55.8s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e09_offgrid/e09_offgrid output -v
+Total displacement (legal): 15010.5495
+Maximum displacement (legal): 36.6912
+Total HPWL (legal): 201490.7209
+Total HPWL (SA): 58957.1654
+x 36.6912)  0.01s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 15040.2 -> 15040.2 (max 36.6912)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 15040.2 -> 15040.2 (max 36.6912)  0.00s
+[target-window] 25/3678 improved: total 15040.217136 -> 15021.320529, max 36.691238 -> 36.691238  0.23s
+[chain] pass 0: 0 chains, total 15021.320529 -> 15021.320529, max 36.691238 -> 36.691238
+[chain] 951 roots, 129207 nodes, 973314 candidates, 0 accepted, longest 0, 0 multi-blocker placements (time limit)
+[window-disp] 2 rows x 4 cells: 1576 windows solved, 16 improved: total 15021.3 -> 15014.8 (max 36.6912)  0.08s
+[window-disp] 3 rows x 3 cells: 1095 windows solved, 3 improved: total 15014.8 -> 15012.0 (max 36.6912)  0.14s
+[chain-round] 1: 25 target windows, 0 chains, longest 0, total 15040.217136 -> 15011.958214, max 36.691238 -> 36.691238
+[target-window] 2/3085 improved: total 15011.958214 -> 15010.628214, max 36.691238 -> 36.691238  0.17s
+[chain] pass 0: 0 chains, total 15010.628214 -> 15010.628214, max 36.691238 -> 36.691238
+[chain] 665 roots, 85450 nodes, 595090 candidates, 0 accepted, longest 0, 0 multi-blocker placements (time limit)
+[window-disp] 2 rows x 4 cells: 241 windows solved, 1 improved: total 15010.6 -> 15010.5 (max 36.6912)  0.01s
+[window-disp] 3 rows x 3 cells: 1007 windows solved, 0 improved: total 15010.5 -> 15010.5 (max 36.6912)  0.11s
+[chain-round] 2: 2 target windows, 0 chains, longest 0, total 15011.958214 -> 15010.549479, max 36.691238 -> 36.691238
+[cap] probe D 36.691238: feasible (rows)  5.99s
+[cap] probe D 36.691238: feasible (rows)  5.99s
+[cap] probe D 36.691238: feasible (rows)  5.99s
+[cap] 3 attempts, 3 feasible, 0 accepted: max 36.691238 -> 36.691238, total 15010.5495 -> 15010.5495 (+0.000%)  0.00s
+[stage1] done  5.99s
+[sa] parallel: 6 bands/threads  HPWL 201491  T0 80.61  250500000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 80.61  acc 0.826  win 12 x 9  cur 312190  best 201491  0.5s
+[sa] step  20  T 20.25  acc 0.583  win 17 x 14  cur 188594  best 183983  10.2s
+[sa] step  40  T 5.086  acc 0.379  win 13 x 10  cur 90491  best 89917  19.3s
+[sa] step  60  T 1.278  acc 0.285  win 5 x 3  cur 63671  best 63434  29.5s
+[sa] step  80  T 0.3209  acc 0.095  win 5 x 3  cur 59270  best 59234  39.8s
+[sa] step  99  T 0.08637  acc 0.041  win 5 x 3  cur 58980  best 58975  49.0s
+[sa] 30800 sync rounds, 250393391 attempts (14.0% proposals failed)  49.0s (moves 44.6s, merge 3.9s)
+[polish] pass 1: 58975.169300 -> 58970.293900; slide 19, relocate 5, assignment 0, reorder 35
+[polish] pass 2: 58970.293900 -> 58970.293900; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 9/2103 accepted, 58970.293900 -> 58965.647000
+[window-hpwl] pass 1: 12/2056 accepted, 58965.647000 -> 58962.717200
+[order-hpwl] pass 0: 7 accepted, 58962.717200 -> 58960.043900
+[order-hpwl] pass 1: 3 accepted, 58960.043900 -> 58957.165400
+[polish-total] 58975.169300 -> 58957.165400
+[stage2] done  55.76s
+
+
+===== e10_mixedsites: OK 58.8s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e10_mixedsites/e10_mixedsites output -v
+Total displacement (legal): 62875.29
+Maximum displacement (legal): 49.121
+Total HPWL (legal): 1229351
+Total HPWL (SA): 794698
+x 3 cells: 1230 windows solved, 2 improved: total 62931.4 -> 62928.8 (max 51.7630)  0.12s
+[chain-round] 1: 1 target windows, 13 chains, longest 10, total 63123.586000 -> 62928.840000, max 51.763000 -> 51.763000
+[target-window] 0/1999 improved: total 62928.840000 -> 62928.840000, max 51.763000 -> 51.763000  0.11s
+[chain] pass 0: 0 chains, total 62928.840000 -> 62928.840000, max 51.763000 -> 51.763000
+[chain] 674 roots, 107797 nodes, 643484 candidates, 0 accepted, longest 0, 0 multi-blocker placements (time limit)
+[cap] probe D 46.586700: unresolved  4.63s
+[cap] probe D 49.174850: unresolved  4.76s
+[cap] probe D 50.468925: unresolved  4.89s
+[cap] probe D 51.115962: feasible (rows)  5.07s
+[cap] probe D 50.771463: unresolved  5.29s
+[cap] probe D 50.922731: unresolved  5.45s
+[cap] probe D 50.998366: unresolved  5.59s
+[cap] D 51.590750: feasible (rows), accepted, total 62790.0860 max 51.458000  6.37s
+[cap] D 51.266000: feasible (rows), accepted, total 62791.2720 max 51.064000  6.49s
+[cap] probe D 45.957600: unresolved  6.66s
+[cap] probe D 48.510800: unresolved  6.79s
+[cap] probe D 49.787400: feasible (rows)  6.80s
+[cap] probe D 49.135400: unresolved  6.93s
+[cap] probe D 49.447700: feasible (rows)  6.98s
+[cap] D 50.578250: feasible (rows), accepted, total 62844.5360 max 50.569000  7.79s
+[cap] D 49.845000: feasible (rows), accepted, total 62857.0880 max 49.616000  7.96s
+[cap] D 49.368500: feasible (rows), accepted, total 62875.2900 max 49.121000  8.21s
+[cap] probe D 44.208900: unresolved  8.34s
+[cap] probe D 46.664950: unresolved  8.56s
+[cap] probe D 44.208900: unresolved  8.76s
+[cap] probe D 44.208900: unresolved  8.89s
+[cap] 21 attempts, 8 feasible, 5 accepted: max 51.763000 -> 49.121000, total 62928.8400 -> 62875.2900 (-0.085%)  4.39s
+[stage1] done  8.89s
+[sa] parallel: 5 bands/threads  HPWL 1229351  T0 862.9  261050000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 862.9  acc 0.584  win 172 x 55  cur 4111538  best 1229351  0.5s
+[sa] step  20  T 216.8  acc 0.415  win 280 x 90  cur 2325528  best 1229351  9.4s
+[sa] step  40  T 54.45  acc 0.366  win 88 x 28  cur 1212634  best 1198248  18.1s
+[sa] step  60  T 13.68  acc 0.221  win 48 x 24  cur 846392  best 843203  28.7s
+[sa] step  80  T 3.435  acc 0.083  win 48 x 24  cur 798563  best 798404  39.5s
+[sa] step  99  T 0.9247  acc 0.047  win 48 x 24  cur 794825  best 794810  49.2s
+[sa] 25700 sync rounds, 260966775 attempts (40.6% proposals failed)  49.2s (moves 44.7s, merge 4.0s)
+[polish] pass 1: 794810.000000 -> 794765.000000; slide 4, relocate 4, assignment 0, reorder 16
+[polish] pass 2: 794765.000000 -> 794765.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 8/2596 accepted, 794765.000000 -> 794732.000000
+[window-hpwl] pass 1: 2/2565 accepted, 794732.000000 -> 794728.000000
+[order-hpwl] pass 0: 5 accepted, 794728.000000 -> 794704.000000
+[order-hpwl] pass 1: 1 accepted, 794704.000000 -> 794698.000000
+[polish-total] 794810.000000 -> 794698.000000
+[stage2] done  58.81s
+
+
+===== e11_format: OK 15.1s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e11_format/e11_format output -v
+Total displacement (legal): 7602.547
+Maximum displacement (legal): 12.486
+Total HPWL (legal): 121369.5
+Total HPWL (SA): 75279
+resolved  6.44s
+[cap] probe D 12.418575: unresolved  6.51s
+[cap] probe D 12.577787: feasible (rows)  6.51s
+[cap] probe D 12.492287: feasible (sites)  6.57s
+[cap] probe D 12.452288: unresolved  6.65s
+[cap] probe D 12.469144: unresolved  6.72s
+[cap] D 12.674250: feasible (rows), accepted, total 7596.4090 max 12.637000  7.09s
+[cap] D 12.561500: feasible (rows), accepted, total 7600.2410 max 12.541000  7.52s
+[cap] D 12.513500: feasible (rows), accepted, total 7602.5470 max 12.486000  7.93s
+[cap] probe D 11.406000: unresolved  8.01s
+[cap] probe D 11.946000: unresolved  8.08s
+[cap] probe D 12.216000: unresolved  8.15s
+[cap] probe D 12.351000: unresolved  8.23s
+[cap] probe D 12.418500: unresolved  8.30s
+[cap] probe D 12.452250: unresolved  8.38s
+[cap] probe D 12.469125: unresolved  8.45s
+[cap] probe D 11.406000: unresolved  8.53s
+[cap] probe D 11.946000: unresolved  8.60s
+[cap] probe D 12.216000: unresolved  8.68s
+[cap] probe D 12.351000: unresolved  8.75s
+[cap] probe D 12.418500: unresolved  8.82s
+[cap] probe D 12.452250: feasible (rows)  8.86s
+[cap] D 12.474750: feasible (rows), rejected (total budget), total 7636.1130 max 12.465000  9.27s
+[cap] probe D 11.406000: unresolved  9.34s
+[cap] probe D 11.946000: unresolved  9.42s
+[cap] probe D 12.216000: unresolved  9.49s
+[cap] probe D 12.351000: unresolved  9.57s
+[cap] probe D 12.418500: unresolved  9.64s
+[cap] probe D 12.452250: feasible (rows)  9.67s
+[cap] D 12.474750: unresolved, total 0.0000 max 0.000000  9.91s
+[cap] 50 attempts, 19 feasible, 8 accepted: max 14.292000 -> 12.486000, total 7581.2970 -> 7602.5470 (+0.280%)  7.20s
+[stage1] done  9.91s
+[sa] HPWL 121370  T0 211.4  alpha 0.9333  9940000 moves in 100 steps
+[sa] step   0  T 211.4  acc 0.512  win 30 x 26  cur 220971  best 121262  0.1s
+[sa] step  20  T 53.1  acc 0.392  win 31 x 26  cur 154872  best 121262  0.9s
+[sa] step  40  T 13.34  acc 0.268  win 28 x 18  cur 95549  best 94448  1.8s
+[sa] step  60  T 3.35  acc 0.126  win 28 x 18  cur 76786  best 76676  2.8s
+[sa] step  80  T 0.8416  acc 0.051  win 28 x 18  cur 75434  best 75412  4.0s
+[sa] step  99  T 0.2265  acc 0.037  win 28 x 18  cur 75351  best 75347  5.0s
+[sa] proposals failed 47.8%
+[sa] slide      2.8% of attempts, accepted  82.6%, improving  22.9%
+[sa] move       7.0% of attempts, accepted  53.8%, improving  23.8%
+[sa] swap      32.4% of attempts, accepted  38.7%, improving  16.2%
+[sa] reorder    9.7% of attempts, accepted  35.8%, improving  13.6%
+[sa] rowopt     0.2% of attempts, accepted 100.0%, improving  44.2%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  69.9%
+[polish] pass 1: 75347.000000 -> 75347.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 5/512 accepted, 75347.000000 -> 75305.000000
+[window-hpwl] pass 1: 2/481 accepted, 75305.000000 -> 75287.500000
+[order-hpwl] pass 0: 2 accepted, 75287.500000 -> 75284.500000
+[order-hpwl] pass 1: 2 accepted, 75284.500000 -> 75279.000000
+[polish-total] 75347.000000 -> 75279.000000
+[stage2] done  15.10s
+
+
+===== e12_collapse: OK 27.9s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e12_collapse/e12_collapse output -v
+Total displacement (legal): 322115.813
+Maximum displacement (legal): 233
+Total HPWL (legal): 2380872
+Total HPWL (SA): 179048
+roved: total 322115.8 -> 322115.8 (max 233.0000)  0.02s
+[window-disp] 2 rows x 4 cells: 4 windows solved, 0 improved: total 322115.8 -> 322115.8 (max 233.0000)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 322115.8 -> 322115.8 (max 233.0000)  0.00s
+[chain-round] 1: 1 target windows, 0 chains, longest 0, total 322120.975000 -> 322115.813000, max 233.000000 -> 233.000000
+[target-window] 0/1999 improved: total 322115.813000 -> 322115.813000, max 233.000000 -> 233.000000  0.12s
+[chain] pass 0: 0 chains, total 322115.813000 -> 322115.813000, max 233.000000 -> 233.000000
+[chain] 669 roots, 78662 nodes, 277407 candidates, 0 accepted, longest 0, 0 multi-blocker placements (time limit)
+[cap] probe D 209.700000: unresolved  12.78s
+[cap] probe D 221.350000: unresolved  12.88s
+[cap] probe D 227.175000: feasible (rows)  12.92s
+[cap] probe D 224.175000: unresolved  13.02s
+[cap] probe D 225.587500: unresolved  13.12s
+[cap] probe D 226.293750: feasible (rows)  13.15s
+[cap] probe D 225.929750: feasible (rows)  13.25s
+[cap] D 231.130000: feasible (rows), rejected (total budget), total 326428.1750 max 231.000000  15.18s
+[cap] D 232.065000: feasible (rows), rejected (total budget), total 323920.6870 max 232.000000  17.05s
+[cap] D 232.532500: feasible (rows), rejected (total budget), total 330702.2630 max 232.230000  17.35s
+[cap] 10 attempts, 6 feasible, 0 accepted: max 233.000000 -> 233.000000, total 322115.8130 -> 322115.8130 (+0.000%)  4.67s
+[stage1] done  17.35s
+[sa] HPWL 2380872  T0 536.8  alpha 0.9333  18115000 moves in 100 steps
+[sa] step   0  T 536.8  acc 0.529  win 38 x 52  cur 1217718  best 1214554  0.1s
+[sa] step  20  T 134.8  acc 0.472  win 70 x 96  cur 532366  best 528780  1.9s
+[sa] step  40  T 33.87  acc 0.372  win 32 x 44  cur 274855  best 273067  3.7s
+[sa] step  60  T 8.508  acc 0.225  win 28 x 24  cur 190098  best 189586  5.8s
+[sa] step  80  T 2.137  acc 0.099  win 28 x 24  cur 179988  best 179956  8.1s
+[sa] step  99  T 0.5752  acc 0.049  win 28 x 24  cur 179122  best 179116  10.2s
+[sa] proposals failed 40.6%
+[sa] slide      2.8% of attempts, accepted  83.8%, improving  22.7%
+[sa] move      11.8% of attempts, accepted  58.6%, improving  28.2%
+[sa] swap      34.7% of attempts, accepted  44.8%, improving  19.0%
+[sa] reorder    9.7% of attempts, accepted  46.2%, improving  17.6%
+[sa] rowopt     0.3% of attempts, accepted 100.0%, improving  67.2%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  86.6%
+[polish] pass 1: 179116.500000 -> 179105.000000; slide 4, relocate 0, assignment 0, reorder 9
+[polish] pass 2: 179105.000000 -> 179105.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 5/918 accepted, 179105.000000 -> 179088.500000
+[window-hpwl] pass 1: 8/885 accepted, 179088.500000 -> 179062.500000
+[order-hpwl] pass 0: 5 accepted, 179062.500000 -> 179048.000000
+[order-hpwl] pass 1: 0 accepted, 179048.000000 -> 179048.000000
+[polish-total] 179116.500000 -> 179048.000000
+[stage2] done  27.91s
+
+
+===== e13_onecell: OK 0.3s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e13_onecell/e13_onecell output -v
+Total displacement (legal): 4.57
+Maximum displacement (legal): 4.57
+Total HPWL (legal): 36.5
+Total HPWL (SA): 36.5
+.6
+[legal] matching sweep: total 4.6  max 4.6
+[legal] total-refine pass 0: 0 moves  total 4.6  max 4.6
+[legal] max-refine 0 moves  total 4.6  max 4.6
+[legal] matching d0 4: 1 windows, cells above d0 1 -> 1  total 4.6  max 4.6
+[legal] row-opt (d0 5): 0 segments  total 4.6  max 4.6
+[legal] matching sweep: total 4.6  max 4.6
+[legal] total-refine pass 0: 0 moves  total 4.6  max 4.6
+[legal] plain: total 4.6 max 4.6 | spread: total 4.6 max 4.6 -> plain
+[legal] row-opt (d0 5): 0 segments  total 4.6  max 4.6
+[legal] matching sweep: total 4.6  max 4.6
+[legal] total-refine pass 0: 0 moves  total 4.6  max 4.6
+[window-disp] 2 rows x 5 cells: 0 windows solved, 0 improved: total 4.6 -> 4.6 (max 4.5700)  0.00s
+[window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 4.6 -> 4.6 (max 4.5700)  0.00s
+[legal] final round 0: total 4.6  0.0s
+[legal] max-refine 0 moves  total 4.6  max 4.6
+[legal] matching d0 4: 1 windows, cells above d0 1 -> 1  total 4.6  max 4.6
+[legal] final max pass: max 4.5700 -> 4.5700, total 4.6  0.0s
+[pareto] pass 1: 0 groups, total 4.570000, max 4.570000
+[window-disp] 2 rows x 5 cells: 0 windows solved, 0 improved: total 4.6 -> 4.6 (max 4.5700)  0.00s
+[window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 4.6 -> 4.6 (max 4.5700)  0.00s
+[target-window] 0/1 improved: total 4.570000 -> 4.570000, max 4.570000 -> 4.570000  0.00s
+[chain] pass 0: 0 chains, total 4.570000 -> 4.570000, max 4.570000 -> 4.570000
+[chain] 1 roots, 1 nodes, 0 candidates, 0 accepted, longest 0, 0 multi-blocker placements
+[cap] probe D 4.570000: feasible (rows)  0.00s
+[cap] probe D 4.570000: feasible (rows)  0.00s
+[cap] probe D 4.570000: feasible (rows)  0.00s
+[cap] 3 attempts, 3 feasible, 0 accepted: max 4.570000 -> 4.570000, total 4.5700 -> 4.5700 (+0.000%)  0.00s
+[stage1] done  0.00s
+[sa] HPWL 36  T0 4.481  alpha 0.9333  5000000 moves in 100 steps
+[sa] step   0  T 4.481  acc 0.699  win 12 x 10  cur 36  best 36  0.0s
+[sa] step  20  T 1.126  acc 0.704  win 12 x 10  cur 36  best 36  0.1s
+[sa] step  40  T 0.2828  acc 0.704  win 12 x 10  cur 36  best 36  0.1s
+[sa] step  60  T 0.07103  acc 0.661  win 12 x 10  cur 36  best 36  0.2s
+[sa] step  80  T 0.01784  acc 0.660  win 12 x 10  cur 36  best 36  0.2s
+[sa] step  99  T 0.004802  acc 0.660  win 12 x 10  cur 36  best 36  0.3s
+[sa] proposals failed 31.8%
+[sa] slide     68.2% of attempts, accepted 100.0%, improving   0.0%
+[sa] move       0.0% of attempts, accepted   0.0%, improving   0.0%
+[sa] swap       0.0% of attempts, accepted   0.0%, improving   0.0%
+[sa] reorder    0.0% of attempts, accepted   0.0%, improving   0.0%
+[sa] rowopt     0.0% of attempts, accepted   0.0%, improving   0.0%
+[sa] ism        0.0% of attempts, accepted   0.0%, improving   0.0%
+[polish] pass 1: 36.500000 -> 36.500000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 0/0 accepted, 36.500000 -> 36.500000
+[order-hpwl] pass 0: 0 accepted, 36.500000 -> 36.500000
+[polish-total] 36.500000 -> 36.500000
+[stage2] done  0.26s
+
+
+===== e14_fixedonly: OK 0.0s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e14_fixedonly/e14_fixedonly output -v
+Total displacement (legal): 0
+Maximum displacement (legal): 0
+Total HPWL (legal): 73
+Total HPWL (SA): 73
+[read] 3 nodes (0 movable), 1 nets, 2 rows, 4 segments, utilization 0.000  0.00s
+[stage1] done  0.00s
+[polish] pass 1: 73.000000 -> 73.000000; slide 0, relocate 0, assignment 0, reorder 0
+[polish-total] 73.000000 -> 73.000000
+[stage2] done  0.00s
+
+
+===== e15_realistic: OK 82.9s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e15_realistic/e15_realistic output -v
+Total displacement (legal): 13838325.53
+Maximum displacement (legal): 4745.62
+Total HPWL (legal): 125309640.5
+Total HPWL (SA): 85509011.5
+5 -> 13786858.5 (max 4891.4900)  0.10s
+[chain-round] 1: 46 target windows, 0 chains, longest 0, total 13816276.350000 -> 13786858.540000, max 4891.490000 -> 4891.490000
+[target-window] 4/1609 improved: total 13786858.540000 -> 13785803.082000, max 4891.490000 -> 4891.490000  0.16s
+[chain] pass 0: 0 chains, total 13785803.082000 -> 13785803.082000, max 4891.490000 -> 4891.490000
+[chain] 301 roots, 47122 nodes, 132275 candidates, 0 accepted, longest 0, 0 multi-blocker placements (time limit)
+[window-disp] 2 rows x 4 cells: 442 windows solved, 3 improved: total 13785803.1 -> 13785621.0 (max 4891.4900)  0.03s
+[window-disp] 3 rows x 3 cells: 523 windows solved, 3 improved: total 13785621.0 -> 13785493.1 (max 4891.4900)  0.06s
+[chain-round] 2: 4 target windows, 0 chains, longest 0, total 13786858.540000 -> 13785493.148000, max 4891.490000 -> 4891.490000
+[cap] probe D 4402.341000: feasible (rows)  15.24s
+[cap] probe D 3096.191500: unresolved  15.48s
+[cap] probe D 3748.825250: unresolved  15.72s
+[cap] probe D 4075.142125: unresolved  15.96s
+[cap] probe D 4238.300562: unresolved  16.20s
+[cap] probe D 4319.879781: feasible (rows)  16.29s
+[cap] probe D 4279.005781: unresolved  16.53s
+[cap] probe D 4299.358391: unresolved  16.75s
+[cap] D 4748.545250: feasible (rows), accepted, total 13838325.5300 max 4745.620000  18.64s
+[cap] D 4532.665500: feasible (rows), rejected (total budget), total 14018298.3920 max 4530.059000  19.71s
+[cap] 10 attempts, 4 feasible, 1 accepted: max 4891.490000 -> 4745.620000, total 13785493.1480 -> 13838325.5300 (+0.383%)  4.54s
+[stage1] done  19.71s
+[sa] parallel: 8 bands/threads  HPWL 125309640  T0 5.168e+04  480000000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 5.168e+04  acc 0.812  win 7243 x 5877  cur 713581022  best 125309640  1.1s
+[sa] step  20  T 1.298e+04  acc 0.588  win 10560 x 8568  cur 423118710  best 125309640  13.4s
+[sa] step  40  T 3261  acc 0.400  win 9169 x 7439  cur 155502901  best 125309640  25.1s
+[sa] step  60  T 819.1  acc 0.342  win 1892 x 1535  cur 102289224  best 102140056  37.3s
+[sa] step  80  T 205.7  acc 0.161  win 1838 x 756  cur 87642428  best 87604964  48.8s
+[sa] step  99  T 55.38  acc 0.058  win 1838 x 756  cur 85613758  best 85605531  60.0s
+[sa] 7970 sync rounds, 247034716 attempts (14.5% proposals failed)  60.0s (moves 50.4s, merge 8.7s)
+[polish] pass 1: 85605531.000000 -> 85545863.000000; slide 137, relocate 63, assignment 5, reorder 304
+[polish] pass 2: 85545863.000000 -> 85542065.000000; slide 5, relocate 6, assignment 0, reorder 1
+[polish] pass 3: 85542065.000000 -> 85542065.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 102/8030 accepted, 85542065.000000 -> 85527620.500000
+[window-hpwl] pass 1: 89/7920 accepted, 85527620.500000 -> 85517129.500000
+[order-hpwl] pass 0: 45 accepted, 85517129.500000 -> 85509506.500000
+[order-hpwl] pass 1: 5 accepted, 85509506.500000 -> 85509011.500000
+[polish-total] 85605531.000000 -> 85509011.500000
+[stage2] done  82.84s
+
+
+===== e16_rowgaps: OK 62.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e16_rowgaps/e16_rowgaps output -v
+Total displacement (legal): 95855.44
+Maximum displacement (legal): 63.067
+Total HPWL (legal): 755983
+Total HPWL (SA): 456425.5
+8.708000 -> 95528.708000, max 66.479000 -> 66.479000
+[chain] 470 roots, 74542 nodes, 224679 candidates, 0 accepted, longest 0, 0 multi-blocker placements (time limit)
+[window-disp] 2 rows x 4 cells: 124 windows solved, 3 improved: total 95528.7 -> 95507.4 (max 66.4790)  0.01s
+[window-disp] 3 rows x 3 cells: 241 windows solved, 0 improved: total 95507.4 -> 95507.4 (max 66.4790)  0.05s
+[chain-round] 2: 2 target windows, 0 chains, longest 0, total 95541.176000 -> 95507.350000, max 66.479000 -> 66.479000
+[cap] probe D 59.831100: unresolved  6.59s
+[cap] probe D 63.155050: feasible (rows)  6.59s
+[cap] probe D 61.449050: feasible (rows)  6.62s
+[cap] probe D 60.624050: unresolved  6.74s
+[cap] probe D 61.020525: feasible (rows)  6.76s
+[cap] probe D 60.805525: feasible (rows)  6.79s
+[cap] probe D 60.711525: feasible (rows)  6.83s
+[cap] D 65.034500: feasible (rows), accepted, total 95610.5960 max 64.985000  7.74s
+[cap] D 62.843000: feasible (rows), rejected (total budget), total 95908.1100 max 62.815000  8.60s
+[cap] D 63.914000: feasible (rows), accepted, total 95796.0900 max 63.882000  9.29s
+[cap] D 63.362500: feasible (rows), accepted, total 95783.3100 max 63.300000  9.92s
+[cap] D 63.071500: feasible (rows), accepted, total 95855.4400 max 63.067000  10.19s
+[cap] probe D 56.760300: unresolved  10.31s
+[cap] probe D 59.913650: feasible (rows)  10.33s
+[cap] probe D 58.336650: unresolved  10.45s
+[cap] probe D 59.124825: unresolved  10.47s
+[cap] D 62.278500: feasible (rows), rejected (total budget), total 96016.2160 max 62.239000  11.03s
+[cap] 17 attempts, 12 feasible, 4 accepted: max 66.479000 -> 63.067000, total 95507.3500 -> 95855.4400 (+0.364%)  4.56s
+[stage1] done  11.03s
+[sa] parallel: 7 bands/threads  HPWL 755983  T0 565.4  290465000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 565.4  acc 0.839  win 56 x 130  cur 2334540  best 755983  0.6s
+[sa] step  20  T 142  acc 0.584  win 80 x 186  cur 1285201  best 755983  10.8s
+[sa] step  40  T 35.67  acc 0.392  win 65 x 151  cur 664070  best 659464  19.9s
+[sa] step  60  T 8.961  acc 0.325  win 28 x 28  cur 484890  best 482694  30.3s
+[sa] step  80  T 2.251  acc 0.132  win 28 x 24  cur 458623  best 458416  41.3s
+[sa] step  99  T 0.6058  acc 0.053  win 28 x 24  cur 456590  best 456560  50.7s
+[sa] 35984 sync rounds, 290123236 attempts (12.0% proposals failed)  50.7s (moves 45.5s, merge 4.6s)
+[polish] pass 1: 456560.500000 -> 456493.000000; slide 6, relocate 6, assignment 1, reorder 61
+[polish] pass 2: 456493.000000 -> 456492.500000; slide 0, relocate 0, assignment 0, reorder 1
+[polish] pass 3: 456492.500000 -> 456492.500000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 6/2103 accepted, 456492.500000 -> 456485.500000
+[window-hpwl] pass 1: 5/2054 accepted, 456485.500000 -> 456474.000000
+[order-hpwl] pass 0: 10 accepted, 456474.000000 -> 456449.500000
+[order-hpwl] pass 1: 4 accepted, 456449.500000 -> 456425.500000
+[polish-total] 456560.500000 -> 456425.500000
+[stage2] done  62.50s
+

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file,CMakeFiles/multirow_test.dir/link.d CMakeFiles/multirow_test.dir/tests/multirow_test.cpp.o -o multirow_test  libdp_core.a

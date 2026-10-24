@@ -1,0 +1,14 @@
+{
+  "bench": "toy",
+  "group": "testcases",
+  "status": "OK",
+  "seconds": 1.165699084987864,
+  "disp": 43324.4,
+  "max": 2004.4,
+  "hpwl_legal": 104094.0,
+  "hpwl_sa": 104094.0,
+  "legal": true,
+  "max_ratio": 0.9982568853030529,
+  "total_ratio": 1.0014516337814598,
+  "both": true
+}

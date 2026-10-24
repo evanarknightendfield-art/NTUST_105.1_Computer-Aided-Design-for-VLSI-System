@@ -1,0 +1,17 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "Grader/tools/local_grade.py",
+  "AI_Solutions/CodexChainDP",
+  "CodexChainDP",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/only_L1",
+  "--work",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexChainDP_L1",
+  "--timeout",
+  "240",
+  "--dp-args=-v"
+ ],
+ "returncode": 0,
+ "seconds": 216.51,
+ "finished": "Thu Oct 22 02:49:36 2026"
+}

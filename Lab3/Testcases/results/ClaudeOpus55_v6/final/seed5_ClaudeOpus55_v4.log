@@ -1,0 +1,38 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/submissions/ClaudeOpus55_v4.tgz  (19 files)
+       ClaudeOpus55_v4/CMakeLists.txt
+       ClaudeOpus55_v4/Makefile
+       ClaudeOpus55_v4/README.md
+       ClaudeOpus55_v4/src/annealer.cpp
+       ClaudeOpus55_v4/src/annealer.hpp
+       ClaudeOpus55_v4/src/legalizer.cpp
+       ClaudeOpus55_v4/src/legalizer.hpp
+       ClaudeOpus55_v4/src/main.cpp
+       ClaudeOpus55_v4/src/optimizer.cpp
+       ClaudeOpus55_v4/src/optimizer.hpp
+       ClaudeOpus55_v4/src/placedb.cpp
+       ClaudeOpus55_v4/src/placedb.hpp
+       ClaudeOpus55_v4/src/pool.hpp
+       ClaudeOpus55_v4/src/rowmap.hpp
+       ClaudeOpus55_v4/src/window.cpp
+       ClaudeOpus55_v4/src/window.hpp
+       ClaudeOpus55_v4/tests/multirow_test.cpp
+       ClaudeOpus55_v4/tests/optimizer_test.cpp
+       ClaudeOpus55_v4/tests/window_test.cpp
+[build] OK build/dp  6.3s
+[run] e01_nearlegal PASS  OK          45.0s  disp=23619.832 max=5.604 legal=690162.5 sa=476370.5
+[run] e02_legalgp PASS  OK          18.5s  disp=0.0 max=0.0 legal=14910055.0 sa=9948979.5
+[run] e03_dense97 PASS  OK          31.5s  disp=146489.246 max=126.686 legal=590808.5 sa=292019.5
+[run] e04_sparse10 PASS  OK          14.6s  disp=725.0943 max=1.6795 legal=48276.133 sa=17347.826
+[run] e05_bignets PASS  OK          47.7s  disp=73744.87 max=40.157 legal=995437.5 sa=700700.5
+[run] e06_tallnarrow PASS  OK          14.2s  disp=33637.515 max=39.005 legal=2154411.5 sa=988433.0
+[run] e07_tworows PASS  OK          14.3s  disp=20020.211 max=24.523 legal=977636.0 sa=199247.5
+[run] e08_fragmented PASS  OK          30.2s  disp=54999.074 max=38.743 legal=640987.5 sa=418952.0
+[run] e09_offgrid PASS  OK          53.6s  disp=14034.3565 max=38.7879 legal=188770.6199 sa=57996.8263
+[run] e10_mixedsites PASS  OK          50.3s  disp=64656.666 max=48.016 legal=1243528.5 sa=808435.0
+[run] e11_format PASS  OK           7.1s  disp=9361.588 max=22.338 legal=122145.5 sa=74128.5
+[run] e12_collapse PASS  OK          20.1s  disp=314763.868 max=239.0 legal=2361524.0 sa=187944.0
+[run] e13_onecell PASS  OK           0.2s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          55.5s  disp=9536809.953 max=4347.226 legal=117726991.5 sa=87516472.0
+[run] e16_rowgaps PASS  OK          51.2s  disp=66422.851 max=43.0 legal=739345.5 sa=467138.0
+[summary] 16/16 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/record.csv

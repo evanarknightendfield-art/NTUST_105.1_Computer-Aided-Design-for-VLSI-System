@@ -1,0 +1,19 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase2/large/ABCD2/wrap_cpc_R4",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase2/large/ABCD2/cpc_R4",
+  "--timeout",
+  "900",
+  "--dp-args=--threads 4",
+  "Testcases/large/L1/L1",
+  "Testcases/large/L2/L2",
+  "Testcases/holdout/h08/h08"
+ ],
+ "returncode": 0,
+ "seconds": 528.63,
+ "finished": "Sat Oct 24 05:45:16 2026"
+}

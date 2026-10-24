@@ -1,0 +1,69 @@
+[equal] h04              ClaudeOpus55_v6    seed 1: PASS hpwl 229057.500000000000 attempts 26740633 sa 10.000274s
+[equal] h04              CodexCapDP         seed 1: PASS hpwl 231083.500000000000 attempts 27468195 sa 10.077252s
+[equal] h04              ClaudeOpus55_v4    seed 1: PASS hpwl 229617.000000000000 attempts 19420722 sa 14.770313s
+[equal] h04              ClaudeOpus55_v6    seed 2: PASS hpwl 230712.500000000000 attempts 26552480 sa 9.999889s
+[equal] h04              CodexCapDP         seed 2: PASS hpwl 229995.000000000000 attempts 27620927 sa 10.078285s
+[equal] h04              ClaudeOpus55_v4    seed 2: PASS hpwl 229897.500000000000 attempts 19407121 sa 14.827312s
+[equal] h04              ClaudeOpus55_v6    seed 3: PASS hpwl 231135.000000000000 attempts 26714265 sa 10.000680s
+[equal] h04              CodexCapDP         seed 3: PASS hpwl 228378.000000000000 attempts 27366568 sa 10.079873s
+[equal] h04              ClaudeOpus55_v4    seed 3: PASS hpwl 229837.500000000000 attempts 19375102 sa 14.855293s
+[equal] h08              ClaudeOpus55_v6    seed 1: PASS hpwl 105124078.200000196695 attempts 38183241 sa 9.984261s
+[equal] h08              CodexCapDP         seed 1: PASS hpwl 105577299.300000280142 attempts 34043502 sa 10.302742s
+[equal] h08              ClaudeOpus55_v4    seed 1: PASS hpwl 113857305.700000256300 attempts 15452084 sa 7.434154s
+[equal] h08              ClaudeOpus55_v6    seed 2: PASS hpwl 105110570.800000160933 attempts 40480348 sa 10.002135s
+[equal] h08              CodexCapDP         seed 2: PASS hpwl 105403213.100000247359 attempts 36830213 sa 10.308127s
+[equal] h08              ClaudeOpus55_v4    seed 2: PASS hpwl 112711465.900000229478 attempts 16289285 sa 7.203732s
+[equal] h08              ClaudeOpus55_v6    seed 3: PASS hpwl 104633580.200000271201 attempts 39719096 sa 9.999405s
+[equal] h08              CodexCapDP         seed 3: PASS hpwl 103590532.500000223517 attempts 46889097 sa 10.317626s
+[equal] h08              ClaudeOpus55_v4    seed 3: PASS hpwl 110572654.200000301003 attempts 17090831 sa 8.165764s
+[equal] e03_dense97      ClaudeOpus55_v6    seed 1: PASS hpwl 286748.000000000000 attempts 44559647 sa 10.001271s
+[equal] e03_dense97      CodexCapDP         seed 1: PASS hpwl 286170.500000000000 attempts 44867633 sa 10.107682s
+[equal] e03_dense97      ClaudeOpus55_v4    seed 1: PASS hpwl 292735.000000000000 attempts 18367567 sa 14.012884s
+[equal] e03_dense97      ClaudeOpus55_v6    seed 2: PASS hpwl 287887.500000000000 attempts 44411090 sa 10.000535s
+[equal] e03_dense97      CodexCapDP         seed 2: PASS hpwl 287717.500000000000 attempts 44854996 sa 10.107633s
+[equal] e03_dense97      ClaudeOpus55_v4    seed 2: PASS hpwl 294612.500000000000 attempts 18202355 sa 14.015746s
+[equal] e03_dense97      ClaudeOpus55_v6    seed 3: PASS hpwl 288822.000000000000 attempts 44132400 sa 10.000311s
+[equal] e03_dense97      CodexCapDP         seed 3: PASS hpwl 295348.000000000000 attempts 45074129 sa 10.100712s
+[equal] e03_dense97      ClaudeOpus55_v4    seed 3: PASS hpwl 295698.000000000000 attempts 18321439 sa 14.068922s
+[equal] e06_tallnarrow   ClaudeOpus55_v6    seed 1: PASS hpwl 915165.000000000000 attempts 44383264 sa 9.999562s
+[equal] e06_tallnarrow   CodexCapDP         seed 1: PASS hpwl 913215.000000000000 attempts 45414332 sa 10.109446s
+[equal] e06_tallnarrow   ClaudeOpus55_v4    seed 1: PASS hpwl 943400.500000000000 attempts 20110000 sa 11.707444s
+[equal] e06_tallnarrow   ClaudeOpus55_v6    seed 2: PASS hpwl 923290.500000000000 attempts 44552563 sa 10.000861s
+[equal] e06_tallnarrow   CodexCapDP         seed 2: PASS hpwl 918416.000000000000 attempts 44485182 sa 10.107813s
+[equal] e06_tallnarrow   ClaudeOpus55_v4    seed 2: PASS hpwl 935386.500000000000 attempts 20110000 sa 11.699235s
+[equal] e06_tallnarrow   ClaudeOpus55_v6    seed 3: PASS hpwl 918231.500000000000 attempts 44834080 sa 9.996955s
+[equal] e06_tallnarrow   CodexCapDP         seed 3: PASS hpwl 915798.000000000000 attempts 44770412 sa 10.108022s
+[equal] e06_tallnarrow   ClaudeOpus55_v4    seed 3: PASS hpwl 932746.500000000000 attempts 20110000 sa 11.595379s
+[equal] e07_tworows      ClaudeOpus55_v6    seed 1: PASS hpwl 216414.500000000000 attempts 12091719 sa 12.200201s
+[equal] e07_tworows      CodexCapDP         seed 1: PASS hpwl 198401.500000000000 attempts 9952766 sa 10.000068s
+[equal] e07_tworows      ClaudeOpus55_v4    seed 1: PASS hpwl 200288.000000000000 attempts 13595000 sa 13.151175s
+[equal] e07_tworows      ClaudeOpus55_v6    seed 2: PASS hpwl 209659.500000000000 attempts 12082800 sa 12.202462s
+[equal] e07_tworows      CodexCapDP         seed 2: PASS hpwl 199899.000000000000 attempts 9928512 sa 10.000279s
+[equal] e07_tworows      ClaudeOpus55_v4    seed 2: PASS hpwl 207905.500000000000 attempts 13595000 sa 13.222064s
+[equal] e07_tworows      ClaudeOpus55_v6    seed 3: PASS hpwl 210854.000000000000 attempts 12088188 sa 12.202462s
+[equal] e07_tworows      CodexCapDP         seed 3: PASS hpwl 205992.500000000000 attempts 9961575 sa 10.000584s
+[equal] e07_tworows      ClaudeOpus55_v4    seed 3: PASS hpwl 191716.000000000000 attempts 13595000 sa 13.150287s
+[equal] e09_offgrid      ClaudeOpus55_v6    seed 1: PASS hpwl 60549.381800000127 attempts 50684726 sa 10.001543s
+[equal] e09_offgrid      CodexCapDP         seed 1: PASS hpwl 60568.446000000025 attempts 50380366 sa 10.033519s
+[equal] e09_offgrid      ClaudeOpus55_v4    seed 1: PASS hpwl 61200.968699999947 attempts 38535523 sa 9.544607s
+[equal] e09_offgrid      ClaudeOpus55_v6    seed 2: PASS hpwl 61126.831999999806 attempts 50792523 sa 10.000299s
+[equal] e09_offgrid      CodexCapDP         seed 2: PASS hpwl 60454.027299999994 attempts 50353836 sa 10.026675s
+[equal] e09_offgrid      ClaudeOpus55_v4    seed 2: PASS hpwl 60860.294100000014 attempts 43478614 sa 10.476507s
+[equal] e09_offgrid      ClaudeOpus55_v6    seed 3: PASS hpwl 61584.645999999848 attempts 50480507 sa 9.999621s
+[equal] e09_offgrid      CodexCapDP         seed 3: PASS hpwl 60606.161599999898 attempts 50248944 sa 10.029048s
+[equal] e09_offgrid      ClaudeOpus55_v4    seed 3: PASS hpwl 61343.971099999944 attempts 41647213 sa 10.240693s
+[equal] e15_realistic    ClaudeOpus55_v6    seed 1: PASS hpwl 93802470.500000000000 attempts 36690728 sa 9.994727s
+[equal] e15_realistic    CodexCapDP         seed 1: PASS hpwl 92022768.000000000000 attempts 33996501 sa 10.096784s
+[equal] e15_realistic    ClaudeOpus55_v4    seed 1: PASS hpwl 97163955.500000000000 attempts 22549649 sa 8.626557s
+[equal] e15_realistic    ClaudeOpus55_v6    seed 2: PASS hpwl 90989298.500000000000 attempts 44136197 sa 10.002703s
+[equal] e15_realistic    CodexCapDP         seed 2: PASS hpwl 93386267.000000000000 attempts 41744363 sa 10.103073s
+[equal] e15_realistic    ClaudeOpus55_v4    seed 2: PASS hpwl 98647216.500000000000 attempts 21847511 sa 9.694616s
+[equal] e15_realistic    ClaudeOpus55_v6    seed 3: PASS hpwl 94521558.500000000000 attempts 36785558 sa 10.002547s
+[equal] e15_realistic    CodexCapDP         seed 3: PASS hpwl 92065916.000000000000 attempts 35423185 sa 10.100471s
+[equal] e15_realistic    ClaudeOpus55_v4    seed 3: PASS hpwl 94405303.000000000000 attempts 28207194 sa 9.592403s
+| holdout | h08 | 104,956,076.4 [104,633,580.2, 105,124,078.2] | 104,857,015.0 [103,590,532.5, 105,577,299.3] | 112,380,475.3 [110,572,654.2, 113,857,305.7] | 0.9991 | 1.0707 | 39,460,895 / 10.0 | 39,254,271 / 10.3 | 16,277,400 / 7.6 |
+
+- CodexCapDP / ClaudeOpus55_v6, edge: geometric mean of the per-bench mean ratio = **0.9871** (5 benches, 4 better, 1 worse)
+- CodexCapDP / ClaudeOpus55_v6, holdout: geometric mean of the per-bench mean ratio = **0.9985** (2 benches, 2 better, 0 worse)
+- ClaudeOpus55_v4 / ClaudeOpus55_v6, edge: geometric mean of the per-bench mean ratio = **1.0043** (5 benches, 1 better, 4 worse)
+- ClaudeOpus55_v4 / ClaudeOpus55_v6, holdout: geometric mean of the per-bench mean ratio = **1.0336** (2 benches, 1 better, 1 worse)

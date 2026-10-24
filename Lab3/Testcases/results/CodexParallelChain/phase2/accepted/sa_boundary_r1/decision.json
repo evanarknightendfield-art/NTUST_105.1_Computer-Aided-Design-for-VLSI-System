@@ -1,0 +1,13 @@
+{
+  "decision": "keep",
+  "src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258",
+  "quality_gate": true,
+  "reproducibility_checks": 60,
+  "ratios": {
+    "fixed_single": 1.0,
+    "fixed_auto": 0.9917469293203764,
+    "wall10_auto": 0.9914371007411955
+  },
+  "tsan_warnings": 0,
+  "asan_options": "detect_leaks=0"
+}

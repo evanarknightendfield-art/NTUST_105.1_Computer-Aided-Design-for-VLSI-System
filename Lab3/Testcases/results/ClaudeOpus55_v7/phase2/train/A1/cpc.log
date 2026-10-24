@@ -1,0 +1,11 @@
+[run] ibm01            OK    25.3s  stage1 25.299862505984493  sa None att None  max 10427.027  hpwl 87228450.0
+[run] ibm05            OK    39.1s  stage1 39.03748306003399  sa None att None  max 199.918  hpwl 11833465.5
+[run] toy              OK     1.2s  stage1 1.1540544040035456  sa None att None  max 2004.4  hpwl 104094.0
+[run] h01              OK     9.1s  stage1 9.070789022021927  sa None att None  max 29.39  hpwl 25492.0
+[run] h02              OK    21.5s  stage1 21.49009658099385  sa None att None  max 2526.519  hpwl 3785092.0
+[run] h03              OK    15.7s  stage1 15.663683144026436  sa None att None  max 20.2013  hpwl 26511.7
+[run] h04              OK    16.7s  stage1 16.66792597103631  sa None att None  max 237.85  hpwl 534157.0
+[run] h05              OK     7.6s  stage1 7.5567204899853095  sa None att None  max 1337.305  hpwl 26205137.2
+[run] h06              OK    34.5s  stage1 34.477143196971156  sa None att None  max 427.56  hpwl 2158876.0
+[run] h07              OK    26.2s  stage1 26.14770862896694  sa None att None  max 47.6762  hpwl 354311.332
+[run] h08              OK    61.2s  stage1 61.17081100301584  sa None att None  max 28282.309  hpwl 308041334.5

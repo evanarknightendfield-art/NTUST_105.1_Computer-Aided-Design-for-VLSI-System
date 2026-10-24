@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/bin/dp_diagnostic",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_C/h01/output",
+    "--no-sa",
+    "-v"
+  ],
+  "seconds": 13.592080249014543,
+  "returncode": 0
+}

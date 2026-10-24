@@ -1,0 +1,2 @@
+PASS: 400 exhaustive arbitrary-cost two-row comparisons and coordinated row-exchange fixture
+PASS: 150 exhaustive shared-net HPWL ordering comparisons

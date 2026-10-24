@@ -1,0 +1,4 @@
+h04: 4000 movable, P total 180397.5900 max 237.8500, cap 231.76: 150 violators
+  box 1:8: 881 cells, 30672 columns -> infeasible total None (179.9s)
+  box 1:16: 1029 cells, 72891 columns -> unknown_status1 total None (269.3s)
+  box 2:16: 1295 cells, 158657 columns -> unknown_status1 total None (466.0s)

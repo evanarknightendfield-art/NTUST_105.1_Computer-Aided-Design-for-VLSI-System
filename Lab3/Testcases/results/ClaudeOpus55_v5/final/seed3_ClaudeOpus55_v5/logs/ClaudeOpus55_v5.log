@@ -1,0 +1,205 @@
+$ cmake -S . -B build
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build
+
+$ cmake --build build -j
+[ 11%] Building CXX object CMakeFiles/dp_core.dir/src/global.cpp.o
+[ 11%] Building CXX object CMakeFiles/dp_core.dir/src/legalizer.cpp.o
+[ 11%] Building CXX object CMakeFiles/dp_core.dir/src/chain.cpp.o
+[ 14%] Building CXX object CMakeFiles/dp_core.dir/src/optimizer.cpp.o
+[ 22%] Building CXX object CMakeFiles/dp_core.dir/src/window.cpp.o
+[ 22%] Building CXX object CMakeFiles/dp_core.dir/src/placedb.cpp.o
+[ 29%] Building CXX object CMakeFiles/dp_core.dir/src/annealer.cpp.o
+[ 29%] Building CXX object CMakeFiles/dp_core.dir/src/capsearch.cpp.o
+[ 33%] Linking CXX static library libdp_core.a
+[ 33%] Built target dp_core
+[ 37%] Building CXX object CMakeFiles/window_test.dir/tests/window_test.cpp.o
+[ 40%] Building CXX object CMakeFiles/multirow_test.dir/tests/multirow_test.cpp.o
+[ 48%] Building CXX object CMakeFiles/optimizer_test.dir/tests/optimizer_test.cpp.o
+[ 48%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 55%] Building CXX object CMakeFiles/chain_test.dir/tests/chain_test.cpp.o
+[ 55%] Building CXX object CMakeFiles/capsearch_test.dir/tests/capsearch_test.cpp.o
+[ 59%] Building CXX object CMakeFiles/global_test.dir/tests/global_test.cpp.o
+[ 62%] Building CXX object CMakeFiles/parallel_sa_test.dir/tests/parallel_sa_test.cpp.o
+[ 66%] Building CXX object CMakeFiles/pool_test.dir/tests/pool_test.cpp.o
+[ 70%] Linking CXX executable parallel_sa_test
+[ 74%] Linking CXX executable global_test
+[ 74%] Built target parallel_sa_test
+[ 74%] Built target global_test
+[ 77%] Linking CXX executable pool_test
+[ 81%] Linking CXX executable chain_test
+[ 81%] Built target pool_test
+[ 81%] Built target chain_test
+[ 85%] Linking CXX executable multirow_test
+[ 88%] Linking CXX executable window_test
+[ 88%] Built target multirow_test
+[ 88%] Built target window_test
+[ 92%] Linking CXX executable optimizer_test
+[ 92%] Built target optimizer_test
+[ 96%] Linking CXX executable capsearch_test
+[ 96%] Built target capsearch_test
+[100%] Linking CXX executable dp
+[100%] Built target dp
+In file included from /usr/include/x86_64-linux-gnu/c++/15/bits/c++allocator.h:33,
+                 from /usr/include/c++/15/bits/allocator.h:46,
+                 from /usr/include/c++/15/string:45,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/placedb.hpp:4,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/global.hpp:2,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/global.cpp:1:
+In member function ‘void std::__new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = int; _Args = {int}; _Tp = int]’,
+    inlined from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = int; _Args = {int}; _Tp = int]’ at /usr/include/c++/15/bits/alloc_traits.h:674:17,
+    inlined from ‘void std::vector<_Tp, _Alloc>::_M_insert_aux(iterator, _Arg&&) [with _Arg = int; _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/vector.tcc:430:31,
+    inlined from ‘std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::insert(const_iterator, const value_type&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/vector.tcc:162:21,
+    inlined from ‘bool {anonymous}::constructCap(const PlaceDB&, Placement&, double, double)’ at /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/global.cpp:101:45:
+/usr/include/c++/15/bits/new_allocator.h:191:11: warning: array subscript -1 is outside array bounds of ‘int [2305843009213693951]’ [-Warray-bounds=]
+  191 |         { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In member function ‘_Tp* std::__new_allocator<_Tp>::allocate(size_type, const void*) [with _Tp = int]’,
+    inlined from ‘static _Tp* std::allocator_traits<std::allocator<_CharT> >::allocate(allocator_type&, size_type) [with _Tp = int]’ at /usr/include/c++/15/bits/alloc_traits.h:614:28,
+    inlined from ‘std::_Vector_base<_Tp, _Alloc>::pointer std::_Vector_base<_Tp, _Alloc>::_M_allocate(std::size_t) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:387:33,
+    inlined from ‘void std::_Vector_base<_Tp, _Alloc>::_M_create_storage(std::size_t) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:405:44,
+    inlined from ‘std::_Vector_base<_Tp, _Alloc>::_Vector_base(std::size_t, const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:341:26,
+    inlined from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:633:61,
+    inlined from ‘bool {anonymous}::constructCap(const PlaceDB&, Placement&, double, double)’ at /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/src/global.cpp:101:30:
+/usr/include/c++/15/bits/new_allocator.h:151:73: note: at offset -4 into object of size [0, 9223372036854775804] allocated by ‘operator new’
+  151 |         return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+      |                                                                         ^
+
+
+===== e01_nearlegal: OK 66.0s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e01_nearlegal/e01_nearlegal output
+Total displacement (legal): 23151.014
+Maximum displacement (legal): 5.402
+Total HPWL (legal): 689413
+Total HPWL (SA): 479361
+
+
+===== e02_legalgp: OK 19.0s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e02_legalgp/e02_legalgp output
+Total displacement (legal): 0
+Maximum displacement (legal): 0
+Total HPWL (legal): 15276993
+Total HPWL (SA): 10247848.5
+
+
+===== e03_dense97: OK 36.9s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e03_dense97/e03_dense97 output
+Total displacement (legal): 135831.754
+Maximum displacement (legal): 111.567
+Total HPWL (legal): 554634.5
+Total HPWL (SA): 290657
+
+
+===== e04_sparse10: OK 8.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e04_sparse10/e04_sparse10 output
+Total displacement (legal): 714.1647
+Maximum displacement (legal): 1.5869
+Total HPWL (legal): 46884.498
+Total HPWL (SA): 15293.936
+
+
+===== e05_bignets: OK 72.0s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e05_bignets/e05_bignets output
+Total displacement (legal): 80393.314
+Maximum displacement (legal): 41.639
+Total HPWL (legal): 1004564
+Total HPWL (SA): 708027
+
+
+===== e06_tallnarrow: OK 18.1s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e06_tallnarrow/e06_tallnarrow output
+Total displacement (legal): 32181.656
+Maximum displacement (legal): 32
+Total HPWL (legal): 2076492
+Total HPWL (SA): 914346
+
+
+===== e07_tworows: OK 21.7s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e07_tworows/e07_tworows output
+Total displacement (legal): 20429.46
+Maximum displacement (legal): 26.42
+Total HPWL (legal): 983775.5
+Total HPWL (SA): 191798
+
+
+===== e08_fragmented: OK 38.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e08_fragmented/e08_fragmented output
+Total displacement (legal): 84078.388
+Maximum displacement (legal): 59.516
+Total HPWL (legal): 686602.5
+Total HPWL (SA): 420110.5
+
+
+===== e09_offgrid: OK 54.1s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e09_offgrid/e09_offgrid output
+Total displacement (legal): 13137.4045
+Maximum displacement (legal): 38.513
+Total HPWL (legal): 183679.0873
+Total HPWL (SA): 57670.4618
+
+
+===== e10_mixedsites: OK 59.1s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e10_mixedsites/e10_mixedsites output
+Total displacement (legal): 61376.645
+Maximum displacement (legal): 34.047
+Total HPWL (legal): 1240454.5
+Total HPWL (SA): 812043.5
+
+
+===== e11_format: OK 17.4s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e11_format/e11_format output
+Total displacement (legal): 8990.186
+Maximum displacement (legal): 13.711
+Total HPWL (legal): 123543.5
+Total HPWL (SA): 76275.5
+
+
+===== e12_collapse: OK 27.0s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e12_collapse/e12_collapse output
+Total displacement (legal): 320209.716
+Maximum displacement (legal): 237
+Total HPWL (legal): 2307010
+Total HPWL (SA): 181907.5
+
+
+===== e13_onecell: OK 0.3s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e13_onecell/e13_onecell output
+Total displacement (legal): 4.57
+Maximum displacement (legal): 4.57
+Total HPWL (legal): 36.5
+Total HPWL (SA): 36.5
+
+
+===== e14_fixedonly: OK 0.0s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e14_fixedonly/e14_fixedonly output
+Total displacement (legal): 0
+Maximum displacement (legal): 0
+Total HPWL (legal): 73
+Total HPWL (SA): 73
+
+
+===== e15_realistic: OK 91.9s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e15_realistic/e15_realistic output
+Total displacement (legal): 20428777.946
+Maximum displacement (legal): 5005.084
+Total HPWL (legal): 133120956
+Total HPWL (SA): 85280213
+
+
+===== e16_rowgaps: OK 70.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed3/e16_rowgaps/e16_rowgaps output
+Total displacement (legal): 91570.856
+Maximum displacement (legal): 69.531
+Total HPWL (legal): 747273
+Total HPWL (SA): 455045
+

@@ -1,0 +1,40 @@
+== toy (budget 3.2 s per cap, ChainDP's default)
+incumbent total 43261.6000 max 2007.9000 legal:
+  ordered fail 0.000s
+  construct fail 0.002s
+  dfs fail 0.320s
+  negotiate pass 0 active 3
+  negotiate fail after 500 passes or time 0.017s
+cap 1990.0000: unresolved in 0.339s, total 43261.6000 max 2007.9000
+  ordered fail 0.000s
+  construct fail 0.002s
+  dfs fail 0.320s
+  negotiate pass 0 active 5
+  negotiate fail after 500 passes or time 0.018s
+cap 1972.0000: unresolved in 0.340s, total 43261.6000 max 2007.9000
+  ordered fail 0.000s
+  construct fail 0.002s
+  dfs fail 0.320s
+  negotiate pass 0 active 9
+  negotiate fail after 500 passes or time 0.019s
+cap 1938.4500: unresolved in 0.341s, total 43261.6000 max 2007.9000
+== h01
+incumbent total 2367.0900 max 29.3900 legal:
+  ordered fail 0.000s
+  construct fail 0.013s
+  dfs fail 0.319s
+  negotiate pass 0 active 6
+  negotiate fail after 500 passes or time 0.002s
+cap 28.5000: unresolved in 0.334s, total 2367.0900 max 29.3900
+  ordered fail 0.000s
+  construct fail 0.010s
+  dfs fail 0.319s
+  negotiate pass 0 active 11
+  negotiate fail after 500 passes or time 0.002s
+cap 27.5000: unresolved in 0.331s, total 2367.0900 max 29.3900
+  ordered fail 0.000s
+  construct fail 0.009s
+  dfs fail 0.319s
+  negotiate pass 0 active 12
+  negotiate fail after 500 passes or time 0.002s
+cap 26.5000: unresolved in 0.331s, total 2367.0900 max 29.3900

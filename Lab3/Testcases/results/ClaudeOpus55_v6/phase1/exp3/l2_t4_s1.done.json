@@ -1,0 +1,19 @@
+{
+ "command": [
+  "bash",
+  "-c",
+  "\"$0\" \"$@\" > /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/exp3/l2_t4_s1.csv",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/bin/sa_bench_threads_uncapped",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/exp/l2_sched/start_CodexCapDP/L2",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/exp3/l2_t4_s1",
+  "1",
+  "default",
+  "30",
+  "60",
+  "4"
+ ],
+ "returncode": 0,
+ "seconds": 99.27,
+ "finished": "Thu Oct 22 05:00:58 2026"
+}

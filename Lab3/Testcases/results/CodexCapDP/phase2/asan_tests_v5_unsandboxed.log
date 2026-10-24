@@ -1,0 +1,26 @@
+Internal ctest changing into directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/asan_v5
+Test project /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/asan_v5
+      Start  1: window
+ 1/10 Test  #1: window ...........................   Passed    0.20 sec
+      Start  2: multirow
+ 2/10 Test  #2: multirow .........................   Passed   14.44 sec
+      Start  3: optimizer
+ 3/10 Test  #3: optimizer ........................   Passed    1.22 sec
+      Start  4: chain
+ 4/10 Test  #4: chain ............................   Passed    7.80 sec
+      Start  5: parallel_sa
+ 5/10 Test  #5: parallel_sa ......................   Passed    0.74 sec
+      Start  6: pool
+ 6/10 Test  #6: pool .............................   Passed    0.01 sec
+      Start  7: global
+ 7/10 Test  #7: global ...........................   Passed    0.01 sec
+      Start  8: capsearch
+ 8/10 Test  #8: capsearch ........................   Passed   12.35 sec
+      Start  9: cap_windows
+ 9/10 Test  #9: cap_windows ......................   Passed    0.88 sec
+      Start 10: guard
+10/10 Test #10: guard ............................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) =  37.67 sec

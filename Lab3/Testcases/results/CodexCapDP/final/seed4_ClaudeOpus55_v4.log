@@ -1,0 +1,38 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/seed4_ClaudeOpus55_v4/submissions/ClaudeOpus55_v4.tgz  (19 files)
+       ClaudeOpus55_v4/CMakeLists.txt
+       ClaudeOpus55_v4/Makefile
+       ClaudeOpus55_v4/README.md
+       ClaudeOpus55_v4/src/annealer.cpp
+       ClaudeOpus55_v4/src/annealer.hpp
+       ClaudeOpus55_v4/src/legalizer.cpp
+       ClaudeOpus55_v4/src/legalizer.hpp
+       ClaudeOpus55_v4/src/main.cpp
+       ClaudeOpus55_v4/src/optimizer.cpp
+       ClaudeOpus55_v4/src/optimizer.hpp
+       ClaudeOpus55_v4/src/placedb.cpp
+       ClaudeOpus55_v4/src/placedb.hpp
+       ClaudeOpus55_v4/src/pool.hpp
+       ClaudeOpus55_v4/src/rowmap.hpp
+       ClaudeOpus55_v4/src/window.cpp
+       ClaudeOpus55_v4/src/window.hpp
+       ClaudeOpus55_v4/tests/multirow_test.cpp
+       ClaudeOpus55_v4/tests/optimizer_test.cpp
+       ClaudeOpus55_v4/tests/window_test.cpp
+[build] OK build/dp  6.6s
+[run] e01_nearlegal PASS  OK          41.2s  disp=23264.711 max=5.91 legal=696231.5 sa=486475.0
+[run] e02_legalgp PASS  OK          19.1s  disp=0.0 max=0.0 legal=14965152.5 sa=10062941.0
+[run] e03_dense97 PASS  OK          31.9s  disp=130576.325 max=114.409 legal=535017.5 sa=284953.0
+[run] e04_sparse10 PASS  OK           7.4s  disp=717.7955 max=1.4938 legal=51405.832 sa=16760.203
+[run] e05_bignets PASS  OK          52.9s  disp=125511.234 max=56.893 legal=1067899.0 sa=727921.0
+[run] e06_tallnarrow PASS  OK          14.7s  disp=34332.183 max=41.223 legal=2195200.0 sa=981690.5
+[run] e07_tworows PASS  OK          14.7s  disp=20109.807 max=20.898 legal=974943.5 sa=210156.0
+[run] e08_fragmented PASS  OK          30.7s  disp=68754.359 max=54.471 legal=651621.5 sa=391402.5
+[run] e09_offgrid PASS  OK          54.8s  disp=13385.0892 max=40.1359 legal=189887.4699 sa=58930.5956
+[run] e10_mixedsites PASS  OK          54.0s  disp=65227.71 max=32.885 legal=1224408.0 sa=799828.5
+[run] e11_format PASS  OK           7.4s  disp=9722.351 max=19.36 legal=122500.0 sa=75396.5
+[run] e12_collapse PASS  OK          21.2s  disp=319829.001 max=241.0 legal=2352076.5 sa=184140.5
+[run] e13_onecell PASS  OK           0.2s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          52.7s  disp=14249841.871 max=4596.785 legal=124965202.0 sa=88267835.5
+[run] e16_rowgaps PASS  OK          37.6s  disp=98030.867 max=70.642 legal=701696.5 sa=419845.0
+[summary] 16/16 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/seed4_ClaudeOpus55_v4/record.csv

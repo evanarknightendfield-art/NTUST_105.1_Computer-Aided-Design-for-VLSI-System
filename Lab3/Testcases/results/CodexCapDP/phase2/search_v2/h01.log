@@ -1,0 +1,9 @@
+[cap-local] D 30.605250000 method 3 repair 0.046296 DP 1.080876 windows 12 remaining 0 raw 2385.630000 total 2330.650000 max 30.590000000 accepted
+[cap-local] D 29.519350000 method 1 repair 0.449094 DP 0.385918 windows 22 remaining 1 raw 2366.910000 total 2358.810000 max 29.390000000 total_budget
+[cap-local] D 30.054675000 method 1 repair 0.430374 DP 0.359082 windows 14 remaining 1 raw 2363.910000 total 2357.030000 max 29.670000000 accepted
+[cap-local] D 28.943085000 method 1 repair 0.453653 DP 0.377360 windows 24 remaining 2 raw 2405.730000 total 2395.670000 max 28.890000000 total_budget
+[cap-local] D 29.306542500 method 1 repair 0.424767 DP 0.213446 windows 14 remaining 1 raw 2383.470000 total 2375.650000 max 29.280000000 total_budget
+[cap-local] D 29.488271250 method 3 repair 0.006760 DP 0.290676 windows 4 remaining 0 raw 2361.990000 total 2358.010000 max 29.430000000 total_budget
+[cap-local] D 29.579135625 method 3 repair 0.006623 DP 0.294000 windows 4 remaining 0 raw 2361.990000 total 2358.010000 max 29.430000000 total_budget
+[cap-local] D 29.624567812 method 3 repair 0.006716 DP 0.292870 windows 4 remaining 0 raw 2361.990000 total 2358.010000 max 29.430000000 total_budget
+[cap] 8 attempts, 8 feasible, 2 accepted: max 31.390000 -> 29.670000, total 2347.8500 -> 2357.0300 (+0.391%)  5.12s

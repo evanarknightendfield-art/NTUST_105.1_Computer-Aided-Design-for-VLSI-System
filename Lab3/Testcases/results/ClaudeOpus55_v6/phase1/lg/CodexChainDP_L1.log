@@ -1,0 +1,46 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexChainDP_L1/submissions/CodexChainDP.tgz  (42 files)
+       CodexChainDP/CMakeLists.txt
+       CodexChainDP/Makefile
+       CodexChainDP/READING_NOTES.md
+       CodexChainDP/README.md
+       CodexChainDP/WORK_STATE.md
+       CodexChainDP/src/annealer.cpp
+       CodexChainDP/src/annealer.hpp
+       CodexChainDP/src/chain.cpp
+       CodexChainDP/src/chain.hpp
+       CodexChainDP/src/global.cpp
+       CodexChainDP/src/global.hpp
+       CodexChainDP/src/legalizer.cpp
+       CodexChainDP/src/legalizer.hpp
+       CodexChainDP/src/main.cpp
+       CodexChainDP/src/optimizer.cpp
+       CodexChainDP/src/optimizer.hpp
+       CodexChainDP/src/placedb.cpp
+       CodexChainDP/src/placedb.hpp
+       CodexChainDP/src/pool.hpp
+       CodexChainDP/src/rowmap.hpp
+       CodexChainDP/src/window.cpp
+       CodexChainDP/src/window.hpp
+       CodexChainDP/tests/acceptance.py
+       CodexChainDP/tests/certify.py
+       CodexChainDP/tests/chain_test.cpp
+       CodexChainDP/tests/compare.py
+       CodexChainDP/tests/edge_cases.py
+       CodexChainDP/tests/fair_time.py
+       CodexChainDP/tests/final_audit.py
+       CodexChainDP/tests/final_validation.py
+       CodexChainDP/tests/global_test.cpp
+       CodexChainDP/tests/measure.py
+       CodexChainDP/tests/multirow_test.cpp
+       CodexChainDP/tests/optimizer_test.cpp
+       CodexChainDP/tests/parallel_sa_test.cpp
+       CodexChainDP/tests/pool_test.cpp
+       CodexChainDP/tests/run_tests.py
+       CodexChainDP/tests/sa_bench.cpp
+       CodexChainDP/tests/sanitize_global.py
+       CodexChainDP/tests/summarize.py
+       CodexChainDP/tests/update_docs.py
+       CodexChainDP/tests/window_test.cpp
+[build] OK build/dp  16.6s
+[run] L1       PASS  OK         194.4s  disp=2466093251.764 max=50496.193 legal=5567730302.8 sa=1835377802.8
+[summary] 1/1 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexChainDP_L1/record.csv

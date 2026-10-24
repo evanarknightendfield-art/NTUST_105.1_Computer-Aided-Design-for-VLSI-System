@@ -1,0 +1,1907 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a16578-b777-7212-8d4a-feaa4271d41b
+--------
+user
+接續 AI_Solutions/CodexParallelChain/：讀 WORK_STATE.md 的「下一步」與上一次等待的結果，從那裡繼續（階段 B）。
+規則見 AI_Solutions/ClaudeOpus55_v6/HANDOFF.md 第 0 節；保留／撤回條件、停損、B 完成的最後檢查見第 7 節。只讀需要的片段。回覆不超過 10 行。
+
+【非互動執行的規則（由協調者自動開 session，使用者在睡覺）】
+- 這是 codex exec 的單次 session，沙箱裡啟動的背景工作會在 session 結束時被殺掉（第 A 階段的 nohup 就是這樣死掉的）。
+  所以不要自己啟動超過 5 分鐘的計算；把要跑的東西寫成腳本，然後在最後回覆的最後幾行寫：
+    RUN: <從 Lab3 目錄執行的完整命令>        （可以多行，依序執行）
+    WAIT: <完成標記的路徑，相對 Lab3>
+  協調者會在沙箱外依序執行 RUN、等 WAIT 出現，再開下一個 session。命令不要加 taskset（計時程式不能綁 E-core；編譯已由 v6q 綁）。
+- 要跑的東西都在 5 分鐘內的話（例如 C++ 測試），直接在本 session 跑完，不要寫 RUN/WAIT。
+- ASan：LeakSanitizer 在沙箱內會因 ptrace 失敗，請用 ASAN_OPTIONS=detect_leaks=0 跑並註明；協調者會在沙箱外補跑完整的 ASan。
+- 階段 B 全部完成（HANDOFF.md 第 7 節）時，最後一行只寫：B_DONE
+- 不 commit、不加任何 AI 署名；不要問問題（沒有人會回答），自己依 HANDOFF.md 判斷並把判斷寫進 WORK_STATE.md。
+
+codex
+我會先讀取下一步、上次等待結果及交接規則，再接續階段 B。
+
+exec
+/bin/bash -lc "pwd; rg --files -g AGENTS.md -g WORK_STATE.md -g HANDOFF.md -g '*WAIT*' -g '*DONE*' AI_Solutions .agents .codex" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+AI_Solutions/CodexChainDP/WORK_STATE.md
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+AI_Solutions/ClaudeOpus55_v6/WORK_STATE.md
+AI_Solutions/CodexParallelChain/WORK_STATE.md
+AI_Solutions/CodexCapDP/WORK_STATE.md
+
+exec
+/bin/bash -lc 'for p in /AGENTS.md /home/AGENTS.md /home/evan/AGENTS.md /home/evan/Desktop/AGENTS.md /home/evan/Desktop/NTUST/AGENTS.md /home/evan/Desktop/NTUST/105_1/AGENTS.md /home/evan/Desktop/NTUST/105_1/Class/AGENTS.md /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/AGENTS.md AGENTS.md AI_Solutions/AGENTS.md AI_Solutions/CodexParallelChain/AGENTS.md; do if [ -f "$p" ]; then printf '"'\\n%s\\n' \""'$p"; cat "$p"; fi; done
+rg -n '"'"'^#|下一步|WAIT|RUN|等待'"' AI_Solutions/CodexParallelChain/WORK_STATE.md AI_Solutions/ClaudeOpus55_v6/HANDOFF.md" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:1:# 交接：v6 之後的下一版（給 Codex，一份就夠，不必再讀其他報告）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:5:## 0. 規則（每個 session 都適用）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:16:2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:17:   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:23:## 1. 可以直接用的工具（`Testcases/results/ClaudeOpus55_v6/scripts/`）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:46:## 2. v6 現況（2026-10-22 同輪配對；細節 `Testcases/results/ClaudeOpus55_v6/final/summary.md`）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:62:## 3. 已確認的事實（不必重新量）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:74:## 4. 已經證明不值得做的（不要再試）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:86:## 5. 建議的下一版方向（依幅度 × 機會；先診斷再做）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:95:## 6. 驗收（建議）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:102:## 7. 階段 B（實作・調參）什麼時候算完成
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:104:**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:124:4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:1:# CodexParallelChain — WORK_STATE
+AI_Solutions/CodexParallelChain/WORK_STATE.md:3:- 本 session：只建立版本並啟動第一階段診斷；不等待、不查進度、不調參、不 commit。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:11:## 第一階段範圍
+AI_Solutions/CodexParallelChain/WORK_STATE.md:23:## 執行約定
+AI_Solutions/CodexParallelChain/WORK_STATE.md:37:## 第一階段執行歷史（已於 10-23 05:01 完成）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:39:歷史等待項目：scripts/diag.py，完成標記 phase1/ALL_DONE
+AI_Solutions/CodexParallelChain/WORK_STATE.md:42:- 本 session 到此結束，未等待完成、未查詢診斷進度。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:98:- 10-23 05:01 phase1/ALL_DONE：全部診斷完成，保護資料夾 SHA256 未變；等待下一個 session 分析。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:100:## 目前狀態：2026-10-23 phase1 診斷完成
+AI_Solutions/CodexParallelChain/WORK_STATE.md:110:- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:112:## 階段 B：SA 第 1/3 輪（2026-10-23，待訓練，尚未保留）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:122:- 本 session 不執行長時間訓練、不啟動背景工作。交由協調者：`python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json`。
+
+exec
+/bin/bash -lc "sed -n '1,22p' AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+sed -n '102,135p' AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+sed -n '100,170p' AI_Solutions/CodexParallelChain/WORK_STATE.md
+rg --files AI_Solutions/CodexParallelChain Testcases/results/CodexParallelChain | head -75" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+# 交接：v6 之後的下一版（給 Codex，一份就夠，不必再讀其他報告）
+
+這份取代「先讀 README、COMPARISON、各版 README、診斷」的長清單。需要細節時只用 `grep -n` / `sed -n a,bp` 讀片段。
+
+## 0. 規則（每個 session 都適用）
+
+**品質與流程**
+- 不 commit、任何檔案都不加 AI 署名。保護資料夾（不要改）：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6。
+- 新版本：`AI_Solutions/<NEW>/`，以 ClaudeOpus55_v6 為底複製 `src/ CMakeLists.txt Makefile tests/`；執行輸出全部在 `Testcases/results/<NEW>/`。
+- 調參只用 `Testcases/testcases`、`Testcases/holdout`；edge、edge_seed2~5 只當回歸。凍結（記 sha256）之後才產生新 seed。
+- 沒有數據就不宣稱進步：HPWL 至少 3 seeds、報平均與範圍，三種協定分開；新舊版本同一次配對重跑。
+- 計時中的程式一次一個（`timing.lock`）；分析與編譯 `taskset -c 16-19`。
+
+**省 token（上一輪 Codex 一個 session 用了 2,230 萬 input token：166 次呼叫、每次約 14 萬 context，其中一半的工具呼叫是在查進度）**
+1. **一個 session 只做一個階段**，做完就更新 WORK_STATE 並結束；下一階段開新 session（context 從小開始）。
+2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+   `timeout 600 bash -c 'until [ -e MARKER ]; do sleep 20; done'`，不要反覆 ls / tail / ps。
+3. **輸出都進檔案**，終端只印摘要：每個指令輸出 ≤ 40 行（`| tail -n 20`、`awk` 摘要）；不要 cat 整份 record.csv、log、.pl。
+4. **只讀需要的**：本檔 + 自己的 WORK_STATE.md + 要改的函式。原始碼用 `grep -n` 找函式再 `sed -n` 讀範圍。
+5. 不重跑已完成的步驟（每步 `.done.json`）。對話回覆 ≤ 15 行；完整內容寫在報告檔。
+
+## 7. 階段 B（實作・調參）什麼時候算完成
+
+**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+
+**單項的判定**（只看 testcases + holdout；`phase2_train.py` 的 compare.md 會列出 v6 同輪的數字）
+
+v6 在訓練集 11 筆的基準（對 ChainDP，`ClaudeOpus55_v6/final`）：雙條件 **8/11**、最大位移 GM **0.99604**、總位移 GM **0.99813**。
+Stage 1 的執行間變動：總位移最多約 0.11%、最大位移約 0.13%（ibm05）。
+
+| 改動 | 保留的條件（全部要成立） |
+|---|---|
+| chain 階段平行化 | 訓練集雙條件 ≥ 8/11；總位移 GM 比 v6 低（≥ 0.03%）；最大位移 GM 不比 v6 差超過 0.1%；逐筆最大不比 v6 差超過 0.2%；chain 階段的實際秒數不比 v6 多；h05、h06 在同 1.5 秒內的 chain 收穫至少達到 v6 給 3 秒時的水準（v6：h05 −0.29%、h06 −0.44%，HANDOFF 第 3 節） |
+| 平行 SA（只有診斷的 band 損失平均 ≥ 0.5% 才做） | 同次數協定（固定次數、自動執行緒、3 seeds）在 ibm01、ibm05、h06、h07、h08 的幾何平均比 v6 好 ≥ 0.3%，沒有一筆差超過 0.5%；固定次數下兩次執行結果逐位相同；TSan 0 警告 |
+| 其他小改動 | 有訓練集數據顯示改善，且上表的「不比 v6 差」都成立 |
+
+**停損**：同一項最多 3 輪「改程式 → 訓練」。第 3 輪仍不符合保留條件就撤回（把 src 還原到上一個保留點），數據寫進 WORK_STATE 的「試過沒用」。
+
+**B 結束前的最後檢查**（對最後一份原始碼，`phase2_train.py` 的 protocol.json 裡的 src_sha256 要等於目前 src）
+
+1. 訓練集 Stage 1 一次（`phase2_train.py final_b`），以上「不比 v6 差」都成立，額外步驟 0 超時。
+2. 有動 SA、polish 或時間分配時：`phase2_large.py final_b`（L1、L2 完整執行）全部合法，L1 < 240 秒、L2 < 600 秒。
+3. C++ 測試：一般 + ASan/UBSan 全過；動過平行程式加 TSan 0 警告。新功能各有一個測試。
+4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+
+所有改動都被撤回也算 B 完成：寫清楚數據，C 改成「不凍結新版、直接寫報告說明沒有改善」。
+## 目前狀態：2026-10-23 phase1 診斷完成
+
+- 已確認 phase1/ALL_DONE：26 chain、20 SA、2 toy；不重跑既有完成工作。
+- 已寫 Testcases/results/CodexParallelChain/diagnosis.md：三部分逐筆耗時／位移收益、band 平行資料結構與約 2–4 倍工作量假說、10 對 SA 比值／平均、toy 原因、第二階段排序與驗收。
+- 主樣本 default：target 3.312757 s / 9258.268240；ejection 9.545742 s / 1446.724840；post-DP 1.802126 s / 12303.715360。ejection 占時間 65.11%，收益 6.29%；不可直接以時間加速倍率推論品質收益。
+- SA 等權平均損失 1.339185% ≥ 0.5%；4/5 測資均值過門檻。h06 實際 5 threads，其餘 8；只有 2 seeds，僅診斷。
+- toy 兩版 cap 起點相同；v6 局部修補候選多因 total_budget 被拒，7 attempts／1 accepted，v5 51／3；最大位移 2004.4 對 1972.0。只描述，未修正。
+- 協調者已在沙箱外啟動 diag.py 並移除計時 worker 的 taskset；provenance/orchestrator_note.json 亦記載保護文件變動／基準更新，最終 unchanged 是相對更新後基準。
+- 第二階段優先序：SA 邊界改善 → target/DP 分 band → ejection 分 band與無效搜尋診斷 → toy 後續原因追蹤（需後續任務授權）。各項尚未實作。
+- 閱讀限制判斷：HANDOFF 只讀第 0 節；不擅自讀第 5／7 節。採使用者提供的 0.5% 門檻；驗收依第 0 節與已知範圍列出，第 7 節逐條對齊尚待後續允許閱讀時核對，不能宣告 B_DONE。
+- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。
+
+## 階段 B：SA 第 1/3 輪（2026-10-23，待訓練，尚未保留）
+
+- 本輪依 diagnosis.md 排序表先做 SA：訓練用五筆的診斷平均 band 損失 1.339185% ≥ 0.5%。chain target windows / ejection 分 band 尚未實作，後續仍須完成與各自判定；toy 不在本輪授權內。
+- 已閱讀 HANDOFF 第 0、4、6、7 節及本 WORK_STATE；不讀其他 HANDOFF 段落。原始碼只改本版本 src 與 tests；本檔為使用者明確要求的狀態紀錄例外。未改保護目錄、未 commit。
+- SA 單一設計：在既有同步點以完成批次 round 決定 band 分界，原本首分界 1 / 0.5 個 band 的二相循環改成 1 / 0.5 / 1.25 / 0.75 的四相循環，後續分界仍相隔一 band。使分界兩側可輪流處於同一 worker；最小列寬與尾 band 合併邏輯沿用。
+- 不改溫度、moves、sync 頻率、接受規則、時間限制、額外預算與執行緒選擇；未用 e08/e16 調參。這是待驗證假說，不宣稱品質改善。
+- 合併沿用不相交列／cell 寫入與 barrier；每批真實 HPWL 更新及 bestP 保留不變。main 的 guardedStep 仍於例外或不合法時退回 SA 前狀態，Pool 等全部 worker 結束才傳遞例外。
+- 新功能測試：parallel_sa_test 驗證四相分界的精確位置與週期、單 band、稀疏列／薄尾處理；固定工作量兩次的 seg/site、best、accepted、attempts 相同，並檢查合法性及 HPWL cache。固定工作量測試關閉 wall-clock starvation heuristic；另保留既有 starvation 與零時間測試。
+- tests/run_tests.py 新增互斥 --tsan 模式、編譯限定可用 CPU 16–19，執行測試不綁核。一般 10/10 PASS；sanitizer 結果於下方補記。
+- tag：sa_boundary_r1；目前 src_sha256（與 phase2_train.py 同演算法）：`4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。
+- 本 session 不執行長時間訓練、不啟動背景工作。交由協調者：`python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json`。
+- 下一 session 先讀 `phase2/train/sa_boundary_r1/compare.md` 並把數值寫回本檔。注意此腳本用 --no-sa，僅能判斷 Stage 1 回歸，不能單憑它保留 SA；且目前腳本 reference 指向既有 v6 final，並非同輪重跑，不可宣稱已滿足配對規定。
+- SA 保留閘門：ibm01、ibm05、h06、h07、h08 同合法起點、自動執行緒、固定次數、3 seeds，對同輪 v6 幾何平均改善 ≥ 0.3%、無單筆退步 > 0.5%；固定次數重跑逐位一致、TSan 0 警告。另須報固定 wall-time 配對品質；不得以 Stage 1 無變化冒充 SA 品質證據。
+- 每項最多 3 輪；本 SA 為第 1 輪候選，未有保留結論。三輪仍失敗即撤回到上一保留點（目前為原始 v6 src）；記入「試過沒用」。不能在本輪訓練返回前開始下一改動。
+- B 最後仍須 final_b Stage 1（protocol hash 等於最終 src）、如保留 SA 則 final_b L1/L2 合法且 <240/<600 秒、全套一般/ASan/UBSan/TSan、各項保留或撤回數據及 hash；目前不得宣告 B 完成。
+
+- 本輪測試完成：一般、ASan/UBSan、TSan 均 10/10 PASS（各 28 個 build/link/run 記錄）；TSan 0 警告，ASan/UBSan 無診斷。記錄路徑：Testcases/results/CodexParallelChain/{tests,tests_sanitized,tests_tsan}/records.json 與各測試 .log。ASan 在沙箱內設 ASAN_OPTIONS=detect_leaks=0，LeakSanitizer 尚待協調者沙箱外補跑，不宣稱已驗證洩漏。
+- 10-23 05:15 phase2/train/sa_boundary_r1/stage1 完成（258 秒）
+- 10-23 05:15 phase2/train/sa_boundary_r1 完成（預設）：見 phase2/train/sa_boundary_r1/compare.md
+Testcases/results/CodexParallelChain/orchestrator/B2.log
+Testcases/results/CodexParallelChain/orchestrator/B1.last.md
+Testcases/results/CodexParallelChain/orchestrator/B1.jobs.log
+Testcases/results/CodexParallelChain/orchestrator/A2.last.md
+Testcases/results/CodexParallelChain/orchestrator/B1.log
+Testcases/results/CodexParallelChain/orchestrator/A2.log
+Testcases/results/CodexParallelChain/phase1/toy_summary.csv
+Testcases/results/CodexParallelChain/phase1/ALL_DONE
+Testcases/results/CodexParallelChain/phase1/sa_bench_diag.cpp
+AI_Solutions/CodexParallelChain/tests/diag_chaindp_global/driver.cpp
+AI_Solutions/CodexParallelChain/tests/diag_chaindp_global/global_diag.cpp
+AI_Solutions/CodexParallelChain/tests/run_tests.py
+AI_Solutions/CodexParallelChain/tests/compare_methods.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic.hpp
+AI_Solutions/CodexParallelChain/tests/cap_chain_prototype.cpp
+AI_Solutions/CodexParallelChain/tests/global_preserve_prototype.hpp
+AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp
+AI_Solutions/CodexParallelChain/tests/optimizer_test.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_experiments.cpp
+AI_Solutions/CodexParallelChain/tests/readpl.cpp
+AI_Solutions/CodexParallelChain/tests/window_test.cpp
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp
+AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp
+AI_Solutions/CodexParallelChain/tests/chain_test.cpp
+AI_Solutions/CodexParallelChain/tests/global_preserve_prototype.cpp
+AI_Solutions/CodexParallelChain/tests/multirow_test.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_window.cpp
+AI_Solutions/CodexParallelChain/tests/cap_chain_prototype.hpp
+AI_Solutions/CodexParallelChain/tests/cap_windows_test.cpp
+AI_Solutions/CodexParallelChain/tests/sa_bench2.cpp
+AI_Solutions/CodexParallelChain/tests/cap_windows_bench.cpp
+AI_Solutions/CodexParallelChain/tests/site_repair_bench.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_main.cpp
+AI_Solutions/CodexParallelChain/tests/pool_test.cpp
+AI_Solutions/CodexParallelChain/tests/sa_bench.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_capsearch.cpp
+AI_Solutions/CodexParallelChain/tests/global_test.cpp
+AI_Solutions/CodexParallelChain/tests/repair_compare.cpp
+AI_Solutions/CodexParallelChain/tests/guard_test.cpp
+Testcases/results/CodexParallelChain/tests_sanitized/global.o
+Testcases/results/CodexParallelChain/tests_sanitized/build_legalizer.log
+Testcases/results/CodexParallelChain/tests_sanitized/window_test
+Testcases/results/CodexParallelChain/tests_sanitized/multirow_test
+Testcases/results/CodexParallelChain/tests_sanitized/chain.log
+Testcases/results/CodexParallelChain/tests_sanitized/guard.log
+Testcases/results/CodexParallelChain/tests_sanitized/multirow.log
+Testcases/results/CodexParallelChain/tests_sanitized/build_capsearch.log
+Testcases/results/CodexParallelChain/tests_sanitized/window.log
+Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o
+Testcases/results/CodexParallelChain/tests_sanitized/capsearch.log
+Testcases/results/CodexParallelChain/tests_sanitized/link_capsearch.log
+Testcases/results/CodexParallelChain/tests_sanitized/build_annealer.log
+Testcases/results/CodexParallelChain/tests_sanitized/parallel_sa_test
+Testcases/results/CodexParallelChain/tests_sanitized/link_chain.log
+Testcases/results/CodexParallelChain/tests_sanitized/build_optimizer.log
+Testcases/results/CodexParallelChain/tests_sanitized/pool.log
+Testcases/results/CodexParallelChain/tests_sanitized/chain.o
+Testcases/results/CodexParallelChain/tests_sanitized/link_multirow.log
+Testcases/results/CodexParallelChain/tests_sanitized/window.o
+Testcases/results/CodexParallelChain/tests_sanitized/build_placedb.log
+Testcases/results/CodexParallelChain/tests_sanitized/build_chain.log
+Testcases/results/CodexParallelChain/tests_sanitized/capsearch_test
+Testcases/results/CodexParallelChain/tests_sanitized/parallel_sa.log
+Testcases/results/CodexParallelChain/tests_sanitized/link_pool.log
+Testcases/results/CodexParallelChain/tests_sanitized/link_global.log
+Testcases/results/CodexParallelChain/tests_sanitized/global_test
+Testcases/results/CodexParallelChain/tests_sanitized/build_global.log
+Testcases/results/CodexParallelChain/tests_sanitized/global.log
+Testcases/results/CodexParallelChain/tests_sanitized/link_guard.log
+Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o
+Testcases/results/CodexParallelChain/tests_sanitized/optimizer.log
+Testcases/results/CodexParallelChain/tests_sanitized/build_window.log
+Testcases/results/CodexParallelChain/tests_sanitized/link_optimizer.log
+Testcases/results/CodexParallelChain/tests_sanitized/cap_windows.log
+Testcases/results/CodexParallelChain/tests_sanitized/placedb.o
+
+exec
+/bin/bash -lc 'cat Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/compare.md
+cat Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+# local_grade 比較（參考：CodexChainDP）
+
+條件：最大 ≤ 參考、總位移 ≤ 參考 × 1.005。比值 = 版本 ÷ 參考。
+
+| 版本 | PASS | 雙條件 | 最大 GM | 總 GM | HPWL GM | 秒 |
+|---|---:|---:|---:|---:|---:|---:|
+| ClaudeOpus55_v6 | 11/11 | 8/11 | 0.99604 | 0.99813 | 0.99013 | 616.7 |
+| CodexParallelChain_sa_boundary_r1 | 11/11 | 8/11 | 0.99605 | 0.99833 | 2.00744 | 258.3 |
+
+## ClaudeOpus55_v6
+
+| bench | PASS | 秒 | 最大 | 參考最大 | 最大比 | 總位移 | 參考總 | 總比 | HPWL 比 | 達標 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|
+| ibm01 | PASS | 86.8 | 10427.0270 | 10580.3400 | 0.9855 | 23102846.57 | 23027754.85 | 1.00326 | 0.9857 | ✓ |
+| ibm05 | PASS | 102.0 | 199.9180 | 202.7470 | 0.9860 | 1327881.23 | 1327754.08 | 1.00010 | 0.9843 | ✓ |
+| toy | PASS | 2.9 | 2004.4000 | 2007.9000 | 0.9983 | 43324.40 | 43261.60 | 1.00145 | 0.9809 | ✓ |
+| h01 | PASS | 11.5 | 29.3900 | 29.3900 | 1.0000 | 2358.81 | 2367.09 | 0.99650 | 0.9986 | ✓ |
+| h02 | PASS | 24.3 | 2526.5190 | 2541.4990 | 0.9941 | 463886.86 | 466109.50 | 0.99523 | 0.9948 | ✓ |
+| h03 | PASS | 23.2 | 20.2013 | 20.9394 | 0.9648 | 7066.05 | 7040.20 | 1.00367 | 0.9931 | ✓ |
+| h04 | PASS | 33.1 | 237.8500 | 231.7600 | 1.0263 | 180397.59 | 181950.51 | 0.99147 | 1.0001 | ✗ |
+| h05 | PASS | 26.4 | 1337.3050 | 1337.3050 | 1.0000 | 1551488.48 | 1549278.91 | 1.00143 | 0.9999 | ✓ |
+| h06 | PASS | 95.6 | 427.5500 | 426.6600 | 1.0021 | 890247.22 | 892718.96 | 0.99723 | 1.0043 | ✗ |
+| h07 | PASS | 87.8 | 47.6762 | 47.4162 | 1.0055 | 109173.27 | 109792.26 | 0.99436 | 0.9863 | ✗ |
+| h08 | PASS | 123.2 | 28282.0100 | 28421.6400 | 0.9951 | 125379219.79 | 126036776.25 | 0.99478 | 0.9641 | ✓ |
+
+PASS 11/11；雙條件 8/11；最大幾何平均比 0.99604、總位移 0.99813、HPWL 0.99013；合計 616.7 秒
+
+| 未達標 | 最大差 | 最大差 % | 總超過 ×1.005 | 總差 % |
+|---|---:|---:|---:|---:|
+| h04 | +6.0900 | +2.628% | 0.000 | -0.853% |
+| h06 | +0.8900 | +0.209% | 0.000 | -0.277% |
+| h07 | +0.2600 | +0.548% | 0.000 | -0.564% |
+
+## CodexParallelChain_sa_boundary_r1
+
+| bench | PASS | 秒 | 最大 | 參考最大 | 最大比 | 總位移 | 參考總 | 總比 | HPWL 比 | 達標 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|
+| ibm01 | OK | 25.4 | 10427.0270 | 10580.3400 | 0.9855 | 23102891.17 | 23027754.85 | 1.00326 | 1.7225 | ✓ |
+| ibm05 | OK | 39.0 | 199.9180 | 202.7470 | 0.9860 | 1327879.53 | 1327754.08 | 1.00009 | 1.2197 | ✓ |
+| toy | OK | 1.2 | 2004.4000 | 2007.9000 | 0.9983 | 43324.40 | 43261.60 | 1.00145 | 2.1944 | ✓ |
+| h01 | OK | 9.2 | 29.3900 | 29.3900 | 1.0000 | 2358.81 | 2367.09 | 0.99650 | 1.8142 | ✓ |
+| h02 | OK | 21.6 | 2526.5190 | 2541.4990 | 0.9941 | 463886.86 | 466109.50 | 0.99523 | 1.6497 | ✓ |
+| h03 | OK | 15.7 | 20.2013 | 20.9394 | 0.9648 | 7066.05 | 7040.20 | 1.00367 | 2.1901 | ✓ |
+| h04 | OK | 16.6 | 237.8500 | 231.7600 | 1.0263 | 180395.51 | 181950.51 | 0.99145 | 2.3219 | ✗ |
+| h05 | OK | 7.6 | 1337.3050 | 1337.3050 | 1.0000 | 1551488.48 | 1549278.91 | 1.00143 | 1.4596 | ✓ |
+| h06 | OK | 34.6 | 427.5600 | 426.6600 | 1.0021 | 891012.24 | 892718.96 | 0.99809 | 3.2130 | ✗ |
+| h07 | OK | 26.3 | 47.6762 | 47.4162 | 1.0055 | 109213.04 | 109792.26 | 0.99472 | 2.1446 | ✗ |
+| h08 | OK | 61.0 | 28282.3090 | 28421.6400 | 0.9951 | 125503221.51 | 126036776.25 | 0.99577 | 3.0228 | ✓ |
+
+PASS 11/11；雙條件 8/11；最大幾何平均比 0.99605、總位移 0.99833、HPWL 2.00744；合計 258.3 秒
+
+| 未達標 | 最大差 | 最大差 % | 總超過 ×1.005 | 總差 % |
+|---|---:|---:|---:|---:|
+| h04 | +6.0900 | +2.628% | 0.000 | -0.855% |
+| h06 | +0.9000 | +0.211% | 0.000 | -0.191% |
+| h07 | +0.2600 | +0.548% | 0.000 | -0.528% |
+
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/build/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/ts",
+  "--dp-args=--no-sa ",
+  "Testcases/testcases",
+  "Testcases/holdout"
+ ],
+ "returncode": 0,
+ "seconds": 258.37,
+ "finished": "Fri Oct 23 05:15:42 2026"
+}
+
+exec
+/bin/bash -lc "rg -n '"'^def |''^class |sa_|protocol|reference|fixed|seed|taskset'"' Testcases/results/CodexParallelChain/scripts/phase2_train.py Testcases/results/CodexParallelChain/scripts/diag.py | head -40
+rg --files Testcases/results/CodexParallelChain/scripts" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Testcases/results/CodexParallelChain/scripts/phase2_train.py:21:(d / 'protocol.json').write_text(json.dumps(dict(tag=tag, src_sha256=src_hash, dp_args=extra), indent=1) + '\n')
+Testcases/results/CodexParallelChain/scripts/phase2_train.py:26:# references: this results folder's own phase1/lg (v6's diagnosis) if present, else v6's final paired run
+Testcases/results/CodexParallelChain/scripts/diag.py:29:STARTS = BASE_RESULTS / 'final/hpwl_fixed/legal_starts/ClaudeOpus55_v4'
+Testcases/results/CodexParallelChain/scripts/diag.py:40:def dump(path, data):
+Testcases/results/CodexParallelChain/scripts/diag.py:48:def sha(path):
+Testcases/results/CodexParallelChain/scripts/diag.py:56:def tree_hashes(root):
+Testcases/results/CodexParallelChain/scripts/diag.py:61:def verify_protected(output=None):
+Testcases/results/CodexParallelChain/scripts/diag.py:70:def cases():
+Testcases/results/CodexParallelChain/scripts/diag.py:80:def original_prefix(bench):
+Testcases/results/CodexParallelChain/scripts/diag.py:85:def start_prefix(bench):
+Testcases/results/CodexParallelChain/scripts/diag.py:94:def prefix_hashes(prefix):
+Testcases/results/CodexParallelChain/scripts/diag.py:102:def check_static():
+Testcases/results/CodexParallelChain/scripts/diag.py:120:    driver = (P / 'sa_bench_diag.cpp').read_text()
+Testcases/results/CodexParallelChain/scripts/diag.py:121:    if ''.join(line for line in driver.splitlines(keepends=True) if '[diag-sa]' not in line) != (SOLUTION / 'tests/sa_bench.cpp').read_text():
+Testcases/results/CodexParallelChain/scripts/diag.py:136:        'sa_cases': SA_CASES, 'seeds': SEEDS, 'auto_moves_per_band': AUTO_MOVES,
+Testcases/results/CodexParallelChain/scripts/diag.py:137:        'sa_time_limit': SA_SECONDS, 'polish_seconds': 0,
+Testcases/results/CodexParallelChain/scripts/diag.py:149:def build_one(name):
+Testcases/results/CodexParallelChain/scripts/diag.py:155:    source = P / 'instrumented/src/main.cpp' if name == 'chain' else P / 'sa_bench_diag.cpp'
+Testcases/results/CodexParallelChain/scripts/diag.py:156:    executable = BIN / ('dp_chain_diag' if name == 'chain' else 'sa_bench')
+Testcases/results/CodexParallelChain/scripts/diag.py:162:def must_run(queue, name, command):
+Testcases/results/CodexParallelChain/scripts/diag.py:167:def prepare():
+Testcases/results/CodexParallelChain/scripts/diag.py:172:    executables = [P / 'build/v6/dp', P / 'build/v5/dp', BIN / 'dp_chain_diag', BIN / 'sa_bench']
+Testcases/results/CodexParallelChain/scripts/diag.py:180:def capture(command, directory):
+Testcases/results/CodexParallelChain/scripts/diag.py:182:    command = ['taskset', '-c', TIMED_CPUS] + [str(arg) for arg in command]
+Testcases/results/CodexParallelChain/scripts/diag.py:192:def parse_chain(directory):
+Testcases/results/CodexParallelChain/scripts/diag.py:219:def sa_metrics(directory):
+Testcases/results/CodexParallelChain/scripts/diag.py:221:    index = lines.index('hpwl,attempts,sa_seconds,stage2_seconds')
+Testcases/results/CodexParallelChain/scripts/diag.py:232:def worker(arguments):
+Testcases/results/CodexParallelChain/scripts/diag.py:249:        bench, seed, mode, moves = args
+Testcases/results/CodexParallelChain/scripts/diag.py:250:        directory = P / 'sa' / bench / ('seed' + seed) / mode
+Testcases/results/CodexParallelChain/scripts/diag.py:251:        capture([BIN / 'sa_bench', original_prefix(bench), start_prefix(bench), directory / 'output',
+Testcases/results/CodexParallelChain/scripts/diag.py:252:                 seed, moves, SA_SECONDS, '0', '0' if mode == 'auto' else '1'], directory)
+Testcases/results/CodexParallelChain/scripts/diag.py:253:        sa_metrics(directory)
+Testcases/results/CodexParallelChain/scripts/diag.py:262:def write_csv(name, rows):
+Testcases/results/CodexParallelChain/scripts/diag.py:269:def summarize():
+Testcases/results/CodexParallelChain/scripts/diag.py:285:        for seed in SEEDS:
+Testcases/results/CodexParallelChain/scripts/diag.py:286:            directory = P / 'sa' / bench / ('seed' + str(seed))
+Testcases/results/CodexParallelChain/scripts/diag.py:291:                raise RuntimeError(f'Unmatched SA workload for {bench} seed {seed}: {delta}')
+Testcases/results/CodexParallelChain/scripts/diag.py:292:            pairs.append(dict(bench=bench, seed=seed, auto_threads=auto['threads'], auto_attempts=auto['attempts'],
+Testcases/results/CodexParallelChain/scripts/diag.py:296:                              auto_seconds=auto['sa_seconds'], single_seconds=single['sa_seconds'],
+Testcases/results/CodexParallelChain/scripts/final_report.py
+Testcases/results/CodexParallelChain/scripts/phase1_runs.py
+Testcases/results/CodexParallelChain/scripts/phase2_final.py
+Testcases/results/CodexParallelChain/scripts/phase2_stage2_sweep.py
+Testcases/results/CodexParallelChain/scripts/repair_compare.sh
+Testcases/results/CodexParallelChain/scripts/__pycache__/v6q.cpython-314.pyc
+Testcases/results/CodexParallelChain/scripts/phase1_tables.py
+Testcases/results/CodexParallelChain/scripts/diag.py
+Testcases/results/CodexParallelChain/scripts/stage1_phases.py
+Testcases/results/CodexParallelChain/scripts/v6q.py
+Testcases/results/CodexParallelChain/scripts/phase1_exp3.py
+Testcases/results/CodexParallelChain/scripts/phase2_train.py
+Testcases/results/CodexParallelChain/scripts/phase1_exp2.py
+Testcases/results/CodexParallelChain/scripts/final_summary.py
+Testcases/results/CodexParallelChain/scripts/phase2_large.py
+Testcases/results/CodexParallelChain/scripts/cap_headroom.py
+Testcases/results/CodexParallelChain/scripts/final_validate.py
+Testcases/results/CodexParallelChain/scripts/codex_after.sh
+Testcases/results/CodexParallelChain/scripts/compare_lg.py
+Testcases/results/CodexParallelChain/scripts/phase1_exp.py
+Testcases/results/CodexParallelChain/scripts/toolbin/cmake
+
+codex
+上次 Stage 1 已完成：11/11 合法、雙條件 8/11；但該輪關閉 SA，且 v6 數據不是同輪重跑，尚不能判定 SA 改動是否保留。我會補上三個 seeds 的同輪配對與重現性檢查，交由協調者執行。
+
+exec
+/bin/bash -lc "sed -n '1,40p' Testcases/results/CodexParallelChain/scripts/phase2_train.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#!/usr/bin/env python3
+"""phase2_train.py TAG [extra dp args] — Stage 1 of the current v6 source on the tuning set (testcases + holdout).
+
+Copies AI_Solutions/<this results folder's name> (src + CMakeLists) to phase2/train/TAG/src, builds it there, records the
+source hash, runs run_ts.py --no-sa -v on the 11 cases, and compares with this session's ChainDP / CodexCapDP
+local_grade records (phase1/lg; for a later version: ClaudeOpus55_v6/final). Only testcases + holdout: edge is never used for tuning.
+"""
+import hashlib, json, shutil, subprocess, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from v6q import Queue, R, LAB, PY, V5S, build, note  # noqa: E402
+
+tag = sys.argv[1]
+extra = ' '.join(sys.argv[2:])
+d = R / 'phase2' / 'train' / tag
+if not (d / 'src').exists():
+    d.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(LAB / 'AI_Solutions' / R.name / 'src', d / 'src')
+    shutil.copy(LAB / 'AI_Solutions' / R.name / 'CMakeLists.txt', d / 'CMakeLists.txt')
+src_hash = hashlib.sha256(b''.join(p.read_bytes() for p in sorted((d / 'src').iterdir()))).hexdigest()
+(d / 'protocol.json').write_text(json.dumps(dict(tag=tag, src_sha256=src_hash, dp_args=extra), indent=1) + '\n')
+exe = build('v6', d / 'build', src=d)
+q = Queue(d)
+q.run('stage1', [PY, V5S / 'run_ts.py', '--bin', exe, '--out', d / 'ts', f'--dp-args=--no-sa {extra}',
+                 'Testcases/testcases', 'Testcases/holdout'])
+# references: this results folder's own phase1/lg (v6's diagnosis) if present, else v6's final paired run
+ref = R / 'phase1/lg' if (R / 'phase1/lg/CodexChainDP_27/record.csv').exists() else None
+V6F = R.parent / 'ClaudeOpus55_v6' / 'final'
+refs = (['CodexChainDP', ref / 'CodexChainDP_27/record.csv', 'CodexCapDP', ref / 'CodexCapDP_27/record.csv'] if ref else
+        ['CodexChainDP', V6F / 'lg_CodexChainDP/record.csv', 'ClaudeOpus55_v6', V6F / 'lg_ClaudeOpus55_v6/record.csv'])
+subprocess.run([PY, R / 'scripts/compare_lg.py', d / 'compare.md', *refs, f'{R.name}_{tag}', d / 'ts/record.csv', '--csv', d / 'compare.csv'],
+               check=True)
+subprocess.run([PY, R / 'scripts/stage1_phases.py', d / 'stage1', d / 'ts'], check=True)
+note(f'phase2/train/{tag} 完成（{extra or "預設"}）：見 phase2/train/{tag}/compare.md')
+
+exec
+/bin/bash -lc "rg -n '"'^def |lock|taskset|timeout|sha|build'"' Testcases/results/CodexParallelChain/scripts/v6q.py | head -40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+2:"""v6q.py — serial, checkpointed runner shared by the v6 experiment scripts.
+4:Reusable: copy this scripts/ folder to Testcases/results/<VER>/scripts/; R, the lock and WORK_STATE follow.
+8:results/ClaudeOpus55_v6/timing.lock, so only one timed program runs at a time.
+20:PIN = ['taskset', '-c', '16-19']
+23:def sha(path):
+24:    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+27:def note(msg):
+37:        self.lock = None
+39:            self.lock = (R / 'timing.lock').open('w')
+40:            fcntl.flock(self.lock, fcntl.LOCK_EX)
+63:def env_with_pinned_cmake():
+64:    """local_grade builds with cmake; keep the build on the E-cores."""
+68:    w.write_text('#!/bin/sh\nexec taskset -c 16-19 /home/evan/anaconda3/envs/eda/bin/cmake "$@"\n')
+73:def build(version, out_dir, src=None):
+74:    """cmake Release build of a solution into out_dir (pinned to the E-cores)."""
+79:    subprocess.run(PIN + ['/home/evan/anaconda3/envs/eda/bin/cmake', '--build', out_dir, '-j4'],
+
+exec
+/bin/bash -lc "sed -n '1,40p' AI_Solutions/CodexParallelChain/tests/sa_bench.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+// A common Stage-2 driver compiled separately against each unmodified source
+// tree. Reads a saved legal placement, reports actual SA work, and checks the
+// result using that version's own validator; Python also runs check_pl.py.
+#include "annealer.hpp"
+#include "optimizer.hpp"
+#include "window.hpp"
+#include <cstdio>
+#include <stdexcept>
+#include <fstream>
+
+int main(int argc,char** argv) {
+    try {
+        if(argc!=8 && argc!=9)throw std::runtime_error("sa_bench original legal_prefix out seed moves seconds polish_seconds [threads]");
+        PlaceDB db,loc;std::string err;
+        if(!db.read(argv[1],err)||!loc.read(argv[2],err))throw std::runtime_error(err);
+        Placement p;p.seg.assign(db.nodes.size(),-1);p.site.assign(db.nodes.size(),0);
+        for(int v:db.movable)for(size_t s=0;s<db.segs.size();++s) {
+            const auto& sg=db.segs[s];double x=(loc.nodes[v].gx-sg.x0)/sg.sp;
+            if(std::abs(loc.nodes[v].gy-sg.y)<1e-6 && x>=-1e-6 && x+db.sitesOf(v,sg)<=sg.numSites+1e-6 && std::abs(x-std::round(x))<1e-6) {
+                p.seg[v]=int(s);p.site[v]=int(std::round(x));break;
+            }
+        }
+        if(!checkLegal(db,p).empty())throw std::runtime_error(checkLegal(db,p));
+        const Placement legal=p;
+        SAOptions opt;opt.seed=std::stoull(argv[4]);
+        if(std::string(argv[5])!="default") {
+            opt.minMoves=opt.maxMoves=std::stod(argv[5]);opt.movesPerCell=0;
+        }
+        opt.timeLimit=std::stod(argv[6]);opt.threads=argc==9?std::stoi(argv[8]):1;
+        opt.tracePath=std::string(argv[3])+".trace.csv";
+        double start=wallSeconds();auto stats=anneal(db,p,opt);
+        OptimizeOptions polish;polish.until=wallSeconds()+std::stod(argv[7]);
+        if(std::stod(argv[7])>0) {
+            polishHPWL(db,p,polish);
+            WindowOptions w;w.timeLimit=std::max(0.0,polish.until-wallSeconds());
+            optimizeWindowsHPWL(db,p,w);reorderWindows(db,p,2,false,polish.until);
+        }
+        if(!checkLegal(db,p).empty() || totalHPWL(db,p)>totalHPWL(db,legal)+1e-5)throw std::runtime_error("Stage 2 invariant");
+        writePl(db,p,std::string(argv[3])+".pl");
+        std::printf("hpwl,attempts,sa_seconds,stage2_seconds\n%.12f,%lld,%.6f,%.6f\n",totalHPWL(db,p),stats.attempts,stats.seconds,wallSeconds()-start);
+
+exec
+/bin/bash -lc "sed -n '41,80p' AI_Solutions/CodexParallelChain/tests/sa_bench.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    }catch(const std::exception& e){std::fprintf(stderr,"%s\n",e.what());return 1;}
+}
+
+exec
+/bin/bash -lc "sed -n '20,38p' Testcases/results/CodexParallelChain/scripts/diag.py
+sed -n '70,101p' Testcases/results/CodexParallelChain/scripts/diag.py | head -21" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+import traceback
+
+sys.dont_write_bytecode = True
+from v6q import LAB, PIN, PY, R, Queue, build, note
+
+P = R / 'phase1'
+SOLUTION = LAB / 'AI_Solutions' / R.name
+SELF = Path(__file__).resolve()
+BASE_RESULTS = R.parent / 'ClaudeOpus55_v6'
+STARTS = BASE_RESULTS / 'final/hpwl_fixed/legal_starts/ClaudeOpus55_v4'
+BIN = P / 'bin'
+TIMED_CPUS = '0-19'
+AUTO_MOVES = 3_000_000
+SA_SECONDS = '100000'
+SA_CASES = ['ibm01', 'ibm05', 'h06', 'h07', 'h08']
+SEEDS = [1, 2]
+EDGE_CASES = ['e08_fragmented', 'e16_rowgaps']
+PHASES = ['target_windows', 'ejection_chains', 'post_chain_dp', 'chain_stage']
+
+def cases():
+    training = [(group, aux.stem, aux.with_suffix(''))
+                for group in ['testcases', 'holdout']
+                for aux in sorted((LAB / 'Testcases' / group).glob('*/*.aux'))]
+    if len(training) != 11:
+        raise RuntimeError(f'Expected 11 testcases + holdout, found {len(training)}')
+    return training + [('edge_diagnostic_only', name,
+                        LAB / 'Testcases/edge' / name / name) for name in EDGE_CASES]
+
+
+def original_prefix(bench):
+    group = 'testcases' if bench in ['ibm01', 'ibm05', 'toy'] else 'holdout'
+    return LAB / 'Testcases' / group / bench / bench
+
+
+def start_prefix(bench):
+    original = STARTS / bench / 'output'
+    if original.with_suffix('.aux').is_file() and original.with_suffix('.pl').is_file():
+        return original
+    if bench not in ['ibm01', 'ibm05']:
+        raise RuntimeError(f'Required supplied legal start missing: {original}')
+
+exec
+/bin/bash -lc "rg -n 'starv|timeLimit|movesPer|makeBands|round|parallel' AI_Solutions/CodexParallelChain/src/annealer.cpp | tail -35" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+274:                double movesLeft = (opt_.timeLimit - secs) * (k / dt);
+306:    // ---------------------------------------------------------- v4: parallel SA pieces
+364:    // v5: parallel merge through Shared (replaces v4's syncFrom).
+506:        if (!track_)   // v4 parallel worker: remember which cells this batch moved
+851:            long want=std::lround((tx-db_.nodes[a].w/2-sg.x0)/sg.sp);
+906:        long want = std::lround((tx - na.w / 2 - sg.x0) / sg.sp);   // left site that centers a on tx
+918:        long reach = std::lround(minWinX_ / sg.sp) + w;
+949:        Gap own = rm_.freeAround(a);
+970:        Gap ga = rm_.freeAround(a), gb = rm_.freeAround(b);
+972:        long bWant = P_.site[a] + std::lround((db_.nodes[a].w - db_.nodes[b].w) / 2 / db_.segs[sa].sp);
+995:    bool track_ = true;            // v4: best-so-far journal (off in parallel workers)
+1028:// v4: parallel SA. The schedule is the same as the sequential one (T0 from
+1037:// positions [parallel SA by spatial decomposition, cf. Kravitz & Rutenbar,
+1070:    double perCell = opt.movesPerCell * bands;   // every band gets the sequential per-cell budget
+1080:        std::fprintf(stderr, "[sa] parallel: %d bands/threads  HPWL %.0f  T0 %.4g  %lld moves in %d steps, sync every %.1f moves/cell\n",
+1098:    long long it = 0, round = 0;
+1100:    double limit = opt.timeLimit;   // v6: may be cut after step 0 (starved SA)
+1104:        // sub-rounds of about syncMoves attempts per cell, then merge
+1105:        long long sub = std::max(1LL, (long long)std::llround(perStep / (opt.syncMoves * active)));
+1106:        for (long long k = 0; k < sub; ++k, ++round) {
+1110:            std::vector<int> edge = sa_detail::bandEdges(db, P, bands, round, std::max(1, opt.minBandRows / 2));
+1112:            // v5: every band takes its rows over from the shared state, in parallel
+1116:                work[b]->reseed(opt.seed * 7919ULL + round * 131ULL + b);
+1128:            // once, in parallel chunks; (4) every worker copies what changed.
+1188:        // v6: a starved SA hands its time to the polish. When the whole limit
+1189:        // buys fewer than starvedAttemptsPerCell attempts per cell (at the rate
+1190:        // of step 0, the slowest), the SA keeps only starvedMinFraction of it.
+1197:        if (step == 0 && dt > 0 && opt.starvedAttemptsPerCell > 0) {
+1199:            if (perCellAll < opt.starvedAttemptsPerCell) {
+1200:                double cut = std::max(elapsed(), opt.starvedMinFraction * limit);
+1202:                    std::fprintf(stderr, "[sa] starved: %.0f attempts per cell in %.1f s, limit -> %.1f s\n", perCellAll, limit, cut);
+1221:        std::fprintf(stderr, "[sa] %lld sync rounds, %lld attempts (%.1f%% proposals failed)  %.1fs (moves %.1fs, merge %.1fs)\n",
+1222:                     round, it, 100.0 * failed / std::max(1LL, it), res.seconds, tBatch, tSync);
+1242:        double planned = std::max(opt.minMoves, std::min(opt.maxMoves, opt.movesPerCell * double(db.movable.size())));
+1243:        if (planned / 1.2e6 <= 0.7 * opt.timeLimit) threads = 1;
+
+exec
+/bin/bash -lc "sed -n '30,62p' Testcases/results/CodexParallelChain/scripts/v6q.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    print(msg, flush=True)
+
+
+class Queue:
+    def __init__(self, out, timed=True):
+        self.out = Path(out)
+        self.out.mkdir(parents=True, exist_ok=True)
+        self.lock = None
+        if timed:
+            self.lock = (R / 'timing.lock').open('w')
+            fcntl.flock(self.lock, fcntl.LOCK_EX)
+
+    def run(self, name, cmd, env=None, cwd=LAB, quiet=False):
+        cmd = [str(c) for c in cmd]
+        marker = self.out / f'{name}.done.json'
+        if marker.exists():
+            if json.loads(marker.read_text())['command'] == cmd:
+                return True
+            raise RuntimeError(f'{name}: finished with a different command')
+        t = time.time()
+        with (self.out / f'{name}.log').open('w') as f:
+            rc = subprocess.run(cmd, cwd=cwd, env=env, stdout=f, stderr=subprocess.STDOUT).returncode
+        info = dict(command=cmd, returncode=rc, seconds=round(time.time() - t, 2), finished=time.ctime())
+        if rc:
+            (self.out / f'{name}.failed.json').write_text(json.dumps(info, indent=1) + '\n')
+            note(f'{self.out.name}/{name} FAILED rc={rc}，看 {name}.log')
+            return False
+        marker.write_text(json.dumps(info, indent=1) + '\n')
+        if not quiet:
+            note(f'{self.out.relative_to(R)}/{name} 完成（{info["seconds"]:.0f} 秒）')
+        return True
+
+
+
+exec
+/bin/bash -lc "sed -n '85,101p' Testcases/results/CodexParallelChain/scripts/diag.py
+sed -n '149,166p' Testcases/results/CodexParallelChain/scripts/diag.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def start_prefix(bench):
+    original = STARTS / bench / 'output'
+    if original.with_suffix('.aux').is_file() and original.with_suffix('.pl').is_file():
+        return original
+    if bench not in ['ibm01', 'ibm05']:
+        raise RuntimeError(f'Required supplied legal start missing: {original}')
+    return P / 'sa/legal_starts/ClaudeOpus55_v4' / bench / 'output'
+
+
+def prefix_hashes(prefix):
+    aux = prefix.with_suffix('.aux')
+    if not aux.is_file():
+        raise RuntimeError(f'Missing auxiliary file: {aux}')
+    paths = [aux] + [aux.parent / token for token in aux.read_text().split(':', 1)[1].split()]
+    return {str(path): {'resolved': str(path.resolve()), 'sha256': sha(path)} for path in paths}
+
+
+def build_one(name):
+    BIN.mkdir(exist_ok=True)
+    if name in ['v4', 'v5', 'v6']:
+        version = R.name if name == 'v6' else 'ClaudeOpus55_' + name
+        build(version, P / 'build' / name)
+        return
+    source = P / 'instrumented/src/main.cpp' if name == 'chain' else P / 'sa_bench_diag.cpp'
+    executable = BIN / ('dp_chain_diag' if name == 'chain' else 'sa_bench')
+    subprocess.run(PIN + ['g++', '-std=c++17', '-O3', '-DNDEBUG', '-pthread',
+                         '-I' + str(SOLUTION / 'src'), str(source),
+                         str(P / 'build/v6/libdp_core.a'), '-o', str(executable)], check=True)
+
+
+def must_run(queue, name, command):
+    if not queue.run(name, command, env=dict(os.environ, PYTHONDONTWRITEBYTECODE='1')):
+        raise RuntimeError(f'Failed job: {name}; see {queue.out / (name + ".log")}')
+
+
+
+exec
+/bin/bash -lc "sed -n '1,40p' Testcases/results/CodexParallelChain/scripts/phase2_stage2_sweep.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#!/usr/bin/env python3
+"""phase2_stage2_sweep.py — large designs: SA / polish split with v6's polish (passes until no gain / no fit)
+and v6's thread floor, from this session's CodexCapDP L1 / L2 legal placements.
+
+  v6:      sa_bench built from AI_Solutions/<results folder name>/src, SA S -> polish 90-S, S = 15 / 30 / 45 / 60 (or argv: TAG L2_SPLITS L1_SPLITS, e.g. v6b 0,7,15 60)
+  base:    sa_bench built from CodexCapDP (its default for that design: L1 SA60->P30, L2 SA30->P60)
+seeds 1-2, automatic threads. Output: phase2/stage2_sweep/<design>_<ver>_sa<S>_s<seed>.csv
+"""
+import subprocess, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from v6q import Queue, R, LAB, note  # noqa: E402
+
+SA_BENCH = LAB / 'AI_Solutions/CodexChainDP/tests/sa_bench.cpp'
+tag = sys.argv[1] if len(sys.argv) > 1 else 'v6a'
+splits = {'L2': [int(x) for x in sys.argv[2].split(',')], 'L1': [int(x) for x in sys.argv[3].split(',')]} if len(sys.argv) > 3 else {'L2': [15, 30, 45, 60], 'L1': [15, 30, 45, 60]}
+
+
+def sab(name, src):
+    exe = R / 'bin' / f'sa_bench_{name}'
+    subprocess.run(['taskset', '-c', '16-19', 'g++', '-std=c++17', '-O3', '-DNDEBUG', '-pthread', f'-I{src}', SA_BENCH,
+                    *[src / f'{n}.cpp' for n in ['annealer', 'optimizer', 'window', 'placedb', 'global']], '-o', exe], check=True)
+    return exe
+
+
+new = sab(tag, LAB / 'AI_Solutions' / R.name / 'src')
+base = R / 'bin' / 'sa_bench_CodexCapDP'
+q = Queue(R / 'phase2' / 'stage2_sweep')
+for design in ['L2', 'L1']:
+    src = LAB / f'Testcases/large/{design}/{design}'
+    sd = q.out / f'start_{design}'
+    sd.mkdir(exist_ok=True)
+    for ext in ['.aux', '.nodes', '.nets', '.wts', '.scl']:
+        if not (sd / f'{design}{ext}').exists():
+            (sd / f'{design}{ext}').symlink_to(Path(f'{src}{ext}'))
+    if not (sd / f'{design}.pl').exists():
+        (sd / f'{design}.pl').symlink_to(R / f'phase1/lg/CodexCapDP_{design}/results/CodexCapDP/{design}/output_legal.pl')
+    runs = [('base', base, 30 if design == 'L2' else 60)] + [(tag, new, s) for s in splits[design]]
+    for seed in [1, 2]:
+        for ver, exe, sa in runs:
+
+exec
+/bin/bash -lc "sed -n '1,40p' AI_Solutions/CodexParallelChain/src/annealer.hpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+// annealer.hpp — Stage 2: simulated annealing on total HPWL with legality-preserving moves.
+#pragma once
+#include <cstdint>
+#include <string>
+
+#include "placedb.hpp"
+
+struct SAOptions {
+    uint64_t seed = 1;
+    double timeLimit = 60;        // seconds; moves per step shrink to fit
+    double movesPerCell = 5000;   // attempted moves = movesPerCell * #movable cells ...
+    double minMoves = 5e6;        // ... but at least this many (small designs anneal properly)
+    double maxMoves = 6e7;        // v3: ... and at most this many (big designs keep ~1 min)
+    int steps = 100;              // temperature steps (T0 -> T0 * tEndRatio, geometric)
+    double p0 = 0.8;              // acceptance probability of an average uphill move at T0
+    double tEndRatio = 1e-3;
+    double pTarget = 0.5;         // chance a move aims at the cell's optimal region
+    double win0 = 0.05;           // initial range window, as a fraction of the chip
+    double maxWin = 0.1;          // v2: largest range window, as a fraction of the chip
+    double pGlobalSwap = 0.04;   // cold multi-candidate global/vertical swaps
+    double pRowOpt = 0.01;        // v3: chance of a linear-placement window move
+    int rowWin = 12;              //     cells per linear-placement window
+    double pIsm = 0.01;           // v3: chance of an independent-set-matching move
+    int ismSize = 12;             //     cells per matching
+    double ismReach = 3;          //     candidates within this many minimum windows in x (+-2 rows)
+    double polishFrom = 0.5;      // v3: rowopt / ism only from this fraction of the temperature steps on
+    double minWinCells = 4;       // smallest window: this many average cell widths ...
+    double minWinRows = 1.5;      // ... and this many rows
+    bool clampTarget = false;     // optimal-region moves also obey the window (worse in tests)
+    double pReorder = 0.1;        // v2: chance of a local-reordering move (3 neighbours)
+    int nearTries = -1;           // v2: if the target fails, cells/gaps tried on each side of it;
+                                  //     -1 = auto: 3 when utilization >= 0.72, else 0
+    int threads = 0;              // v4: parallel SA worker threads (0 = auto: hardware, at most 8)
+    int minBandRows = 12;         // v4: rows per band at least (fewer threads on short chips)
+    double syncMoves = 1.0;       // v4: bands merge after about this many attempts per cell
+    double starvedAttemptsPerCell = 100;   // v6: parallel SA: fewer projected attempts per cell -> keep only ...
+    double starvedMinFraction = 0.1;       // v6: ... this fraction of timeLimit (the rest goes to the polish); 0 = off
+    std::string tracePath;        // CSV trace for the report plot (empty = none)
+    bool verbose = false;
+};
+
+exec
+/bin/bash -lc "sed -n '1228,1260p' AI_Solutions/CodexParallelChain/src/annealer.cpp
+sed -n '219,232p' Testcases/results/CodexParallelChain/scripts/diag.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+
+int saThreads(const PlaceDB& db, const SAOptions& opt) {
+    int threads = opt.threads > 0 ? opt.threads : (int)std::min(8u, std::max(1u, std::thread::hardware_concurrency()));
+    // Parallel SA only pays off when one thread could not finish the schedule
+    // in the time limit (ibm01 -3.7 %, h06 -1.8 %, 200k cells -6.8 % at equal
+    // time). When one thread finishes early anyway (h05: 30M moves in 16 s) the
+    // extra moves add nothing and the band edges cost quality (h05: +0.4 %
+    // with 2 threads, +1.4 % with 6). Below 8000 cells (< 4e7 planned moves)
+    // the automatic choice is one thread; --threads N still forces N.
+    // v5: ... unless one thread cannot finish its schedule in the time limit
+    // (about 1.2M moves/s on the holdout designs). With SA limited to 10 s,
+    // 4 threads were better on h03 / h04 / h05 by 1.8 / 0.4 / 0.4 % (3 seeds,
+    // tune/sa_threads_t10); with the default 60 s this keeps v4's choice.
+    if (opt.threads <= 0 && db.movable.size() < 8000) {
+        double planned = std::max(opt.minMoves, std::min(opt.maxMoves, opt.movesPerCell * double(db.movable.size())));
+        if (planned / 1.2e6 <= 0.7 * opt.timeLimit) threads = 1;
+    }
+    // memory: every worker holds its own copy of positions and net boxes. Past
+    // a few hundred thousand objects the copies no longer fit in the cache:
+    // on the 200k-cell test design 8 threads did no more moves than 4 (memory
+    // bound) but had more band edges, and ended 8 % worse; 4 was best.
+    long long n = std::max<long long>(1, (long long)db.movable.size() + (long long)db.nets.size());
+    // v6: at least 4 (was 2), and the hard cap 12e6 / n (was 8e6): on the
+    // 1M-cell L2 (n = 2.7M) four workers did 29 % more attempts than two and
+    // ended 0.7-0.8 % better (2 seeds, diagnosis.md 4.1); 8e6 / n gave 3
+    threads = (int)std::min<long long>(threads, std::max<long long>(4, 2000000LL / n));
+    threads = (int)std::min<long long>(threads, std::max<long long>(1, 12000000LL / n));
+    // a band needs enough rows for vertical moves, and enough cells to be worth a thread
+    threads = std::min(threads, std::max(1, (int)db.rows.size() / std::max(1, opt.minBandRows)));
+    threads = std::min(threads, std::max(1, (int)(db.movable.size() / 1000)));
+    return std::max(1, threads);
+}
+
+def sa_metrics(directory):
+    lines = (directory / 'stdout.txt').read_text().splitlines()
+    index = lines.index('hpwl,attempts,sa_seconds,stage2_seconds')
+    row = next(csv.DictReader(io.StringIO('\n'.join(lines[index:index + 2]))))
+    result = {key: int(value) if key == 'attempts' else float(value) for key, value in row.items()}
+    match = re.search(r'\[diag-sa\] threads=(\d+) requested_moves=(\d+)', (directory / 'stderr.txt').read_text())
+    if not match or result['attempts'] <= 0:
+        raise RuntimeError('Missing SA count/thread diagnostics')
+    result.update(threads=int(match[1]), requested_moves=int(match[2]))
+    dump(directory / 'metrics.json', result)
+    return result
+
+
+def worker(arguments):
+
+exec
+/bin/bash -lc "rg -n 'check_pl|fixed|seconds|protocol|seed|sa_bench' Testcases/results/CodexParallelChain/scripts/phase2_final.py | head -35
+sed -n '1,8p' Testcases/results/CodexParallelChain/phase1/sa_pairs.csv" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+9:  final/edge_seed5            gen_edge.py Testcases/edge_seed5 --seed 20261023 --check   (only now)
+10:  final/seed5_<ver>           local_grade edge_seed5                            v4, ChainDP, v5, CodexCapDP, v6
+11:  final/ts_<ver>              run_ts --no-sa holdout + edge (Stage 1 for the HPWL protocols)   v4, CodexCapDP, v6
+12:  final/hpwl_<mode>           hpwl_compare.py fixed / equal / default, holdout + edge, seeds 1-3, v4 / CodexCapDP / v6
+58:q.run('edge_seed5', ['taskset', '-c', '16-19', PY, 'Grader/tools/gen_edge.py', 'Testcases/edge_seed5', '--seed', '20261023', '--check'])
+60:    grade(f'seed5_{v}', v, ['Testcases/edge_seed5'])
+73:for mode in ['fixed', 'equal', 'default']:
+bench,seed,auto_threads,auto_attempts,single_requested,single_attempts,schedule_rounding_attempts,auto_hpwl,single_hpwl,auto_loss_pct,auto_seconds,single_seconds,legal_start
+ibm01,1,8,23992002,23992002,23992000,2,54562032.0,53067378.0,2.8165212911027915,5.009135,21.281258,/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output
+ibm01,2,8,23992000,23992000,23992000,0,55040712.0,53337582.0,3.19311437852583,5.515971,21.312501,/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output
+ibm05,1,8,23995921,23995921,23995900,21,10147365.5,10013432.0,1.3375384183964112,5.289494,25.689888,/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output
+ibm05,2,8,23995914,23995914,23995900,14,10160930.5,10033235.0,1.2727250981363403,5.518209,25.53909,/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output
+h06,1,5,14996036,14996036,14996000,36,722323.0,706763.0,2.201586670496325,4.009987,13.679325,/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output
+h06,2,5,14996365,14996365,14996300,65,716259.5,708454.0,1.101765252225273,4.025128,13.784389,/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output
+h07,1,8,23993528,23993528,23993500,28,169086.71800000276,169060.05100000216,0.015773685056208464,5.691396,22.139788,/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output
+
+exec
+/bin/bash -lc "rg -n 'fixed|equal|default|moves|seconds|mode' Testcases/results/ClaudeOpus55_v5/scripts/hpwl_compare.py | head -35
+sed -n '73,90p' Testcases/results/CodexParallelChain/scripts/v6q.py
+rg -n 'argparse|add_argument' Grader/tools/check_pl.py | head -15
+rg -n 'struct SAStats|accepted|best' AI_Solutions/CodexParallelChain/src/annealer.hpp | tail -10" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+5:version's own sources, and the Stage 1 placements + Stage 1 times of a time-stamped default run
+8:modes (each is its own experiment; never mix their numbers):
+9:  equal    same TOTAL time: budget = slower Stage 1 + 12 s, SA limit = budget - own Stage 1 - 2 s,
+10:           polish 2 s, automatic threads  (= CodexChainDP's equal_time_default protocol)
+11:  default  the programs' default Stage 2: SA limit 60 s, polish 30 s, automatic threads, each from
+12:           its own Stage 1 (what a default run does, minus re-running Stage 1)
+13:  fixed    same number of SA proposals: --moves N (default 5e6), 1 thread, no time limit, no polish,
+17:       [--moves N] [--benches a b ...]
+37:    """(seconds, legal prefix) from a run_ts.py directory"""
+60:    ap.add_argument('mode', choices=['equal', 'default', 'fixed'])
+63:    ap.add_argument('--groups', nargs='+', default=['holdout', 'edge'])
+64:    ap.add_argument('--seeds', type=int, nargs='+', default=[1, 2, 3])
+65:    ap.add_argument('--moves', type=float, default=5e6)
+72:    (out / 'protocol.json').write_text(json.dumps(vars(a), indent=2, default=str) + '\n')
+74:    fields = ['mode', 'group', 'bench', 'version', 'seed', 'verdict', 'budget', 'stage1_seconds', 'sa_limit', 'polish_limit',
+75:              'threads', 'process_seconds', 'charged_seconds', 'hpwl', 'attempts', 'sa_seconds', 'stage2_seconds']
+98:                    if a.mode == 'fixed':
+100:                        moves, sa, pol, thr = str(int(a.moves)), 100000.0, 0.0, '1'
+101:                    elif a.mode == 'equal':
+102:                        moves, sa, pol, thr = 'default', budget - t1 - 2, 2.0, '0'
+104:                        moves, sa, pol, thr = 'default', 60.0, 30.0, '0'
+107:                    cmd = [str(exes[n]), str(aux.with_suffix('')), str(start), str(d / 'output'), str(seed), moves,
+112:                    r = dict(mode=a.mode, group=group, bench=bench, version=n, seed=seed, verdict='FAIL',
+113:                             budget=budget if a.mode == 'equal' else '', stage1_seconds=t1, sa_limit=sa, polish_limit=pol,
+114:                             threads=thr, process_seconds=round(time.monotonic() - t, 3))
+117:                        r['charged_seconds'] = round(t1 + float(r['stage2_seconds']), 3)
+129:                    print(f"[{a.mode}] {bench:16s} {n:18s} seed {seed}: {r['verdict']} hpwl {r.get('hpwl', '')} "
+130:                          f"attempts {r.get('attempts', '')} sa {r.get('sa_seconds', '')}s", flush=True)
+139:        by.setdefault((r['group'], r['bench']), {}).setdefault(r['version'], []).append(r)
+156:            ratios[n].setdefault(g, []).append(ratio)
+161:            ss = [float(x['sa_seconds'] or 0) for x in v[n]]
+def build(version, out_dir, src=None):
+    """cmake Release build of a solution into out_dir (pinned to the E-cores)."""
+    src = src or LAB / 'AI_Solutions' / version
+    e = env_with_pinned_cmake()
+    subprocess.run(['cmake', '-S', src, '-B', out_dir, '-DBUILD_TESTING=OFF', '-DCMAKE_BUILD_TYPE=Release'],
+                   env=e, check=True, stdout=subprocess.DEVNULL)
+    subprocess.run(PIN + ['/home/evan/anaconda3/envs/eda/bin/cmake', '--build', out_dir, '-j4'],
+                   env=e, check=True, stdout=subprocess.DEVNULL)
+    return Path(out_dir) / 'dp'
+43:    double initial = 0, best = 0;
+44:    long long attempts = 0, accepted = 0;
+49:// Improves P in place; P stays legal after every accepted move, and the best
+
+exec
+/bin/bash -lc "sed -n '106,127p' Testcases/results/ClaudeOpus55_v5/scripts/hpwl_compare.py
+sed -n '1,32p' Testcases/results/CodexParallelChain/scripts/v6q.py
+sed -n '40,51p' AI_Solutions/CodexParallelChain/src/annealer.hpp
+sed -n '1,28p' AI_Solutions/CodexParallelChain/CMakeLists.txt" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+                    d.mkdir(parents=True, exist_ok=True)
+                    cmd = [str(exes[n]), str(aux.with_suffix('')), str(start), str(d / 'output'), str(seed), moves,
+                           str(max(0.0, sa)), str(pol), thr]
+                    t = time.monotonic()
+                    with open(d / 'stdout.txt', 'w') as o, open(d / 'stderr.txt', 'w') as e:
+                        p = subprocess.run(cmd, stdout=o, stderr=e, timeout=3600)
+                    r = dict(mode=a.mode, group=group, bench=bench, version=n, seed=seed, verdict='FAIL',
+                             budget=budget if a.mode == 'equal' else '', stage1_seconds=t1, sa_limit=sa, polish_limit=pol,
+                             threads=thr, process_seconds=round(time.monotonic() - t, 3))
+                    if p.returncode == 0:
+                        r.update(next(csv.DictReader(open(d / 'stdout.txt'))))
+                        r['charged_seconds'] = round(t1 + float(r['stage2_seconds']), 3)
+                        ck = subprocess.run([sys.executable, str(CHECK), str(aux.with_suffix('')), str(d / 'output.pl'), '--quiet'],
+                                            capture_output=True, text=True)
+                        (d / 'check.txt').write_text(ck.stdout + ck.stderr)
+                        if ck.returncode == 0:
+                            r['verdict'] = 'PASS'
+                    w.writerow({k: r.get(k, '') for k in fields})
+                    f.flush()
+                    try:
+                        os.remove(d / 'output.trace.csv')
+                    except OSError:
+#!/usr/bin/env python3
+"""v6q.py — serial, checkpointed runner shared by the v6 experiment scripts.
+
+Reusable: copy this scripts/ folder to Testcases/results/<VER>/scripts/; R, the lock and WORK_STATE follow.
+
+Every step writes <out>/<name>.done.json (command + hashes) when it finishes; a
+rerun skips finished steps whose command did not change. Timed steps hold
+results/ClaudeOpus55_v6/timing.lock, so only one timed program runs at a time.
+Each finished step appends a line to AI_Solutions/ClaudeOpus55_v6/WORK_STATE.md.
+"""
+import fcntl, hashlib, json, os, subprocess, time
+from pathlib import Path
+
+R = Path(__file__).resolve().parents[1]          # Testcases/results/ClaudeOpus55_v6
+LAB = R.parents[2]
+PY = '/home/evan/anaconda3/bin/python3'
+V5S = R.parent / 'ClaudeOpus55_v5' / 'scripts'
+# the results folder is named after the version: Testcases/results/<VER>/ <-> AI_Solutions/<VER>/
+WORK_STATE = LAB / 'AI_Solutions' / R.name / 'WORK_STATE.md'
+PIN = ['taskset', '-c', '16-19']
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def note(msg):
+    with WORK_STATE.open('a') as f:
+        f.write(f'- {time.strftime("%m-%d %H:%M")} {msg}\n')
+    print(msg, flush=True)
+
+
+};
+
+struct SAResult {
+    double initial = 0, best = 0;
+    long long attempts = 0, accepted = 0;
+    double seconds = 0;
+    double limitCut = 0;   // v6: seconds of timeLimit given up by a starved SA (main hands them to the polish)
+};
+
+// Improves P in place; P stays legal after every accepted move, and the best
+// placement seen is returned.
+SAResult anneal(const PlaceDB& db, Placement& P, const SAOptions& opt);
+cmake_minimum_required(VERSION 3.10)
+project(CodexCapDP CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Without an explicit build type CMake builds without optimization.
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
+
+find_package(Threads REQUIRED)   # v4: parallel SA (std::thread)
+file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+list(REMOVE_ITEM SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+add_library(dp_core STATIC ${SOURCES})
+target_compile_options(dp_core PRIVATE -Wall -Wextra)
+target_link_libraries(dp_core PUBLIC Threads::Threads)
+add_executable(dp src/main.cpp)
+target_compile_options(dp PRIVATE -Wall -Wextra)
+target_link_libraries(dp PRIVATE dp_core)
+
+include(CTest)
+if(BUILD_TESTING)
+  foreach(name window multirow optimizer chain parallel_sa pool global capsearch cap_windows guard)
+    add_executable(${name}_test tests/${name}_test.cpp)
+    target_link_libraries(${name}_test PRIVATE dp_core)
+    # Several inherited exhaustive tests use assert, including Release builds.
+    target_compile_options(${name}_test PRIVATE -UNDEBUG)
+
+exec
+/bin/bash -lc "rg -n 'void writePl|writePl\\(' AI_Solutions/CodexParallelChain/src/placedb.cpp
+rg -n 'CHECK =' Testcases/results/ClaudeOpus55_v5/scripts/hpwl_compare.py
+rg -n 'starved|round|phase' AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp | tail -12
+sed -n '20,37p' AI_Solutions/CodexParallelChain/WORK_STATE.md" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+339:bool writePl(const PlaceDB& db, const Placement& p, const std::string& path) {
+368:    if (!writePl(db, legal, outPrefix + "_legal.pl") || !writePl(db, finalP, outPrefix + ".pl")) {
+24:CHECK = LAB / 'Grader' / 'tools' / 'check_pl.py'
+56:    for (int round = 0; round < 4; ++round) {
+57:        auto edge = sa_detail::bandEdges(sparse, original, 8, round, 6);
+72:    options.starvedAttemptsPerCell = 0;
+87:    // v6: a starved SA keeps only starvedMinFraction of its limit
+88:    SAOptions starved = options;
+89:    starved.starvedAttemptsPerCell = 1e15;
+90:    starved.starvedMinFraction = 0.1;
+92:    auto cut = anneal(db, s, starved);
+93:    require(cut.limitCut > 26.9 && cut.limitCut < 27.0 + 1e-9, "starved SA did not keep 10 % of its limit");
+94:    require(cut.seconds < 3.5, "starved SA ran past its cut limit");
+95:    require(checkLegal(db, s).empty() && cut.best <= cut.initial + 1e-7, "starved SA broke legality or its incumbent");
+102:    std::cout << "PASS: parallel legality, HPWL cache, fixed-work determinism, starved cut, expired budget\n";
+   例外：該目錄沒有 ibm01、ibm05；在新目錄 phase1/sa/legal_starts/ClaudeOpus55_v4/ 以未修改 v4 -v --no-sa 補建；每對 SA 共用同一份起點並保存 SHA256。
+3. toy：未插樁 v5 與 v6 各一次 -v --no-sa，保留完整 cap stderr；HANDOFF 參考最大位移分別 1972.0、2004.4，實測另列。
+
+## 執行約定
+
+- 使用複製的 v6q.Queue，每步 .done.json；拿新版本 timing.lock，同時拿既有 v6 timing.lock（唯讀開啟、不更動檔案），計時程式一次一個。
+- 編譯、分析固定 CPU 16–19；計時程式可用 CPU 0–19，無其他診斷同時執行。
+- 完成輸出 phase1/chain_summary.csv、chain_rounds.csv、sa_pairs.csv、toy_summary.csv、summary.json；只有全部成功且保護資料夾 SHA256 未變才寫 phase1/ALL_DONE。
+- 失敗寫 phase1/FAILED.json，保留每步 log/.failed.json；修正後可重跑佇列，已成功步驟跳過。
+- 尚未啟動；先做編譯與輸入檢查，不執行計時診斷。
+- 10-22 23:55 phase1/build_jobs/build_v6 完成（12 秒）
+- 10-22 23:55 phase1/build_jobs/build_chain 完成（2 秒）
+- 10-22 23:55 phase1/build_jobs/build_sa 完成（1 秒）
+- 10-22 23:55 phase1/build_jobs/build_v5 完成（12 秒）
+- 10-22 23:55 phase1/build_jobs/build_v4 完成（8 秒）
+- 10-22 23:55 phase1 啟動前檢查完成：編譯成功、輸入有效、插樁僅 fprintf；尚未執行診斷。
+
+## 第一階段執行歷史（已於 10-23 05:01 完成）
+
+exec
+/bin/bash -lc "sed -n '48,70p' Testcases/results/CodexParallelChain/scripts/diag.py
+sed -n '339,352p' AI_Solutions/CodexParallelChain/src/placedb.cpp
+sed -n '310,341p' Testcases/results/CodexParallelChain/scripts/diag.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def sha(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as f:
+        for block in iter(lambda: f.read(1024 * 1024), b''):
+            h.update(block)
+    return h.hexdigest()
+
+
+def tree_hashes(root):
+    return {str(p.relative_to(root)): sha(p)
+            for p in sorted(root.rglob('*')) if p.is_file()}
+
+
+def verify_protected(output=None):
+    original = json.loads((R / 'provenance/protected_before.json').read_text())
+    current = {n: tree_hashes(LAB / 'AI_Solutions' / n) for n in original}
+    if current != original:
+        raise RuntimeError('Protected directories changed; do not write ALL_DONE')
+    if output:
+        dump(output, current)
+
+
+def cases():
+bool writePl(const PlaceDB& db, const Placement& p, const std::string& path) {
+    std::ofstream out(path);
+    if (!out) return false;
+    out << "UCLA pl 1.0\n\n";
+    for (int v = 0; v < (int)db.nodes.size(); ++v) {
+        const Node& n = db.nodes[v];
+        out << n.name << '\t' << fmtNum(p.x(db, v)) << '\t' << fmtNum(p.y(db, v)) << "\t: " << n.orient;
+        if (!n.plSuffix.empty()) out << ' ' << n.plSuffix;
+        out << '\n';
+    }
+    return (bool)out;
+}
+
+bool writeOutput(const PlaceDB& db, const Placement& legal, const Placement& finalP,
+    write_csv('chain_rounds.csv', rounds)
+    write_csv('chain_summary.csv', totals)
+    write_csv('sa_pairs.csv', pairs)
+    write_csv('toy_summary.csv', toy)
+    by_bench = {}
+    for bench in SA_CASES:
+        values = [row['auto_loss_pct'] for row in pairs if row['bench'] == bench]
+        by_bench[bench] = {'mean_loss_pct': statistics.mean(values), 'min_loss_pct': min(values), 'max_loss_pct': max(values)}
+    dump(P / 'summary.json', {'chain': totals, 'sa_pairs': pairs, 'sa_by_bench': by_bench, 'toy': toy,
+                             'scope': 'diagnosis only; two SA seeds; edge e08/e16 are not tuning data',
+                             'sa_warning': 'positive loss means auto HPWL is worse; serial 100-step rounding is listed',
+                             'starts': json.loads((P / 'sa/start_provenance.json').read_text())})
+
+
+def run_queue():
+    preflight = json.loads((P / 'preflight.done.json').read_text())
+    if preflight['script_sha256'] != sha(SELF) or any(sha(path) != digest for path, digest in preflight['executables'].items()):
+        raise RuntimeError('Prepared script/binaries changed; rerun --prepare')
+    check_static()
+    queue = Queue(P / 'jobs')
+    # Coordinate with the original queue without truncating or modifying its lock.
+    with (BASE_RESULTS / 'timing.lock').open('r') as common_lock:
+        fcntl.flock(common_lock, fcntl.LOCK_EX)
+        for _, bench, _ in cases():
+            for variant in ['default', 'chain6']:
+                must_run(queue, f'chain_{bench}_{variant}', [PY, SELF, '--worker', 'chain', bench, variant])
+        for bench in SA_CASES:
+            if start_prefix(bench).is_relative_to(P):
+                must_run(queue, 'legal_start_' + bench, PIN + [PY, SELF, '--worker', 'start', bench])
+        dump(P / 'sa/start_provenance.json', {bench: prefix_hashes(start_prefix(bench)) for bench in SA_CASES})
+        for bench in SA_CASES:
+            for seed in SEEDS:
+
+exec
+/bin/bash -lc 'tail -n 16 Testcases/results/CodexParallelChain/scripts/diag.py' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        build_one(args.build)
+    elif args.worker:
+        worker(args.worker)
+    elif args.summarize:
+        summarize()
+    else:
+        try:
+            run_queue()
+        except Exception as error:
+            dump(P / 'FAILED.json', {'error': str(error), 'traceback': traceback.format_exc()})
+            note(f'phase1 診斷失敗：{error}；未寫 ALL_DONE，詳見 phase1/FAILED.json。')
+            raise
+
+
+if __name__ == '__main__':
+    main()
+
+codex
+配對將共用合法起點，分別記錄固定次數單執行緒、固定次數自動執行緒及固定 10 秒；固定次數會重跑比對。程式碼維持第 1 輪候選，待結果返回後才決定保留、調整或撤回。
+
+apply patch
+patch: completed
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+diff --git a/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py b/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..e61e8ac7dc085025f8c9da6bfa0f9892d381594e
+--- /dev/null
++++ b/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+@@ -0,0 +1,222 @@
++#!/usr/bin/env python3
++"""Checkpointed, same-session SA pairing; --prepare builds without timing runs.
++
++These are isolated SA protocols (no polish or Stage 1 charge), not the final
++fixed/equal/default end-to-end protocols. Fixed auto is the HANDOFF B SA gate.
++"""
++import argparse
++import csv
++import fcntl
++import hashlib
++import io
++import json
++import math
++import os
++from pathlib import Path
++import shutil
++import statistics
++import subprocess
++import sys
++import time
++import traceback
++
++sys.dont_write_bytecode = True
++from v6q import LAB, R, PIN, PY, Queue, build, note
++from diag import prefix_hashes, original_prefix, start_prefix, sha, verify_protected
++
++SELF = Path(__file__).resolve()
++CASES = ['ibm01', 'ibm05', 'h06', 'h07', 'h08']
++MODES = {
++    'fixed_single': dict(moves='5000000', seconds='100000', threads='1'),
++    'fixed_auto': dict(moves='3000000', seconds='100000', threads='0'),
++    'wall10_auto': dict(moves='default', seconds='10', threads='0'),
++}
++
++
++def dump(path, value):
++    path.parent.mkdir(parents=True, exist_ok=True)
++    tmp = path.with_name(path.name + '.tmp')
++    tmp.write_text(json.dumps(value, indent=2) + '\n')
++    tmp.replace(path)
++
++
++def src_hash(path):
++    return hashlib.sha256(b''.join(p.read_bytes() for p in sorted(path.iterdir()))).hexdigest()
++
++
++def protocol(tag):
++    return dict(tag=tag, script_sha256=sha(SELF),
++                src_sha256=src_hash(LAB / 'AI_Solutions' / R.name / 'src'),
++                reference_sha256=src_hash(LAB / 'AI_Solutions/ClaudeOpus55_v6/src'),
++                driver_base_sha256=sha(LAB / 'AI_Solutions' / R.name / 'tests/sa_bench.cpp'),
++                cases=CASES, seeds=[1, 2, 3], modes=MODES,
++                fixed_repeats=2, polish_seconds=0,
++                fixed_note='Moves per band; actual attempt counts recorded, placement-dependent rounding allowed between versions. Starvation heuristic off for fixed work only.',
++                starts={b: prefix_hashes(start_prefix(b)) for b in CASES},
++                inputs={b: prefix_hashes(original_prefix(b)) for b in CASES})
++
++
++def prepare(d, tag):
++    verify_protected()
++    p = protocol(tag)
++    path = d / 'protocol.json'
++    if path.exists() and json.loads(path.read_text()) != p:
++        raise RuntimeError('Protocol/input/source changed: use a new tag, never reuse results')
++    dump(path, p)
++    # Common driver, identical for both source trees. Persist exact internal
++    # placement and floating-point result for reproducibility, excluding times.
++    driver = (LAB / 'AI_Solutions' / R.name / 'tests/sa_bench.cpp').read_text()
++    driver = driver.replace('double start=wallSeconds();',
++        'if(std::string(argv[5])!="default") opt.starvedAttemptsPerCell=0;\n'
++        '        std::printf("threads,%d\\n",saThreads(db,opt));\n'
++        '        double start=wallSeconds();')
++    driver = driver.replace('writePl(db,p,std::string(argv[3])+".pl");',
++        'if(!writePl(db,p,std::string(argv[3])+".pl")) throw std::runtime_error("writePl failed");\n'
++        '        std::ofstream state(std::string(argv[3])+".state");\n'
++        '        state << std::hexfloat << stats.initial << " " << stats.best << " " << totalHPWL(db,p) << " " << stats.attempts << " " << stats.accepted << "\\n";\n'
++        '        for(size_t i=0;i<p.seg.size();++i) state << p.seg[i] << " " << p.site[i] << "\\n";\n'
++        '        if(!state) throw std::runtime_error("state write failed");')
++    (d / 'driver.cpp').write_text(driver)
++    q = Queue(d / 'build_jobs', timed=False)
++    for version, name in [('v6', 'ClaudeOpus55_v6'), ('candidate', R.name)]:
++        snapshot = d / version
++        if not (snapshot / 'src').exists():
++            shutil.copytree(LAB / 'AI_Solutions' / name / 'src', snapshot / 'src')
++            shutil.copy(LAB / 'AI_Solutions' / name / 'CMakeLists.txt', snapshot / 'CMakeLists.txt')
++        expected = p['src_sha256' if version == 'candidate' else 'reference_sha256']
++        if src_hash(snapshot / 'src') != expected:
++            raise RuntimeError('Snapshot hash mismatch')
++        exe = snapshot / 'sa_bench'
++        marker = q.out / (version + '.done.json')
++        if not marker.exists():
++            build(name, snapshot / 'build', src=snapshot)
++        command = PIN + ['g++', '-std=c++17', '-O3', '-DNDEBUG', '-pthread',
++                         '-I' + str(snapshot / 'src'), d / 'driver.cpp',
++                         snapshot / 'build/libdp_core.a', '-o', exe]
++        if not q.run(version, command, quiet=True):
++            raise RuntimeError('Driver build failed')
++    dump(d / 'prepared.json', dict(protocol_sha256=sha(path), driver_sha256=sha(d / 'driver.cpp'),
++                                  binaries={v: sha(d / v / 'sa_bench') for v in ['v6', 'candidate']}))
++
++
++def worker(d, mode, bench, seed, version, repeat):
++    dest = d / mode / bench / ('seed' + seed) / version / repeat
++    dest.mkdir(parents=True, exist_ok=True)
++    settings = MODES[mode]
++    cmd = [d / version / 'sa_bench', original_prefix(bench), start_prefix(bench),
++           dest / 'output', seed, settings['moves'], settings['seconds'], '0', settings['threads']]
++    start = time.monotonic()
++    with (dest / 'stdout.txt').open('w') as out, (dest / 'stderr.txt').open('w') as err:
++        subprocess.run([str(x) for x in cmd], stdout=out, stderr=err, check=True, timeout=240)
++    elapsed = time.monotonic() - start
++    with (dest / 'check.txt').open('w') as out:
++        subprocess.run([PY, LAB / 'Grader/tools/check_pl.py', original_prefix(bench),
++                        dest / 'output.pl', '--quiet'], stdout=out, stderr=subprocess.STDOUT, check=True)
++    lines = (dest / 'stdout.txt').read_text().splitlines()
++    index = lines.index('hpwl,attempts,sa_seconds,stage2_seconds')
++    metrics = next(csv.DictReader(io.StringIO('\n'.join(lines[index:index + 2]))))
++    metrics = {k: int(v) if k == 'attempts' else float(v) for k, v in metrics.items()}
++    metrics.update(threads=int(next(x for x in lines if x.startswith('threads,')).split(',')[1]),
++                   process_seconds=elapsed, placement_sha256=sha(dest / 'output.pl'),
++                   state_sha256=sha(dest / 'output.state'), legal=True)
++    if metrics['attempts'] <= 0:
++        raise RuntimeError('No SA work')
++    dump(dest / 'metrics.json', metrics)
++
++
++def summarize(d):
++    rows, details, repeats = [], {}, []
++    for mode in MODES:
++        details[mode] = {}
++        for bench in CASES:
++            ratios, hpwl = [], {'v6': [], 'candidate': []}
++            for seed in [1, 2, 3]:
++                values = {}
++                for version in hpwl:
++                    base = d / mode / bench / f'seed{seed}' / version
++                    m = json.loads((base / '1/metrics.json').read_text())
++                    values[version] = m
++                    hpwl[version].append(m['hpwl'])
++                    rows.append(dict(mode=mode, bench=bench, seed=seed, version=version, **m))
++                    if mode.startswith('fixed'):
++                        again = json.loads((base / '2/metrics.json').read_text())
++                        same = all(m[k] == again[k] for k in ['placement_sha256', 'state_sha256', 'threads', 'attempts', 'hpwl'])
++                        repeats.append(dict(mode=mode, bench=bench, seed=seed, version=version, identical=same))
++                if values['v6']['threads'] != values['candidate']['threads']:
++                    raise RuntimeError('Different automatic thread counts')
++                ratios.append(values['candidate']['hpwl'] / values['v6']['hpwl'])
++            details[mode][bench] = dict(ratio_mean=statistics.mean(ratios),
++                ratio_min=min(ratios), ratio_max=max(ratios),
++                hpwl={v: dict(mean=statistics.mean(a), min=min(a), max=max(a)) for v, a in hpwl.items()})
++    with (d / 'records.csv').open('w') as out:
++        w = csv.DictWriter(out, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
++    gm = {mode: math.exp(statistics.mean(math.log(v['ratio_mean']) for v in benches.values()))
++          for mode, benches in details.items()}
++    fixed = details['fixed_auto']
++    gate = gm['fixed_auto'] <= .997 and max(x['ratio_max'] for x in fixed.values()) <= 1.005
++    result = dict(by_protocol=details, geometric_mean_ratios=gm, reproducibility=repeats,
++                  quality_gate_pass=gate, all_fixed_identical=all(r['identical'] for r in repeats),
++                  note='SA gate only. TSan and final B checks remain separate; no automatic retain decision.')
++    dump(d / 'summary.json', result)
++    lines = ['# SA same-round paired results', '',
++             'Three seeds per case; ratio = candidate / v6. No polish; wall10 is isolated SA, not end-to-end equal/default.', '',
++             '| Protocol | Bench | Ratio mean | Range | v6 HPWL mean [min, max] | Candidate HPWL mean [min, max] |',
++             '|---|---|---:|---|---|---|']
++    for mode, benches in details.items():
++        for bench, data in benches.items():
++            h = data['hpwl']
++            desc = [f"{h[v]['mean']:.6f} [{h[v]['min']:.6f}, {h[v]['max']:.6f}]" for v in ['v6', 'candidate']]
++            lines.append(f"| {mode} | {bench} | {data['ratio_mean']:.8f} | {data['ratio_min']:.8f}–{data['ratio_max']:.8f} | {desc[0]} | {desc[1]} |")
++    lines += ['', *[f'- {mode} GM: {value:.8f}' for mode, value in gm.items()],
++              f'- Fixed-auto quality gate: {gate}', f"- Fixed-work identical: {result['all_fixed_identical']}"]
++    (d / 'compare.md').write_text('\n'.join(lines) + '\n')
++
++
++def run(d, tag):
++    if not (d / 'prepared.json').exists():
++        prepare(d, tag)
++    if json.loads((d / 'protocol.json').read_text()) != protocol(tag):
++        raise RuntimeError('Protocol changed after preparation')
++    prepared = json.loads((d / 'prepared.json').read_text())
++    if prepared['protocol_sha256'] != sha(d / 'protocol.json') or prepared['driver_sha256'] != sha(d / 'driver.cpp'):
++        raise RuntimeError('Prepared files changed')
++    for v, digest in prepared['binaries'].items():
++        if sha(d / v / 'sa_bench') != digest:
++            raise RuntimeError('Binary changed')
++    verify_protected()
++    q = Queue(d / 'jobs')
++    with (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as lock:
++        fcntl.flock(lock, fcntl.LOCK_EX)
++        for mode in MODES:
++            for bench in CASES:
++                for seed in [1, 2, 3]:
++                    versions = ['v6', 'candidate'] if seed % 2 else ['candidate', 'v6']
++                    for repeat in ([1, 2] if mode.startswith('fixed') else [1]):
++                        for version in versions:
++                            args = [mode, bench, str(seed), version, str(repeat)]
++                            if not q.run('_'.join(args), [PY, SELF, tag, '--worker', *args], quiet=True):
++                                raise RuntimeError('SA worker failed: ' + ' '.join(args))
++        summarize(d)
++        verify_protected(d / 'protected_after.json')
++        dump(d / 'ALL_DONE', dict(protocol_sha256=sha(d / 'protocol.json'), finished=time.ctime()))
++    note(f'phase2/sa_pair/{tag} completed; see compare.md and summary.json')
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('tag')
++    parser.add_argument('--prepare', action='store_true')
++    parser.add_argument('--worker', nargs=5)
++    args = parser.parse_args()
++    directory = R / 'phase2/sa_pair' / args.tag
++    directory.mkdir(parents=True, exist_ok=True)
++    try:
++        if args.worker:
++            worker(directory, *args.worker)
++        elif args.prepare:
++            prepare(directory, args.tag)
++        else:
++            run(directory, args.tag)
++    except Exception as error:
++        dump(directory / 'FAILED.json', dict(error=str(error), traceback=traceback.format_exc()))
++        raise
+
+exec
+/bin/bash -lc 'python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1 --prepare > Testcases/results/CodexParallelChain/phase2/sa_pair_prepare.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc 'tail -n 8 Testcases/results/CodexParallelChain/phase2/sa_pair_prepare.log' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+ succeeded in 25654ms:
+exec
+/bin/bash -lc "git diff --stat -- AI_Solutions/CodexParallelChain Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+python3 - <<'PY'
+import json
+from pathlib import Path
+p=Path('Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/protocol.json')
+print(json.dumps(json.loads(p.read_text()),ensure_ascii=False))
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+{"tag": "sa_boundary_r1", "src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258", "dp_args": ""}
+
+exec
+/bin/bash -lc "python3 - <<'PY' > Testcases/results/CodexParallelChain/phase2/sa_pair_smoke.log 2>&1
+import sys, fcntl
+sys.dont_write_bytecode=True
+sys.path.insert(0,'Testcases/results/CodexParallelChain/scripts')
+import phase2_sa_pair as p
+d=p.R/'phase2/sa_pair/sa_boundary_r1'
+q=p.Queue(d/'jobs')
+with (p.R.parent/'ClaudeOpus55_v6/timing.lock').open('r') as lock:
+    fcntl.flock(lock,fcntl.LOCK_EX)
+    for repeat in ['1','2']:
+        for version in ['v6','candidate']:
+            args=['fixed_auto','ibm05','1',version,repeat]
+            assert q.run('_'.join(args),[p.PY,p.SELF,'sa_boundary_r1','--worker',*args],quiet=True)
+    for v in ['v6','candidate']:
+        a=p.json.loads((d/'fixed_auto/ibm05/seed1'/v/'1/metrics.json').read_text())
+        b=p.json.loads((d/'fixed_auto/ibm05/seed1'/v/'2/metrics.json').read_text())
+        identical=all(a[k]==b[k] for k in ['placement_sha256','state_sha256','threads','attempts','hpwl'])
+        print(v,'legal=',a['legal'],'threads=',a['threads'],'attempts=',a['attempts'],'hpwl=',a['hpwl'],'identical=',identical,flush=True)
+        assert identical
+p.verify_protected()
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 27376ms:
+apply patch
+patch: completed
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md b/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md
+index 2a3e366ed7ac8c4bed9629d464f5153c5223b8fe..f904198ece93bc3d88aaa4579ff45ef2a36ebae8
+--- a/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md
++++ b/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md
+@@ -128,3 +128,16 @@
+ - 本輪測試完成：一般、ASan/UBSan、TSan 均 10/10 PASS（各 28 個 build/link/run 記錄）；TSan 0 警告，ASan/UBSan 無診斷。記錄路徑：Testcases/results/CodexParallelChain/{tests,tests_sanitized,tests_tsan}/records.json 與各測試 .log。ASan 在沙箱內設 ASAN_OPTIONS=detect_leaks=0，LeakSanitizer 尚待協調者沙箱外補跑，不宣稱已驗證洩漏。
+ - 10-23 05:15 phase2/train/sa_boundary_r1/stage1 完成（258 秒）
+ - 10-23 05:15 phase2/train/sa_boundary_r1 完成（預設）：見 phase2/train/sa_boundary_r1/compare.md
++
++## 階段 B：SA 第 1/3 輪補足同輪配對（2026-10-23，等待中）
++
++- 已讀上次 `phase2/train/sa_boundary_r1/stage1.done.json` 與 `compare.md`：258.37 秒、11/11 合法、雙條件 8/11、對 ChainDP 最大 GM 0.99605、總位移 GM 0.99833。歷史 v6 為 0.99604／0.99813；本輪 `--no-sa` 與歷史完整流程不等價，不能把 HPWL 2.00744 對 0.99013 當作 SA 退步，亦不能據此保留改動。既有 Stage 1 不重跑；最後仍需真正同輪 final_b。
++- 判斷：先補足本輪 SA 閘門，不消耗第 2 輪、不調參、不開始 chain 改動。src 與 tests 均未改；src hash 仍為 `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。保留／撤回結論尚未作成。
++- 新佇列 `Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py`；結果 `phase2/sa_pair/sa_boundary_r1/`。保存雙方 src 快照、共同 driver、二進位／輸入／合法起點 SHA256，v6 與候選交錯同輪執行，且交替先後順序。五筆訓練測資 ibm01、ibm05、h06、h07、h08；每筆 seeds 1、2、3，無 edge 調參。
++- 三個獨立 SA 協定：`fixed_single` 單執行緒 5M proposals；`fixed_auto` 自動執行緒每 band 3M（沿用診斷工作量）；`wall10_auto` 原預設工作量上限與自動執行緒、10 秒。全都共用合法起點、polish=0。這些是隔離 SA 的訓練協定，不冒稱最終 end-to-end fixed/equal/default。每項報三 seeds HPWL 平均／範圍與配對比值，協定不混算。
++- 固定次數兩協定各跑兩次，比對輸出 placement、完整 seg/site、浮點 initial/best/HPWL 與 attempts/accepted 的精確序列；只在固定次數 driver 關閉依速度推估的 starvation heuristic，雙方一致且不更動 production src。固定 auto 各 band 的取整會依 placement 造成小量 attempts 差異，完整記錄，不宣稱兩版本實際 proposals 逐一相等。
++- `summary.json` 預先固定判斷：固定 auto 五筆的三 seeds 平均配對比值之 GM ≤0.997，且所有單 seed 比值 ≤1.005（比逐筆均值不退步 >0.5% 更嚴格）；重跑一致與 TSan 仍獨立核對。無條件提前保留；失敗也保留數據供下一 session 判斷剩餘輪次。
++- 計時雙鎖：本版本 `timing.lock`＋唯讀開啟 v6 `timing.lock`，worker 不使用 taskset；只有 build 使用 v6q 的 CPU 16–19。每項 `.done.json` 可續跑；worker 最多 240 秒、每次另以 check_pl 驗證合法性。保護資料夾 hash 前後核對，全部成功才寫 ALL_DONE；出錯寫 FAILED.json。
++- 已完成雙版本編譯與輸入預檢：`phase2/sa_pair_prepare.log`；沒有啟動背景工作。既有一般／ASan/UBSan／TSan 測試對應同一份 src，無須本輪重跑；ASan 先前為 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 仍待沙箱外補跑。
++- 等待中：協調者執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE`。完整訓練超過 5 分鐘，故交外部執行；已完成的小樣本工作會依 marker 跳過。
++- **下一步**：先讀上述 `ALL_DONE`、`compare.md` 與 `summary.json` 的 gate/reproducibility，將數據與判斷記回本檔。若 SA 閘門失敗，依原因決定第 2/3 輪或提前撤回，總計最多 3 輪；chain target/DP 與 ejection 尚未實作或判定。B 尚未完成，不凍結、不產生新 seed、不進 C、不 commit。
+diff --git a/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py b/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..e61e8ac7dc085025f8c9da6bfa0f9892d381594e
+--- /dev/null
++++ b/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+@@ -0,0 +1,222 @@
++#!/usr/bin/env python3
++"""Checkpointed, same-session SA pairing; --prepare builds without timing runs.
++
++These are isolated SA protocols (no polish or Stage 1 charge), not the final
++fixed/equal/default end-to-end protocols. Fixed auto is the HANDOFF B SA gate.
++"""
++import argparse
++import csv
++import fcntl
++import hashlib
++import io
++import json
++import math
++import os
++from pathlib import Path
++import shutil
++import statistics
++import subprocess
++import sys
++import time
++import traceback
++
++sys.dont_write_bytecode = True
++from v6q import LAB, R, PIN, PY, Queue, build, note
++from diag import prefix_hashes, original_prefix, start_prefix, sha, verify_protected
++
++SELF = Path(__file__).resolve()
++CASES = ['ibm01', 'ibm05', 'h06', 'h07', 'h08']
++MODES = {
++    'fixed_single': dict(moves='5000000', seconds='100000', threads='1'),
++    'fixed_auto': dict(moves='3000000', seconds='100000', threads='0'),
++    'wall10_auto': dict(moves='default', seconds='10', threads='0'),
++}
++
++
++def dump(path, value):
++    path.parent.mkdir(parents=True, exist_ok=True)
++    tmp = path.with_name(path.name + '.tmp')
++    tmp.write_text(json.dumps(value, indent=2) + '\n')
++    tmp.replace(path)
++
++
++def src_hash(path):
++    return hashlib.sha256(b''.join(p.read_bytes() for p in sorted(path.iterdir()))).hexdigest()
++
++
++def protocol(tag):
++    return dict(tag=tag, script_sha256=sha(SELF),
++                src_sha256=src_hash(LAB / 'AI_Solutions' / R.name / 'src'),
++                reference_sha256=src_hash(LAB / 'AI_Solutions/ClaudeOpus55_v6/src'),
++                driver_base_sha256=sha(LAB / 'AI_Solutions' / R.name / 'tests/sa_bench.cpp'),
++                cases=CASES, seeds=[1, 2, 3], modes=MODES,
++                fixed_repeats=2, polish_seconds=0,
++                fixed_note='Moves per band; actual attempt counts recorded, placement-dependent rounding allowed between versions. Starvation heuristic off for fixed work only.',
++                starts={b: prefix_hashes(start_prefix(b)) for b in CASES},
++                inputs={b: prefix_hashes(original_prefix(b)) for b in CASES})
++
++
++def prepare(d, tag):
++    verify_protected()
++    p = protocol(tag)
++    path = d / 'protocol.json'
++    if path.exists() and json.loads(path.read_text()) != p:
++        raise RuntimeError('Protocol/input/source changed: use a new tag, never reuse results')
++    dump(path, p)
++    # Common driver, identical for both source trees. Persist exact internal
++    # placement and floating-point result for reproducibility, excluding times.
++    driver = (LAB / 'AI_Solutions' / R.name / 'tests/sa_bench.cpp').read_text()
++    driver = driver.replace('double start=wallSeconds();',
++        'if(std::string(argv[5])!="default") opt.starvedAttemptsPerCell=0;\n'
++        '        std::printf("threads,%d\\n",saThreads(db,opt));\n'
++        '        double start=wallSeconds();')
++    driver = driver.replace('writePl(db,p,std::string(argv[3])+".pl");',
++        'if(!writePl(db,p,std::string(argv[3])+".pl")) throw std::runtime_error("writePl failed");\n'
++        '        std::ofstream state(std::string(argv[3])+".state");\n'
++        '        state << std::hexfloat << stats.initial << " " << stats.best << " " << totalHPWL(db,p) << " " << stats.attempts << " " << stats.accepted << "\\n";\n'
++        '        for(size_t i=0;i<p.seg.size();++i) state << p.seg[i] << " " << p.site[i] << "\\n";\n'
++        '        if(!state) throw std::runtime_error("state write failed");')
++    (d / 'driver.cpp').write_text(driver)
++    q = Queue(d / 'build_jobs', timed=False)
++    for version, name in [('v6', 'ClaudeOpus55_v6'), ('candidate', R.name)]:
++        snapshot = d / version
++        if not (snapshot / 'src').exists():
++            shutil.copytree(LAB / 'AI_Solutions' / name / 'src', snapshot / 'src')
++            shutil.copy(LAB / 'AI_Solutions' / name / 'CMakeLists.txt', snapshot / 'CMakeLists.txt')
++        expected = p['src_sha256' if version == 'candidate' else 'reference_sha256']
++        if src_hash(snapshot / 'src') != expected:
++            raise RuntimeError('Snapshot hash mismatch')
++        exe = snapshot / 'sa_bench'
++        marker = q.out / (version + '.done.json')
++        if not marker.exists():
++            build(name, snapshot / 'build', src=snapshot)
++        command = PIN + ['g++', '-std=c++17', '-O3', '-DNDEBUG', '-pthread',
++                         '-I' + str(snapshot / 'src'), d / 'driver.cpp',
++                         snapshot / 'build/libdp_core.a', '-o', exe]
++        if not q.run(version, command, quiet=True):
++            raise RuntimeError('Driver build failed')
++    dump(d / 'prepared.json', dict(protocol_sha256=sha(path), driver_sha256=sha(d / 'driver.cpp'),
++                                  binaries={v: sha(d / v / 'sa_bench') for v in ['v6', 'candidate']}))
++
++
++def worker(d, mode, bench, seed, version, repeat):
++    dest = d / mode / bench / ('seed' + seed) / version / repeat
++    dest.mkdir(parents=True, exist_ok=True)
++    settings = MODES[mode]
++    cmd = [d / version / 'sa_bench', original_prefix(bench), start_prefix(bench),
++           dest / 'output', seed, settings['moves'], settings['seconds'], '0', settings['threads']]
++    start = time.monotonic()
++    with (dest / 'stdout.txt').open('w') as out, (dest / 'stderr.txt').open('w') as err:
++        subprocess.run([str(x) for x in cmd], stdout=out, stderr=err, check=True, timeout=240)
++    elapsed = time.monotonic() - start
++    with (dest / 'check.txt').open('w') as out:
++        subprocess.run([PY, LAB / 'Grader/tools/check_pl.py', original_prefix(bench),
++                        dest / 'output.pl', '--quiet'], stdout=out, stderr=subprocess.STDOUT, check=True)
++    lines = (dest / 'stdout.txt').read_text().splitlines()
++    index = lines.index('hpwl,attempts,sa_seconds,stage2_seconds')
++    metrics = next(csv.DictReader(io.StringIO('\n'.join(lines[index:index + 2]))))
++    metrics = {k: int(v) if k == 'attempts' else float(v) for k, v in metrics.items()}
++    metrics.update(threads=int(next(x for x in lines if x.startswith('threads,')).split(',')[1]),
++                   process_seconds=elapsed, placement_sha256=sha(dest / 'output.pl'),
++                   state_sha256=sha(dest / 'output.state'), legal=True)
++    if metrics['attempts'] <= 0:
++        raise RuntimeError('No SA work')
++    dump(dest / 'metrics.json', metrics)
++
++
++def summarize(d):
++    rows, details, repeats = [], {}, []
++    for mode in MODES:
++        details[mode] = {}
++        for bench in CASES:
++            ratios, hpwl = [], {'v6': [], 'candidate': []}
++            for seed in [1, 2, 3]:
++                values = {}
++                for version in hpwl:
++                    base = d / mode / bench / f'seed{seed}' / version
++                    m = json.loads((base / '1/metrics.json').read_text())
++                    values[version] = m
++                    hpwl[version].append(m['hpwl'])
++                    rows.append(dict(mode=mode, bench=bench, seed=seed, version=version, **m))
++                    if mode.startswith('fixed'):
++                        again = json.loads((base / '2/metrics.json').read_text())
++                        same = all(m[k] == again[k] for k in ['placement_sha256', 'state_sha256', 'threads', 'attempts', 'hpwl'])
++                        repeats.append(dict(mode=mode, bench=bench, seed=seed, version=version, identical=same))
++                if values['v6']['threads'] != values['candidate']['threads']:
++                    raise RuntimeError('Different automatic thread counts')
++                ratios.append(values['candidate']['hpwl'] / values['v6']['hpwl'])
++            details[mode][bench] = dict(ratio_mean=statistics.mean(ratios),
++                ratio_min=min(ratios), ratio_max=max(ratios),
++                hpwl={v: dict(mean=statistics.mean(a), min=min(a), max=max(a)) for v, a in hpwl.items()})
++    with (d / 'records.csv').open('w') as out:
++        w = csv.DictWriter(out, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
++    gm = {mode: math.exp(statistics.mean(math.log(v['ratio_mean']) for v in benches.values()))
++          for mode, benches in details.items()}
++    fixed = details['fixed_auto']
++    gate = gm['fixed_auto'] <= .997 and max(x['ratio_max'] for x in fixed.values()) <= 1.005
++    result = dict(by_protocol=details, geometric_mean_ratios=gm, reproducibility=repeats,
++                  quality_gate_pass=gate, all_fixed_identical=all(r['identical'] for r in repeats),
++                  note='SA gate only. TSan and final B checks remain separate; no automatic retain decision.')
++    dump(d / 'summary.json', result)
++    lines = ['# SA same-round paired results', '',
++             'Three seeds per case; ratio = candidate / v6. No polish; wall10 is isolated SA, not end-to-end equal/default.', '',
++             '| Protocol | Bench | Ratio mean | Range | v6 HPWL mean [min, max] | Candidate HPWL mean [min, max] |',
++             '|---|---|---:|---|---|---|']
++    for mode, benches in details.items():
++        for bench, data in benches.items():
++            h = data['hpwl']
++            desc = [f"{h[v]['mean']:.6f} [{h[v]['min']:.6f}, {h[v]['max']:.6f}]" for v in ['v6', 'candidate']]
++            lines.append(f"| {mode} | {bench} | {data['ratio_mean']:.8f} | {data['ratio_min']:.8f}–{data['ratio_max']:.8f} | {desc[0]} | {desc[1]} |")
++    lines += ['', *[f'- {mode} GM: {value:.8f}' for mode, value in gm.items()],
++              f'- Fixed-auto quality gate: {gate}', f"- Fixed-work identical: {result['all_fixed_identical']}"]
++    (d / 'compare.md').write_text('\n'.join(lines) + '\n')
++
++
++def run(d, tag):
++    if not (d / 'prepared.json').exists():
++        prepare(d, tag)
++    if json.loads((d / 'protocol.json').read_text()) != protocol(tag):
++        raise RuntimeError('Protocol changed after preparation')
++    prepared = json.loads((d / 'prepared.json').read_text())
++    if prepared['protocol_sha256'] != sha(d / 'protocol.json') or prepared['driver_sha256'] != sha(d / 'driver.cpp'):
++        raise RuntimeError('Prepared files changed')
++    for v, digest in prepared['binaries'].items():
++        if sha(d / v / 'sa_bench') != digest:
++            raise RuntimeError('Binary changed')
++    verify_protected()
++    q = Queue(d / 'jobs')
++    with (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as lock:
++        fcntl.flock(lock, fcntl.LOCK_EX)
++        for mode in MODES:
++            for bench in CASES:
++                for seed in [1, 2, 3]:
++                    versions = ['v6', 'candidate'] if seed % 2 else ['candidate', 'v6']
++                    for repeat in ([1, 2] if mode.startswith('fixed') else [1]):
++                        for version in versions:
++                            args = [mode, bench, str(seed), version, str(repeat)]
++                            if not q.run('_'.join(args), [PY, SELF, tag, '--worker', *args], quiet=True):
++                                raise RuntimeError('SA worker failed: ' + ' '.join(args))
++        summarize(d)
++        verify_protected(d / 'protected_after.json')
++        dump(d / 'ALL_DONE', dict(protocol_sha256=sha(d / 'protocol.json'), finished=time.ctime()))
++    note(f'phase2/sa_pair/{tag} completed; see compare.md and summary.json')
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('tag')
++    parser.add_argument('--prepare', action='store_true')
++    parser.add_argument('--worker', nargs=5)
++    args = parser.parse_args()
++    directory = R / 'phase2/sa_pair' / args.tag
++    directory.mkdir(parents=True, exist_ok=True)
++    try:
++        if args.worker:
++            worker(directory, *args.worker)
++        elif args.prepare:
++            prepare(directory, args.tag)
++        else:
++            run(directory, args.tag)
++    except Exception as error:
++        dump(directory / 'FAILED.json', dict(error=str(error), traceback=traceback.format_exc()))
++        raise
+
+exec
+/bin/bash -lc 'tail -n 6 Testcases/results/CodexParallelChain/phase2/sa_pair_smoke.log' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+v6 legal= True threads= 8 attempts= 23995921 hpwl= 10147365.5 identical= True
+candidate legal= True threads= 8 attempts= 23995835 hpwl= 10093594.5 identical= True
+
+apply patch
+patch: completed
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md b/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md
+index 2a3e366ed7ac8c4bed9629d464f5153c5223b8fe..31592f5564cea8dcacd4c6b706a3cfb9122def33
+--- a/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md
++++ b/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md
+@@ -128,3 +128,17 @@
+ - 本輪測試完成：一般、ASan/UBSan、TSan 均 10/10 PASS（各 28 個 build/link/run 記錄）；TSan 0 警告，ASan/UBSan 無診斷。記錄路徑：Testcases/results/CodexParallelChain/{tests,tests_sanitized,tests_tsan}/records.json 與各測試 .log。ASan 在沙箱內設 ASAN_OPTIONS=detect_leaks=0，LeakSanitizer 尚待協調者沙箱外補跑，不宣稱已驗證洩漏。
+ - 10-23 05:15 phase2/train/sa_boundary_r1/stage1 完成（258 秒）
+ - 10-23 05:15 phase2/train/sa_boundary_r1 完成（預設）：見 phase2/train/sa_boundary_r1/compare.md
++
++## 階段 B：SA 第 1/3 輪補足同輪配對（2026-10-23，等待中）
++
++- 已讀上次 `phase2/train/sa_boundary_r1/stage1.done.json` 與 `compare.md`：258.37 秒、11/11 合法、雙條件 8/11、對 ChainDP 最大 GM 0.99605、總位移 GM 0.99833。歷史 v6 為 0.99604／0.99813；本輪 `--no-sa` 與歷史完整流程不等價，不能把 HPWL 2.00744 對 0.99013 當作 SA 退步，亦不能據此保留改動。既有 Stage 1 不重跑；最後仍需真正同輪 final_b。
++- 判斷：先補足本輪 SA 閘門，不消耗第 2 輪、不調參、不開始 chain 改動。src 與 tests 均未改；src hash 仍為 `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。保留／撤回結論尚未作成。
++- 新佇列 `Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py`；結果 `phase2/sa_pair/sa_boundary_r1/`。保存雙方 src 快照、共同 driver、二進位／輸入／合法起點 SHA256，v6 與候選交錯同輪執行，且交替先後順序。五筆訓練測資 ibm01、ibm05、h06、h07、h08；每筆 seeds 1、2、3，無 edge 調參。
++- 三個獨立 SA 協定：`fixed_single` 單執行緒 5M proposals；`fixed_auto` 自動執行緒每 band 3M（沿用診斷工作量）；`wall10_auto` 原預設工作量上限與自動執行緒、10 秒。全都共用合法起點、polish=0。這些是隔離 SA 的訓練協定，不冒稱最終 end-to-end fixed/equal/default。每項報三 seeds HPWL 平均／範圍與配對比值，協定不混算。
++- 固定次數兩協定各跑兩次，比對輸出 placement、完整 seg/site、浮點 initial/best/HPWL 與 attempts/accepted 的精確序列；只在固定次數 driver 關閉依速度推估的 starvation heuristic，雙方一致且不更動 production src。固定 auto 各 band 的取整會依 placement 造成小量 attempts 差異，完整記錄，不宣稱兩版本實際 proposals 逐一相等。
++- `summary.json` 預先固定判斷：固定 auto 五筆的三 seeds 平均配對比值之 GM ≤0.997，且所有單 seed 比值 ≤1.005（比逐筆均值不退步 >0.5% 更嚴格）；重跑一致與 TSan 仍獨立核對。無條件提前保留；失敗也保留數據供下一 session 判斷剩餘輪次。
++- 計時雙鎖：本版本 `timing.lock`＋唯讀開啟 v6 `timing.lock`，worker 不使用 taskset；只有 build 使用 v6q 的 CPU 16–19。每項 `.done.json` 可續跑；worker 最多 240 秒、每次另以 check_pl 驗證合法性。保護資料夾 hash 前後核對，全部成功才寫 ALL_DONE；出錯寫 FAILED.json。
++- 已完成雙版本編譯與輸入預檢：`phase2/sa_pair_prepare.log`；沒有啟動背景工作。既有一般／ASan/UBSan／TSan 測試對應同一份 src，無須本輪重跑；ASan 先前為 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 仍待沙箱外補跑。
++- 本 session 已直接跑完短驗證：ibm05 seed1 fixed_auto，雙方各兩次共 4 個 checkpoint；均合法、8 threads，各自重跑完整狀態逐位一致。v6 HPWL 10147365.5／23995921 attempts；候選 10093594.5／23995835 attempts。單 seed 僅驗證佇列與重現性，不能推論保留；詳見 `phase2/sa_pair_smoke.log` 與 `phase2/sa_pair/sa_boundary_r1/fixed_auto/ibm05/seed1/`。保護資料夾 hash 檢查通過。
++- 等待中：協調者執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE`。完整訓練超過 5 分鐘，故交外部執行；已完成的小樣本工作會依 marker 跳過。
++- **下一步**：先讀上述 `ALL_DONE`、`compare.md` 與 `summary.json` 的 gate/reproducibility，將數據與判斷記回本檔。若 SA 閘門失敗，依原因決定第 2/3 輪或提前撤回，總計最多 3 輪；chain target/DP 與 ejection 尚未實作或判定。B 尚未完成，不凍結、不產生新 seed、不進 C、不 commit。
+diff --git a/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py b/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..e61e8ac7dc085025f8c9da6bfa0f9892d381594e
+--- /dev/null
++++ b/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+@@ -0,0 +1,222 @@
++#!/usr/bin/env python3
++"""Checkpointed, same-session SA pairing; --prepare builds without timing runs.
++
++These are isolated SA protocols (no polish or Stage 1 charge), not the final
++fixed/equal/default end-to-end protocols. Fixed auto is the HANDOFF B SA gate.
++"""
++import argparse
++import csv
++import fcntl
++import hashlib
++import io
++import json
++import math
++import os
++from pathlib import Path
++import shutil
++import statistics
++import subprocess
++import sys
++import time
++import traceback
++
++sys.dont_write_bytecode = True
++from v6q import LAB, R, PIN, PY, Queue, build, note
++from diag import prefix_hashes, original_prefix, start_prefix, sha, verify_protected
++
++SELF = Path(__file__).resolve()
++CASES = ['ibm01', 'ibm05', 'h06', 'h07', 'h08']
++MODES = {
++    'fixed_single': dict(moves='5000000', seconds='100000', threads='1'),
++    'fixed_auto': dict(moves='3000000', seconds='100000', threads='0'),
++    'wall10_auto': dict(moves='default', seconds='10', threads='0'),
++}
++
++
++def dump(path, value):
++    path.parent.mkdir(parents=True, exist_ok=True)
++    tmp = path.with_name(path.name + '.tmp')
++    tmp.write_text(json.dumps(value, indent=2) + '\n')
++    tmp.replace(path)
++
++
++def src_hash(path):
++    return hashlib.sha256(b''.join(p.read_bytes() for p in sorted(path.iterdir()))).hexdigest()
++
++
++def protocol(tag):
++    return dict(tag=tag, script_sha256=sha(SELF),
++                src_sha256=src_hash(LAB / 'AI_Solutions' / R.name / 'src'),
++                reference_sha256=src_hash(LAB / 'AI_Solutions/ClaudeOpus55_v6/src'),
++                driver_base_sha256=sha(LAB / 'AI_Solutions' / R.name / 'tests/sa_bench.cpp'),
++                cases=CASES, seeds=[1, 2, 3], modes=MODES,
++                fixed_repeats=2, polish_seconds=0,
++                fixed_note='Moves per band; actual attempt counts recorded, placement-dependent rounding allowed between versions. Starvation heuristic off for fixed work only.',
++                starts={b: prefix_hashes(start_prefix(b)) for b in CASES},
++                inputs={b: prefix_hashes(original_prefix(b)) for b in CASES})
++
++
++def prepare(d, tag):
++    verify_protected()
++    p = protocol(tag)
++    path = d / 'protocol.json'
++    if path.exists() and json.loads(path.read_text()) != p:
++        raise RuntimeError('Protocol/input/source changed: use a new tag, never reuse results')
++    dump(path, p)
++    # Common driver, identical for both source trees. Persist exact internal
++    # placement and floating-point result for reproducibility, excluding times.
++    driver = (LAB / 'AI_Solutions' / R.name / 'tests/sa_bench.cpp').read_text()
++    driver = driver.replace('double start=wallSeconds();',
++        'if(std::string(argv[5])!="default") opt.starvedAttemptsPerCell=0;\n'
++        '        std::printf("threads,%d\\n",saThreads(db,opt));\n'
++        '        double start=wallSeconds();')
++    driver = driver.replace('writePl(db,p,std::string(argv[3])+".pl");',
++        'if(!writePl(db,p,std::string(argv[3])+".pl")) throw std::runtime_error("writePl failed");\n'
++        '        std::ofstream state(std::string(argv[3])+".state");\n'
++        '        state << std::hexfloat << stats.initial << " " << stats.best << " " << totalHPWL(db,p) << " " << stats.attempts << " " << stats.accepted << "\\n";\n'
++        '        for(size_t i=0;i<p.seg.size();++i) state << p.seg[i] << " " << p.site[i] << "\\n";\n'
++        '        if(!state) throw std::runtime_error("state write failed");')
++    (d / 'driver.cpp').write_text(driver)
++    q = Queue(d / 'build_jobs', timed=False)
++    for version, name in [('v6', 'ClaudeOpus55_v6'), ('candidate', R.name)]:
++        snapshot = d / version
++        if not (snapshot / 'src').exists():
++            shutil.copytree(LAB / 'AI_Solutions' / name / 'src', snapshot / 'src')
++            shutil.copy(LAB / 'AI_Solutions' / name / 'CMakeLists.txt', snapshot / 'CMakeLists.txt')
++        expected = p['src_sha256' if version == 'candidate' else 'reference_sha256']
++        if src_hash(snapshot / 'src') != expected:
++            raise RuntimeError('Snapshot hash mismatch')
++        exe = snapshot / 'sa_bench'
++        marker = q.out / (version + '.done.json')
++        if not marker.exists():
++            build(name, snapshot / 'build', src=snapshot)
++        command = PIN + ['g++', '-std=c++17', '-O3', '-DNDEBUG', '-pthread',
++                         '-I' + str(snapshot / 'src'), d / 'driver.cpp',
++                         snapshot / 'build/libdp_core.a', '-o', exe]
++        if not q.run(version, command, quiet=True):
++            raise RuntimeError('Driver build failed')
++    dump(d / 'prepared.json', dict(protocol_sha256=sha(path), driver_sha256=sha(d / 'driver.cpp'),
++                                  binaries={v: sha(d / v / 'sa_bench') for v in ['v6', 'candidate']}))
++
++
++def worker(d, mode, bench, seed, version, repeat):
++    dest = d / mode / bench / ('seed' + seed) / version / repeat
++    dest.mkdir(parents=True, exist_ok=True)
++    settings = MODES[mode]
++    cmd = [d / version / 'sa_bench', original_prefix(bench), start_prefix(bench),
++           dest / 'output', seed, settings['moves'], settings['seconds'], '0', settings['threads']]
++    start = time.monotonic()
++    with (dest / 'stdout.txt').open('w') as out, (dest / 'stderr.txt').open('w') as err:
++        subprocess.run([str(x) for x in cmd], stdout=out, stderr=err, check=True, timeout=240)
++    elapsed = time.monotonic() - start
++    with (dest / 'check.txt').open('w') as out:
++        subprocess.run([PY, LAB / 'Grader/tools/check_pl.py', original_prefix(bench),
++                        dest / 'output.pl', '--quiet'], stdout=out, stderr=subprocess.STDOUT, check=True)
++    lines = (dest / 'stdout.txt').read_text().splitlines()
++    index = lines.index('hpwl,attempts,sa_seconds,stage2_seconds')
++    metrics = next(csv.DictReader(io.StringIO('\n'.join(lines[index:index + 2]))))
++    metrics = {k: int(v) if k == 'attempts' else float(v) for k, v in metrics.items()}
++    metrics.update(threads=int(next(x for x in lines if x.startswith('threads,')).split(',')[1]),
++                   process_seconds=elapsed, placement_sha256=sha(dest / 'output.pl'),
++                   state_sha256=sha(dest / 'output.state'), legal=True)
++    if metrics['attempts'] <= 0:
++        raise RuntimeError('No SA work')
++    dump(dest / 'metrics.json', metrics)
++
++
++def summarize(d):
++    rows, details, repeats = [], {}, []
++    for mode in MODES:
++        details[mode] = {}
++        for bench in CASES:
++            ratios, hpwl = [], {'v6': [], 'candidate': []}
++            for seed in [1, 2, 3]:
++                values = {}
++                for version in hpwl:
++                    base = d / mode / bench / f'seed{seed}' / version
++                    m = json.loads((base / '1/metrics.json').read_text())
++                    values[version] = m
++                    hpwl[version].append(m['hpwl'])
++                    rows.append(dict(mode=mode, bench=bench, seed=seed, version=version, **m))
++                    if mode.startswith('fixed'):
++                        again = json.loads((base / '2/metrics.json').read_text())
++                        same = all(m[k] == again[k] for k in ['placement_sha256', 'state_sha256', 'threads', 'attempts', 'hpwl'])
++                        repeats.append(dict(mode=mode, bench=bench, seed=seed, version=version, identical=same))
++                if values['v6']['threads'] != values['candidate']['threads']:
++                    raise RuntimeError('Different automatic thread counts')
++                ratios.append(values['candidate']['hpwl'] / values['v6']['hpwl'])
++            details[mode][bench] = dict(ratio_mean=statistics.mean(ratios),
++                ratio_min=min(ratios), ratio_max=max(ratios),
++                hpwl={v: dict(mean=statistics.mean(a), min=min(a), max=max(a)) for v, a in hpwl.items()})
++    with (d / 'records.csv').open('w') as out:
++        w = csv.DictWriter(out, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
++    gm = {mode: math.exp(statistics.mean(math.log(v['ratio_mean']) for v in benches.values()))
++          for mode, benches in details.items()}
++    fixed = details['fixed_auto']
++    gate = gm['fixed_auto'] <= .997 and max(x['ratio_max'] for x in fixed.values()) <= 1.005
++    result = dict(by_protocol=details, geometric_mean_ratios=gm, reproducibility=repeats,
++                  quality_gate_pass=gate, all_fixed_identical=all(r['identical'] for r in repeats),
++                  note='SA gate only. TSan and final B checks remain separate; no automatic retain decision.')
++    dump(d / 'summary.json', result)
++    lines = ['# SA same-round paired results', '',
++             'Three seeds per case; ratio = candidate / v6. No polish; wall10 is isolated SA, not end-to-end equal/default.', '',
++             '| Protocol | Bench | Ratio mean | Range | v6 HPWL mean [min, max] | Candidate HPWL mean [min, max] |',
++             '|---|---|---:|---|---|---|']
++    for mode, benches in details.items():
++        for bench, data in benches.items():
++            h = data['hpwl']
++            desc = [f"{h[v]['mean']:.6f} [{h[v]['min']:.6f}, {h[v]['max']:.6f}]" for v in ['v6', 'candidate']]
++            lines.append(f"| {mode} | {bench} | {data['ratio_mean']:.8f} | {data['ratio_min']:.8f}–{data['ratio_max']:.8f} | {desc[0]} | {desc[1]} |")
++    lines += ['', *[f'- {mode} GM: {value:.8f}' for mode, value in gm.items()],
++              f'- Fixed-auto quality gate: {gate}', f"- Fixed-work identical: {result['all_fixed_identical']}"]
++    (d / 'compare.md').write_text('\n'.join(lines) + '\n')
++
++
++def run(d, tag):
++    if not (d / 'prepared.json').exists():
++        prepare(d, tag)
++    if json.loads((d / 'protocol.json').read_text()) != protocol(tag):
++        raise RuntimeError('Protocol changed after preparation')
++    prepared = json.loads((d / 'prepared.json').read_text())
++    if prepared['protocol_sha256'] != sha(d / 'protocol.json') or prepared['driver_sha256'] != sha(d / 'driver.cpp'):
++        raise RuntimeError('Prepared files changed')
++    for v, digest in prepared['binaries'].items():
++        if sha(d / v / 'sa_bench') != digest:
++            raise RuntimeError('Binary changed')
++    verify_protected()
++    q = Queue(d / 'jobs')
++    with (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as lock:
++        fcntl.flock(lock, fcntl.LOCK_EX)
++        for mode in MODES:
++            for bench in CASES:
++                for seed in [1, 2, 3]:
++                    versions = ['v6', 'candidate'] if seed % 2 else ['candidate', 'v6']
++                    for repeat in ([1, 2] if mode.startswith('fixed') else [1]):
++                        for version in versions:
++                            args = [mode, bench, str(seed), version, str(repeat)]
++                            if not q.run('_'.join(args), [PY, SELF, tag, '--worker', *args], quiet=True):
++                                raise RuntimeError('SA worker failed: ' + ' '.join(args))
++        summarize(d)
++        verify_protected(d / 'protected_after.json')
++        dump(d / 'ALL_DONE', dict(protocol_sha256=sha(d / 'protocol.json'), finished=time.ctime()))
++    note(f'phase2/sa_pair/{tag} completed; see compare.md and summary.json')
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('tag')
++    parser.add_argument('--prepare', action='store_true')
++    parser.add_argument('--worker', nargs=5)
++    args = parser.parse_args()
++    directory = R / 'phase2/sa_pair' / args.tag
++    directory.mkdir(parents=True, exist_ok=True)
++    try:
++        if args.worker:
++            worker(directory, *args.worker)
++        elif args.prepare:
++            prepare(directory, args.tag)
++        else:
++            run(directory, args.tag)
++    except Exception as error:
++        dump(directory / 'FAILED.json', dict(error=str(error), traceback=traceback.format_exc()))
++        raise
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+import ast, hashlib, json
+from pathlib import Path
+p=Path('Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py')
+ast.parse(p.read_text())
+d=Path('Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1')
+prepared=json.loads((d/'prepared.json').read_text())
+assert prepared['protocol_sha256']==hashlib.sha256((d/'protocol.json').read_bytes()).hexdigest()
+assert json.loads((d/'protocol.json').read_text())['script_sha256']==hashlib.sha256(p.read_bytes()).hexdigest()
+print('Syntax and prepared protocol verified; completed jobs:',len(list((d/'jobs').glob('*.done.json'))))
+print('ALL_DONE exists:',(d/'ALL_DONE').exists())
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Syntax and prepared protocol verified; completed jobs: 4
+ALL_DONE exists: False
+
+codex
+已更新 WORK_STATE.md；Stage 1 為 11/11 合法、雙條件 8/11，尚不足以判定 SA 保留。
+配對腳本已編譯；短驗證雙方各跑兩次，均合法且各自結果逐位一致。階段 B 尚未完成。
+RUN: python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1
+WAIT: Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE
+tokens used
+48,695
+已更新 WORK_STATE.md；Stage 1 為 11/11 合法、雙條件 8/11，尚不足以判定 SA 保留。
+配對腳本已編譯；短驗證雙方各跑兩次，均合法且各自結果逐位一致。階段 B 尚未完成。
+RUN: python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1
+WAIT: Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE

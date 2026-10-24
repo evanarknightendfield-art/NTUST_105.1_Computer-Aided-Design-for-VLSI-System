@@ -1,0 +1,16 @@
+e01_nearlegal: 9769 cells, 9688 nets, 90 rows, 63 fixed  reference placement: LEGAL  Total displacement: 26779.1  Maximum displacement: 5.5  (c2577)  Total HPWL: 689104.5
+e02_legalgp: 4493 cells, 4464 nets, 60 rows, 42 fixed  reference placement: LEGAL  Total displacement: 0.0  Maximum displacement: 0.0  (None)  Total HPWL: 15276993.0
+e03_dense97: 5822 cells, 5792 nets, 70 rows, 44 fixed  reference placement: LEGAL  Total displacement: 276605.5  Maximum displacement: 131.0  (c1081)  Total HPWL: 379095.5
+e04_sparse10: 1447 cells, 1444 nets, 50 rows, 30 fixed  reference placement: LEGAL  Total displacement: 224401.6  Maximum displacement: 433.4  (c199)  Total HPWL: 316144.1
+e05_bignets: 11544 cells, 11491 nets, 100 rows, 82 fixed  reference placement: LEGAL  Total displacement: 322092.0  Maximum displacement: 68.7  (c4758)  Total HPWL: 974041.5
+e06_tallnarrow: 4080 cells, 4068 nets, 800 rows, 40 fixed  reference placement: LEGAL  Total displacement: 224590.6  Maximum displacement: 176.9  (c637)  Total HPWL: 2047368.5
+e07_tworows: 2747 cells, 2862 nets, 2 rows, 20 fixed  reference placement: LEGAL  Total displacement: 107792.3  Maximum displacement: 160.0  (c1679)  Total HPWL: 935915.0
+e08_fragmented: 7029 cells, 6978 nets, 120 rows, 80 fixed  reference placement: LEGAL  Total displacement: 322475.6  Maximum displacement: 123.5  (c3237)  Total HPWL: 614462.0
+e09_offgrid: 8197 cells, 8105 nets, 80 rows, 40 fixed  reference placement: LEGAL  Total displacement: 55271.8  Maximum displacement: 203.3  (c1354)  Total HPWL: 83853.9
+e10_mixedsites: 10552 cells, 10540 nets, 60 rows, 30 fixed  reference placement: LEGAL  Total displacement: 285568.2  Maximum displacement: 68.0  (c7061)  Total HPWL: 1216972.0
+e11_format: 1997 cells, 2014 nets, 40 rows, 38 fixed  reference placement: LEGAL  Total displacement: 30286.2  Maximum displacement: 43.2  (u36/blk[18].g1818)  Total HPWL: 120211.0
+e12_collapse: 3619 cells, 3543 nets, 60 rows, 30 fixed  reference placement: LEGAL  Total displacement: 1301639.2  Maximum displacement: 1203.0  (c3618)  Total HPWL: 286663.0
+e13_onecell: 1 cells, 1 nets, 1 rows, 2 fixed  reference placement: LEGAL  Total displacement: 6.6  Maximum displacement: 6.6  (only)  Total HPWL: 36.5
+e14_fixedonly: 0 cells, 1 nets, 2 rows, 3 fixed  reference placement: LEGAL  Total displacement: 0.0  Maximum displacement: 0.0  (None)  Total HPWL: 73.0
+e15_realistic: 31785 cells, 31531 nets, 170 rows, 405 fixed  reference placement: LEGAL  Total displacement: 75945621.7  Maximum displacement: 6464.4  (c22961)  Total HPWL: 112540877.0
+e16_rowgaps: 8276 cells, 8201 nets, 96 rows, 40 fixed  reference placement: LEGAL  Total displacement: 316310.8  Maximum displacement: 113.3  (c899)  Total HPWL: 682019.0

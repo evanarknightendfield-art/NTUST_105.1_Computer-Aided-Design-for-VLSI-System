@@ -1,0 +1,494 @@
+[
+  {
+    "label": "build_annealer",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-c",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/annealer.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o"
+    ],
+    "returncode": 0,
+    "seconds": 17.566462964983657
+  },
+  {
+    "label": "build_capsearch",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-c",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/capsearch.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o"
+    ],
+    "returncode": 0,
+    "seconds": 9.723050482047256
+  },
+  {
+    "label": "build_chain",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-c",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o"
+    ],
+    "returncode": 0,
+    "seconds": 5.848291142960079
+  },
+  {
+    "label": "build_global",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-c",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/global.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o"
+    ],
+    "returncode": 0,
+    "seconds": 6.680571379023604
+  },
+  {
+    "label": "build_legalizer",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-c",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/legalizer.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o"
+    ],
+    "returncode": 0,
+    "seconds": 15.11431380501017
+  },
+  {
+    "label": "build_optimizer",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-c",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/optimizer.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o"
+    ],
+    "returncode": 0,
+    "seconds": 8.576953666983172
+  },
+  {
+    "label": "build_placedb",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-c",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/placedb.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o"
+    ],
+    "returncode": 0,
+    "seconds": 6.3054429740295745
+  },
+  {
+    "label": "build_window",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-c",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/window.cpp",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o"
+    ],
+    "returncode": 0,
+    "seconds": 14.113322971970774
+  },
+  {
+    "label": "link_window",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/window_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window_test"
+    ],
+    "returncode": 0,
+    "seconds": 2.7873338039498776
+  },
+  {
+    "label": "window",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window_test"
+    ],
+    "returncode": 0,
+    "seconds": 0.19562646298436448
+  },
+  {
+    "label": "link_multirow",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/multirow_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/multirow_test"
+    ],
+    "returncode": 0,
+    "seconds": 3.3037340380251408
+  },
+  {
+    "label": "multirow",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/multirow_test"
+    ],
+    "returncode": 0,
+    "seconds": 8.078220324998256
+  },
+  {
+    "label": "link_optimizer",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/optimizer_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer_test"
+    ],
+    "returncode": 0,
+    "seconds": 3.873515031009447
+  },
+  {
+    "label": "optimizer",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer_test"
+    ],
+    "returncode": 0,
+    "seconds": 0.7294308809796348
+  },
+  {
+    "label": "link_chain",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/chain_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain_test"
+    ],
+    "returncode": 0,
+    "seconds": 2.9268797769909725
+  },
+  {
+    "label": "chain",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain_test"
+    ],
+    "returncode": 0,
+    "seconds": 3.8055775240063667
+  },
+  {
+    "label": "link_parallel_sa",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/parallel_sa_test"
+    ],
+    "returncode": 0,
+    "seconds": 3.9893791350186802
+  },
+  {
+    "label": "parallel_sa",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/parallel_sa_test"
+    ],
+    "returncode": 0,
+    "seconds": 0.5389361889683641
+  },
+  {
+    "label": "link_pool",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/pool_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/pool_test"
+    ],
+    "returncode": 0,
+    "seconds": 1.3775623900000937
+  },
+  {
+    "label": "pool",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/pool_test"
+    ],
+    "returncode": 0,
+    "seconds": 0.01985280803637579
+  },
+  {
+    "label": "link_global",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/global_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global_test"
+    ],
+    "returncode": 0,
+    "seconds": 2.889985133020673
+  },
+  {
+    "label": "global",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global_test"
+    ],
+    "returncode": 0,
+    "seconds": 0.021068885980639607
+  },
+  {
+    "label": "link_capsearch",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch_test"
+    ],
+    "returncode": 0,
+    "seconds": 4.12450771901058
+  },
+  {
+    "label": "capsearch",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch_test"
+    ],
+    "returncode": 0,
+    "seconds": 11.442205854982603
+  },
+  {
+    "label": "link_cap_windows",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/cap_windows_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/cap_windows_test"
+    ],
+    "returncode": 0,
+    "seconds": 3.59279114700621
+  },
+  {
+    "label": "cap_windows",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/cap_windows_test"
+    ],
+    "returncode": 0,
+    "seconds": 0.49504029395757243
+  },
+  {
+    "label": "link_guard",
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-O1",
+      "-pthread",
+      "-UNDEBUG",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/guard_test.cpp",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/annealer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/capsearch.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/chain.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/global.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/legalizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/optimizer.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/placedb.o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/window.o",
+      "-o",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/guard_test"
+    ],
+    "returncode": 0,
+    "seconds": 1.5740124969743192
+  },
+  {
+    "label": "guard",
+    "command": [
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests_sanitized/guard_test"
+    ],
+    "returncode": 0,
+    "seconds": 0.019760745053645223
+  }
+]

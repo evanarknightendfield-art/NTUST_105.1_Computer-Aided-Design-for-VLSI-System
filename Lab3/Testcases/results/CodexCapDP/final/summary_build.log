@@ -1,0 +1,105 @@
+{
+  "groups": {
+    "testcases": {
+      "cases": 3,
+      "passed": 3,
+      "max_ok": 3,
+      "total_ok": 3,
+      "both": 3,
+      "seconds": 191.74
+    },
+    "holdout": {
+      "cases": 8,
+      "passed": 8,
+      "max_ok": 6,
+      "total_ok": 8,
+      "both": 6,
+      "seconds": 427.40999999999997
+    },
+    "edge": {
+      "cases": 16,
+      "passed": 16,
+      "max_ok": 14,
+      "total_ok": 14,
+      "both": 12,
+      "seconds": 578.04
+    },
+    "all": {
+      "cases": 27,
+      "passed": 27,
+      "max_ok": 23,
+      "total_ok": 25,
+      "both": 21,
+      "seconds": 1197.19
+    }
+  },
+  "hpwl": {
+    "fixed": {
+      "holdout": {
+        "ratio": 0.993493567264363,
+        "seed_min": 0.9928755283236386,
+        "seed_max": 0.9939211783802849,
+        "benches": 8,
+        "threshold": null,
+        "passed": null
+      },
+      "edge": {
+        "ratio": 0.9931092796728757,
+        "seed_min": 0.9922146992871981,
+        "seed_max": 0.9942150076793459,
+        "benches": 16,
+        "threshold": null,
+        "passed": null
+      }
+    },
+    "equal": {
+      "holdout": {
+        "ratio": 0.985721012768569,
+        "seed_min": 0.9832816230137903,
+        "seed_max": 0.9873900872655529,
+        "benches": 8,
+        "threshold": 0.9907,
+        "passed": true
+      },
+      "edge": {
+        "ratio": 0.9866905031447886,
+        "seed_min": 0.9841183695035023,
+        "seed_max": 0.9917763596005627,
+        "benches": 16,
+        "threshold": 0.9876,
+        "passed": true
+      }
+    },
+    "default": {
+      "holdout": {
+        "ratio": 0.992398935068984,
+        "seed_min": 0.9916623975842966,
+        "seed_max": 0.9936995915900932,
+        "benches": 8,
+        "threshold": 0.9919,
+        "passed": false
+      },
+      "edge": {
+        "ratio": 0.9930725208908162,
+        "seed_min": 0.9902428816101642,
+        "seed_max": 0.9951031860502911,
+        "benches": 16,
+        "threshold": 0.9938,
+        "passed": true
+      }
+    }
+  },
+  "e08": {
+    "new_total": 90357.493,
+    "v5_total": 90333.005,
+    "chain_total": 89415.317,
+    "vs_v5": 0.00027108585616075764,
+    "vs_chain": 0.010537076102967946
+  },
+  "seed4_pass": {
+    "ClaudeOpus55_v4": 16,
+    "CodexChainDP": 16,
+    "ClaudeOpus55_v5": 16,
+    "CodexCapDP": 16
+  }
+}

@@ -1,0 +1,67 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_CodexCapDP/submissions/CodexCapDP.tgz  (53 files)
+       CodexCapDP/CMakeLists.txt
+       CodexCapDP/Makefile
+       CodexCapDP/README.md
+       CodexCapDP/WORK_STATE.md
+       CodexCapDP/src/annealer.cpp
+       CodexCapDP/src/annealer.hpp
+       CodexCapDP/src/capsearch.cpp
+       CodexCapDP/src/capsearch.hpp
+       CodexCapDP/src/chain.cpp
+       CodexCapDP/src/chain.hpp
+       CodexCapDP/src/global.cpp
+       CodexCapDP/src/global.hpp
+       CodexCapDP/src/guard.hpp
+       CodexCapDP/src/legalizer.cpp
+       CodexCapDP/src/legalizer.hpp
+       CodexCapDP/src/main.cpp
+       CodexCapDP/src/optimizer.cpp
+       CodexCapDP/src/optimizer.hpp
+       CodexCapDP/src/placedb.cpp
+       CodexCapDP/src/placedb.hpp
+       CodexCapDP/src/pool.hpp
+       CodexCapDP/src/rowmap.hpp
+       CodexCapDP/src/window.cpp
+       CodexCapDP/src/window.hpp
+       CodexCapDP/tests/cap_chain_prototype.cpp
+       CodexCapDP/tests/cap_chain_prototype.hpp
+       CodexCapDP/tests/cap_search_bench.cpp
+       CodexCapDP/tests/cap_windows_bench.cpp
+       CodexCapDP/tests/cap_windows_test.cpp
+       CodexCapDP/tests/capsearch_test.cpp
+       CodexCapDP/tests/chain_test.cpp
+       CodexCapDP/tests/compare_methods.cpp
+       CodexCapDP/tests/diag_chaindp_global/driver.cpp
+       CodexCapDP/tests/diag_chaindp_global/global_diag.cpp
+       CodexCapDP/tests/diagnostic.hpp
+       CodexCapDP/tests/diagnostic_capsearch.cpp
+       CodexCapDP/tests/diagnostic_experiments.cpp
+       CodexCapDP/tests/diagnostic_main.cpp
+       CodexCapDP/tests/diagnostic_window.cpp
+       CodexCapDP/tests/global_preserve_prototype.cpp
+       CodexCapDP/tests/global_preserve_prototype.hpp
+       CodexCapDP/tests/global_test.cpp
+       CodexCapDP/tests/guard_test.cpp
+       CodexCapDP/tests/multirow_test.cpp
+       CodexCapDP/tests/optimizer_test.cpp
+       CodexCapDP/tests/parallel_sa_test.cpp
+       CodexCapDP/tests/pool_test.cpp
+       CodexCapDP/tests/readpl.cpp
+       CodexCapDP/tests/run_tests.py
+       CodexCapDP/tests/sa_bench.cpp
+       CodexCapDP/tests/sa_bench2.cpp
+       CodexCapDP/tests/site_repair_bench.cpp
+       CodexCapDP/tests/window_test.cpp
+[build] OK build/dp  12.9s
+[run] ibm01    PASS  OK          86.5s  disp=23102846.5707 max=10427.027 legal=87236196.0 sa=49455174.0
+[run] ibm05    PASS  OK         102.0s  disp=1327871.231 max=199.918 legal=11833463.5 sa=9566838.0
+[run] toy      PASS  OK           2.8s  disp=43324.4 max=2004.4 legal=104094.0 sa=46530.0
+[run] h01      PASS  OK          11.5s  disp=2358.81 max=29.39 legal=25492.0 sa=14031.5
+[run] h02      PASS  OK          24.2s  disp=463886.857 max=2526.519 legal=3785092.0 sa=2282312.7
+[run] h03      PASS  OK          23.2s  disp=7066.0491 max=20.2013 legal=26511.7 sa=12022.3
+[run] h04      PASS  OK          33.0s  disp=180396.51 max=237.85 legal=534303.5 sa=231597.5
+[run] h05      PASS  OK          26.4s  disp=1551488.48 max=1337.305 legal=26205137.2 sa=17952305.4
+[run] h06      PASS  OK          95.3s  disp=889855.88 max=427.56 legal=2154481.0 sa=665096.0
+[run] h07      PASS  OK          87.7s  disp=109169.7327 max=47.6762 legal=354425.032 sa=162850.654
+[run] h08      PASS  OK         123.5s  disp=125458340.095 max=28282.309 legal=308252016.8 sa=100571905.5
+[summary] 11/11 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_CodexCapDP/record.csv

@@ -1,0 +1,15 @@
+{
+  "freeze": "b9d4ac797f3804a1eded6e4975ebfdb15dc2756e23212fcc5f5bcae0c67cc08b",
+  "command": [
+    "/home/evan/anaconda3/bin/python3",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+    "--bin",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build_v5/dp",
+    "--out",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/ts_new_stage1",
+    "--append",
+    "--dp-args=--no-sa",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e08_fragmented/e08_fragmented"
+  ],
+  "started": 1792579975.956049
+}

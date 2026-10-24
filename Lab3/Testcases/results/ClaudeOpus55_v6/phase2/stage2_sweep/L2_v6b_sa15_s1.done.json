@@ -1,0 +1,19 @@
+{
+ "command": [
+  "bash",
+  "-c",
+  "\"$0\" \"$@\" > /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase2/stage2_sweep/L2_v6b_sa15_s1.csv 2> /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase2/stage2_sweep/L2_v6b_sa15_s1.err",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/bin/sa_bench_v6b",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase2/stage2_sweep/start_L2/L2",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase2/stage2_sweep/L2_v6b_sa15_s1",
+  "1",
+  "default",
+  "15",
+  "75",
+  "0"
+ ],
+ "returncode": 0,
+ "seconds": 99.27,
+ "finished": "Thu Oct 22 05:48:13 2026"
+}

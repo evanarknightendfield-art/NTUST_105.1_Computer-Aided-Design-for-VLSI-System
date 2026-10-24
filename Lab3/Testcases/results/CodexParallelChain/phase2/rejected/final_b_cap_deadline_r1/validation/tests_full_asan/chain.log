@@ -1,0 +1,1 @@
+PASS: eight-row cycle, two-blocker split, partial rollback, budgets, determinism; 300 random placements (6569 accepted chains, 2673 multi-blocker steps)

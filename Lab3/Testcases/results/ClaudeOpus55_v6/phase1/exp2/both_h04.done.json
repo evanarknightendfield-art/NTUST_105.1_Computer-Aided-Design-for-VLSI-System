@@ -1,0 +1,16 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/bin/CodexCapDP/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/exp2/both",
+  "--append",
+  "--dp-args=--no-sa --total-ratio 1.01 --extra-time 20",
+  "Testcases/holdout/h04/h04"
+ ],
+ "returncode": 0,
+ "seconds": 25.91,
+ "finished": "Thu Oct 22 03:46:34 2026"
+}

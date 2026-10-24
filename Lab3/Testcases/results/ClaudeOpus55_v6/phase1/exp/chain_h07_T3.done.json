@@ -1,0 +1,16 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/bin/CodexCapDP/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/exp/chain_sweep/T3",
+  "--append",
+  "--dp-args=--no-sa --cap-time 0 --extra-time 40 --chain-time 3",
+  "Testcases/holdout/h07/h07"
+ ],
+ "returncode": 0,
+ "seconds": 23.04,
+ "finished": "Thu Oct 22 04:44:37 2026"
+}

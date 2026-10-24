@@ -1,0 +1,9 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v7/tests/run_tests.py"
+ ],
+ "returncode": 0,
+ "seconds": 41.53,
+ "finished": "Sat Oct 24 05:45:57 2026"
+}

@@ -1,0 +1,111 @@
+{
+  "record": {
+    "bench": "h08",
+    "status": "OK",
+    "seconds": "61.23",
+    "disp": "125494245.313",
+    "max": "28282.309",
+    "hpwl_legal": "308548749.6",
+    "hpwl_sa": "308548749.6",
+    "t_read": "0.074",
+    "t_legalize": "49.763",
+    "t_pareto": "0.23",
+    "t_windowdp": "5.231",
+    "t_chain": "5.882",
+    "t_global": "",
+    "t_sa": "",
+    "t_polish": "",
+    "t_stage1": "61.17970935901394",
+    "t_stage2": "61.181289255968295",
+    "sa_threads": "",
+    "sa_attempts": "",
+    "sa_internal_s": "",
+    "sa_failed_pct": "",
+    "sa_timeup": "",
+    "global_tries": "0",
+    "global_accepted": "0",
+    "global_unknown": "0",
+    "sa_seconds": ""
+  },
+  "legal": true,
+  "chain": {
+    "round": 0,
+    "phase": "chain_stage",
+    "seconds": 1.3587979939999997,
+    "total_before": 125014153.16300039,
+    "total_after": 125013163.16300039,
+    "total_reduction": 990.0,
+    "max_before": 28599.531000000003,
+    "max_after": 28599.531000000003,
+    "work": -1
+  },
+  "phases": [
+    {
+      "round": 1,
+      "phase": "target_windows",
+      "seconds": 0.2266772649999993,
+      "total_before": 125014153.16300039,
+      "total_after": 125013163.16300039,
+      "total_reduction": 990.0,
+      "max_before": 28599.531000000003,
+      "max_after": 28599.531000000003,
+      "work": 4
+    },
+    {
+      "round": 1,
+      "phase": "ejection_chains",
+      "seconds": 0.480724342000002,
+      "total_before": 125013163.16300039,
+      "total_after": 125013163.16300039,
+      "total_reduction": 0.0,
+      "max_before": 28599.531000000003,
+      "max_after": 28599.531000000003,
+      "work": 0
+    },
+    {
+      "round": 1,
+      "phase": "post_chain_dp",
+      "seconds": 0.022164327999995237,
+      "total_before": 125013163.16300039,
+      "total_after": 125013163.16300039,
+      "total_reduction": 0.0,
+      "max_before": 28599.531000000003,
+      "max_after": 28599.531000000003,
+      "work": -1
+    },
+    {
+      "round": 2,
+      "phase": "target_windows",
+      "seconds": 0.19209109900000243,
+      "total_before": 125013163.16300039,
+      "total_after": 125013163.16300039,
+      "total_reduction": 0.0,
+      "max_before": 28599.531000000003,
+      "max_after": 28599.531000000003,
+      "work": 0
+    },
+    {
+      "round": 2,
+      "phase": "ejection_chains",
+      "seconds": 0.436834441000002,
+      "total_before": 125013163.16300039,
+      "total_after": 125013163.16300039,
+      "total_reduction": 0.0,
+      "max_before": 28599.531000000003,
+      "max_after": 28599.531000000003,
+      "work": 0
+    },
+    {
+      "round": 0,
+      "phase": "chain_stage",
+      "seconds": 1.3587979939999997,
+      "total_before": 125014153.16300039,
+      "total_after": 125013163.16300039,
+      "total_reduction": 990.0,
+      "max_before": 28599.531000000003,
+      "max_after": 28599.531000000003,
+      "work": -1
+    }
+  ],
+  "placement_sha256": "1e22923c953316c3685bc1b6faecac662d76958d55e67fee64c22141453b1c86"
+}

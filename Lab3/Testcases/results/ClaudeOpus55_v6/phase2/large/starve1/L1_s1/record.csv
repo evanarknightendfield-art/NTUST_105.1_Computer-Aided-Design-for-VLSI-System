@@ -1,0 +1,2 @@
+bench,status,seconds,disp,max,hpwl_legal,hpwl_sa,t_read,t_legalize,t_pareto,t_windowdp,t_chain,t_global,t_sa,t_polish,t_stage1,t_stage2,sa_threads,sa_attempts,sa_internal_s,sa_failed_pct,sa_timeup,global_tries,global_accepted,global_unknown,sa_seconds
+L1,OK,187.72,2443109957.994,50495.937,5573483602.8,1725874566.4,0.676,89.344,3.404,6.587,5.746,,60.004,21.856,105.75748785599717,187.61820009999792,4,75449959,60.0,12.9,,0,0,0,60.004

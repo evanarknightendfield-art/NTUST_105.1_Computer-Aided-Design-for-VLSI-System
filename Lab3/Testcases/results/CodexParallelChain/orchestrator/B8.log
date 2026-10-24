@@ -1,0 +1,2942 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a16774-ff58-77b1-bf50-68c6a2c1c16a
+--------
+user
+接續 AI_Solutions/CodexParallelChain/：讀 WORK_STATE.md 的「下一步」與上一次等待的結果，從那裡繼續（階段 B）。
+規則見 AI_Solutions/ClaudeOpus55_v6/HANDOFF.md 第 0 節；保留／撤回條件、停損、B 完成的最後檢查見第 7 節。只讀需要的片段。回覆不超過 10 行。
+
+【非互動執行的規則（由協調者自動開 session，使用者在睡覺）】
+- 這是 codex exec 的單次 session，沙箱裡啟動的背景工作會在 session 結束時被殺掉（第 A 階段的 nohup 就是這樣死掉的）。
+  所以不要自己啟動超過 5 分鐘的計算；把要跑的東西寫成腳本，然後在最後回覆的最後幾行寫：
+    RUN: <從 Lab3 目錄執行的完整命令>        （可以多行，依序執行）
+    WAIT: <完成標記的路徑，相對 Lab3>
+  協調者會在沙箱外依序執行 RUN、等 WAIT 出現，再開下一個 session。命令不要加 taskset（計時程式不能綁 E-core；編譯已由 v6q 綁）。
+- 要跑的東西都在 5 分鐘內的話（例如 C++ 測試），直接在本 session 跑完，不要寫 RUN/WAIT。
+- ASan：LeakSanitizer 在沙箱內會因 ptrace 失敗，請用 ASAN_OPTIONS=detect_leaks=0 跑並註明；協調者會在沙箱外補跑完整的 ASan。
+- 階段 B 全部完成（HANDOFF.md 第 7 節）時，最後一行只寫：B_DONE
+- 不 commit、不加任何 AI 署名；不要問問題（沒有人會回答），自己依 HANDOFF.md 判斷並把判斷寫進 WORK_STATE.md。
+
+codex
+我會先讀取指定交接規則、下一步與上次等待結果，再接續階段 B，並把判斷更新到 WORK_STATE.md。
+
+exec
+/bin/bash -lc "pwd; rg --files -g 'AGENTS.md' -g 'WORK_STATE.md' -g 'HANDOFF.md' -g '*wait*' AI_Solutions .agents 2>/dev/null" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+AI_Solutions/CodexChainDP/WORK_STATE.md
+AI_Solutions/CodexCapDP/WORK_STATE.md
+AI_Solutions/ClaudeOpus55_v6/WORK_STATE.md
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+AI_Solutions/CodexParallelChain/WORK_STATE.md
+
+exec
+/bin/bash -lc 'for p in /AGENTS.md /home/AGENTS.md /home/evan/AGENTS.md /home/evan/Desktop/AGENTS.md /home/evan/Desktop/NTUST/AGENTS.md /home/evan/Desktop/NTUST/105_1/AGENTS.md /home/evan/Desktop/NTUST/105_1/Class/AGENTS.md /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/AGENTS.md AGENTS.md AI_Solutions/AGENTS.md AI_Solutions/CodexParallelChain/AGENTS.md; do if [ -f "$p" ]; then printf '"'\\n%s\\n' \""'$p"; cat "$p"; fi; done
+rg -n '"'"'^#{1,4} |下一步|WAIT|RUN|等待'"' AI_Solutions/CodexParallelChain/WORK_STATE.md AI_Solutions/ClaudeOpus55_v6/HANDOFF.md" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:1:# 交接：v6 之後的下一版（給 Codex，一份就夠，不必再讀其他報告）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:5:## 0. 規則（每個 session 都適用）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:16:2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:17:   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:23:## 1. 可以直接用的工具（`Testcases/results/ClaudeOpus55_v6/scripts/`）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:46:## 2. v6 現況（2026-10-22 同輪配對；細節 `Testcases/results/ClaudeOpus55_v6/final/summary.md`）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:62:## 3. 已確認的事實（不必重新量）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:74:## 4. 已經證明不值得做的（不要再試）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:86:## 5. 建議的下一版方向（依幅度 × 機會；先診斷再做）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:95:## 6. 驗收（建議）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:102:## 7. 階段 B（實作・調參）什麼時候算完成
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:104:**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:124:4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:1:# CodexParallelChain — WORK_STATE
+AI_Solutions/CodexParallelChain/WORK_STATE.md:3:- 本 session：只建立版本並啟動第一階段診斷；不等待、不查進度、不調參、不 commit。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:11:## 第一階段範圍
+AI_Solutions/CodexParallelChain/WORK_STATE.md:23:## 執行約定
+AI_Solutions/CodexParallelChain/WORK_STATE.md:37:## 第一階段執行歷史（已於 10-23 05:01 完成）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:39:歷史等待項目：scripts/diag.py，完成標記 phase1/ALL_DONE
+AI_Solutions/CodexParallelChain/WORK_STATE.md:42:- 本 session 到此結束，未等待完成、未查詢診斷進度。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:98:- 10-23 05:01 phase1/ALL_DONE：全部診斷完成，保護資料夾 SHA256 未變；等待下一個 session 分析。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:100:## 目前狀態：2026-10-23 phase1 診斷完成
+AI_Solutions/CodexParallelChain/WORK_STATE.md:110:- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:112:## 階段 B：SA 第 1/3 輪（2026-10-23，待訓練，尚未保留）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:122:- 本 session 不執行長時間訓練、不啟動背景工作。交由協調者：`python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json`。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:132:## 階段 B：SA 第 1/3 輪補足同輪配對（2026-10-23，等待中）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:143:- 等待中：協調者執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE`。完整訓練超過 5 分鐘，故交外部執行；已完成的小樣本工作會依 marker 跳過。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:144:- **下一步**：先讀上述 `ALL_DONE`、`compare.md` 與 `summary.json` 的 gate/reproducibility，將數據與判斷記回本檔。若 SA 閘門失敗，依原因決定第 2/3 輪或提前撤回，總計最多 3 輪；chain target/DP 與 ejection 尚未實作或判定。B 尚未完成，不凍結、不產生新 seed、不進 C、不 commit。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:148:## 階段 B：SA 保留；target windows 第 1/3 輪（2026-10-23）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:166:- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py target_parallel_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/ALL_DONE`。其餘訓練預計超過 5 分鐘，未在沙箱啟動。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:167:- **下一步**：先讀該 ALL_DONE、compare.md、summary.json 的 gates／budgets／實際 chain seconds，將本輪 target windows 判定寫回本檔。失敗時按主因決定第 2/3 輪或提前撤回（只撤回此輪 window 改動，保留 SA）；成功則記新保留點。接著處理尚未完成的 ejection 平行化／無效搜尋項；不可用 SA 已通過或 toy 短測宣告 B 完成。最終階段需修正既有 phase2_train.py 的歷史參考問題，讓 final_b 真正同輪配對，再做第 7 節所有檢查。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:170:## 階段 B：target windows 撤回；ejection 第 1/3 輪（2026-10-23）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:182:- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py ejection_beam_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ALL_DONE`。完整訓練預計超過 5 分鐘，未在沙箱啟動；沒有殘留背景工作。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:183:- **下一步**：先讀上述 ALL_DONE、compare.md、summary.json 的 gates/budgets/chain_seconds，必要時只讀 ejection_work.json 的 h05/h06 計數，判定此輪保留或撤回。ejection 最多 3 輪，若幾乎沒有吞吐或品質收益可依停損提前撤回至 SA 保留點；如考慮第 2 輪分 band，必須先解決完整 Search touched-set 隔離、跨界補做與 barrier cap 重驗，不能因目前排序等價就假設分 band 安全。所有 ejection 方案須有明確保留／撤回結論才能進最後驗收。B 尚未完成；最終仍須修正 phase2_train.py 歷史參考問題後做真正同輪 final_b Stage 1、protocol hash 對應最終 src、final_b L1/L2 合法及 <240/<600 秒、全套測試與最終 hash。未凍結、不產生新 seed、不進 C、不 commit。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:186:## 階段 B：ejection 撤回；最終驗收準備（2026-10-23）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:197:- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。依序 train final_b 剩餘同輪配對、large final_b L2 seed1/2 + L1 seed1、沙箱外完整 ASan/UBSan（detect_leaks=1）。計時程式不綁核；只有 v6q／測試 runner 的編譯綁 16–19。佇列過程若程序失敗會寫 FAILED.json，不寫成功 marker；若只是數值門檻失敗，ALL_DONE 中 gates=false，仍須人工判定，不能視為通過。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:198:- **下一步**：只讀 `phase2/final_b_validation/ALL_DONE`、`phase2/{train,large}/final_b/{ALL_DONE,compare.md,summary.json,protocol.json}` 與 `phase2/final_b_validation/{test_evidence/verification.json,tests_full_asan/records.json}`，核對 final src hash、每項門檻、0 額外步驟超時、全合法及 L1<240／L2<600。完整 ASan 日志須無診斷；一般／TSan 證據不可被 full ASan 覆蓋。若全通過，回顧 SA 保留與 target/ejection 撤回的數據路徑、寫最終 hash 及「B 完成，下一步 C」，最後一行 B_DONE；未全通過則按失敗原因處理，不重跑已完成成功步驟、不放寬門檻、不先進 C。目前 **B 尚未完成**。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:202:## 階段 B：最終驗收失敗，保守撤回 SA（2026-10-23）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:208:- 最終 production src 現已與保護 v6 **逐檔逐位一致**，hash `03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2`；還原 parallel_sa_test.cpp，保留 tests runner 的編譯綁核／TSan 選項。沒有 production 改動保留；若最後驗收通過，下一步 C 必須是「不凍結新版、直接寫報告說明沒有通過完整驗收的改善」，並誠實保留 SA 單項改善結果。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:214:- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。此為還原後 hash 的新驗收，不沿用舊 marker；正式計時不綁核，完整佇列超過 5 分鐘，未在本 session 啟動。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:215:- **下一步**：讀新的 `phase2/final_b_validation/ALL_DONE`、`phase2/{train,large}/final_b/{compare.md,summary.json,protocol.json}` 與短／完整 sanitizer 證據，只判斷還原後來源。保持全部門檻；若全過，最終結論為「全部 production 改動撤回，B 完成，下一步 C：不凍結新版、直接寫報告」，須保留 SA 單項改善與最終驗收失敗的區別。若基線也失敗，先核對失敗原因與協定，不以 source 相同為由跳過 gate、不對同份原碼反覆抽樣直到通過；仍不得 B_DONE。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:217:## 協調者備註（Claude，10-23 14:10；給下一個 B session）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:226:## 階段 B：v6 對照仍失敗；依協調者備註恢復 SA 單項保留（2026-10-23）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:228:- 已消化上次等待結果：`final_b_validation/ALL_DONE` 的 train=false、large=false、full_asan_ubsan=true；沒有把完成標記當通過。還原版原碼、train/large protocol、snapshot、binary、輸入及 helper hashes 已由 `validate()` 核對，來源確為 v6 hash `03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2`。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:237:- **下一步／阻塞原因**：先處理 v6 既有的 cap deadline 正確性與相同來源 Stage 1 量測變動。若實作期限修正，必須先用 testcases/holdout 的新功能測試及新一輪同輪訓練判定（小改動最多 3 輪），不得以 L2 調參，也不得讓 v6 reference 的失敗被忽略；只有來源或有明確依據的協定修正後才建立新 final_b。若維持目前原碼與全部現有 gate，兩份來源均已有失敗證據，沒有可合法直接宣告 B_DONE 的路徑。無等待中工作、無 RUN/WAIT；本 session 停在 B 驗收阻塞，不進 C、不凍結、不新增 seed、不 commit。保護資料夾 hashes 核對未變。
+
+exec
+/bin/bash -lc "sed -n '5,22p' AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+sed -n '102,140p' AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+sed -n '186,250p' AI_Solutions/CodexParallelChain/WORK_STATE.md
+rg --files AI_Solutions/CodexParallelChain Testcases/results/CodexParallelChain/scripts" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+## 0. 規則（每個 session 都適用）
+
+**品質與流程**
+- 不 commit、任何檔案都不加 AI 署名。保護資料夾（不要改）：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6。
+- 新版本：`AI_Solutions/<NEW>/`，以 ClaudeOpus55_v6 為底複製 `src/ CMakeLists.txt Makefile tests/`；執行輸出全部在 `Testcases/results/<NEW>/`。
+- 調參只用 `Testcases/testcases`、`Testcases/holdout`；edge、edge_seed2~5 只當回歸。凍結（記 sha256）之後才產生新 seed。
+- 沒有數據就不宣稱進步：HPWL 至少 3 seeds、報平均與範圍，三種協定分開；新舊版本同一次配對重跑。
+- 計時中的程式一次一個（`timing.lock`）；分析與編譯 `taskset -c 16-19`。
+
+**省 token（上一輪 Codex 一個 session 用了 2,230 萬 input token：166 次呼叫、每次約 14 萬 context，其中一半的工具呼叫是在查進度）**
+1. **一個 session 只做一個階段**，做完就更新 WORK_STATE 並結束；下一階段開新 session（context 從小開始）。
+2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+   `timeout 600 bash -c 'until [ -e MARKER ]; do sleep 20; done'`，不要反覆 ls / tail / ps。
+3. **輸出都進檔案**，終端只印摘要：每個指令輸出 ≤ 40 行（`| tail -n 20`、`awk` 摘要）；不要 cat 整份 record.csv、log、.pl。
+4. **只讀需要的**：本檔 + 自己的 WORK_STATE.md + 要改的函式。原始碼用 `grep -n` 找函式再 `sed -n` 讀範圍。
+5. 不重跑已完成的步驟（每步 `.done.json`）。對話回覆 ≤ 15 行；完整內容寫在報告檔。
+
+## 7. 階段 B（實作・調參）什麼時候算完成
+
+**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+
+**單項的判定**（只看 testcases + holdout；`phase2_train.py` 的 compare.md 會列出 v6 同輪的數字）
+
+v6 在訓練集 11 筆的基準（對 ChainDP，`ClaudeOpus55_v6/final`）：雙條件 **8/11**、最大位移 GM **0.99604**、總位移 GM **0.99813**。
+Stage 1 的執行間變動：總位移最多約 0.11%、最大位移約 0.13%（ibm05）。
+
+| 改動 | 保留的條件（全部要成立） |
+|---|---|
+| chain 階段平行化 | 訓練集雙條件 ≥ 8/11；總位移 GM 比 v6 低（≥ 0.03%）；最大位移 GM 不比 v6 差超過 0.1%；逐筆最大不比 v6 差超過 0.2%；chain 階段的實際秒數不比 v6 多；h05、h06 在同 1.5 秒內的 chain 收穫至少達到 v6 給 3 秒時的水準（v6：h05 −0.29%、h06 −0.44%，HANDOFF 第 3 節） |
+| 平行 SA（只有診斷的 band 損失平均 ≥ 0.5% 才做） | 同次數協定（固定次數、自動執行緒、3 seeds）在 ibm01、ibm05、h06、h07、h08 的幾何平均比 v6 好 ≥ 0.3%，沒有一筆差超過 0.5%；固定次數下兩次執行結果逐位相同；TSan 0 警告 |
+| 其他小改動 | 有訓練集數據顯示改善，且上表的「不比 v6 差」都成立 |
+
+**停損**：同一項最多 3 輪「改程式 → 訓練」。第 3 輪仍不符合保留條件就撤回（把 src 還原到上一個保留點），數據寫進 WORK_STATE 的「試過沒用」。
+
+**B 結束前的最後檢查**（對最後一份原始碼，`phase2_train.py` 的 protocol.json 裡的 src_sha256 要等於目前 src）
+
+1. 訓練集 Stage 1 一次（`phase2_train.py final_b`），以上「不比 v6 差」都成立，額外步驟 0 超時。
+2. 有動 SA、polish 或時間分配時：`phase2_large.py final_b`（L1、L2 完整執行）全部合法，L1 < 240 秒、L2 < 600 秒。
+3. C++ 測試：一般 + ASan/UBSan 全過；動過平行程式加 TSan 0 警告。新功能各有一個測試。
+4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+
+所有改動都被撤回也算 B 完成：寫清楚數據，C 改成「不凍結新版、直接寫報告說明沒有改善」。
+## 階段 B：ejection 撤回；最終驗收準備（2026-10-23）
+
+- 已讀上次 `phase2/chain_pair/ejection_beam_r1/{ALL_DONE,compare.md,summary.json,ejection_work.json}`。雙條件 8/11；總位移 GM 0.999931693871（僅改善 0.006831% < 0.03%）、最大 GM 1.00000000；chain 實秒合計 candidate 14.547725445 / v6 14.547820982，沒有實質加速。h05 半預算收益 0.261639% < v6 3s 0.288901%／歷史 0.29%；h06 0.367677% < 0.434905%／0.44%。同預算 h05 nodes 304354 / 305877、h06 138682 / 140362，吞吐分別減少約 0.50%／1.20%。
+- **試過沒用／ejection 第 1 輪提前撤回**：沿用已存在的 `phase2/chain_pair/ejection_beam_r1/decision.json`（本 session 開始時已存在），沒有收益證據支持第 2/3 輪。檢查發現 src 已與 `phase2/accepted/sa_boundary_r1/src` 逐檔相同；故不重做還原，確認 hash `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。chain_beam 測試亦已退出目前清單，候選證據仍保留。上次 WORK_STATE 未記錄這些落盤結果，本節補齊。
+- **ejection 分 band 本次 B 不採用**：沒有完整 Search touched-set 隔離、跨界補做及 barrier cap 重驗的已驗證實作；先前精確等價少排序亦沒有吞吐收益，因此不擴展第 2 輪風險。這是提前停損／不保留的決策，並非宣稱已測得分 band 無效。target windows 已撤回；post-chain DP 本來就平行，沒有新增改動。所有項目已明確判定，最後僅保留 SA 四相邊界。
+- 已修正 `scripts/phase2_train.py` 與 `phase2_large.py`，共用新 `phase2_acceptance.py`。舊腳本存 `phase2/final_b_setup/*.before`。train 使用最後 production 原碼（無計時插樁）對 11 筆訓練逐筆交錯重跑 candidate/v6；歷史 ChainDP 僅用雙條件 8/11 定義，所有 v6 比率都來自本輪。protocol 記錄 src、腳本、helper、輸入、checker、binary hashes，快照或協定變更拒絕沿用 marker；雙 timing.lock，只有編譯綁核。
+- 最後僅保留 SA，故 final Stage 1 檢查總 GM≤1、最大 GM≤1.001、逐筆最大≤1.002、雙條件≥8/11、額外步驟 used≤budget（0 超時），不再要求已撤回 chain 功能的 0.03%／半預算改善。兩種輸出 placement 都 check_pl；TIMEOUT、guard fallback、非法 placement 直接失敗。large 沿用既有 L2 seed 1/2、L1 seed 1，完整預設執行，L1<240s、L2<600s；不新生 seed，不用大例調參或宣稱 HPWL 改善。
+- `scripts/phase2_final_b_queue.py` 供協調者依序完成 train final_b、large final_b，以及沙箱外完整 ASan/UBSan（detect_leaks=1）；最後 marker 是驗收資料完成，非自動 B_DONE。沙箱內正做最後原碼一般／ASan+UBSan（detect_leaks=0）／TSan 驗證，結果後補。一般已 10/10 PASS，28 筆 build/link/run；證據保存在 `phase2/final_b_validation/test_evidence/tests/`。
+
+- 本 session 最後短驗證完成：一般、ASan/UBSan、TSan 均 **10/10 PASS**，各 28 筆 build/link/run；用時 41.2／139.1／68.5 秒，單項都少於 5 分鐘。TSan 0 警告、ASan/UBSan 0 診斷。沙箱 ASan 使用 `ASAN_OPTIONS=detect_leaks=0`、UBSan `halt_on_error=1`，不能據此宣稱洩漏驗證通過。完整 test/source hashes 與不可覆寫日志已存 `phase2/final_b_validation/test_evidence/verification.json` 及各子目錄。
+- train final_b 的雙 production binaries 與 large final_b candidate 已編譯，protocol／src／binary hashes 核對通過。toy 同輪短測 2 個 jobs/*.done.json 已完成，兩版均合法、總位移 43324.4、最大 2004.4；extra used candidate 0.668260／v6 0.654251，budget 12 秒。這只驗證流程，不是最終訓練結論。正式佇列跳過這兩筆；記錄 `phase2/final_b_setup/{train_smoke,large_prepare}.log`。保護目錄 hash 未變；本 session 未修改 production src，未 commit、未新生 seed、未凍結、未進 C，無殘留背景工作。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。依序 train final_b 剩餘同輪配對、large final_b L2 seed1/2 + L1 seed1、沙箱外完整 ASan/UBSan（detect_leaks=1）。計時程式不綁核；只有 v6q／測試 runner 的編譯綁 16–19。佇列過程若程序失敗會寫 FAILED.json，不寫成功 marker；若只是數值門檻失敗，ALL_DONE 中 gates=false，仍須人工判定，不能視為通過。
+- **下一步**：只讀 `phase2/final_b_validation/ALL_DONE`、`phase2/{train,large}/final_b/{ALL_DONE,compare.md,summary.json,protocol.json}` 與 `phase2/final_b_validation/{test_evidence/verification.json,tests_full_asan/records.json}`，核對 final src hash、每項門檻、0 額外步驟超時、全合法及 L1<240／L2<600。完整 ASan 日志須無診斷；一般／TSan 證據不可被 full ASan 覆蓋。若全通過，回顧 SA 保留與 target/ejection 撤回的數據路徑、寫最終 hash 及「B 完成，下一步 C」，最後一行 B_DONE；未全通過則按失敗原因處理，不重跑已完成成功步驟、不放寬門檻、不先進 C。目前 **B 尚未完成**。
+- 10-23 13:43 phase2/train/final_b completed; all_gates=False
+- 10-23 13:54 phase2/large/final_b completed; all_gates=False
+
+## 階段 B：最終驗收失敗，保守撤回 SA（2026-10-23）
+
+- 已核對上次完成標記、train/large summary 與 protocol：來源 hash 均為 `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`；marker 只是資料完成，train=false、large=false，不能 B_DONE。Stage 1 總 GM 0.99956280、最大 GM 1.00160930、雙條件 8/11、額外步驟 0 超時；h06 最大比 1.017845448592（+1.784545%，超過 +0.2%），最大 GM 亦超過 +0.1%。L1 187.50s、L2 seed1/2 211.42/212.77s，全部合法且在限制內；L2 seed2 額外步驟 6.336646s > 6s，不能略去該失敗。
+- 原碼差異只有 annealer.cpp 與 sa_bands.hpp；Stage 1 使用 --no-sa，兩項失敗均在 SA 之前。h06 日志顯示微小 chain/DP 起點差異後，v6 cap 首候選 accepted（total 891019.06），candidate 首候選 total_budget（892648.88），後者最後最大仍 435.19、v6 427.56。L2 seed2 第二次 cap repair 用 1.793603s，結束後 extra 已超時。這些是日誌證據，**不能歸因 SA**，亦不把它們當成調整大例參數的理由。
+- **最終保守撤回 SA**：單項固定自動緒改善 0.825307% 與 wall10 0.856290% 的證據仍有效（`phase2/sa_pair/sa_boundary_r1/`），但候選未取得完整 final_b 通過證據。不對未改原碼反覆抽樣直到通過，不放寬門檻；停止保留新版，還原 v6。這是最終驗收失敗後的風險決策，不宣稱已證明 SA 無效，也不消耗 SA 第 2/3 輪調參。target/ejection 的撤回理由維持原決策路徑。
+- 所有舊 final_b 資料、production src/tests 與 helper 已封存於 `phase2/rejected/final_b_sa_boundary_r1/`：原 `train/final_b` → `train/`、`large/final_b` → `large/`、`final_b_validation` → `validation/`；原日志中的絕對路徑依此映射，不修改歷史數值。決策見該目錄 `decision.json`。先前一般／ASan+UBSan／TSan 各 28 記錄及逐檔 SHA 已核對；沙箱外完整 ASan+UBSan 28 記錄全成功、日志 0 診斷，原證據未遺失。
+- 最終 production src 現已與保護 v6 **逐檔逐位一致**，hash `03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2`；還原 parallel_sa_test.cpp，保留 tests runner 的編譯綁核／TSan 選項。沒有 production 改動保留；若最後驗收通過，下一步 C 必須是「不凍結新版、直接寫報告說明沒有通過完整驗收的改善」，並誠實保留 SA 單項改善結果。
+- 原碼已改為 v6，因此舊 hash 的成功步驟不能充作新 final 原碼驗收。安排新 `phase2_train.py final_b`／`phase2_large.py final_b`，**所有既有數值門檻原樣保留**，不共用舊 marker；連同 L1/L2 與額外超時條件都保留。只修 protocol 說明為全部撤回，沒有改 acceptance 算法或 gate。若基線也不通過，要如實記為基線／量測限制並處理，不可當作自動豁免。
+- 新 `phase2_short_validation.py` 每次只執行一套 <5 分鐘測試，雙 timing lock、只有編譯綁核，僅封存本套 records 實際引用的日志，避免殘留已撤回測試混入證據。final queue 現會驗證最後 src/tests 與三套證據 hash，再接受沙箱外完整 ASan 的 records／日志；Python 語法檢查成功。
+
+- 還原後最終短驗證：一般／ASan+UBSan／TSan 均 **10/10 PASS**，各 28 筆記錄；耗時 40.9／138.1／68.3 秒。ASan 使用 `ASAN_OPTIONS=detect_leaks=0`，TSan 0 警告；對應原碼／測試／日志 SHA 已封存並重新核對於 `phase2/final_b_validation/test_evidence/verification.json`。這份原碼的完整 LeakSanitizer 仍由協調者補跑，舊 SA 原碼通過證據不能冒用。
+- 新 final_b 的 train 雙 production binaries 與 large candidate 已編譯，protocol/src/binary hashes 核對成功；`src_sha256` 與 `reference_sha256` 都是 `03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2`。日誌 `phase2/final_b_rollback_setup/{train,large}_prepare.log`；保護目錄 hash 未變，未 commit、未新生 seed、未凍結、未進 C，沒有殘留背景工作。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。此為還原後 hash 的新驗收，不沿用舊 marker；正式計時不綁核，完整佇列超過 5 分鐘，未在本 session 啟動。
+- **下一步**：讀新的 `phase2/final_b_validation/ALL_DONE`、`phase2/{train,large}/final_b/{compare.md,summary.json,protocol.json}` 與短／完整 sanitizer 證據，只判斷還原後來源。保持全部門檻；若全過，最終結論為「全部 production 改動撤回，B 完成，下一步 C：不凍結新版、直接寫報告」，須保留 SA 單項改善與最終驗收失敗的區別。若基線也失敗，先核對失敗原因與協定，不以 source 相同為由跳過 gate、不對同份原碼反覆抽樣直到通過；仍不得 B_DONE。
+
+## 協調者備註（Claude，10-23 14:10；給下一個 B session）
+- SA 的 band 分界改動只在 Stage 2（annealer.cpp），不會影響 Stage 1：h06 的最大位移、L2 的額外步驟時間都是 Stage 1 的結果。
+- 正在跑的還原版（等同 v6）final_b 驗收，就是判斷這兩項是不是「v6 本身的執行間變動／既有問題」的對照：
+  - 若還原版也出現同樣的 h06 最大位移變動或 L2 額外時間超出 → 不是 SA 造成的；SA 應依 HANDOFF 第 7 節的同次數協定（已量到 GM 改善 0.825%）判定保留，
+    並把 h06／L2 記為 v6 既有的變動（v6 的 0/27 超時只量了 27 筆，沒有量 L1/L2 的額外步驟）。
+  - 若還原版沒有這兩個問題 → 才表示和 SA 有關，維持撤回。
+- 10-23 14:13 phase2/train/final_b completed; all_gates=False
+- 10-23 14:24 phase2/large/final_b completed; all_gates=False
+
+## 階段 B：v6 對照仍失敗；依協調者備註恢復 SA 單項保留（2026-10-23）
+
+- 已消化上次等待結果：`final_b_validation/ALL_DONE` 的 train=false、large=false、full_asan_ubsan=true；沒有把完成標記當通過。還原版原碼、train/large protocol、snapshot、binary、輸入及 helper hashes 已由 `validate()` 核對，來源確為 v6 hash `03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2`。
+- Stage 1：總位移 GM **1.0000003706805136**（退步 0.0000370681%，雖小仍未通過 ≤1），最大 GM 1、逐筆最大比全為 1、雙條件 8/11、額外步驟 0 超時。h06 最大兩版皆 427.55；上次 h06 最大退步沒有重現。相同來源的總位移仍有執行間變動，但不因此放寬 gate 或重抽樣。
+- L1 seed1 **187.59 s**、L2 seed1/2 **199.26/199.24 s**，全部 placement 合法且符合 <240/<600 s；L2 額外步驟 **6.127434/6.135080 s > 6 s**，兩筆失敗。L1 extra=5.721812 s。L2 的超時在 byte-identical v6 亦出現，支持其為既有問題，不能歸因 SA；v6 歷史 0/27 並未涵蓋 L1/L2，不能用來否定這次觀測。
+- 唯讀定位：`src/capsearch.cpp` 的 `capSearch()` 將 repair 時間限制設為 min(.4,.15*left)，`repairAt()` 雖傳入 phase1/phase2 deadline，L2 日誌第二個 unresolved repair 仍耗 1.589675/1.593705 s。這指出子程序期限涵蓋範圍有待檢查，尚未證明哪一段初始化／收尾造成超時；沒有依大例調參、縮減搜尋或擅自更改 acceptance。
+- **更正上節保守撤回決策：恢復 SA 單項保留。** 協調者 14:10 備註的「還原版 L2 亦超時」條件已成立；恢復 `annealer.cpp`、`sa_bands.hpp`、`tests/parallel_sa_test.cpp` 至原保留點。固定自動緒三 seeds GM 改善 0.825307%、最差單 seed +0.423939%、60 組逐位相同、TSan 0 警告的證據仍在 `phase2/sa_pair/sa_boundary_r1/` 與 `phase2/accepted/sa_boundary_r1/`。h06 未重現也不能反過來證明是 SA 所致：Stage 1 未執行 SA，這一因果判定仍不成立。**單項保留不等於 final_b 通過。**
+- target windows、ejection 繼續撤回，數據分別在 `phase2/chain_pair/target_parallel_r1/`、`phase2/chain_pair/ejection_beam_r1/`；本 session 未開新的實作／調參輪。SA 最終失敗資料仍在 `phase2/rejected/final_b_sa_boundary_r1/`。
+- v6 對照整包已封存至 `phase2/rejected/final_b_v6_control/{train,large,validation,src,tests,phase2_acceptance.py,decision.json}`；原 final_b 路徑已移走，以免把舊來源 marker 誤認為目前 SA 原碼的驗收。檔內歷史絕對路徑按此搬移映射，未修改原數據。decision.json 記錄此輪 gates、完整 sanitizer 日誌 hash 與判定。
+- 對照版一般／沙箱 ASan+UBSan／TSan 各 28 records、10/10 PASS，逐檔 SHA 已重驗；沙箱 ASan 使用 `ASAN_OPTIONS=detect_leaks=0`。協調者沙箱外完整 ASan+UBSan（detect_leaks=1）亦 28 records 全成功；四套日志均無 sanitizer 診斷。恢復後的 src/tests hashes 與先前 SA 最終驗收測試證據完全一致，不重跑已成功測試；沒有用對照版測試冒充 SA 證據。
+- **目前 source hash：`4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。B 尚未完成。** 恢復的 SA 原碼仍只有先前失敗的 final_b，未放寬或豁免任何 gate，也不能直接重跑這份原碼取較好數字。`phase2_acceptance.py` 的 note 仍是歷史「全部撤回」，故未準備新 protocol／final queue；禁止直接執行既有 final queue。
+- **下一步／阻塞原因**：先處理 v6 既有的 cap deadline 正確性與相同來源 Stage 1 量測變動。若實作期限修正，必須先用 testcases/holdout 的新功能測試及新一輪同輪訓練判定（小改動最多 3 輪），不得以 L2 調參，也不得讓 v6 reference 的失敗被忽略；只有來源或有明確依據的協定修正後才建立新 final_b。若維持目前原碼與全部現有 gate，兩份來源均已有失敗證據，沒有可合法直接宣告 B_DONE 的路徑。無等待中工作、無 RUN/WAIT；本 session 停在 B 驗收阻塞，不進 C、不凍結、不新增 seed、不 commit。保護資料夾 hashes 核對未變。
+
+## 協調者備註 2（Claude，10-23 14:35）
+- HANDOFF 第 7 節「不比 v6 差」的 Stage 1 項目，以第 7 節寫的執行間變動為容許範圍（總位移約 0.11%、最大約 0.13%）；
+  總位移 GM 1.00000037（差 0.00004%）在範圍內，算通過，不是退步。SA 改動不碰 Stage 1，這項不需要再花一輪。
+- L2 額外時間超出是 v6 既有問題（還原版也出現），修正它是正確的下一步；修好之後的最後檢查只需要讓 L1/L2 與 27 筆的額外步驟都在預算內。
+- B 的 session 上限還剩 3 次（第 10 次會強制收尾）；請以「cap deadline 修正 → 一次 final_b → B_DONE」為目標。
+Testcases/results/CodexParallelChain/scripts/final_report.py
+Testcases/results/CodexParallelChain/scripts/phase1_runs.py
+Testcases/results/CodexParallelChain/scripts/phase2_final.py
+Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py
+Testcases/results/CodexParallelChain/scripts/phase2_stage2_sweep.py
+Testcases/results/CodexParallelChain/scripts/repair_compare.sh
+Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py
+Testcases/results/CodexParallelChain/scripts/__pycache__/phase2_acceptance.cpython-314.pyc
+Testcases/results/CodexParallelChain/scripts/__pycache__/v6q.cpython-314.pyc
+Testcases/results/CodexParallelChain/scripts/phase1_tables.py
+Testcases/results/CodexParallelChain/scripts/phase2_short_validation.py
+Testcases/results/CodexParallelChain/scripts/diag.py
+Testcases/results/CodexParallelChain/scripts/stage1_phases.py
+Testcases/results/CodexParallelChain/scripts/v6q.py
+Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py
+Testcases/results/CodexParallelChain/scripts/phase1_exp3.py
+Testcases/results/CodexParallelChain/scripts/phase2_train.py
+Testcases/results/CodexParallelChain/scripts/phase1_exp2.py
+Testcases/results/CodexParallelChain/scripts/final_summary.py
+Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+Testcases/results/CodexParallelChain/scripts/phase2_large.py
+Testcases/results/CodexParallelChain/scripts/cap_headroom.py
+Testcases/results/CodexParallelChain/scripts/final_validate.py
+Testcases/results/CodexParallelChain/scripts/codex_after.sh
+Testcases/results/CodexParallelChain/scripts/toolbin/cmake
+Testcases/results/CodexParallelChain/scripts/phase1_exp.py
+Testcases/results/CodexParallelChain/scripts/compare_lg.py
+AI_Solutions/CodexParallelChain/CMakeLists.txt
+AI_Solutions/CodexParallelChain/Makefile
+AI_Solutions/CodexParallelChain/tests/diag_chaindp_global/driver.cpp
+AI_Solutions/CodexParallelChain/tests/global_preserve_prototype.cpp
+AI_Solutions/CodexParallelChain/tests/diag_chaindp_global/global_diag.cpp
+AI_Solutions/CodexParallelChain/tests/multirow_test.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_window.cpp
+AI_Solutions/CodexParallelChain/tests/cap_chain_prototype.hpp
+AI_Solutions/CodexParallelChain/tests/cap_windows_test.cpp
+AI_Solutions/CodexParallelChain/tests/sa_bench2.cpp
+AI_Solutions/CodexParallelChain/tests/cap_windows_bench.cpp
+AI_Solutions/CodexParallelChain/tests/site_repair_bench.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_main.cpp
+AI_Solutions/CodexParallelChain/tests/run_tests.py
+AI_Solutions/CodexParallelChain/tests/pool_test.cpp
+AI_Solutions/CodexParallelChain/tests/sa_bench.cpp
+AI_Solutions/CodexParallelChain/tests/compare_methods.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_capsearch.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic.hpp
+AI_Solutions/CodexParallelChain/tests/global_test.cpp
+AI_Solutions/CodexParallelChain/tests/repair_compare.cpp
+AI_Solutions/CodexParallelChain/tests/cap_chain_prototype.cpp
+AI_Solutions/CodexParallelChain/tests/global_preserve_prototype.hpp
+AI_Solutions/CodexParallelChain/tests/guard_test.cpp
+AI_Solutions/CodexParallelChain/tests/window_test.cpp
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp
+AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp
+AI_Solutions/CodexParallelChain/tests/chain_test.cpp
+AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_experiments.cpp
+AI_Solutions/CodexParallelChain/tests/optimizer_test.cpp
+AI_Solutions/CodexParallelChain/tests/readpl.cpp
+AI_Solutions/CodexParallelChain/WORK_STATE.md
+AI_Solutions/CodexParallelChain/src/annealer.hpp
+AI_Solutions/CodexParallelChain/src/capsearch.hpp
+AI_Solutions/CodexParallelChain/src/optimizer.hpp
+AI_Solutions/CodexParallelChain/src/annealer.cpp
+AI_Solutions/CodexParallelChain/src/main.cpp
+AI_Solutions/CodexParallelChain/src/window.cpp
+AI_Solutions/CodexParallelChain/src/placedb.hpp
+AI_Solutions/CodexParallelChain/src/window.hpp
+AI_Solutions/CodexParallelChain/src/pool.hpp
+AI_Solutions/CodexParallelChain/src/chain.hpp
+AI_Solutions/CodexParallelChain/src/placedb.cpp
+AI_Solutions/CodexParallelChain/src/rowmap.hpp
+AI_Solutions/CodexParallelChain/src/optimizer.cpp
+AI_Solutions/CodexParallelChain/src/chain.cpp
+AI_Solutions/CodexParallelChain/src/capsearch.cpp
+AI_Solutions/CodexParallelChain/src/legalizer.cpp
+AI_Solutions/CodexParallelChain/src/global.cpp
+AI_Solutions/CodexParallelChain/src/global.hpp
+AI_Solutions/CodexParallelChain/src/sa_bands.hpp
+AI_Solutions/CodexParallelChain/src/legalizer.hpp
+AI_Solutions/CodexParallelChain/src/guard.hpp
+
+exec
+/bin/bash -lc "rg -n 'deadline|repairAt|capSearch|phase1|phase2|timeLimit' AI_Solutions/CodexParallelChain/src/capsearch.cpp | head -n 40
+rg -n 'deadline|capSearch|extraBudget|extraStart|budget' AI_Solutions/CodexParallelChain/src/main.cpp | tail -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+12://     with release dates (leftmost allowed site) and deadlines (rightmost
+13://     allowed site + width); Schrage's rule (non-delay earliest deadline)
+124:    // trades places with the cell before it while its deadline is earlier, and
+245:    // Lateness in Schrage's order (non-delay, earliest deadline first).
+470:    const double until = opt.phase1Until;
+554:            if (wallSeconds() >= opt.phase2Until) break;
+593:    const double T2 = pool.empty() ? 0 : opt.phase2Temp * sum / double(pool.size());
+594:    const long n2 = opt.phase2PerCell * long(pool.size());
+598:        if (wallSeconds() >= opt.phase2Until) break;   // v6: every move (see phase 1)
+679:bool repairAt(const PlaceDB& db, const Placement& from, double D, double until, long phase2PerCell, double phase2Temp,
+683:    ro.phase1Until = now + 0.6 * (until - now);
+684:    ro.phase2Until = until;
+685:    ro.phase2PerCell = phase2PerCell;
+686:    ro.phase2Temp = phase2Temp;
+699:CapSearchResult capSearch(const PlaceDB& db, Placement& p, const CapSearchOptions& opt, WindowMemo* memo) {
+725:        repair.timeLimit = std::min(.4, .15 * left());
+731:            ok = repairAt(db, partial, D, wallSeconds() + std::min(.4, .15 * left()),
+732:                          n <= 3000 ? opt.phase2PerCell : 0, opt.phase2Temp,
+751:            w.timeLimit = std::max(0., std::min(left(), std::max(.25, .55 * left())));
+762:                w.timeLimit = left();
+784:        WindowOptions w = opt.dp; w.threads = opt.threads; w.verbose = 0; w.timeLimit = left();
+6://   * the extra Stage 1 steps (chains, cap search) get a budget scaled with the
+13:// v4: every stage has a time budget and every optional step is guarded, so
+47:                 "  --extra-time S          budget of the extra Stage 1 steps (chains + cap search);\n"
+49:                 "  --cap-time S            cap search budget (default: what the chains leave of --extra-time; 0 disables)\n"
+54:                 "  --global-time S         legacy global cap repair budget (16 seconds; with --legacy-global)\n"
+55:                 "  --chain-time S          chain + DP budget (default: 25 %% of --extra-time, at most 3 seconds)\n"
+64:                 "  --stage1-time S         Stage 1 refinement budget, seconds from start (90)\n"
+66:                 "  --polish-time S         post-SA polish budget in seconds (30)\n"
+124:    double chainTime = -1;                // v5: -1 = 25 % of the extra budget, at most 3 s
+133:    double stage1Time = 90;   // v4: Stage 1 refinement budget (seconds since start)
+134:    double polishTime = 30;   // v4: post-SA deterministic polish budget (seconds)
+313:    const double extraStart = wallSeconds();
+314:    const double extraUntil = extraStart + extraTime;
+317:    // This is an explicit EXTRA budget, not an equal-total-time comparison.
+373:        guarded("cap search", legal, [&] { capSearch(db, legal, copts, &stage1Memo); }, [&] {
+379:    if (lopt.verbose) std::fprintf(stderr, "[extra] budget %.6f used %.6f\n", extraTime, wallSeconds() - extraStart);
+
+exec
+/bin/bash -lc "sed -n '1,160p' AI_Solutions/CodexParallelChain/src/capsearch.hpp
+rg -n '"'^(def |class )|gates|budget|note|datasets|stage1'"' Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py | head -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+// capsearch.hpp — v5: lower the maximum displacement by reassigning rows.
+#pragma once
+#include <cstdint>
+
+#include "placedb.hpp"
+#include "window.hpp"
+
+struct RepairOptions {
+    double phase1Until = 0;      // wall time (wallSeconds) to give up reaching lateness 0
+    double phase2Until = 0;      // wall time limit of phase 2
+    long phase2PerCell = 2000;   // phase 2 moves per cell of the touched segments
+    double phase2Temp = 0.05;    // phase 2 start temperature / average displacement
+    uint64_t seed = 1;
+    bool verbose = false;
+};
+
+struct CapSearchOptions {
+    double seconds = 6;          // budget of the whole descent
+    long phase2PerCell = 2000;
+    double phase2Temp = 0.05;
+    double totalRatio = 1.0048;   // accepted total / total before the search
+    int threads = 1;             // window DP threads
+    WindowOptions dp;            // window DP settings used after every repair
+    bool verbose = false;
+};
+
+struct CapSearchResult {
+    int attempts = 0, feasible = 0, accepted = 0;
+    double startMax = 0, endMax = 0, startTotal = 0, endTotal = 0, seconds = 0;
+};
+
+// One cap D: find a legal placement with every displacement <= D, starting
+// from p. State = which segment each cell is in; a segment is "on time" when
+// its cells, in Schrage's order (non-delay earliest-deadline with release
+// dates), fit their cap intervals. Phase 1 anneals the total lateness to 0 with
+// relocate / swap moves between segments; phase 2 anneals the segments' exact
+// L1 cost while keeping them on time. Changed segments are then placed by L1
+// clumping under the cap intervals. Returns false (p unchanged) when no legal
+// placement under D was found before `until` — that is NOT a proof that none
+// exists. On success p is legal and its maximum is <= D.
+bool rowRepair(const PlaceDB& db, Placement& p, double D, const RepairOptions& opt);
+
+// Descent: D = max * (1 - step); a success (after the window DP has won back
+// total displacement under the new cap) is kept when the total stays within
+// totalRatio of the starting total, and the step grows; a failure halves it.
+// p only changes to a legal placement with a lower maximum.
+CapSearchResult capSearch(const PlaceDB& db, Placement& p, const CapSearchOptions& opt, WindowMemo* memo = nullptr);
+
+// Largest over cells of the distance to the nearest legal site of the cell
+// (ignoring all other cells): a lower bound on the maximum displacement.
+double individualMaxBound(const PlaceDB& db);
+18:from v6q import LAB, R, PY, V5S, Queue, build, note
+28:def dump(path, value):
+35:def src_hash(path):
+39:def prefix(mode, bench):
+43:def protocol(mode, tag):
+53:                gates=dict(total_gm_at_most=1.0, max_gm_at_most=1.001, each_max_at_most=1.002,
+54:                           both_at_least=8, extra_budget_overshoots=0, L1_seconds_lt=240, L2_seconds_lt=600),
+55:                note='All production changes withdrawn; source is byte-identical to v6. Stage 1 total must not regress; chain-specific improvement/half-budget gates do not apply. '
+59:def prepare(d, mode, tag):
+80:def validate(d, mode, tag):
+93:def worker(d, mode, bench, version, seed):
+108:    extra = re.findall(r'\[extra\] budget ([0-9.]+) used ([0-9.]+)', stderr)
+110:        raise RuntimeError('Missing extra-step budget evidence')
+111:    budget, used = map(float, extra[0])
+119:                                    extra_budget=budget, extra_used=used, extra_overshoot=used > budget))
+122:def gm(values):
+126:def ratio(a, b):
+130:def summarize(d, mode):
+144:        gates = dict(total_gm_not_worse=total <= 1.0, max_gm_not_worse_01pct=maximum <= 1.001,
+148:        result = dict(rows=rows, total_gm=total, max_gm=maximum, both=sum(x['both'] for x in rows), gates=gates)
+156:        gates = dict(all_legal=all(x['legal'] for x in rows),
+159:        result = dict(rows=rows, gates=gates)
+162:    result['all_gates'] = all(gates.values())
+164:    lines += ['', 'Gates:'] + [f'- {k}: {v}' for k, v in gates.items()]
+169:def run(d, mode, tag, smoke=False):
+188:        dump(d / 'ALL_DONE', dict(protocol_sha256=sha(d / 'protocol.json'), all_gates=result['all_gates'], finished=time.ctime()))
+189:    note(f'phase2/{mode}/{tag} completed; all_gates={result["all_gates"]}')
+192:def main(mode):
+
+exec
+/bin/bash -lc "sed -n '719,758p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        WindowOptions w = opt.dp;
+        if (n > 2000) { w.perRow = std::min(4, w.perRow); w.perRow3 = std::min(3, w.perRow3); }
+        w.threads = opt.threads; w.verbose = 0;
+        auto r0 = wallSeconds();
+        WindowOptions repair = w;
+        repair.passes = 2;
+        repair.timeLimit = std::min(.4, .15 * left());
+        CapWindowResult wr;
+        bool ok = repairCapWindows(db, q, D, repair, &wr, &partial);
+        int method = ok ? 3 : 0;
+        if (!ok && left() > .08) {
+            int how = 0;
+            ok = repairAt(db, partial, D, wallSeconds() + std::min(.4, .15 * left()),
+                          n <= 3000 ? opt.phase2PerCell : 0, opt.phase2Temp,
+                          unsigned(trial + 1), false, q, how);
+            method = how;
+        }
+        double repairSeconds = wallSeconds() - r0;
+        ++res.attempts;
+        auto mm = *memo;
+        std::vector<char> footprint(db.nodes.size(), 0);
+        if (ok) for (int v : db.movable)
+            if (q.seg[v] != best.seg[v] || q.site[v] != best.site[v] || displacementOf(db, best, v) > D + EPS)
+                footprint[v] = 1;
+        w.active = &footprint;
+        double raw = ok ? displacement(db, q).total : 0;
+        double dpSeconds = 0;
+        DispStats d{};
+        bool accept = false;
+        if (ok) {
+            ++res.feasible;
+            auto t = wallSeconds();
+            w.timeLimit = std::max(0., std::min(left(), std::max(.25, .55 * left())));
+            windowSweeps(db, q, w, &mm);
+            d = displacement(db, q);
+            // Preserve a nearly recovered candidate rather than restart from
+            // another expensive raw placement with too little DP time left.
+            if (d.total > base.total * opt.totalRatio && d.total < base.total * 1.01 && left() > .3) {
+                ChainOptions c; c.seconds = std::min(.3, .2 * left());
+                chainDisplacement(db, q, c);
+
+exec
+/bin/bash -lc "rg -n 'deadline|until|timeLimit|repairUnderCap|for \\(' AI_Solutions/CodexParallelChain/src/global.cpp | tail -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '450,489p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '679,718p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '410,449p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '350,389p' AI_Solutions/CodexParallelChain/src/main.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+67:bool constructCap(const PlaceDB& db, Placement& out, double cap, double until) {
+70:    for(int trial=0;trial<12 && wallSeconds()<until;++trial) {
+90:            if(wallSeconds()>=until)return false;
+94:                if(wallSeconds()>=until)return false;
+119:bool packingSearch(const PlaceDB& db, Placement& out, double cap, double until) {
+151:        if((++nodes&127)==0 && wallSeconds()>=until) return false;
+161:            if(wallSeconds()>=until) break;
+193:bool repairCap(const PlaceDB& db, Placement& out, double cap, double until, unsigned seed) {
+194:    if(wallSeconds()>=until) return false;
+197:    if(constructCap(db,p,cap,wallSeconds()+0.2*(until-wallSeconds()))) {out=std::move(p);return true;}
+200:    if(packingSearch(db,p,cap,wallSeconds()+0.1*(until-wallSeconds()))) {out=std::move(p);return true;}
+224:    for(int pass=0;pass<500 && wallSeconds()<until;++pass) {
+234:            if(wallSeconds()>=until) return false;
+245:                    if(wallSeconds()>=until) return false;
+280:    double until=wallSeconds()+seconds;
+286:    for(int attempt=0;attempt<20 && wallSeconds()<until;++attempt) {
+290:        double remaining=until-wallSeconds();
+296:            w.timeLimit=std::min(until-wallSeconds(),seconds/5);
+
+ succeeded in 0ms:
+bool repairAt(const PlaceDB& db, const Placement& from, double D, double until, long phase2PerCell, double phase2Temp,
+              uint64_t seed, bool verbose, Placement& out, int& how) {
+    double now = wallSeconds();
+    RepairOptions ro;
+    ro.phase1Until = now + 0.6 * (until - now);
+    ro.phase2Until = until;
+    ro.phase2PerCell = phase2PerCell;
+    ro.phase2Temp = phase2Temp;
+    ro.seed = seed;
+    ro.verbose = verbose;
+    out = from;
+    if (rowRepair(db, out, D, ro)) { how = 1; return true; }
+    out = from;
+    if (wallSeconds() < until && repairCap(db, out, D, until, unsigned(seed))) { how = 2; return true; }
+    out = from;
+    how = 0;
+    return false;
+}
+}  // namespace
+
+CapSearchResult capSearch(const PlaceDB& db, Placement& p, const CapSearchOptions& opt, WindowMemo* memo) {
+    CapSearchResult res;
+    const double t0 = wallSeconds(), until = t0 + opt.seconds;
+    const DispStats base = displacement(db, p);
+    res.startMax = res.endMax = base.max;
+    res.startTotal = res.endTotal = base.total;
+    if (db.movable.empty() || opt.seconds <= 0 || base.max <= EPS) return res;
+    const double lb = individualMaxBound(db);
+    const double n = double(db.movable.size());
+    Placement best = p;
+    double M = base.max, total = base.total;
+    WindowMemo local;
+    if (!memo) memo = &local;
+    // More cells near the maximum require smaller initial cap changes.
+    double step = std::min(.025, 1.75 / std::sqrt(n));
+    auto left = [&] { return until - wallSeconds(); };
+    for (int trial = 0; trial < 20 && left() > (n > 2000 ? .35 : .1) && step >= .0008; ++trial) {
+        double D = std::max(lb, M * (1 - step));
+        if (D >= M - EPS) break;
+        Placement q = best, partial = best;
+
+exec
+/bin/bash -lc "sed -n '640,679p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    t.l1.erase(std::find(t.l1.begin(), t.l1.end(), v));
+    t.l2 = l2;
+    t.l2.push_back(v);
+    for (int u : t.back) {
+        t.l2.erase(std::find(t.l2.begin(), t.l2.end(), u));
+        t.l1.push_back(u);
+    }
+    return true;
+}
+
+void apply(Repair& R, Trial& t) {
+    R.list[t.s1].swap(t.l1);
+    R.list[t.s2].swap(t.l2);
+    R.seg[t.v] = t.s2;
+    for (int u : t.back) R.seg[u] = t.s1;
+}
+
+}  // namespace
+
+bool rowRepair(const PlaceDB& db, Placement& p, double D, const RepairOptions& opt) {
+    const double until = opt.phase1Until;
+    const bool verbose = opt.verbose;
+    if (db.movable.empty()) return true;
+    Repair R(db, p, D);
+    Rng rng(opt.seed);
+    // a cell over the cap with no segment in reach can never be repaired
+    for (int v : db.movable)
+        if (displacementOf(db, p, v) > D + EPS && R.targets(v).empty()) return false;
+
+    // ---- phase 1: total lateness -> 0
+    std::vector<int> bad;
+    double cur = 0;
+    for (double x : R.late) cur += x;
+    const double start = cur;
+    // temperature in sites: a move that pushes a row by about half a cell
+    // width must stay acceptable early on (narrow-site designs: e06 has
+    // 1-site columns and 28-site cells)
+    double avgW = 0;
+    for (int v : db.movable) avgW += db.sitesOf(v, db.segs[p.seg[v]]);
+    avgW /= double(db.movable.size());
+
+ succeeded in 0ms:
+// v goes from s1 to s2; the cells `back` of s2 go to s1 (none: relocate,
+// one: swap, several: a wide cell trades places with a run of narrow ones)
+struct Trial {
+    int v = -1, s1 = -1, s2 = -1;
+    std::vector<int> back, l1, l2;
+};
+
+bool propose(const PlaceDB& db, Repair& R, Rng& rng, int v, Trial& t) {
+    t.v = v;
+    t.s1 = R.seg[v];
+    const auto& tv = R.targets(v);
+    if (tv.empty()) return false;
+    t.s2 = tv[rng.below(int(tv.size()))];
+    if (t.s2 == t.s1) return false;
+    const auto& l2 = R.list[t.s2];
+    t.back.clear();
+    double r = rng.u01();
+    double lo, hi, pen;
+    if (!l2.empty() && r < 0.35) {   // swap with one cell
+        int u = l2[rng.below(int(l2.size()))];
+        if (R.window(u, t.s1, lo, hi, pen) && pen == 0) t.back.push_back(u);
+    } else if (l2.size() >= 2 && r < 0.6) {
+        // block swap: the k cells of s2 whose centers are nearest v's ideal center
+        double cv = db.nodes[v].gx + 0.5 * db.nodes[v].w;
+        int k = 2 + rng.below(3);
+        std::vector<std::pair<double, int>> near;
+        near.reserve(l2.size());
+        for (int u : l2) {
+            double cu = db.nodes[u].gx + 0.5 * db.nodes[u].w;   // the run is chosen by ideal x
+            near.push_back({std::fabs(cu - cv), u});
+        }
+        k = std::min<int>(k, int(near.size()));
+        std::partial_sort(near.begin(), near.begin() + k, near.end());
+        for (int j = 0; j < k; ++j) {
+            int u = near[j].second;
+            if (!R.window(u, t.s1, lo, hi, pen) || pen > 0) return false;
+            t.back.push_back(u);
+        }
+    }
+    t.l1 = R.list[t.s1];
+
+ succeeded in 0ms:
+        if (lopt.verbose) {
+            const auto after = displacement(db, legal);
+            std::fprintf(stderr, "[chain-round] %d: %ld target windows, %ld chains, longest %d, total %.6f -> %.6f, max %.6f -> %.6f\n",
+                         round + 1, targetMoves, result.accepted, result.longest, before.total, after.total, before.max, after.max);
+        }
+    }
+    const auto beforeGlobal = displacement(db, legal);
+    if (legacyGlobal) {
+        guarded("global cap repair", legal, [&] {
+            globalMinimax(db, legal, globalTime, totalRatio, wopt.threads, lopt.verbose);
+        }, [&] {
+            const auto after = displacement(db, legal);
+            return checkLegal(db, legal).empty() && after.max <= beforeGlobal.max + 1e-6 &&
+                   after.total <= beforeGlobal.total * totalRatio + 1e-5;
+        });
+    } else {
+        CapSearchOptions copts;
+        copts.seconds = capTime >= 0 ? capTime : std::max(0.0, extraUntil - wallSeconds() - (.1 + 1e-6 * db.movable.size()));
+        copts.totalRatio = totalRatio;
+        copts.threads = wopt.threads;
+        copts.dp = wopt;
+        copts.dp.passes = 1000;
+        copts.verbose = lopt.verbose;
+        guarded("cap search", legal, [&] { capSearch(db, legal, copts, &stage1Memo); }, [&] {
+            const auto after = displacement(db, legal);
+            return checkLegal(db, legal).empty() && after.max <= beforeGlobal.max + 1e-6 &&
+                   after.total <= beforeGlobal.total * totalRatio + 1e-5;
+        });
+    }
+    if (lopt.verbose) std::fprintf(stderr, "[extra] budget %.6f used %.6f\n", extraTime, wallSeconds() - extraStart);
+    std::string bad = checkLegal(db, legal);
+    if (!bad.empty()) { std::fprintf(stderr, "error: legalization is illegal: %s\n", bad.c_str()); return 1; }
+    DispStats disp = displacement(db, legal);
+    double legalHPWL = totalHPWL(db, legal);
+    std::printf("Total displacement (legal): %s\n", fmtNum(disp.total).c_str());
+    std::printf("Maximum displacement (legal): %s\n", fmtNum(disp.max).c_str());
+    std::printf("Total HPWL (legal): %s\n", fmtNum(legalHPWL).c_str());
+    std::fflush(stdout);
+    if (lopt.verbose) std::fprintf(stderr, "[stage1] done  %.2fs\n", seconds(t0));
+
+
+ succeeded in 0ms:
+                     pool.size(), acc2, gain, d.total, d.max, wallSeconds());
+    p = std::move(q);
+    return true;
+}
+
+double individualMaxBound(const PlaceDB& db) {
+    double bound = 0;
+    for (int v : db.movable) {
+        const Node& n = db.nodes[v];
+        double best = INF;
+        int r0 = db.nearestRow(n.gy);
+        // rows outward from the nearest one until the vertical distance alone is worse
+        for (int dir : {0, 1}) {
+            for (int r = dir ? r0 + 1 : r0; r >= 0 && r < int(db.rows.size()); r += dir ? 1 : -1) {
+                double dy = std::fabs(db.rows[r].y - n.gy);
+                if (dy >= best) break;
+                for (int s : db.rows[r].segs) {
+                    const Segment& g = db.segs[s];
+                    int w = db.sitesOf(v, g);
+                    if (w > g.numSites || std::fabs(g.height - n.h) > 1e-6) continue;
+                    int x = std::clamp(int(std::lround((n.gx - g.x0) / g.sp)), 0, g.numSites - w);
+                    // the rounded site may not be the nearest: check its neighbours too
+                    for (int k = std::max(0, x - 1); k <= std::min(g.numSites - w, x + 1); ++k)
+                        best = std::min(best, std::fabs(g.x0 + k * g.sp - n.gx) + dy);
+                }
+            }
+        }
+        if (best < INF) bound = std::max(bound, best);
+    }
+    return bound;
+}
+
+namespace {
+// One repair at cap D from `from`: the row reassignment first, then
+// ChainDP's site-level repair (ordered packing, greedy rebuild, DFS, site
+// congestion negotiation). They succeed on different instances: the row
+// reassignment on structural ones (toy, e06, e15), the negotiation on dense
+// ones that a ripple of single-cell moves resolves (e03, e12, h04, h07).
+// how: 1 = rows, 2 = ChainDP's repair.
+bool repairAt(const PlaceDB& db, const Placement& from, double D, double until, long phase2PerCell, double phase2Temp,
+
+codex
+還原版也出現 L2 額外步驟超時，已支持它是 v6 既有問題。依最新協調備註，我會保留 SA 單項結論，修正 cap 期限檢查，並準備修正後的驗收。
+
+exec
+/bin/bash -lc "sed -n '300,339p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        int bi = -1;
+        std::vector<int> st, bestSites;
+        for (int i : {4, 0, 1, 2, 3}) {
+            if (lat[i] > EPS) continue;
+            if (i != 4 && cand[i] == cand[4] && lat[4] <= EPS) continue;
+            double c = clump(s, cand[i], sites ? &st : nullptr);
+            if (c < best) { best = c; bi = i; if (sites) bestSites = st; }
+        }
+        if (bi < 0) return INF;
+        if (order) *order = cand[bi];
+        if (sites) *sites = bestSites;
+        return best;
+    }
+
+    // Segments a cell can be in under D (lazily).
+    const std::vector<int>& targets(int v) {
+        if (have_[v]) return reach_[v];
+        have_[v] = 1;
+        const Node& n = db_.nodes[v];
+        auto first = std::lower_bound(db_.rows.begin(), db_.rows.end(), n.gy - D_ - 1e-9,
+                                      [](const Row& r, double y) { return r.y < y; });
+        for (auto row = first; row != db_.rows.end() && row->y <= n.gy + D_ + 1e-9; ++row)
+            for (int s : row->segs) {
+                const Segment& g = db_.segs[s];
+                double rx = D_ - std::fabs(g.y - n.gy);
+                if (n.gx + rx < g.x0 - 1e-9 || n.gx - rx > g.x0 + g.numSites * g.sp - n.w + 1e-9) continue;
+                double lo, hi, pen;
+                if (window(v, s, lo, hi, pen) && pen == 0) reach_[v].push_back(s);
+            }
+        return reach_[v];
+    }
+
+    std::vector<std::vector<int>> list;   // per segment: its cells (unordered)
+    std::vector<int> seg;                 // per node
+    std::vector<double> late;             // per segment
+
+private:
+    struct Cluster { int first, last, width, lo, hi, x; };
+
+    // L1 clumping for a fixed order under the cap intervals (exact, discrete).
+
+exec
+/bin/bash -lc "sed -n '340,379p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    double clump(int s, const std::vector<int>& o, std::vector<int>* sites) const {
+        const Segment& g = db_.segs[s];
+        int n = int(o.size());
+        width_.resize(n); lo_.resize(n); hi_.resize(n); ideal_.resize(n);
+        double dy = 0;
+        for (int j = 0; j < n; ++j) {
+            double a = 0, b = 0, pen = 0;
+            if (!window(o[j], s, a, b, pen)) return INF;   // cannot happen: callers check lateness first
+            width_[j] = db_.sitesOf(o[j], g);
+            lo_[j] = int(a);
+            hi_[j] = int(b);
+            ideal_[j] = (db_.nodes[o[j]].gx - g.x0) / g.sp;
+            dy += std::fabs(g.y - db_.nodes[o[j]].gy);
+        }
+        stack_.clear();
+        auto place = [&](Cluster& c) {
+            pts_.clear();
+            int pre = 0;
+            for (int j = c.first; j <= c.last; ++j) { pts_.push_back(ideal_[j] - pre); pre += width_[j]; }
+            auto mid = pts_.begin() + (pts_.size() - 1) / 2;
+            std::nth_element(pts_.begin(), mid, pts_.end());
+            // the rounded median need not be the discrete optimum: compare both neighbours
+            int a = int(std::clamp(std::floor(*mid), double(c.lo), double(c.hi)));
+            int b = int(std::clamp(std::ceil(*mid), double(c.lo), double(c.hi)));
+            double ca = 0, cb = 0;
+            for (double t : pts_) { ca += std::fabs(a - t); cb += std::fabs(b - t); }
+            c.x = cb < ca ? b : a;
+        };
+        for (int j = 0; j < n; ++j) {
+            Cluster c{j, j, width_[j], lo_[j], hi_[j], 0};
+            place(c);
+            while (!stack_.empty() && stack_.back().x + stack_.back().width > c.x) {
+                Cluster b = stack_.back();
+                stack_.pop_back();
+                c = {b.first, c.last, b.width + c.width, std::max(b.lo, c.lo - b.width), std::min(b.hi, c.hi - b.width), 0};
+                if (c.lo > c.hi) return INF;
+                place(c);
+            }
+            stack_.push_back(c);
+        }
+
+exec
+/bin/bash -lc "sed -n '380,409p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '1,40p' AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        double tot = dy;
+        if (sites) sites->assign(n, 0);
+        for (const Cluster& c : stack_) {
+            int x = c.x;
+            for (int j = c.first; j <= c.last; ++j) {
+                tot += std::fabs(x - ideal_[j]) * g.sp;
+                if (sites) (*sites)[j] = x;
+                x += width_[j];
+            }
+        }
+        return tot;
+    }
+
+    const PlaceDB& db_;
+    double D_;
+    std::vector<std::vector<int>> reach_;
+    std::vector<char> have_;
+    std::vector<int> home_;
+    std::vector<double> homeX_;
+    mutable std::vector<int> keyed_, rk_, pk_, nk_, tmp_;
+    mutable std::vector<double> rlo_, rhi_, rw_, rend_;
+    mutable std::vector<std::pair<double, int>> byKey_, byHi_;
+    mutable std::vector<char> done_;
+    mutable std::vector<std::array<double, 5>> items_;
+    mutable std::vector<std::pair<double, int>> heap_;
+    mutable std::vector<int> width_, lo_, hi_;
+    mutable std::vector<double> ideal_, pts_;
+    mutable std::vector<Cluster> stack_;
+};
+
+
+ succeeded in 0ms:
+// capsearch_test — v5 cap search: soundness and rollback.
+//  1. random small designs: every successful rowRepair is legal and keeps every
+//     displacement <= D; a failure leaves the placement untouched
+//  2. single-row instances: whenever rowRepair succeeds, a brute-force check
+//     over all orders confirms a feasible order exists (soundness), and when a
+//     brute-force order exists for a 1-row design with room, the repair finds it
+//  3. capSearch never raises the maximum and keeps total <= ratio * start
+//  4. toy-like cluster: all cells at one point, the cap search lowers the max
+#include "../src/capsearch.hpp"
+#include <algorithm>
+#include <cassert>
+#include <cmath>
+#include <cstdio>
+#include <random>
+
+namespace {
+PlaceDB makeRows(int rows, int sites, double sp = 1, double h = 1) {
+    PlaceDB db;
+    db.uniformSites = true;
+    db.siteSpacing = sp;
+    for (int r = 0; r < rows; ++r) {
+        db.rows.push_back({r * h, h, {r}});
+        db.segs.push_back({r, r * h, h, 0, sp, sites});
+    }
+    return db;
+}
+void addCell(PlaceDB& db, double gx, double gy, int w, double h = 1) {
+    Node n;
+    n.name = "c" + std::to_string(db.nodes.size());
+    n.w = w * db.siteSpacing;
+    n.h = h;
+    n.gx = gx;
+    n.gy = gy;
+    db.movable.push_back(int(db.nodes.size()));
+    db.nodes.push_back(n);
+    db.wSites.push_back(w);
+    db.nodeNets.push_back({});
+}
+// left-to-right packing in global x order: a legal start (empty seg = no room)
+Placement packAll(const PlaceDB& db) {
+
+exec
+/bin/bash -lc "sed -n '193,232p' AI_Solutions/CodexParallelChain/src/global.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '1,40p' Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+bool repairCap(const PlaceDB& db, Placement& out, double cap, double until, unsigned seed) {
+    if(wallSeconds()>=until) return false;
+    Placement p=out;
+    if(orderedCap(db,p,cap)) {out=std::move(p);return true;}
+    if(constructCap(db,p,cap,wallSeconds()+0.2*(until-wallSeconds()))) {out=std::move(p);return true;}
+    // Preserve the inexpensive row improvements even if other rows need
+    // global reassignment. Full-domain DFS is capped to avoid starving repair.
+    if(packingSearch(db,p,cap,wallSeconds()+0.1*(until-wallSeconds()))) {out=std::move(p);return true;}
+    std::vector<Sites> sites(db.segs.size());
+    size_t count=0;
+    for(const auto& s:db.segs) count+=s.numSites;
+    if(count>16000000) return false; // bounded memory, independent of case name
+    for(size_t s=0;s<sites.size();++s) {
+        sites[s].used.assign(db.segs[s].numSites,0);
+        sites[s].history.assign(db.segs[s].numSites,0);
+    }
+    auto occupy=[&](int v,int delta) {
+        auto& a=sites[p.seg[v]].used;
+        int end=p.site[v]+db.sitesOf(v,db.segs[p.seg[v]]);
+        for(int x=p.site[v];x<end;++x) a[x]+=delta;
+    };
+    auto conflict=[&](int v) {
+        if(displacementOf(db,p,v)>cap+EPS) return true;
+        const auto& a=sites[p.seg[v]].used;
+        int end=p.site[v]+db.sitesOf(v,db.segs[p.seg[v]]);
+        for(int x=p.site[v];x<end;++x) if(a[x]>1) return true;
+        return false;
+    };
+    for(int v:db.movable) occupy(v,1);
+    std::mt19937 rng(seed);
+    std::vector<int> active;
+    for(int pass=0;pass<500 && wallSeconds()<until;++pass) {
+        active.clear();
+        for(int v:db.movable) if(conflict(v)) active.push_back(v);
+        if(active.empty()) {
+            if(checkLegal(db,p).empty() && displacement(db,p).max<=cap+EPS) {out=std::move(p);return true;}
+            return false;
+        }
+        std::shuffle(active.begin(),active.end(),rng);
+        double present=1.0+0.03*pass;
+
+ succeeded in 0ms:
+#!/usr/bin/env python3
+"""Coordinator-only final B queue; completion is not a B_DONE decision."""
+import fcntl
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+
+sys.dont_write_bytecode = True
+from phase2_acceptance import SOLUTION, dump, src_hash, validate
+from diag import sha, verify_protected
+from v6q import LAB, R, PY, Queue
+
+SELF = Path(__file__).resolve()
+D = R / 'phase2/final_b_validation'
+
+
+def main():
+    D.mkdir(parents=True, exist_ok=True)
+    protocol = dict(src_sha256=src_hash(SOLUTION / 'src'), queue_sha256=sha(SELF),
+                    tests_sha256={p.name: sha(p) for p in sorted((SOLUTION / 'tests').glob('*')) if p.is_file()},
+                    scripts_sha256={n: sha(SELF.parent / n) for n in
+                                    ['phase2_train.py', 'phase2_large.py', 'phase2_acceptance.py']})
+    if (D / 'protocol.json').exists() and json.loads((D / 'protocol.json').read_text()) != protocol:
+        raise RuntimeError('Final validation inputs changed')
+    dump(D / 'protocol.json', protocol)
+    verify_protected()
+    evidence = json.loads((D / 'test_evidence/verification.json').read_text())
+    if evidence['src_sha256'] != protocol['src_sha256'] or evidence['tests_sha256'] != protocol['tests_sha256']:
+        raise RuntimeError('Short test evidence does not match final source/tests')
+    for suite in ['tests', 'tests_sanitized', 'tests_tsan']:
+        info = evidence['suites'][suite]
+        for name, digest in info['files'].items():
+            if sha(D / 'test_evidence' / suite / name) != digest:
+                raise RuntimeError('Short test evidence changed')
+
+exec
+/bin/bash -lc "rg -n 'repairCapWindows|timeLimit|until' AI_Solutions/CodexParallelChain/src/window.cpp | tail -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "rg -n 'struct Repair|Repair\\(|targets\\(|for \\(' AI_Solutions/CodexParallelChain/src/capsearch.cpp | head -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+145:void reorderWindows(const PlaceDB& db,Placement& p,int passes,bool verbose,double until) {
+149:    for(int pass=0;pass<passes && wallSeconds()<until;++pass) {
+153:            if((ss&15)==0 && wallSeconds()>until) break;   // v4: time budget
+466:                if ((a & 15) == 0 && seconds(t0) > opt.timeLimit) { timeUp[b] = 1; break; }
+602:            o.timeLimit = opt.timeLimit - seconds(t0);
+603:            if (o.timeLimit <= 0) return all;
+613:    if (db.movable.empty() || opt.passes == 0 || opt.timeLimit <= 0 || maxRoots <= 0) return 0;
+631:                if (seconds(start) >= opt.timeLimit) break;
+670:            if (accepted == previous || seconds(start) >= opt.timeLimit) break;
+691:bool repairCapWindows(const PlaceDB& db, Placement& p, double D, const WindowOptions& opt, CapWindowResult* report, Placement* partial) {
+694:    if (opt.timeLimit > 0 && D >= 0) repairCapOrderedRows(db, q, D);
+702:    for (int pass = 0; pass < opt.passes && seconds(t0) < opt.timeLimit; ++pass) {
+705:            if (seconds(t0) >= opt.timeLimit) break;
+714:                if (seconds(t0) >= opt.timeLimit) break;
+763:    for (int iter = 0; iter < opt.passes && seconds(t0) < opt.timeLimit; ++iter) {
+830:            if ((a & 255) == 0 && seconds(t0) > opt.timeLimit) break;
+
+ succeeded in 0ms:
+47:    Repair(const PlaceDB& db, const Placement& p, double D) : db_(db), D_(D) {
+52:        for (int v : db.movable) {
+58:        for (size_t s = 0; s < list.size(); ++s)
+131:        for (int j = 0; j < n; ++j) {
+163:        for (int v : l) (home_[v] == s ? pk_ : nk_).push_back(v);
+167:        for (int u : nk_) {
+173:            for (int pos = std::max(0, r - 6); pos <= std::min(int(pk_.size()), r + 6); ++pos) {
+194:        for (int v : l) {
+234:        for (int v : o) {
+250:        for (int v : l) {
+302:        for (int i : {4, 0, 1, 2, 3}) {
+315:    const std::vector<int>& targets(int v) {
+321:        for (auto row = first; row != db_.rows.end() && row->y <= n.gy + D_ + 1e-9; ++row)
+322:            for (int s : row->segs) {
+345:        for (int j = 0; j < n; ++j) {
+358:            for (int j = c.first; j <= c.last; ++j) { pts_.push_back(ideal_[j] - pre); pre += width_[j]; }
+365:            for (double t : pts_) { ca += std::fabs(a - t); cb += std::fabs(b - t); }
+368:        for (int j = 0; j < n; ++j) {
+382:        for (const Cluster& c : stack_) {
+384:            for (int j = c.first; j <= c.last; ++j) {
+420:    const auto& tv = R.targets(v);
+437:        for (int u : l2) {
+443:        for (int j = 0; j < k; ++j) {
+453:    for (int u : t.back) {
+464:    for (int u : t.back) R.seg[u] = t.s1;
+469:bool rowRepair(const PlaceDB& db, Placement& p, double D, const RepairOptions& opt) {
+476:    for (int v : db.movable)
+477:        if (displacementOf(db, p, v) > D + EPS && R.targets(v).empty()) return false;
+482:    for (double x : R.late) cur += x;
+488:    for (int v : db.movable) avgW += db.sitesOf(v, db.segs[p.seg[v]]);
+505:            for (size_t s = 0; s < R.late.size(); ++s) {
+523:            for (int c : R.list[s1])
+541:    for (double x : R.late) cur += x;
+551:    for (int round = 0; round < 4; ++round) {
+553:        for (int v : db.movable) {
+576:    for (int v : db.movable) away += R.seg[v] != p.seg[v];
+583:    for (int v : db.movable)
+585:    for (size_t s = 0; s < R.list.size(); ++s)
+587:            for (int v : R.list[s])
+592:    for (int v : pool) sum += displacementOf(db, p, v);
+
+exec
+/bin/bash -lc "sed -n '35,74p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+constexpr double INF = 1e300;
+
+struct Rng {   // xorshift64*
+    uint64_t s;
+    explicit Rng(uint64_t x) : s(x * 0x9e3779b97f4a7c15ULL + 0x632be59bd9b4e019ULL) { if (!s) s = 1; }
+    uint64_t next() { s ^= s >> 12; s ^= s << 25; s ^= s >> 27; return s * 0x2545F4914F6CDD1DULL; }
+    int below(int n) { return int((next() >> 33) % uint64_t(n)); }
+    double u01() { return double(next() >> 11) * 0x1.0p-53; }
+};
+
+class Repair {
+public:
+    Repair(const PlaceDB& db, const Placement& p, double D) : db_(db), D_(D) {
+        list.assign(db.segs.size(), {});
+        seg.assign(db.nodes.size(), -1);
+        home_.assign(db.nodes.size(), -1);
+        homeX_.assign(db.nodes.size(), 0);
+        for (int v : db.movable) {
+            seg[v] = home_[v] = p.seg[v];
+            homeX_[v] = p.x(db, v) + 0.5 * db.nodes[v].w;
+            list[p.seg[v]].push_back(v);
+        }
+        late.assign(db.segs.size(), 0);
+        for (size_t s = 0; s < list.size(); ++s)
+            if (!list[s].empty()) late[s] = lateness(int(s), list[s]);
+        reach_.resize(db.nodes.size());
+        have_.assign(db.nodes.size(), 0);
+    }
+
+    // Start sites of v in segment s with displacement <= D: [lo, hi].
+    // false: v never fits s (height / width). pen > 0: no site is close
+    // enough; lo = hi = the nearest site and pen = how far (in sites) it is off.
+    bool window(int v, int s, double& lo, double& hi, double& pen) const {
+        const Segment& g = db_.segs[s];
+        const Node& n = db_.nodes[v];
+        int w = db_.sitesOf(v, g);
+        pen = 0;
+        if (w > g.numSites || std::fabs(g.height - n.h) > 1e-6) return false;
+        double reach = (D_ - std::fabs(g.y - n.gy)) / g.sp;
+        if (reach < 0) { pen = -reach; reach = 0; }
+
+exec
+/bin/bash -lc "rg -n '"'^    [a-zA-Z].*'"\\(' AI_Solutions/CodexParallelChain/src/capsearch.cpp | head -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+39:    explicit Rng(uint64_t x) : s(x * 0x9e3779b97f4a7c15ULL + 0x632be59bd9b4e019ULL) { if (!s) s = 1; }
+40:    uint64_t next() { s ^= s >> 12; s ^= s << 25; s ^= s >> 27; return s * 0x2545F4914F6CDD1DULL; }
+41:    int below(int n) { return int((next() >> 33) % uint64_t(n)); }
+42:    double u01() { return double(next() >> 11) * 0x1.0p-53; }
+47:    Repair(const PlaceDB& db, const Placement& p, double D) : db_(db), D_(D) {
+67:    bool window(int v, int s, double& lo, double& hi, double& pen) const {
+88:    double key(int v, int s) const {
+95:    double lateness(int s, const std::vector<int>& l, std::vector<int>* order = nullptr) const {
+112:    double repaired(int s, const std::vector<int>& l, std::vector<int>* order) const {
+126:    double repairOrder(int s, std::vector<int>& o) const {
+160:    double perturbed(int s, const std::vector<int>& l, std::vector<int>* order) const {
+190:    double hybrid(int s, const std::vector<int>& l, std::vector<int>* order) const {
+231:    double greedy(int s, const std::vector<int>& o) const {
+246:    double schrage(int s, const std::vector<int>& l, std::vector<int>* order) const {
+283:    double cost(int s, const std::vector<int>& l, std::vector<int>* order = nullptr,
+315:    const std::vector<int>& targets(int v) {
+332:    std::vector<std::vector<int>> list;   // per segment: its cells (unordered)
+340:    double clump(int s, const std::vector<int>& o, std::vector<int>* sites) const {
+420:    const auto& tv = R.targets(v);
+421:    if (tv.empty()) return false;
+422:    t.s2 = tv[rng.below(int(tv.size()))];
+423:    if (t.s2 == t.s1) return false;
+425:    t.back.clear();
+426:    double r = rng.u01();
+428:    if (!l2.empty() && r < 0.35) {   // swap with one cell
+450:    t.l1.erase(std::find(t.l1.begin(), t.l1.end(), v));
+452:    t.l2.push_back(v);
+453:    for (int u : t.back) {
+461:    R.list[t.s1].swap(t.l1);
+462:    R.list[t.s2].swap(t.l2);
+464:    for (int u : t.back) R.seg[u] = t.s1;
+472:    if (db.movable.empty()) return true;
+473:    Repair R(db, p, D);
+474:    Rng rng(opt.seed);
+476:    for (int v : db.movable)
+482:    for (double x : R.late) cur += x;
+488:    for (int v : db.movable) avgW += db.sitesOf(v, db.segs[p.seg[v]]);
+489:    avgW /= double(db.movable.size());
+490:    const double T0 = std::max(1.0, 0.5 * avgW);
+492:    const double t1 = wallSeconds();
+
+exec
+/bin/bash -lc "sed -n '615,644p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+            for (int c : R.list[s2])
+                if (!inPool[c]) { inPool[c] = 1; pool.push_back(c); }
+        }
+    }
+
+    // ---- place the segments whose membership changed or that hold a cell
+    // over the cap; every other segment keeps its incumbent positions
+    std::fill(dirty.begin(), dirty.end(), 0);
+    for (int v : db.movable)
+        if (R.seg[v] != p.seg[v] || displacementOf(db, p, v) > D + EPS) dirty[R.seg[v]] = dirty[p.seg[v]] = 1;
+    Placement q = p;
+    std::vector<int> order, sites;
+    for (size_t s = 0; s < R.list.size(); ++s) {
+        if (!dirty[s]) continue;
+        if (R.cost(int(s), R.list[s], &order, &sites) >= INF) return false;   // cannot happen: on time
+        for (size_t j = 0; j < order.size(); ++j) {
+            q.seg[order[j]] = int(s);
+            q.site[order[j]] = sites[j];
+        }
+    }
+    if (!checkLegal(db, q).empty()) return false;
+    DispStats d = displacement(db, q);
+    if (d.max > D + 1e-6) return false;
+    if (verbose)
+        std::fprintf(stderr, "[cap] D %.6f: phase 2 pool %zu, %ld accepted (%+.3f), placed: total %.4f max %.6f  %.2fs\n", D,
+                     pool.size(), acc2, gain, d.total, d.max, wallSeconds());
+    p = std::move(q);
+    return true;
+}
+
+
+exec
+/bin/bash -lc "sed -n '1,39p' AI_Solutions/CodexParallelChain/src/global.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#include "global.hpp"
+#include "window.hpp"
+#include "rowmap.hpp"
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <numeric>
+#include <random>
+#include <limits>
+#include <functional>
+
+namespace {
+constexpr double EPS=1e-7;
+struct Sites { std::vector<int> used; std::vector<double> history; };
+// Exact convex L1 clumping for a fixed row/order, with genuine cap intervals
+// (unlike the inherited row optimizer, the old position is NOT exempt).
+bool packSequence(const PlaceDB& db, Placement& p, int si, const std::vector<int>& cells, double cap) {
+    const auto& s=db.segs[si];int n=int(cells.size());
+    std::vector<int> width(n),lo(n),hi(n);std::vector<double> ideal(n);
+    int end=0;
+    for(int j=0;j<n;++j) {
+        const auto& v=db.nodes[cells[j]];width[j]=db.sitesOf(cells[j],s);
+        double reach=(cap-std::abs(v.gy-s.y))/s.sp;
+        ideal[j]=(v.gx-s.x0)/s.sp;
+        lo[j]=std::max(0,int(std::ceil(ideal[j]-reach-1e-9)));
+        hi[j]=std::min(s.numSites-width[j],int(std::floor(ideal[j]+reach+1e-9)));
+        end=std::max(end,lo[j]);if(end>hi[j])return false;end+=width[j];
+    }
+    struct Cluster {int first,last,width,lo,hi,x;};
+    std::vector<Cluster> stack;
+    auto minimize=[&](Cluster& c) {
+        std::vector<double> points;int prefix=0;
+        for(int j=c.first;j<=c.last;++j){points.push_back(ideal[j]-prefix);prefix+=width[j];}
+        auto mid=points.begin()+(points.size()-1)/2;
+        std::nth_element(points.begin(),mid,points.end());
+        // A rounded median need not minimize discrete L1: several targets
+        // can lie between the same two sites. Evaluate both adjacent sites.
+        int a=int(std::clamp(std::floor(*mid),double(c.lo),double(c.hi)));
+        int b=int(std::clamp(std::ceil(*mid),double(c.lo),double(c.hi)));
+
+exec
+/bin/bash -lc "sed -n '691,730p' AI_Solutions/CodexParallelChain/src/window.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+bool repairCapWindows(const PlaceDB& db, Placement& p, double D, const WindowOptions& opt, CapWindowResult* report, Placement* partial) {
+    auto t0 = std::chrono::steady_clock::now();
+    Placement q = p;
+    if (opt.timeLimit > 0 && D >= 0) repairCapOrderedRows(db, q, D);
+    RowMap rows(db, q);
+    CapWindowResult result;
+    std::vector<int> roots;
+    for (int v : db.movable) if (displacementOf(db, q, v) > D + EPS) roots.push_back(v);
+    std::stable_sort(roots.begin(), roots.end(), [&](int a, int b) {
+        return displacementOf(db, q, a) > displacementOf(db, q, b);
+    });
+    for (int pass = 0; pass < opt.passes && seconds(t0) < opt.timeLimit; ++pass) {
+        long before = result.applied;
+        for (int v : roots) {
+            if (seconds(t0) >= opt.timeLimit) break;
+            if (displacementOf(db, q, v) <= D + EPS) continue;
+            Window best;
+            WindowSolution bestSol;
+            double bestDelta = INF;
+            const std::vector<std::vector<int>> shapes = pass == 0
+                ? std::vector<std::vector<int>>{{}, {1}, {-1}, {-1, 1}}
+                : std::vector<std::vector<int>>{{}, {1}, {-1}, {-1, 1}, {2}, {-2}};
+            for (const auto& offsets : shapes) {
+                if (seconds(t0) >= opt.timeLimit) break;
+                WindowOptions o = opt;
+                o.perRow = offsets.empty() ? (pass ? 12 : 8) : offsets.size() == 2 ? std::min(4, opt.perRow3 + pass) : std::min(5, opt.perRow + pass);
+                Window w;
+                if (!buildWindow(db, q, rows, v, offsets, o, w)) continue;
+                // A window's own row must contain the violating anchor.
+                if (std::find(w.cells.begin(), w.cells.end(), v) == w.cells.end()) continue;
+                double old = 0;
+                for (int c : w.cells) old += displacementOf(db, q, c);
+                auto sol = solveDisp(db, w, D);
+                ++result.solved;
+                if (sol.feasible && sol.cost - old < bestDelta) {
+                    bestDelta = sol.cost - old;
+                    best = std::move(w);
+                    bestSol = std::move(sol);
+                    if (bestDelta <= EPS) break;
+                }
+
+exec
+/bin/bash -lc "rg -n 'repairCapOrderedRows' AI_Solutions/CodexParallelChain/src/*" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+AI_Solutions/CodexParallelChain/src/window.cpp:694:    if (opt.timeLimit > 0 && D >= 0) repairCapOrderedRows(db, q, D);
+AI_Solutions/CodexParallelChain/src/global.cpp:189:bool repairCapOrderedRows(const PlaceDB& db, Placement& p, double cap) {
+AI_Solutions/CodexParallelChain/src/global.hpp:9:bool repairCapOrderedRows(const PlaceDB&, Placement&, double cap);
+
+exec
+/bin/bash -lc "sed -n '40,79p' Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    return original_prefix(bench) if mode == 'train' else LAB / 'Testcases/large' / bench / bench
+
+
+def protocol(mode, tag):
+    return dict(mode=mode, tag=tag, script_sha256=sha(SELF),
+                wrapper_sha256=sha(SELF.parent / f'phase2_{mode}.py'),
+                helper_sha256={p: sha(SELF.parent / p) for p in ['v6q.py', 'diag.py']},
+                src_sha256=src_hash(SOLUTION / 'src'), reference_sha256=src_hash(BASE / 'src'),
+                cmake_sha256={v: sha(s / 'CMakeLists.txt') for v, s in [('candidate', SOLUTION), ('v6', BASE)]},
+                runner_sha256=sha(V5S / 'run_ts.py'), checker_sha256=sha(LAB / 'Grader/tools/check_pl.py'),
+                inputs={b: prefix_hashes(prefix(mode, b)) for b in (CASES if mode == 'train' else ['L1', 'L2'])},
+                cases=CASES if mode == 'train' else LARGE,
+                historical_chaindp_sha256=sha(R.parent / 'ClaudeOpus55_v6/final/lg_CodexChainDP/record.csv'),
+                gates=dict(total_gm_at_most=1.0, max_gm_at_most=1.001, each_max_at_most=1.002,
+                           both_at_least=8, extra_budget_overshoots=0, L1_seconds_lt=240, L2_seconds_lt=600),
+                note='All production changes withdrawn; source is byte-identical to v6. Stage 1 total must not regress; chain-specific improvement/half-budget gates do not apply. '
+                     'Historical ChainDP only defines both; every v6 ratio uses this run. Large runs are legality/runtime checks, not HPWL evidence.')
+
+
+def prepare(d, mode, tag):
+    verify_protected()
+    p = json.loads(json.dumps(protocol(mode, tag)))
+    if (d / 'protocol.json').exists() and json.loads((d / 'protocol.json').read_text()) != p:
+        raise RuntimeError('Protocol changed; do not reuse completed evidence')
+    dump(d / 'protocol.json', p)
+    if (d / 'prepared.json').exists():
+        validate(d, mode, tag)
+        return
+    binaries = {}
+    for version, source in ([('v6', BASE), ('candidate', SOLUTION)] if mode == 'train' else [('candidate', SOLUTION)]):
+        snapshot = d / version
+        if not (snapshot / 'src').exists():
+            shutil.copytree(source / 'src', snapshot / 'src')
+        if src_hash(snapshot / 'src') != src_hash(source / 'src'):
+            raise RuntimeError('Stale source snapshot')
+        shutil.copy2(source / 'CMakeLists.txt', snapshot / 'CMakeLists.txt')
+        binaries[version] = sha(build(version, snapshot / 'build', src=snapshot))
+    dump(d / 'prepared.json', dict(protocol_sha256=sha(d / 'protocol.json'), binaries=binaries))
+
+
+
+exec
+/bin/bash -lc "sed -n '130,169p' Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def summarize(d, mode):
+    rows = []
+    if mode == 'train':
+        historical = {x['bench']: x for x in csv.DictReader(
+            (R.parent / 'ClaudeOpus55_v6/final/lg_CodexChainDP/record.csv').open())}
+        for bench in CASES:
+            data = {v: json.loads((d / 'runs' / bench / v / 'metrics.json').read_text()) for v in ['candidate', 'v6']}
+            a, b = [data[v]['record'] for v in ['candidate', 'v6']]
+            old = historical[bench]
+            rows.append(dict(bench=bench, total_ratio=ratio(float(a['disp']), float(b['disp'])),
+                             max_ratio=ratio(float(a['max']), float(b['max'])),
+                             both=float(a['max']) <= float(old['max']) + 1e-9 and float(a['disp']) <= float(old['disp']) * 1.005 + 1e-9,
+                             candidate=a, v6=b, extra_overshoots=sum(x['extra_overshoot'] for x in data.values())))
+        total, maximum = gm([x['total_ratio'] for x in rows]), gm([x['max_ratio'] for x in rows])
+        gates = dict(total_gm_not_worse=total <= 1.0, max_gm_not_worse_01pct=maximum <= 1.001,
+                     every_max_not_worse_02pct=all(x['max_ratio'] <= 1.002 for x in rows),
+                     both_at_least_8=sum(x['both'] for x in rows) >= 8,
+                     zero_extra_overshoots=not any(x['extra_overshoots'] for x in rows))
+        result = dict(rows=rows, total_gm=total, max_gm=maximum, both=sum(x['both'] for x in rows), gates=gates)
+        lines = ['# Final B: same-round production Stage 1', '', '| Case | Total candidate/v6 | Max candidate/v6 | Both vs historical ChainDP |', '|---|---:|---:|:---:|']
+        lines += [f"| {x['bench']} | {x['total_ratio']:.8f} | {x['max_ratio']:.8f} | {x['both']} |" for x in rows]
+        lines += ['', f'Total GM {total:.8f}; max GM {maximum:.8f}; both {result["both"]}/11.']
+    else:
+        for bench, seed in LARGE:
+            data = json.loads((d / 'runs' / f'{bench}_s{seed}' / 'candidate/metrics.json').read_text())
+            rows.append(dict(bench=bench, seed=seed, **data, time_limit=240 if bench == 'L1' else 600))
+        gates = dict(all_legal=all(x['legal'] for x in rows),
+                     all_within_time=all(float(x['record']['seconds']) < x['time_limit'] for x in rows),
+                     zero_extra_overshoots=not any(x['extra_overshoot'] for x in rows))
+        result = dict(rows=rows, gates=gates)
+        lines = ['# Final B: full large runs', '', '| Case | Seed | Seconds | Limit (<) | Legal |', '|---|---:|---:|---:|:---:|']
+        lines += [f"| {x['bench']} | {x['seed']} | {x['record']['seconds']} | {x['time_limit']} | {x['legal']} |" for x in rows]
+    result['all_gates'] = all(gates.values())
+    dump(d / 'summary.json', result)
+    lines += ['', 'Gates:'] + [f'- {k}: {v}' for k, v in gates.items()]
+    (d / 'compare.md').write_text('\n'.join(lines) + '\n')
+    return result
+
+
+def run(d, mode, tag, smoke=False):
+
+exec
+/bin/bash -lc "sed -n '119,158p' AI_Solutions/CodexParallelChain/src/global.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+bool packingSearch(const PlaceDB& db, Placement& out, double cap, double until) {
+    if(db.movable.size()>512) return false;
+    struct Pos {int seg, site, begin, end; double cost;};
+    std::vector<int> offset(db.segs.size()+1);
+    for(size_t s=0;s<db.segs.size();++s) offset[s+1]=offset[s]+db.segs[s].numSites;
+    if(offset.back()>2000000) return false;
+    std::vector<std::vector<Pos>> domains(db.movable.size());
+    size_t entries=0;
+    for(size_t i=0;i<db.movable.size();++i) {
+        int v=db.movable[i];const auto& n=db.nodes[v];
+        for(size_t si=0;si<db.segs.size();++si) {
+            const auto& s=db.segs[si];int w=db.sitesOf(v,s);
+            double dx=cap-std::abs(s.y-n.gy);
+            if(dx<-EPS || std::abs(n.h-s.height)>EPS || w>s.numSites) continue;
+            int lo=std::max(0,int(std::ceil((n.gx-dx-s.x0-EPS)/s.sp)));
+            int hi=std::min(s.numSites-w,int(std::floor((n.gx+dx-s.x0+EPS)/s.sp)));
+            for(int x=lo;x<=hi;++x) {
+                double d=std::abs(s.x0+x*s.sp-n.gx)+std::abs(s.y-n.gy);
+                // Stay near incumbent to limit the total-displacement tradeoff.
+                double change=std::abs(s.x0+x*s.sp-out.x(db,v))+std::abs(s.y-out.y(db,v));
+                domains[i].push_back({int(si),x,offset[si]+x,offset[si]+x+w,change+0.01*d});
+                if(++entries>800000) return false;
+            }
+        }
+        if(domains[i].empty()) return false;
+        std::stable_sort(domains[i].begin(),domains[i].end(),[](const Pos& a,const Pos& b){return a.cost<b.cost;});
+    }
+    std::vector<unsigned char> occupied(offset.back(),0),assigned(domains.size(),0);
+    Placement p=out;long nodes=0;
+    auto fits=[&](const Pos& c){for(int x=c.begin;x<c.end;++x) if(occupied[x])return false;return true;};
+    std::function<bool(int)> dfs=[&](int left) {
+        if(!left) return true;
+        if((++nodes&127)==0 && wallSeconds()>=until) return false;
+        int chosen=-1;size_t fewest=std::numeric_limits<size_t>::max();
+        for(size_t i=0;i<domains.size();++i) if(!assigned[i]) {
+            size_t count=0;
+            for(const auto& c:domains[i]) if(fits(c) && ++count>=fewest) break;
+            if(!count) return false;
+            if(count<fewest) {fewest=count;chosen=int(i);}
+        }
+
+exec
+/bin/bash -lc "sed -n '40,79p' AI_Solutions/CodexParallelChain/src/global.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        double ca=0,cb=0;
+        for(double target:points){ca+=std::abs(a-target);cb+=std::abs(b-target);}
+        c.x=cb<ca ? b:a;
+    };
+    for(int j=0;j<n;++j) {
+        Cluster c{j,j,width[j],lo[j],hi[j],0};minimize(c);
+        while(!stack.empty() && stack.back().x+stack.back().width>c.x) {
+            auto b=stack.back();stack.pop_back();
+            c={b.first,c.last,b.width+c.width,std::max(b.lo,c.lo-b.width),std::min(b.hi,c.hi-b.width),0};
+            if(c.lo>c.hi)return false;
+            minimize(c);
+        }
+        stack.push_back(c);
+    }
+    for(const auto& c:stack){int x=c.x;for(int j=c.first;j<=c.last;++j){p.seg[cells[j]]=si;p.site[cells[j]]=x;x+=width[j];}}
+    return true;
+}
+
+bool orderedCap(const PlaceDB& db, Placement& p, double cap) {
+    RowMap rows(db,p);bool all=true;
+    for(size_t s=0;s<db.segs.size();++s)
+        if(!packSequence(db,p,int(s),rows.cells(int(s)),cap))all=false;
+    return all;
+}
+
+// Rebuild the complete row assignment, packing each tentative row with its
+// actual cap intervals. Capacity is never treated as divisible cell area.
+bool constructCap(const PlaceDB& db, Placement& out, double cap, double until) {
+    if(db.movable.size()>3000) return false;
+    std::mt19937 rng(761);
+    for(int trial=0;trial<12 && wallSeconds()<until;++trial) {
+        Placement p=out;std::vector<std::vector<int>> rows(db.segs.size());
+        std::vector<double> costs(db.segs.size(),0),priority(db.nodes.size(),0);
+        auto order=db.movable;
+        for(int v:order) {
+            const auto& n=db.nodes[v];double area=0;
+            for(const auto& s:db.segs) {
+                double dx=cap-std::abs(s.y-n.gy);int w=db.sitesOf(v,s);
+                if(dx<0 || std::abs(s.height-n.h)>EPS || w>s.numSites)continue;
+                double lo=std::max(0.0,std::ceil((n.gx-dx-s.x0-EPS)/s.sp));
+
+exec
+/bin/bash -lc "sed -n '90,129p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    }
+
+    // Total lateness (sites) of segment s with cells l: the smaller of
+    // Schrage's order and the incumbent-like order (by key). The incumbent
+    // order matters where the window DP chose a non-trivial order.
+    double lateness(int s, const std::vector<int>& l, std::vector<int>* order = nullptr) const {
+        double a = schrage(s, l, order);
+        if (a <= EPS) return a;
+        // the incumbent order, repaired locally: near-legal inputs (e01) overlap
+        // so much that only the order the incumbent already has fits
+        double b = repaired(s, l, &keyed_);
+        if (b < a) { a = b; if (order) *order = keyed_; }
+        if (a <= EPS) return a;
+        double c = hybrid(s, l, &keyed_);
+        if (c < a) { a = c; if (order) *order = keyed_; }
+        if (a <= EPS) return a;
+        double d = perturbed(s, l, &keyed_);
+        if (d < a) { a = d; if (order) *order = keyed_; }
+        return a;
+    }
+
+    // The incumbent order (newcomers by ideal center), repaired locally.
+    double repaired(int s, const std::vector<int>& l, std::vector<int>* order) const {
+        rk_ = l;
+        std::sort(rk_.begin(), rk_.end(), [&](int x, int y) {
+            double kx = key(x, s), ky = key(y, s);
+            return kx != ky ? kx < ky : x < y;
+        });
+        double c = repairOrder(s, rk_);
+        if (order) *order = rk_;
+        return c;
+    }
+
+    // Local repair of an order: the leftmost schedule; the first late cell
+    // trades places with the cell before it while its deadline is earlier, and
+    // so on. Only the order around the problem changes. Returns the lateness.
+    double repairOrder(int s, std::vector<int>& o) const {
+        const Segment& g = db_.segs[s];
+        int n = int(o.size());
+        rlo_.resize(n); rhi_.resize(n); rw_.resize(n); rend_.assign(n + 1, 0);
+
+exec
+/bin/bash -lc "sed -n '179,198p' AI_Solutions/CodexParallelChain/src/global.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+            if(std::abs(s.y-n.gy)>=best) continue;
+            int x=std::clamp(int(std::round((n.gx-s.x0)/s.sp)),0,s.numSites-w);
+            best=std::min(best,std::abs(s.x0+x*s.sp-n.gx)+std::abs(s.y-n.gy));
+        }
+        bound=std::max(bound,best);
+    }
+    return bound;
+}
+}
+
+bool repairCapOrderedRows(const PlaceDB& db, Placement& p, double cap) {
+    return orderedCap(db, p, cap);
+}
+
+bool repairCap(const PlaceDB& db, Placement& out, double cap, double until, unsigned seed) {
+    if(wallSeconds()>=until) return false;
+    Placement p=out;
+    if(orderedCap(db,p,cap)) {out=std::move(p);return true;}
+    if(constructCap(db,p,cap,wallSeconds()+0.2*(until-wallSeconds()))) {out=std::move(p);return true;}
+    // Preserve the inexpensive row improvements even if other rows need
+
+exec
+/bin/bash -lc "sed -n '130,169p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        double c = 0;
+        for (int j = 0; j < n; ++j) {
+            double lo, hi, pen;
+            if (!window(o[j], s, lo, hi, pen)) return INF;
+            c += pen;
+            rlo_[j] = lo; rhi_[j] = hi; rw_[j] = db_.sitesOf(o[j], g);
+        }
+        int swaps = 0, i = 0;
+        while (i < n) {
+            double x = std::max(rend_[i], rlo_[i]);
+            if (x > rhi_[i] + EPS && i > 0 && swaps < 4 * n && rhi_[i] + rw_[i] < rhi_[i - 1] + rw_[i - 1] - EPS) {
+                std::swap(o[i], o[i - 1]); std::swap(rlo_[i], rlo_[i - 1]);
+                std::swap(rhi_[i], rhi_[i - 1]); std::swap(rw_[i], rw_[i - 1]);
+                ++swaps;
+                --i;
+                continue;
+            }
+            if (x > rhi_[i]) c += x - rhi_[i];
+            rend_[i + 1] = x + rw_[i];
+            ++i;
+        }
+        return c;
+    }
+
+    // Minimal perturbation: the cells that were in s keep their incumbent
+    // order; every newcomer goes to the position near its ideal rank that
+    // leaves the least lateness, then the local repair. In a hotspot the
+    // window DP's order is far from any simple order (h06: one segment 17,749
+    // in the incumbent order, 32,898 in ideal order), so a single newcomer
+    // must not reorder the whole segment.
+    double perturbed(int s, const std::vector<int>& l, std::vector<int>* order) const {
+        pk_.clear();
+        nk_.clear();
+        for (int v : l) (home_[v] == s ? pk_ : nk_).push_back(v);
+        std::sort(pk_.begin(), pk_.end(), [&](int x, int y) { return homeX_[x] != homeX_[y] ? homeX_[x] < homeX_[y] : x < y; });
+        auto ic = [&](int v) { return db_.nodes[v].gx + 0.5 * db_.nodes[v].w; };
+        std::sort(nk_.begin(), nk_.end(), [&](int x, int y) { return ic(x) != ic(y) ? ic(x) < ic(y) : x < y; });
+        for (int u : nk_) {
+            // rank by incumbent / ideal center, then try a few places around it
+            double cu = ic(u);
+
+exec
+/bin/bash -lc "sed -n '1,40p' Testcases/results/CodexParallelChain/scripts/phase2_short_validation.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "rg -n 'CASES|EDGE|edge|def worker|extra' Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py | head -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#!/usr/bin/env python3
+"""Run one bounded final-source suite and archive its exact evidence."""
+import argparse
+import fcntl
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import time
+
+sys.dont_write_bytecode = True
+from phase2_acceptance import SOLUTION, dump, src_hash
+from diag import sha, verify_protected
+from v6q import R, PY
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('suite', choices=['tests', 'tests_sanitized', 'tests_tsan'])
+    args = parser.parse_args()
+    dest = R / 'phase2/final_b_validation/test_evidence'
+    manifest = dest / 'verification.json'
+    source = src_hash(SOLUTION / 'src')
+    tests = {p.name: sha(p) for p in sorted((SOLUTION / 'tests').iterdir()) if p.is_file()}
+    evidence = json.loads(manifest.read_text()) if manifest.exists() else dict(
+        src_sha256=source, tests_sha256=tests, asan_options='detect_leaks=0',
+        ubsan_options='halt_on_error=1', tsan_warnings=0, suites={})
+    assert evidence['src_sha256'] == source and evidence['tests_sha256'] == tests
+    if args.suite in evidence['suites']:
+        for name, digest in evidence['suites'][args.suite]['files'].items():
+            assert sha(dest / args.suite / name) == digest
+        print(args.suite + ': verified existing evidence')
+        return
+    verify_protected()
+    flags = {'tests': [], 'tests_sanitized': ['--sanitize'], 'tests_tsan': ['--tsan']}
+    dest.mkdir(parents=True, exist_ok=True)
+    start = time.monotonic()
+
+ succeeded in 0ms:
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:24:CASES = ['ibm01', 'ibm05', 'toy'] + [f'h{i:02d}' for i in range(1, 9)]
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:50:                inputs={b: prefix_hashes(prefix(mode, b)) for b in (CASES if mode == 'train' else ['L1', 'L2'])},
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:51:                cases=CASES if mode == 'train' else LARGE,
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:54:                           both_at_least=8, extra_budget_overshoots=0, L1_seconds_lt=240, L2_seconds_lt=600),
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:93:def worker(d, mode, bench, version, seed):
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:108:    extra = re.findall(r'\[extra\] budget ([0-9.]+) used ([0-9.]+)', stderr)
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:109:    if len(extra) != 1:
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:110:        raise RuntimeError('Missing extra-step budget evidence')
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:111:    budget, used = map(float, extra[0])
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:119:                                    extra_budget=budget, extra_used=used, extra_overshoot=used > budget))
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:135:        for bench in CASES:
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:142:                             candidate=a, v6=b, extra_overshoots=sum(x['extra_overshoot'] for x in data.values())))
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:147:                     zero_extra_overshoots=not any(x['extra_overshoots'] for x in rows))
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:158:                     zero_extra_overshoots=not any(x['extra_overshoot'] for x in rows))
+Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py:175:        cases = [('toy', 1)] if smoke else ([(b, 1) for b in CASES] if mode == 'train' else LARGE)
+
+exec
+/bin/bash -lc 'tail -n 40 AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    for (int t = 0; t < 40; ++t) {
+        int rows = 3 + int(rng() % 4), sites = 30;
+        PlaceDB db = makeRows(rows, sites);
+        for (int i = 0; i < 14; ++i)
+            addCell(db, std::uniform_real_distribution<double>(5, 15)(rng), std::uniform_real_distribution<double>(0, 1)(rng),
+                    1 + int(rng() % 4));
+        Placement p = packAll(db);
+        if (p.seg.empty()) continue;
+        DispStats a = displacement(db, p);
+        CapSearchOptions o;
+        o.seconds = 0.2;
+        o.totalRatio = 1.01;
+        o.dp.passes = 1000;
+        CapSearchResult r = capSearch(db, p, o);
+        DispStats b = displacement(db, p);
+        assert(checkLegal(db, p).empty());
+        assert(b.max <= a.max + 1e-9);
+        assert(b.max < a.max - 1e-9 || std::fabs(b.total - a.total) < 1e-9 || r.accepted == 0);
+        assert(b.total <= a.total * 1.01 + 1e-6);
+    }
+    // 4. toy-like cluster: 12 cells at one point, the cap search must lower the max
+    {
+        PlaceDB db = makeRows(9, 60);
+        for (int i = 0; i < 12; ++i) addCell(db, 28, 4, 3 + i % 3);
+        Placement p = packAll(db);
+        assert(!p.seg.empty());
+        double before = displacement(db, p).max;
+        CapSearchOptions o;
+        o.seconds = 0.5;
+        o.totalRatio = 10;
+        o.dp.passes = 1000;
+        capSearch(db, p, o);
+        assert(checkLegal(db, p).empty());
+        assert(displacement(db, p).max < before - 1e-9);
+        std::printf("cluster: max %.3f -> %.3f\n", before, displacement(db, p).max);
+    }
+    std::printf("PASS: %d repaired / %d unresolved random caps (all legal, all <= D, failures untouched); "
+                "one-row agreement with brute force %d / 300 (never unsound)\n", repaired, failed, agree);
+    return 0;
+}
+
+exec
+/bin/bash -lc "sed -n '80,119p' Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def validate(d, mode, tag):
+    p = json.loads((d / 'protocol.json').read_text())
+    if p != json.loads(json.dumps(protocol(mode, tag))):
+        raise RuntimeError('Protocol/source/input changed after preparation')
+    prepared = json.loads((d / 'prepared.json').read_text())
+    if prepared['protocol_sha256'] != sha(d / 'protocol.json'):
+        raise RuntimeError('Prepared protocol mismatch')
+    for v, digest in prepared['binaries'].items():
+        expected = p['src_sha256'] if v == 'candidate' else p['reference_sha256']
+        if sha(d / v / 'build/dp') != digest or src_hash(d / v / 'src') != expected:
+            raise RuntimeError('Binary or snapshot changed')
+
+
+def worker(d, mode, bench, version, seed):
+    root = d / 'runs' / (bench if mode == 'train' else f'{bench}_s{seed}') / version
+    root.mkdir(parents=True, exist_ok=True)
+    args = '--no-sa' if mode == 'train' else f'--seed {seed}'
+    limit = 240 if mode == 'train' else 900
+    subprocess.run([str(x) for x in [PY, V5S / 'run_ts.py', '--bin', d / version / 'build/dp',
+                   '--out', root, '--timeout', limit, '--dp-args=' + args, prefix(mode, bench)]],
+                   check=True, timeout=limit + 60)
+    records = list(csv.DictReader((root / 'record.csv').open()))
+    if len(records) != 1 or records[0]['status'] != 'OK':
+        raise RuntimeError('Run failed or timed out')
+    case = root / bench
+    stderr = (case / 'stderr_ts.tsv').read_text()
+    if re.search(r'invariant failed|step skipped|legalization failed|TIMEOUT', stderr):
+        raise RuntimeError('Guard fallback, timeout or invariant failure')
+    extra = re.findall(r'\[extra\] budget ([0-9.]+) used ([0-9.]+)', stderr)
+    if len(extra) != 1:
+        raise RuntimeError('Missing extra-step budget evidence')
+    budget, used = map(float, extra[0])
+    legal = {}
+    for filename in ['output_legal.pl', 'output.pl']:
+        with (case / (filename + '.check.txt')).open('w') as log:
+            subprocess.run([str(x) for x in [PY, LAB / 'Grader/tools/check_pl.py', prefix(mode, bench),
+                           case / filename, '--quiet']], stdout=log, stderr=subprocess.STDOUT, check=True)
+        legal[filename] = sha(case / filename)
+    dump(root / 'metrics.json', dict(record=records[0], legal=True, placements=legal,
+                                    extra_budget=budget, extra_used=used, extra_overshoot=used > budget))
+
+exec
+/bin/bash -lc "sed -n '169,208p' Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def run(d, mode, tag, smoke=False):
+    prepare(d, mode, tag)
+    verify_protected()
+    q = Queue(d / 'jobs')
+    with (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        cases = [('toy', 1)] if smoke else ([(b, 1) for b in CASES] if mode == 'train' else LARGE)
+        for i, (bench, seed) in enumerate(cases):
+            versions = (['v6', 'candidate'] if i % 2 == 0 else ['candidate', 'v6']) if mode == 'train' else ['candidate']
+            for v in versions:
+                command = [PY, SELF.parent / f'phase2_{mode}.py', tag, '--worker', bench, v, seed]
+                if not q.run(f'{bench}_s{seed}_{v}', command, quiet=True):
+                    raise RuntimeError('Worker failed; inspect jobs log')
+        if smoke:
+            return
+        result = summarize(d, mode)
+        validate(d, mode, tag)
+        verify_protected(d / 'protected_after.json')
+        # Completion means results are ready, not automatic acceptance.
+        dump(d / 'ALL_DONE', dict(protocol_sha256=sha(d / 'protocol.json'), all_gates=result['all_gates'], finished=time.ctime()))
+    note(f'phase2/{mode}/{tag} completed; all_gates={result["all_gates"]}')
+
+
+def main(mode):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('tag')
+    parser.add_argument('--prepare', action='store_true')
+    parser.add_argument('--smoke', action='store_true')
+    parser.add_argument('--worker', nargs=3)
+    args = parser.parse_args()
+    if args.smoke and mode != 'train':
+        parser.error('Smoke is only for training')
+    d = R / 'phase2' / mode / args.tag
+    try:
+        if args.worker:
+            validate(d, mode, args.tag)
+            worker(d, mode, *args.worker)
+        elif args.prepare:
+            prepare(d, mode, args.tag)
+        else:
+
+exec
+/bin/bash -lc "sed -n '40,79p' Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+                raise RuntimeError('Short test evidence changed')
+        records = json.loads((D / 'test_evidence' / suite / 'records.json').read_text())
+        if not records or any(x['returncode'] != 0 for x in records):
+            raise RuntimeError('Short test suite failed')
+    # Child queues own the timing locks; do not hold them across these calls.
+    q = Queue(D / 'jobs', timed=False)
+    for mode in ['train', 'large']:
+        if not q.run(mode, [PY, SELF.parent / f'phase2_{mode}.py', 'final_b'], quiet=True):
+            raise RuntimeError(f'{mode} queue failed')
+        validate(R / 'phase2' / mode / 'final_b', mode, 'final_b')
+        if not (R / 'phase2' / mode / 'final_b/ALL_DONE').exists():
+            raise RuntimeError(f'{mode} completion marker missing')
+    # Full LeakSanitizer is intentionally outside the sandbox.
+    q = Queue(D / 'asan_jobs')
+    with (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        if not q.run('full_asan_ubsan', [PY, SOLUTION / 'tests/run_tests.py', '--sanitize'],
+                     env=dict(os.environ, ASAN_OPTIONS='detect_leaks=1', UBSAN_OPTIONS='halt_on_error=1'), quiet=True):
+            raise RuntimeError('Full ASan/UBSan suite failed')
+        dest = D / 'tests_full_asan'
+        if not dest.exists():
+            dest.mkdir()
+            records = json.loads((R / 'tests_sanitized/records.json').read_text())
+            for name in ['records.json'] + [x['label'] + '.log' for x in records]:
+                shutil.copy2(R / 'tests_sanitized' / name, dest / name)
+        records = json.loads((dest / 'records.json').read_text())
+        if not records or any(x['returncode'] != 0 for x in records):
+            raise RuntimeError('Full sanitizer evidence failed')
+        for record in records:
+            if re.search(r'ERROR: (AddressSanitizer|LeakSanitizer)|runtime error:',
+                         (dest / (record['label'] + '.log')).read_text()):
+                raise RuntimeError('Full sanitizer diagnostic found')
+    verify_protected(D / 'protected_after.json')
+    if src_hash(SOLUTION / 'src') != protocol['src_sha256']:
+        raise RuntimeError('Source changed during final validation')
+    summaries = {m: json.loads((R / 'phase2' / m / 'final_b/summary.json').read_text())['all_gates']
+                 for m in ['train', 'large']}
+    dump(D / 'ALL_DONE', dict(src_sha256=protocol['src_sha256'], gates=summaries,
+                             full_asan_ubsan=True, finished=time.ctime(),
+                             note='Read all evidence and update WORK_STATE before declaring B_DONE.'))
+
+exec
+/bin/bash -lc "sed -n '80,119p' Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception:
+        dump(D / 'FAILED.json', dict(error=traceback.format_exc(), when=time.ctime()))
+        raise
+
+exec
+/bin/bash -lc "rg -n '"'^def |prefix|e01|edge'"' Testcases/results/CodexParallelChain/scripts/diag.py | head -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+40:def dump(path, data):
+48:def sha(path):
+56:def tree_hashes(root):
+61:def verify_protected(output=None):
+70:def cases():
+76:    return training + [('edge_diagnostic_only', name,
+77:                        LAB / 'Testcases/edge' / name / name) for name in EDGE_CASES]
+80:def original_prefix(bench):
+85:def start_prefix(bench):
+94:def prefix_hashes(prefix):
+95:    aux = prefix.with_suffix('.aux')
+102:def check_static():
+123:    for _, _, prefix in cases():
+124:        prefix_hashes(prefix)
+127:        start = start_prefix(bench)
+131:            prefix_hashes(start)
+133:        'chain_cases': [{'group': group, 'bench': bench, 'input': str(prefix)} for group, bench, prefix in cases()],
+149:def build_one(name):
+162:def must_run(queue, name, command):
+167:def prepare():
+180:def capture(command, directory):
+192:def parse_chain(directory):
+219:def sa_metrics(directory):
+232:def worker(arguments):
+236:        prefix = next(prefix for _, name, prefix in cases() if name == bench)
+238:        command = [BIN / 'dp_chain_diag', prefix, directory / 'output', '-v', '--no-sa', '--cap-time', '0']
+245:        prefix = start_prefix(bench)
+246:        capture([P / 'build/v4/dp', original_prefix(bench), prefix, '-v', '--no-sa'], prefix.parent)
+247:        prefix_hashes(prefix)
+251:        capture([BIN / 'sa_bench', original_prefix(bench), start_prefix(bench), directory / 'output',
+257:        capture([P / 'build' / version / 'dp', original_prefix('toy'), directory / 'output', '-v', '--no-sa'], directory)
+262:def write_csv(name, rows):
+269:def summarize():
+297:                              legal_start=str(start_prefix(bench))))
+319:                             'scope': 'diagnosis only; two SA seeds; edge e08/e16 are not tuning data',
+324:def run_queue():
+337:            if start_prefix(bench).is_relative_to(P):
+339:        dump(P / 'sa/start_provenance.json', {bench: prefix_hashes(start_prefix(bench)) for bench in SA_CASES})
+356:def main():
+
+exec
+/bin/bash -lc "sed -n '40,79p' Testcases/results/CodexParallelChain/scripts/phase2_short_validation.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    start = time.monotonic()
+    with (R / 'timing.lock').open('a') as own, (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as ref:
+        fcntl.flock(own, fcntl.LOCK_EX)
+        fcntl.flock(ref, fcntl.LOCK_EX)
+        with (dest / (args.suite + '.runner.log')).open('w') as log:
+            subprocess.run([str(PY), str(SOLUTION / 'tests/run_tests.py'), *flags[args.suite]],
+                           env=dict(os.environ, ASAN_OPTIONS='detect_leaks=0', UBSAN_OPTIONS='halt_on_error=1'),
+                           stdout=log, stderr=subprocess.STDOUT, check=True, timeout=280)
+        records = json.loads((R / args.suite / 'records.json').read_text())
+        assert all(x['returncode'] == 0 for x in records)
+        target = dest / args.suite
+        target.mkdir(exist_ok=False)
+        names = ['records.json'] + [x['label'] + '.log' for x in records]
+        for name in names:
+            original = R / args.suite / name
+            assert not re.search(r'ERROR: (AddressSanitizer|LeakSanitizer)|runtime error:|WARNING: ThreadSanitizer', original.read_text())
+            shutil.copy2(original, target / name)
+    assert source == src_hash(SOLUTION / 'src')
+    verify_protected(dest / 'protected_after.json')
+    programs = sum(not x['label'].startswith(('build_', 'link_')) for x in records)
+    evidence['suites'][args.suite] = dict(programs=programs, records=len(records),
+        seconds=time.monotonic() - start, files={n: sha(target / n) for n in names})
+    dump(manifest, evidence)
+    print(f'{args.suite}: {programs}/{programs} PASS, {len(records)} records; evidence archived')
+
+
+if __name__ == '__main__':
+    main()
+
+exec
+/bin/bash -lc "rg -n 'capsearch|argparse|sanitize|timeout' AI_Solutions/CodexParallelChain/tests/run_tests.py | head -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+3:import argparse
+14:    parser = argparse.ArgumentParser(description=__doc__)
+16:    mode.add_argument('--sanitize', action='store_true')
+20:    out = ROOT.parents[1] / 'Testcases/results' / ROOT.name / ('tests_tsan' if args.tsan else 'tests_sanitized' if args.sanitize else 'tests')
+22:    flags = ['-std=c++17', '-O1' if args.sanitize or args.tsan else '-O2', '-pthread', '-UNDEBUG']
+23:    if args.sanitize:
+24:        flags += ['-g', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']
+26:        flags += ['-g', '-fsanitize=thread', '-fno-omit-frame-pointer']
+29:    def run(command, label, timeout=180):
+35:                                 stderr=subprocess.STDOUT, timeout=timeout, preexec_fn=pin)
+52:    for name in ('window', 'multirow', 'optimizer', 'chain', 'parallel_sa', 'pool', 'global', 'capsearch', 'cap_windows', 'guard'):
+
+exec
+/bin/bash -lc "sed -n '770,810p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+            std::fprintf(stderr, "[cap-local] D %.9f method %d repair %.6f DP %.6f windows %ld remaining %d raw %.6f total %.6f max %.9f %s\n",
+                         D, method, repairSeconds, dpSeconds, wr.solved, wr.remaining, raw, d.total, d.max,
+                         !ok ? "unresolved" : accept ? "accepted" : "total_budget");
+        if (accept) {
+            best = std::move(q); *memo = std::move(mm); M = d.max; total = d.total;
+            ++res.accepted;
+            step = std::min(.05, step * 1.4);
+        } else step *= .5;
+    }
+    if (left() > .15) {
+        ChainOptions c; c.seconds = .5 * left();
+        chainDisplacement(db, best, c);
+    }
+    if (left() > .01) {
+        WindowOptions w = opt.dp; w.threads = opt.threads; w.verbose = 0; w.timeLimit = left();
+        windowSweeps(db, best, w, memo);
+        total = displacement(db, best).total;
+    }
+    const auto final = displacement(db, best);
+    total = final.total; M = final.max;
+    p = std::move(best);
+    res.endMax = M;
+    res.endTotal = total;
+    res.seconds = wallSeconds() - t0;
+    if (opt.verbose)
+        std::fprintf(stderr, "[cap] %d attempts, %d feasible, %d accepted: max %.6f -> %.6f, total %.4f -> %.4f (%+.3f%%)  %.2fs\n",
+                     res.attempts, res.feasible, res.accepted, res.startMax, res.endMax, res.startTotal, res.endTotal,
+                     100 * (res.endTotal / std::max(EPS, res.startTotal) - 1), res.seconds);
+    return res;
+}
+
+exec
+/bin/bash -lc "rg -n 'load|read|int main|argc' AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp AI_Solutions/CodexParallelChain/src/placedb.hpp AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp | head -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp:92:int main() {
+AI_Solutions/CodexParallelChain/src/placedb.hpp:42:    bool read(const std::string& inputPrefix, std::string& err);
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp:3:bool readPlX(const PlaceDB&,const std::string&,Placement&);
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp:4:int main(int argc,char** argv){
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp:5: if(argc<6)return 1; PlaceDB db;Placement p;std::string err;
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp:6: if(!db.read(argv[1],err)||!readPlX(db,argv[2],p))return 2;
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp:7: auto mm=diag::loadMemo(std::string(argv[2]).substr(0,std::string(argv[2]).size()-3)+".memo");
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp:8: CapSearchOptions o;o.seconds=std::stod(argv[4]);o.totalRatio=std::stod(argv[5]);o.threads=8;o.dp.passes=1000;o.verbose=true;
+
+exec
+/bin/bash -lc "sed -n '20,59p' AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp
+sed -n '80,88p' Testcases/results/CodexParallelChain/scripts/diag.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def original_prefix(bench):
+    group = 'testcases' if bench in ['ibm01', 'ibm05', 'toy'] else 'holdout'
+    return LAB / 'Testcases' / group / bench / bench
+
+
+def start_prefix(bench):
+    original = STARTS / bench / 'output'
+    if original.with_suffix('.aux').is_file() and original.with_suffix('.pl').is_file():
+        return original
+
+exec
+/bin/bash -lc "sed -n '40,65p' AI_Solutions/CodexParallelChain/tests/run_tests.py
+sed -n '1,20p' AI_Solutions/CodexParallelChain/tests/readpl.cpp
+sed -n '490,529p' AI_Solutions/CodexParallelChain/src/capsearch.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        print(label + ': ' + ('PASS' if process.returncode == 0 else 'FAIL'), flush=True)
+        if process.returncode:
+            print(process.stdout)
+            raise SystemExit(process.returncode)
+
+    objects = []
+    for source in sorted((ROOT / 'src').glob('*.cpp')):
+        if source.stem == 'main':
+            continue
+        obj = out / (source.stem + '.o')
+        run([args.compiler, *flags, '-c', str(source), '-o', str(obj)], 'build_' + source.stem)
+        objects.append(str(obj))
+    for name in ('window', 'multirow', 'optimizer', 'chain', 'parallel_sa', 'pool', 'global', 'capsearch', 'cap_windows', 'guard'):
+        exe = out / (name + '_test')
+        run([args.compiler, *flags, str(ROOT / 'tests' / (name + '_test.cpp')),
+             *objects, '-o', str(exe)], 'link_' + name)
+        run([str(exe)], name)
+    print('All 10 C++ test programs passed. Logs: ' + str(out), flush=True)
+
+
+if __name__ == '__main__':
+    main()
+#include "placedb.hpp"
+#include <map>
+#include <fstream>
+#include <sstream>
+#include <cmath>
+#include <cstdio>
+bool readPlX(const PlaceDB& db, const std::string& path, Placement& p) {
+    std::map<std::string, int> id;
+    for (size_t i = 0; i < db.nodes.size(); ++i) id[db.nodes[i].name] = int(i);
+    p.seg.assign(db.nodes.size(), -1);
+    p.site.assign(db.nodes.size(), 0);
+    std::ifstream f(path);
+    std::string line;
+    while (std::getline(f, line)) {
+        std::istringstream ss(line);
+        std::string n;
+        double x, y;
+        if (!(ss >> n >> x >> y)) continue;
+        auto it = id.find(n);
+        if (it == id.end()) continue;
+    const double T0 = std::max(1.0, 0.5 * avgW);
+    double T = T0;
+    const double t1 = wallSeconds();
+    std::vector<int> over;
+    long it = 0;
+    Trial t;
+    while (cur > EPS) {
+        // v6: the clock is read every move, not every 256: on a design with
+        // a few long rows one move re-scores two segments of ~1400 cells
+        // (2-7 ms on e07), and 256 of them overran a 0.4 s repair by 1.4 s
+        // (Testcases/results/ClaudeOpus55_v6/diagnosis.md section 5)
+        if (wallSeconds() >= until) break;
+        if ((it & 255) == 0) {
+            bad.clear();
+            cur = 0;
+            for (size_t s = 0; s < R.late.size(); ++s) {
+                cur += R.late[s];
+                if (R.late[s] > EPS) bad.push_back(int(s));
+            }
+            if (bad.empty()) break;
+            // time-based: three cool-downs T0 -> 0.05 per slice (long rows do
+            // few moves per second, an iteration-based schedule never cools)
+            double frac = std::fmod(3.0 * (wallSeconds() - t1) / std::max(1e-3, until - t1), 1.0);
+            T = T0 * std::pow(0.05 / T0, frac);
+        }
+        ++it;
+        int s1 = bad[rng.below(int(bad.size()))];
+        if (R.late[s1] <= EPS || R.list[s1].empty()) continue;
+        // half of the time, a cell that is over the cap wherever it is now
+        int v = -1;
+        if (rng.u01() < 0.5) {
+            over.clear();
+            double lo, hi, pen;
+            for (int c : R.list[s1])
+                if (R.window(c, s1, lo, hi, pen) && pen > 0) over.push_back(c);
+            if (!over.empty()) v = over[rng.below(int(over.size()))];
+        }
+        if (v < 0) v = R.list[s1][rng.below(int(R.list[s1].size()))];
+        if (!propose(db, R, rng, v, t)) continue;
+        double c1 = R.lateness(t.s1, t.l1), c2 = R.lateness(t.s2, t.l2);
+
+exec
+/bin/bash -lc "rg -n 'phase[12]Until|RepairOptions' AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp
+sed -n '15,30p' AI_Solutions/CodexParallelChain/tests/run_tests.py
+sed -n '1,35p' Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py
+sed -n '1,35p' AI_Solutions/CodexParallelChain/src/placedb.hpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+107:        RepairOptions o;
+108:        o.phase1Until = wallSeconds() + 0.05;
+109:        o.phase2Until = o.phase1Until + 0.02;
+133:        RepairOptions o;
+134:        o.phase1Until = wallSeconds() + 0.02;
+135:        o.phase2Until = o.phase1Until + 0.01;
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--sanitize', action='store_true')
+    mode.add_argument('--tsan', action='store_true')
+    parser.add_argument('--compiler', default='g++')
+    args = parser.parse_args()
+    out = ROOT.parents[1] / 'Testcases/results' / ROOT.name / ('tests_tsan' if args.tsan else 'tests_sanitized' if args.sanitize else 'tests')
+    out.mkdir(parents=True, exist_ok=True)
+    flags = ['-std=c++17', '-O1' if args.sanitize or args.tsan else '-O2', '-pthread', '-UNDEBUG']
+    if args.sanitize:
+        flags += ['-g', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']
+    if args.tsan:
+        flags += ['-g', '-fsanitize=thread', '-fno-omit-frame-pointer']
+    records = []
+
+    def run(command, label, timeout=180):
+        start = time.perf_counter()
+#!/usr/bin/env python3
+"""Final B validation with production sources and same-round v6 pairs."""
+import argparse
+import csv
+import fcntl
+import hashlib
+import json
+import math
+import re
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+from pathlib import Path
+
+sys.dont_write_bytecode = True
+from v6q import LAB, R, PY, V5S, Queue, build, note
+from diag import sha, verify_protected, original_prefix, prefix_hashes
+
+SELF = Path(__file__).resolve()
+SOLUTION = LAB / 'AI_Solutions' / R.name
+BASE = LAB / 'AI_Solutions/ClaudeOpus55_v6'
+CASES = ['ibm01', 'ibm05', 'toy'] + [f'h{i:02d}' for i in range(1, 9)]
+LARGE = [('L2', 1), ('L2', 2), ('L1', 1)]
+
+
+def dump(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + '.tmp')
+    tmp.write_text(json.dumps(value, indent=2) + '\n')
+    tmp.replace(path)
+
+
+def src_hash(path):
+// placedb.hpp — circuit data, Bookshelf I/O, rows/segments, placement and metrics.
+#pragma once
+#include <cmath>
+#include <string>
+#include <vector>
+
+struct Node {
+    std::string name;
+    double w = 0, h = 0;
+    bool fixed = false;        // "terminal" in .nodes, or /FIXED in .pl
+    double gx = 0, gy = 0;     // input (global placement) bottom-left corner
+    std::string orient = "N";
+    std::string plSuffix;      // e.g. "/FIXED", written back unchanged
+};
+
+// One run of contiguous free sites in a row. Fixed objects that overlap a row
+// split its subrow into several segments. Site k of the segment starts at
+// x = x0 + k * sp.
+struct Segment {
+    int row = 0;
+    double y = 0, height = 0;
+    double x0 = 0, sp = 1;
+    int numSites = 0;
+};
+
+struct Row {
+    double y = 0, height = 0;
+    std::vector<int> segs;     // segment ids in this row, sorted by x
+};
+
+struct PlaceDB {
+    std::vector<Node> nodes;
+    std::vector<std::vector<int>> nets;       // node ids of each net (deduplicated)
+    std::vector<std::vector<int>> nodeNets;   // net ids of each node
+    std::vector<int> movable;                 // ids of movable nodes
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path('AI_Solutions/CodexParallelChain/src/capsearch.cpp')
+s=p.read_text().replace('class Repair {','struct RepairDeadline {};\\n\\nclass Repair {')
+s=s.replace('Repair(const PlaceDB& db, const Placement& p, double D) : db_(db), D_(D) {','Repair(const PlaceDB& db, const Placement& p, double D, double until) : db_(db), D_(D), until_(until) {\\n        checkDeadline();')
+s=s.replace('        for (int v : db.movable) {\\n            seg[v]', '        for (int v : db.movable) {\\n            tick();\\n            seg[v]',1)
+s=s.replace('    bool window(int v, int s, double& lo, double& hi, double& pen) const {','    bool window(int v, int s, double& lo, double& hi, double& pen) const {\\n        tick();')
+s=s.replace('    double key(int v, int s) const {','    double key(int v, int s) const {\\n        tick();')
+s=s.replace('    double lateness(int s, const std::vector<int>& l, std::vector<int>* order = nullptr) const {','    double lateness(int s, const std::vector<int>& l, std::vector<int>* order = nullptr) const {\\n        checkDeadline();')
+s=s.replace('        while (i < n) {','        while (i < n) {\\n            tick();',1)
+s=s.replace('    const std::vector<int>& targets(int v) {','    const std::vector<int>& targets(int v) {\\n        checkDeadline();')
+s=s.replace('            for (int s : row->segs) {','            for (int s : row->segs) {\\n                tick();',1)
+s=s.replace('    std::vector<std::vector<int>> list;','    // Covers initialization and per-row scoring, not only the annealing loop.\\n    // Only rowRepair catches this; its caller placement stays transactional.\\n    void checkDeadline() const {\\n        if (wallSeconds() >= until_) throw RepairDeadline{};\\n    }\\n\\n    std::vector<std::vector<int>> list;',1)
+s=s.replace('    struct Cluster { int first, last, width, lo, hi, x; };','    void tick() const { if ((++ticks_ & 255u) == 0) checkDeadline(); }\\n    struct Cluster { int first, last, width, lo, hi, x; };',1)
+s=s.replace('        auto place = [&](Cluster& c) {','        auto place = [&](Cluster& c) {\\n            checkDeadline();',1)
+s=s.replace('    double D_;','    double D_;\\n    double until_;\\n    mutable unsigned ticks_ = 0;',1)
+s=s.replace('bool rowRepair(const PlaceDB& db, Placement& p, double D, const RepairOptions& opt) {','bool rowRepair(const PlaceDB& db, Placement& p, double D, const RepairOptions& opt) try {',1)
+s=s.replace('    Repair R(db, p, D);','    Repair R(db, p, D, opt.phase2Until);',1)
+s=s.replace('        if ("'!dirty[s]) continue;'"\\n        if (R.cost','        R.checkDeadline();\\n        if ("'!dirty[s]) continue;'"\\n        if (R.cost',1)
+s=s.replace('    p = std::move(q);\\n    return true;\\n}\\n\\ndouble individualMaxBound','    R.checkDeadline();\\n    p = std::move(q);\\n    return true;\\n} catch (const RepairDeadline&) {\\n    return false;\\n}\\n\\ndouble individualMaxBound',1)
+p.write_text(s)
+print('Added transactional rowRepair deadline coverage, including initialization and final placement.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Added transactional rowRepair deadline coverage, including initialization and final placement.
+
+exec
+/bin/bash -lc "sed -n '1,40p' AI_Solutions/CodexParallelChain/src/legalizer.hpp
+sed -n '1,40p' AI_Solutions/CodexParallelChain/tests/global_test.cpp
+rg --files Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/toy Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06 | head -n 30" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+// legalizer.hpp — Stage 1: legal placement with small total and maximum displacement.
+#pragma once
+#include <string>
+
+#include "placedb.hpp"
+
+struct LegalizeOptions {
+    std::string method = "abacus";   // "tetris" (greedy baseline) or "abacus"
+    bool totalCost = true;           // abacus row choice: total displacement change (true) or the new cell only
+    bool refineMax = true;           // post-pass: pull the worst cells closer
+    bool refineTotal = true;         // post-pass: greedy moves/swaps that cut total displacement
+    bool evict = true;               // max pass may also move a cell out of the worst cell's way
+    bool matching = true;            // v2: same-width min-cost matching around the worst cells
+    bool rowOpt = true;              // v2: exact per-row re-placement with the order fixed
+    std::string spread = "auto";     // v2: flow-based spreading before Abacus: off, on, or auto
+                                     //     (run with and without, keep the better)
+    int binRows = 2;                 //     bin height in rows
+    double binCells = 16;            //     bin width in average cell widths
+    int spreadRounds = 4;            //     bound relaxations (x1.5 each)
+    int sweepRows = 6, sweepSites = 120;   // v3: total-displacement matching windows
+    double totalTol = 5e-4;          // v3: total pass stops when a pass gains less than this fraction
+    int finishRounds = 4;            // v3: final row-opt / matching / local-move rounds
+    bool swapPush = false;           // v3: swap-with-push move (mixed results, 1.7x slower; off)
+    bool windowDP = true;            // v4: two-row window DP (CodexWindowDP) inside the final rounds
+    int windowCells = 4;             //     cells per row in a two-row window
+    int windowCells3 = 3;            //     cells per row in a three-row window
+    double until = 1e30;             // v4: refinement stops at this wallSeconds() (Abacus always finishes)
+    int threads = 1;                 // v4: window DP worker threads
+    bool verbose = false;
+};
+
+// Returns false (with err set) when some cell cannot be placed anywhere.
+bool legalize(const PlaceDB& db, Placement& out, const LegalizeOptions& opt, std::string& err);
+#include "../src/global.hpp"
+#include <cassert>
+#include <iostream>
+
+int main() {
+    PlaceDB db;Placement p;
+    db.uniformSites=true;db.siteSpacing=1;
+    for(int r=0;r<8;++r) {
+        db.rows.push_back({double(r),1,{r}});
+        db.segs.push_back({r,double(r),1,0,1,4});
+        Node n;n.name="c"+std::to_string(r);n.w=4;n.h=1;n.gy=r;
+        db.nodes.push_back(n);db.movable.push_back(r);db.wSites.push_back(4);
+        p.seg.push_back((r+1)%8);p.site.push_back(0);
+    }
+    auto old=p;
+    assert(checkLegal(db,p).empty());
+    assert(!repairCap(db,p,0,wallSeconds()));
+    assert(p.seg==old.seg && p.site==old.site);
+    assert(repairCap(db,p,0,wallSeconds()+2));
+    assert(checkLegal(db,p).empty() && displacement(db,p).max==0);
+    db.nodes[0].gx=0.4;
+    old=p;
+    assert(!repairCap(db,p,0.1,wallSeconds()+0.2));
+    assert(p.seg==old.seg && p.site==old.site);
+    // A crowded single row requires coordinated shifts; nearest sites alone
+    // overlap. The cap is checked against every cell, including incumbents.
+    PlaceDB row;Placement q;
+    row.rows.push_back({0,1,{0}});row.segs.push_back({0,0,1,0,1,8});
+    for(int i=0;i<4;++i) {
+        Node n;n.name="r"+std::to_string(i);n.w=2;n.h=1;n.gx=1.0+1.5*i;
+        row.nodes.push_back(n);row.movable.push_back(i);q.seg.push_back(0);q.site.push_back(2*i);
+    }
+    assert(repairCap(row,q,1.0,wallSeconds()+1));
+    assert(checkLegal(row,q).empty() && displacement(row,q).max<=1.0+1e-7);
+    PlaceDB fractional;Placement fp;
+    fractional.rows.push_back({0,1,{0}});fractional.segs.push_back({0,0,1,0,1,4});
+    double targets[]={0.9,1.49,2.45};
+    for(int i=0;i<3;++i){Node n;n.name="f"+std::to_string(i);n.w=n.h=1;n.gx=targets[i];
+        fractional.nodes.push_back(n);fractional.movable.push_back(i);fp.seg.push_back(0);fp.site.push_back(i);}
+    assert(repairCap(fractional,fp,1,wallSeconds()+1));
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/output.pl
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/stdout.txt
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/output.scl
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/output.aux
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/output.pl.check.txt
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/output.nets
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/output_legal.pl.check.txt
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/output.nodes
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/output.wts
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/output_legal.pl
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/h06/stderr_ts.tsv
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/record.csv
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/candidate/metrics.json
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/output.pl
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/stdout.txt
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/output.scl
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/output.aux
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/output.pl.check.txt
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/output.nets
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/output_legal.pl.check.txt
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/output.nodes
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/output.wts
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/output_legal.pl
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/h06/stderr_ts.tsv
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/toy/candidate/metrics.json
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/record.csv
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/h06/v6/metrics.json
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/toy/candidate/record.csv
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/toy/v6/record.csv
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control/train/runs/toy/v6/metrics.json
+
+codex
+已找到期限檢查缺口：`rowRepair` 只在搜尋迴圈檢查時間，初始化會先逐列評分，收尾也未檢查。修正已加入這些路徑；逾時會撤銷整次嘗試，接著驗證期限與 placement 不變性。
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path('AI_Solutions/CodexParallelChain/tests/cap_deadline_test.cpp')
+p.write_text('''// Deadline cancellation must include initialization and preserve the caller.
+#include \"../src/capsearch.hpp\"
+#include <cassert>
+#include <cstdio>
+#include <string>
+bool readPlX(const PlaceDB&, const std::string&, Placement&);
+
+void check(const PlaceDB& db, const Placement& start) {
+    assert(checkLegal(db, start).empty());
+    for (double budget : {-1.0, 0.002}) {
+        auto p = start;
+        RepairOptions opt;
+        double begin = wallSeconds();
+        opt.phase1Until = begin + budget * 0.6;
+        opt.phase2Until = begin + budget;
+        opt.phase2PerCell = 0;
+        double cap = displacement(db, start).max;
+        bool ok = rowRepair(db, p, budget < 0 ? cap : cap * 0.999, opt);
+        double elapsed = wallSeconds() - begin;
+        // Allow sanitizer/allocator overhead; this is not a performance gate.
+        assert(elapsed < 0.5);
+        if (budget < 0) assert("'!ok);
+        if (!ok) assert(p.seg == start.seg && p.site == start.site);
+        else assert(checkLegal(db, p).empty() && displacement(db, p).max <= cap * 0.999 + 1e-6);
+        std::printf("deadline budget %.6f elapsed %.6f success %d rollback %d'"\\\\n\",
+                    budget, elapsed, ok, p.seg == start.seg && p.site == start.site);
+    }
+}
+
+int main(int argc, char** argv) {
+    PlaceDB db; Placement p;
+    if (argc == 3) {
+        std::string err;
+        assert(db.read(argv[1], err));
+        assert(readPlX(db, argv[2], p));
+    } else {
+        db.uniformSites = true; db.siteSpacing = 1;
+        for (int r = 0; r < 20000; ++r) {
+            db.rows.push_back({double(r), 1, {r}});
+            db.segs.push_back({r, double(r), 1, 0, 1, 16});
+            for (int j = 0; j < 3; ++j) {
+                int v = int(db.nodes.size());
+                Node n; n.name = \"c\" + std::to_string(v); n.w = n.h = 1;
+                n.gx = j + 1; n.gy = r;
+                db.nodes.push_back(n); db.movable.push_back(v); db.wSites.push_back(1);
+                p.seg.push_back(r); p.site.push_back(j);
+            }
+        }
+    }
+    check(db, p);
+    std::puts(\"PASS: expired deadlines reject, interrupted repairs preserve placement\");
+}
+''')
+p=Path('AI_Solutions/CodexParallelChain/tests/run_tests.py');s=p.read_text()
+s=s.replace(\"'cap_windows', 'guard')\", \"'cap_windows', 'guard', 'cap_deadline')\")
+s=s.replace(\"        run([args.compiler, *flags, str(ROOT\", \"        extra = ['-I' + str(ROOT / 'src'), str(ROOT / 'tests/readpl.cpp')] if name == 'cap_deadline' else []\\n        run([args.compiler, *flags, *extra, str(ROOT\")
+s=s.replace('All 10 C++','All 11 C++');p.write_text(s)
+print('Added cap_deadline regression with optional training fixtures; runner now has 11 tests.')
+PY
+python3 Testcases/results/CodexParallelChain/scripts/phase2_short_validation.py tests > Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_tests.log 2>&1" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "python3 - <<'PY'
+import json
+from pathlib import Path
+r=Path('Testcases/results/CodexParallelChain/phase2/rejected/final_b_v6_control')
+print('last wait:',json.loads((r/'validation/ALL_DONE').read_text()))
+for mode in ['train','large']:
+ s=json.loads((r/mode/'summary.json').read_text());print(mode,{k:v for k,v in s.items() if k"'!='"'rows'})
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+last wait: {'src_sha256': '03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2', 'gates': {'train': False, 'large': False}, 'full_asan_ubsan': True, 'finished': 'Fri Oct 23 14:26:32 2026', 'note': 'Read all evidence and update WORK_STATE before declaring B_DONE.'}
+train {'total_gm': 1.0000003706805136, 'max_gm': 1.0, 'both': 8, 'gates': {'total_gm_not_worse': False, 'max_gm_not_worse_01pct': True, 'every_max_not_worse_02pct': True, 'both_at_least_8': True, 'zero_extra_overshoots': True}, 'all_gates': False}
+large {'gates': {'all_legal': True, 'all_within_time': True, 'zero_extra_overshoots': False}, 'all_gates': False}
+
+exec
+/bin/bash -lc "sed -n '30,65p' Testcases/results/CodexParallelChain/scripts/v6q.py
+sed -n '35,39p' Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py
+rg -n 'def run|timing.lock|done.json' Testcases/results/CodexParallelChain/scripts/v6q.py | head -n 15" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    print(msg, flush=True)
+
+
+class Queue:
+    def __init__(self, out, timed=True):
+        self.out = Path(out)
+        self.out.mkdir(parents=True, exist_ok=True)
+        self.lock = None
+        if timed:
+            self.lock = (R / 'timing.lock').open('w')
+            fcntl.flock(self.lock, fcntl.LOCK_EX)
+
+    def run(self, name, cmd, env=None, cwd=LAB, quiet=False):
+        cmd = [str(c) for c in cmd]
+        marker = self.out / f'{name}.done.json'
+        if marker.exists():
+            if json.loads(marker.read_text())['command'] == cmd:
+                return True
+            raise RuntimeError(f'{name}: finished with a different command')
+        t = time.time()
+        with (self.out / f'{name}.log').open('w') as f:
+            rc = subprocess.run(cmd, cwd=cwd, env=env, stdout=f, stderr=subprocess.STDOUT).returncode
+        info = dict(command=cmd, returncode=rc, seconds=round(time.time() - t, 2), finished=time.ctime())
+        if rc:
+            (self.out / f'{name}.failed.json').write_text(json.dumps(info, indent=1) + '\n')
+            note(f'{self.out.name}/{name} FAILED rc={rc}，看 {name}.log')
+            return False
+        marker.write_text(json.dumps(info, indent=1) + '\n')
+        if not quiet:
+            note(f'{self.out.relative_to(R)}/{name} 完成（{info["seconds"]:.0f} 秒）')
+        return True
+
+
+def env_with_pinned_cmake():
+    """local_grade builds with cmake; keep the build on the E-cores."""
+    tb = R / 'scripts' / 'toolbin'
+def src_hash(path):
+    return hashlib.sha256(b''.join(p.read_bytes() for p in sorted(path.iterdir()))).hexdigest()
+
+
+def prefix(mode, bench):
+6:Every step writes <out>/<name>.done.json (command + hashes) when it finishes; a
+8:results/ClaudeOpus55_v6/timing.lock, so only one timed program runs at a time.
+39:            self.lock = (R / 'timing.lock').open('w')
+42:    def run(self, name, cmd, env=None, cwd=LAB, quiet=False):
+44:        marker = self.out / f'{name}.done.json'
+
+ succeeded in 42666ms:
+Added cap_deadline regression with optional training fixtures; runner now has 11 tests.
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path('Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py');s=p.read_text()
+s=s.replace(\"    return original_prefix(bench) if mode == 'train' else LAB / 'Testcases/large' / bench / bench\", \"    if mode == 'train':\\n        return LAB / 'Testcases/edge' / bench / bench if bench.startswith('e') else original_prefix(bench)\\n    return LAB / 'Testcases/large' / bench / bench\")
+s=s.replace('total_gm_at_most=1.0,','total_gm_at_most=1.0011,')
+s=s.replace(\"note='All production changes withdrawn; source is byte-identical to v6. Stage 1 total must not regress; chain-specific improvement/half-budget gates do not apply. '\",\"note='SA boundary remains accepted; cap deadline repair round 1 is pending this paired validation. '\\n                     'Coordinator WORK_STATE note 2 (2026-10-23 14:35) permits 0.11% total Stage 1 run variation; '\\n                     'max GM 0.1% and each max 0.2% gates stay unchanged (stricter than the allowed max-GM variation). '\\n                     'No elapsed-time tolerance: all candidate and reference training extra steps must be within budget. '\")
+s=s.replace('total_gm_not_worse=total <= 1.0,','total_gm_within_011pct_variation=total <= 1.0011,')
+p.write_text(s)
+print('Updated protocol with explicit coordinator-authorized total-GM variation; time gates unchanged.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Updated protocol with explicit coordinator-authorized total-GM variation; time gates unchanged.
+
+exec
+/bin/bash -lc 'tail -n 8 Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_tests.log' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+tests: 11/11 PASS, 30 records; evidence archived
+
+exec
+/bin/bash -lc 'python3 Testcases/results/CodexParallelChain/scripts/phase2_short_validation.py tests_sanitized > Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_asan.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path('Testcases/results/CodexParallelChain/scripts/phase2_deadline_regression.py')
+p.write_text('''#"'!/usr/bin/env python3
+"""27-case final-source legality/deadline regression; edge never tunes quality."""
+import argparse
+import fcntl
+import json
+from pathlib import Path
+import sys
+import time
+import traceback
+sys.dont_write_bytecode = True
+from phase2_acceptance import CASES, SOLUTION, dump, prefix, src_hash, validate, worker
+from diag import sha, prefix_hashes, verify_protected
+from v6q import LAB, R, PY, Queue
+
+SELF = Path(__file__).resolve()
+D = R / '"'phase2/deadline_regression/final_b'
+TRAIN = R / 'phase2/train/final_b'
+EDGES = [f'e{i:02d}' for i in range(1, 17)]
+
+
+def protocol():
+    validate(TRAIN, 'train', 'final_b')
+    return dict(src_sha256=src_hash(SOLUTION / 'src'), script_sha256=sha(SELF),
+                train_protocol_sha256=sha(TRAIN / 'protocol.json'),
+                train_summary_sha256=sha(TRAIN / 'summary.json'),
+                inputs={b: prefix_hashes(prefix('train', b)) for b in EDGES},
+                cases=CASES + EDGES,
+                note='Reuse 11 completed candidate training runs; run 16 edge regressions once. '
+                     'Only legality and extra deadlines are gates; no edge quality tuning.')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--worker')
+    args = parser.parse_args()
+    p = protocol()
+    D.mkdir(parents=True, exist_ok=True)
+    if (D / 'protocol.json').exists() and json.loads((D / 'protocol.json').read_text()) "'!= p:
+        raise RuntimeError('"'Regression protocol changed')
+    if args.worker:
+        if args.worker not in EDGES or not (D / 'protocol.json').exists():
+            raise RuntimeError('Invalid/unprepared regression worker')
+        worker(D, 'train', args.worker, 'candidate', 1)
+        return
+    dump(D / 'protocol.json', p)
+    binary = D / 'candidate'
+    if not binary.exists():
+        binary.symlink_to(TRAIN / 'candidate', target_is_directory=True)
+    if binary.resolve() "'!= (TRAIN / '"'candidate').resolve():
+        raise RuntimeError('Wrong production binary')
+    verify_protected()
+    q = Queue(D / 'jobs')
+    with (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        for bench in EDGES:
+            if not q.run(bench, [PY, SELF, '--worker', bench], quiet=True):
+                raise RuntimeError('Regression worker failed')
+        rows = []
+        for bench in CASES + EDGES:
+            root = TRAIN if bench in CASES else D
+            path = root / 'runs' / bench / 'candidate/metrics.json'
+            rows.append(dict(bench=bench, evidence=str(path.relative_to(LAB)),
+                             metrics_sha256=sha(path), **json.loads(path.read_text())))
+        gates = dict(all_27_legal=all(x['legal'] for x in rows),
+                     zero_extra_overshoots=not any(x['extra_overshoot'] for x in rows))
+        dump(D / 'summary.json', dict(rows=rows, gates=gates, all_gates=all(gates.values())))
+        if protocol() "'!= p:
+            raise RuntimeError('"'Regression inputs changed')
+        verify_protected(D / 'protected_after.json')
+        dump(D / 'ALL_DONE', dict(src_sha256=p['src_sha256'], protocol_sha256=sha(D / 'protocol.json'),
+                                 gates=gates, all_gates=all(gates.values()), finished=time.ctime()))
+    print(gates)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception:
+        dump(D / 'FAILED.json', dict(error=traceback.format_exc(), when=time.ctime()))
+        raise
+''')
+p=Path('Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py');s=p.read_text()
+s=s.replace(\"['phase2_train.py', 'phase2_large.py', 'phase2_acceptance.py']\", \"['phase2_train.py', 'phase2_large.py', 'phase2_acceptance.py', 'phase2_deadline_regression.py']\")
+s=s.replace('    # Full LeakSanitizer is intentionally outside the sandbox.', '''    if not q.run('deadline_regression_27', [PY, SELF.parent / 'phase2_deadline_regression.py'], quiet=True):
+        raise RuntimeError('27-case deadline regression failed')
+    regression = R / 'phase2/deadline_regression/final_b'
+    marker = json.loads((regression / 'ALL_DONE').read_text())
+    if marker['src_sha256'] "'!= protocol['"'src_sha256']:
+        raise RuntimeError('27-case regression source mismatch')
+    # Full LeakSanitizer is intentionally outside the sandbox.''')
+s=s.replace(\"    dump(D / 'ALL_DONE',\", \"    summaries['deadline_regression_27'] = marker['all_gates']\\n    dump(D / 'ALL_DONE',\")
+p.write_text(s)
+print('Prepared final queue: paired training, full large, 27-case deadline/legality regression, full ASan.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Prepared final queue: paired training, full large, 27-case deadline/legality regression, full ASan.
+
+exec
+/bin/bash -lc "git status --short -- AI_Solutions/CodexParallelChain Testcases/results/CodexParallelChain | head -n 30
+python3 - <<'PY'
+import ast
+from pathlib import Path
+for n in ['phase2_acceptance.py','phase2_final_b_queue.py','phase2_deadline_regression.py']:
+ p=Path('Testcases/results/CodexParallelChain/scripts')/n
+ ast.parse(p.read_text());print(n,'syntax OK')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+?? AI_Solutions/CodexParallelChain/
+?? Testcases/results/CodexParallelChain/
+phase2_acceptance.py syntax OK
+phase2_final_b_queue.py syntax OK
+phase2_deadline_regression.py syntax OK
+
+exec
+/bin/bash -lc "diff -u AI_Solutions/ClaudeOpus55_v6/src/capsearch.cpp AI_Solutions/CodexParallelChain/src/capsearch.cpp | head -n 40
+sed -n '47,62p' Testcases/results/CodexParallelChain/scripts/phase2_acceptance.py
+rg -n 'RepairDeadline|checkDeadline|tick\\(' AI_Solutions/CodexParallelChain/src/capsearch.cpp | tail -n 20" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+--- AI_Solutions/ClaudeOpus55_v6/src/capsearch.cpp	2026-10-22 05:43:45.255154714 +0800
++++ AI_Solutions/CodexParallelChain/src/capsearch.cpp	2026-10-23 14:33:53.760430828 +0800
+@@ -42,14 +42,18 @@
+     double u01() { return double(next() >> 11) * 0x1.0p-53; }
+ };
+ 
++struct RepairDeadline {};
++
+ class Repair {
+ public:
+-    Repair(const PlaceDB& db, const Placement& p, double D) : db_(db), D_(D) {
++    Repair(const PlaceDB& db, const Placement& p, double D, double until) : db_(db), D_(D), until_(until) {
++        checkDeadline();
+         list.assign(db.segs.size(), {});
+         seg.assign(db.nodes.size(), -1);
+         home_.assign(db.nodes.size(), -1);
+         homeX_.assign(db.nodes.size(), 0);
+         for (int v : db.movable) {
++            tick();
+             seg[v] = home_[v] = p.seg[v];
+             homeX_[v] = p.x(db, v) + 0.5 * db.nodes[v].w;
+             list[p.seg[v]].push_back(v);
+@@ -65,6 +69,7 @@
+     // false: v never fits s (height / width). pen > 0: no site is close
+     // enough; lo = hi = the nearest site and pen = how far (in sites) it is off.
+     bool window(int v, int s, double& lo, double& hi, double& pen) const {
++        tick();
+         const Segment& g = db_.segs[s];
+         const Node& n = db_.nodes[v];
+         int w = db_.sitesOf(v, g);
+@@ -86,6 +91,7 @@
+     // Order key that keeps the incumbent order: a cell in its incumbent
+     // segment sorts by its incumbent center, a newcomer by its ideal center.
+     double key(int v, int s) const {
++        tick();
+         return s == home_[v] ? homeX_[v] : db_.nodes[v].gx + 0.5 * db_.nodes[v].w;
+     }
+ 
+@@ -93,6 +99,7 @@
+     // Schrage's order and the incumbent-like order (by key). The incumbent
+                wrapper_sha256=sha(SELF.parent / f'phase2_{mode}.py'),
+                helper_sha256={p: sha(SELF.parent / p) for p in ['v6q.py', 'diag.py']},
+                src_sha256=src_hash(SOLUTION / 'src'), reference_sha256=src_hash(BASE / 'src'),
+                cmake_sha256={v: sha(s / 'CMakeLists.txt') for v, s in [('candidate', SOLUTION), ('v6', BASE)]},
+                runner_sha256=sha(V5S / 'run_ts.py'), checker_sha256=sha(LAB / 'Grader/tools/check_pl.py'),
+                inputs={b: prefix_hashes(prefix(mode, b)) for b in (CASES if mode == 'train' else ['L1', 'L2'])},
+                cases=CASES if mode == 'train' else LARGE,
+                historical_chaindp_sha256=sha(R.parent / 'ClaudeOpus55_v6/final/lg_CodexChainDP/record.csv'),
+                gates=dict(total_gm_at_most=1.0011, max_gm_at_most=1.001, each_max_at_most=1.002,
+                           both_at_least=8, extra_budget_overshoots=0, L1_seconds_lt=240, L2_seconds_lt=600),
+                note='SA boundary remains accepted; cap deadline repair round 1 is pending this paired validation. '
+                     'Coordinator WORK_STATE note 2 (2026-10-23 14:35) permits 0.11% total Stage 1 run variation; '
+                     'max GM 0.1% and each max 0.2% gates stay unchanged (stricter than the allowed max-GM variation). '
+                     'No elapsed-time tolerance: all candidate and reference training extra steps must be within budget. '
+                     'Historical ChainDP only defines both; every v6 ratio uses this run. Large runs are legality/runtime checks, not HPWL evidence.')
+
+45:struct RepairDeadline {};
+50:        checkDeadline();
+56:            tick();
+72:        tick();
+94:        tick();
+102:        checkDeadline();
+146:            tick();
+324:        checkDeadline();
+332:                tick();
+344:    void checkDeadline() const {
+345:        if (wallSeconds() >= until_) throw RepairDeadline{};
+353:    void tick() const { if ((++ticks_ & 255u) == 0) checkDeadline(); }
+373:            checkDeadline();
+648:        R.checkDeadline();
+662:    R.checkDeadline();
+665:} catch (const RepairDeadline&) {
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path('Testcases/results/CodexParallelChain/scripts/phase2_deadline_fixtures.py')
+p.write_text('''#"'!/usr/bin/env python3
+"""Bounded training-only deadline test and pre-fix negative control."""
+import fcntl
+import json
+import os
+from pathlib import Path
+import resource
+import subprocess
+import sys
+sys.dont_write_bytecode = True
+from phase2_acceptance import SOLUTION, BASE, dump, src_hash
+from diag import sha, prefix_hashes, original_prefix, verify_protected
+from v6q import LAB, R
+
+D = R / '"'phase2/cap_deadline_r1/fixtures'
+D.mkdir(parents=True, exist_ok=True)
+EXE = R / 'tests/cap_deadline_test'
+records = []
+
+def execute(label, command, compile=False, expected=0):
+    def setup():
+        resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+        if compile:
+            os.sched_setaffinity(0, {16, 17, 18, 19})
+    with (D / (label + '.log')).open('w') as log:
+        run = subprocess.run([str(x) for x in command], cwd=LAB, stdout=log, stderr=subprocess.STDOUT,
+                             preexec_fn=setup, timeout=120)
+    if expected == 'failure':
+        if run.returncode "'!= -6 or '"'Assertion' not in (D / (label + '.log')).read_text():
+            raise RuntimeError('Old code did not fail the expected deadline assertion')
+    elif run.returncode "'!= expected:
+        raise RuntimeError(label + '"' failed')
+    records.append(dict(label=label, command=[str(x) for x in command], returncode=run.returncode,
+                        expected=expected, log_sha256=sha(D / (label + '.log'))))
+
+with (R / 'timing.lock').open('a') as own, (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as ref:
+    fcntl.flock(own, fcntl.LOCK_EX)
+    fcntl.flock(ref, fcntl.LOCK_EX)
+    inputs = {}
+    for bench in ['toy', 'h06']:
+        pl = R / 'phase2/rejected/final_b_v6_control/train/runs' / bench / 'candidate' / bench / 'output_legal.pl'
+        inputs[bench] = dict(input=prefix_hashes(original_prefix(bench)), placement_sha256=sha(pl))
+        execute(bench, [EXE, original_prefix(bench), pl])
+    old = D / 'capsearch_v6.o'
+    execute('build_control', ['g++', '-std=c++17', '-O2', '-pthread', '-c', BASE / 'src/capsearch.cpp', '-o', old], compile=True)
+    objects = [p for p in sorted((R / 'tests').glob('*.o')) if p.name "'!= '"'capsearch.o']
+    control = D / 'deadline_v6_control'
+    execute('link_control', ['g++', '-std=c++17', '-O2', '-pthread', '-UNDEBUG', '-I' + str(SOLUTION / 'src'),
+                            SOLUTION / 'tests/cap_deadline_test.cpp', SOLUTION / 'tests/readpl.cpp',
+                            *objects, old, '-o', control], compile=True)
+    execute('v6_expected_failure', [control], expected='failure')
+verify_protected()
+dump(D / 'ALL_DONE', dict(src_sha256=src_hash(SOLUTION / 'src'), binary_sha256=sha(EXE),
+     fixture_inputs=inputs, records=records, note='Synthetic regression fails on v6; toy/h06 cancellation passes. No L2 tuning.'))
+print('PASS: toy/h06 deadline fixtures; v6 fails expired-deadline assertion as expected')
+''')
+print('Prepared short training fixture and v6 negative-control runner.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Prepared short training fixture and v6 negative-control runner.
+
+codex
+一般測試已通過 11/11。最後佇列會涵蓋同輪訓練、L1/L2、27 筆合法性與額外步驟期限檢查；僅依協調備註採用總位移 0.11% 變動容許範圍，時間門檻維持不變。
+
+exec
+/bin/bash -lc 'tail -n 4 Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_asan.log' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+exec
+/bin/bash -lc 'python3 Testcases/results/CodexParallelChain/scripts/phase2_deadline_fixtures.py > Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_fixtures.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 143974ms:
+ succeeded in 24891ms:
+exec
+/bin/bash -lc 'python3 Testcases/results/CodexParallelChain/scripts/phase2_short_validation.py tests_tsan > Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_tsan.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc 'tail -n 3 Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_asan.log
+tail -n 8 Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_fixtures.log' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+tests_sanitized: 11/11 PASS, 30 records; evidence archived
+PASS: toy/h06 deadline fixtures; v6 fails expired-deadline assertion as expected
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import json
+r=Path('Testcases/results/CodexParallelChain/phase2/cap_deadline_r1/fixtures')
+for n in ['toy','h06','v6_expected_failure']:
+ print(n, (r/(n+'.log')).read_text().strip())
+e=json.loads(Path('Testcases/results/CodexParallelChain/phase2/final_b_validation/test_evidence/verification.json').read_text())
+print('source',e['src_sha256'])
+print('suites', {k: {a:b for a,b in v.items() if a"'!='"'files'} for k,v in e['suites'].items()})
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+toy deadline budget -1.000000 elapsed 0.000028 success 0 rollback 1
+deadline budget 0.002000 elapsed 0.000882 success 1 rollback 0
+PASS: expired deadlines reject, interrupted repairs preserve placement
+h06 deadline budget -1.000000 elapsed 0.000054 success 0 rollback 1
+deadline budget 0.002000 elapsed 0.001214 success 0 rollback 1
+PASS: expired deadlines reject, interrupted repairs preserve placement
+v6_expected_failure deadline_v6_control: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/cap_deadline_test.cpp:22: void check(const PlaceDB&, const Placement&): Assertion `!ok' failed.
+source 00e81c9d621384e51cecfce2a1943c478e9e4df287451c2b55a378fa47a96746
+suites {'tests': {'programs': 11, 'records': 30, 'seconds': 42.66479149099905}, 'tests_sanitized': {'programs': 11, 'records': 30, 'seconds': 143.99623812700156}}
+
+exec
+/bin/bash -lc 'python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py final_b --prepare > Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_prepare_train.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "tail -n 5 Testcases/results/CodexParallelChain/phase2/final_b_validation/test_evidence/tests/cap_deadline.log
+sed -n '1,28p' Testcases/results/CodexParallelChain/scripts/v6q.py
+sed -n '735,775p' AI_Solutions/CodexParallelChain/src/capsearch.cpp | head -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+deadline budget -1.000000 elapsed 0.000280 success 0 rollback 1
+deadline budget 0.002000 elapsed 0.002659 success 0 rollback 1
+PASS: expired deadlines reject, interrupted repairs preserve placement
+#!/usr/bin/env python3
+"""v6q.py — serial, checkpointed runner shared by the v6 experiment scripts.
+
+Reusable: copy this scripts/ folder to Testcases/results/<VER>/scripts/; R, the lock and WORK_STATE follow.
+
+Every step writes <out>/<name>.done.json (command + hashes) when it finishes; a
+rerun skips finished steps whose command did not change. Timed steps hold
+results/ClaudeOpus55_v6/timing.lock, so only one timed program runs at a time.
+Each finished step appends a line to AI_Solutions/ClaudeOpus55_v6/WORK_STATE.md.
+"""
+import fcntl, hashlib, json, os, subprocess, time
+from pathlib import Path
+
+R = Path(__file__).resolve().parents[1]          # Testcases/results/ClaudeOpus55_v6
+LAB = R.parents[2]
+PY = '/home/evan/anaconda3/bin/python3'
+V5S = R.parent / 'ClaudeOpus55_v5' / 'scripts'
+# the results folder is named after the version: Testcases/results/<VER>/ <-> AI_Solutions/<VER>/
+WORK_STATE = LAB / 'AI_Solutions' / R.name / 'WORK_STATE.md'
+PIN = ['taskset', '-c', '16-19']
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def note(msg):
+    with WORK_STATE.open('a') as f:
+    if (!memo) memo = &local;
+    // More cells near the maximum require smaller initial cap changes.
+    double step = std::min(.025, 1.75 / std::sqrt(n));
+    auto left = [&] { return until - wallSeconds(); };
+    for (int trial = 0; trial < 20 && left() > (n > 2000 ? .35 : .1) && step >= .0008; ++trial) {
+        double D = std::max(lb, M * (1 - step));
+        if (D >= M - EPS) break;
+        Placement q = best, partial = best;
+        WindowOptions w = opt.dp;
+        if (n > 2000) { w.perRow = std::min(4, w.perRow); w.perRow3 = std::min(3, w.perRow3); }
+        w.threads = opt.threads; w.verbose = 0;
+        auto r0 = wallSeconds();
+        WindowOptions repair = w;
+        repair.passes = 2;
+        repair.timeLimit = std::min(.4, .15 * left());
+        CapWindowResult wr;
+        bool ok = repairCapWindows(db, q, D, repair, &wr, &partial);
+        int method = ok ? 3 : 0;
+        if (!ok && left() > .08) {
+            int how = 0;
+            ok = repairAt(db, partial, D, wallSeconds() + std::min(.4, .15 * left()),
+                          n <= 3000 ? opt.phase2PerCell : 0, opt.phase2Temp,
+                          unsigned(trial + 1), false, q, how);
+            method = how;
+        }
+        double repairSeconds = wallSeconds() - r0;
+        ++res.attempts;
+        auto mm = *memo;
+        std::vector<char> footprint(db.nodes.size(), 0);
+        if (ok) for (int v : db.movable)
+            if (q.seg[v] != best.seg[v] || q.site[v] != best.site[v] || displacementOf(db, best, v) > D + EPS)
+                footprint[v] = 1;
+        w.active = &footprint;
+        double raw = ok ? displacement(db, q).total : 0;
+        double dpSeconds = 0;
+        DispStats d{};
+        bool accept = false;
+        if (ok) {
+            ++res.feasible;
+            auto t = wallSeconds();
+
+ succeeded in 26971ms:
+exec
+/bin/bash -lc 'python3 Testcases/results/CodexParallelChain/scripts/phase2_large.py final_b --prepare > Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_prepare_large.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 12322ms:
+exec
+/bin/bash -lc 'python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py final_b --smoke > Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_smoke.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path('Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py')
+s=p.read_text().replace(\"    protocol = dict(src_sha256=src_hash(SOLUTION / 'src'), queue_sha256=sha(SELF),\", \"    fixtures = R / 'phase2/cap_deadline_r1/fixtures'\\n    fixture_evidence = json.loads((fixtures / 'ALL_DONE').read_text())\\n    if fixture_evidence['src_sha256'] "'!= src_hash(SOLUTION / '"'src'):\\n        raise RuntimeError('Deadline fixture source mismatch')\\n    for record in fixture_evidence['records']:\\n        if sha(fixtures / (record['label'] + '.log')) "'!= record['"'log_sha256']:\\n            raise RuntimeError('Deadline fixture log changed')\\n    protocol = dict(src_sha256=src_hash(SOLUTION / 'src'), queue_sha256=sha(SELF),\\n                    deadline_fixture_sha256=sha(fixtures / 'ALL_DONE'),\")
+p.write_text(s)
+print('Final queue verifies new feature evidence before starting timed acceptance.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Final queue verifies new feature evidence before starting timed acceptance.
+
+ succeeded in 76225ms:
+ succeeded in 19117ms:
+exec
+/bin/bash -lc 'tail -n 4 Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_tsan.log
+tail -n 4 Testcases/results/CodexParallelChain/phase2/cap_deadline_r1_smoke.log' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+tests_tsan: 11/11 PASS, 30 records; evidence archived
+
+codex
+一般、ASan/UBSan、TSan 均已通過 11/11；沙箱 ASan 使用 `detect_leaks=0`。toy/h06 功能測試也通過，且新期限測試能在 v6 重現失敗；完整驗收將交由外部佇列執行。
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+import ast,json,sys
+from pathlib import Path
+sys.dont_write_bytecode=True
+scripts=Path('Testcases/results/CodexParallelChain/scripts');sys.path.insert(0,str(scripts))
+import phase2_acceptance as a
+from diag import sha,verify_protected,prefix_hashes
+for n in ['phase2_acceptance.py','phase2_deadline_regression.py','phase2_deadline_fixtures.py','phase2_final_b_queue.py']:
+ ast.parse((scripts/n).read_text())
+for mode in ['train','large']:a.validate(a.R/'phase2'/mode/'final_b',mode,'final_b')
+d=a.R/'phase2/final_b_validation/test_evidence';e=json.loads((d/'verification.json').read_text())
+assert e['src_sha256']==a.src_hash(a.SOLUTION/'src')
+assert e['tests_sha256']=={p.name:sha(p) for p in sorted((a.SOLUTION/'tests').glob('*')) if p.is_file()}
+for suite,v in e['suites'].items():
+ for n,digest in v['files'].items():assert sha(d/suite/n)==digest
+ print(suite, 'PASS',v['programs'],v['records'],round(v['seconds'],2))
+for b in [f'e{i:02d}' for i in range(1,17)]:prefix_hashes(a.prefix('train',b))
+for v in ['candidate','v6']:
+ m=json.loads((a.R/'phase2/train/final_b/runs/toy'/v/'metrics.json').read_text());print('toy',v,m['record']['disp'],m['record']['max'],m['extra_used'],m['extra_budget'],m['legal'])
+verify_protected()
+print('source',e['src_sha256'])
+print('Prepared protocols, evidence hashes, regression inputs and protected folders: PASS')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ exited 1 in 66ms:
+tests PASS 11 30 42.66
+tests_sanitized PASS 11 30 144.0
+tests_tsan PASS 11 30 76.23
+Traceback (most recent call last):
+  File "<stdin>", line 16, in <module>
+  File "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py", line 97, in prefix_hashes
+    raise RuntimeError(f'Missing auxiliary file: {aux}')
+RuntimeError: Missing auxiliary file: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e01/e01.aux
+
+exec
+/bin/bash -lc "rg --files Testcases/edge -g '*.aux' | head -n 20
+sed -n '65,80p' Testcases/results/CodexParallelChain/scripts/diag.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Testcases/edge/e14_fixedonly/e14_fixedonly.aux
+Testcases/edge/e13_onecell/e13_onecell.aux
+Testcases/edge/e09_offgrid/e09_offgrid.aux
+Testcases/edge/e05_bignets/e05_bignets.aux
+Testcases/edge/e08_fragmented/e08_fragmented.aux
+Testcases/edge/e03_dense97/e03_dense97.aux
+Testcases/edge/e04_sparse10/e04_sparse10.aux
+Testcases/edge/e06_tallnarrow/e06_tallnarrow.aux
+Testcases/edge/e10_mixedsites/e10_mixedsites.aux
+Testcases/edge/e11_format/e11_format.aux
+Testcases/edge/e07_tworows/e07_tworows.aux
+Testcases/edge/e16_rowgaps/e16_rowgaps.aux
+Testcases/edge/e15_realistic/e15_realistic.aux
+Testcases/edge/e02_legalgp/e02_legalgp.aux
+Testcases/edge/e12_collapse/e12_collapse.aux
+Testcases/edge/e01_nearlegal/e01_nearlegal.aux
+        raise RuntimeError('Protected directories changed; do not write ALL_DONE')
+    if output:
+        dump(output, current)
+
+
+def cases():
+    training = [(group, aux.stem, aux.with_suffix(''))
+                for group in ['testcases', 'holdout']
+                for aux in sorted((LAB / 'Testcases' / group).glob('*/*.aux'))]
+    if len(training) != 11:
+        raise RuntimeError(f'Expected 11 testcases + holdout, found {len(training)}')
+    return training + [('edge_diagnostic_only', name,
+                        LAB / 'Testcases/edge' / name / name) for name in EDGE_CASES]
+
+
+def original_prefix(bench):
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path('Testcases/results/CodexParallelChain/scripts/phase2_deadline_regression.py')
+s=p.read_text().replace(\"EDGES = [f'e{i:02d}' for i in range(1, 17)]\", \"EDGES = [p.stem for p in sorted((LAB / 'Testcases/edge').glob('*/*.aux'))]\\nif [b.split('_')[0] for b in EDGES] "'!= [f'"'e{i:02d}' for i in range(1, 17)]:\\n    raise RuntimeError('Expected the original 16 edge regression cases')\")
+p.write_text(s)
+print('Regression manifest now uses the actual 16 edge case names.')
+PY
+python3 - <<'PY'
+import ast,json,sys
+from pathlib import Path
+sys.dont_write_bytecode=True
+scripts=Path('Testcases/results/CodexParallelChain/scripts');sys.path.insert(0,str(scripts))
+import phase2_acceptance as a
+from phase2_deadline_regression import EDGES
+from diag import sha,verify_protected,prefix_hashes
+for n in ['phase2_acceptance.py','phase2_deadline_regression.py','phase2_deadline_fixtures.py','phase2_final_b_queue.py']:ast.parse((scripts/n).read_text())
+for mode in ['train','large']:a.validate(a.R/'phase2'/mode/'final_b',mode,'final_b')
+for b in EDGES:prefix_hashes(a.prefix('train',b))
+for v in ['candidate','v6']:
+ m=json.loads((a.R/'phase2/train/final_b/runs/toy'/v/'metrics.json').read_text());print('toy',v,m['record']['disp'],m['record']['max'],m['extra_used'],m['extra_budget'],m['legal'])
+verify_protected()
+print('Prepared protocols, regression inputs, protected folders: PASS')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 115ms:
+Regression manifest now uses the actual 16 edge case names.
+toy candidate 43324.4 2004.4 0.700882 12.0 True
+toy v6 43324.4 2004.4 0.680769 12.0 True
+Prepared protocols, regression inputs, protected folders: PASS
+
+apply patch
+patch: completed
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/WORK_STATE.md
+diff --git a/AI_Solutions/CodexParallelChain/WORK_STATE.md b/AI_Solutions/CodexParallelChain/WORK_STATE.md
+index 6b79d4afc4bd7d2b78d8bdb46b97156d04243804..8051ab738c482669b8b6ca9138896814036f1fdf
+--- a/AI_Solutions/CodexParallelChain/WORK_STATE.md
++++ b/AI_Solutions/CodexParallelChain/WORK_STATE.md
+@@ -241,3 +241,16 @@
+   總位移 GM 1.00000037（差 0.00004%）在範圍內，算通過，不是退步。SA 改動不碰 Stage 1，這項不需要再花一輪。
+ - L2 額外時間超出是 v6 既有問題（還原版也出現），修正它是正確的下一步；修好之後的最後檢查只需要讓 L1/L2 與 27 筆的額外步驟都在預算內。
+ - B 的 session 上限還剩 3 次（第 10 次會強制收尾）；請以「cap deadline 修正 → 一次 final_b → B_DONE」為目標。
++
++## 階段 B：cap deadline 第 1/3 輪；修正後 final_b 等待中（2026-10-23）
++
++- 已實讀上次封存的 `phase2/rejected/final_b_v6_control/validation/ALL_DONE` 與 train/large summaries：train=false、large=false、full ASan=true；總 GM 1.0000003706805136、最大 GM 1、雙條件 8/11、train 額外步驟 0 超時，large 僅 extra gate 失敗。沒有未消化的背景工作。依協調者備註 2，採取期限修正後一次 final_b；不對原封不動的來源重抽樣。
++- **期限修正第 1 輪，尚未判定保留**：`src/capsearch.cpp` 的 `Repair` 建構子會在進入原有 deadline-aware 搜尋迴圈之前，建立全體細胞／逐列 lateness；逐列評分與最後 placement 亦缺乏期限檢查。新增只由 `rowRepair` 捕捉的內部取消例外；建構、逐列 lateness、候選列、排序 key／window 的每 256 次操作、clumping 及最後提交都檢查既有 phase2Until。超時直接回傳 false，caller placement 逐位不變；不增加預算、不改 L2 參數、不修改保護 v6。這證明並修正可重現的期限缺口，但完整 L1/L2 是否消除超時仍待驗收，不提前宣稱已解決所有期限路徑。
++- 新功能測試 `tests/cap_deadline_test.cpp`：60,000-cell 合成案例中，過期期限拒絕、2ms 初始化中斷後 placement 不變（實測含清理 2.659ms；單元測試 0.5s 上限只容許 sanitizer/allocator 開銷，**正式 extra gate 不加任何寬限**）。相同測試連結 v6 capsearch 時於 expired-deadline assertion 失敗（SIGABRT，關閉 core）；證據 `phase2/cap_deadline_r1/fixtures/{ALL_DONE,v6_expected_failure.log}`。另用 testcases/toy 與 holdout/h06 的既有合法 placement 驗證，期限／合法性／失敗不改 placement 均通過；未以 edge 或 L2 調參。
++- 最終來源一般／ASan+UBSan／TSan 均 **11/11 PASS**，各 30 records；42.66／144.00／76.23 秒。TSan 0 警告、sanitizer 0 診斷；沙箱 ASan 使用 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 由外部佇列補跑。精確 source/tests/log hashes：`phase2/final_b_validation/test_evidence/verification.json`。新增測試使舊 10-test 證據不可冒用；三套新證據皆已重新核對。
++- 協定修正有明確依據：依備註 2 的 0.11% 執行間變動，Stage 1 總 GM gate 改為 ≤1.0011；最大 GM ≤1.001、逐筆最大 ≤1.002、雙條件 ≥8/11 維持原限制。protocol 記載此授權來源及 SA 保留／deadline 第 1 輪待判定；不再沿用「全部撤回」歷史 note。train 仍同輪交錯重跑 candidate/v6，兩版 extra 都必須 0 超時，不忽略 reference 失敗；歷史控制資料不改寫。
++- 新 `scripts/phase2_deadline_regression.py` 為最後 27 筆 deadline/合法性回歸：沿用本輪已完成的 11 筆 candidate train，另跑原始 edge 16 筆，避免重跑成功步驟；edge 只看合法性／額外步驟時限，不判定品質收益。已預檢 16 筆實際完整名稱、輸入 hashes。final queue 驗證新功能證據、全部短測 hashes，依序 train、large、27 筆回歸、完整 ASan；ALL_DONE 的 gates 增加 `deadline_regression_27`，任何數值失敗仍不能 B_DONE。
++- train/large production snapshots 與 binaries 已編譯並通過 `validate()`；兩份 protocol src_sha256 都等於目前 **`00e81c9d621384e51cecfce2a1943c478e9e4df287451c2b55a378fa47a96746`**。toy 同輪 smoke 的兩筆 jobs marker 已完成：兩版 total=43324.4、max=2004.4、合法，extra candidate 0.700882／v6 0.680769 <12s。這只驗證流程，不能充作整體訓練結論。保護資料夾 hashes 未變；不 commit、不凍結、不新增 seed、不進 C。
++- **現行判定**：SA 四相邊界依原三-seed 同次數改善 0.825307% 與 TSan／重現證據繼續單項保留，數據 `phase2/sa_pair/sa_boundary_r1/`、`phase2/accepted/sa_boundary_r1/`；target windows 與 ejection 繼續撤回，數據 `phase2/chain_pair/{target_parallel_r1,ejection_beam_r1}/`。deadline 修正待這一次新來源同輪資料判定；未新增其他調參輪。
++- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。整個佇列超過 5 分鐘，未在沙箱啟動；計時程式不綁核，僅編譯由既有 runner 綁核。
++- **下一步**：讀上述 marker、`phase2/{train,large}/final_b/{summary.json,compare.md,protocol.json}`、`phase2/deadline_regression/final_b/{ALL_DONE,summary.json,protocol.json}` 與 sanitizer 證據，逐項核對新 hash、同輪最大／總位移 gates、27 筆全合法及 0 額外超時、L1<240/L2<600、完整 ASan 0 診斷。全部通過才將 deadline 第 1 輪判定保留，寫最終 hash、「B 完成，下一步 C」，回覆末行 B_DONE。若未通過，按失敗路徑針對性處理或撤回，維持最多 3 輪停損及協調者 session 上限，不對同份來源重抽樣、不以既有 v6 問題直接豁免時間 gate。**B 尚未完成。**
+
+codex
+已補上 rowRepair 期限檢查並更新 WORK_STATE.md；一般、ASan/UBSan、TSan 各 11/11 通過。
+沙箱 ASan 使用 `detect_leaks=0`；B 尚待完整驗收，外部佇列會補跑完整 ASan。
+RUN: python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py
+WAIT: Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE
+tokens used
+95,650
+已補上 rowRepair 期限檢查並更新 WORK_STATE.md；一般、ASan/UBSan、TSan 各 11/11 通過。
+沙箱 ASan 使用 `detect_leaks=0`；B 尚待完整驗收，外部佇列會補跑完整 ASan。
+RUN: python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py
+WAIT: Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE

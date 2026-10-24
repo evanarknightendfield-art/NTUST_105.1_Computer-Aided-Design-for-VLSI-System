@@ -1,0 +1,47 @@
+{
+  "version": "CodexParallelChain",
+  "frozen_at": "2026-10-23T10:04:33.414834+00:00",
+  "source_root": "AI_Solutions/CodexParallelChain",
+  "manifest": "Testcases/results/CodexParallelChain/frozen_sources.sha256",
+  "path_base": "AI_Solutions/CodexParallelChain",
+  "file_count": 53,
+  "manifest_sha256": "2960fb38797b9262133b83c9ba3ebe1c97e00c6790dc13abf5ae4b3e1cbfcf35",
+  "src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258",
+  "src_hash_algorithm": "SHA256 of concatenated immediate src file contents sorted by filename",
+  "retained": [
+    "SA four-phase band boundaries"
+  ],
+  "reverted": [
+    "target windows parallelization",
+    "ejection candidate reduction",
+    "rowRepair deadline cancellation and repair budget changes"
+  ],
+  "b_complete": true,
+  "evidence_sha256": {
+    "phase2/train/final_b/protocol.json": "751b437c92c9d27bcaa3f08d9c26f76c153ff2a9c73614b07335c19d4d3a4058",
+    "phase2/large/final_b/protocol.json": "3a4e9f8b4713be72afd484eba9978c8a5e9be5d2737bfb536451d7cdfef894b4",
+    "phase2/final_b_validation/ALL_DONE": "bc199ae11493407ef6492660c2ed01f5b9c9f3907092db9534fc9c496a77a475",
+    "phase2/deadline_regression/final_b/ALL_DONE": "bf61418e279ac78c7e0d08d54de0af0459f490d8ede8b0698d47b48d0eef632a",
+    "phase2/final_b_validation/test_evidence/verification.json": "366c2f85d4a8a0a00bef8ad684367970b73c2e1efbd0701760c31ddb68c4c82f",
+    "phase2/train/final_b/summary.json": "238d3f0263ddb285d1f37014d1ab18e76a56a6996eb058903ea12411a35552eb",
+    "phase2/large/final_b/summary.json": "e55cd8479bd13dcff29d5228f1f69b65e4d8090940080e9224770ec8e7bbc20a"
+  },
+  "asan_outside": {
+    "path": "Testcases/results/CodexParallelChain/phase2/asan_outside.log",
+    "sha256": "9da7a8f19860ea9db6b5418781ec80d955328231f6aec3cc5eb4ad44f0b0a127",
+    "passed": 10,
+    "failed": 0,
+    "test_seconds": 31.71,
+    "configure_build_ctest_returncodes": [
+      0,
+      0,
+      0
+    ]
+  },
+  "seed_dir": "edge_seed6",
+  "seed": 20261024,
+  "seed_directory_absent_at_freeze": true,
+  "run": "python3 Testcases/results/CodexParallelChain/scripts/final_validate.py --seed-dir edge_seed6 --seed 20261024",
+  "wait": "Testcases/results/CodexParallelChain/final/ALL_DONE",
+  "next": "final_report.py"
+}

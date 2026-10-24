@@ -1,0 +1,26 @@
+{
+  "AI_Solutions/COMPARISON.md": {
+    "sha256": "f648c16eb6dc990f5f2c6fd82e351fb62d2d40006afe4c0e966f6f811ece15be",
+    "bytes": 29997
+  },
+  "Testcases/results/edge/make_table.py": {
+    "sha256": "0f68cba22805a2a463d0e65cdd8cc6f9b867bcd5610f54970dbabc0289c0cfce",
+    "bytes": 2913
+  },
+  "Testcases/results/edge/tables.md": {
+    "sha256": "0a9c7caf53295d05cc026583a96acd6130a6c8daf62fa54e9f8686fe64fbda5e",
+    "bytes": 9280
+  },
+  "README.md": {
+    "sha256": "33588a187a76b6bf3e4db9a815db5304b58ec76a71f20dbd3c54f2d9c9960abf",
+    "bytes": 7177
+  },
+  "Testcases/README.md": {
+    "sha256": "e5b6c129bb3f885f20a57def009104020b1fcdd56f55bd5ae2a542cae88ddb8f",
+    "bytes": 9872
+  },
+  "Testcases/results/edge/README.md": {
+    "sha256": "3b682dcfbe7a83e1c008c58f9628ec0272ed23c9ca08b6858884ff29a9170df9",
+    "bytes": 14025
+  }
+}

@@ -1,0 +1,38 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/seed_ClaudeOpus55_v4/submissions/ClaudeOpus55_v4.tgz  (19 files)
+       ClaudeOpus55_v4/CMakeLists.txt
+       ClaudeOpus55_v4/Makefile
+       ClaudeOpus55_v4/README.md
+       ClaudeOpus55_v4/src/annealer.cpp
+       ClaudeOpus55_v4/src/annealer.hpp
+       ClaudeOpus55_v4/src/legalizer.cpp
+       ClaudeOpus55_v4/src/legalizer.hpp
+       ClaudeOpus55_v4/src/main.cpp
+       ClaudeOpus55_v4/src/optimizer.cpp
+       ClaudeOpus55_v4/src/optimizer.hpp
+       ClaudeOpus55_v4/src/placedb.cpp
+       ClaudeOpus55_v4/src/placedb.hpp
+       ClaudeOpus55_v4/src/pool.hpp
+       ClaudeOpus55_v4/src/rowmap.hpp
+       ClaudeOpus55_v4/src/window.cpp
+       ClaudeOpus55_v4/src/window.hpp
+       ClaudeOpus55_v4/tests/multirow_test.cpp
+       ClaudeOpus55_v4/tests/optimizer_test.cpp
+       ClaudeOpus55_v4/tests/window_test.cpp
+[build] OK build/dp  6.0s
+[run] e01_nearlegal PASS  OK          47.8s  disp=23382.242 max=5.963 legal=683502.0 sa=471418.5
+[run] e02_legalgp PASS  OK          18.5s  disp=0.0 max=0.0 legal=15259651.5 sa=10282442.0
+[run] e03_dense97 PASS  OK          30.9s  disp=120593.915 max=126.304 legal=537676.0 sa=282334.0
+[run] e04_sparse10 PASS  OK           7.0s  disp=752.6213 max=1.5686 legal=48982.267 sa=14020.167
+[run] e05_bignets PASS  OK          48.0s  disp=75504.465 max=39.583 legal=990164.0 sa=697952.0
+[run] e06_tallnarrow PASS  OK          13.8s  disp=32955.99 max=48.0 legal=2123554.0 sa=934781.5
+[run] e07_tworows PASS  OK          14.6s  disp=20482.641 max=25.684 legal=983088.0 sa=200089.5
+[run] e08_fragmented PASS  OK          30.4s  disp=60329.562 max=51.152 legal=649378.5 sa=407644.5
+[run] e09_offgrid PASS  OK          52.8s  disp=14749.6419 max=38.1293 legal=192881.4811 sa=58454.4947
+[run] e10_mixedsites PASS  OK          54.4s  disp=63618.248 max=61.805 legal=1219320.0 sa=806361.5
+[run] e11_format PASS  OK           7.6s  disp=10903.263 max=22.899 legal=127317.0 sa=78548.0
+[run] e12_collapse PASS  OK          22.1s  disp=326796.414 max=240.0 legal=2464762.0 sa=192507.5
+[run] e13_onecell PASS  OK           0.2s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          64.9s  disp=13227725.592 max=3779.126 legal=123316980.5 sa=88677253.0
+[run] e16_rowgaps PASS  OK          52.4s  disp=81547.215 max=51.49 legal=706265.5 sa=434339.5
+[summary] 16/16 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/seed_ClaudeOpus55_v4/record.csv

@@ -1,0 +1,41 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/lg/ClaudeOpus55_v5_L1/submissions/ClaudeOpus55_v5.tgz  (37 files)
+       ClaudeOpus55_v5/CMakeLists.txt
+       ClaudeOpus55_v5/Makefile
+       ClaudeOpus55_v5/README.md
+       ClaudeOpus55_v5/src/annealer.cpp
+       ClaudeOpus55_v5/src/annealer.hpp
+       ClaudeOpus55_v5/src/capsearch.cpp
+       ClaudeOpus55_v5/src/capsearch.hpp
+       ClaudeOpus55_v5/src/chain.cpp
+       ClaudeOpus55_v5/src/chain.hpp
+       ClaudeOpus55_v5/src/global.cpp
+       ClaudeOpus55_v5/src/global.hpp
+       ClaudeOpus55_v5/src/legalizer.cpp
+       ClaudeOpus55_v5/src/legalizer.hpp
+       ClaudeOpus55_v5/src/main.cpp
+       ClaudeOpus55_v5/src/optimizer.cpp
+       ClaudeOpus55_v5/src/optimizer.hpp
+       ClaudeOpus55_v5/src/placedb.cpp
+       ClaudeOpus55_v5/src/placedb.hpp
+       ClaudeOpus55_v5/src/pool.hpp
+       ClaudeOpus55_v5/src/rowmap.hpp
+       ClaudeOpus55_v5/src/window.cpp
+       ClaudeOpus55_v5/src/window.hpp
+       ClaudeOpus55_v5/tests/capsearch_test.cpp
+       ClaudeOpus55_v5/tests/chain_test.cpp
+       ClaudeOpus55_v5/tests/compare_methods.cpp
+       ClaudeOpus55_v5/tests/diag_chaindp_global/driver.cpp
+       ClaudeOpus55_v5/tests/diag_chaindp_global/global_diag.cpp
+       ClaudeOpus55_v5/tests/global_test.cpp
+       ClaudeOpus55_v5/tests/multirow_test.cpp
+       ClaudeOpus55_v5/tests/optimizer_test.cpp
+       ClaudeOpus55_v5/tests/parallel_sa_test.cpp
+       ClaudeOpus55_v5/tests/pool_test.cpp
+       ClaudeOpus55_v5/tests/readpl.cpp
+       ClaudeOpus55_v5/tests/run_tests.py
+       ClaudeOpus55_v5/tests/sa_bench.cpp
+       ClaudeOpus55_v5/tests/sa_bench2.cpp
+       ClaudeOpus55_v5/tests/window_test.cpp
+[build] OK build/dp  17.5s
+[run] L1       PASS  OK         186.9s  disp=2468150875.5 max=50495.911 legal=5563645298.2 sa=1738308022.8
+[summary] 1/1 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/lg/ClaudeOpus55_v5_L1/record.csv

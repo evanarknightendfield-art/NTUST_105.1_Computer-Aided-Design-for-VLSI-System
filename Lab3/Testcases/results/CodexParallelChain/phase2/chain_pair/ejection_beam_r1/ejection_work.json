@@ -1,0 +1,484 @@
+{
+  "ibm01": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 862,
+          "nodes": 129364,
+          "candidates": 341236,
+          "accepted": 0
+        },
+        {
+          "roots": 579,
+          "nodes": 85087,
+          "candidates": 209087,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 1441,
+        "nodes": 214451,
+        "candidates": 550323,
+        "accepted": 0
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 862,
+          "nodes": 129473,
+          "candidates": 341391,
+          "accepted": 0
+        },
+        {
+          "roots": 578,
+          "nodes": 84986,
+          "candidates": 208738,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 1440,
+        "nodes": 214459,
+        "candidates": 550129,
+        "accepted": 0
+      }
+    }
+  },
+  "ibm05": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 716,
+          "nodes": 113483,
+          "candidates": 771662,
+          "accepted": 0
+        },
+        {
+          "roots": 626,
+          "nodes": 99194,
+          "candidates": 660709,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 1342,
+        "nodes": 212677,
+        "candidates": 1432371,
+        "accepted": 0
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 723,
+          "nodes": 114616,
+          "candidates": 780510,
+          "accepted": 0
+        },
+        {
+          "roots": 639,
+          "nodes": 101138,
+          "candidates": 676206,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 1362,
+        "nodes": 215754,
+        "candidates": 1456716,
+        "accepted": 0
+      }
+    }
+  },
+  "toy": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 31,
+          "nodes": 4960,
+          "candidates": 13703,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 31,
+        "nodes": 4960,
+        "candidates": 13703,
+        "accepted": 0
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 31,
+          "nodes": 4960,
+          "candidates": 13703,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 31,
+        "nodes": 4960,
+        "candidates": 13703,
+        "accepted": 0
+      }
+    }
+  },
+  "h01": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 300,
+          "nodes": 23673,
+          "candidates": 146390,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 300,
+        "nodes": 23673,
+        "candidates": 146390,
+        "accepted": 0
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 300,
+          "nodes": 23673,
+          "candidates": 146390,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 300,
+        "nodes": 23673,
+        "candidates": 146390,
+        "accepted": 0
+      }
+    }
+  },
+  "h02": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 2000,
+          "nodes": 204407,
+          "candidates": 2728515,
+          "accepted": 1
+        },
+        {
+          "roots": 1000,
+          "nodes": 102124,
+          "candidates": 1363446,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 3000,
+        "nodes": 306531,
+        "candidates": 4091961,
+        "accepted": 1
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 2000,
+          "nodes": 204407,
+          "candidates": 2728515,
+          "accepted": 1
+        },
+        {
+          "roots": 1000,
+          "nodes": 102124,
+          "candidates": 1363446,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 3000,
+        "nodes": 306531,
+        "candidates": 4091961,
+        "accepted": 1
+      }
+    }
+  },
+  "h03": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 1704,
+          "nodes": 224401,
+          "candidates": 2527590,
+          "accepted": 1
+        },
+        {
+          "roots": 1903,
+          "nodes": 236113,
+          "candidates": 2638876,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 3607,
+        "nodes": 460514,
+        "candidates": 5166466,
+        "accepted": 1
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 1682,
+          "nodes": 222953,
+          "candidates": 2509784,
+          "accepted": 1
+        },
+        {
+          "roots": 1872,
+          "nodes": 235065,
+          "candidates": 2632176,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 3554,
+        "nodes": 458018,
+        "candidates": 5141960,
+        "accepted": 1
+      }
+    }
+  },
+  "h04": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 545,
+          "nodes": 84526,
+          "candidates": 334391,
+          "accepted": 0
+        },
+        {
+          "roots": 352,
+          "nodes": 54401,
+          "candidates": 195331,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 897,
+        "nodes": 138927,
+        "candidates": 529722,
+        "accepted": 0
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 552,
+          "nodes": 85760,
+          "candidates": 340113,
+          "accepted": 0
+        },
+        {
+          "roots": 353,
+          "nodes": 54542,
+          "candidates": 196309,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 905,
+        "nodes": 140302,
+        "candidates": 536422,
+        "accepted": 0
+      }
+    }
+  },
+  "h05": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 1199,
+          "nodes": 181509,
+          "candidates": 1798678,
+          "accepted": 10
+        },
+        {
+          "roots": 818,
+          "nodes": 124368,
+          "candidates": 1181366,
+          "accepted": 3
+        }
+      ],
+      "totals": {
+        "roots": 2017,
+        "nodes": 305877,
+        "candidates": 2980044,
+        "accepted": 13
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 1211,
+          "nodes": 183287,
+          "candidates": 1817337,
+          "accepted": 10
+        },
+        {
+          "roots": 796,
+          "nodes": 121067,
+          "candidates": 1148391,
+          "accepted": 3
+        }
+      ],
+      "totals": {
+        "roots": 2007,
+        "nodes": 304354,
+        "candidates": 2965728,
+        "accepted": 13
+      }
+    }
+  },
+  "h06": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 534,
+          "nodes": 85350,
+          "candidates": 310634,
+          "accepted": 1
+        },
+        {
+          "roots": 344,
+          "nodes": 55012,
+          "candidates": 205080,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 878,
+        "nodes": 140362,
+        "candidates": 515714,
+        "accepted": 1
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 527,
+          "nodes": 84218,
+          "candidates": 306615,
+          "accepted": 1
+        },
+        {
+          "roots": 341,
+          "nodes": 54464,
+          "candidates": 203563,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 868,
+        "nodes": 138682,
+        "candidates": 510178,
+        "accepted": 1
+      }
+    }
+  },
+  "h07": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 543,
+          "nodes": 74147,
+          "candidates": 239671,
+          "accepted": 0
+        },
+        {
+          "roots": 355,
+          "nodes": 49934,
+          "candidates": 135468,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 898,
+        "nodes": 124081,
+        "candidates": 375139,
+        "accepted": 0
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 535,
+          "nodes": 72734,
+          "candidates": 234361,
+          "accepted": 0
+        },
+        {
+          "roots": 339,
+          "nodes": 47671,
+          "candidates": 125097,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 874,
+        "nodes": 120405,
+        "candidates": 359458,
+        "accepted": 0
+      }
+    }
+  },
+  "h08": {
+    "v6": {
+      "passes": [
+        {
+          "roots": 855,
+          "nodes": 92651,
+          "candidates": 236640,
+          "accepted": 0
+        },
+        {
+          "roots": 767,
+          "nodes": 82876,
+          "candidates": 208994,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 1622,
+        "nodes": 175527,
+        "candidates": 445634,
+        "accepted": 0
+      }
+    },
+    "candidate": {
+      "passes": [
+        {
+          "roots": 849,
+          "nodes": 91863,
+          "candidates": 235050,
+          "accepted": 0
+        },
+        {
+          "roots": 770,
+          "nodes": 83222,
+          "candidates": 209957,
+          "accepted": 0
+        }
+      ],
+      "totals": {
+        "roots": 1619,
+        "nodes": 175085,
+        "candidates": 445007,
+        "accepted": 0
+      }
+    }
+  }
+}

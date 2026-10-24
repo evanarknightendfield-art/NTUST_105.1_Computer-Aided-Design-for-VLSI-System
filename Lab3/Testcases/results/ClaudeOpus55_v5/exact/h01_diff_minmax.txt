@@ -1,0 +1,21 @@
+A: total 2367.0900 max 29.3900   B: total 2474.5900 max 26.4800
+cells: 300; same position 221, same row shifted 62, other row 17 (row deltas: {-2: 1, -1: 5, 1: 11})
+rows that differ: 12 of 17 used rows
+rows with the same cells but a different order: 0
+
+cells with displacement >= 26.000 in A or B (dA, dB, rowA->rowB, xA->xB, width sites):
+  c165         dA     29.390 dB     26.390  row    1->   1  x     151.00->    148.00  w 16  gx 122.97 gy 17.36
+  c90          dA     29.190 dB     25.190  row    3->   4  x      95.00->    115.00  w 8  gx 117.27 gy 41.08
+  c64          dA     29.150 dB     26.150  row    0->   0  x      83.00->     86.00  w 8  gx 108.19 gy 3.96
+  c118         dA     28.690 dB     23.310  row    3->   1  x     106.00->     86.00  w 16  gx 105.20 gy 20.11
+  c88          dA     28.550 dB     25.550  row    4->   3  x     113.00->    100.00  w 12  gx 116.48 gy 38.93
+  c264         dA     28.530 dB     26.330  row    0->   0  x     147.00->    109.00  w 6  gx 126.90 gy 8.43
+  c148         dA     28.480 dB     26.480  row    2->   2  x     169.00->    167.00  w 6  gx 144.08 gy 35.56
+  c65          dA     28.430 dB     26.430  row    1->   1  x      68.00->     70.00  w 16  gx 91.41 gy 10.98
+  c100         dA     28.070 dB     26.070  row    2->   2  x      74.00->     76.00  w 28  gx 101.58 gy 31.51
+  c200         dA     27.840 dB     21.840  row    4->   3  x     139.00->    149.00  w 6  gx 136.29 gy 38.87
+  c39          dA     27.670 dB     25.670  row    3->   4  x     155.00->    137.00  w 10  gx 132.46 gy 42.87
+  c223         dA     26.780 dB     25.780  row    3->   3  x      89.00->     90.00  w 4  gx 106.85 gy 39.07
+  c67          dA     26.280 dB     26.280  row    0->   0  x      71.00->     71.00  w 8  gx 88.95 gy 8.33
+  c206         dA      9.130 dB     26.130  row    1->   1  x      84.00->     67.00  w 3  gx 88.66 gy 11.53
+  c137         dA     26.130 dB     26.130  row    2->   2  x     159.00->    159.00  w 8  gx 135.74 gy 29.13

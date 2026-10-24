@@ -1,0 +1,26 @@
+{
+  "mode": "default",
+  "out": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/exp/hpwl_default_holdout",
+  "v": [
+    [
+      "ClaudeOpus55_v5",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v5/src",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/ts/ClaudeOpus55_v5_s1_r1"
+    ],
+    [
+      "CodexCapDP",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexCapDP/src",
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/ts/CodexCapDP_s1_r1"
+    ]
+  ],
+  "groups": [
+    "holdout"
+  ],
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "moves": 5000000.0,
+  "benches": null
+}

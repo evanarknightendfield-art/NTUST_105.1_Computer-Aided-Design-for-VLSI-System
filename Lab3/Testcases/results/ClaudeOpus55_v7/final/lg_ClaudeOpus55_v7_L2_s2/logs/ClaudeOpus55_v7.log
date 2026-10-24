@@ -1,0 +1,98 @@
+$ cmake -S . -B build
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/lg_ClaudeOpus55_v7_L2_s2/home/ClaudeOpus55_v7/build
+
+$ cmake --build build -j
+[  3%] Building CXX object CMakeFiles/dp_core.dir/src/annealer.cpp.o
+[  9%] Building CXX object CMakeFiles/dp_core.dir/src/capsearch.cpp.o
+[  9%] Building CXX object CMakeFiles/dp_core.dir/src/chain.cpp.o
+[ 12%] Building CXX object CMakeFiles/dp_core.dir/src/global.cpp.o
+[ 19%] Building CXX object CMakeFiles/dp_core.dir/src/optimizer.cpp.o
+[ 19%] Building CXX object CMakeFiles/dp_core.dir/src/placedb.cpp.o
+[ 22%] Building CXX object CMakeFiles/dp_core.dir/src/window.cpp.o
+[ 25%] Building CXX object CMakeFiles/dp_core.dir/src/legalizer.cpp.o
+[ 29%] Linking CXX static library libdp_core.a
+[ 29%] Built target dp_core
+[ 32%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 35%] Building CXX object CMakeFiles/window_test.dir/tests/window_test.cpp.o
+[ 41%] Building CXX object CMakeFiles/multirow_test.dir/tests/multirow_test.cpp.o
+[ 41%] Building CXX object CMakeFiles/capsearch_test.dir/tests/capsearch_test.cpp.o
+[ 45%] Building CXX object CMakeFiles/parallel_sa_test.dir/tests/parallel_sa_test.cpp.o
+[ 48%] Building CXX object CMakeFiles/chain_test.dir/tests/chain_test.cpp.o
+[ 51%] Building CXX object CMakeFiles/pool_test.dir/tests/pool_test.cpp.o
+[ 54%] Building CXX object CMakeFiles/optimizer_test.dir/tests/optimizer_test.cpp.o
+[ 58%] Building CXX object CMakeFiles/global_test.dir/tests/global_test.cpp.o
+[ 61%] Building CXX object CMakeFiles/guard_test.dir/tests/guard_test.cpp.o
+[ 64%] Building CXX object CMakeFiles/cap_windows_test.dir/tests/cap_windows_test.cpp.o
+[ 67%] Linking CXX executable guard_test
+[ 70%] Linking CXX executable global_test
+[ 74%] Linking CXX executable pool_test
+[ 74%] Built target guard_test
+[ 74%] Built target pool_test
+[ 74%] Built target global_test
+[ 77%] Linking CXX executable chain_test
+[ 80%] Linking CXX executable multirow_test
+[ 83%] Linking CXX executable parallel_sa_test
+[ 83%] Built target chain_test
+[ 87%] Linking CXX executable window_test
+[ 87%] Built target multirow_test
+[ 90%] Linking CXX executable cap_windows_test
+[ 90%] Built target parallel_sa_test
+[ 90%] Built target cap_windows_test
+[ 90%] Built target window_test
+[ 93%] Linking CXX executable capsearch_test
+[ 96%] Linking CXX executable optimizer_test
+[ 96%] Built target capsearch_test
+[ 96%] Built target optimizer_test
+[100%] Linking CXX executable dp
+[100%] Built target dp
+
+
+===== L2: OK 196.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/lg_ClaudeOpus55_v7_L2_s2/home/ClaudeOpus55_v7/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/only_L2/L2/L2 output -v --seed 2
+Total displacement (legal): 1951498758.0599
+Maximum displacement (legal): 12205.97
+Total HPWL (legal): 2502829487.5
+Total HPWL (SA): 1531211714.5
+23 -> 1954002261.579922, max 12521.340000 -> 12396.970000
+[chain] 505 roots, 61263 nodes, 539811 candidates, 13 accepted, longest 3, 0 multi-blocker placements (time limit)
+[window-disp] 2 rows x 4 cells: 2539 windows solved, 2157 improved: total 1954002261.6 -> 1953907813.1 (max 12396.9700)  0.18s
+[chain-round] 1: 1247 target windows, 13 chains, longest 3, total 1954141103.139923 -> 1953907813.079921, max 12530.750000 -> 12396.970000
+[target-window] 152/204 improved: total 1953907813.079921 -> 1953898211.659922, max 12396.970000 -> 12340.190000  0.13s
+[chain] pass 0: 2 chains, total 1953898211.659922 -> 1953896761.659922, max 12340.190000 -> 12287.070000
+[chain] 4 roots, 615 nodes, 3932 candidates, 2 accepted, longest 1, 0 multi-blocker placements (time limit)
+[chain-round] 2: 152 target windows, 2 chains, longest 1, total 1953907813.079921 -> 1953896761.659922, max 12396.970000 -> 12287.070000
+[chain-phase] total 1954141103.139923 -> 1953896761.659922, max 12530.750000 -> 12287.070000  1.754s of 1.500s
+[cap-local] D 12265.567627500 method 3 repair 1.962220 DP 0.655670 windows 0 remaining 0 raw 1952799579.479928 total 1951498758.059922 max 12205.970000000 accepted
+[cap] 1 attempts, 1 feasible, 1 accepted: max 12287.070000 -> 12205.970000, total 1953896761.6599 -> 1951498758.0599 (-0.123%)  2.77s
+[extra] budget 6.000000 used 4.581533
+[stage1] done  104.82s
+[sa] parallel: 4 bands/threads  HPWL 2502829488  T0 5731  240000000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 5731  acc 0.277  win 531 x 532  cur 2643715591  best 2502829488  2.7s
+[sa] starved: 67 attempts per cell in 60.0 s, limit -> 6.0 s
+[sa] step  20  T 1440  acc 0.335  win 39 x 39  cur 2637165220  best 2502829488  3.4s
+[sa] step  40  T 361.6  acc 0.335  win 28 x 24  cur 2622040702  best 2502829488  4.0s
+[sa] step  60  T 90.83  acc 0.327  win 28 x 24  cur 2604371159  best 2502829488  4.7s
+[sa] step  80  T 22.81  acc 0.274  win 28 x 24  cur 2585918372  best 2502829488  5.4s
+[sa] step  99  T 6.141  acc 0.244  win 28 x 24  cur 2568179800  best 2502829488  6.0s
+[sa] 101 sync rounds, 4299175 attempts (66.7% proposals failed)  6.0s (moves 3.8s, merge 1.4s)
+[polish] pass 1: 2502829487.500000 -> 1979938795.500000; slide 54565, relocate 589452, assignment 30570, reorder 773704
+[polish] pass 2: 1979938795.500000 -> 1781817573.000000; slide 21716, relocate 409072, assignment 30327, reorder 721571
+[polish] pass 3: 1781817573.000000 -> 1662505959.500000; slide 15396, relocate 333548, assignment 29462, reorder 642163
+[polish] pass 4: 1662505959.500000 -> 1589561225.500000; slide 12761, relocate 276930, assignment 29279, reorder 600338
+[polish] pass 5: 1589561225.500000 -> 1531787459.500000; slide 11328, relocate 234201, assignment 28664, reorder 541116
+[window-hpwl] pass 0: 11025/17119 accepted, 1531787459.500000 -> 1531211714.500000
+[window-hpwl] pass 1: 0/0 accepted, 1531211714.500000 -> 1531211714.500000
+[polish-total] 2502829487.500000 -> 1531211714.500000
+[stage2] done  196.07s
+

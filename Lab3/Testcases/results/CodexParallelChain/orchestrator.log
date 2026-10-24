@@ -1,0 +1,78 @@
+10-23 00:18:05 協調者開始（CodexParallelChain），狀態 {}
+10-23 05:02:05 codex A2 (A2.md) 開始
+10-23 05:06:33 codex A2 結束 rc=0；最後訊息 312 字
+10-23 05:06:33 codex B1 (B.md) 開始
+10-23 05:11:12 codex B1 結束 rc=0；最後訊息 412 字
+10-23 05:11:12 B1 啟動：python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1
+10-23 05:11:12 B1 等待 Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json
+10-23 05:16:12 B1 等待結束：完成標記出現
+10-23 05:16:12 codex B2 (B_next.md) 開始
+10-23 05:20:10 codex B2 結束 rc=0；最後訊息 274 字
+10-23 05:20:10 B2 啟動：python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1
+10-23 05:20:10 B2 等待 Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE
+10-23 05:36:10 B2 等待結束：完成標記出現
+10-23 05:36:10 codex B3 (B_next.md) 開始
+10-23 05:45:07 codex B3 結束 rc=0；最後訊息 362 字
+10-23 05:45:07 B3 啟動：python3 Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py target_parallel_r1
+10-23 05:45:07 B3 等待 Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/ALL_DONE
+10-23 05:55:07 B3 等待結束：完成標記出現
+10-23 05:55:07 codex B4 (B_next.md) 開始
+10-23 06:01:31 codex B4 結束 rc=0；最後訊息 343 字
+10-23 06:01:31 B4 啟動：python3 Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py ejection_beam_r1
+10-23 06:01:31 B4 等待 Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ALL_DONE
+10-23 06:11:31 B4 等待結束：完成標記出現
+10-23 06:11:31 codex B5 (B_next.md) 開始
+10-23 06:12:51 codex B5 結束 rc=1；最後訊息 0 字
+10-23 06:12:51 codex B6 (B_next.md) 開始
+10-23 06:12:53 codex B6 結束 rc=1；最後訊息 0 字
+10-23 06:12:53 codex B7 (B_next.md) 開始
+10-23 06:12:55 codex B7 結束 rc=1；最後訊息 0 字
+10-23 06:12:55 codex B8 (B_next.md) 開始
+10-23 06:12:57 codex B8 結束 rc=1；最後訊息 0 字
+10-23 06:12:57 codex B9 (B_next.md) 開始
+10-23 06:12:59 codex B9 結束 rc=1；最後訊息 0 字
+10-23 06:12:59 codex B10 (B_force.md) 開始
+10-23 06:13:01 codex B10 結束 rc=1；最後訊息 0 字
+10-23 06:13:01 B 收尾也沒有寫 B_DONE；停止，等使用者處理
+-- B5~B10 都是 Codex 使用量上限造成的立即失敗（沒有執行），計數改回 B_runs=4；協調腳本加上「遇到使用量上限就等到重設時間、重跑同一個 session」
+10-23 13:24:32 協調者開始（CodexParallelChain），狀態 {'A2': True, 'B_runs': 4}
+10-23 13:24:32 codex B5 (B_next.md) 開始
+10-23 13:34:38 codex B5 結束 rc=0；最後訊息 273 字
+10-23 13:34:38 B5 啟動：python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py
+10-23 13:34:38 B5 等待 Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE
+10-23 13:56:38 B5 等待結束：完成標記出現
+10-23 13:56:38 codex B6 (B_next.md) 開始
+10-23 14:05:06 codex B6 結束 rc=0；最後訊息 300 字
+10-23 14:05:06 B6 啟動：python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py
+10-23 14:05:06 B6 等待 Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE
+10-23 14:27:06 B6 等待結束：完成標記出現
+10-23 14:27:06 codex B7 (B_next.md) 開始
+10-23 14:31:22 codex B7 結束 rc=0；最後訊息 191 字
+10-23 14:31:22 codex B8 (B_next.md) 開始
+10-23 14:42:00 codex B8 結束 rc=0；最後訊息 279 字
+10-23 14:42:00 B8 啟動：python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py
+10-23 14:42:00 B8 等待 Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE
+10-23 15:06:00 B8 等待結束：完成標記出現
+10-23 15:06:00 codex B9 (B_next.md) 開始
+10-23 15:06:02 codex B9 結束 rc=1；最後訊息 0 字
+10-23 15:06:02 B9：Codex 使用量上限，等 109 分鐘後重跑同一個 session（不算一次）
+10-23 16:54:59 codex B9 (B_next.md) 開始
+10-23 17:03:58 codex B9 結束 rc=0；最後訊息 258 字
+10-23 17:03:58 B9 啟動：python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py
+10-23 17:03:58 B9 等待 Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE
+10-23 17:28:58 B9 等待結束：完成標記出現
+10-23 17:28:58 codex B10 (B_force.md) 開始
+10-23 17:37:06 codex B10 結束 rc=0；最後訊息 327 字
+10-23 17:37:06 B10 啟動：python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py
+10-23 17:37:06 B10 等待 Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE
+10-23 18:02:06 B10 等待結束：完成標記出現
+10-23 18:02:06 B 完成
+10-23 18:03:23 沙箱外 ASan/UBSan：/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase2/asan_outside.log（rc=0）
+10-23 18:03:23 codex C (C.md) 開始
+10-23 18:04:39 codex C 結束 rc=0；最後訊息 358 字
+10-23 18:04:39 C 啟動：python3 Testcases/results/CodexParallelChain/scripts/final_validate.py --seed-dir edge_seed6 --seed 20261024
+10-23 18:04:39 C 等待 Testcases/results/CodexParallelChain/final/ALL_DONE
+10-23 22:38:39 C 等待結束：完成標記出現
+10-23 22:38:39 codex D (D.md) 開始
+10-23 22:42:09 codex D 結束 rc=0；最後訊息 729 字
+10-23 22:42:09 全部完成

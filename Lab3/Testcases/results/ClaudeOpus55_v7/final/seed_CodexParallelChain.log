@@ -1,0 +1,74 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/seed_CodexParallelChain/submissions/CodexParallelChain.tgz  (55 files)
+       CodexParallelChain/CMakeLists.txt
+       CodexParallelChain/Makefile
+       CodexParallelChain/README.md
+       CodexParallelChain/WORK_STATE.md
+       CodexParallelChain/src/annealer.cpp
+       CodexParallelChain/src/annealer.hpp
+       CodexParallelChain/src/capsearch.cpp
+       CodexParallelChain/src/capsearch.hpp
+       CodexParallelChain/src/chain.cpp
+       CodexParallelChain/src/chain.hpp
+       CodexParallelChain/src/global.cpp
+       CodexParallelChain/src/global.hpp
+       CodexParallelChain/src/guard.hpp
+       CodexParallelChain/src/legalizer.cpp
+       CodexParallelChain/src/legalizer.hpp
+       CodexParallelChain/src/main.cpp
+       CodexParallelChain/src/optimizer.cpp
+       CodexParallelChain/src/optimizer.hpp
+       CodexParallelChain/src/placedb.cpp
+       CodexParallelChain/src/placedb.hpp
+       CodexParallelChain/src/pool.hpp
+       CodexParallelChain/src/rowmap.hpp
+       CodexParallelChain/src/sa_bands.hpp
+       CodexParallelChain/src/window.cpp
+       CodexParallelChain/src/window.hpp
+       CodexParallelChain/tests/cap_chain_prototype.cpp
+       CodexParallelChain/tests/cap_chain_prototype.hpp
+       CodexParallelChain/tests/cap_search_bench.cpp
+       CodexParallelChain/tests/cap_windows_bench.cpp
+       CodexParallelChain/tests/cap_windows_test.cpp
+       CodexParallelChain/tests/capsearch_test.cpp
+       CodexParallelChain/tests/chain_test.cpp
+       CodexParallelChain/tests/compare_methods.cpp
+       CodexParallelChain/tests/diag_chaindp_global/driver.cpp
+       CodexParallelChain/tests/diag_chaindp_global/global_diag.cpp
+       CodexParallelChain/tests/diagnostic.hpp
+       CodexParallelChain/tests/diagnostic_capsearch.cpp
+       CodexParallelChain/tests/diagnostic_experiments.cpp
+       CodexParallelChain/tests/diagnostic_main.cpp
+       CodexParallelChain/tests/diagnostic_window.cpp
+       CodexParallelChain/tests/global_preserve_prototype.cpp
+       CodexParallelChain/tests/global_preserve_prototype.hpp
+       CodexParallelChain/tests/global_test.cpp
+       CodexParallelChain/tests/guard_test.cpp
+       CodexParallelChain/tests/multirow_test.cpp
+       CodexParallelChain/tests/optimizer_test.cpp
+       CodexParallelChain/tests/parallel_sa_test.cpp
+       CodexParallelChain/tests/pool_test.cpp
+       CodexParallelChain/tests/readpl.cpp
+       CodexParallelChain/tests/repair_compare.cpp
+       CodexParallelChain/tests/run_tests.py
+       CodexParallelChain/tests/sa_bench.cpp
+       CodexParallelChain/tests/sa_bench2.cpp
+       CodexParallelChain/tests/site_repair_bench.cpp
+       CodexParallelChain/tests/window_test.cpp
+[build] OK build/dp  13.2s
+[run] e01_nearlegal PASS  OK          65.0s  disp=23464.604 max=5.341 legal=683079.5 sa=474711.5
+[run] e02_legalgp PASS  OK          18.7s  disp=0.0 max=0.0 legal=14784186.5 sa=9787391.5
+[run] e03_dense97 PASS  OK          37.9s  disp=145289.457 max=120.371 legal=561359.5 sa=288854.5
+[run] e04_sparse10 PASS  OK          10.8s  disp=677.5486 max=1.6512 legal=47197.666 sa=13801.302
+[run] e05_bignets PASS  OK          71.0s  disp=65332.138 max=29.98 legal=975283.5 sa=687569.0
+[run] e06_tallnarrow PASS  OK          20.4s  disp=34087.774 max=47.179 legal=2231195.5 sa=978657.5
+[run] e07_tworows PASS  OK          20.4s  disp=20368.623 max=20.866 legal=973358.5 sa=205020.5
+[run] e08_fragmented PASS  OK          38.1s  disp=76878.932 max=58.66 legal=694665.0 sa=410919.5
+[run] e09_offgrid PASS  OK          57.7s  disp=13940.8104 max=37.0437 legal=198336.7951 sa=58430.7075
+[run] e10_mixedsites PASS  OK          58.7s  disp=62431.251 max=32.448 legal=1220333.0 sa=791010.5
+[run] e11_format PASS  OK          12.6s  disp=10405.564 max=23.337 legal=120639.5 sa=72933.0
+[run] e12_collapse PASS  OK          26.5s  disp=302978.044 max=233.0 legal=2278139.5 sa=175829.0
+[run] e13_onecell PASS  OK           0.2s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          79.4s  disp=10359306.828 max=2824.743 legal=117317812.5 sa=86653833.5
+[run] e16_rowgaps PASS  OK          43.6s  disp=84747.475 max=61.132 legal=694635.5 sa=431851.0
+[summary] 16/16 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/seed_CodexParallelChain/record.csv

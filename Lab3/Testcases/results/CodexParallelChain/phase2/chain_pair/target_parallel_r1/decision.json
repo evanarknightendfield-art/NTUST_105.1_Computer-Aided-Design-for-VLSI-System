@@ -1,0 +1,13 @@
+{
+  "decision": "withdraw",
+  "round": 1,
+  "reason": "Total GM, per-case maximum and both half-budget gains fail; 2.19% chain-time saving is insufficient. Return to accepted SA source before independent ejection experiment.",
+  "gates": {
+    "both_at_least_8": true,
+    "total_improved_003pct": false,
+    "max_gm_not_worse_01pct": true,
+    "every_max_not_worse_02pct": false,
+    "chain_seconds_not_more": true,
+    "h05_h06_gain": false
+  }
+}

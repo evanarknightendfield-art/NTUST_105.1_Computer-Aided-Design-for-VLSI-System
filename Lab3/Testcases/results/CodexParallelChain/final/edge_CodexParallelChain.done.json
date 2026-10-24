@@ -1,0 +1,10 @@
+{
+ "command": [
+  "bash",
+  "Testcases/results/run_edge.sh",
+  "CodexParallelChain"
+ ],
+ "returncode": 0,
+ "seconds": 584.18,
+ "finished": "Fri Oct 23 18:24:54 2026"
+}

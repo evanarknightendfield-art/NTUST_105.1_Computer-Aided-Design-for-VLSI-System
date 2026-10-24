@@ -1,0 +1,39 @@
+{
+  "src_sha256": "03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2",
+  "queue_sha256": "8da2a4cbf582b1ac8337644c8622ce4b7f69bb20abb186b9c46fe5dd3a4eaf8b",
+  "tests_sha256": {
+    "cap_chain_prototype.cpp": "aa94ab5ae0b750c2b315030b435e1d043c586b9fdaceec4b7be727375486b6cb",
+    "cap_chain_prototype.hpp": "d9ee6dd1ea89d3fe0f46e8097a0993192003cbaaa9aaad54788b737545b6a949",
+    "cap_search_bench.cpp": "3ebdc9f169eb85e69442d6a9db4aa94ff38d7ad2c504b586d16431c5967e5fca",
+    "cap_windows_bench.cpp": "5e6578d13302ec88cf7f5e3d6b6872dbf549a210f2f0bc4eb75c6bd6e2aca86b",
+    "cap_windows_test.cpp": "afc889aa0cf024c30a2dfb82231320e852423cabf3d17c64603793e264bf3466",
+    "capsearch_test.cpp": "24152ff188808fb6b11772f26b984fec3a94cd8f0b5c0a7c55f8e04f569f0d21",
+    "chain_test.cpp": "1b03ceb9c832dfec4b3e0a28855e52bbe144ff5cb053d628f72f6a5ce71db067",
+    "compare_methods.cpp": "87aa77d6f5b7dc07718ffb64a6097dee51a5104f12f8cb10ae236236b4e0af80",
+    "diagnostic.hpp": "84b0f358806d53341acf3049befcc7984775619e2ffc847b01e5cf778e6b92fe",
+    "diagnostic_capsearch.cpp": "ae5f35d1231971daf463214f7626311e2c34600b146b245fe8721f1d6a84d38b",
+    "diagnostic_experiments.cpp": "82dee493f6b6b0ea21e65c21157a292ffe87e85e9b48d9dc3f52515aa0a47816",
+    "diagnostic_main.cpp": "13eb0eaedbf9fdc342beb793cf36cdc3dee61deed764c5b69471558a86305643",
+    "diagnostic_window.cpp": "7ae2c3725b7f97a8204fbd130a22263953a544fa6eef154da50a75d6fff32c4d",
+    "global_preserve_prototype.cpp": "9afef7d0e1f793b2234a2b9ffc94f444047684d45b343dc4dfb49cb66dc5979d",
+    "global_preserve_prototype.hpp": "dd3e9dbf995e21049535a57594aacbce50b9d3bbc01cf50c761954ef1c23a401",
+    "global_test.cpp": "b7ec2dfc9553e4639b96a9f030a1c1e69c3417e3cb8d472355db4ee5d64f8e1a",
+    "guard_test.cpp": "31a47a8449812a392be9edb546e56b78bd3ac522d642836aa2f1a3e64d7e1fcf",
+    "multirow_test.cpp": "7f18c66752ad7af2ce3240fa79efec4ed46f8a27eb04a89ed541b4430ae3857f",
+    "optimizer_test.cpp": "59518f877b850b22b67e349613ce168efc0d9d57a7ab1726c81dc911a25f8afa",
+    "parallel_sa_test.cpp": "672fb84aeba28fb7a0194ea213eb6e3c65b8636c29275690dda0500357a0578d",
+    "pool_test.cpp": "36c939619cf6a13c9813d90e9f5dc59e5d765e07abd5061f0089a0cb7146939f",
+    "readpl.cpp": "05dbf88ec1009880331f9b36e8778fa8f0153495771468fb90d2f293513d697d",
+    "repair_compare.cpp": "8dc396006b4351b3ed9f673de14d1803ab641acbbdbbc3268bd6fb5e9ac0751b",
+    "run_tests.py": "e4301e1a21c35bbb974dc4c54791291dde1f95c40f059116d5f75b4d1297013c",
+    "sa_bench.cpp": "0814bfcae5a5911257a78a0c41427d8676e0715ada91b5994420e4e5aaba39bd",
+    "sa_bench2.cpp": "5d88b287f40b9ae971f67627f68e1998fe8c3c3a4f6aec000f909243fc3f72d1",
+    "site_repair_bench.cpp": "ea784bd75ed9020df6b57210ae39ee878b8b7a9a4c6e352a0ce926f9ea275949",
+    "window_test.cpp": "717a4a12d1f674dd9f1a520be934438d0830ef87583343511c6096f7108f198a"
+  },
+  "scripts_sha256": {
+    "phase2_train.py": "bad16bb5e4ffc13715be86beb90b95db77d6d35c49353cc70af1358864899079",
+    "phase2_large.py": "eb8c8e0ce7034f945203a6c21f346c0ac45eba5f5a3049242f74b8f1113545cf",
+    "phase2_acceptance.py": "baf0738529a49991d64d40b736aa94ef0ccd3e4172c20871f9f1d89a63726c88"
+  }
+}

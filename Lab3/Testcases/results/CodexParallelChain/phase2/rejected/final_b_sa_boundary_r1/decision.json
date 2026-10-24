@@ -1,0 +1,18 @@
+{
+  "decision": "withdraw_sa_after_failed_final_acceptance",
+  "old_src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258",
+  "stage1_total_gm": 0.9995628,
+  "stage1_max_gm": 1.0016093,
+  "h06_max_ratio": 1.0178454485920105,
+  "L2_s2_extra_used": 6.336646,
+  "L2_extra_budget": 6,
+  "reason": "Final gates failed. Differences occur before SA in unchanged Stage 1 code; no causal attribution to SA. Conservative withdrawal instead of rerunning unchanged source until a favorable sample. Isolated SA gains remain documented.",
+  "archive_map": {
+    "phase2/train/final_b": "train",
+    "phase2/large/final_b": "large",
+    "phase2/final_b_validation": "validation"
+  },
+  "full_asan_records": 28,
+  "full_asan_diagnostics": 0,
+  "restored_src_sha256": "03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2"
+}

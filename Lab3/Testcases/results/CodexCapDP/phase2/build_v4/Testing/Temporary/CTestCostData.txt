@@ -1,0 +1,11 @@
+window 1 0.0221417
+multirow 1 1.61218
+optimizer 1 0.138907
+chain 1 0.632424
+parallel_sa 1 0.0821403
+pool 1 0.00200876
+global 1 0.00148244
+capsearch 1 8.61711
+cap_windows 1 0.107332
+guard 1 0.00178774
+---

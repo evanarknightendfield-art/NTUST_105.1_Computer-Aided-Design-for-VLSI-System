@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Grader/tools/exact_bound.py", line 307, in <module>
+    main()
+    ~~~~^^
+  File "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Grader/tools/exact_bound.py", line 250, in main
+    print(f'  total displacement: LP lower bound {lp:.1f}   ours/LB = {tot / lp:.4f}   ({time.time() - t0:.1f}s)')
+                                                 ^^^^^^^^
+TypeError: unsupported format string passed to NoneType.__format__

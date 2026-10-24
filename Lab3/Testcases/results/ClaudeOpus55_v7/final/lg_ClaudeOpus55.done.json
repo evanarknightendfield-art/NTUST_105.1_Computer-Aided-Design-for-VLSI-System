@@ -1,0 +1,18 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "Grader/tools/local_grade.py",
+  "AI_Solutions/ClaudeOpus55",
+  "ClaudeOpus55",
+  "Testcases/testcases",
+  "Testcases/holdout",
+  "--work",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/lg_ClaudeOpus55",
+  "--timeout",
+  "600",
+  "--dp-args="
+ ],
+ "returncode": 0,
+ "seconds": 130.13,
+ "finished": "Sat Oct 24 06:55:45 2026"
+}

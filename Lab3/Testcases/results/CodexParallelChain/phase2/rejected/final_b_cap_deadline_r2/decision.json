@@ -1,0 +1,48 @@
+{
+  "decision": "revert",
+  "src_sha256": "d0b99109f3d04bdc33bdc7e90f55f1ef61ae8d828dc8a89b02747d85104ffc20",
+  "restore_src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258",
+  "gates": {
+    "train": false,
+    "large": false,
+    "deadline_regression_27": true
+  },
+  "reason": "Session cap; training individual maximum displacement and L2 extra deadline gates failed. No third tuning round.",
+  "full_asan_files": {
+    "link_window.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_cap_deadline.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_parallel_sa.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_cap_windows.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "records.json": "950e207760a61cd853163f82bb9f02a7d13d0fb646c98af3d4ecc27cd7c2e37c",
+    "cap_windows.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_optimizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build_window.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "optimizer.log": "58231cbc8599c9dee94a7ca8e96b83571826724a482e085ed472a87d2d7cf723",
+    "link_guard.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "global.log": "b45e960cfb6b25d6cee360772d7f96b162c3f563df199b3a5d2aa8cce9e3fe6e",
+    "build_global.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_global.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_pool.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "parallel_sa.log": "032d71d68bed491dfaf28cf7e06dc0aed1dcbe3be6216e82851fc881ac95fe7c",
+    "build_chain.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build_placedb.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_multirow.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pool.log": "d86957e1321c19813e1677812f4d52f78b0014da80f62c6f1dc89b875c825ca6",
+    "build_optimizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_chain.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build_annealer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_capsearch.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "capsearch.log": "6374bd649d2dd498cb65ea61b022c7b51ebcc64e7aebf6f2f0a46f6689d3e20b",
+    "window.log": "46fc3c57ca69322541515b4f2ec6aab3054ed446e072c39fe83db9cb9398eecc",
+    "build_capsearch.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "multirow.log": "e60b9d97c6b05f4307a677d4a8847afaa9da1000a8e308405703c1e3bc3d6e89",
+    "guard.log": "600b8716de9e7cb4bb9fa35ee80f0086d290fe0f5244a9d7e2bff508ed17c932",
+    "chain.log": "fb13d61af96833b7432d15bbce356e1a1f530f54327d6b09f414f65caeaff117",
+    "cap_deadline.log": "0e1b3932b11372095425d5b70ca34d37021112803aace3231731509f20587332",
+    "build_legalizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "archived_regression_symlink": {
+    "original": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase2/train/final_b/candidate",
+    "archived": "../train/candidate"
+  }
+}

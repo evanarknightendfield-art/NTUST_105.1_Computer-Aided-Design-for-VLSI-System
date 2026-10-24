@@ -1,0 +1,26 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/scripts/hpwl_compare.py",
+  "fixed",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed",
+  "--groups",
+  "holdout",
+  "edge",
+  "--v",
+  "ClaudeOpus55_v4",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v4/src",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4",
+  "--v",
+  "CodexCapDP",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexCapDP/src",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_CodexCapDP",
+  "--v",
+  "ClaudeOpus55_v6",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v6/src",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v6"
+ ],
+ "returncode": 0,
+ "seconds": 815.98,
+ "finished": "Thu Oct 22 09:21:11 2026"
+}

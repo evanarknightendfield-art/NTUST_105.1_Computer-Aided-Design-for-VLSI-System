@@ -1,0 +1,148 @@
+Start testing: Oct 21 17:58 CST
+----------------------------------------------------------
+1/9 Testing: window
+1/9 Test: window
+Command: "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build/window_test"
+Directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build
+"window" start time: Oct 21 17:58 CST
+Output:
+----------------------------------------------------------
+PASS: 400 exhaustive arbitrary-cost two-row comparisons and coordinated row-exchange fixture
+PASS: 150 exhaustive shared-net HPWL ordering comparisons
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"window" end time: Oct 21 17:58 CST
+"window" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/9 Testing: multirow
+2/9 Test: multirow
+Command: "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build/multirow_test"
+Directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build
+"multirow" start time: Oct 21 17:58 CST
+Output:
+----------------------------------------------------------
+PASS: 1500 exhaustive 1/2/3-row comparisons (1045 feasible) and a three-row chain fixture
+<end of output>
+Test time =   1.69 sec
+----------------------------------------------------------
+Test Passed.
+"multirow" end time: Oct 21 17:58 CST
+"multirow" time elapsed: 00:00:01
+----------------------------------------------------------
+
+3/9 Testing: optimizer
+3/9 Test: optimizer
+Command: "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build/optimizer_test"
+Directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build
+"optimizer" start time: Oct 21 17:58 CST
+Output:
+----------------------------------------------------------
+PASS: 250 exhaustive assignment/bottleneck cases and 100 randomized placement cases
+<end of output>
+Test time =   0.14 sec
+----------------------------------------------------------
+Test Passed.
+"optimizer" end time: Oct 21 17:58 CST
+"optimizer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/9 Testing: chain
+4/9 Test: chain
+Command: "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build/chain_test"
+Directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build
+"chain" start time: Oct 21 17:58 CST
+Output:
+----------------------------------------------------------
+PASS: eight-row cycle, two-blocker split, partial rollback, budgets, determinism; 300 random placements (6569 accepted chains, 2673 multi-blocker steps)
+<end of output>
+Test time =   0.67 sec
+----------------------------------------------------------
+Test Passed.
+"chain" end time: Oct 21 17:58 CST
+"chain" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/9 Testing: parallel_sa
+5/9 Test: parallel_sa
+Command: "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build/parallel_sa_test"
+Directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build
+"parallel_sa" start time: Oct 21 17:58 CST
+Output:
+----------------------------------------------------------
+PASS: parallel legality, HPWL cache, fixed-work determinism, expired budget
+<end of output>
+Test time =   0.13 sec
+----------------------------------------------------------
+Test Passed.
+"parallel_sa" end time: Oct 21 17:58 CST
+"parallel_sa" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/9 Testing: pool
+6/9 Test: pool
+Command: "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build/pool_test"
+Directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build
+"pool" start time: Oct 21 17:58 CST
+Output:
+----------------------------------------------------------
+PASS: worker exceptions, completion barrier, idle workers, pool reuse
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"pool" end time: Oct 21 17:58 CST
+"pool" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/9 Testing: global
+7/9 Test: global
+Command: "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build/global_test"
+Directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build
+"global" start time: Oct 21 17:58 CST
+Output:
+----------------------------------------------------------
+PASS: global row cycle, cap, contiguous packing and rollback
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"global" end time: Oct 21 17:58 CST
+"global" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/9 Testing: capsearch
+8/9 Test: capsearch
+Command: "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build/capsearch_test"
+Directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build
+"capsearch" start time: Oct 21 17:58 CST
+Output:
+----------------------------------------------------------
+cluster: max 5.000 -> 4.000
+PASS: 59 repaired / 240 unresolved random caps (all legal, all <= D, failures untouched); one-row agreement with brute force 261 / 300 (never unsound)
+<end of output>
+Test time =   9.08 sec
+----------------------------------------------------------
+Test Passed.
+"capsearch" end time: Oct 21 17:58 CST
+"capsearch" time elapsed: 00:00:09
+----------------------------------------------------------
+
+9/9 Testing: cap_windows
+9/9 Test: cap_windows
+Command: "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build/cap_windows_test"
+Directory: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/phase2/build
+"cap_windows" start time: Oct 21 17:58 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.11 sec
+----------------------------------------------------------
+Test Passed.
+"cap_windows" end time: Oct 21 17:58 CST
+"cap_windows" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 21 17:58 CST

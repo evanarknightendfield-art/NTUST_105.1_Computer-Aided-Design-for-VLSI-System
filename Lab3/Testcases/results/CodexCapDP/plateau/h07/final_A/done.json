@@ -1,0 +1,14 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "16-19",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/bin/diagnostic_experiments",
+    "plateau",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/results/CodexCapDP/h07/output_legal.pl",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/plateau/h07/final_A/result"
+  ],
+  "seconds": 0.0843446779763326,
+  "returncode": 0
+}

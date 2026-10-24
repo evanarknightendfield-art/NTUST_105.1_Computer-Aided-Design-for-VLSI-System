@@ -1,0 +1,4 @@
+[cap-local] D 1457.612325000 method 3 repair 0.023057 DP 1.137491 windows 18 remaining 0 raw 1549738.200000 total 1547800.192000 max 1443.036000000 accepted
+[cap-local] D 1392.529740000 method 1 repair 0.017277 DP 0.153497 windows 22 remaining 1 raw 1551471.754000 total 1549718.922000 max 1386.987000000 accepted
+[cap-local] D 1337.305000000 method 3 repair 0.005144 DP 0.144032 windows 24 remaining 0 raw 1553592.954000 total 1552543.026000 max 1337.305000000 accepted
+[cap] 3 attempts, 3 feasible, 3 accepted: max 1494.987000 -> 1337.305000, total 1547986.5360 -> 1552543.0260 (+0.294%)  1.48s

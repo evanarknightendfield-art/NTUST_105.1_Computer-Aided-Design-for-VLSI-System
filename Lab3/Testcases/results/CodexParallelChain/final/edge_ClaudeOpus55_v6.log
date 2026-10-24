@@ -1,0 +1,75 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/edge_ClaudeOpus55_v6/submissions/ClaudeOpus55_v6.tgz  (56 files)
+       ClaudeOpus55_v6/CMakeLists.txt
+       ClaudeOpus55_v6/HANDOFF.md
+       ClaudeOpus55_v6/Makefile
+       ClaudeOpus55_v6/NEXT_CODEX_PROMPTS.md
+       ClaudeOpus55_v6/README.md
+       ClaudeOpus55_v6/WORK_STATE.md
+       ClaudeOpus55_v6/src/annealer.cpp
+       ClaudeOpus55_v6/src/annealer.hpp
+       ClaudeOpus55_v6/src/capsearch.cpp
+       ClaudeOpus55_v6/src/capsearch.hpp
+       ClaudeOpus55_v6/src/chain.cpp
+       ClaudeOpus55_v6/src/chain.hpp
+       ClaudeOpus55_v6/src/global.cpp
+       ClaudeOpus55_v6/src/global.hpp
+       ClaudeOpus55_v6/src/guard.hpp
+       ClaudeOpus55_v6/src/legalizer.cpp
+       ClaudeOpus55_v6/src/legalizer.hpp
+       ClaudeOpus55_v6/src/main.cpp
+       ClaudeOpus55_v6/src/optimizer.cpp
+       ClaudeOpus55_v6/src/optimizer.hpp
+       ClaudeOpus55_v6/src/placedb.cpp
+       ClaudeOpus55_v6/src/placedb.hpp
+       ClaudeOpus55_v6/src/pool.hpp
+       ClaudeOpus55_v6/src/rowmap.hpp
+       ClaudeOpus55_v6/src/window.cpp
+       ClaudeOpus55_v6/src/window.hpp
+       ClaudeOpus55_v6/tests/cap_chain_prototype.cpp
+       ClaudeOpus55_v6/tests/cap_chain_prototype.hpp
+       ClaudeOpus55_v6/tests/cap_search_bench.cpp
+       ClaudeOpus55_v6/tests/cap_windows_bench.cpp
+       ClaudeOpus55_v6/tests/cap_windows_test.cpp
+       ClaudeOpus55_v6/tests/capsearch_test.cpp
+       ClaudeOpus55_v6/tests/chain_test.cpp
+       ClaudeOpus55_v6/tests/compare_methods.cpp
+       ClaudeOpus55_v6/tests/diag_chaindp_global/driver.cpp
+       ClaudeOpus55_v6/tests/diag_chaindp_global/global_diag.cpp
+       ClaudeOpus55_v6/tests/diagnostic.hpp
+       ClaudeOpus55_v6/tests/diagnostic_capsearch.cpp
+       ClaudeOpus55_v6/tests/diagnostic_experiments.cpp
+       ClaudeOpus55_v6/tests/diagnostic_main.cpp
+       ClaudeOpus55_v6/tests/diagnostic_window.cpp
+       ClaudeOpus55_v6/tests/global_preserve_prototype.cpp
+       ClaudeOpus55_v6/tests/global_preserve_prototype.hpp
+       ClaudeOpus55_v6/tests/global_test.cpp
+       ClaudeOpus55_v6/tests/guard_test.cpp
+       ClaudeOpus55_v6/tests/multirow_test.cpp
+       ClaudeOpus55_v6/tests/optimizer_test.cpp
+       ClaudeOpus55_v6/tests/parallel_sa_test.cpp
+       ClaudeOpus55_v6/tests/pool_test.cpp
+       ClaudeOpus55_v6/tests/readpl.cpp
+       ClaudeOpus55_v6/tests/repair_compare.cpp
+       ClaudeOpus55_v6/tests/run_tests.py
+       ClaudeOpus55_v6/tests/sa_bench.cpp
+       ClaudeOpus55_v6/tests/sa_bench2.cpp
+       ClaudeOpus55_v6/tests/site_repair_bench.cpp
+       ClaudeOpus55_v6/tests/window_test.cpp
+[build] OK build/dp  12.8s
+[run] e01_nearlegal PASS  OK          64.3s  disp=23081.091 max=5.423 legal=698133.0 sa=487159.0
+[run] e02_legalgp PASS  OK          19.4s  disp=0.0 max=0.0 legal=14678898.5 sa=9878992.5
+[run] e03_dense97 PASS  OK          39.2s  disp=141132.038 max=137.795 legal=571491.0 sa=288393.5
+[run] e04_sparse10 PASS  OK           8.3s  disp=689.1627 max=1.7841 legal=47356.566 sa=14169.832
+[run] e05_bignets PASS  OK          70.8s  disp=77089.664 max=57.185 legal=1003979.0 sa=712483.5
+[run] e06_tallnarrow PASS  OK          19.3s  disp=32207.261 max=29.939 legal=2139626.0 sa=932626.5
+[run] e07_tworows PASS  OK          18.6s  disp=19771.903 max=26.358 legal=991713.0 sa=199323.0
+[run] e08_fragmented PASS  OK          32.3s  disp=90357.493 max=71.753 legal=709085.5 sa=406141.5
+[run] e09_offgrid PASS  OK          57.0s  disp=15020.402 max=36.6912 legal=201436.2707 sa=58921.8344
+[run] e10_mixedsites PASS  OK          58.7s  disp=62906.122 max=41.584 legal=1228927.0 sa=796288.5
+[run] e11_format PASS  OK          14.4s  disp=7607.837 max=12.543 legal=121493.0 sa=75939.5
+[run] e12_collapse PASS  OK          27.3s  disp=322246.973 max=233.0 legal=2385782.0 sa=178785.0
+[run] e13_onecell PASS  OK           0.3s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          81.8s  disp=13835799.95 max=4470.19 legal=125149492.5 sa=85054363.5
+[run] e16_rowgaps PASS  OK          60.6s  disp=95953.22 max=62.588 legal=756423.0 sa=456635.5
+[summary] 16/16 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/edge_ClaudeOpus55_v6/record.csv

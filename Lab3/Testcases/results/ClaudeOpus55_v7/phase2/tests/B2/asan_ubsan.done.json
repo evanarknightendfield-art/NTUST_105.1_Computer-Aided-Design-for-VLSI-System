@@ -1,0 +1,10 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/ClaudeOpus55_v7/tests/run_tests.py",
+  "--sanitize"
+ ],
+ "returncode": 0,
+ "seconds": 141.57,
+ "finished": "Sat Oct 24 05:48:19 2026"
+}

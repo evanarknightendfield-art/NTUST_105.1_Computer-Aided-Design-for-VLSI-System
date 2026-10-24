@@ -1,0 +1,122 @@
+{
+ "all/L1/v7": {
+  "seconds": 187.57,
+  "disp": 2426832268.262,
+  "max": 50446.555,
+  "hpwl": 1727889936.3,
+  "stage1": 105.75584027799778,
+  "extra_used": 5.720148,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "all/L1/cpc": {
+  "seconds": 187.44,
+  "disp": 2445886968.448,
+  "max": 50496.167,
+  "hpwl": 1726804934.2,
+  "stage1": 105.76027943001827,
+  "extra_used": 5.721027,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "all/L2/v7": {
+  "seconds": 196.57,
+  "disp": 1950357101.4199,
+  "max": 12532.98,
+  "hpwl": 1532324931.0,
+  "stage1": 104.80141897598514,
+  "extra_used": 4.559425,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "all/L2/cpc": {
+  "seconds": 199.28,
+  "disp": 2083920232.4599,
+  "max": 13419.61,
+  "hpwl": 1654485770.0,
+  "stage1": 107.52580144803505,
+  "extra_used": 6.157566,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "all/h08/v7": {
+  "seconds": 122.05,
+  "disp": 125370803.533,
+  "max": 28282.01,
+  "hpwl": 98269213.0,
+  "stage1": 59.68200156203238,
+  "extra_used": 5.881428,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "all/h08/cpc": {
+  "seconds": 123.51,
+  "disp": 125514436.397,
+  "max": 28282.309,
+  "hpwl": 98606084.5,
+  "stage1": 61.18708856403828,
+  "extra_used": 5.881139,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "R2/L1/v7": {
+  "seconds": 187.76,
+  "disp": 2666693261.496,
+  "max": 50492.47,
+  "hpwl": 1776184194.5,
+  "stage1": 105.76274124003248,
+  "extra_used": 5.722338,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "R2/L1/cpc": {
+  "seconds": 187.59,
+  "disp": 2891561359.334,
+  "max": 50495.771,
+  "hpwl": 1751932073.4,
+  "stage1": 105.76649763004389,
+  "extra_used": 5.728481,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "R2/L2/v7": {
+  "seconds": 196.59,
+  "disp": 2011536716.1199,
+  "max": 12586.13,
+  "hpwl": 1508097723.0,
+  "stage1": 104.83426807000069,
+  "extra_used": 4.580864,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "R2/L2/cpc": {
+  "seconds": 199.21,
+  "disp": 2087725167.6599,
+  "max": 13476.58,
+  "hpwl": 1653537114.0,
+  "stage1": 107.47725851699943,
+  "extra_used": 6.15388,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "R2/h08/v7": {
+  "seconds": 149.34,
+  "disp": 125427352.391,
+  "max": 28282.309,
+  "hpwl": 101398077.3,
+  "stage1": 86.90953090903349,
+  "extra_used": 5.884696,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "R2/h08/cpc": {
+  "seconds": 168.3,
+  "disp": 124777751.377,
+  "max": 28597.264,
+  "hpwl": 101940141.7,
+  "stage1": 105.88360065501183,
+  "extra_used": 5.878151,
+  "extra_budget": 6.0,
+  "status": "OK"
+ }
+}

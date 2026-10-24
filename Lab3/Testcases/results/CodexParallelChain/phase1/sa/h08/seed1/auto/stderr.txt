@@ -1,0 +1,1 @@
+[diag-sa] threads=8 requested_moves=3000000

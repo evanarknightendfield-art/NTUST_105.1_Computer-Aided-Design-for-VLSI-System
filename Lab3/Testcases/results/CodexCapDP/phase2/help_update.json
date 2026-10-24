@@ -1,0 +1,8 @@
+{
+  "reason": "Only the usage string is corrected; executed algorithm and test sources unchanged. Completed tuning is retained.",
+  "old_source_sha256": "4f95945f8dbd7699ad43368c6eee014e7b72e8e81a44f951e9ebf2144790d79c",
+  "new_source_sha256": "10b9c4b34218be643111cf1a36ef3d1ba4c53e0d9311c7f60daf5aaa37732982",
+  "old_binary_sha256": "e6d7774c7c2eb19e9cdfd4890a9bd6189b2b435cecddd9c970aaf4a5f3f66f0a",
+  "diff": "--- \n+++ \n@@ -43,7 +43,7 @@\n                  \"  --extra-time S          budget of the extra Stage 1 steps (chains + cap search);\\n\"\n                  \"                          default: 12 s (<= 2000 cells) or 6 s; 16 = max displacement first (see README)\\n\"\n                  \"  --cap-time S            cap search budget (default: what the chains leave of --extra-time; 0 disables)\\n\"\n-                 \"  --total-ratio R         cap search: maximum total displacement / total before it (1.004)\\n\"\n+                 \"  --total-ratio R         cap search: maximum total displacement / total before it (1.0048)\\n\"\n                  \"  --legacy-global         ChainDP's global cap repair instead of the v5 cap search\\n\"\n                  \"options (CodexChainDP):\\n\"\n                  \"  --global-swap P         cold global/vertical swap proposal probability (0.04)\\n\"\n",
+  "new_binary_sha256": "14974bd500a4558bd8f45fbf2aceb64a5f26076816d5ac4c8e715f8dde4c924e"
+}

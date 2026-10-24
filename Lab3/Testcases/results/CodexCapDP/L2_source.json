@@ -1,0 +1,20 @@
+{
+  "placement": "Lab3/Testcases/results/ClaudeOpus55_v5/final/lg_v5_L2/results/ClaudeOpus55_v5/L2/output_legal.pl",
+  "sha256": "7cd8e9b702222a6ad0989c3d4ac3de224cd53172558817e3e8255f4c6a6db499",
+  "original_record": [
+    {
+      "bench": "L2",
+      "verdict": "PASS",
+      "status": "OK",
+      "seconds": "215.77",
+      "disp": "2045892835.5999",
+      "max": "12381.58",
+      "hpwl_legal": "2633124437.5",
+      "hpwl_sa": "1669556062.0",
+      "legal_ok": "True",
+      "sa_ok": "True",
+      "missing": "",
+      "problems": ""
+    }
+  ]
+}

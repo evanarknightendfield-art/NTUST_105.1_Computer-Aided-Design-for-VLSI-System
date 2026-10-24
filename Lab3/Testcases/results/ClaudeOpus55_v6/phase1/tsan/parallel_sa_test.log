@@ -1,0 +1,2 @@
+PASS: parallel legality, HPWL cache, fixed-work determinism, expired budget
+rc=0

@@ -1,0 +1,25 @@
+{
+  "time": "Fri Oct 23 00:09:39 2026",
+  "by": "orchestrator (Claude, authorised by the user)",
+  "reason": "HANDOFF.md section 7 (phase B completion rule) and NEXT_CODEX_PROMPTS.md were edited after phase A recorded the baseline; documentation only, no source changed",
+  "changes": {
+    "HANDOFF.md": {
+      "old": "4fea708ac7db506cc1d05cfb74a4dafcf1dd770165892683421b2afaea3c2f0e",
+      "new": "61651d9c113b69879dad69fa2105ff904c57df5240a21e306b023bac782c916b"
+    },
+    "NEXT_CODEX_PROMPTS.md": {
+      "old": "41032d9391a04ba392a9b8f7395699c439cc7c6e24f3fcb893a5679d8cd4350b",
+      "new": "0041d991eb60ecde8b4d59b8d02c21bae776371f537563f5c4391251dc31ced7"
+    }
+  },
+  "also": "diag.py: removed taskset (PIN) from the timed chain/sa/toy workers: 8-thread SA band-loss runs must not be squeezed onto 4 E-cores; the job is now launched outside the Codex sandbox (background jobs started inside it die with the session)",
+  "later": [
+    {
+      "time": "Fri Oct 23 05:01:56 2026",
+      "file": "ClaudeOpus55_v6/WORK_STATE.md",
+      "old": "4e8e52fcf798cdfe4f70cd61ff0a214e72c53a9f199d54a05d537b9bbbd0e625",
+      "new": "fd75846affdfb3bc168cb6df13b9c039e8a36cbd3dc5738d20ae6a78fb861d78",
+      "reason": "the orchestrator (Claude) appended progress lines to v6 WORK_STATE.md after the baseline; documentation only. No further writes into ClaudeOpus55_v6."
+    }
+  ]
+}

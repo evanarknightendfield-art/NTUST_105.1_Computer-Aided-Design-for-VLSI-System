@@ -1,0 +1,3 @@
+[run] ibm01            OK    25.3s  stage1 25.27475131797837  sa None att None  max 10427.027  hpwl 87250710.0
+[run] ibm05            OK    39.1s  stage1 39.0334582029609  sa None att None  max 199.918  hpwl 11833731.5
+[run] toy              OK     1.2s  stage1 1.1410218169912696  sa None att None  max 2004.4  hpwl 104094.0

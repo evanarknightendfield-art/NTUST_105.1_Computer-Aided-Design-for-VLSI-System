@@ -1,0 +1,9 @@
+[22:01:27] local_grade ChainDP 27
+[22:22:28] local_grade ChainDP L1
+[22:22:32] run_ts ClaudeOpus55_v4 27
+[22:38:47] run_ts CodexChainDP 27
+[22:59:46] run_ts ClaudeOpus55_v4 L1 L2
+[23:05:45] run_ts CodexChainDP L1 L2
+[23:12:41] phase1 runs done
+[23:12:52] local_grade ChainDP L1 (retry)
+[23:16:18] L1 done

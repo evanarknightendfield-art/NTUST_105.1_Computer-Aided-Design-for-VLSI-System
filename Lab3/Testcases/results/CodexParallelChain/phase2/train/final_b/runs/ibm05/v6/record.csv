@@ -1,0 +1,2 @@
+bench,status,seconds,disp,max,hpwl_legal,hpwl_sa,t_read,t_legalize,t_pareto,t_windowdp,t_chain,t_global,t_sa,t_polish,t_stage1,t_stage2,sa_threads,sa_attempts,sa_internal_s,sa_failed_pct,sa_timeup,global_tries,global_accepted,global_unknown,sa_seconds
+ibm05,OK,38.78,1327888.765,199.918,11833690.5,11833690.5,0.099,29.996,0.411,2.354,5.878,,,,38.73801717400784,38.739672034047544,,,,,,0,0,0,

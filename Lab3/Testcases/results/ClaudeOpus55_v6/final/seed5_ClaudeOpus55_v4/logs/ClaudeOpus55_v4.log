@@ -1,0 +1,769 @@
+$ cmake -S . -B build
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build
+
+$ cmake --build build -j
+[ 14%] Building CXX object CMakeFiles/dp.dir/src/legalizer.cpp.o
+[ 28%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 57%] Building CXX object CMakeFiles/dp.dir/src/annealer.cpp.o
+[ 57%] Building CXX object CMakeFiles/dp.dir/src/optimizer.cpp.o
+[ 71%] Building CXX object CMakeFiles/dp.dir/src/placedb.cpp.o
+[ 85%] Building CXX object CMakeFiles/dp.dir/src/window.cpp.o
+[100%] Linking CXX executable dp
+[100%] Built target dp
+
+
+===== e01_nearlegal: OK 45.0s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e01_nearlegal/e01_nearlegal output -v
+Total displacement (legal): 23619.832
+Maximum displacement (legal): 5.604
+Total HPWL (legal): 690162.5
+Total HPWL (SA): 476370.5
+max 29.4  0.0s
+[legal] row-opt (d0 0): 102 segments  total 24703.0  max 29.4
+[legal] max-refine 101 moves  total 23753.3  max 5.6
+[legal] matching d0 5: 23 windows, cells above d0 23 -> 23  total 23753.3  max 5.6
+[legal] row-opt (d0 6): 36 segments  total 23629.0  max 5.6
+[legal] matching sweep: total 23629.0  max 5.6
+[legal] total-refine pass 0: 9 moves  total 23619.8  max 5.6
+[legal] max-refine 0 moves  total 23619.8  max 5.6
+[legal] matching d0 5: 15 windows, cells above d0 15 -> 15  total 23619.8  max 5.6
+[legal] row-opt (d0 6): 1 segments  total 23619.8  max 5.6
+[legal] matching sweep: total 23619.8  max 5.6
+[legal] total-refine pass 0: 0 moves  total 23619.8  max 5.6
+[legal] plain: total 23619.8 max 5.6 | spread: total 23619.8 max 5.6 -> plain
+[legal] row-opt (d0 6): 0 segments  total 23619.8  max 5.6
+[legal] matching sweep: total 23619.8  max 5.6
+[legal] total-refine pass 0: 0 moves  total 23619.8  max 5.6
+[window-disp] 2 rows x 4 cells: 4761 windows solved, 0 improved: total 23619.8 -> 23619.8 (max 5.6040)  0.20s
+[window-disp] 3 rows x 3 cells: 6213 windows solved, 0 improved: total 23619.8 -> 23619.8 (max 5.6040)  0.72s
+[legal] final round 0: total 23619.8  1.0s
+[legal] max-refine 0 moves  total 23619.8  max 5.6
+[legal] matching d0 5: 15 windows, cells above d0 15 -> 15  total 23619.8  max 5.6
+[legal] final max pass: max 5.6040 -> 5.6040, total 23619.8  1.0s
+[pareto] pass 1: 0 groups, total 23619.832000, max 5.604000
+[window-disp] 2 rows x 4 cells: 4761 windows solved, 0 improved: total 23619.8 -> 23619.8 (max 5.6040)  0.20s
+[window-disp] 3 rows x 3 cells: 6213 windows solved, 0 improved: total 23619.8 -> 23619.8 (max 5.6040)  0.72s
+[stage1] done  1.92s
+[sa] parallel: 7 bands/threads  HPWL 690162  T0 549.6  346920000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 549.6  acc 0.790  win 61 x 97  cur 2664879  best 690162  1.1s
+[sa] step  20  T 138  acc 0.556  win 90 x 144  cur 1548492  best 690162  11.4s
+[sa] step  40  T 34.68  acc 0.387  win 70 x 111  cur 713189  best 690162  20.4s
+[sa] step  60  T 8.71  acc 0.312  win 28 x 24  cur 514112  best 514112  28.8s
+[sa] step  80  T 2.188  acc 0.119  win 28 x 24  cur 479408  best 479408  36.3s
+[sa] step  99  T 0.5889  acc 0.047  win 28 x 24  cur 476536  best 476536  42.2s
+[sa] 19170 sync rounds, 184420260 attempts (15.1% proposals failed)  42.2s (moves 28.7s, merge 13.0s)
+[polish] pass 1: 476536.000000 -> 476424.000000; slide 13, relocate 4, assignment 2, reorder 80
+[polish] pass 2: 476424.000000 -> 476423.000000; slide 0, relocate 0, assignment 0, reorder 1
+[polish] pass 3: 476423.000000 -> 476423.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 6/2505 accepted, 476423.000000 -> 476405.000000
+[window-hpwl] pass 1: 2/2459 accepted, 476405.000000 -> 476404.000000
+[order-hpwl] pass 0: 13 accepted, 476404.000000 -> 476373.500000
+[order-hpwl] pass 1: 2 accepted, 476373.500000 -> 476370.500000
+[polish-total] 476536.000000 -> 476370.500000
+[stage2] done  45.02s
+
+
+===== e02_legalgp: OK 18.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e02_legalgp/e02_legalgp output -v
+Total displacement (legal): 0
+Maximum displacement (legal): 0
+Total HPWL (legal): 14910055
+Total HPWL (SA): 9948979.5
+ine pass 7: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 8: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 9: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 10: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 11: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 12: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 13: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 14: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 15: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 16: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 17: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 18: 0 moves  total 0.0  max 0.0
+[legal] total-refine pass 19: 0 moves  total 0.0  max 0.0
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 0.0 -> 0.0 (max 0.0000)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 0.0 -> 0.0 (max 0.0000)  0.00s
+[legal] final round 3: total 0.0  1.0s
+[legal] max-refine 0 moves  total 0.0  max 0.0
+[legal] matching d0 0: 0 windows, cells above d0 0 -> 0  total 0.0  max 0.0
+[legal] final max pass: max 0.0000 -> 0.0000, total 0.0  1.0s
+[pareto] pass 1: 0 groups, total 0.000000, max 0.000000
+[window-disp] 2 rows x 4 cells: 2189 windows solved, 0 improved: total 0.0 -> 0.0 (max 0.0000)  0.20s
+[window-disp] 3 rows x 3 cells: 2926 windows solved, 0 improved: total 0.0 -> 0.0 (max 0.0000)  0.71s
+[stage1] done  1.86s
+[sa] HPWL 14910055  T0 1.831e+04  alpha 0.9333  22515000 moves in 100 steps
+[sa] step   0  T 1.831e+04  acc 0.839  win 3231 x 2115  cur 40436614  best 14910055  0.2s
+[sa] step  20  T 4600  acc 0.556  win 4620 x 3024  cur 25726632  best 14910055  3.3s
+[sa] step  40  T 1155  acc 0.364  win 2587 x 1693  cur 13993189  best 13800599  6.4s
+[sa] step  60  T 290.2  acc 0.192  win 1855 x 756  cur 10482484  best 10456378  9.7s
+[sa] step  80  T 72.91  acc 0.060  win 1855 x 756  cur 9980401  best 9974677  13.1s
+[sa] step  99  T 19.62  acc 0.035  win 1855 x 756  cur 9952978  best 9952846  16.2s
+[sa] proposals failed 14.4%
+[sa] slide      1.7% of attempts, accepted  81.9%, improving  26.6%
+[sa] move       9.5% of attempts, accepted  49.2%, improving  24.9%
+[sa] swap      64.2% of attempts, accepted  33.4%, improving  14.8%
+[sa] reorder    9.9% of attempts, accepted  39.3%, improving  15.6%
+[sa] rowopt     0.2% of attempts, accepted 100.0%, improving  65.1%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  89.4%
+[polish] pass 1: 9952846.500000 -> 9952210.500000; slide 0, relocate 1, assignment 0, reorder 5
+[polish] pass 2: 9952210.500000 -> 9952210.500000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 7/1141 accepted, 9952210.500000 -> 9950803.500000
+[window-hpwl] pass 1: 9/1106 accepted, 9950803.500000 -> 9949672.500000
+[order-hpwl] pass 0: 7 accepted, 9949672.500000 -> 9948979.500000
+[order-hpwl] pass 1: 0 accepted, 9948979.500000 -> 9948979.500000
+[polish-total] 9952846.500000 -> 9948979.500000
+[stage2] done  18.45s
+
+
+===== e03_dense97: OK 31.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e03_dense97/e03_dense97 output -v
+Total displacement (legal): 146489.246
+Maximum displacement (legal): 126.686
+Total HPWL (legal): 590808.5
+Total HPWL (SA): 292019.5
+: total 147124.9 -> 146874.9 (max 126.7300)  0.78s
+[window-disp] 2 rows x 4 cells: 872 windows solved, 29 improved: total 146874.9 -> 146731.4 (max 126.6860)  0.07s
+[window-disp] 3 rows x 3 cells: 641 windows solved, 9 improved: total 146731.4 -> 146682.4 (max 126.6860)  0.16s
+[window-disp] 2 rows x 4 cells: 108 windows solved, 2 improved: total 146682.4 -> 146679.5 (max 126.6860)  0.02s
+[window-disp] 3 rows x 3 cells: 44 windows solved, 0 improved: total 146679.5 -> 146679.5 (max 126.6860)  0.02s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 146679.5 -> 146679.5 (max 126.6860)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 146679.5 -> 146679.5 (max 126.6860)  0.00s
+[legal] final max pass: max 127.7840 -> 126.6860, total 146679.5  7.8s
+[pareto] pass 1: 78 groups, total 146624.228000, max 126.686000
+[pareto] pass 2: 41 groups, total 146615.778000, max 126.686000
+[window-disp] 2 rows x 4 cells: 3300 windows solved, 29 improved: total 146615.8 -> 146490.4 (max 126.6860)  0.22s
+[window-disp] 3 rows x 3 cells: 3851 windows solved, 1 improved: total 146490.4 -> 146489.2 (max 126.6860)  0.72s
+[window-disp] 2 rows x 4 cells: 46 windows solved, 0 improved: total 146489.2 -> 146489.2 (max 126.6860)  0.01s
+[window-disp] 3 rows x 3 cells: 28 windows solved, 0 improved: total 146489.2 -> 146489.2 (max 126.6860)  0.01s
+[stage1] done  8.79s
+[sa] HPWL 590808  T0 354.9  alpha 0.9333  29440000 moves in 100 steps
+[sa] step   0  T 354.9  acc 0.578  win 34 x 64  cur 1239666  best 590789  0.2s
+[sa] step  20  T 89.14  acc 0.406  win 52 x 97  cur 743294  best 590789  4.7s
+[sa] step  40  T 22.39  acc 0.374  win 27 x 36  cur 387304  best 386448  9.1s
+[sa] step  60  T 5.624  acc 0.229  win 27 x 24  cur 303832  best 303412  13.6s
+[sa] step  80  T 1.413  acc 0.081  win 27 x 24  cur 293616  best 293582  18.1s
+[sa] step  99  T 0.3803  acc 0.040  win 27 x 24  cur 292782  best 292772  22.2s
+[sa] proposals failed 27.6%
+[sa] slide      0.5% of attempts, accepted  84.0%, improving  29.8%
+[sa] move       0.9% of attempts, accepted  31.3%, improving  15.2%
+[sa] swap      60.9% of attempts, accepted  36.9%, improving  16.6%
+[sa] reorder    9.9% of attempts, accepted  46.6%, improving  19.0%
+[sa] rowopt     0.1% of attempts, accepted 100.0%, improving  70.9%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  85.2%
+[polish] pass 1: 292771.500000 -> 292711.500000; slide 2, relocate 2, assignment 3, reorder 21
+[polish] pass 2: 292711.500000 -> 292655.000000; slide 0, relocate 0, assignment 1, reorder 5
+[polish] pass 3: 292655.000000 -> 292647.000000; slide 1, relocate 0, assignment 1, reorder 0
+[window-hpwl] pass 0: 25/1492 accepted, 292647.000000 -> 292397.500000
+[window-hpwl] pass 1: 25/1446 accepted, 292397.500000 -> 292161.500000
+[order-hpwl] pass 0: 37 accepted, 292161.500000 -> 292061.500000
+[order-hpwl] pass 1: 11 accepted, 292061.500000 -> 292019.500000
+[polish-total] 292771.500000 -> 292019.500000
+[stage2] done  31.48s
+
+
+===== e04_sparse10: OK 14.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e04_sparse10/e04_sparse10 output -v
+Total displacement (legal): 725.0943
+Maximum displacement (legal): 1.6795
+Total HPWL (legal): 48276.133
+Total HPWL (SA): 17347.826
+otal 733.5 max 1.7 -> plain
+[legal] row-opt (d0 2): 0 segments  total 727.1  max 1.7
+[legal] matching sweep: total 727.1  max 1.7
+[legal] total-refine pass 0: 0 moves  total 727.1  max 1.7
+[window-disp] 2 rows x 5 cells: 114 windows solved, 3 improved: total 727.1 -> 726.7 (max 1.6795)  0.41s
+[window-disp] 3 rows x 4 cells: 194 windows solved, 4 improved: total 726.7 -> 725.1 (max 1.6795)  4.88s
+[window-disp] 2 rows x 5 cells: 31 windows solved, 0 improved: total 725.1 -> 725.1 (max 1.6795)  0.09s
+[window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 725.1 -> 725.1 (max 1.6795)  0.00s
+[legal] final round 0: total 725.1  5.4s
+[legal] row-opt (d0 2): 2 segments  total 725.1  max 1.7
+[legal] matching sweep: total 725.1  max 1.7
+[legal] total-refine pass 0: 0 moves  total 725.1  max 1.7
+[window-disp] 2 rows x 5 cells: 10 windows solved, 0 improved: total 725.1 -> 725.1 (max 1.6795)  0.03s
+[window-disp] 3 rows x 4 cells: 16 windows solved, 0 improved: total 725.1 -> 725.1 (max 1.6795)  0.37s
+[legal] final round 1: total 725.1  5.8s
+[legal] max-refine 0 moves  total 725.1  max 1.7
+[legal] matching d0 2: 6 windows, cells above d0 6 -> 6  total 725.1  max 1.7
+[legal] final max pass: max 1.6795 -> 1.6795, total 725.1  5.8s
+[pareto] pass 1: 0 groups, total 725.094301, max 1.679487
+[window-disp] 2 rows x 5 cells: 109 windows solved, 0 improved: total 725.1 -> 725.1 (max 1.6795)  0.34s
+[window-disp] 3 rows x 4 cells: 172 windows solved, 0 improved: total 725.1 -> 725.1 (max 1.6795)  4.35s
+[stage1] done  10.50s
+[sa] HPWL 48276  T0 127.6  alpha 0.9333  7255000 moves in 100 steps
+[sa] step   0  T 127.6  acc 0.896  win 29 x 6  cur 58254  best 48135  0.0s
+[sa] step  20  T 32.06  acc 0.614  win 40 x 8  cur 42509  best 42343  0.7s
+[sa] step  40  T 8.054  acc 0.387  win 32 x 6  cur 25476  best 24928  1.4s
+[sa] step  60  T 2.023  acc 0.285  win 6 x 2  cur 19088  best 19067  2.1s
+[sa] step  80  T 0.5082  acc 0.122  win 6 x 2  cur 17554  best 17531  2.9s
+[sa] step  99  T 0.1368  acc 0.072  win 6 x 2  cur 17372  best 17370  3.6s
+[sa] proposals failed 24.3%
+[sa] slide      4.8% of attempts, accepted  78.5%, improving  19.5%
+[sa] move      31.3% of attempts, accepted  54.4%, improving  25.8%
+[sa] swap      29.2% of attempts, accepted  43.0%, improving  18.1%
+[sa] reorder    9.9% of attempts, accepted  37.7%, improving  13.4%
+[sa] rowopt     0.4% of attempts, accepted 100.0%, improving  74.9%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  93.1%
+[polish] pass 1: 17370.126000 -> 17365.426000; slide 4, relocate 3, assignment 0, reorder 2
+[polish] pass 2: 17365.426000 -> 17365.426000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 8/219 accepted, 17365.426000 -> 17360.926000
+[window-hpwl] pass 1: 10/209 accepted, 17360.926000 -> 17349.426000
+[order-hpwl] pass 0: 3 accepted, 17349.426000 -> 17347.826000
+[order-hpwl] pass 1: 0 accepted, 17347.826000 -> 17347.826000
+[polish-total] 17370.126000 -> 17347.826000
+[stage2] done  14.59s
+
+
+===== e05_bignets: OK 47.7s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e05_bignets/e05_bignets output -v
+Total displacement (legal): 73744.87
+Maximum displacement (legal): 40.157
+Total HPWL (legal): 995437.5
+Total HPWL (SA): 700700.5
+ows x 4 cells: 0 windows solved, 0 improved: total 73702.5 -> 73702.5 (max 40.2450)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 73702.5 -> 73702.5 (max 40.2450)  0.00s
+[legal] final round 3: total 73702.5  3.0s
+[legal] max-refine 3 moves  total 73889.4  max 40.2
+[legal] matching d0 38: 27 windows, cells above d0 29 -> 27  total 73889.4  max 40.2
+[window-disp] 2 rows x 4 cells: 425 windows solved, 16 improved: total 73889.4 -> 73765.5 (max 40.1570)  0.05s
+[window-disp] 3 rows x 3 cells: 753 windows solved, 3 improved: total 73765.5 -> 73750.5 (max 40.1570)  0.21s
+[window-disp] 2 rows x 4 cells: 61 windows solved, 1 improved: total 73750.5 -> 73747.9 (max 40.1570)  0.01s
+[window-disp] 3 rows x 3 cells: 19 windows solved, 0 improved: total 73747.9 -> 73747.9 (max 40.1570)  0.01s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 73747.9 -> 73747.9 (max 40.1570)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 73747.9 -> 73747.9 (max 40.1570)  0.00s
+[legal] final max pass: max 40.2450 -> 40.1570, total 73747.9  3.3s
+[pareto] pass 1: 21 groups, total 73747.870000, max 40.157000
+[pareto] pass 2: 6 groups, total 73747.870000, max 40.157000
+[window-disp] 2 rows x 4 cells: 5490 windows solved, 1 improved: total 73747.9 -> 73744.9 (max 40.1570)  0.21s
+[window-disp] 3 rows x 3 cells: 7075 windows solved, 0 improved: total 73744.9 -> 73744.9 (max 40.1570)  0.71s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 73744.9 -> 73744.9 (max 40.1570)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 73744.9 -> 73744.9 (max 40.1570)  0.00s
+[stage1] done  4.23s
+[sa] parallel: 8 bands/threads  HPWL 995438  T0 681.7  459800000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 681.7  acc 0.831  win 70 x 111  cur 3602925  best 995438  1.9s
+[sa] step  20  T 171.2  acc 0.605  win 100 x 160  cur 2188742  best 995438  12.2s
+[sa] step  40  T 43.02  acc 0.406  win 91 x 145  cur 1033713  best 995438  19.1s
+[sa] step  60  T 10.8  acc 0.329  win 28 x 28  cur 767784  best 767784  27.1s
+[sa] step  80  T 2.714  acc 0.142  win 28 x 24  cur 706360  best 706360  35.7s
+[sa] step  99  T 0.7305  acc 0.056  win 28 x 24  cur 701074  best 701074  41.6s
+[sa] 12223 sync rounds, 138446759 attempts (13.2% proposals failed)  41.6s (moves 27.5s, merge 13.7s)
+[polish] pass 1: 701074.000000 -> 700890.500000; slide 21, relocate 7, assignment 1, reorder 130
+[polish] pass 2: 700890.500000 -> 700886.000000; slide 0, relocate 0, assignment 0, reorder 3
+[polish] pass 3: 700886.000000 -> 700886.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 16/2910 accepted, 700886.000000 -> 700819.500000
+[window-hpwl] pass 1: 9/2844 accepted, 700819.500000 -> 700797.000000
+[order-hpwl] pass 0: 23 accepted, 700797.000000 -> 700713.500000
+[order-hpwl] pass 1: 6 accepted, 700713.500000 -> 700700.500000
+[polish-total] 701074.000000 -> 700700.500000
+[stage2] done  47.68s
+
+
+===== e06_tallnarrow: OK 14.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e06_tallnarrow/e06_tallnarrow output -v
+Total displacement (legal): 33637.515
+Maximum displacement (legal): 39.005
+Total HPWL (legal): 2154411.5
+Total HPWL (SA): 988433
+ax 39.5
+[legal] matching sweep: total 33634.1  max 39.5
+[legal] total-refine pass 0: 0 moves  total 33634.1  max 39.5
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 33634.1 -> 33634.1 (max 39.5350)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 33634.1 -> 33634.1 (max 39.5350)  0.00s
+[legal] final round 2: total 33634.1  1.5s
+[legal] max-refine 1 moves  total 33639.5  max 39.0
+[legal] matching d0 37: 4 windows, cells above d0 4 -> 4  total 33639.5  max 39.0
+[window-disp] 2 rows x 4 cells: 13 windows solved, 1 improved: total 33639.5 -> 33637.5 (max 39.0050)  0.00s
+[window-disp] 3 rows x 3 cells: 17 windows solved, 0 improved: total 33637.5 -> 33637.5 (max 39.0050)  0.01s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 33637.5 -> 33637.5 (max 39.0050)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 33637.5 -> 33637.5 (max 39.0050)  0.00s
+[legal] final max pass: max 39.5350 -> 39.0050, total 33637.5  1.5s
+[pareto] pass 1: 19 groups, total 33637.515000, max 39.005000
+[pareto] pass 2: 7 groups, total 33637.515000, max 39.005000
+[window-disp] 2 rows x 4 cells: 2216 windows solved, 0 improved: total 33637.5 -> 33637.5 (max 39.0050)  0.15s
+[window-disp] 3 rows x 3 cells: 2961 windows solved, 0 improved: total 33637.5 -> 33637.5 (max 39.0050)  0.64s
+[stage1] done  2.26s
+[sa] HPWL 2154412  T0 2823  alpha 0.9333  20320000 moves in 100 steps
+[sa] step   0  T 2823  acc 0.701  win 26 x 807  cur 4464904  best 2154200  0.1s
+[sa] step  20  T 709.2  acc 0.513  win 26 x 1280  cur 2258564  best 2154200  2.4s
+[sa] step  40  T 178.1  acc 0.429  win 26 x 1247  cur 1273612  best 1270999  4.6s
+[sa] step  60  T 44.75  acc 0.381  win 26 x 634  cur 1067722  best 1065839  7.0s
+[sa] step  80  T 11.24  acc 0.296  win 26 x 76  cur 1011698  best 1011176  9.5s
+[sa] step  99  T 3.025  acc 0.144  win 26 x 24  cur 990836  best 990656  11.7s
+[sa] proposals failed 21.8%
+[sa] slide      1.2% of attempts, accepted  86.9%, improving  38.7%
+[sa] move       8.5% of attempts, accepted  47.7%, improving  25.9%
+[sa] swap      58.3% of attempts, accepted  47.9%, improving  22.7%
+[sa] reorder    9.7% of attempts, accepted  76.5%, improving  31.7%
+[sa] rowopt     0.4% of attempts, accepted 100.0%, improving  92.9%
+[sa] ism        0.1% of attempts, accepted 100.0%, improving  95.9%
+[polish] pass 1: 990655.500000 -> 989097.500000; slide 208, relocate 126, assignment 17, reorder 233
+[polish] pass 2: 989097.500000 -> 988988.000000; slide 33, relocate 22, assignment 5, reorder 14
+[polish] pass 3: 988988.000000 -> 988974.000000; slide 4, relocate 3, assignment 0, reorder 0
+[window-hpwl] pass 0: 113/1318 accepted, 988974.000000 -> 988657.000000
+[window-hpwl] pass 1: 36/910 accepted, 988657.000000 -> 988574.500000
+[order-hpwl] pass 0: 34 accepted, 988574.500000 -> 988445.000000
+[order-hpwl] pass 1: 5 accepted, 988445.000000 -> 988433.000000
+[polish-total] 990655.500000 -> 988433.000000
+[stage2] done  14.23s
+
+
+===== e07_tworows: OK 14.3s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e07_tworows/e07_tworows output -v
+Total displacement (legal): 20020.211
+Maximum displacement (legal): 24.523
+Total HPWL (legal): 977636
+Total HPWL (SA): 199247.5
+(max 24.5230)  0.02s
+[window-disp] 3 rows x 3 cells: 77 windows solved, 0 improved: total 20025.0 -> 20025.0 (max 24.5230)  0.00s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 20025.0 -> 20025.0 (max 24.5230)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 20025.0 -> 20025.0 (max 24.5230)  0.00s
+[legal] final round 2: total 20025.0  0.8s
+[legal] row-opt (d0 25): 1 segments  total 20022.2  max 24.5
+[legal] matching sweep: total 20022.2  max 24.5
+[legal] total-refine pass 0: 1 moves  total 20020.2  max 24.5
+[window-disp] 2 rows x 4 cells: 645 windows solved, 0 improved: total 20020.2 -> 20020.2 (max 24.5230)  0.09s
+[window-disp] 3 rows x 3 cells: 1719 windows solved, 0 improved: total 20020.2 -> 20020.2 (max 24.5230)  0.04s
+[legal] final round 3: total 20020.2  0.9s
+[legal] max-refine 0 moves  total 20020.2  max 24.5
+[legal] matching d0 23: 31 windows, cells above d0 31 -> 30  total 20020.2  max 24.5
+[legal] final max pass: max 24.5230 -> 24.5230, total 20020.2  0.9s
+[pareto] pass 1: 4 groups, total 20020.211000, max 24.523000
+[pareto] pass 2: 2 groups, total 20020.211000, max 24.523000
+[window-disp] 2 rows x 4 cells: 685 windows solved, 0 improved: total 20020.2 -> 20020.2 (max 24.5230)  0.09s
+[window-disp] 3 rows x 3 cells: 1826 windows solved, 0 improved: total 20020.2 -> 20020.2 (max 24.5230)  0.04s
+[stage1] done  1.05s
+[sa] HPWL 977636  T0 3737  alpha 0.9333  13685000 moves in 100 steps
+[sa] step   0  T 3737  acc 0.836  win 838 x 24  cur 2956146  best 975921  0.1s
+[sa] step  20  T 938.8  acc 0.613  win 1200 x 24  cur 1406802  best 975921  2.7s
+[sa] step  40  T 235.8  acc 0.494  win 1200 x 24  cur 420326  best 410196  5.1s
+[sa] step  60  T 59.23  acc 0.387  win 869 x 24  cur 267112  best 262123  7.8s
+[sa] step  80  T 14.88  acc 0.326  win 137 x 24  cur 216971  best 215880  10.5s
+[sa] step  99  T 4.005  acc 0.255  win 28 x 24  cur 202308  best 202001  13.1s
+[sa] proposals failed 15.3%
+[sa] slide      0.9% of attempts, accepted  88.8%, improving  27.7%
+[sa] move      11.7% of attempts, accepted  45.0%, improving  24.2%
+[sa] swap      61.9% of attempts, accepted  53.6%, improving  24.0%
+[sa] reorder    9.9% of attempts, accepted  79.5%, improving  32.7%
+[sa] rowopt     0.2% of attempts, accepted 100.0%, improving  94.3%
+[sa] ism        0.1% of attempts, accepted 100.0%, improving  92.8%
+[polish] pass 1: 202001.000000 -> 200038.000000; slide 9, relocate 23, assignment 8, reorder 458
+[polish] pass 2: 200038.000000 -> 199901.500000; slide 2, relocate 1, assignment 0, reorder 53
+[polish] pass 3: 199901.500000 -> 199883.000000; slide 0, relocate 0, assignment 0, reorder 7
+[window-hpwl] pass 0: 13/336 accepted, 199883.000000 -> 199839.000000
+[window-hpwl] pass 1: 15/348 accepted, 199839.000000 -> 199777.000000
+[order-hpwl] pass 0: 79 accepted, 199777.000000 -> 199451.500000
+[order-hpwl] pass 1: 28 accepted, 199451.500000 -> 199247.500000
+[polish-total] 202001.000000 -> 199247.500000
+[stage2] done  14.29s
+
+
+===== e08_fragmented: OK 30.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e08_fragmented/e08_fragmented output -v
+Total displacement (legal): 54999.074
+Maximum displacement (legal): 38.743
+Total HPWL (legal): 640987.5
+Total HPWL (SA): 418952
+7430)  0.15s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 54999.6 -> 54999.6 (max 38.7430)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 54999.6 -> 54999.6 (max 38.7430)  0.00s
+[legal] final round 2: total 54999.6  2.7s
+[legal] row-opt (d0 39): 1 segments  total 54997.6  max 38.7
+[legal] matching sweep: total 54997.6  max 38.7
+[legal] total-refine pass 0: 1 moves  total 54996.6  max 38.7
+[window-disp] 2 rows x 4 cells: 39 windows solved, 0 improved: total 54996.6 -> 54996.6 (max 38.7430)  0.01s
+[window-disp] 3 rows x 3 cells: 75 windows solved, 0 improved: total 54996.6 -> 54996.6 (max 38.7430)  0.03s
+[legal] final round 3: total 54996.6  2.8s
+[legal] max-refine 0 moves  total 54996.6  max 38.7
+[legal] matching d0 37: 50 windows, cells above d0 54 -> 50  total 55001.1  max 38.7
+[legal] final max pass: max 38.7430 -> 38.7430, total 55001.1  2.8s
+[pareto] pass 1: 15 groups, total 55001.074000, max 38.743000
+[pareto] pass 2: 5 groups, total 55001.074000, max 38.743000
+[window-disp] 2 rows x 4 cells: 3499 windows solved, 1 improved: total 55001.1 -> 54999.1 (max 38.7430)  0.21s
+[window-disp] 3 rows x 3 cells: 4617 windows solved, 0 improved: total 54999.1 -> 54999.1 (max 38.7430)  0.80s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 54999.1 -> 54999.1 (max 38.7430)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 54999.1 -> 54999.1 (max 38.7430)  0.00s
+[stage1] done  3.78s
+[sa] HPWL 640988  T0 540.2  alpha 0.9333  35100000 moves in 100 steps
+[sa] step   0  T 540.2  acc 0.834  win 42 x 134  cur 1786348  best 640930  0.3s
+[sa] step  20  T 135.7  acc 0.559  win 60 x 192  cur 1076894  best 640930  5.1s
+[sa] step  40  T 34.08  acc 0.386  win 46 x 147  cur 581892  best 579682  10.1s
+[sa] step  60  T 8.561  acc 0.294  win 28 x 24  cur 447008  best 446178  15.4s
+[sa] step  80  T 2.15  acc 0.114  win 28 x 24  cur 420972  best 420931  20.8s
+[sa] step  99  T 0.5788  acc 0.047  win 28 x 24  cur 419112  best 419084  25.8s
+[sa] proposals failed 12.6%
+[sa] slide      1.9% of attempts, accepted  81.5%, improving  26.7%
+[sa] move      12.0% of attempts, accepted  46.0%, improving  23.5%
+[sa] swap      63.4% of attempts, accepted  36.4%, improving  16.3%
+[sa] reorder    9.9% of attempts, accepted  48.7%, improving  18.9%
+[sa] rowopt     0.3% of attempts, accepted 100.0%, improving  72.1%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  89.9%
+[polish] pass 1: 419084.000000 -> 419023.500000; slide 6, relocate 4, assignment 0, reorder 47
+[polish] pass 2: 419023.500000 -> 419023.500000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 6/1851 accepted, 419023.500000 -> 419009.000000
+[window-hpwl] pass 1: 4/1702 accepted, 419009.000000 -> 418999.500000
+[order-hpwl] pass 0: 14 accepted, 418999.500000 -> 418960.500000
+[order-hpwl] pass 1: 2 accepted, 418960.500000 -> 418952.000000
+[polish-total] 419084.000000 -> 418952.000000
+[stage2] done  30.21s
+
+
+===== e09_offgrid: OK 53.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e09_offgrid/e09_offgrid output -v
+Total displacement (legal): 14034.3565
+Maximum displacement (legal): 38.7879
+Total HPWL (legal): 188770.6199
+Total HPWL (SA): 57996.8263
+.8
+[legal] matching sweep: total 14049.7  max 38.8
+[legal] total-refine pass 0: 4 moves  total 14048.4  max 38.8
+[window-disp] 2 rows x 4 cells: 199 windows solved, 5 improved: total 14048.4 -> 14047.0 (max 38.7879)  0.02s
+[window-disp] 3 rows x 3 cells: 512 windows solved, 7 improved: total 14047.0 -> 14042.7 (max 38.7879)  0.12s
+[window-disp] 2 rows x 4 cells: 95 windows solved, 2 improved: total 14042.7 -> 14042.4 (max 38.7879)  0.02s
+[window-disp] 3 rows x 3 cells: 44 windows solved, 0 improved: total 14042.4 -> 14042.4 (max 38.7879)  0.02s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 14042.4 -> 14042.4 (max 38.7879)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 14042.4 -> 14042.4 (max 38.7879)  0.00s
+[legal] final round 3: total 14042.4  4.1s
+[legal] max-refine 0 moves  total 14042.4  max 38.8
+[legal] matching d0 37: 4 windows, cells above d0 4 -> 4  total 14042.4  max 38.8
+[legal] final max pass: max 38.7879 -> 38.7879, total 14042.4  4.1s
+[pareto] pass 1: 6 groups, total 14042.431833, max 38.787876
+[pareto] pass 2: 9 groups, total 14042.073936, max 38.787876
+[window-disp] 2 rows x 4 cells: 3955 windows solved, 4 improved: total 14042.1 -> 14038.7 (max 38.7879)  0.18s
+[window-disp] 3 rows x 3 cells: 5382 windows solved, 6 improved: total 14038.7 -> 14034.7 (max 38.7879)  0.75s
+[window-disp] 2 rows x 4 cells: 195 windows solved, 2 improved: total 14034.7 -> 14034.4 (max 38.7879)  0.03s
+[window-disp] 3 rows x 3 cells: 76 windows solved, 0 improved: total 14034.4 -> 14034.4 (max 38.7879)  0.04s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 14034.4 -> 14034.4 (max 38.7879)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 14034.4 -> 14034.4 (max 38.7879)  0.00s
+[stage1] done  5.10s
+[sa] parallel: 6 bands/threads  HPWL 188771  T0 78.69  247770000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 78.69  acc 0.823  win 12 x 9  cur 307877  best 188771  0.7s
+[sa] step  20  T 19.77  acc 0.578  win 17 x 14  cur 182559  best 182559  12.0s
+[sa] step  40  T 4.965  acc 0.379  win 12 x 10  cur 88791  best 88791  22.1s
+[sa] step  60  T 1.247  acc 0.268  win 5 x 3  cur 62838  best 62838  32.0s
+[sa] step  80  T 0.3133  acc 0.089  win 5 x 3  cur 58305  best 58305  40.6s
+[sa] step  99  T 0.08432  acc 0.042  win 5 x 3  cur 58011  best 58011  47.8s
+[sa] 25068 sync rounds, 200923934 attempts (14.0% proposals failed)  47.8s (moves 34.6s, merge 12.7s)
+[polish] pass 1: 58011.249100 -> 58002.940300; slide 19, relocate 8, assignment 0, reorder 44
+[polish] pass 2: 58002.940300 -> 58002.927000; slide 1, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 10/2079 accepted, 58002.927000 -> 58000.240600
+[window-hpwl] pass 1: 10/2044 accepted, 58000.240600 -> 57997.804800
+[order-hpwl] pass 0: 3 accepted, 57997.804800 -> 57997.301300
+[order-hpwl] pass 1: 1 accepted, 57997.301300 -> 57996.826300
+[polish-total] 58011.249100 -> 57996.826300
+[stage2] done  53.62s
+
+
+===== e10_mixedsites: OK 50.3s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e10_mixedsites/e10_mixedsites output -v
+Total displacement (legal): 64656.666
+Maximum displacement (legal): 48.016
+Total HPWL (legal): 1243528.5
+Total HPWL (SA): 808435
+96 windows solved, 2 improved: total 64801.8 -> 64797.2 (max 48.0160)  0.02s
+[window-disp] 2 rows x 4 cells: 75 windows solved, 0 improved: total 64797.2 -> 64797.2 (max 48.0160)  0.01s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 64797.2 -> 64797.2 (max 48.0160)  0.00s
+[legal] final round 0: total 64797.2  1.8s
+[legal] row-opt (d0 48): 22 segments  total 64727.4  max 48.0
+[legal] total-refine pass 0: 11 moves  total 64702.4  max 48.0
+[window-disp] 2 rows x 4 cells: 2648 windows solved, 10 improved: total 64702.4 -> 64658.8 (max 48.0160)  0.12s
+[window-disp] 3 rows x 3 cells: 3525 windows solved, 3 improved: total 64658.8 -> 64657.4 (max 48.0160)  0.40s
+[window-disp] 2 rows x 4 cells: 120 windows solved, 0 improved: total 64657.4 -> 64657.4 (max 48.0160)  0.01s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 64657.4 -> 64657.4 (max 48.0160)  0.00s
+[legal] final round 1: total 64657.4  2.4s
+[legal] row-opt (d0 48): 2 segments  total 64656.7  max 48.0
+[legal] total-refine pass 0: 0 moves  total 64656.7  max 48.0
+[window-disp] 2 rows x 4 cells: 157 windows solved, 0 improved: total 64656.7 -> 64656.7 (max 48.0160)  0.03s
+[window-disp] 3 rows x 3 cells: 318 windows solved, 0 improved: total 64656.7 -> 64656.7 (max 48.0160)  0.08s
+[legal] final round 2: total 64656.7  2.5s
+[legal] max-refine 0 moves  total 64656.7  max 48.0
+[legal] matching d0 46: 0 windows, cells above d0 14 -> 14  total 64656.7  max 48.0
+[legal] final max pass: max 48.0160 -> 48.0160, total 64656.7  2.5s
+[window-disp] 2 rows x 4 cells: 4833 windows solved, 0 improved: total 64656.7 -> 64656.7 (max 48.0160)  0.13s
+[window-disp] 3 rows x 3 cells: 6063 windows solved, 0 improved: total 64656.7 -> 64656.7 (max 48.0160)  0.50s
+[stage1] done  3.14s
+[sa] parallel: 5 bands/threads  HPWL 1243528  T0 903.7  262600000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 903.7  acc 0.584  win 172 x 55  cur 4243196  best 1243528  0.8s
+[sa] step  20  T 227  acc 0.417  win 284 x 91  cur 2444954  best 1243528  11.3s
+[sa] step  40  T 57.02  acc 0.368  win 92 x 29  cur 1240628  best 1240628  21.0s
+[sa] step  60  T 14.32  acc 0.212  win 48 x 24  cur 880218  best 880218  30.9s
+[sa] step  80  T 3.598  acc 0.080  win 48 x 24  cur 813887  best 813887  39.4s
+[sa] step  99  T 0.9683  acc 0.046  win 48 x 24  cur 808775  best 808775  46.4s
+[sa] 20353 sync rounds, 208696094 attempts (41.0% proposals failed)  46.4s (moves 33.5s, merge 12.5s)
+[polish] pass 1: 808775.000000 -> 808682.000000; slide 9, relocate 4, assignment 0, reorder 30
+[polish] pass 2: 808682.000000 -> 808682.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 19/2614 accepted, 808682.000000 -> 808571.000000
+[window-hpwl] pass 1: 10/2586 accepted, 808571.000000 -> 808491.000000
+[order-hpwl] pass 0: 9 accepted, 808491.000000 -> 808436.000000
+[order-hpwl] pass 1: 1 accepted, 808436.000000 -> 808435.000000
+[polish-total] 808775.000000 -> 808435.000000
+[stage2] done  50.31s
+
+
+===== e11_format: OK 7.1s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e11_format/e11_format output -v
+Total displacement (legal): 9361.588
+Maximum displacement (legal): 22.338
+Total HPWL (legal): 122145.5
+Total HPWL (SA): 74128.5
+egal] matching sweep: total 9390.8  max 22.3
+[legal] total-refine pass 0: 2 moves  total 9382.0  max 22.3
+[legal] total-refine pass 1: 0 moves  total 9382.0  max 22.3
+[window-disp] 2 rows x 4 cells: 96 windows solved, 3 improved: total 9382.0 -> 9369.3 (max 22.3380)  0.01s
+[window-disp] 3 rows x 3 cells: 127 windows solved, 2 improved: total 9369.3 -> 9361.7 (max 22.3380)  0.04s
+[window-disp] 2 rows x 4 cells: 24 windows solved, 0 improved: total 9361.7 -> 9361.7 (max 22.3380)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 9361.7 -> 9361.7 (max 22.3380)  0.00s
+[legal] final round 2: total 9361.7  1.6s
+[legal] row-opt (d0 22): 1 segments  total 9361.6  max 22.3
+[legal] matching sweep: total 9361.6  max 22.3
+[legal] total-refine pass 0: 0 moves  total 9361.6  max 22.3
+[window-disp] 2 rows x 4 cells: 40 windows solved, 0 improved: total 9361.6 -> 9361.6 (max 22.3380)  0.01s
+[window-disp] 3 rows x 3 cells: 84 windows solved, 0 improved: total 9361.6 -> 9361.6 (max 22.3380)  0.02s
+[legal] final round 3: total 9361.6  1.7s
+[legal] max-refine 0 moves  total 9361.6  max 22.3
+[legal] matching d0 21: 7 windows, cells above d0 7 -> 7  total 9361.6  max 22.3
+[legal] final max pass: max 22.3380 -> 22.3380, total 9361.6  1.7s
+[pareto] pass 1: 1 groups, total 9361.588000, max 22.338000
+[pareto] pass 2: 1 groups, total 9361.588000, max 22.338000
+[window-disp] 2 rows x 4 cells: 982 windows solved, 0 improved: total 9361.6 -> 9361.6 (max 22.3380)  0.14s
+[window-disp] 3 rows x 3 cells: 1342 windows solved, 0 improved: total 9361.6 -> 9361.6 (max 22.3380)  0.54s
+[stage1] done  2.33s
+[sa] HPWL 122146  T0 209.1  alpha 0.9333  9930000 moves in 100 steps
+[sa] step   0  T 209.1  acc 0.515  win 31 x 26  cur 224355  best 121946  0.0s
+[sa] step  20  T 52.53  acc 0.401  win 32 x 27  cur 149652  best 121946  0.9s
+[sa] step  40  T 13.2  acc 0.266  win 28 x 18  cur 94014  best 93842  1.8s
+[sa] step  60  T 3.314  acc 0.107  win 28 x 18  cur 75886  best 75814  2.7s
+[sa] step  80  T 0.8326  acc 0.050  win 28 x 18  cur 74311  best 74282  3.7s
+[sa] step  99  T 0.2241  acc 0.039  win 28 x 18  cur 74174  best 74172  4.6s
+[sa] proposals failed 48.1%
+[sa] slide      2.9% of attempts, accepted  81.6%, improving  21.5%
+[sa] move       7.1% of attempts, accepted  50.7%, improving  23.0%
+[sa] swap      31.7% of attempts, accepted  38.9%, improving  16.2%
+[sa] reorder    9.9% of attempts, accepted  35.2%, improving  13.3%
+[sa] rowopt     0.2% of attempts, accepted 100.0%, improving  44.4%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  80.8%
+[polish] pass 1: 74172.500000 -> 74172.500000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 11/513 accepted, 74172.500000 -> 74153.000000
+[window-hpwl] pass 1: 2/481 accepted, 74153.000000 -> 74147.500000
+[order-hpwl] pass 0: 3 accepted, 74147.500000 -> 74139.500000
+[order-hpwl] pass 1: 3 accepted, 74139.500000 -> 74128.500000
+[polish-total] 74172.500000 -> 74128.500000
+[stage2] done  7.09s
+
+
+===== e12_collapse: OK 20.1s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e12_collapse/e12_collapse output -v
+Total displacement (legal): 314763.868
+Maximum displacement (legal): 239
+Total HPWL (legal): 2361524
+Total HPWL (SA): 187944
+  7.6s
+[legal] row-opt (d0 239): 5 segments  total 314890.3  max 239.0
+[legal] matching sweep: total 314888.4  max 239.0
+[legal] total-refine pass 0: 13 moves  total 314849.6  max 239.0
+[window-disp] 2 rows x 4 cells: 1785 windows solved, 15 improved: total 314849.6 -> 314808.3 (max 239.0000)  0.23s
+[window-disp] 3 rows x 3 cells: 2306 windows solved, 3 improved: total 314808.3 -> 314804.0 (max 239.0000)  0.87s
+[window-disp] 2 rows x 4 cells: 97 windows solved, 0 improved: total 314804.0 -> 314804.0 (max 239.0000)  0.02s
+[window-disp] 3 rows x 3 cells: 65 windows solved, 0 improved: total 314804.0 -> 314804.0 (max 239.0000)  0.03s
+[legal] final round 2: total 314804.0  8.7s
+[legal] max-refine 0 moves  total 314804.0  max 239.0
+[legal] matching d0 227: 124 windows, cells above d0 108 -> 95  total 314912.4  max 239.0
+[legal] final max pass: max 239.0000 -> 239.0000, total 314912.4  9.0s
+[pareto] pass 1: 16 groups, total 314884.948000, max 239.000000
+[pareto] pass 2: 5 groups, total 314884.948000, max 239.000000
+[window-disp] 2 rows x 4 cells: 2149 windows solved, 31 improved: total 314884.9 -> 314782.3 (max 239.0000)  0.32s
+[window-disp] 3 rows x 3 cells: 2545 windows solved, 6 improved: total 314782.3 -> 314763.9 (max 239.0000)  1.10s
+[window-disp] 2 rows x 4 cells: 97 windows solved, 0 improved: total 314763.9 -> 314763.9 (max 239.0000)  0.02s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 314763.9 -> 314763.9 (max 239.0000)  0.00s
+[stage1] done  10.43s
+[sa] HPWL 2361524  T0 563.7  alpha 0.9333  18055000 moves in 100 steps
+[sa] step   0  T 563.7  acc 0.536  win 38 x 53  cur 1220145  best 1213638  0.1s
+[sa] step  20  T 141.6  acc 0.478  win 70 x 96  cur 544879  best 534364  1.9s
+[sa] step  40  T 35.57  acc 0.371  win 34 x 47  cur 289290  best 287610  3.7s
+[sa] step  60  T 8.934  acc 0.211  win 28 x 24  cur 202382  best 202178  5.6s
+[sa] step  80  T 2.244  acc 0.092  win 28 x 24  cur 189436  best 189280  7.6s
+[sa] step  99  T 0.604  acc 0.049  win 28 x 24  cur 188105  best 188094  9.3s
+[sa] proposals failed 41.3%
+[sa] slide      2.9% of attempts, accepted  83.5%, improving  21.2%
+[sa] move      12.3% of attempts, accepted  58.7%, improving  28.2%
+[sa] swap      33.1% of attempts, accepted  45.0%, improving  19.1%
+[sa] reorder    9.9% of attempts, accepted  46.4%, improving  17.7%
+[sa] rowopt     0.3% of attempts, accepted 100.0%, improving  69.2%
+[sa] ism        0.0% of attempts, accepted 100.0%, improving  88.1%
+[polish] pass 1: 188094.500000 -> 188049.000000; slide 2, relocate 3, assignment 2, reorder 15
+[polish] pass 2: 188049.000000 -> 188049.000000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 10/923 accepted, 188049.000000 -> 188002.000000
+[window-hpwl] pass 1: 8/887 accepted, 188002.000000 -> 187974.000000
+[order-hpwl] pass 0: 6 accepted, 187974.000000 -> 187957.500000
+[order-hpwl] pass 1: 2 accepted, 187957.500000 -> 187944.000000
+[polish-total] 188094.500000 -> 187944.000000
+[stage2] done  20.07s
+
+
+===== e13_onecell: OK 0.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e13_onecell/e13_onecell output -v
+Total displacement (legal): 4.57
+Maximum displacement (legal): 4.57
+Total HPWL (legal): 36.5
+Total HPWL (SA): 36.5
+total 4.6  max 4.6
+[legal] matching sweep: total 4.6  max 4.6
+[legal] total-refine pass 0: 0 moves  total 4.6  max 4.6
+[legal] spread: 1 x 1 bins, 0 path moves, 1 cells retargeted, max shift 4.2, B 136
+[legal] abacus: 0 exact cost steps
+[legal] abacus  total 4.6  max 4.6  0.0s
+[legal] row-opt (d0 0): 0 segments  total 4.6  max 4.6
+[legal] max-refine 0 moves  total 4.6  max 4.6
+[legal] matching d0 4: 1 windows, cells above d0 1 -> 1  total 4.6  max 4.6
+[legal] row-opt (d0 5): 0 segments  total 4.6  max 4.6
+[legal] matching sweep: total 4.6  max 4.6
+[legal] total-refine pass 0: 0 moves  total 4.6  max 4.6
+[legal] max-refine 0 moves  total 4.6  max 4.6
+[legal] matching d0 4: 1 windows, cells above d0 1 -> 1  total 4.6  max 4.6
+[legal] row-opt (d0 5): 0 segments  total 4.6  max 4.6
+[legal] matching sweep: total 4.6  max 4.6
+[legal] total-refine pass 0: 0 moves  total 4.6  max 4.6
+[legal] plain: total 4.6 max 4.6 | spread: total 4.6 max 4.6 -> plain
+[legal] row-opt (d0 5): 0 segments  total 4.6  max 4.6
+[legal] matching sweep: total 4.6  max 4.6
+[legal] total-refine pass 0: 0 moves  total 4.6  max 4.6
+[window-disp] 2 rows x 5 cells: 0 windows solved, 0 improved: total 4.6 -> 4.6 (max 4.5700)  0.00s
+[window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 4.6 -> 4.6 (max 4.5700)  0.00s
+[legal] final round 0: total 4.6  0.0s
+[legal] max-refine 0 moves  total 4.6  max 4.6
+[legal] matching d0 4: 1 windows, cells above d0 1 -> 1  total 4.6  max 4.6
+[legal] final max pass: max 4.5700 -> 4.5700, total 4.6  0.0s
+[pareto] pass 1: 0 groups, total 4.570000, max 4.570000
+[window-disp] 2 rows x 5 cells: 0 windows solved, 0 improved: total 4.6 -> 4.6 (max 4.5700)  0.00s
+[window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 4.6 -> 4.6 (max 4.5700)  0.00s
+[stage1] done  0.00s
+[sa] HPWL 36  T0 4.481  alpha 0.9333  5000000 moves in 100 steps
+[sa] step   0  T 4.481  acc 0.699  win 12 x 10  cur 36  best 36  0.0s
+[sa] step  20  T 1.126  acc 0.704  win 12 x 10  cur 36  best 36  0.1s
+[sa] step  40  T 0.2828  acc 0.704  win 12 x 10  cur 36  best 36  0.1s
+[sa] step  60  T 0.07103  acc 0.689  win 12 x 10  cur 36  best 36  0.1s
+[sa] step  80  T 0.01784  acc 0.685  win 12 x 10  cur 36  best 36  0.2s
+[sa] step  99  T 0.004802  acc 0.689  win 12 x 10  cur 36  best 36  0.2s
+[sa] proposals failed 30.4%
+[sa] slide     69.6% of attempts, accepted 100.0%, improving   0.0%
+[sa] move       0.0% of attempts, accepted   0.0%, improving   0.0%
+[sa] swap       0.0% of attempts, accepted   0.0%, improving   0.0%
+[sa] reorder    0.0% of attempts, accepted   0.0%, improving   0.0%
+[sa] rowopt     0.0% of attempts, accepted   0.0%, improving   0.0%
+[sa] ism        0.0% of attempts, accepted   0.0%, improving   0.0%
+[polish] pass 1: 36.500000 -> 36.500000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 0/0 accepted, 36.500000 -> 36.500000
+[order-hpwl] pass 0: 0 accepted, 36.500000 -> 36.500000
+[polish-total] 36.500000 -> 36.500000
+[stage2] done  0.24s
+
+
+===== e14_fixedonly: OK 0.0s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e14_fixedonly/e14_fixedonly output -v
+Total displacement (legal): 0
+Maximum displacement (legal): 0
+Total HPWL (legal): 73
+Total HPWL (SA): 73
+[read] 3 nodes (0 movable), 1 nets, 2 rows, 4 segments, utilization 0.000  0.00s
+[stage1] done  0.00s
+[polish] pass 1: 73.000000 -> 73.000000; slide 0, relocate 0, assignment 0, reorder 0
+[polish-total] 73.000000 -> 73.000000
+[stage2] done  0.00s
+
+
+===== e15_realistic: OK 55.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e15_realistic/e15_realistic output -v
+Total displacement (legal): 9536809.953
+Maximum displacement (legal): 4347.226
+Total HPWL (legal): 117726991.5
+Total HPWL (SA): 87516472
+ndows solved, 138 improved: total 9621741.4 -> 9560683.0 (max 4347.2260)  0.26s
+[window-disp] 3 rows x 3 cells: 4432 windows solved, 43 improved: total 9560683.0 -> 9552220.1 (max 4347.2260)  0.74s
+[window-disp] 2 rows x 4 cells: 718 windows solved, 11 improved: total 9552220.1 -> 9548580.0 (max 4347.2260)  0.06s
+[window-disp] 3 rows x 3 cells: 320 windows solved, 1 improved: total 9548580.0 -> 9548426.6 (max 4347.2260)  0.12s
+[window-disp] 2 rows x 4 cells: 86 windows solved, 0 improved: total 9548426.6 -> 9548426.6 (max 4347.2260)  0.02s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 9548426.6 -> 9548426.6 (max 4347.2260)  0.01s
+[legal] final max pass: max 4353.6300 -> 4347.2260, total 9548426.6  12.4s
+[pareto] pass 1: 51 groups, total 9547978.699000, max 4347.226000
+[pareto] pass 2: 14 groups, total 9547267.489000, max 4347.226000
+[window-disp] 2 rows x 4 cells: 15558 windows solved, 26 improved: total 9547267.5 -> 9540290.1 (max 4347.2260)  0.35s
+[window-disp] 3 rows x 3 cells: 19986 windows solved, 13 improved: total 9540290.1 -> 9537049.8 (max 4347.2260)  1.40s
+[window-disp] 2 rows x 4 cells: 590 windows solved, 3 improved: total 9537049.8 -> 9536810.0 (max 4347.2260)  0.05s
+[window-disp] 3 rows x 3 cells: 64 windows solved, 0 improved: total 9536810.0 -> 9536810.0 (max 4347.2260)  0.03s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 9536810.0 -> 9536810.0 (max 4347.2260)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 9536810.0 -> 9536810.0 (max 4347.2260)  0.00s
+[stage1] done  14.29s
+[sa] parallel: 8 bands/threads  HPWL 117726992  T0 5.172e+04  480000000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 5.172e+04  acc 0.813  win 7252 x 5884  cur 711345111  best 117726992  2.5s
+[sa] step  20  T 1.299e+04  acc 0.591  win 10560 x 8568  cur 431195044  best 117726992  9.8s
+[sa] step  40  T 3263  acc 0.410  win 9671 x 7847  cur 156405678  best 117726992  19.7s
+[sa] step  60  T 819.7  acc 0.332  win 1907 x 1548  cur 105338012  best 105338012  26.9s
+[sa] step  80  T 205.9  acc 0.152  win 1851 x 756  cur 89835072  best 89835072  34.4s
+[sa] step  99  T 55.42  acc 0.056  win 1851 x 756  cur 87653665  best 87653665  38.1s
+[sa] 3428 sync rounds, 104467938 attempts (13.2% proposals failed)  38.1s (moves 22.7s, merge 15.0s)
+[polish] pass 1: 87653665.000000 -> 87578289.000000; slide 115, relocate 117, assignment 7, reorder 337
+[polish] pass 2: 87578289.000000 -> 87575526.000000; slide 16, relocate 8, assignment 0, reorder 7
+[polish] pass 3: 87575526.000000 -> 87575394.000000; slide 2, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 154/7955 accepted, 87575394.000000 -> 87544484.000000
+[window-hpwl] pass 1: 95/7851 accepted, 87544484.000000 -> 87525580.500000
+[order-hpwl] pass 0: 51 accepted, 87525580.500000 -> 87517000.000000
+[order-hpwl] pass 1: 5 accepted, 87517000.000000 -> 87516472.000000
+[polish-total] 87653665.000000 -> 87516472.000000
+[stage2] done  55.45s
+
+
+===== e16_rowgaps: OK 51.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v4/home/ClaudeOpus55_v4/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge_seed5/e16_rowgaps/e16_rowgaps output -v
+Total displacement (legal): 66422.851
+Maximum displacement (legal): 43
+Total HPWL (legal): 739345.5
+Total HPWL (SA): 467138
+round 2: total 66431.8  3.6s
+[legal] row-opt (d0 43): 4 segments  total 66417.8  max 43.1
+[legal] matching sweep: total 66416.2  max 43.1
+[legal] total-refine pass 0: 3 moves  total 66414.2  max 43.1
+[window-disp] 2 rows x 4 cells: 264 windows solved, 3 improved: total 66414.2 -> 66399.7 (max 43.0980)  0.05s
+[window-disp] 3 rows x 3 cells: 449 windows solved, 0 improved: total 66399.7 -> 66399.7 (max 43.0980)  0.17s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 66399.7 -> 66399.7 (max 43.0980)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 66399.7 -> 66399.7 (max 43.0980)  0.00s
+[legal] final round 3: total 66399.7  3.8s
+[legal] max-refine 1 moves  total 66531.2  max 43.0
+[legal] matching d0 41: 36 windows, cells above d0 35 -> 34  total 66531.2  max 43.0
+[window-disp] 2 rows x 4 cells: 221 windows solved, 7 improved: total 66531.2 -> 66422.9 (max 43.0000)  0.02s
+[window-disp] 3 rows x 3 cells: 406 windows solved, 0 improved: total 66422.9 -> 66422.9 (max 43.0000)  0.08s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 66422.9 -> 66422.9 (max 43.0000)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 66422.9 -> 66422.9 (max 43.0000)  0.00s
+[legal] final max pass: max 43.0980 -> 43.0000, total 66422.9  3.9s
+[pareto] pass 1: 10 groups, total 66422.851000, max 43.000000
+[pareto] pass 2: 7 groups, total 66422.851000, max 43.000000
+[window-disp] 2 rows x 4 cells: 4126 windows solved, 0 improved: total 66422.9 -> 66422.9 (max 43.0000)  0.19s
+[window-disp] 3 rows x 3 cells: 5399 windows solved, 0 improved: total 66422.9 -> 66422.9 (max 43.0000)  0.73s
+[stage1] done  4.85s
+[sa] parallel: 8 bands/threads  HPWL 739346  T0 588.6  344000000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 588.6  acc 0.842  win 56 x 132  cur 2410699  best 739346  0.9s
+[sa] step  20  T 147.8  acc 0.598  win 80 x 188  cur 1374239  best 739346  11.4s
+[sa] step  40  T 37.14  acc 0.396  win 68 x 159  cur 692740  best 692740  21.5s
+[sa] step  60  T 9.328  acc 0.318  win 28 x 26  cur 504518  best 504518  30.6s
+[sa] step  80  T 2.343  acc 0.127  win 28 x 24  cur 469942  best 469942  39.1s
+[sa] step  99  T 0.6307  acc 0.052  win 28 x 24  cur 467322  best 467322  45.6s
+[sa] 25959 sync rounds, 217014305 attempts (12.0% proposals failed)  45.6s (moves 29.4s, merge 15.6s)
+[polish] pass 1: 467322.500000 -> 467217.500000; slide 19, relocate 6, assignment 2, reorder 66
+[polish] pass 2: 467217.500000 -> 467214.500000; slide 0, relocate 1, assignment 0, reorder 1
+[polish] pass 3: 467214.500000 -> 467214.500000; slide 0, relocate 0, assignment 0, reorder 0
+[window-hpwl] pass 0: 6/2177 accepted, 467214.500000 -> 467187.000000
+[window-hpwl] pass 1: 11/2134 accepted, 467187.000000 -> 467171.000000
+[order-hpwl] pass 0: 12 accepted, 467171.000000 -> 467140.500000
+[order-hpwl] pass 1: 2 accepted, 467140.500000 -> 467138.000000
+[polish-total] 467322.500000 -> 467138.000000
+[stage2] done  51.22s
+

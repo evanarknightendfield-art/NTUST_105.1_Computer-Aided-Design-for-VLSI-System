@@ -1,0 +1,89 @@
+開始 lg_new；log = final/lg_new.log
+lg_new 完成；不要重跑。
+開始 edge_new；log = final/edge_new.log
+edge_new 完成；不要重跑。
+開始 lg_new_L1；log = final/lg_new_L1.log
+lg_new_L1 完成；不要重跑。
+開始 lg_new_L2；log = final/lg_new_L2.log
+lg_new_L2 完成；不要重跑。
+開始 ts_e01_nearlegal；log = final/ts_e01_nearlegal.log
+ts_e01_nearlegal 完成；不要重跑。
+開始 check_ts_e01_nearlegal；log = final/check_ts_e01_nearlegal.log
+check_ts_e01_nearlegal 完成；不要重跑。
+開始 ts_e02_legalgp；log = final/ts_e02_legalgp.log
+ts_e02_legalgp 完成；不要重跑。
+開始 check_ts_e02_legalgp；log = final/check_ts_e02_legalgp.log
+check_ts_e02_legalgp 完成；不要重跑。
+開始 ts_e03_dense97；log = final/ts_e03_dense97.log
+ts_e03_dense97 完成；不要重跑。
+開始 check_ts_e03_dense97；log = final/check_ts_e03_dense97.log
+check_ts_e03_dense97 完成；不要重跑。
+開始 ts_e04_sparse10；log = final/ts_e04_sparse10.log
+ts_e04_sparse10 完成；不要重跑。
+開始 check_ts_e04_sparse10；log = final/check_ts_e04_sparse10.log
+check_ts_e04_sparse10 完成；不要重跑。
+開始 ts_e05_bignets；log = final/ts_e05_bignets.log
+ts_e05_bignets 完成；不要重跑。
+開始 check_ts_e05_bignets；log = final/check_ts_e05_bignets.log
+check_ts_e05_bignets 完成；不要重跑。
+開始 ts_e06_tallnarrow；log = final/ts_e06_tallnarrow.log
+ts_e06_tallnarrow 完成；不要重跑。
+開始 check_ts_e06_tallnarrow；log = final/check_ts_e06_tallnarrow.log
+check_ts_e06_tallnarrow 完成；不要重跑。
+開始 ts_e07_tworows；log = final/ts_e07_tworows.log
+ts_e07_tworows 完成；不要重跑。
+開始 check_ts_e07_tworows；log = final/check_ts_e07_tworows.log
+check_ts_e07_tworows 完成；不要重跑。
+開始 ts_e08_fragmented；log = final/ts_e08_fragmented.log
+ts_e08_fragmented 完成；不要重跑。
+開始 check_ts_e08_fragmented；log = final/check_ts_e08_fragmented.log
+check_ts_e08_fragmented 完成；不要重跑。
+開始 ts_e09_offgrid；log = final/ts_e09_offgrid.log
+ts_e09_offgrid 完成；不要重跑。
+開始 check_ts_e09_offgrid；log = final/check_ts_e09_offgrid.log
+check_ts_e09_offgrid 完成；不要重跑。
+開始 ts_e10_mixedsites；log = final/ts_e10_mixedsites.log
+ts_e10_mixedsites 完成；不要重跑。
+開始 check_ts_e10_mixedsites；log = final/check_ts_e10_mixedsites.log
+check_ts_e10_mixedsites 完成；不要重跑。
+開始 ts_e11_format；log = final/ts_e11_format.log
+ts_e11_format 完成；不要重跑。
+開始 check_ts_e11_format；log = final/check_ts_e11_format.log
+check_ts_e11_format 完成；不要重跑。
+開始 ts_e12_collapse；log = final/ts_e12_collapse.log
+ts_e12_collapse 完成；不要重跑。
+開始 check_ts_e12_collapse；log = final/check_ts_e12_collapse.log
+check_ts_e12_collapse 完成；不要重跑。
+開始 ts_e13_onecell；log = final/ts_e13_onecell.log
+ts_e13_onecell 完成；不要重跑。
+開始 check_ts_e13_onecell；log = final/check_ts_e13_onecell.log
+check_ts_e13_onecell 完成；不要重跑。
+開始 ts_e14_fixedonly；log = final/ts_e14_fixedonly.log
+ts_e14_fixedonly 完成；不要重跑。
+開始 check_ts_e14_fixedonly；log = final/check_ts_e14_fixedonly.log
+check_ts_e14_fixedonly 完成；不要重跑。
+開始 ts_e15_realistic；log = final/ts_e15_realistic.log
+ts_e15_realistic 完成；不要重跑。
+開始 check_ts_e15_realistic；log = final/check_ts_e15_realistic.log
+check_ts_e15_realistic 完成；不要重跑。
+開始 ts_e16_rowgaps；log = final/ts_e16_rowgaps.log
+ts_e16_rowgaps 完成；不要重跑。
+開始 check_ts_e16_rowgaps；log = final/check_ts_e16_rowgaps.log
+check_ts_e16_rowgaps 完成；不要重跑。
+開始 hpwl_fixed；log = final/hpwl_fixed.log
+hpwl_fixed 完成；不要重跑。
+開始 hpwl_equal；log = final/hpwl_equal.log
+hpwl_equal 完成；不要重跑。
+開始 hpwl_default；log = final/hpwl_default.log
+hpwl_default 完成；不要重跑。
+開始 generate_seed4；log = final/generate_seed4.log
+generate_seed4 完成；不要重跑。
+開始 seed4_ClaudeOpus55_v4；log = final/seed4_ClaudeOpus55_v4.log
+seed4_ClaudeOpus55_v4 完成；不要重跑。
+開始 seed4_CodexChainDP；log = final/seed4_CodexChainDP.log
+seed4_CodexChainDP 完成；不要重跑。
+開始 seed4_ClaudeOpus55_v5；log = final/seed4_ClaudeOpus55_v5.log
+seed4_ClaudeOpus55_v5 完成；不要重跑。
+開始 seed4_CodexCapDP；log = final/seed4_CodexCapDP.log
+seed4_CodexCapDP 完成；不要重跑。
+所有計算步驟完成；下一步彙整數據、README、COMPARISON 與 edge 表，不改演算法。

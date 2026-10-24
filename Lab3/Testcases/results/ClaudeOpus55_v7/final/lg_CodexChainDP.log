@@ -1,0 +1,56 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/lg_CodexChainDP/submissions/CodexChainDP.tgz  (42 files)
+       CodexChainDP/CMakeLists.txt
+       CodexChainDP/Makefile
+       CodexChainDP/READING_NOTES.md
+       CodexChainDP/README.md
+       CodexChainDP/WORK_STATE.md
+       CodexChainDP/src/annealer.cpp
+       CodexChainDP/src/annealer.hpp
+       CodexChainDP/src/chain.cpp
+       CodexChainDP/src/chain.hpp
+       CodexChainDP/src/global.cpp
+       CodexChainDP/src/global.hpp
+       CodexChainDP/src/legalizer.cpp
+       CodexChainDP/src/legalizer.hpp
+       CodexChainDP/src/main.cpp
+       CodexChainDP/src/optimizer.cpp
+       CodexChainDP/src/optimizer.hpp
+       CodexChainDP/src/placedb.cpp
+       CodexChainDP/src/placedb.hpp
+       CodexChainDP/src/pool.hpp
+       CodexChainDP/src/rowmap.hpp
+       CodexChainDP/src/window.cpp
+       CodexChainDP/src/window.hpp
+       CodexChainDP/tests/acceptance.py
+       CodexChainDP/tests/certify.py
+       CodexChainDP/tests/chain_test.cpp
+       CodexChainDP/tests/compare.py
+       CodexChainDP/tests/edge_cases.py
+       CodexChainDP/tests/fair_time.py
+       CodexChainDP/tests/final_audit.py
+       CodexChainDP/tests/final_validation.py
+       CodexChainDP/tests/global_test.cpp
+       CodexChainDP/tests/measure.py
+       CodexChainDP/tests/multirow_test.cpp
+       CodexChainDP/tests/optimizer_test.cpp
+       CodexChainDP/tests/parallel_sa_test.cpp
+       CodexChainDP/tests/pool_test.cpp
+       CodexChainDP/tests/run_tests.py
+       CodexChainDP/tests/sa_bench.cpp
+       CodexChainDP/tests/sanitize_global.py
+       CodexChainDP/tests/summarize.py
+       CodexChainDP/tests/update_docs.py
+       CodexChainDP/tests/window_test.cpp
+[build] OK build/dp  10.5s
+[run] ibm01    PASS  OK          69.6s  disp=23027754.8485 max=10580.34 legal=87255096.0 sa=49899210.0
+[run] ibm05    PASS  OK          94.4s  disp=1327754.08 max=202.747 legal=11826069.0 sa=9670425.0
+[run] toy      PASS  OK           8.1s  disp=43261.6 max=2007.9 legal=103854.0 sa=47436.0
+[run] h01      PASS  OK          20.8s  disp=2367.09 max=29.39 legal=25541.0 sa=14051.0
+[run] h02      PASS  OK          33.8s  disp=466109.499 max=2541.499 legal=3753652.0 sa=2294345.1
+[run] h03      PASS  OK          31.9s  disp=7040.1975 max=20.9394 legal=26501.6 sa=12105.4
+[run] h04      PASS  OK          44.8s  disp=181950.51 max=231.76 legal=540042.0 sa=230078.0
+[run] h05      PASS  OK          28.4s  disp=1549278.908 max=1337.305 legal=26207147.2 sa=17954110.7
+[run] h06      PASS  OK         101.0s  disp=894364.68 max=428.03 legal=2143393.5 sa=669908.0
+[run] h07      PASS  OK          78.4s  disp=109415.6902 max=47.5557 legal=357075.282 sa=165721.923
+[run] h08      PASS  OK         120.1s  disp=126027816.289 max=28421.64 legal=309944363.0 sa=101346548.0
+[summary] 11/11 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/lg_CodexChainDP/record.csv

@@ -1,0 +1,79 @@
+[
+  {
+    "round": 1,
+    "phase": "target_windows",
+    "seconds": 0.397069342,
+    "total_before": 1551912.4600000004,
+    "total_after": 1551154.414000001,
+    "total_reduction": 758.0459999993909,
+    "max_before": 1494.987000000001,
+    "max_after": 1494.987000000001,
+    "work": 11
+  },
+  {
+    "round": 1,
+    "phase": "ejection_chains",
+    "seconds": 2.101813833,
+    "total_before": 1551154.414000001,
+    "total_after": 1548461.4579999999,
+    "total_reduction": 2692.9560000011697,
+    "max_before": 1494.987000000001,
+    "max_after": 1494.987000000001,
+    "work": 26
+  },
+  {
+    "round": 1,
+    "phase": "post_chain_dp",
+    "seconds": 0.3214994940000002,
+    "total_before": 1548461.4579999999,
+    "total_after": 1546933.6099999996,
+    "total_reduction": 1527.848000000231,
+    "max_before": 1494.987000000001,
+    "max_after": 1494.987000000001,
+    "work": -1
+  },
+  {
+    "round": 2,
+    "phase": "target_windows",
+    "seconds": 0.40057820900000074,
+    "total_before": 1546933.6099999996,
+    "total_after": 1546909.6179999996,
+    "total_reduction": 23.99200000008568,
+    "max_before": 1494.987000000001,
+    "max_after": 1494.987000000001,
+    "work": 2
+  },
+  {
+    "round": 2,
+    "phase": "ejection_chains",
+    "seconds": 2.0849871989999995,
+    "total_before": 1546909.6179999996,
+    "total_after": 1546817.2859999991,
+    "total_reduction": 92.33200000040233,
+    "max_before": 1494.987000000001,
+    "max_after": 1494.987000000001,
+    "work": 2
+  },
+  {
+    "round": 2,
+    "phase": "post_chain_dp",
+    "seconds": 0.09937559099999937,
+    "total_before": 1546817.2859999991,
+    "total_after": 1546509.0399999989,
+    "total_reduction": 308.24600000027567,
+    "max_before": 1494.987000000001,
+    "max_after": 1494.987000000001,
+    "work": -1
+  },
+  {
+    "round": 0,
+    "phase": "chain_stage",
+    "seconds": 5.405482430999999,
+    "total_before": 1551912.4600000004,
+    "total_after": 1546509.0399999989,
+    "total_reduction": 5403.420000001555,
+    "max_before": 1494.987000000001,
+    "max_after": 1494.987000000001,
+    "work": -1
+  }
+]

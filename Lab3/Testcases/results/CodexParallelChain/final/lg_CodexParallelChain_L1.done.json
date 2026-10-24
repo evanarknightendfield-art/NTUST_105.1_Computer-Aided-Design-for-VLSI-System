@@ -1,0 +1,17 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "Grader/tools/local_grade.py",
+  "AI_Solutions/CodexParallelChain",
+  "CodexParallelChain",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/only_L1",
+  "--work",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/lg_CodexParallelChain_L1",
+  "--timeout",
+  "240",
+  "--dp-args=-v"
+ ],
+ "returncode": 0,
+ "seconds": 203.12,
+ "finished": "Fri Oct 23 19:08:51 2026"
+}

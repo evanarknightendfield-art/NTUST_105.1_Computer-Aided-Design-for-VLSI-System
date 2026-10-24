@@ -1,0 +1,35 @@
+[
+  {
+    "round": 1,
+    "phase": "target_windows",
+    "seconds": 0.010349618999999866,
+    "total_before": 2347.85,
+    "total_after": 2347.85,
+    "total_reduction": 0.0,
+    "max_before": 31.39,
+    "max_after": 31.39,
+    "work": 0
+  },
+  {
+    "round": 1,
+    "phase": "ejection_chains",
+    "seconds": 0.04920240499999995,
+    "total_before": 2347.85,
+    "total_after": 2347.85,
+    "total_reduction": 0.0,
+    "max_before": 31.39,
+    "max_after": 31.39,
+    "work": 0
+  },
+  {
+    "round": 0,
+    "phase": "chain_stage",
+    "seconds": 0.059557684999999694,
+    "total_before": 2347.85,
+    "total_after": 2347.85,
+    "total_reduction": 0.0,
+    "max_before": 31.39,
+    "max_after": 31.39,
+    "work": -1
+  }
+]

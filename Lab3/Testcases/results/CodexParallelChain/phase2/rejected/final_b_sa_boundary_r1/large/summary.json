@@ -1,0 +1,133 @@
+{
+  "rows": [
+    {
+      "bench": "L2",
+      "seed": 1,
+      "record": {
+        "bench": "L2",
+        "status": "OK",
+        "seconds": "211.42",
+        "disp": "2048617085.5199",
+        "max": "13144.61",
+        "hpwl_legal": "2641021008.5",
+        "hpwl_sa": "1545871796.0",
+        "t_read": "3.996",
+        "t_legalize": "95.801",
+        "t_pareto": "13.499",
+        "t_windowdp": "1.112",
+        "t_chain": "5.242",
+        "t_global": "",
+        "t_sa": "6.159",
+        "t_polish": "85.078",
+        "t_stage1": "119.64979667001171",
+        "t_stage2": "210.8872242399957",
+        "sa_threads": "4",
+        "sa_attempts": "4274781",
+        "sa_internal_s": "6.0",
+        "sa_failed_pct": "66.1",
+        "sa_timeup": "",
+        "global_tries": "0",
+        "global_accepted": "0",
+        "global_unknown": "0",
+        "sa_seconds": "6.159"
+      },
+      "legal": true,
+      "placements": {
+        "output_legal.pl": "63c0a231f602363d2c3910cadd83b5699447642c572c02d47f3a3160733a8cc7",
+        "output.pl": "83e168f47154c57737c21b9678b33e90324b2ef4cf84fb13396417735174f111"
+      },
+      "extra_budget": 6.0,
+      "extra_used": 5.05762,
+      "extra_overshoot": false,
+      "time_limit": 600
+    },
+    {
+      "bench": "L2",
+      "seed": 2,
+      "record": {
+        "bench": "L2",
+        "status": "OK",
+        "seconds": "212.77",
+        "disp": "2048193564.9399",
+        "max": "13194.17",
+        "hpwl_legal": "2640619422.5",
+        "hpwl_sa": "1547361849.5",
+        "t_read": "3.996",
+        "t_legalize": "95.83",
+        "t_pareto": "13.521",
+        "t_windowdp": "1.112",
+        "t_chain": "6.519",
+        "t_global": "",
+        "t_sa": "6.157",
+        "t_polish": "85.097",
+        "t_stage1": "120.9784879310173",
+        "t_stage2": "212.23225575999822",
+        "sa_threads": "4",
+        "sa_attempts": "4280748",
+        "sa_internal_s": "6.0",
+        "sa_failed_pct": "66.0",
+        "sa_timeup": "",
+        "global_tries": "0",
+        "global_accepted": "0",
+        "global_unknown": "0",
+        "sa_seconds": "6.157"
+      },
+      "legal": true,
+      "placements": {
+        "output_legal.pl": "64b545ec139e94ad2ed2302a27c0cb01060b85f1a67524b955395dc4d282e753",
+        "output.pl": "45c89edf9443c4a750f275728b5a246b8b6e530cb187a3b1c51063318e9678d3"
+      },
+      "extra_budget": 6.0,
+      "extra_used": 6.336646,
+      "extra_overshoot": true,
+      "time_limit": 600
+    },
+    {
+      "bench": "L1",
+      "seed": 1,
+      "record": {
+        "bench": "L1",
+        "status": "OK",
+        "seconds": "187.5",
+        "disp": "2444386620.656",
+        "max": "50443.901",
+        "hpwl_legal": "5574446664.6",
+        "hpwl_sa": "1726371306.0",
+        "t_read": "0.633",
+        "t_legalize": "89.387",
+        "t_pareto": "3.423",
+        "t_windowdp": "6.568",
+        "t_chain": "5.748",
+        "t_global": "",
+        "t_sa": "60.006",
+        "t_polish": "21.63",
+        "t_stage1": "105.75930099497782",
+        "t_stage2": "187.39624064101372",
+        "sa_threads": "4",
+        "sa_attempts": "75650222",
+        "sa_internal_s": "60.0",
+        "sa_failed_pct": "12.8",
+        "sa_timeup": "",
+        "global_tries": "0",
+        "global_accepted": "0",
+        "global_unknown": "0",
+        "sa_seconds": "60.006"
+      },
+      "legal": true,
+      "placements": {
+        "output_legal.pl": "c811862d7075e076d3ae1fb12b8008fe23ecf067edc297a43f95a8aab7ae6bdd",
+        "output.pl": "2950b771d503a1a2691d9e277cf9ff4184700906436a9a95d752ed74678a7ae7"
+      },
+      "extra_budget": 6.0,
+      "extra_used": 5.721408,
+      "extra_overshoot": false,
+      "time_limit": 240
+    }
+  ],
+  "gates": {
+    "all_legal": true,
+    "all_within_time": true,
+    "zero_extra_overshoots": false
+  },
+  "all_gates": false
+}

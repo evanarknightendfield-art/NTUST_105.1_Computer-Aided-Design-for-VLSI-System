@@ -1,0 +1,19 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/bin/CodexParallelChain/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase1/maxvar/r3",
+  "--dp-args=--no-sa",
+  "Testcases/holdout/h01/h01",
+  "Testcases/holdout/h04/h04",
+  "Testcases/holdout/h06/h06",
+  "Testcases/holdout/h07/h07",
+  "Testcases/testcases/ibm05/ibm05"
+ ],
+ "returncode": 0,
+ "seconds": 125.96,
+ "finished": "Sat Oct 24 02:28:05 2026"
+}

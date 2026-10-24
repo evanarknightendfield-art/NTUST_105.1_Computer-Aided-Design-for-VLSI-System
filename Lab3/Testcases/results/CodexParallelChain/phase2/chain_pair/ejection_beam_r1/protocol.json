@@ -1,0 +1,317 @@
+{
+  "tag": "ejection_beam_r1",
+  "script_sha256": "232a9480e18ea66217f3857c9c0e38224775d2ad115642742b8fe754af0d7889",
+  "src_sha256": "2fc4f106a3f84835e9f92afbf40d0befa0eb9f5ac7ab1160b58373fc96cf921a",
+  "reference_sha256": "03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2",
+  "modes": {
+    "stage1": "--no-sa",
+    "chain15": "--no-sa --cap-time 0 --chain-time 1.5",
+    "chain30": "--no-sa --cap-time 0 --chain-time 3"
+  },
+  "cases": [
+    "ibm01",
+    "ibm05",
+    "toy",
+    "h01",
+    "h02",
+    "h03",
+    "h04",
+    "h05",
+    "h06",
+    "h07",
+    "h08"
+  ],
+  "cmake_sha256": "111dd1e622a4ab208f77cb49ff35ccb0572c64cc7e727686b5783ec7676b0b6d",
+  "runner_sha256": "4e9b13e0d79088920b842b7990733ee8e07f29453fac8414510deabf0c9da9b6",
+  "instrumentation_sha256": "33bf1d29bb4ff5ce267cfb041fbdfaaf8ccbf11649c954f25419397350becce0",
+  "inputs": {
+    "ibm01": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.aux",
+        "sha256": "62a6aa78b37e6c23dd0426b106b4920ff069ba3d070af35934bc9fcf4a6decf7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.nodes",
+        "sha256": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.nets",
+        "sha256": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.wts",
+        "sha256": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.pl",
+        "sha256": "d003573ae03d3413714c3ac89d99e00bc5f131e5f0cbff1e3a7f9430cbfdcaca"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.scl",
+        "sha256": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc"
+      }
+    },
+    "ibm05": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.aux",
+        "sha256": "173db66078531d61e1b94b0c47f2b007d3024d52984649dd89d233e376062a06"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.nodes",
+        "sha256": "83c9acbee7c43b4c5288f8867f2db1988ffdc1d9d424aedf6cede0c935dcea41"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.nets",
+        "sha256": "7a1cbb6bab44d95893e0ca2304f84eb1737c72a9823d09a14679e9fcbfc34c2b"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.wts",
+        "sha256": "b9162b7e4dc187ee1075b155d6cc1f6bbaa13165889b1ea1d7f3fc4cde0d26bb"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.pl",
+        "sha256": "bdbfcceef50fb3260d60f8b52c7292a41c9d77d9afec297e17ecd492c1ed584f"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.scl",
+        "sha256": "60c1593e1a7558bbd273731248e91cf0ab1549778a28accc7dce7e3be03e592a"
+      }
+    },
+    "toy": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.aux",
+        "sha256": "7c1e2044cc41a001647823bc969831b3f7d5bbdc90720fe357896e8445442ad9"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nodes",
+        "sha256": "775f0bf23ddb00bfc20d26cdbe2d1ea99e266d6e6f848ad107f2d3509605d17a"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nets",
+        "sha256": "038aca10169c0f07636444898d4cfceccd89ac602014cb481b8d5c639f5c4c84"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.wts",
+        "sha256": "78487846435e8114a65b9eb061d8e90da63be644b89a484426c905f455d1f3f3"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.pl",
+        "sha256": "57e2575466c488e20ed8871ffd2a6733f0a46d5eba8b4a4463de1d563e562eca"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.scl",
+        "sha256": "c27e581e161d0f4fbe540a2f8a19ee8fcf9708355f3c4af113b19fd672630e38"
+      }
+    },
+    "h01": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.aux",
+        "sha256": "1b1b685a53ae5cdaf1cdaa2257dca9cbfe9b8d1a4b0e2a2120a6607efc34edbd"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.nodes",
+        "sha256": "c848add221ed66bb484bc9321477f3cc02bcff7e29eae09dc91f6ee184a20e21"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.nets",
+        "sha256": "c0347a3286ca2f742ecf361bfb32c1eec2abce23c2eb67931ce96fdecd9c4462"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.wts",
+        "sha256": "2c6f8cb43f3688b210d8274ee4f664e2280432d42b8ae4c2b3b46284121c1536"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.pl",
+        "sha256": "8630fbe758b479c20dea3e53090a793ac91ea87298fe3ea3dead4b4c0ca33aa8"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.scl",
+        "sha256": "12c7f725802d81ec5e35f1fec337d6f48a2a71285c8e926db5fb5bc601b386ab"
+      }
+    },
+    "h02": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.aux",
+        "sha256": "2db103abc7646ae4d0dfa942cff4c63f29ffafa04c49f850b51157f7c5f42c48"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.nodes",
+        "sha256": "6a285c8d292d1bb9123628bcdc48cf5e5cf7b5b6bd522b443c9d8d100deddb49"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.nets",
+        "sha256": "4266e66864c6f28f07a90eb4fc306aa20d1030e55ba507172732f825c7d3aadf"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.wts",
+        "sha256": "fd21c09b348da236d7e40629e40e84897a0488d7dd600913bfa658b885a4abb9"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.pl",
+        "sha256": "16895312438cf757e56f16d013bb9e00783a6454f5d4a21970a64490235562c3"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.scl",
+        "sha256": "5a7e233d004d9ddc3b0d1db6d22fe298da4f3b105982f171402823508c8e7bbc"
+      }
+    },
+    "h03": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.aux",
+        "sha256": "30e59164904bfece7696c5492397f599872933bb5b871d93bff3dde19d8f3b68"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.nodes",
+        "sha256": "7932e5e2a98c7a483a3663b5366436c1677b05b96d8c239f5638996d95d3c6cb"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.nets",
+        "sha256": "29e1ebfd5e708d09ceb39c993a95e7ea4e01d9f23bcf304994b944c5aa2334b8"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.wts",
+        "sha256": "6566591a4cb6e2c287dce4f6cec308775fa2fbc1d82527baf7ed172633a61a29"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.pl",
+        "sha256": "809dc57773a0f3da54a4edc8e7f9b4ffe3b77c06fbbda4e0dc5af0234350459e"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.scl",
+        "sha256": "32adf0240d0ccc65b4add1297a1b0e981a5deb527eb4d278b127d342eeb852fe"
+      }
+    },
+    "h04": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.aux",
+        "sha256": "238370114843d35b76cc203b958d623f2e77a21ba06494012796453b6d7bd908"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.nodes",
+        "sha256": "b5e27b6d867edb6f83cea5a55da09801652f0341e9eb586651c7c349ee5dd4c1"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.nets",
+        "sha256": "4c0fe2143a6e93aab37e1f9aa9e25810e48475042f2c943f949d59db66545d11"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.wts",
+        "sha256": "86adf48855bc8de4ab31c6704e4de0553ef901b5226c00b5a3e2b20f4dba1b77"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.pl",
+        "sha256": "50062abbbd7da974c05f7d23157e4b5bab9e81ba471892140707758488fa046d"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04.scl",
+        "sha256": "29961dfdad8a747669f7082110b18bfffba2b89ce709288781bb9b3e65732cc6"
+      }
+    },
+    "h05": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.aux",
+        "sha256": "a0936428ca5ee3ff17aaa1a31c0c2f5b2240d9c62d344e0379f7175d0e97543e"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.nodes",
+        "sha256": "c14a46407eb0338d45334890d4d495f0ade1e43f922e87c728734bc6b6b8037f"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.nets",
+        "sha256": "b29fe1c1ab687895f75582fc97c64b649f2e938e775831861172095aadfd4d01"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.wts",
+        "sha256": "8551d1a4034dc62238b44d21345922b83ab6ee7b8aae61175aee3efdd72d58be"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.pl",
+        "sha256": "cecca007a3d20eeb4c1228bc8d1dd8f88a4d62bf646dbe15fa283f1b3fcfaf98"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05.scl",
+        "sha256": "8393ed0c392159d69049491d9553c357dcca15b2f8268ffbc7a56378a973273e"
+      }
+    },
+    "h06": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.aux",
+        "sha256": "e0c4949b05a5cb4e453212be28674a03845051dd69d241bad1c8e04376a41929"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.nodes",
+        "sha256": "5516df202d293c68616f3f603439c11784f0d99765b3fe8c442690be65d983a0"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.nets",
+        "sha256": "022e018ebc24a84bcf3f8d645628940eb2549444148d3a7d902b63d559f343e7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.wts",
+        "sha256": "94dbe1e7c4bcd79b1fa1405d4db389877217c7841db8a87ac65efa5332457184"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.pl",
+        "sha256": "76877cb2ff4041f9f5bc4ed0c158b66b00afd7b8eec311adec59c7207a616074"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06.scl",
+        "sha256": "e19f929cbf3fc9b021475f3a91563b0e04e8142f0889a11cdd4de3869c733379"
+      }
+    },
+    "h07": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.aux",
+        "sha256": "7976c645227792a23044d0f5b8e3c7749c798dc512f35b6cce600a985c529362"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.nodes",
+        "sha256": "9afd47d51cf5b62f1252b22e68fc2b35d300ca35b063c471c8c51171852264d1"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.nets",
+        "sha256": "26dfff163cc74463701c88fe6f463240a084734ee6bcab4eed8b16d197368f73"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.wts",
+        "sha256": "f5dcf7b7beda6b9a111e24be9a7bc30d7b80a480dbad9fcd28f560cfe385f828"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.pl",
+        "sha256": "15410d04a661b2accd892b43a5a5e0b716c67cbcfaa88fdf41d814884aed3591"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07.scl",
+        "sha256": "ce1e7e759409071318358eb8d501579ef56d25147be7a64c027a6ea1c82dd712"
+      }
+    },
+    "h08": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.aux",
+        "sha256": "411d3f311f25a40ee093c6957f3be698f05df51131c38199d14e0859c2a3fa12"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.nodes",
+        "sha256": "bf0edfd911be22877243ff5836b1280c2ef39bf481767e0a6e33f9bc317d15fe"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.nets",
+        "sha256": "ab0ee74c3eda0a5c5457d7d542201320c4a91db4657e8806cb02c311b5ce0fbf"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.wts",
+        "sha256": "8e11c57dd514b10259adfeecd2b17afcf62259741576a42a868f9c4f9598e9ba"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.pl",
+        "sha256": "13e2f7c8789159f67759eee350234f471787a202ef49f2198beda2dbbed7ce9e"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08.scl",
+        "sha256": "1c920efed67adad76a0a720da06a496c7c1af06b64273f628d60e380e92b9ce8"
+      }
+    }
+  },
+  "chain_reference_sha256": "10ede2d7948d2203a0df3926b88cb372fb4a121c09960cb0b63de3a085205e54",
+  "note": "Stage 1 only; no HPWL quality claims. Candidate/v6 interleaved per case. ChainDP historical reference only defines 8/11; all improvement ratios use paired v6."
+}

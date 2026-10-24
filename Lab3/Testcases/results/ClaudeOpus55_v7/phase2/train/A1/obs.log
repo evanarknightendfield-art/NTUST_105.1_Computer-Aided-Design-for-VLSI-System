@@ -1,0 +1,2 @@
+[run] e08_fragmented   OK    10.6s  stage1 10.609167622984387  sa None att None  max 71.753  hpwl 709085.5
+[run] e16_rowgaps      OK    10.3s  stage1 10.226481663994491  sa None att None  max 62.588  hpwl 756423.0

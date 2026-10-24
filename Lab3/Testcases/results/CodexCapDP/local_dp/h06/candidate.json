@@ -1,0 +1,21 @@
+{
+  "id": "8",
+  "round": "0",
+  "kind": "full",
+  "seed": "8",
+  "D": "430.545",
+  "start_max": "434.81",
+  "start_total": "887002.260000003",
+  "row_s": "0.00914321600000179",
+  "site_s": "0",
+  "dp_s": "1.893662012",
+  "raw_total": "1261450.08",
+  "raw_max": "430.48",
+  "post_total": "887150.560000002",
+  "post_max": "430.48",
+  "feasible": "1",
+  "accepted": "1",
+  "method": "1",
+  "total_limit": "890550.269040003",
+  "reason": "accepted"
+}

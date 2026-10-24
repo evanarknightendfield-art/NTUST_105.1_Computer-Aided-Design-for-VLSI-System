@@ -14,6 +14,8 @@ Lab3 的規則：**測資放這裡，任何程式跑出來的東西也放這裡�
 | `holdout/` | 8 筆報告 / 穩健度測試用的新測資 h01–h08（300 ~ 25,000 cells） | `Grader/tools/gen_bench.py --suite`（seed 2026） |
 | `edge/` | **過擬合檢查** e01–e16：現有測資沒測到的情況（下面有表） | `Grader/tools/gen_edge.py`（5 秒、15 MB） |
 | `edge_seed2/` | 同樣 16 種情況、換一個 seed（`--seed 20261020`），CodexChainDP 演算法定下來之後才產生的驗證組 | `Grader/tools/gen_edge.py`（numpy 2.4.6 才會跟量過的一樣；2.5.3 的 e04 不同） |
+| `edge_seed3/` | 同樣 16 種情況、再換一個 seed（`--seed 20261021`），ClaudeOpus55_v5 演算法凍結之後才產生的驗證組 | `Grader/tools/gen_edge.py`（numpy 2.4.6） |
+| `edge_seed7/` | 同樣 16 種情況、再換一個 seed（`--seed 20261025`），ClaudeOpus55_v7 凍結之後才產生的驗證組 | `Grader/tools/gen_edge.py`（由 `results/ClaudeOpus55_v7/scripts/final_validate_v7.py` 產生） |
 | `large/` | 規模測試 L1（200,000 cells）、L2（1,000,000 cells），有熱點、macro、split row | `./make_testcases.sh --large`（約 1 分鐘、160 MB） |
 
 每筆是一個資料夾 `X/X.{aux,nodes,nets,wts,pl,scl}`，執行方式：`dp testcases/ibm01/ibm01 results/manual/ibm01`。
@@ -57,6 +59,8 @@ Lab3 的規則：**測資放這裡，任何程式跑出來的東西也放這裡�
 | `step2_grader/` | `Grader/step2_grader/run_demo.py` | 檢查器示範：`inputs/`（h01 的副本）、`GOOD/`、`BAD_*/`、`record.csv` | 紀錄（重跑 `run_demo.py` 會重建全部） |
 | `CodexWindowDP/` | `tests/compare.py`、`summarize.py`、`plot_results.py`、`full_bound.py` | `comparison/`（6 個版本 × 11 筆）、`multiseed/`、`bounds/`、`figures/`、`verification.txt` | 紀錄 |
 | `CodexChainDP/` | `tests/acceptance.py`、`final_validation.py`、`fair_time.py`、`measure.py`、`compare.py` | 驗收（`acceptance.json`、`summary.json`、`default_comparison.csv`）、同時間 / 同次數的 HPWL 比較、`edge_seed2/`、`exact_max/`、`large_L1/`，說明在 `AI_Solutions/CodexChainDP/README.md` | 紀錄 |
+| `ClaudeOpus55_v5/` | `scripts/`（`phase1_runs.sh`、`run_ts.py`、`tune_stage1.py`、`hpwl_compare.py`、`phase2_final.sh`、`final_summary.py` 等） | `diagnosis.md`（第一階段診斷）、`phase1/`（量測）、`exact/`（toy / h01 精確取捨曲線）、`tune/`（只用 testcases + holdout 的調參）、`final/`（凍結後的驗收、HPWL 三種比較、新 seed），說明在 `AI_Solutions/ClaudeOpus55_v5/README.md` | 紀錄 |
+| `ClaudeOpus55_v7/` | `scripts/`（`phase1_queue.py`、`phase1_analyze.py`、`phase2_train.py`、`phase2_large.py`、`final_validate_v7.py`、`final_report_v7.py` 等） | `diagnosis.md`（第一階段診斷）、`phase1*/`（量測）、`phase2/`（訓練、大設計、測試）、`final/`（最終驗證，`summary.md`）、`provenance/`（保護資料夾與文件的 sha256） | 紀錄 |
 | `edge/<版本>/` | `results/run_edge.sh` | 各版本在 edge 測資的 `record.csv`、`summary.csv`、`run.log`；`README.md` 是比較和分析（完整輸出在 `local_grade/edge_<版本>/`） | 紀錄 |
 
 「進 git」那一欄：**是** = 全部；**紀錄** = 只有小的紀錄檔，**否** = 都不進。`results/` 底下的規則（`.gitignore`）：

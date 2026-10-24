@@ -1,0 +1,3 @@
+kind,box,cells,columns,status,seconds,total,total_vs_P,cap
+hotspot_mip,1:16,1029,72891,infeasible,876.48,,,231.76
+hotspot_mip,2:16,1295,158657,unknown_status1,1265.19,,,231.76

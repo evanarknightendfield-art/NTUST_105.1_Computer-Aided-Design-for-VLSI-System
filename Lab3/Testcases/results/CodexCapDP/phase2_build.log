@@ -1,0 +1,33 @@
+[  6%] Building CXX object CMakeFiles/dp_core.dir/src/capsearch.cpp.o
+[  6%] Building CXX object CMakeFiles/dp_core.dir/src/global.cpp.o
+[ 10%] Building CXX object CMakeFiles/dp_core.dir/src/legalizer.cpp.o
+[ 13%] Building CXX object CMakeFiles/dp_core.dir/src/window.cpp.o
+[ 17%] Linking CXX static library libdp_core.a
+[ 31%] Built target dp_core
+[ 44%] Building CXX object CMakeFiles/multirow_test.dir/tests/multirow_test.cpp.o
+[ 44%] Building CXX object CMakeFiles/window_test.dir/tests/window_test.cpp.o
+[ 44%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 44%] Building CXX object CMakeFiles/optimizer_test.dir/tests/optimizer_test.cpp.o
+[ 48%] Linking CXX executable multirow_test
+[ 51%] Linking CXX executable window_test
+[ 51%] Built target multirow_test
+[ 51%] Built target window_test
+[ 55%] Linking CXX executable chain_test
+[ 58%] Linking CXX executable parallel_sa_test
+[ 62%] Linking CXX executable optimizer_test
+[ 65%] Built target chain_test
+[ 68%] Built target parallel_sa_test
+[ 72%] Linking CXX executable pool_test
+[ 75%] Building CXX object CMakeFiles/global_test.dir/tests/global_test.cpp.o
+[ 75%] Built target optimizer_test
+[ 79%] Built target pool_test
+[ 82%] Building CXX object CMakeFiles/capsearch_test.dir/tests/capsearch_test.cpp.o
+[ 86%] Building CXX object CMakeFiles/cap_windows_test.dir/tests/cap_windows_test.cpp.o
+[ 89%] Linking CXX executable dp
+[ 89%] Built target dp
+[ 93%] Linking CXX executable global_test
+[ 93%] Built target global_test
+[ 96%] Linking CXX executable cap_windows_test
+[ 96%] Built target cap_windows_test
+[100%] Linking CXX executable capsearch_test
+[100%] Built target capsearch_test

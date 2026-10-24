@@ -1,0 +1,74 @@
+start run_C/h01
+done run_C/h01 13.59
+start run_C/h02
+done run_C/h02 24.26
+start run_C/h03
+done run_C/h03 17.12
+start run_C/h04
+done run_C/h04 16.76
+start run_C/h05
+done run_C/h05 6.26
+start run_C/h06
+done run_C/h06 32.39
+start run_C/h07
+done run_C/h07 26.24
+start run_C/h08
+done run_C/h08 63.45
+start chain/h01
+done chain/h01 0.12
+start chain/h02
+done chain/h02 3.28
+start chain/h03
+done chain/h03 4.55
+start chain/h04
+done chain/h04 5.11
+start chain/h05
+done chain/h05 5.22
+start chain/h06
+done chain/h06 5.4
+start chain/h07
+done chain/h07 5.35
+start chain/h08
+done chain/h08 5.01
+start plateau/h01/precap
+done plateau/h01/precap 0.0
+start plateau/h01/final_A
+done plateau/h01/final_A 0.0
+start local_dp/h01
+done local_dp/h01 0.17
+start forensic/h01
+done forensic/h01 1.38
+start plateau/h04/precap
+done plateau/h04/precap 0.02
+start plateau/h04/final_A
+done plateau/h04/final_A 0.02
+start local_dp/h04
+done local_dp/h04 2.74
+start forensic/h04
+done forensic/h04 3.57
+start plateau/h06/precap
+done plateau/h06/precap 0.06
+start plateau/h06/final_A
+done plateau/h06/final_A 0.05
+start local_dp/h06
+done local_dp/h06 13.5
+start forensic/h06
+done forensic/h06 10.74
+start plateau/h07/precap
+done plateau/h07/precap 0.09
+start plateau/h07/final_A
+done plateau/h07/final_A 0.08
+start local_dp/h07
+done local_dp/h07 7.93
+start forensic/h07
+done forensic/h07 8.59
+start plateau/h08/precap
+done plateau/h08/precap 0.16
+start plateau/h08/final_A
+done plateau/h08/final_A 0.14
+start local_dp/h08
+done local_dp/h08 18.8
+start forensic/h08
+done forensic/h08 18.56
+start L2
+done L2 285.71

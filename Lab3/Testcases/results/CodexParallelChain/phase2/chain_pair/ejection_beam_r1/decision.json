@@ -1,0 +1,16 @@
+{
+  "decision": "revert",
+  "round": 1,
+  "reason": "Total improvement 0.00683% < 0.03%; h05/h06 half-budget gain failed; same-budget nodes decreased 0.50%/1.20%, no throughput evidence to justify another round.",
+  "summary_sha256": "cd9fd2e2ea0eb0b0b698c8be05168e8777689818b01602948344e6775528102b",
+  "gates": {
+    "both_at_least_8": true,
+    "total_improved_003pct": false,
+    "max_gm_not_worse_01pct": true,
+    "every_max_not_worse_02pct": true,
+    "chain_seconds_not_more": true,
+    "h05_h06_gain": false
+  },
+  "ejection_bands": "Deferred/rejected for B: no proven complete Search touched-set isolation, boundary replay or barrier cap validation; no band code retained.",
+  "restore": "phase2/accepted/sa_boundary_r1/src"
+}

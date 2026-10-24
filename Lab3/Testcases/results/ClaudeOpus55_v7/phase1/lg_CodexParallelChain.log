@@ -1,0 +1,69 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase1/lg_CodexParallelChain/submissions/CodexParallelChain.tgz  (55 files)
+       CodexParallelChain/CMakeLists.txt
+       CodexParallelChain/Makefile
+       CodexParallelChain/README.md
+       CodexParallelChain/WORK_STATE.md
+       CodexParallelChain/src/annealer.cpp
+       CodexParallelChain/src/annealer.hpp
+       CodexParallelChain/src/capsearch.cpp
+       CodexParallelChain/src/capsearch.hpp
+       CodexParallelChain/src/chain.cpp
+       CodexParallelChain/src/chain.hpp
+       CodexParallelChain/src/global.cpp
+       CodexParallelChain/src/global.hpp
+       CodexParallelChain/src/guard.hpp
+       CodexParallelChain/src/legalizer.cpp
+       CodexParallelChain/src/legalizer.hpp
+       CodexParallelChain/src/main.cpp
+       CodexParallelChain/src/optimizer.cpp
+       CodexParallelChain/src/optimizer.hpp
+       CodexParallelChain/src/placedb.cpp
+       CodexParallelChain/src/placedb.hpp
+       CodexParallelChain/src/pool.hpp
+       CodexParallelChain/src/rowmap.hpp
+       CodexParallelChain/src/sa_bands.hpp
+       CodexParallelChain/src/window.cpp
+       CodexParallelChain/src/window.hpp
+       CodexParallelChain/tests/cap_chain_prototype.cpp
+       CodexParallelChain/tests/cap_chain_prototype.hpp
+       CodexParallelChain/tests/cap_search_bench.cpp
+       CodexParallelChain/tests/cap_windows_bench.cpp
+       CodexParallelChain/tests/cap_windows_test.cpp
+       CodexParallelChain/tests/capsearch_test.cpp
+       CodexParallelChain/tests/chain_test.cpp
+       CodexParallelChain/tests/compare_methods.cpp
+       CodexParallelChain/tests/diag_chaindp_global/driver.cpp
+       CodexParallelChain/tests/diag_chaindp_global/global_diag.cpp
+       CodexParallelChain/tests/diagnostic.hpp
+       CodexParallelChain/tests/diagnostic_capsearch.cpp
+       CodexParallelChain/tests/diagnostic_experiments.cpp
+       CodexParallelChain/tests/diagnostic_main.cpp
+       CodexParallelChain/tests/diagnostic_window.cpp
+       CodexParallelChain/tests/global_preserve_prototype.cpp
+       CodexParallelChain/tests/global_preserve_prototype.hpp
+       CodexParallelChain/tests/global_test.cpp
+       CodexParallelChain/tests/guard_test.cpp
+       CodexParallelChain/tests/multirow_test.cpp
+       CodexParallelChain/tests/optimizer_test.cpp
+       CodexParallelChain/tests/parallel_sa_test.cpp
+       CodexParallelChain/tests/pool_test.cpp
+       CodexParallelChain/tests/readpl.cpp
+       CodexParallelChain/tests/repair_compare.cpp
+       CodexParallelChain/tests/run_tests.py
+       CodexParallelChain/tests/sa_bench.cpp
+       CodexParallelChain/tests/sa_bench2.cpp
+       CodexParallelChain/tests/site_repair_bench.cpp
+       CodexParallelChain/tests/window_test.cpp
+[build] OK build/dp  13.1s
+[run] ibm01    PASS  OK          86.5s  disp=23101702.9947 max=10427.027 legal=87250158.0 sa=48547884.0
+[run] ibm05    PASS  OK         102.1s  disp=1327881.229 max=199.918 legal=11833721.5 sa=9527517.5
+[run] toy      PASS  OK           2.8s  disp=43324.4 max=2004.4 legal=104094.0 sa=46530.0
+[run] h01      PASS  OK          11.5s  disp=2358.81 max=29.39 legal=25492.0 sa=14031.5
+[run] h02      PASS  OK          24.1s  disp=463886.857 max=2526.519 legal=3785092.0 sa=2282312.7
+[run] h03      PASS  OK          23.3s  disp=7066.0491 max=20.2013 legal=26511.7 sa=12022.3
+[run] h04      PASS  OK          33.0s  disp=180397.59 max=237.85 legal=534360.5 sa=230110.5
+[run] h05      PASS  OK          26.2s  disp=1551488.48 max=1337.305 legal=26205137.2 sa=17952305.4
+[run] h06      PASS  OK          95.4s  disp=886834.3 max=435.19 legal=2149816.0 sa=663162.5
+[run] h07      PASS  OK          87.7s  disp=109183.8951 max=47.6762 legal=354504.532 sa=162814.497
+[run] h08      PASS  OK         123.2s  disp=125501889.455 max=28282.309 legal=308306777.2 sa=99643352.8
+[summary] 11/11 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase1/lg_CodexParallelChain/record.csv

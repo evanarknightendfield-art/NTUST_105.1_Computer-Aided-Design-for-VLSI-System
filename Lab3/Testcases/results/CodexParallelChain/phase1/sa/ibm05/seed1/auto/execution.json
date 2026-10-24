@@ -1,0 +1,18 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "0-19",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/bin/sa_bench",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/ibm05/seed1/auto/output",
+    "1",
+    "3000000",
+    "100000",
+    "0",
+    "0"
+  ],
+  "returncode": 0,
+  "wall_seconds": 5.522629196988419
+}

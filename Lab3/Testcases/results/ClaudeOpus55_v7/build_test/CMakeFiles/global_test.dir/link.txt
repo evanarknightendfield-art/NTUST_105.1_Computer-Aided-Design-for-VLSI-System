@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file,CMakeFiles/global_test.dir/link.d CMakeFiles/global_test.dir/tests/global_test.cpp.o -o global_test  libdp_core.a

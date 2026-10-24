@@ -1,0 +1,5 @@
+{
+  "binary_sha256": "819163d5964a39cc07cd39b5ae83d0c3da833eab5a1c50c68b59ec9dac059e25",
+  "ratio": 1.007,
+  "baseline": "run_C diag_precap; all holdout"
+}

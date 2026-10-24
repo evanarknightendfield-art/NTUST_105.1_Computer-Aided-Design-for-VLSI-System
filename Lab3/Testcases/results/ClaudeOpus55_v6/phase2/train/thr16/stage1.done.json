@@ -1,0 +1,16 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase2/train/thr16/build/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase2/train/thr16/ts",
+  "--dp-args=--no-sa --threads 16",
+  "Testcases/testcases",
+  "Testcases/holdout"
+ ],
+ "returncode": 0,
+ "seconds": 254.81,
+ "finished": "Thu Oct 22 06:00:12 2026"
+}

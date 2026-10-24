@@ -1,0 +1,86 @@
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (0.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/asan_outside
+[  6%] Building CXX object CMakeFiles/dp_core.dir/src/capsearch.cpp.o
+[  6%] Building CXX object CMakeFiles/dp_core.dir/src/annealer.cpp.o
+[  9%] Building CXX object CMakeFiles/dp_core.dir/src/chain.cpp.o
+[ 12%] Building CXX object CMakeFiles/dp_core.dir/src/global.cpp.o
+[ 16%] Building CXX object CMakeFiles/dp_core.dir/src/legalizer.cpp.o
+[ 19%] Building CXX object CMakeFiles/dp_core.dir/src/optimizer.cpp.o
+[ 22%] Building CXX object CMakeFiles/dp_core.dir/src/placedb.cpp.o
+[ 25%] Building CXX object CMakeFiles/dp_core.dir/src/window.cpp.o
+[ 29%] Linking CXX static library libdp_core.a
+[ 29%] Built target dp_core
+[ 38%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 38%] Building CXX object CMakeFiles/multirow_test.dir/tests/multirow_test.cpp.o
+[ 38%] Building CXX object CMakeFiles/window_test.dir/tests/window_test.cpp.o
+[ 41%] Building CXX object CMakeFiles/optimizer_test.dir/tests/optimizer_test.cpp.o
+[ 45%] Linking CXX executable window_test
+[ 45%] Built target window_test
+[ 48%] Building CXX object CMakeFiles/chain_test.dir/tests/chain_test.cpp.o
+[ 51%] Linking CXX executable multirow_test
+[ 51%] Built target multirow_test
+[ 54%] Building CXX object CMakeFiles/parallel_sa_test.dir/tests/parallel_sa_test.cpp.o
+[ 58%] Linking CXX executable optimizer_test
+[ 58%] Built target optimizer_test
+[ 61%] Building CXX object CMakeFiles/pool_test.dir/tests/pool_test.cpp.o
+[ 64%] Linking CXX executable dp
+[ 64%] Built target dp
+[ 67%] Linking CXX executable pool_test
+[ 70%] Building CXX object CMakeFiles/global_test.dir/tests/global_test.cpp.o
+[ 70%] Built target pool_test
+[ 74%] Building CXX object CMakeFiles/capsearch_test.dir/tests/capsearch_test.cpp.o
+[ 77%] Linking CXX executable chain_test
+[ 77%] Built target chain_test
+[ 80%] Building CXX object CMakeFiles/cap_windows_test.dir/tests/cap_windows_test.cpp.o
+[ 83%] Linking CXX executable parallel_sa_test
+[ 83%] Built target parallel_sa_test
+[ 87%] Building CXX object CMakeFiles/guard_test.dir/tests/guard_test.cpp.o
+[ 90%] Linking CXX executable global_test
+[ 90%] Built target global_test
+[ 93%] Linking CXX executable guard_test
+[ 93%] Built target guard_test
+[ 96%] Linking CXX executable cap_windows_test
+[ 96%] Built target cap_windows_test
+[100%] Linking CXX executable capsearch_test
+[100%] Built target capsearch_test
+Test project /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/asan_outside
+      Start  1: window
+ 1/10 Test  #1: window ...........................   Passed    0.14 sec
+      Start  2: multirow
+ 2/10 Test  #2: multirow .........................   Passed   10.93 sec
+      Start  3: optimizer
+ 3/10 Test  #3: optimizer ........................   Passed    0.81 sec
+      Start  4: chain
+ 4/10 Test  #4: chain ............................   Passed    6.33 sec
+      Start  5: parallel_sa
+ 5/10 Test  #5: parallel_sa ......................   Passed    0.81 sec
+      Start  6: pool
+ 6/10 Test  #6: pool .............................   Passed    0.01 sec
+      Start  7: global
+ 7/10 Test  #7: global ...........................   Passed    0.02 sec
+      Start  8: capsearch
+ 8/10 Test  #8: capsearch ........................   Passed   12.02 sec
+      Start  9: cap_windows
+ 9/10 Test  #9: cap_windows ......................   Passed    0.62 sec
+      Start 10: guard
+10/10 Test #10: guard ............................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) =  31.71 sec
+
+[orchestrator] cmake -S /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain rc=0
+
+[orchestrator] cmake --build /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/asan_outside rc=0
+
+[orchestrator] ctest --output-on-failure --timeout rc=0

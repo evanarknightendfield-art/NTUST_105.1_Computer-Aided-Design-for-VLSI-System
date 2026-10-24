@@ -1,0 +1,165 @@
+$ cmake -S . -B build
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build
+
+$ cmake --build build -j
+[  3%] Building CXX object CMakeFiles/dp_core.dir/src/annealer.cpp.o
+[  7%] Building CXX object CMakeFiles/dp_core.dir/src/chain.cpp.o
+[ 11%] Building CXX object CMakeFiles/dp_core.dir/src/global.cpp.o
+[ 18%] Building CXX object CMakeFiles/dp_core.dir/src/placedb.cpp.o
+[ 18%] Building CXX object CMakeFiles/dp_core.dir/src/optimizer.cpp.o
+[ 25%] Building CXX object CMakeFiles/dp_core.dir/src/window.cpp.o
+[ 25%] Building CXX object CMakeFiles/dp_core.dir/src/legalizer.cpp.o
+[ 29%] Building CXX object CMakeFiles/dp_core.dir/src/capsearch.cpp.o
+[ 33%] Linking CXX static library libdp_core.a
+[ 33%] Built target dp_core
+[ 37%] Building CXX object CMakeFiles/parallel_sa_test.dir/tests/parallel_sa_test.cpp.o
+[ 44%] Building CXX object CMakeFiles/multirow_test.dir/tests/multirow_test.cpp.o
+[ 48%] Building CXX object CMakeFiles/optimizer_test.dir/tests/optimizer_test.cpp.o
+[ 48%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 51%] Building CXX object CMakeFiles/chain_test.dir/tests/chain_test.cpp.o
+[ 59%] Building CXX object CMakeFiles/global_test.dir/tests/global_test.cpp.o
+[ 59%] Building CXX object CMakeFiles/capsearch_test.dir/tests/capsearch_test.cpp.o
+[ 62%] Building CXX object CMakeFiles/pool_test.dir/tests/pool_test.cpp.o
+[ 66%] Building CXX object CMakeFiles/window_test.dir/tests/window_test.cpp.o
+[ 70%] Linking CXX executable pool_test
+[ 74%] Linking CXX executable parallel_sa_test
+[ 74%] Built target pool_test
+[ 74%] Built target parallel_sa_test
+[ 77%] Linking CXX executable global_test
+[ 77%] Built target global_test
+[ 81%] Linking CXX executable chain_test
+[ 81%] Built target chain_test
+[ 85%] Linking CXX executable multirow_test
+[ 85%] Built target multirow_test
+[ 88%] Linking CXX executable optimizer_test
+[ 88%] Built target optimizer_test
+[ 92%] Linking CXX executable window_test
+[ 96%] Linking CXX executable capsearch_test
+[ 96%] Built target window_test
+[ 96%] Built target capsearch_test
+[100%] Linking CXX executable dp
+[100%] Built target dp
+In file included from /usr/include/x86_64-linux-gnu/c++/15/bits/c++allocator.h:33,
+                 from /usr/include/c++/15/bits/allocator.h:46,
+                 from /usr/include/c++/15/string:45,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/src/placedb.hpp:4,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/src/global.hpp:2,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/src/global.cpp:1:
+In member function ‘void std::__new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = int; _Args = {int}; _Tp = int]’,
+    inlined from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = int; _Args = {int}; _Tp = int]’ at /usr/include/c++/15/bits/alloc_traits.h:674:17,
+    inlined from ‘void std::vector<_Tp, _Alloc>::_M_insert_aux(iterator, _Arg&&) [with _Arg = int; _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/vector.tcc:430:31,
+    inlined from ‘std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::insert(const_iterator, const value_type&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/vector.tcc:162:21,
+    inlined from ‘bool {anonymous}::constructCap(const PlaceDB&, Placement&, double, double)’ at /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/src/global.cpp:101:45:
+/usr/include/c++/15/bits/new_allocator.h:191:11: warning: array subscript -1 is outside array bounds of ‘int [2305843009213693951]’ [-Warray-bounds=]
+  191 |         { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In member function ‘_Tp* std::__new_allocator<_Tp>::allocate(size_type, const void*) [with _Tp = int]’,
+    inlined from ‘static _Tp* std::allocator_traits<std::allocator<_CharT> >::allocate(allocator_type&, size_type) [with _Tp = int]’ at /usr/include/c++/15/bits/alloc_traits.h:614:28,
+    inlined from ‘std::_Vector_base<_Tp, _Alloc>::pointer std::_Vector_base<_Tp, _Alloc>::_M_allocate(std::size_t) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:387:33,
+    inlined from ‘void std::_Vector_base<_Tp, _Alloc>::_M_create_storage(std::size_t) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:405:44,
+    inlined from ‘std::_Vector_base<_Tp, _Alloc>::_Vector_base(std::size_t, const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:341:26,
+    inlined from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:633:61,
+    inlined from ‘bool {anonymous}::constructCap(const PlaceDB&, Placement&, double, double)’ at /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/src/global.cpp:101:30:
+/usr/include/c++/15/bits/new_allocator.h:151:73: note: at offset -4 into object of size [0, 9223372036854775804] allocated by ‘operator new’
+  151 |         return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+      |                                                                         ^
+
+
+===== ibm01: OK 86.3s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01 output
+Total displacement (legal): 23092714.6012
+Maximum displacement (legal): 10530.6
+Total HPWL (legal): 87267576
+Total HPWL (SA): 49731120
+
+
+===== ibm05: OK 102.7s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05 output
+Total displacement (legal): 1331740.5302
+Maximum displacement (legal): 200.374
+Total HPWL (legal): 11837664
+Total HPWL (SA): 9576939
+
+
+===== toy: OK 9.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy output
+Total displacement (legal): 43241.6
+Maximum displacement (legal): 1972
+Total HPWL (legal): 101202
+Total HPWL (SA): 46296
+
+
+===== h01: OK 13.7s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01 output
+Total displacement (legal): 2351.45
+Maximum displacement (legal): 30.07
+Total HPWL (legal): 25571
+Total HPWL (SA): 14103.5
+
+
+===== h02: OK 26.9s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02 output
+Total displacement (legal): 463087.733
+Maximum displacement (legal): 2513.931
+Total HPWL (legal): 3795115
+Total HPWL (SA): 2299152.6
+
+
+===== h03: OK 24.5s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03 output
+Total displacement (legal): 7061.6173
+Maximum displacement (legal): 20.7117
+Total HPWL (legal): 26529.7
+Total HPWL (SA): 12271.6
+
+
+===== h04: OK 33.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04 output
+Total displacement (legal): 180393.63
+Maximum displacement (legal): 239.81
+Total HPWL (legal): 540261.5
+Total HPWL (SA): 231588.5
+
+
+===== h05: OK 24.9s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05 output
+Total displacement (legal): 1551807.72
+Maximum displacement (legal): 1337.305
+Total HPWL (legal): 26210942.2
+Total HPWL (SA): 17918824.2
+
+
+===== h06: OK 93.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06 output
+Total displacement (legal): 885080.66
+Maximum displacement (legal): 432.22
+Total HPWL (legal): 2156395.5
+Total HPWL (SA): 664736.5
+
+
+===== h07: OK 87.7s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07 output
+Total displacement (legal): 108912.3095
+Maximum displacement (legal): 48.0254
+Total HPWL (legal): 356043.545
+Total HPWL (SA): 163720.785
+
+
+===== h08: OK 126.2s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08 output
+Total displacement (legal): 125040837.517
+Maximum displacement (legal): 28600.483
+Total HPWL (legal): 307763537
+Total HPWL (SA): 99887796
+

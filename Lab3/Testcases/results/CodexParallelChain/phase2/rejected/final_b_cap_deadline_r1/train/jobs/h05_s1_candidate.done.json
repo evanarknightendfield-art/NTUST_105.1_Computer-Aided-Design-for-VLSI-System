@@ -1,0 +1,14 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_train.py",
+  "final_b",
+  "--worker",
+  "h05",
+  "candidate",
+  "1"
+ ],
+ "returncode": 0,
+ "seconds": 7.84,
+ "finished": "Fri Oct 23 14:46:20 2026"
+}

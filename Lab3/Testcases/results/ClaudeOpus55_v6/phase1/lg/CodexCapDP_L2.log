@@ -1,0 +1,57 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexCapDP_L2/submissions/CodexCapDP.tgz  (53 files)
+       CodexCapDP/CMakeLists.txt
+       CodexCapDP/Makefile
+       CodexCapDP/README.md
+       CodexCapDP/WORK_STATE.md
+       CodexCapDP/src/annealer.cpp
+       CodexCapDP/src/annealer.hpp
+       CodexCapDP/src/capsearch.cpp
+       CodexCapDP/src/capsearch.hpp
+       CodexCapDP/src/chain.cpp
+       CodexCapDP/src/chain.hpp
+       CodexCapDP/src/global.cpp
+       CodexCapDP/src/global.hpp
+       CodexCapDP/src/guard.hpp
+       CodexCapDP/src/legalizer.cpp
+       CodexCapDP/src/legalizer.hpp
+       CodexCapDP/src/main.cpp
+       CodexCapDP/src/optimizer.cpp
+       CodexCapDP/src/optimizer.hpp
+       CodexCapDP/src/placedb.cpp
+       CodexCapDP/src/placedb.hpp
+       CodexCapDP/src/pool.hpp
+       CodexCapDP/src/rowmap.hpp
+       CodexCapDP/src/window.cpp
+       CodexCapDP/src/window.hpp
+       CodexCapDP/tests/cap_chain_prototype.cpp
+       CodexCapDP/tests/cap_chain_prototype.hpp
+       CodexCapDP/tests/cap_search_bench.cpp
+       CodexCapDP/tests/cap_windows_bench.cpp
+       CodexCapDP/tests/cap_windows_test.cpp
+       CodexCapDP/tests/capsearch_test.cpp
+       CodexCapDP/tests/chain_test.cpp
+       CodexCapDP/tests/compare_methods.cpp
+       CodexCapDP/tests/diag_chaindp_global/driver.cpp
+       CodexCapDP/tests/diag_chaindp_global/global_diag.cpp
+       CodexCapDP/tests/diagnostic.hpp
+       CodexCapDP/tests/diagnostic_capsearch.cpp
+       CodexCapDP/tests/diagnostic_experiments.cpp
+       CodexCapDP/tests/diagnostic_main.cpp
+       CodexCapDP/tests/diagnostic_window.cpp
+       CodexCapDP/tests/global_preserve_prototype.cpp
+       CodexCapDP/tests/global_preserve_prototype.hpp
+       CodexCapDP/tests/global_test.cpp
+       CodexCapDP/tests/guard_test.cpp
+       CodexCapDP/tests/multirow_test.cpp
+       CodexCapDP/tests/optimizer_test.cpp
+       CodexCapDP/tests/parallel_sa_test.cpp
+       CodexCapDP/tests/pool_test.cpp
+       CodexCapDP/tests/readpl.cpp
+       CodexCapDP/tests/run_tests.py
+       CodexCapDP/tests/sa_bench.cpp
+       CodexCapDP/tests/sa_bench2.cpp
+       CodexCapDP/tests/site_repair_bench.cpp
+       CodexCapDP/tests/window_test.cpp
+[build] OK build/dp  15.1s
+[run] L2       PASS  OK         211.7s  disp=2049064179.6599 max=13172.01 legal=2641824073.5 sa=1623874004.0
+[summary] 1/1 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexCapDP_L2/record.csv

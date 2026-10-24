@@ -1,0 +1,3 @@
+[cap-local] D 47.545165800 method 1 repair 0.382387 DP 1.876699 windows 881 remaining 9 raw 110385.891680 total 109252.475840 max 47.544530000 accepted
+[cap-local] D 46.878906580 method 1 repair 0.492796 DP 1.685229 windows 1042 remaining 43 raw 116243.755860 total 110381.518620 max 46.878760000 total_budget
+[cap] 2 attempts, 2 feasible, 1 accepted: max 48.025420 -> 47.544530, total 108910.8117 -> 109252.4758 (+0.314%)  4.44s

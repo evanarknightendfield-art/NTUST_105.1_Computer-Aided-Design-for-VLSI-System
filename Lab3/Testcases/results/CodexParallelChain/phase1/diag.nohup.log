@@ -1,0 +1,66 @@
+phase1/jobs/chain_ibm01_default 完成（22 秒）
+phase1/jobs/chain_ibm01_chain6 完成（26 秒）
+phase1/jobs/chain_ibm05_default 完成（37 秒）
+phase1/jobs/chain_ibm05_chain6 完成（41 秒）
+phase1/jobs/chain_toy_default 完成（1 秒）
+phase1/jobs/chain_toy_chain6 完成（1 秒）
+phase1/jobs/chain_h01_default 完成（3 秒）
+phase1/jobs/chain_h01_chain6 完成（3 秒）
+phase1/jobs/chain_h02_default 完成（14 秒）
+phase1/jobs/chain_h02_chain6 完成（14 秒）
+phase1/jobs/chain_h03_default 完成（8 秒）
+phase1/jobs/chain_h03_chain6 完成（9 秒）
+phase1/jobs/chain_h04_default 完成（13 秒）
+phase1/jobs/chain_h04_chain6 完成（16 秒）
+phase1/jobs/chain_h05_default 完成（5 秒）
+phase1/jobs/chain_h05_chain6 完成（9 秒）
+phase1/jobs/chain_h06_default 完成（30 秒）
+phase1/jobs/chain_h06_chain6 完成（34 秒）
+phase1/jobs/chain_h07_default 完成（22 秒）
+phase1/jobs/chain_h07_chain6 完成（26 秒）
+phase1/jobs/chain_h08_default 完成（58 秒）
+phase1/jobs/chain_h08_chain6 完成（63 秒）
+phase1/jobs/chain_e08_fragmented_default 完成（6 秒）
+phase1/jobs/chain_e08_fragmented_chain6 完成（10 秒）
+phase1/jobs/chain_e16_rowgaps_default 完成（6 秒）
+phase1/jobs/chain_e16_rowgaps_chain6 完成（10 秒）
+phase1/jobs/legal_start_ibm01 完成（21 秒）
+phase1/jobs/legal_start_ibm05 完成（35 秒）
+phase1/jobs/sa_ibm01_s1_auto 完成（5 秒）
+phase1/jobs/sa_ibm01_s1_single 完成（21 秒）
+phase1/jobs/sa_ibm01_s2_auto 完成（6 秒）
+phase1/jobs/sa_ibm01_s2_single 完成（21 秒）
+phase1/jobs/sa_ibm05_s1_auto 完成（6 秒）
+phase1/jobs/sa_ibm05_s1_single 完成（26 秒）
+phase1/jobs/sa_ibm05_s2_auto 完成（6 秒）
+phase1/jobs/sa_ibm05_s2_single 完成（26 秒）
+phase1/jobs/sa_h06_s1_auto 完成（4 秒）
+phase1/jobs/sa_h06_s1_single 完成（14 秒）
+phase1/jobs/sa_h06_s2_auto 完成（4 秒）
+phase1/jobs/sa_h06_s2_single 完成（14 秒）
+phase1/jobs/sa_h07_s1_auto 完成（6 秒）
+phase1/jobs/sa_h07_s1_single 完成（22 秒）
+phase1/jobs/sa_h07_s2_auto 完成（6 秒）
+phase1/jobs/sa_h07_s2_single 完成（22 秒）
+phase1/jobs/sa_h08_s1_auto 完成（7 秒）
+phase1/jobs/sa_h08_s1_single 完成（25 秒）
+phase1/jobs/sa_h08_s2_auto 完成（6 秒）
+phase1/jobs/sa_h08_s2_single 完成（24 秒）
+phase1/jobs/toy_v5 完成（5 秒）
+phase1/jobs/toy_v6 完成（1 秒）
+phase1/jobs/summarize 完成（0 秒）
+phase1 診斷失敗：Protected directories changed; do not write ALL_DONE；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+Traceback (most recent call last):
+  File "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py", line 382, in <module>
+    main()
+    ~~~~^^
+  File "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py", line 374, in main
+    run_queue()
+    ~~~~~~~~~^^
+  File "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py", line 349, in run_queue
+    verify_protected(R / 'provenance/protected_after.json')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py", line 65, in verify_protected
+    raise RuntimeError('Protected directories changed; do not write ALL_DONE')
+RuntimeError: Protected directories changed; do not write ALL_DONE
+phase1/ALL_DONE：全部診斷完成，保護資料夾 SHA256 未變；等待下一個 session 分析。

@@ -1,0 +1,15 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/CodexParallelChain/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/extra_testcases_CodexParallelChain",
+  "--dp-args=--no-sa",
+  "Testcases/testcases"
+ ],
+ "returncode": 0,
+ "seconds": 65.59,
+ "finished": "Fri Oct 23 22:36:56 2026"
+}

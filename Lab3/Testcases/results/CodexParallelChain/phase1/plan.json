@@ -1,0 +1,106 @@
+{
+  "chain_cases": [
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01"
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05"
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy"
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01"
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02"
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03"
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04"
+    },
+    {
+      "group": "holdout",
+      "bench": "h05",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05"
+    },
+    {
+      "group": "holdout",
+      "bench": "h06",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06"
+    },
+    {
+      "group": "holdout",
+      "bench": "h07",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07"
+    },
+    {
+      "group": "holdout",
+      "bench": "h08",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08"
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e08_fragmented",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e08_fragmented/e08_fragmented"
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e16_rowgaps",
+      "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e16_rowgaps/e16_rowgaps"
+    }
+  ],
+  "chain_variants": {
+    "default": [],
+    "chain6": [
+      "--chain-time",
+      "6"
+    ]
+  },
+  "chain_common_args": [
+    "-v",
+    "--no-sa",
+    "--cap-time",
+    "0"
+  ],
+  "sa_cases": [
+    "ibm01",
+    "ibm05",
+    "h06",
+    "h07",
+    "h08"
+  ],
+  "seeds": [
+    1,
+    2
+  ],
+  "auto_moves_per_band": 3000000,
+  "sa_time_limit": "100000",
+  "polish_seconds": 0,
+  "serial_budget": "the exact attempts reported by the paired auto run",
+  "serial_rounding": "unchanged 100-step scheduler may execute 0-99 fewer attempts; reported explicitly",
+  "missing_supplied_starts": [
+    "ibm01",
+    "ibm05"
+  ],
+  "fallback": "unmodified v4 -v --no-sa, generated only under new results directory",
+  "timed_cpus": "0-19",
+  "analysis_build_cpus": "16-19",
+  "timed_steps": 50
+}

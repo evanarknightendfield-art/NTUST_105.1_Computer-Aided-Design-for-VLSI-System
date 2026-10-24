@@ -1,0 +1,1693 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1656f-e33f-72a2-82ac-4f9b141a4d7d
+--------
+user
+接續 AI_Solutions/CodexParallelChain/。只讀 HANDOFF.md（AI_Solutions/ClaudeOpus55_v6/）第 0、4、6、7 節、WORK_STATE.md 與 Testcases/results/CodexParallelChain/diagnosis.md 的排序表。
+依 diagnosis.md 的排序改程式（只改 AI_Solutions/CodexParallelChain/src 與 tests）：
+1. chain 階段平行化（target windows、ejection chains 分 band 平行；總時間與額外預算不變；結果合法、出錯退回前一步）。
+2. 只有診斷顯示 band 邊界損失 ≥ 0.5% 才改平行 SA；改了要保持「同 seed、同執行緒數、固定次數結果一樣」。
+每改完一項：C++ 測試（一般；有動平行程式再加 ASan/UBSan 與 TSan），補一個新功能的測試；
+然後用 RUN: python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py TAG 跑訓練集 Stage 1，WAIT: Testcases/results/CodexParallelChain/phase2/train/TAG/stage1.done.json。
+下一個 session 讀 phase2/train/TAG/compare.md 決定保留或撤回（數據寫進 WORK_STATE）。
+只用 testcases + holdout 決定參數；e08 / e16 不能拿來調參。每一項的保留條件、停損（同一項最多 3 輪）與「B 完成」的最後檢查在 HANDOFF.md 第 7 節。
+回覆不超過 15 行。
+
+【非互動執行的規則（由協調者自動開 session，使用者在睡覺）】
+- 這是 codex exec 的單次 session，沙箱裡啟動的背景工作會在 session 結束時被殺掉（第 A 階段的 nohup 就是這樣死掉的）。
+  所以不要自己啟動超過 5 分鐘的計算；把要跑的東西寫成腳本，然後在最後回覆的最後幾行寫：
+    RUN: <從 Lab3 目錄執行的完整命令>        （可以多行，依序執行）
+    WAIT: <完成標記的路徑，相對 Lab3>
+  協調者會在沙箱外依序執行 RUN、等 WAIT 出現，再開下一個 session。命令不要加 taskset（計時程式不能綁 E-core；編譯已由 v6q 綁）。
+- 要跑的東西都在 5 分鐘內的話（例如 C++ 測試），直接在本 session 跑完，不要寫 RUN/WAIT。
+- ASan：LeakSanitizer 在沙箱內會因 ptrace 失敗，請用 ASAN_OPTIONS=detect_leaks=0 跑並註明；協調者會在沙箱外補跑完整的 ASan。
+- 階段 B 全部完成（HANDOFF.md 第 7 節）時，最後一行只寫：B_DONE
+- 不 commit、不加任何 AI 署名；不要問問題（沒有人會回答），自己依 HANDOFF.md 判斷並把判斷寫進 WORK_STATE.md。
+
+codex
+我會先讀指定交接段落、工作狀態與診斷排序，再完成本輪修改和測試；長時間訓練會交由協調者執行。
+
+exec
+/bin/bash -lc "pwd; rg --files -g AGENTS.md -g WORK_STATE.md -g HANDOFF.md -g diagnosis.md -g '*phase2*' -g '*test*' AI_Solutions/CodexParallelChain AI_Solutions/ClaudeOpus55_v6 Testcases/results/CodexParallelChain" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+AI_Solutions/ClaudeOpus55_v6/tests/run_tests.py
+AI_Solutions/ClaudeOpus55_v6/tests/parallel_sa_test.cpp
+AI_Solutions/ClaudeOpus55_v6/tests/optimizer_test.cpp
+AI_Solutions/ClaudeOpus55_v6/tests/window_test.cpp
+AI_Solutions/ClaudeOpus55_v6/tests/capsearch_test.cpp
+AI_Solutions/ClaudeOpus55_v6/tests/chain_test.cpp
+AI_Solutions/ClaudeOpus55_v6/tests/multirow_test.cpp
+AI_Solutions/ClaudeOpus55_v6/tests/cap_windows_test.cpp
+AI_Solutions/ClaudeOpus55_v6/tests/pool_test.cpp
+AI_Solutions/ClaudeOpus55_v6/tests/global_test.cpp
+AI_Solutions/ClaudeOpus55_v6/tests/guard_test.cpp
+AI_Solutions/ClaudeOpus55_v6/WORK_STATE.md
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+Testcases/results/CodexParallelChain/diagnosis.md
+AI_Solutions/CodexParallelChain/WORK_STATE.md
+AI_Solutions/CodexParallelChain/tests/multirow_test.cpp
+AI_Solutions/CodexParallelChain/tests/cap_windows_test.cpp
+AI_Solutions/CodexParallelChain/tests/pool_test.cpp
+AI_Solutions/CodexParallelChain/tests/global_test.cpp
+AI_Solutions/CodexParallelChain/tests/guard_test.cpp
+AI_Solutions/CodexParallelChain/tests/window_test.cpp
+AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp
+AI_Solutions/CodexParallelChain/tests/chain_test.cpp
+AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp
+AI_Solutions/CodexParallelChain/tests/optimizer_test.cpp
+AI_Solutions/CodexParallelChain/tests/run_tests.py
+Testcases/results/CodexParallelChain/scripts/phase2_final.py
+Testcases/results/CodexParallelChain/scripts/phase2_stage2_sweep.py
+Testcases/results/CodexParallelChain/scripts/phase2_train.py
+Testcases/results/CodexParallelChain/scripts/phase2_large.py
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/run_tests.py
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/parallel_sa_test.cpp
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/optimizer_test.cpp
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/window_test.cpp
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/capsearch_test.cpp
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/chain_test.cpp
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/multirow_test.cpp
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/cap_windows_test.cpp
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/pool_test.cpp
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/global_test.cpp
+Testcases/results/CodexParallelChain/phase1/instrumented/tests/guard_test.cpp
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+cwd=Path.cwd()
+for p in [*reversed(cwd.parents),cwd,cwd/'AI_Solutions',cwd/'AI_Solutions/CodexParallelChain']:
+ f=p/'AGENTS.md'
+ if f.exists(): print(str(f)+'\\n'+f.read_text())
+p=Path('AI_Solutions/ClaudeOpus55_v6/HANDOFF.md')
+s=p.read_text().splitlines(); show=False
+for line in s:
+ if line.startswith('## '):
+  import re
+  show=bool(re.match(r'## (0|4|6|7)[.、\\s：:]',line))
+ if show: print(line)
+print('\\n--- WORK_STATE ---\\n'+Path('AI_Solutions/CodexParallelChain/WORK_STATE.md').read_text())
+print('\\n--- DIAGNOSIS TABLES ---')
+s=Path('Testcases/results/CodexParallelChain/diagnosis.md').read_text().splitlines()
+for i,l in enumerate(s):
+ if l.startswith('#') or l.lstrip().startswith('|'): print(l)
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+## 0. 規則（每個 session 都適用）
+
+**品質與流程**
+- 不 commit、任何檔案都不加 AI 署名。保護資料夾（不要改）：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6。
+- 新版本：`AI_Solutions/<NEW>/`，以 ClaudeOpus55_v6 為底複製 `src/ CMakeLists.txt Makefile tests/`；執行輸出全部在 `Testcases/results/<NEW>/`。
+- 調參只用 `Testcases/testcases`、`Testcases/holdout`；edge、edge_seed2~5 只當回歸。凍結（記 sha256）之後才產生新 seed。
+- 沒有數據就不宣稱進步：HPWL 至少 3 seeds、報平均與範圍，三種協定分開；新舊版本同一次配對重跑。
+- 計時中的程式一次一個（`timing.lock`）；分析與編譯 `taskset -c 16-19`。
+
+**省 token（上一輪 Codex 一個 session 用了 2,230 萬 input token：166 次呼叫、每次約 14 萬 context，其中一半的工具呼叫是在查進度）**
+1. **一個 session 只做一個階段**，做完就更新 WORK_STATE 並結束；下一階段開新 session（context 從小開始）。
+2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+   `timeout 600 bash -c 'until [ -e MARKER ]; do sleep 20; done'`，不要反覆 ls / tail / ps。
+3. **輸出都進檔案**，終端只印摘要：每個指令輸出 ≤ 40 行（`| tail -n 20`、`awk` 摘要）；不要 cat 整份 record.csv、log、.pl。
+4. **只讀需要的**：本檔 + 自己的 WORK_STATE.md + 要改的函式。原始碼用 `grep -n` 找函式再 `sed -n` 讀範圍。
+5. 不重跑已完成的步驟（每步 `.done.json`）。對話回覆 ≤ 15 行；完整內容寫在報告檔。
+
+## 4. 已經證明不值得做的（不要再試）
+
+| 方向 | 證據 |
+|---|---|
+| 放寬內部總位移比例（1.0048 → 1.01）或改接受規則 | e03 會達標，但 h03 / e08 / e16 總位移失敗；接受步驟的邊際斜率兩組重疊（v6 diagnosis §2.2） |
+| 熱點附近精確子問題（MIP / 分支定界） | h04、e12 在 ±1 列 ±8~16 site 內證明不可行；e03 的違規 cell 在 ±16 site 內沒有合格位置（§2.5） |
+| rows / site 協商雙修復比較 | 11 筆結果完全不變（`phase2/train/race1`） |
+| 視窗 DP 16 執行緒 | 11 筆最大位移相同（`phase2/train/thr16`） |
+| chain 依「第 1 輪收穫」延長時間 | 訓練集最大 0.34%（h06），e08/e16 1.26/0.82%：訓練集沒有會觸發的筆，門檻只能看 edge 定（違反調參規則） |
+| L2 的 SA 依比例縮短 | 只縮到 13.5 秒；v6 改成門檻式（每 cell < 100 次只留 10%） |
+| 最大位移追上 ChainDP 的 e03 / h04 / e12 | 需要 1.01 比例 + 約 20 秒（ChainDP 的 global 16 秒）；額外預算不能增加 |
+
+## 6. 驗收（建議）
+
+- 27 + L1 + L2 + 新 seed 全部 PASS；L1 < 240 秒、L2 < 600 秒；額外步驟 0 超時；任何步驟出錯退回前一步。
+- 對 v6（同輪）：27 筆雙條件 ≥ 19、總位移幾何平均 ≤ v6、逐筆最大位移不比 v6 差超過 Stage 1 的執行間變動；
+  HPWL 預設與同總時間協定 holdout、edge 平均不比 v6 差（報範圍）；同次數協定若 SA 有改要報。
+- C++ 測試一般 + ASan/UBSan 通過；動到平行程式要 TSan，並確認同 seed / 同執行緒數 / 固定次數結果一樣。
+
+## 7. 階段 B（實作・調參）什麼時候算完成
+
+**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+
+**單項的判定**（只看 testcases + holdout；`phase2_train.py` 的 compare.md 會列出 v6 同輪的數字）
+
+v6 在訓練集 11 筆的基準（對 ChainDP，`ClaudeOpus55_v6/final`）：雙條件 **8/11**、最大位移 GM **0.99604**、總位移 GM **0.99813**。
+Stage 1 的執行間變動：總位移最多約 0.11%、最大位移約 0.13%（ibm05）。
+
+| 改動 | 保留的條件（全部要成立） |
+|---|---|
+| chain 階段平行化 | 訓練集雙條件 ≥ 8/11；總位移 GM 比 v6 低（≥ 0.03%）；最大位移 GM 不比 v6 差超過 0.1%；逐筆最大不比 v6 差超過 0.2%；chain 階段的實際秒數不比 v6 多；h05、h06 在同 1.5 秒內的 chain 收穫至少達到 v6 給 3 秒時的水準（v6：h05 −0.29%、h06 −0.44%，HANDOFF 第 3 節） |
+| 平行 SA（只有診斷的 band 損失平均 ≥ 0.5% 才做） | 同次數協定（固定次數、自動執行緒、3 seeds）在 ibm01、ibm05、h06、h07、h08 的幾何平均比 v6 好 ≥ 0.3%，沒有一筆差超過 0.5%；固定次數下兩次執行結果逐位相同；TSan 0 警告 |
+| 其他小改動 | 有訓練集數據顯示改善，且上表的「不比 v6 差」都成立 |
+
+**停損**：同一項最多 3 輪「改程式 → 訓練」。第 3 輪仍不符合保留條件就撤回（把 src 還原到上一個保留點），數據寫進 WORK_STATE 的「試過沒用」。
+
+**B 結束前的最後檢查**（對最後一份原始碼，`phase2_train.py` 的 protocol.json 裡的 src_sha256 要等於目前 src）
+
+1. 訓練集 Stage 1 一次（`phase2_train.py final_b`），以上「不比 v6 差」都成立，額外步驟 0 超時。
+2. 有動 SA、polish 或時間分配時：`phase2_large.py final_b`（L1、L2 完整執行）全部合法，L1 < 240 秒、L2 < 600 秒。
+3. C++ 測試：一般 + ASan/UBSan 全過；動過平行程式加 TSan 0 警告。新功能各有一個測試。
+4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+
+所有改動都被撤回也算 B 完成：寫清楚數據，C 改成「不凍結新版、直接寫報告說明沒有改善」。
+
+--- WORK_STATE ---
+# CodexParallelChain — WORK_STATE
+
+- 本 session：只建立版本並啟動第一階段診斷；不等待、不查進度、不調參、不 commit。
+- 專案根目錄：Lab3。底版：ClaudeOpus55_v6；src、tests、CMakeLists.txt、Makefile 原樣複製。
+- 只閱讀 HANDOFF.md 與必要原始碼／工具片段，未閱讀其他報告。
+- 執行輸出：Testcases/results/CodexParallelChain/；scripts/ 已完整複製 v6 scripts/。
+- 保護：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6，均不得修改。
+- SHA256：provenance/protected_before.json（逐檔）、protected_roots.sha256（各目錄 aggregate；按相對路徑排序的 sha256  雙空白  路徑 + 換行）、base.sha256（底版複製項目）、copied_scripts.json。
+- v6 整個保護目錄 aggregate SHA256：2702e487b8f7be35de32daab56d71d9ac5fc74444c1b19fe20b1e24f8f15b2e3。
+
+## 第一階段範圍
+
+1. chain：testcases 3 + holdout 8 = 11 筆，另 e08_fragmented、e16_rowgaps 僅診斷；default 與額外指定 --chain-time 6，共 26 次。
+   使用 -v --no-sa --cap-time 0；default 保留原本 1.5/3 秒 chain 預算。cap 關閉以隔離 chain 收穫；不改接受規則或額外預算。
+   phase1/instrumented/ 是獨立副本，只有 main.cpp 增加 8 個 fprintf；記錄每輪 target windows、ejection chains、post-chain DP 的實際耗時與前後總位移，以及整段 chain。
+2. SA：ibm01、ibm05、h06、h07、h08，seed 1、2；自動執行緒 moves=3,000,000（8 bands 約 2,400 萬實際次數），再把其實際 attempts 原值傳給單執行緒。
+   sa_bench：seconds=100000、polish_seconds=0，避免時間截止；保留 100 溫度步驟，明列單執行緒整除步驟可能少做的 0–99 次，不冒稱完全相等。
+   原始演算法不改；診斷 driver 只加 fprintf 印實際 threads。逐筆、平均與範圍均由完成後腳本生成，僅診斷不宣稱進步。
+   指定起點：Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/<bench>/output。
+   例外：該目錄沒有 ibm01、ibm05；在新目錄 phase1/sa/legal_starts/ClaudeOpus55_v4/ 以未修改 v4 -v --no-sa 補建；每對 SA 共用同一份起點並保存 SHA256。
+3. toy：未插樁 v5 與 v6 各一次 -v --no-sa，保留完整 cap stderr；HANDOFF 參考最大位移分別 1972.0、2004.4，實測另列。
+
+## 執行約定
+
+- 使用複製的 v6q.Queue，每步 .done.json；拿新版本 timing.lock，同時拿既有 v6 timing.lock（唯讀開啟、不更動檔案），計時程式一次一個。
+- 編譯、分析固定 CPU 16–19；計時程式可用 CPU 0–19，無其他診斷同時執行。
+- 完成輸出 phase1/chain_summary.csv、chain_rounds.csv、sa_pairs.csv、toy_summary.csv、summary.json；只有全部成功且保護資料夾 SHA256 未變才寫 phase1/ALL_DONE。
+- 失敗寫 phase1/FAILED.json，保留每步 log/.failed.json；修正後可重跑佇列，已成功步驟跳過。
+- 尚未啟動；先做編譯與輸入檢查，不執行計時診斷。
+- 10-22 23:55 phase1/build_jobs/build_v6 完成（12 秒）
+- 10-22 23:55 phase1/build_jobs/build_chain 完成（2 秒）
+- 10-22 23:55 phase1/build_jobs/build_sa 完成（1 秒）
+- 10-22 23:55 phase1/build_jobs/build_v5 完成（12 秒）
+- 10-22 23:55 phase1/build_jobs/build_v4 完成（8 秒）
+- 10-22 23:55 phase1 啟動前檢查完成：編譯成功、輸入有效、插樁僅 fprintf；尚未執行診斷。
+
+## 第一階段執行歷史（已於 10-23 05:01 完成）
+
+歷史等待項目：scripts/diag.py，完成標記 phase1/ALL_DONE
+- 已 nohup 啟動，PID 4；日誌 phase1/diag.nohup.log。
+- 啟動前編譯與輸入檢查成功；保護資料夾 SHA256 未變（provenance/protected_after_setup.json）。
+- 本 session 到此結束，未等待完成、未查詢診斷進度。
+- 10-23 00:09 phase1 診斷失敗：Protected directories changed; do not write ALL_DONE；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+- 10-23 00:09 phase1 診斷失敗：Prepared script/binaries changed; rerun --prepare；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+- 10-23 00:10 phase1 啟動前檢查完成：編譯成功、輸入有效、插樁僅 fprintf；尚未執行診斷。
+- 10-23 00:10 phase1/jobs/chain_ibm01_default 完成（22 秒）
+- 10-23 00:10 phase1/jobs/chain_ibm01_chain6 完成（26 秒）
+- 10-23 00:11 phase1/jobs/chain_ibm05_default 完成（37 秒）
+- 10-23 00:12 phase1/jobs/chain_ibm05_chain6 完成（41 秒）
+- 10-23 00:12 phase1/jobs/chain_toy_default 完成（1 秒）
+- 10-23 00:12 phase1/jobs/chain_toy_chain6 完成（1 秒）
+- 10-23 00:12 phase1/jobs/chain_h01_default 完成（3 秒）
+- 10-23 00:12 phase1/jobs/chain_h01_chain6 完成（3 秒）
+- 10-23 00:12 phase1/jobs/chain_h02_default 完成（14 秒）
+- 10-23 00:12 phase1/jobs/chain_h02_chain6 完成（14 秒）
+- 10-23 00:12 phase1/jobs/chain_h03_default 完成（8 秒）
+- 10-23 00:13 phase1/jobs/chain_h03_chain6 完成（9 秒）
+- 10-23 00:13 phase1/jobs/chain_h04_default 完成（13 秒）
+- 10-23 00:13 phase1/jobs/chain_h04_chain6 完成（16 秒）
+- 10-23 00:13 phase1/jobs/chain_h05_default 完成（5 秒）
+- 10-23 00:13 phase1/jobs/chain_h05_chain6 完成（9 秒）
+- 10-23 00:14 phase1/jobs/chain_h06_default 完成（30 秒）
+- 10-23 00:14 phase1/jobs/chain_h06_chain6 完成（34 秒）
+- 10-23 00:15 phase1/jobs/chain_h07_default 完成（22 秒）
+- 10-23 00:15 phase1/jobs/chain_h07_chain6 完成（26 秒）
+- 10-23 00:16 phase1/jobs/chain_h08_default 完成（58 秒）
+- 10-23 00:17 phase1/jobs/chain_h08_chain6 完成（63 秒）
+- 10-23 00:17 phase1/jobs/chain_e08_fragmented_default 完成（6 秒）
+- 10-23 00:17 phase1/jobs/chain_e08_fragmented_chain6 完成（10 秒）
+- 10-23 00:18 phase1/jobs/chain_e16_rowgaps_default 完成（6 秒）
+- 10-23 00:18 phase1/jobs/chain_e16_rowgaps_chain6 完成（10 秒）
+- 10-23 00:18 phase1/jobs/legal_start_ibm01 完成（21 秒）
+- 10-23 00:19 phase1/jobs/legal_start_ibm05 完成（35 秒）
+- 10-23 00:19 phase1/jobs/sa_ibm01_s1_auto 完成（5 秒）
+- 10-23 00:19 phase1/jobs/sa_ibm01_s1_single 完成（21 秒）
+- 10-23 00:19 phase1/jobs/sa_ibm01_s2_auto 完成（6 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm01_s2_single 完成（21 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm05_s1_auto 完成（6 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm05_s1_single 完成（26 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm05_s2_auto 完成（6 秒）
+- 10-23 00:21 phase1/jobs/sa_ibm05_s2_single 完成（26 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s1_auto 完成（4 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s1_single 完成（14 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s2_auto 完成（4 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s2_single 完成（14 秒）
+- 10-23 00:21 phase1/jobs/sa_h07_s1_auto 完成（6 秒）
+- 10-23 00:22 phase1/jobs/sa_h07_s1_single 完成（22 秒）
+- 10-23 00:22 phase1/jobs/sa_h07_s2_auto 完成（6 秒）
+- 10-23 00:22 phase1/jobs/sa_h07_s2_single 完成（22 秒）
+- 10-23 00:22 phase1/jobs/sa_h08_s1_auto 完成（7 秒）
+- 10-23 00:23 phase1/jobs/sa_h08_s1_single 完成（25 秒）
+- 10-23 00:23 phase1/jobs/sa_h08_s2_auto 完成（6 秒）
+- 10-23 00:23 phase1/jobs/sa_h08_s2_single 完成（24 秒）
+- 10-23 00:23 phase1/jobs/toy_v5 完成（5 秒）
+- 10-23 00:23 phase1/jobs/toy_v6 完成（1 秒）
+- 10-23 00:23 phase1/jobs/summarize 完成（0 秒）
+- 10-23 00:23 phase1 診斷失敗：Protected directories changed; do not write ALL_DONE；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+- 10-23 05:01 phase1/ALL_DONE：全部診斷完成，保護資料夾 SHA256 未變；等待下一個 session 分析。
+
+## 目前狀態：2026-10-23 phase1 診斷完成
+
+- 已確認 phase1/ALL_DONE：26 chain、20 SA、2 toy；不重跑既有完成工作。
+- 已寫 Testcases/results/CodexParallelChain/diagnosis.md：三部分逐筆耗時／位移收益、band 平行資料結構與約 2–4 倍工作量假說、10 對 SA 比值／平均、toy 原因、第二階段排序與驗收。
+- 主樣本 default：target 3.312757 s / 9258.268240；ejection 9.545742 s / 1446.724840；post-DP 1.802126 s / 12303.715360。ejection 占時間 65.11%，收益 6.29%；不可直接以時間加速倍率推論品質收益。
+- SA 等權平均損失 1.339185% ≥ 0.5%；4/5 測資均值過門檻。h06 實際 5 threads，其餘 8；只有 2 seeds，僅診斷。
+- toy 兩版 cap 起點相同；v6 局部修補候選多因 total_budget 被拒，7 attempts／1 accepted，v5 51／3；最大位移 2004.4 對 1972.0。只描述，未修正。
+- 協調者已在沙箱外啟動 diag.py 並移除計時 worker 的 taskset；provenance/orchestrator_note.json 亦記載保護文件變動／基準更新，最終 unchanged 是相對更新後基準。
+- 第二階段優先序：SA 邊界改善 → target/DP 分 band → ejection 分 band與無效搜尋診斷 → toy 後續原因追蹤（需後續任務授權）。各項尚未實作。
+- 閱讀限制判斷：HANDOFF 只讀第 0 節；不擅自讀第 5／7 節。採使用者提供的 0.5% 門檻；驗收依第 0 節與已知範圍列出，第 7 節逐條對齊尚待後續允許閱讀時核對，不能宣告 B_DONE。
+- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。
+
+
+--- DIAGNOSIS TABLES ---
+# CodexParallelChain：phase1 診斷與第二階段計畫
+## 證據與範圍
+## 1. chain：時間與總位移收益
+### 11 筆 testcases + holdout 加總
+|設定|部分|時間 s|時間占比|ΔΣd|收益占比|
+|---|---|---:|---:|---:|---:|
+|default|target_windows|3.312757|22.60%|9258.268240|40.24%|
+|default|ejection_chains|9.545742|65.11%|1446.724840|6.29%|
+|default|post_chain_dp|1.802126|12.29%|12303.715360|53.47%|
+|chain6|target_windows|5.044487|11.69%|10512.091140|33.20%|
+|chain6|ejection_chains|34.741726|80.50%|3584.482840|11.32%|
+|chain6|post_chain_dp|3.369174|7.81%|17564.762940|55.48%|
+### 逐筆三部分與整段
+|測資|設定|target windows|ejection chains|post-chain DP|整段 s|整段 ΔΣd / 起點 %|
+|---|---|---:|---:|---:|---:|---:|
+|ibm01|default|0.405047 / 5351.000000|0.792472 / 0.000000|0.253618 / 8660.084000|1.451402|14011.084000 / 0.060775%|
+|ibm01|chain6|0.767771 / 6654.800000|3.963749 / 325.400000|0.636406 / 13532.484000|5.368122|20512.684000 / 0.088977%|
+|ibm05|default|0.460881 / 2.710000|0.887493 / 0.000000|0.022877 / 0.000000|1.371636|2.710000 / 0.000204%|
+|ibm05|chain6|0.762103 / 2.710000|4.294265 / 23.048000|0.287250 / 27.900000|5.344434|53.658000 / 0.004041%|
+|toy|default|0.005039 / 0.000000|0.009441 / 0.000000|0.000000 / 0.000000|0.014494|0.000000 / 0.000000%|
+|toy|chain6|0.005107 / 0.000000|0.009453 / 0.000000|0.000000 / 0.000000|0.014570|0.000000 / 0.000000%|
+|h01|default|0.009990 / 0.000000|0.050054 / 0.000000|0.000000 / 0.000000|0.060059|0.000000 / 0.000000%|
+|h01|chain6|0.010110 / 0.000000|0.049382 / 0.000000|0.000000 / 0.000000|0.059507|0.000000 / 0.000000%|
+|h02|default|0.121402 / 79.196000|1.562668 / 17.412000|0.279961 / 0.000000|1.964115|96.608000 / 0.020917%|
+|h02|chain6|0.121734 / 79.196000|1.550603 / 17.412000|0.281931 / 0.000000|1.954321|96.608000 / 0.020917%|
+|h03|default|0.273820 / 4.494440|2.163010 / 0.454840|0.194673 / 2.120520|2.631551|7.069800 / 0.100361%|
+|h03|chain6|0.275014 / 4.494440|3.415993 / 0.454840|0.200999 / 2.120520|3.892052|7.069800 / 0.100361%|
+|h04|default|0.404582 / 260.980000|0.791894 / 0.000000|0.253423 / 131.980000|1.449993|392.960000 / 0.218100%|
+|h04|chain6|0.456917 / 252.920000|4.374086 / 3.980000|0.423219 / 152.080000|5.254655|408.980000 / 0.226991%|
+|h05|default|0.404802 / 709.214000|0.791994 / 1357.138000|0.254305 / 1994.054000|1.451240|4060.406000 / 0.261639%|
+|h05|chain6|0.797648 / 782.038000|4.186801 / 2785.288000|0.420875 / 1836.094000|5.405482|5403.420000 / 0.348178%|
+|h06|default|0.404452 / 1745.100000|0.791236 / 71.720000|0.259264 / 1435.060000|1.455164|3251.880000 / 0.365287%|
+|h06|chain6|0.709751 / 1615.180000|3.931714 / 428.900000|0.793922 / 1950.240000|5.435658|3994.320000 / 0.448686%|
+|h07|default|0.403411 / 115.573800|0.789184 / 0.000000|0.261131 / 80.416840|1.454025|195.990640 / 0.179754%|
+|h07|chain6|0.512849 / 130.752700|4.424699 / 0.000000|0.298649 / 63.844420|5.236587|194.597120 / 0.178476%|
+|h08|default|0.419330 / 990.000000|0.916296 / 0.000000|0.022875 / 0.000000|1.359074|990.000000 / 0.000792%|
+|h08|chain6|0.625484 / 990.000000|4.540981 / 0.000000|0.025924 / 0.000000|5.192758|990.000000 / 0.000792%|
+|e08_fragmented（僅回歸）|default|0.403898 / 951.676000|0.790778 / 32.108000|0.255433 / 205.272000|1.450247|1189.056000 / 1.304415%|
+|e08_fragmented（僅回歸）|chain6|0.586143 / 934.804000|4.307644 / 177.402000|0.448686 / 694.618000|5.342634|1806.824000 / 1.982118%|
+|e16_rowgaps（僅回歸）|default|0.404261 / 505.758000|0.791086 / 14.752000|0.253834 / 296.748000|1.449370|817.258000 / 0.848475%|
+|e16_rowgaps（僅回歸）|chain6|0.536510 / 496.332000|4.422999 / 69.818000|0.312792 / 382.740000|5.272469|948.890000 / 0.985135%|
+### 可分 band 的部分、共用結構與限制
+|部分|可平行單位|必須隔離／協調的資料|
+|---|---|---|
+|target windows|來源與目標 region 都落在同一 band 的不相交 windows；跨 band 配對需另批排程|唯讀 PlaceDB 可共用；Placement 的 seg/site 與 RowMap 的 occupancy/cell lists 會更新。targetedWindowsDisp 直接配對目前位置與全域目標所在 row，不能只以 anchor 所在 band 判定獨立。|
+|ejection chains|整條 blocker/候選搜尋及移動範圍均屬同一 band 的 root 搜尋|Search 持有 Placement&、RowMap、locked、oldDistance、maximum priority_queue、path、holeSeg/holeSite/remaining、cap/rootDistance、stats。每個 worker 要有搜尋暫存／局部 row map；不能共用一個可變 Search。全域 maximum/cap 需輪次快照與合併重驗，跨 band chain 需序列或有序鎖定。|
+|post-chain DP|不重疊的 2/3-row windows；分顏色輪次或 band 內工作，邊界另做|Placement、RowMap 及 stage1Memo（WindowMemo.mod、seen、seg/site、clock、cap 等）有相依更新。memo 分片或 worker 私有，再於 barrier 同步／失效；不能多執行緒共用目前 clock/cache 更新流程。|
+### 同 1.5 秒可多做多少：規劃估算而非實測
+## 2. band 邊界損失
+|測資|seed|auto threads|HPWL auto|HPWL single|R|損失 %|single 少做 attempts|
+|---|---:|---:|---:|---:|---:|---:|---:|
+|ibm01|1|8|54562032.000000|53067378.000000|1.028165213|2.816521|2|
+|ibm01|2|8|55040712.000000|53337582.000000|1.031931144|3.193114|0|
+|ibm05|1|8|10147365.500000|10013432.000000|1.013375384|1.337538|21|
+|ibm05|2|8|10160930.500000|10033235.000000|1.012727251|1.272725|14|
+|h06|1|5|722323.000000|706763.000000|1.022015867|2.201587|36|
+|h06|2|5|716259.500000|708454.000000|1.011017653|1.101765|65|
+|h07|1|8|169086.718000|169060.051000|1.000157737|0.015774|28|
+|h07|2|8|168116.390000|168157.938000|0.999752923|-0.024708|60|
+|h08|1|8|105642448.300000|104687988.200000|1.009117188|0.911719|67|
+|h08|2|8|105752219.800000|105157226.900000|1.005658127|0.565813|12|
+|測資|兩 seed 平均 R|平均損失 %|損失範圍 %|≥0.5%|
+|---|---:|---:|---:|---|
+|ibm01|1.030048178|3.004818|2.816521～3.193114|是|
+|ibm05|1.013051318|1.305132|1.272725～1.337538|是|
+|h06|1.016516760|1.651676|1.101765～2.201587|是|
+|h07|0.999955330|-0.004467|-0.024708～0.015774|否|
+|h08|1.007387657|0.738766|0.565813～0.911719|是|
+|全體等權平均|1.013391849|1.339185|-0.024708～3.193114|是|
+## 3. toy 退步原因（只描述）
+## 4. 第二階段計畫：依「幅度 × 機會」排序
+|優先|項目與幅度 × 機會|做法|驗收方式|
+|---|---|---|---|
+|1|SA 邊界交換／重分 band：平均 1.339% 品質空間，4/5 測資超過門檻，機會最廣|在同步點做鄰 band 邊界交換或移動分界；以單一設計做消融，避免同時改溫度、moves、接受規則|同合法起點、同次數及固定 wall-time 各自配對至少 3 seeds；報五筆各自平均／範圍、attempts、時間與合法性。以 auto 原版為直接基線，serial 作診斷參照；目標平均差距降至 <0.5%，且固定時間 HPWL 不因同步成本變差。未達標則保留否定結果，不宣告改善。|
+|2|target windows + post-chain DP 分 band：default 占收益 93.71%，有可分割 windows；同時存在跨 band 依賴|先做不重疊 windows 的批次排程與 worker 私有 memo，再保留跨 band 補做；保持總位移／最大位移接受約束|先以已知移動集合驗證衝突、row occupancy、memo 失效與 rollback；單 worker 與原版固定工作量對照，再驗證多 worker 全部合法。固定 1.5 秒報 solved/attempted windows 倍率與逐筆位移，完整 default 預算另跑配對；至少不能用降低覆蓋率換吞吐。|
+|3|ejection 搜尋分 band／減少無效搜尋：占 65.11% 時間，但收益集中 h05；延長預算提升有限|先加 nodes/candidates/失敗原因計數；worker 隔離 Search，限定完整 touched set、跨界序列補做，global max 在 barrier 合併。是否提前停低收益搜尋需獨立消融|固定工作量核對回滾、所有 blocker、最大位移與合法性；1.5 秒評估 attempted nodes/roots 的實際倍數（約 2–4 倍為假說），並逐筆比較總／最大位移。重點觀察 h05/h06，但接受判定用全部 testcases+holdout；不能以 6 秒收益冒充 1.5 秒成果。|
+|4|toy cap 回收／停止路徑：最大位移落差 1.643%，目前只一筆證據；本輪僅記錄|後續若任務授權，先追蹤停止原因、修補候選和 DP 回收範圍，再評估一般性修正，不做 toy 特判|以 v5/v6 相同起點配對，保留 total/max/attempts/時間；參考最大位移 1972.0，且必須通過既有總位移接受約束與全套合法性／其他測資回歸。時間預算不同要單列，不能把加時算作演算法改進。|
+### 共通驗收與完成閘門
+## 資料來源指紋
+
+exec
+/bin/bash -lc "rg -n 'band|parallel|anneal|thread|epoch' AI_Solutions/CodexParallelChain/src/*sa*; rg --files AI_Solutions/CodexParallelChain/src; rg -n 'sanitize|tsan|parallel_sa|argparse|src_sha256|Stage|stage1' AI_Solutions/CodexParallelChain/tests/run_tests.py Testcases/results/CodexParallelChain/scripts/phase2_train.py; rg --files -g AGENTS.md AI_Solutions/CodexParallelChain Testcases/results/CodexParallelChain" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ exited 1 in 0ms:
+rg: AI_Solutions/CodexParallelChain/src/*sa*: IO error for operation on AI_Solutions/CodexParallelChain/src/*sa*: No such file or directory (os error 2)
+AI_Solutions/CodexParallelChain/src/guard.hpp
+AI_Solutions/CodexParallelChain/src/legalizer.hpp
+AI_Solutions/CodexParallelChain/src/legalizer.cpp
+AI_Solutions/CodexParallelChain/src/global.cpp
+AI_Solutions/CodexParallelChain/src/global.hpp
+AI_Solutions/CodexParallelChain/src/chain.hpp
+AI_Solutions/CodexParallelChain/src/placedb.cpp
+AI_Solutions/CodexParallelChain/src/rowmap.hpp
+AI_Solutions/CodexParallelChain/src/optimizer.cpp
+AI_Solutions/CodexParallelChain/src/chain.cpp
+AI_Solutions/CodexParallelChain/src/capsearch.cpp
+AI_Solutions/CodexParallelChain/src/annealer.hpp
+AI_Solutions/CodexParallelChain/src/capsearch.hpp
+AI_Solutions/CodexParallelChain/src/optimizer.hpp
+AI_Solutions/CodexParallelChain/src/annealer.cpp
+AI_Solutions/CodexParallelChain/src/main.cpp
+AI_Solutions/CodexParallelChain/src/window.cpp
+AI_Solutions/CodexParallelChain/src/placedb.hpp
+AI_Solutions/CodexParallelChain/src/window.hpp
+AI_Solutions/CodexParallelChain/src/pool.hpp
+Testcases/results/CodexParallelChain/scripts/phase2_train.py:2:"""phase2_train.py TAG [extra dp args] — Stage 1 of the current v6 source on the tuning set (testcases + holdout).
+Testcases/results/CodexParallelChain/scripts/phase2_train.py:21:(d / 'protocol.json').write_text(json.dumps(dict(tag=tag, src_sha256=src_hash, dp_args=extra), indent=1) + '\n')
+Testcases/results/CodexParallelChain/scripts/phase2_train.py:24:q.run('stage1', [PY, V5S / 'run_ts.py', '--bin', exe, '--out', d / 'ts', f'--dp-args=--no-sa {extra}',
+Testcases/results/CodexParallelChain/scripts/phase2_train.py:33:subprocess.run([PY, R / 'scripts/stage1_phases.py', d / 'stage1', d / 'ts'], check=True)
+AI_Solutions/CodexParallelChain/tests/run_tests.py:3:import argparse
+AI_Solutions/CodexParallelChain/tests/run_tests.py:13:    parser = argparse.ArgumentParser(description=__doc__)
+AI_Solutions/CodexParallelChain/tests/run_tests.py:14:    parser.add_argument('--sanitize', action='store_true')
+AI_Solutions/CodexParallelChain/tests/run_tests.py:17:    out = ROOT.parents[1] / 'Testcases/results' / ROOT.name / ('tests_sanitized' if args.sanitize else 'tests')
+AI_Solutions/CodexParallelChain/tests/run_tests.py:19:    flags = ['-std=c++17', '-O1' if args.sanitize else '-O2', '-pthread', '-UNDEBUG']
+AI_Solutions/CodexParallelChain/tests/run_tests.py:20:    if args.sanitize:
+AI_Solutions/CodexParallelChain/tests/run_tests.py:21:        flags += ['-g', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']
+AI_Solutions/CodexParallelChain/tests/run_tests.py:44:    for name in ('window', 'multirow', 'optimizer', 'chain', 'parallel_sa', 'pool', 'global', 'capsearch', 'cap_windows', 'guard'):
+
+exec
+/bin/bash -lc "rg -n 'band|parallel|thread|epoch|anneal' AI_Solutions/CodexParallelChain/src/annealer.cpp; cat AI_Solutions/CodexParallelChain/src/annealer.hpp AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp AI_Solutions/CodexParallelChain/tests/run_tests.py Testcases/results/CodexParallelChain/scripts/phase2_train.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+1:// annealer.cpp — Stage 2 (v3).
+21:// v4: with several threads the chip is cut into row bands annealed at the
+22:// same time (annealParallel, see there); bands merge after about one attempt
+23:// per cell and the band edges move by half a band every merge.
+24:#include "annealer.hpp"
+34:#include <thread>
+118:// v4: connectivity shared by all workers of the parallel SA (read-only).
+132:// v5: the merged state of the parallel SA. Every merge writes it once (bands
+133:// in parallel, nets in parallel chunks) and the workers only copy from it.
+134:// v4 had every worker redo every other band's updates itself: row-list
+160:        bandHi_ = (int)db.rows.size();
+305:    // ---------------------------------------------------------- v4: parallel SA pieces
+310:        bandLo_ = r0;
+311:        bandHi_ = r1;
+312:        bandY0_ = db_.rows[r0].y;
+313:        bandY1_ = db_.rows[r1 - 1].y + db_.rows[r1 - 1].height;
+363:    // v5: parallel merge through Shared (replaces v4's syncFrom).
+373:    // After a batch: this band's moved cells and rows into G (bands write
+374:    // disjoint cells and rows, so bands may export at the same time), and the
+382:        for (int r = bandLo_; r < bandHi_; ++r)
+394:    // Takes over the other bands' moved cells and the updated nets from G
+395:    // (copies only; rows are loaded per band by loadBand).
+410:    // The row lists of the coming band (other rows may be stale in this
+411:    // worker; moves never read them), then the band itself.
+505:        if (!track_)   // v4 parallel worker: remember which cells this batch moved
+513:            if (cellEpoch_[v] != epoch_) {
+514:                cellEpoch_[v] = epoch_;
+538:            ++epoch_;
+596:    // Segment of row r (inside the band) nearest to x; -1 if the band has none.
+600:            for(int j=bandLo_;j<bandHi_;++j) if(!db_.rows[j].segs.empty()) {
+770:        for (int r = std::max(bandLo_, r0 - 2); r <= std::min(bandHi_ - 1, r0 + 2); ++r)
+846:            if(row<bandLo_ || row>=bandHi_) continue;
+890:            // v4: in a band, sample y only where window and band overlap (no wasted proposals)
+891:            double lo = std::max(c_[a].y - winY_, bandY0_), hi = std::min(c_[a].y + winY_, bandY1_);
+895:        if (row < bandLo_ || row >= bandHi_) {   // v4 band: aimed moves stop at the edge, random ones fail
+897:            row = std::min(bandHi_ - 1, std::max(bandLo_, row));
+992:    int bandLo_ = 0, bandHi_ = 0;  // v4: rows this annealer may use
+993:    double bandY0_ = -1e300, bandY1_ = 1e300;
+994:    bool track_ = true;            // v4: best-so-far journal (off in parallel workers)
+1017:    int epoch_ = 0;
+1027:// v4: rows split into (at most) `bands` horizontal bands holding about the
+1028:// same number of cells; shift = 1 moves every boundary by half a band, so
+1030:std::vector<int> bandEdges(const PlaceDB& db, const Placement& P, int bands, int shift, int minRows) {
+1037:    double acc = 0, unit = total / bands;
+1041:        if (acc >= next && (int)edge.size() < bands && r + 1 < R && r + 1 - edge.back() >= minRows) {
+1046:    if (R - edge.back() < minRows && edge.size() > 1) edge.pop_back();   // no thin last band
+1048:    return edge;   // band b = rows [edge[b], edge[b+1])
+1051:// v4: parallel SA. The schedule is the same as the sequential one (T0 from
+1053:// step runs in all bands at once, one worker thread per band. A worker sees
+1055:// move decisions do not depend on thread timing (a wall-time cutoff can still
+1056:// change the number of completed batches). After each batch the bands are merged (rows are disjoint,
+1058:// placement is kept. Nets that span two bands are the only source of
+1059:// error: their delta is computed against the other band's start-of-step
+1060:// positions [parallel SA by spatial decomposition, cf. Kravitz & Rutenbar,
+1061:// "Placement by simulated annealing on a multiprocessor", TCAD'87].
+1075:SAResult annealParallel(const PlaceDB& db, Placement& P, const SAOptions& opt, int bands,
+1080:    std::vector<Placement> copies(bands, P);
+1082:    for (int b = 0; b < bands; ++b)
+1093:    double perCell = opt.movesPerCell * bands;   // every band gets the sequential per-cell budget
+1094:    long long total = (long long)std::max(opt.minMoves * bands,
+1095:                                          std::min(opt.maxMoves * bands, perCell * db.movable.size()));
+1103:        std::fprintf(stderr, "[sa] parallel: %d bands/threads  HPWL %.0f  T0 %.4g  %lld moves in %d steps, sync every %.1f moves/cell\n",
+1104:                     bands, res.initial, T0, total, steps, opt.syncMoves);
+1113:    Pool pool(bands);
+1114:    std::vector<long long> acc(bands), att(bands);
+1119:    std::vector<double> dH(bands, 0);
+1133:            std::vector<int> edge = bandEdges(db, P, bands, round % 2, std::max(1, opt.minBandRows / 2));
+1135:            // v5: every band takes its rows over from the shared state, in parallel
+1143:            for (int b = nb; b < bands; ++b) work[b]->clearMoved();
+1149:            // v5 merge: (1) bands write their moved cells and rows (disjoint);
+1150:            // (2) the touched nets, deduplicated in band order; (3) their boxes,
+1151:            // once, in parallel chunks; (4) every worker copies what changed.
+1161:            size_t chunk = (touched.size() + bands - 1) / bands;
+1162:            pool.run(bands, [&](int b) {
+1175:            for (int b = 0; b < bands; ++b) G.cur += dH[b];
+1176:            pool.run(bands, [&](int b) {
+1253:    int threads = opt.threads > 0 ? opt.threads : (int)std::min(8u, std::max(1u, std::thread::hardware_concurrency()));
+1254:    // Parallel SA only pays off when one thread could not finish the schedule
+1256:    // time). When one thread finishes early anyway (h05: 30M moves in 16 s) the
+1257:    // extra moves add nothing and the band edges cost quality (h05: +0.4 %
+1258:    // with 2 threads, +1.4 % with 6). Below 8000 cells (< 4e7 planned moves)
+1259:    // the automatic choice is one thread; --threads N still forces N.
+1260:    // v5: ... unless one thread cannot finish its schedule in the time limit
+1262:    // 4 threads were better on h03 / h04 / h05 by 1.8 / 0.4 / 0.4 % (3 seeds,
+1263:    // tune/sa_threads_t10); with the default 60 s this keeps v4's choice.
+1264:    if (opt.threads <= 0 && db.movable.size() < 8000) {
+1266:        if (planned / 1.2e6 <= 0.7 * opt.timeLimit) threads = 1;
+1270:    // on the 200k-cell test design 8 threads did no more moves than 4 (memory
+1271:    // bound) but had more band edges, and ended 8 % worse; 4 was best.
+1276:    threads = (int)std::min<long long>(threads, std::max<long long>(4, 2000000LL / n));
+1277:    threads = (int)std::min<long long>(threads, std::max<long long>(1, 12000000LL / n));
+1278:    // a band needs enough rows for vertical moves, and enough cells to be worth a thread
+1279:    threads = std::min(threads, std::max(1, (int)db.rows.size() / std::max(1, opt.minBandRows)));
+1280:    threads = std::min(threads, std::max(1, (int)(db.movable.size() / 1000)));
+1281:    return std::max(1, threads);
+1284:SAResult anneal(const PlaceDB& db, Placement& P, const SAOptions& opt) {
+1286:    int threads = saThreads(db, opt);
+1287:    if (threads > 1) return annealParallel(db, P, opt, threads, g);
+// annealer.hpp — Stage 2: simulated annealing on total HPWL with legality-preserving moves.
+#pragma once
+#include <cstdint>
+#include <string>
+
+#include "placedb.hpp"
+
+struct SAOptions {
+    uint64_t seed = 1;
+    double timeLimit = 60;        // seconds; moves per step shrink to fit
+    double movesPerCell = 5000;   // attempted moves = movesPerCell * #movable cells ...
+    double minMoves = 5e6;        // ... but at least this many (small designs anneal properly)
+    double maxMoves = 6e7;        // v3: ... and at most this many (big designs keep ~1 min)
+    int steps = 100;              // temperature steps (T0 -> T0 * tEndRatio, geometric)
+    double p0 = 0.8;              // acceptance probability of an average uphill move at T0
+    double tEndRatio = 1e-3;
+    double pTarget = 0.5;         // chance a move aims at the cell's optimal region
+    double win0 = 0.05;           // initial range window, as a fraction of the chip
+    double maxWin = 0.1;          // v2: largest range window, as a fraction of the chip
+    double pGlobalSwap = 0.04;   // cold multi-candidate global/vertical swaps
+    double pRowOpt = 0.01;        // v3: chance of a linear-placement window move
+    int rowWin = 12;              //     cells per linear-placement window
+    double pIsm = 0.01;           // v3: chance of an independent-set-matching move
+    int ismSize = 12;             //     cells per matching
+    double ismReach = 3;          //     candidates within this many minimum windows in x (+-2 rows)
+    double polishFrom = 0.5;      // v3: rowopt / ism only from this fraction of the temperature steps on
+    double minWinCells = 4;       // smallest window: this many average cell widths ...
+    double minWinRows = 1.5;      // ... and this many rows
+    bool clampTarget = false;     // optimal-region moves also obey the window (worse in tests)
+    double pReorder = 0.1;        // v2: chance of a local-reordering move (3 neighbours)
+    int nearTries = -1;           // v2: if the target fails, cells/gaps tried on each side of it;
+                                  //     -1 = auto: 3 when utilization >= 0.72, else 0
+    int threads = 0;              // v4: parallel SA worker threads (0 = auto: hardware, at most 8)
+    int minBandRows = 12;         // v4: rows per band at least (fewer threads on short chips)
+    double syncMoves = 1.0;       // v4: bands merge after about this many attempts per cell
+    double starvedAttemptsPerCell = 100;   // v6: parallel SA: fewer projected attempts per cell -> keep only ...
+    double starvedMinFraction = 0.1;       // v6: ... this fraction of timeLimit (the rest goes to the polish); 0 = off
+    std::string tracePath;        // CSV trace for the report plot (empty = none)
+    bool verbose = false;
+};
+
+struct SAResult {
+    double initial = 0, best = 0;
+    long long attempts = 0, accepted = 0;
+    double seconds = 0;
+    double limitCut = 0;   // v6: seconds of timeLimit given up by a starved SA (main hands them to the polish)
+};
+
+// Improves P in place; P stays legal after every accepted move, and the best
+// placement seen is returned.
+SAResult anneal(const PlaceDB& db, Placement& P, const SAOptions& opt);
+// v4: number of worker threads anneal() will use for this design.
+int saThreads(const PlaceDB& db, const SAOptions& opt);
+#include "../src/annealer.hpp"
+#include <cmath>
+#include <iostream>
+#include <stdexcept>
+
+void require(bool condition, const char* message) {
+    if (!condition) throw std::runtime_error(message);
+}
+
+int main() {
+    PlaceDB db;
+    db.uniformSites = true;
+    db.siteSpacing = 1;
+    Placement original;
+    constexpr int count = 2000, rows = 40, perRow = count / rows;
+    for (int row = 0; row < rows; ++row) {
+        db.rows.push_back({double(row), 1, {row}});
+        db.segs.push_back({row, double(row), 1, 0, 1, 120});
+    }
+    for (int v = 0; v < count; ++v) {
+        Node cell;
+        cell.name = "c" + std::to_string(v);
+        cell.w = cell.h = 1;
+        cell.gx = 2 * (v % perRow);
+        cell.gy = v / perRow;
+        db.nodes.push_back(cell);
+        db.movable.push_back(v);
+        db.wSites.push_back(1);
+        original.seg.push_back(v / perRow);
+        original.site.push_back(2 * (v % perRow));
+    }
+    db.nodeNets.resize(count);
+    for (int v = 0; v < count; ++v) {
+        int other = (37 * v + 19) % count;
+        db.nets.push_back({v, other});
+        db.nodeNets[v].push_back(v);
+        db.nodeNets[other].push_back(v);
+    }
+    require(checkLegal(db, original).empty(), "invalid test fixture");
+    SAOptions options;
+    options.threads = 2;
+    options.minMoves = 0;
+    options.movesPerCell = 10;
+    options.steps = 3;
+    options.syncMoves = 0.1;
+    options.timeLimit = 30;
+    require(saThreads(db, options) == 2, "fixture did not enable parallel SA");
+    Placement a = original, b = original;
+    auto first = anneal(db, a, options);
+    auto second = anneal(db, b, options);
+    require(first.attempts > 0 && first.attempts == second.attempts, "inconsistent work budget");
+    require(a.seg == b.seg && a.site == b.site, "fixed-work parallel SA was not deterministic");
+    require(checkLegal(db, a).empty(), "parallel merge produced illegal placement");
+    require(first.best <= first.initial + 1e-7, "parallel SA lost its incumbent");
+    require(std::abs(totalHPWL(db, a) - first.best) < 1e-7, "merged HPWL cache disagrees with actual placement");
+
+    require(first.limitCut == 0, "a well-fed SA cut its own time limit");
+
+    // v6: a starved SA keeps only starvedMinFraction of its limit
+    SAOptions starved = options;
+    starved.starvedAttemptsPerCell = 1e15;
+    starved.starvedMinFraction = 0.1;
+    Placement s = original;
+    auto cut = anneal(db, s, starved);
+    require(cut.limitCut > 26.9 && cut.limitCut < 27.0 + 1e-9, "starved SA did not keep 10 % of its limit");
+    require(cut.seconds < 3.5, "starved SA ran past its cut limit");
+    require(checkLegal(db, s).empty() && cut.best <= cut.initial + 1e-7, "starved SA broke legality or its incumbent");
+
+    options.timeLimit = 0;
+    Placement stopped = original;
+    auto expired = anneal(db, stopped, options);
+    require(expired.attempts == 0, "parallel SA started a batch after its deadline");
+    require(stopped.seg == original.seg && stopped.site == original.site, "zero-budget run changed the placement");
+    std::cout << "PASS: parallel legality, HPWL cache, fixed-work determinism, starved cut, expired budget\n";
+}
+#!/usr/bin/env python3
+"""Build and run the invariant/exhaustive regression suite without CMake."""
+import argparse
+import json
+from pathlib import Path
+import subprocess
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--sanitize', action='store_true')
+    parser.add_argument('--compiler', default='g++')
+    args = parser.parse_args()
+    out = ROOT.parents[1] / 'Testcases/results' / ROOT.name / ('tests_sanitized' if args.sanitize else 'tests')
+    out.mkdir(parents=True, exist_ok=True)
+    flags = ['-std=c++17', '-O1' if args.sanitize else '-O2', '-pthread', '-UNDEBUG']
+    if args.sanitize:
+        flags += ['-g', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']
+    records = []
+
+    def run(command, label, timeout=180):
+        start = time.perf_counter()
+        process = subprocess.run(command, text=True, stdout=subprocess.PIPE,
+                                 stderr=subprocess.STDOUT, timeout=timeout)
+        (out / (label + '.log')).write_text(process.stdout)
+        records.append({'label': label, 'command': command, 'returncode': process.returncode,
+                        'seconds': time.perf_counter() - start})
+        (out / 'records.json').write_text(json.dumps(records, indent=2) + '\n')
+        print(label + ': ' + ('PASS' if process.returncode == 0 else 'FAIL'), flush=True)
+        if process.returncode:
+            print(process.stdout)
+            raise SystemExit(process.returncode)
+
+    objects = []
+    for source in sorted((ROOT / 'src').glob('*.cpp')):
+        if source.stem == 'main':
+            continue
+        obj = out / (source.stem + '.o')
+        run([args.compiler, *flags, '-c', str(source), '-o', str(obj)], 'build_' + source.stem)
+        objects.append(str(obj))
+    for name in ('window', 'multirow', 'optimizer', 'chain', 'parallel_sa', 'pool', 'global', 'capsearch', 'cap_windows', 'guard'):
+        exe = out / (name + '_test')
+        run([args.compiler, *flags, str(ROOT / 'tests' / (name + '_test.cpp')),
+             *objects, '-o', str(exe)], 'link_' + name)
+        run([str(exe)], name)
+    print('All 10 C++ test programs passed. Logs: ' + str(out), flush=True)
+
+
+if __name__ == '__main__':
+    main()
+#!/usr/bin/env python3
+"""phase2_train.py TAG [extra dp args] — Stage 1 of the current v6 source on the tuning set (testcases + holdout).
+
+Copies AI_Solutions/<this results folder's name> (src + CMakeLists) to phase2/train/TAG/src, builds it there, records the
+source hash, runs run_ts.py --no-sa -v on the 11 cases, and compares with this session's ChainDP / CodexCapDP
+local_grade records (phase1/lg; for a later version: ClaudeOpus55_v6/final). Only testcases + holdout: edge is never used for tuning.
+"""
+import hashlib, json, shutil, subprocess, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from v6q import Queue, R, LAB, PY, V5S, build, note  # noqa: E402
+
+tag = sys.argv[1]
+extra = ' '.join(sys.argv[2:])
+d = R / 'phase2' / 'train' / tag
+if not (d / 'src').exists():
+    d.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(LAB / 'AI_Solutions' / R.name / 'src', d / 'src')
+    shutil.copy(LAB / 'AI_Solutions' / R.name / 'CMakeLists.txt', d / 'CMakeLists.txt')
+src_hash = hashlib.sha256(b''.join(p.read_bytes() for p in sorted((d / 'src').iterdir()))).hexdigest()
+(d / 'protocol.json').write_text(json.dumps(dict(tag=tag, src_sha256=src_hash, dp_args=extra), indent=1) + '\n')
+exe = build('v6', d / 'build', src=d)
+q = Queue(d)
+q.run('stage1', [PY, V5S / 'run_ts.py', '--bin', exe, '--out', d / 'ts', f'--dp-args=--no-sa {extra}',
+                 'Testcases/testcases', 'Testcases/holdout'])
+# references: this results folder's own phase1/lg (v6's diagnosis) if present, else v6's final paired run
+ref = R / 'phase1/lg' if (R / 'phase1/lg/CodexChainDP_27/record.csv').exists() else None
+V6F = R.parent / 'ClaudeOpus55_v6' / 'final'
+refs = (['CodexChainDP', ref / 'CodexChainDP_27/record.csv', 'CodexCapDP', ref / 'CodexCapDP_27/record.csv'] if ref else
+        ['CodexChainDP', V6F / 'lg_CodexChainDP/record.csv', 'ClaudeOpus55_v6', V6F / 'lg_ClaudeOpus55_v6/record.csv'])
+subprocess.run([PY, R / 'scripts/compare_lg.py', d / 'compare.md', *refs, f'{R.name}_{tag}', d / 'ts/record.csv', '--csv', d / 'compare.csv'],
+               check=True)
+subprocess.run([PY, R / 'scripts/stage1_phases.py', d / 'stage1', d / 'ts'], check=True)
+note(f'phase2/train/{tag} 完成（{extra or "預設"}）：見 phase2/train/{tag}/compare.md')
+
+codex
+診斷排序以 SA 邊界改善為第一項，平均損失 1.339% 已達門檻。本輪先做一個分界調整設計，保留溫度、次數與接受規則，並測試固定次數的可重現性；chain 留待後續輪次。
+
+exec
+/bin/bash -lc "sed -n '1027,1249p' AI_Solutions/CodexParallelChain/src/annealer.cpp; sed -n '305,435p' AI_Solutions/CodexParallelChain/src/annealer.cpp; cat AI_Solutions/CodexParallelChain/src/pool.hpp; rg -n 'fixed|sa_bench|seeds|protocol|argparse' Testcases/results/CodexParallelChain/scripts/phase2_stage2_sweep.py; git status --short" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+// v4: rows split into (at most) `bands` horizontal bands holding about the
+// same number of cells; shift = 1 moves every boundary by half a band, so
+// cells next to a boundary can cross it in the other layout.
+std::vector<int> bandEdges(const PlaceDB& db, const Placement& P, int bands, int shift, int minRows) {
+    int R = (int)db.rows.size();
+    std::vector<double> cnt(R, 0);
+    for (int v : db.movable) cnt[db.segs[P.seg[v]].row] += 1;
+    double total = 0;
+    for (double c : cnt) total += c;
+    std::vector<int> edge{0};
+    double acc = 0, unit = total / bands;
+    double next = unit * (shift ? 0.5 : 1.0);
+    for (int r = 0; r < R; ++r) {
+        acc += cnt[r];
+        if (acc >= next && (int)edge.size() < bands && r + 1 < R && r + 1 - edge.back() >= minRows) {
+            edge.push_back(r + 1);
+            next += unit;
+        }
+    }
+    if (R - edge.back() < minRows && edge.size() > 1) edge.pop_back();   // no thin last band
+    edge.push_back(R);
+    return edge;   // band b = rows [edge[b], edge[b+1])
+}
+
+// v4: parallel SA. The schedule is the same as the sequential one (T0 from
+// sampled moves, geometric cooling, VPR range limiter), but every temperature
+// step runs in all bands at once, one worker thread per band. A worker sees
+// the rest of the chip as it was at the start of the batch (its own copy), so
+// move decisions do not depend on thread timing (a wall-time cutoff can still
+// change the number of completed batches). After each batch the bands are merged (rows are disjoint,
+// so the merge is legal), the true HPWL is measured and the best merged
+// placement is kept. Nets that span two bands are the only source of
+// error: their delta is computed against the other band's start-of-step
+// positions [parallel SA by spatial decomposition, cf. Kravitz & Rutenbar,
+// "Placement by simulated annealing on a multiprocessor", TCAD'87].
+// v5: a net's box from the shared centers (same as Annealer::netBox)
+Box sharedBox(const Graph& g, const std::vector<Pt>& c, int n) {
+    const int *p = g.pins.begin(n), *e = g.pins.end(n);
+    if (e - p < 2) return {0, 0, 0, 0};
+    Box b{c[*p].x, c[*p].x, c[*p].y, c[*p].y};
+    for (++p; p != e; ++p) {
+        const Pt& q = c[*p];
+        if (q.x < b.xl) b.xl = q.x; else if (q.x > b.xh) b.xh = q.x;
+        if (q.y < b.yl) b.yl = q.y; else if (q.y > b.yh) b.yh = q.y;
+    }
+    return b;
+}
+
+SAResult annealParallel(const PlaceDB& db, Placement& P, const SAOptions& opt, int bands,
+                        std::shared_ptr<const Graph> g) {
+    auto t0 = std::chrono::steady_clock::now();
+    auto elapsed = [&] { return std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count(); };
+    SAResult res;
+    std::vector<Placement> copies(bands, P);
+    std::vector<std::unique_ptr<Annealer>> work;
+    for (int b = 0; b < bands; ++b)
+        work.emplace_back(new Annealer(db, copies[b], opt, g, opt.seed * 1000003ULL + b));
+    res.initial = work[0]->current();
+    double best = res.initial;
+    Placement bestP = P;
+    if (work[0]->activeCount() == 0) { res.best = best; return res; }
+    for (auto& w : work) w->initWindow();   // window limits for every worker
+    double T0 = work[0]->initialTemperature();
+    double winX = work[0]->winX(), winY = work[0]->winY();
+    int steps = std::max(1, opt.steps);
+    double alpha = std::pow(opt.tEndRatio, 1.0 / steps);
+    double perCell = opt.movesPerCell * bands;   // every band gets the sequential per-cell budget
+    long long total = (long long)std::max(opt.minMoves * bands,
+                                          std::min(opt.maxMoves * bands, perCell * db.movable.size()));
+    const long long planned = std::max(1LL, total / steps);
+    long long perStep = planned;
+    long long active = 0;
+    for (int v : db.movable)
+        if (!db.nodeNets[v].empty()) ++active;
+    active = std::max(1LL, active);
+    if (opt.verbose)
+        std::fprintf(stderr, "[sa] parallel: %d bands/threads  HPWL %.0f  T0 %.4g  %lld moves in %d steps, sync every %.1f moves/cell\n",
+                     bands, res.initial, T0, total, steps, opt.syncMoves);
+    std::ofstream trace;
+    if (!opt.tracePath.empty()) {
+        trace.open(opt.tracePath);
+        if (!trace) throw std::runtime_error("cannot open SA trace");
+        trace << std::setprecision(15);
+        trace << "iteration,current,best,temperature,window_x,window_y,accept_rate\n";
+        trace << 0 << ',' << res.initial << ',' << best << ',' << T0 << ',' << winX << ',' << winY << ",1\n";
+    }
+    Pool pool(bands);
+    std::vector<long long> acc(bands), att(bands);
+    Shared G;
+    work[0]->exportAll(G);
+    std::vector<int> netStamp(db.nets.size(), 0), touched;
+    int netStampId = 0;
+    std::vector<double> dH(bands, 0);
+    double T = T0, cur = res.initial, lastSecs = elapsed(), tBatch = 0, tSync = 0;
+    long long it = 0, round = 0;
+    bool timeUp = false;
+    double limit = opt.timeLimit;   // v6: may be cut after step 0 (starved SA)
+    for (int step = 0; step < steps; ++step) {
+        bool polish = step >= opt.polishFrom * steps;
+        long long a = 0, n = 0;
+        // sub-rounds of about syncMoves attempts per cell, then merge
+        long long sub = std::max(1LL, (long long)std::llround(perStep / (opt.syncMoves * active)));
+        for (long long k = 0; k < sub; ++k, ++round) {
+            // A complete batch (including its merge) is the cancellation unit:
+            // never start another one after the deadline has passed.
+            if (elapsed() >= limit) { timeUp = true; break; }
+            std::vector<int> edge = bandEdges(db, P, bands, round % 2, std::max(1, opt.minBandRows / 2));
+            int nb = (int)edge.size() - 1;
+            // v5: every band takes its rows over from the shared state, in parallel
+            pool.run(nb, [&](int b) {
+                work[b]->loadBand(G, edge[b], edge[b + 1]);
+                work[b]->setWindow(winX, winY);
+                work[b]->reseed(opt.seed * 7919ULL + round * 131ULL + b);
+            });
+            long long act = 0;
+            for (int b = 0; b < nb; ++b) act += work[b]->activeCount();
+            for (int b = nb; b < bands; ++b) work[b]->clearMoved();
+            for (int b = 0; b < nb; ++b) att[b] = act ? (perStep / sub) * work[b]->activeCount() / act : 0;
+            double tb = elapsed();
+            pool.run(nb, [&](int b) { acc[b] = work[b]->batch(T, att[b], polish); });
+            tBatch += elapsed() - tb;
+            tb = elapsed();
+            // v5 merge: (1) bands write their moved cells and rows (disjoint);
+            // (2) the touched nets, deduplicated in band order; (3) their boxes,
+            // once, in parallel chunks; (4) every worker copies what changed.
+            pool.run(nb, [&](int b) { work[b]->exportBand(P, G); });
+            ++netStampId;
+            touched.clear();
+            for (int b = 0; b < nb; ++b)
+                for (int net : work[b]->touchedNets())
+                    if (netStamp[net] != netStampId) {
+                        netStamp[net] = netStampId;
+                        touched.push_back(net);
+                    }
+            size_t chunk = (touched.size() + bands - 1) / bands;
+            pool.run(bands, [&](int b) {
+                double d = 0;
+                size_t lo = std::min(touched.size(), b * chunk), hi = std::min(touched.size(), lo + chunk);
+                for (size_t i = lo; i < hi; ++i) {
+                    int net = touched[i];
+                    Box bx = sharedBox(*g, G.c, net);
+                    double h = (bx.xh - bx.xl) + (bx.yh - bx.yl);
+                    d += h - G.H[net];
+                    G.box[net] = bx;
+                    G.H[net] = h;
+                }
+                dH[b] = d;
+            });
+            for (int b = 0; b < bands; ++b) G.cur += dH[b];
+            pool.run(bands, [&](int b) {
+                std::vector<const std::vector<int>*> lists;
+                for (int o = 0; o < nb; ++o)
+                    if (o != b) lists.push_back(&work[o]->moved());
+                work[b]->importFrom(P, G, lists, touched);
+            });
+            for (int b = 0; b < nb; ++b) { a += acc[b]; n += att[b]; }
+            tSync += elapsed() - tb;
+            // A later batch at this same temperature may worsen HPWL. Keep
+            // every synchronized incumbent, not just the step's final one.
+            cur = G.cur;
+            if (cur < best - 1e-6) { best = cur; bestP = P; }
+        }
+        cur = G.cur;
+        it += n;
+        res.accepted += a;
+        double rate = (double)a / std::max(1LL, n);
+        double f = std::min(2.0, std::max(0.5, 1 - 0.44 + rate));
+        work[0]->setWindow(winX * f, winY * f);   // clamps to the allowed range
+        winX = work[0]->winX();
+        winY = work[0]->winY();
+        if (trace.is_open())
+            trace << it << ',' << cur << ',' << best << ',' << T << ',' << winX << ',' << winY << ',' << rate << '\n';
+        if (opt.verbose && (step % 20 == 0 || step == steps - 1))
+            std::fprintf(stderr, "[sa] step %3d  T %.4g  acc %.3f  win %.0f x %.0f  cur %.0f  best %.0f  %.1fs\n", step, T,
+                         rate, winX, winY, cur, best, elapsed());
+        if (timeUp || elapsed() >= limit || n == 0) break;
+        // too slow for the time limit: fewer moves per step, same temperatures.
+        // v4: speed measured over the last step only (hot steps are slower;
+        // the overall average stopped the run 10 - 30 % early)
+        // v5: and back up to the plan when the later, colder steps run faster.
+        // v4 kept the count of the first (slowest) step: 43 - 50 of 60 s used,
+        // on the 200k-cell L1 15 % of the planned moves (diagnosis.md 2.4).
+        int left = steps - step - 1;
+        double secs = elapsed(), dt = secs - lastSecs;
+        // v6: a starved SA hands its time to the polish. When the whole limit
+        // buys fewer than starvedAttemptsPerCell attempts per cell (at the rate
+        // of step 0, the slowest), the SA keeps only starvedMinFraction of it.
+        // From the same L2 start (1M cells, ~45 attempts per cell in 60 s):
+        // SA 0 / 7 / 15 / 30 / 60 s, rest polish -> HPWL 1.545 / 1.546 /
+        // 1.569 / 1.616 / 1.802e9; CodexCapDP's SA 30 -> P60 1.627e9. The
+        // 200k-cell L1 (~375 per cell) is best with the full 60 s (45 s: +3 %).
+        // A cut in proportion cannot serve both, hence a threshold
+        // (Testcases/results/ClaudeOpus55_v6/phase2/stage2_sweep).
+        if (step == 0 && dt > 0 && opt.starvedAttemptsPerCell > 0) {
+            double perCellAll = n / dt * limit / std::max<size_t>(1, db.movable.size());
+            if (perCellAll < opt.starvedAttemptsPerCell) {
+                double cut = std::max(elapsed(), opt.starvedMinFraction * limit);
+                if (opt.verbose)
+                    std::fprintf(stderr, "[sa] starved: %.0f attempts per cell in %.1f s, limit -> %.1f s\n", perCellAll, limit, cut);
+                res.limitCut = limit - cut;
+                limit = cut;
+            }
+        }
+        if (left > 0 && dt > 0) {
+            double movesLeft = (limit - secs) * (n / dt);
+            perStep = std::max(1LL, std::min(planned, (long long)(movesLeft / left)));
+        }
+        lastSecs = secs;
+        T *= alpha;
+    }
+    P = bestP;
+    res.best = best;
+    res.attempts = it;
+    res.seconds = elapsed();
+    if (opt.verbose) {
+        long long failed = 0;
+        for (auto& w : work) failed += w->failed();
+        std::fprintf(stderr, "[sa] %lld sync rounds, %lld attempts (%.1f%% proposals failed)  %.1fs (moves %.1fs, merge %.1fs)\n",
+                     round, it, 100.0 * failed / std::max(1LL, it), res.seconds, tBatch, tSync);
+    }
+    return res;
+}
+
+    // ---------------------------------------------------------- v4: parallel SA pieces
+    // Moves only cells of rows [r0, r1) and only into those rows; the rest of
+    // the chip is frozen at this worker's copy. No best-so-far journal here:
+    // the driver keeps the best merged placement.
+    void setBand(int r0, int r1) {
+        bandLo_ = r0;
+        bandHi_ = r1;
+        bandY0_ = db_.rows[r0].y;
+        bandY1_ = db_.rows[r1 - 1].y + db_.rows[r1 - 1].height;
+        track_ = false;
+        active_.clear();
+        for (int r = r0; r < r1; ++r)
+            for (int s : db_.rows[r].segs)
+                for (int v : rm_.cells(s))
+                    if (nets_.end(v) != nets_.begin(v)) active_.push_back(v);
+    }
+    long long activeCount() const { return (long long)active_.size(); }
+    long long failed() const { return failed_; }
+    void setWindow(double wx, double wy) {
+        winX_ = std::min(maxWinX_, std::max(minWinX_, wx));
+        winY_ = std::min(maxWinY_, std::max(minWinY_, wy));
+    }
+    void initWindow() {
+        winX_ = std::max(minWinX_, opt_.win0 * (xHi_ - xLo_));
+        winY_ = std::max(minWinY_, opt_.win0 * (yHi_ - yLo_));
+        maxWinX_ = std::max(winX_, opt_.maxWin * (xHi_ - xLo_));
+        maxWinY_ = std::max(winY_, opt_.maxWin * (yHi_ - yLo_));
+    }
+    double winX() const { return winX_; }
+    double winY() const { return winY_; }
+    double current() const { return cur_; }
+    void reseed(uint64_t seed) { rng_ = Rng(seed); }
+
+    // `moves` attempts at temperature T; returns the number accepted.
+    long long batch(double T, long long moves, bool polish) {
+        polish_ = polish;
+        moved_.clear();
+        ++movedStamp_;
+        if (movedMark_.empty()) movedMark_.assign(db_.nodes.size(), 0);
+        long long acc = 0;
+        if (active_.empty()) return 0;
+        for (long long k = 0; k < moves; ++k) {
+            Move m;
+            if (!propose(m)) { ++failed_; continue; }
+            double d = delta(m);
+            if (d <= 0 || rng_.u01() < std::exp(-d / T)) {
+                commit(m, d);
+                ++acc;
+            } else {
+                revert(m);
+            }
+        }
+        return acc;
+    }
+
+    const std::vector<int>& moved() const { return moved_; }
+    void clearMoved() { moved_.clear(); }
+
+    // v5: parallel merge through Shared (replaces v4's syncFrom).
+    // The whole state, once, from this worker (all workers start equal).
+    void exportAll(Shared& G) const {
+        G.c = c_;
+        G.box = box_;
+        G.H = netH_;
+        G.cur = cur_;
+        G.rows.resize(db_.segs.size());
+        for (size_t s = 0; s < db_.segs.size(); ++s) G.rows[s] = rm_.cells((int)s);
+    }
+    // After a batch: this band's moved cells and rows into G (bands write
+    // disjoint cells and rows, so bands may export at the same time), and the
+    // nets those cells touch into touchedOut_ (for the shared box update).
+    void exportBand(Placement& GP, Shared& G) {
+        for (int v : moved_) {
+            GP.seg[v] = P_.seg[v];
+            GP.site[v] = P_.site[v];
+            G.c[v] = c_[v];
+        }
+        for (int r = bandLo_; r < bandHi_; ++r)
+            for (int s : db_.rows[r].segs) G.rows[s] = rm_.cells(s);
+        touchedOut_.clear();
+        ++stampId_;
+        for (int v : moved_)
+            for (const int* it = nets_.begin(v); it != nets_.end(v); ++it)
+                if (netStamp_[*it] != stampId_) {
+                    netStamp_[*it] = stampId_;
+                    touchedOut_.push_back(*it);
+                }
+    }
+    const std::vector<int>& touchedNets() const { return touchedOut_; }
+    // Takes over the other bands' moved cells and the updated nets from G
+    // (copies only; rows are loaded per band by loadBand).
+    void importFrom(const Placement& GP, const Shared& G, const std::vector<const std::vector<int>*>& lists,
+                    const std::vector<int>& nets) {
+        for (const auto* l : lists)
+            for (int v : *l) {
+                P_.seg[v] = GP.seg[v];
+                P_.site[v] = GP.site[v];
+                c_[v] = G.c[v];
+            }
+        for (int n : nets) {
+            box_[n] = G.box[n];
+            netH_[n] = G.H[n];
+        }
+        cur_ = G.cur;
+    }
+    // The row lists of the coming band (other rows may be stale in this
+    // worker; moves never read them), then the band itself.
+    void loadBand(const Shared& G, int r0, int r1) {
+        for (int r = r0; r < r1; ++r)
+            for (int s : db_.rows[r].segs) rm_.setCells(s, G.rows[s]);
+        setBand(r0, r1);
+    }
+
+    // T0 such that an average uphill move is accepted with probability p0.
+    double initialTemperature() {
+        double sum = 0;
+        int cnt = 0;
+        for (int k = 0; k < 20000 && cnt < 5000; ++k) {
+            Move m;
+            if (!propose(m)) continue;
+            double d = delta(m);
+            revert(m);
+            if (d > 1e-9) { sum += d; ++cnt; }
+        }
+        double avg = cnt ? sum / cnt : 1.0;
+        return -avg / std::log(opt_.p0);
+    }
+
+private:
+    // ---------------------------------------------------------- cost
+    Box netBox(int n) const {
+// pool.hpp — v4: a small fixed thread pool (parallel SA and window DP).
+#pragma once
+#include <condition_variable>
+#include <exception>
+#include <functional>
+#include <mutex>
+#include <thread>
+#include <vector>
+
+// v4: a fixed set of worker threads; run(n, f) calls f(0..n-1) in parallel
+// and returns when all are done (cheaper than starting threads every round).
+class Pool {
+public:
+    explicit Pool(int n) {
+        try {
+            for (int i = 0; i < n; ++i) th_.emplace_back([this, i] { loop(i); });
+        } catch (...) {
+            // A partially constructed vector of joinable threads must also
+            // be stopped before propagating a thread-allocation failure.
+            stop();
+            throw;
+        }
+    }
+    ~Pool() { stop(); }
+    void run(int n, const std::function<void(int)>& f) {
+        {
+            std::lock_guard<std::mutex> l(m_);
+            f_ = &f;
+            n_ = n;
+            error_ = nullptr;
+            left_ = (int)th_.size();
+            ++gen_;
+        }
+        cv_.notify_all();
+        std::unique_lock<std::mutex> l(m_);
+        done_.wait(l, [&] { return left_ == 0; });
+        // Wait for every worker before unwinding its caller's placement and
+        // lambda captures. main.cpp can now roll back the optional stage.
+        if (error_) std::rethrow_exception(error_);
+    }
+
+private:
+    void stop() {
+        {
+            std::lock_guard<std::mutex> l(m_);
+            stop_ = true;
+            ++gen_;
+        }
+        cv_.notify_all();
+        for (auto& t : th_) t.join();
+    }
+    void loop(int i) {
+        long seen = 0;
+        for (;;) {
+            const std::function<void(int)>* f;
+            int n;
+            {
+                std::unique_lock<std::mutex> l(m_);
+                cv_.wait(l, [&] { return gen_ != seen; });
+                seen = gen_;
+                if (stop_) return;
+                f = f_;
+                n = n_;
+            }
+            std::exception_ptr error;
+            try {
+                if (i < n) (*f)(i);
+            } catch (...) {
+                error = std::current_exception();
+            }
+            {
+                std::lock_guard<std::mutex> l(m_);
+                if (error && !error_) error_ = error;
+                if (--left_ == 0) done_.notify_one();
+            }
+        }
+    }
+    std::vector<std::thread> th_;
+    std::mutex m_;
+    std::condition_variable cv_, done_;
+    const std::function<void(int)>* f_ = nullptr;
+    std::exception_ptr error_;
+    int n_ = 0, left_ = 0;
+    long gen_ = 0;
+    bool stop_ = false;
+};
+
+5:  v6:      sa_bench built from AI_Solutions/<results folder name>/src, SA S -> polish 90-S, S = 15 / 30 / 45 / 60 (or argv: TAG L2_SPLITS L1_SPLITS, e.g. v6b 0,7,15 60)
+6:  base:    sa_bench built from CodexCapDP (its default for that design: L1 SA60->P30, L2 SA30->P60)
+7:seeds 1-2, automatic threads. Output: phase2/stage2_sweep/<design>_<ver>_sa<S>_s<seed>.csv
+14:SA_BENCH = LAB / 'AI_Solutions/CodexChainDP/tests/sa_bench.cpp'
+20:    exe = R / 'bin' / f'sa_bench_{name}'
+27:base = R / 'bin' / 'sa_bench_CodexCapDP'
+ M AI_Solutions/COMPARISON.md
+ M README.md
+ M Testcases/README.md
+ M Testcases/results/edge/README.md
+ M Testcases/results/edge/make_table.py
+ M Testcases/results/edge/tables.md
+?? AI_Solutions/ClaudeOpus55_v5/
+?? AI_Solutions/ClaudeOpus55_v6/
+?? AI_Solutions/CodexCapDP/
+?? AI_Solutions/CodexParallelChain/
+?? AI_Solutions/HISTORY.md
+?? Testcases/results/ClaudeOpus55_v5/
+?? Testcases/results/ClaudeOpus55_v6/
+?? Testcases/results/CodexCapDP/
+?? Testcases/results/CodexParallelChain/
+?? Testcases/results/edge/ClaudeOpus55_v5/
+?? Testcases/results/edge/ClaudeOpus55_v6/
+?? Testcases/results/edge/CodexCapDP/
+
+exec
+/bin/bash -lc "sed -n '24,48p' AI_Solutions/CodexParallelChain/src/annealer.cpp; sed -n '1247,1305p' AI_Solutions/CodexParallelChain/src/annealer.cpp; rg -n 'guard|anneal\\(' AI_Solutions/CodexParallelChain/src/main.cpp; sed -n '1,110p' AI_Solutions/CodexParallelChain/src/guard.hpp; rg -n 'fixed|moves|argc|argv' AI_Solutions/CodexChainDP/tests/sa_bench.cpp; rg --files Testcases/results/CodexParallelChain/scripts" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#include "annealer.hpp"
+#include <iomanip>
+#include <stdexcept>
+
+#include <algorithm>
+#include <chrono>
+#include <cmath>
+#include <cstdio>
+#include <fstream>
+#include <memory>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <functional>
+
+#include "pool.hpp"
+#include "rowmap.hpp"
+
+namespace {
+
+struct Rng {   // xoshiro256** — fast and good enough for SA
+    uint64_t s[4];
+    explicit Rng(uint64_t seed) {
+        for (auto& x : s) {   // splitmix64 seeding
+            seed += 0x9e3779b97f4a7c15ULL;
+    return res;
+}
+
+}  // namespace
+
+int saThreads(const PlaceDB& db, const SAOptions& opt) {
+    int threads = opt.threads > 0 ? opt.threads : (int)std::min(8u, std::max(1u, std::thread::hardware_concurrency()));
+    // Parallel SA only pays off when one thread could not finish the schedule
+    // in the time limit (ibm01 -3.7 %, h06 -1.8 %, 200k cells -6.8 % at equal
+    // time). When one thread finishes early anyway (h05: 30M moves in 16 s) the
+    // extra moves add nothing and the band edges cost quality (h05: +0.4 %
+    // with 2 threads, +1.4 % with 6). Below 8000 cells (< 4e7 planned moves)
+    // the automatic choice is one thread; --threads N still forces N.
+    // v5: ... unless one thread cannot finish its schedule in the time limit
+    // (about 1.2M moves/s on the holdout designs). With SA limited to 10 s,
+    // 4 threads were better on h03 / h04 / h05 by 1.8 / 0.4 / 0.4 % (3 seeds,
+    // tune/sa_threads_t10); with the default 60 s this keeps v4's choice.
+    if (opt.threads <= 0 && db.movable.size() < 8000) {
+        double planned = std::max(opt.minMoves, std::min(opt.maxMoves, opt.movesPerCell * double(db.movable.size())));
+        if (planned / 1.2e6 <= 0.7 * opt.timeLimit) threads = 1;
+    }
+    // memory: every worker holds its own copy of positions and net boxes. Past
+    // a few hundred thousand objects the copies no longer fit in the cache:
+    // on the 200k-cell test design 8 threads did no more moves than 4 (memory
+    // bound) but had more band edges, and ended 8 % worse; 4 was best.
+    long long n = std::max<long long>(1, (long long)db.movable.size() + (long long)db.nets.size());
+    // v6: at least 4 (was 2), and the hard cap 12e6 / n (was 8e6): on the
+    // 1M-cell L2 (n = 2.7M) four workers did 29 % more attempts than two and
+    // ended 0.7-0.8 % better (2 seeds, diagnosis.md 4.1); 8e6 / n gave 3
+    threads = (int)std::min<long long>(threads, std::max<long long>(4, 2000000LL / n));
+    threads = (int)std::min<long long>(threads, std::max<long long>(1, 12000000LL / n));
+    // a band needs enough rows for vertical moves, and enough cells to be worth a thread
+    threads = std::min(threads, std::max(1, (int)db.rows.size() / std::max(1, opt.minBandRows)));
+    threads = std::min(threads, std::max(1, (int)(db.movable.size() / 1000)));
+    return std::max(1, threads);
+}
+
+SAResult anneal(const PlaceDB& db, Placement& P, const SAOptions& opt) {
+    auto g = std::make_shared<const Graph>(db);
+    int threads = saThreads(db, opt);
+    if (threads > 1) return annealParallel(db, P, opt, threads, g);
+    return Annealer(db, P, opt, g, opt.seed).run();
+}
+1:#include "guard.hpp"
+13:// v4: every stage has a time budget and every optional step is guarded, so
+257:    // v4: every optional step is guarded. If one throws or breaks its invariant,
+260:    auto guarded = [&](const char* name, Placement& p, const std::function<void()>& step,
+262:        guardedStep(name, p, step, ok);
+296:    guarded("pareto matching", legal, [&] { paretoDisplacement(db, legal, oopt); }, noWorse);
+301:    guarded("window DP", legal, [&] { windowSweeps(db, legal, wopt, &stage1Memo); }, noWorse);
+330:            guarded("global-target windows", legal, [&] {
+338:        guarded("ejection chains", legal, [&] { result = chainDisplacement(db, legal, copt); }, [&] {
+346:        guarded("post-chain windows", legal, [&] { windowSweeps(db, legal, afterChain, &stage1Memo); }, [&] {
+358:        guarded("global cap repair", legal, [&] {
+373:        guarded("cap search", legal, [&] { capSearch(db, legal, copts, &stage1Memo); }, [&] {
+401:        if (sopt.timeLimit > 0) guarded("SA", final, [&] { sa = anneal(db, final, sopt); }, legalNow);
+406:        guarded("HPWL polish", final, [&] {
+412:        guarded("HPWL windows", final, [&] { optimizeWindowsHPWL(db, final, hpopt); }, better);
+413:        guarded("order DP", final, [&] { reorderWindows(db, final, orderPasses, wopt.verbose, oopt.until); }, better);
+#pragma once
+#include "placedb.hpp"
+#include <cstdio>
+#include <exception>
+
+// Every optional optimization commits only after its invariant is checked.
+template<class Step, class Check>
+bool guardedStep(const char* name, Placement& p, Step&& step, Check&& ok) {
+    Placement keep = p;
+    try {
+        step();
+        if (ok()) return true;
+        std::fprintf(stderr, "warning: %s broke an invariant, step skipped\n", name);
+    } catch (const std::exception& e) {
+        std::fprintf(stderr, "warning: %s failed (%s), step skipped\n", name, e.what());
+    } catch (...) {
+        std::fprintf(stderr, "warning: %s failed (non-standard exception), step skipped\n", name);
+    }
+    p = std::move(keep);
+    return false;
+}
+11:int main(int argc,char** argv) {
+13:        if(argc!=8 && argc!=9)throw std::runtime_error("sa_bench original legal_prefix out seed moves seconds polish_seconds [threads]");
+15:        if(!db.read(argv[1],err)||!loc.read(argv[2],err))throw std::runtime_error(err);
+25:        SAOptions opt;opt.seed=std::stoull(argv[4]);
+26:        if(std::string(argv[5])!="default") {
+27:            opt.minMoves=opt.maxMoves=std::stod(argv[5]);opt.movesPerCell=0;
+29:        opt.timeLimit=std::stod(argv[6]);opt.threads=argc==9?std::stoi(argv[8]):1;
+30:        opt.tracePath=std::string(argv[3])+".trace.csv";
+32:        OptimizeOptions polish;polish.until=wallSeconds()+std::stod(argv[7]);
+33:        if(std::stod(argv[7])>0) {
+39:        writePl(db,p,std::string(argv[3])+".pl");
+Testcases/results/CodexParallelChain/scripts/phase1_exp.py
+Testcases/results/CodexParallelChain/scripts/compare_lg.py
+Testcases/results/CodexParallelChain/scripts/codex_after.sh
+Testcases/results/CodexParallelChain/scripts/phase1_exp2.py
+Testcases/results/CodexParallelChain/scripts/final_summary.py
+Testcases/results/CodexParallelChain/scripts/phase2_large.py
+Testcases/results/CodexParallelChain/scripts/cap_headroom.py
+Testcases/results/CodexParallelChain/scripts/final_validate.py
+Testcases/results/CodexParallelChain/scripts/v6q.py
+Testcases/results/CodexParallelChain/scripts/phase1_exp3.py
+Testcases/results/CodexParallelChain/scripts/phase2_train.py
+Testcases/results/CodexParallelChain/scripts/diag.py
+Testcases/results/CodexParallelChain/scripts/stage1_phases.py
+Testcases/results/CodexParallelChain/scripts/phase1_tables.py
+Testcases/results/CodexParallelChain/scripts/final_report.py
+Testcases/results/CodexParallelChain/scripts/phase1_runs.py
+Testcases/results/CodexParallelChain/scripts/phase2_final.py
+Testcases/results/CodexParallelChain/scripts/phase2_stage2_sweep.py
+Testcases/results/CodexParallelChain/scripts/repair_compare.sh
+Testcases/results/CodexParallelChain/scripts/toolbin/cmake
+
+apply patch
+patch: completed
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/sa_bands.hpp
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/src/sa_bands.hpp b/Lab3/AI_Solutions/CodexParallelChain/src/sa_bands.hpp
+new file mode 100644
+index 0000000000000000000000000000000000000000..2948b422af14ebd86d459c6782883d6ad830d789
+--- /dev/null
++++ b/Lab3/AI_Solutions/CodexParallelChain/src/sa_bands.hpp
+@@ -0,0 +1,33 @@
++#pragma once
++#include "placedb.hpp"
++#include <vector>
++
++namespace sa_detail {
++// Sweep both sides of the balanced boundaries. Unlike alternating only the
++// balanced and half-band-left layouts, the right-shifted layout also lets
++// cells near the top boundary share a worker with their neighbours above it.
++// The phase depends only on the completed batch number, never worker timing.
++inline std::vector<int> bandEdges(const PlaceDB& db, const Placement& p,
++                                  int bands, long long round, int minRows) {
++    const int rows = static_cast<int>(db.rows.size());
++    std::vector<double> count(rows, 0);
++    for (int v : db.movable) ++count[db.segs[p.seg[v]].row];
++    double total = 0;
++    for (double n : count) total += n;
++    constexpr double offsets[] = {1.0, 0.5, 1.25, 0.75};
++    const double unit = total / bands;
++    double next = unit * offsets[round % 4], acc = 0;
++    std::vector<int> edge{0};
++    for (int r = 0; r < rows; ++r) {
++        acc += count[r];
++        if (acc >= next && static_cast<int>(edge.size()) < bands &&
++            r + 1 < rows && r + 1 - edge.back() >= minRows) {
++            edge.push_back(r + 1);
++            next += unit;
++        }
++    }
++    if (rows - edge.back() < minRows && edge.size() > 1) edge.pop_back();
++    edge.push_back(rows);
++    return edge;
++}
++}  // namespace sa_detail
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path('AI_Solutions/CodexParallelChain/src/annealer.cpp')
+s=p.read_text().replace('#include \"rowmap.hpp\"','#include \"rowmap.hpp\"\\n#include \"sa_bands.hpp\"')
+a=s.index('// v4: rows split into (at most) "'`bands`'"')
+b=s.index('// v4: parallel SA.',a)
+s=s[:a]+s[b:]
+s=s.replace('bandEdges(db, P, bands, round % 2,','sa_detail::bandEdges(db, P, bands, round,')
+s=s.replace('// per cell and the band edges move by half a band every merge.', '// per cell; the band edges sweep four deterministic offsets at merges.')
+p.write_text(s)
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+apply patch
+patch: completed
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/run_tests.py
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/src/sa_bands.hpp b/Lab3/AI_Solutions/CodexParallelChain/src/sa_bands.hpp
+new file mode 100644
+index 0000000000000000000000000000000000000000..2948b422af14ebd86d459c6782883d6ad830d789
+--- /dev/null
++++ b/Lab3/AI_Solutions/CodexParallelChain/src/sa_bands.hpp
+@@ -0,0 +1,33 @@
++#pragma once
++#include "placedb.hpp"
++#include <vector>
++
++namespace sa_detail {
++// Sweep both sides of the balanced boundaries. Unlike alternating only the
++// balanced and half-band-left layouts, the right-shifted layout also lets
++// cells near the top boundary share a worker with their neighbours above it.
++// The phase depends only on the completed batch number, never worker timing.
++inline std::vector<int> bandEdges(const PlaceDB& db, const Placement& p,
++                                  int bands, long long round, int minRows) {
++    const int rows = static_cast<int>(db.rows.size());
++    std::vector<double> count(rows, 0);
++    for (int v : db.movable) ++count[db.segs[p.seg[v]].row];
++    double total = 0;
++    for (double n : count) total += n;
++    constexpr double offsets[] = {1.0, 0.5, 1.25, 0.75};
++    const double unit = total / bands;
++    double next = unit * offsets[round % 4], acc = 0;
++    std::vector<int> edge{0};
++    for (int r = 0; r < rows; ++r) {
++        acc += count[r];
++        if (acc >= next && static_cast<int>(edge.size()) < bands &&
++            r + 1 < rows && r + 1 - edge.back() >= minRows) {
++            edge.push_back(r + 1);
++            next += unit;
++        }
++    }
++    if (rows - edge.back() < minRows && edge.size() > 1) edge.pop_back();
++    edge.push_back(rows);
++    return edge;
++}
++}  // namespace sa_detail
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp b/Lab3/AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp
+index 75c8bb4b23f60e6ac721532c385fa99dfff28a1a..8282814607d001fcc29a7b5de00dd79ca3b11f5a
+--- a/Lab3/AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp
++++ b/Lab3/AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp
+@@ -1,4 +1,5 @@
+ #include "../src/annealer.hpp"
++#include "../src/sa_bands.hpp"
+ #include <cmath>
+ #include <iostream>
+ #include <stdexcept>
+@@ -37,6 +38,28 @@
+         db.nodeNets[other].push_back(v);
+     }
+     require(checkLegal(db, original).empty(), "invalid test fixture");
++    // Equal row populations make each expected boundary exact. Exercise all
++    // four layouts, including the new rightward shift, and their full cycle.
++    const std::vector<std::vector<int>> expected{
++        {0, 10, 20, 30, 40}, {0, 5, 15, 25, 40},
++        {0, 13, 23, 33, 40}, {0, 8, 18, 28, 40}};
++    for (int round = 0; round < 8; ++round) {
++        auto edge = sa_detail::bandEdges(db, original, 4, round, 3);
++        require(edge == expected[round % 4], "incorrect deterministic boundary sweep");
++        require(sa_detail::bandEdges(db, original, 1, round, 3) ==
++                    std::vector<int>({0, rows}), "single band was split");
++    }
++    // Sparse rows and minimum-band coalescing must still partition every row
++    // exactly once, including the thin tail of a right-shifted layout.
++    PlaceDB sparse = db;
++    sparse.movable.resize(100);
++    for (int round = 0; round < 4; ++round) {
++        auto edge = sa_detail::bandEdges(sparse, original, 8, round, 6);
++        require(edge.front() == 0 && edge.back() == rows && edge.size() <= 9,
++                "sparse partition lost rows or exceeded worker count");
++        for (size_t i = 1; i < edge.size(); ++i)
++            require(edge[i] - edge[i - 1] >= 6, "sparse partition has a thin band");
++    }
+     SAOptions options;
+     options.threads = 2;
+     options.minMoves = 0;
+@@ -44,12 +67,17 @@
+     options.steps = 3;
+     options.syncMoves = 0.1;
+     options.timeLimit = 30;
++    // Disable the production wall-clock starvation heuristic for fixed-work
++    // determinism; its behaviour is tested separately below.
++    options.starvedAttemptsPerCell = 0;
+     require(saThreads(db, options) == 2, "fixture did not enable parallel SA");
+     Placement a = original, b = original;
+     auto first = anneal(db, a, options);
+     auto second = anneal(db, b, options);
+     require(first.attempts > 0 && first.attempts == second.attempts, "inconsistent work budget");
+     require(a.seg == b.seg && a.site == b.site, "fixed-work parallel SA was not deterministic");
++    require(first.best == second.best && first.accepted == second.accepted,
++            "fixed-work parallel statistics were not bitwise deterministic");
+     require(checkLegal(db, a).empty(), "parallel merge produced illegal placement");
+     require(first.best <= first.initial + 1e-7, "parallel SA lost its incumbent");
+     require(std::abs(totalHPWL(db, a) - first.best) < 1e-7, "merged HPWL cache disagrees with actual placement");
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/tests/run_tests.py b/Lab3/AI_Solutions/CodexParallelChain/tests/run_tests.py
+index a009796d52be47e18fdd6552366598d7b8500963..288c2ad9ab0e33af5e4cc6fad7175bb4d88a1075
+--- a/Lab3/AI_Solutions/CodexParallelChain/tests/run_tests.py
++++ b/Lab3/AI_Solutions/CodexParallelChain/tests/run_tests.py
+@@ -2,6 +2,7 @@
+ """Build and run the invariant/exhaustive regression suite without CMake."""
+ import argparse
+ import json
++import os
+ from pathlib import Path
+ import subprocess
+ import time
+@@ -11,20 +12,27 @@
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument('--sanitize', action='store_true')
++    mode = parser.add_mutually_exclusive_group()
++    mode.add_argument('--sanitize', action='store_true')
++    mode.add_argument('--tsan', action='store_true')
+     parser.add_argument('--compiler', default='g++')
+     args = parser.parse_args()
+-    out = ROOT.parents[1] / 'Testcases/results' / ROOT.name / ('tests_sanitized' if args.sanitize else 'tests')
++    out = ROOT.parents[1] / 'Testcases/results' / ROOT.name / ('tests_tsan' if args.tsan else 'tests_sanitized' if args.sanitize else 'tests')
+     out.mkdir(parents=True, exist_ok=True)
+-    flags = ['-std=c++17', '-O1' if args.sanitize else '-O2', '-pthread', '-UNDEBUG']
++    flags = ['-std=c++17', '-O1' if args.sanitize or args.tsan else '-O2', '-pthread', '-UNDEBUG']
+     if args.sanitize:
+         flags += ['-g', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']
++    if args.tsan:
++        flags += ['-g', '-fsanitize=thread', '-fno-omit-frame-pointer']
+     records = []
+ 
+     def run(command, label, timeout=180):
+         start = time.perf_counter()
++        # Pin compilation only; runtime checks retain the caller's CPU set.
++        compile_cpus = set(range(16, 20)) & os.sched_getaffinity(0)
++        pin = (lambda: os.sched_setaffinity(0, compile_cpus)) if command[0] == args.compiler and compile_cpus else None
+         process = subprocess.run(command, text=True, stdout=subprocess.PIPE,
+-                                 stderr=subprocess.STDOUT, timeout=timeout)
++                                 stderr=subprocess.STDOUT, timeout=timeout, preexec_fn=pin)
+         (out / (label + '.log')).write_text(process.stdout)
+         records.append({'label': label, 'command': command, 'returncode': process.returncode,
+                         'seconds': time.perf_counter() - start})
+
+exec
+/bin/bash -lc 'timeout 290 python3 AI_Solutions/CodexParallelChain/tests/run_tests.py > /tmp/cpc_sa1_tests.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+codex
+SA 分界已改為四個固定偏移循環，讓原本靠近邊界的 cell 有不同鄰列可用；既有同步與合併流程不變。新增測試涵蓋分界位置、稀疏列，以及固定次數重跑時座標和統計值完全一致。
+
+exec
+/bin/bash -lc 'timeout 290 env ASAN_OPTIONS=detect_leaks=0 python3 AI_Solutions/CodexParallelChain/tests/run_tests.py --sanitize > /tmp/cpc_sa1_asan.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc 'timeout 290 python3 AI_Solutions/CodexParallelChain/tests/run_tests.py --tsan > /tmp/cpc_sa1_tsan.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "git diff --no-index --stat AI_Solutions/ClaudeOpus55_v6/src AI_Solutions/CodexParallelChain/src; rg -n 'R =|LAB =|affinity|taskset|def build|def note' Testcases/results/CodexParallelChain/scripts/v6q.py; tail -n 4 /tmp/cpc_sa1_tests.log" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+ .../src/annealer.cpp                               | 29 ++-----------------
+ .../CodexParallelChain/src/sa_bands.hpp            | 33 ++++++++++++++++++++++
+ 2 files changed, 36 insertions(+), 26 deletions(-)
+14:R = Path(__file__).resolve().parents[1]          # Testcases/results/ClaudeOpus55_v6
+15:LAB = R.parents[2]
+20:PIN = ['taskset', '-c', '16-19']
+27:def note(msg):
+68:    w.write_text('#!/bin/sh\nexec taskset -c 16-19 /home/evan/anaconda3/envs/eda/bin/cmake "$@"\n')
+73:def build(version, out_dir, src=None):
+multirow: PASS
+link_optimizer: PASS
+optimizer: PASS
+link_chain: PASS
+
+exec
+/bin/bash -lc "sed -n '14,48p' Testcases/results/CodexParallelChain/scripts/v6q.py; sed -n '73,99p' Testcases/results/CodexParallelChain/scripts/v6q.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+R = Path(__file__).resolve().parents[1]          # Testcases/results/ClaudeOpus55_v6
+LAB = R.parents[2]
+PY = '/home/evan/anaconda3/bin/python3'
+V5S = R.parent / 'ClaudeOpus55_v5' / 'scripts'
+# the results folder is named after the version: Testcases/results/<VER>/ <-> AI_Solutions/<VER>/
+WORK_STATE = LAB / 'AI_Solutions' / R.name / 'WORK_STATE.md'
+PIN = ['taskset', '-c', '16-19']
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def note(msg):
+    with WORK_STATE.open('a') as f:
+        f.write(f'- {time.strftime("%m-%d %H:%M")} {msg}\n')
+    print(msg, flush=True)
+
+
+class Queue:
+    def __init__(self, out, timed=True):
+        self.out = Path(out)
+        self.out.mkdir(parents=True, exist_ok=True)
+        self.lock = None
+        if timed:
+            self.lock = (R / 'timing.lock').open('w')
+            fcntl.flock(self.lock, fcntl.LOCK_EX)
+
+    def run(self, name, cmd, env=None, cwd=LAB, quiet=False):
+        cmd = [str(c) for c in cmd]
+        marker = self.out / f'{name}.done.json'
+        if marker.exists():
+            if json.loads(marker.read_text())['command'] == cmd:
+                return True
+            raise RuntimeError(f'{name}: finished with a different command')
+def build(version, out_dir, src=None):
+    """cmake Release build of a solution into out_dir (pinned to the E-cores)."""
+    src = src or LAB / 'AI_Solutions' / version
+    e = env_with_pinned_cmake()
+    subprocess.run(['cmake', '-S', src, '-B', out_dir, '-DBUILD_TESTING=OFF', '-DCMAKE_BUILD_TYPE=Release'],
+                   env=e, check=True, stdout=subprocess.DEVNULL)
+    subprocess.run(PIN + ['/home/evan/anaconda3/envs/eda/bin/cmake', '--build', out_dir, '-j4'],
+                   env=e, check=True, stdout=subprocess.DEVNULL)
+    return Path(out_dir) / 'dp'
+
+ succeeded in 43178ms:
+exec
+/bin/bash -lc 'tail -n 5 /tmp/cpc_sa1_tests.log; tail -n 5 /tmp/cpc_sa1_asan.log; tail -n 5 /tmp/cpc_sa1_tsan.log' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+link_cap_windows: PASS
+cap_windows: PASS
+link_guard: PASS
+guard: PASS
+All 10 C++ test programs passed. Logs: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests
+build_annealer: PASS
+build_capsearch: PASS
+build_placedb: PASS
+build_window: PASS
+link_window: PASS
+window: PASS
+link_multirow: PASS
+
+codex
+一般 C++ 測試 10/10 通過，ASan/UBSan 與 TSan 正在執行。Stage 1 使用 `--no-sa`，只能檢查位移回歸；SA 是否保留，仍須依第 7 節補齊五筆、三 seeds 的固定次數比較。
+
+ succeeded in 111070ms:
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import hashlib
+src=Path('AI_Solutions/CodexParallelChain/src')
+sha=hashlib.sha256(b''.join(p.read_bytes() for p in sorted(src.iterdir()))).hexdigest()
+p=Path('AI_Solutions/CodexParallelChain/WORK_STATE.md')
+with p.open('a') as f:
+ f.write(f'''
+## 階段 B：SA 第 1/3 輪（2026-10-23，待訓練，尚未保留）
+
+- 本輪依 diagnosis.md 排序表先做 SA：訓練用五筆的診斷平均 band 損失 1.339185% ≥ 0.5%。chain target windows / ejection 分 band 尚未實作，後續仍須完成與各自判定；toy 不在本輪授權內。
+- 已閱讀 HANDOFF 第 0、4、6、7 節及本 WORK_STATE；不讀其他 HANDOFF 段落。原始碼只改本版本 src 與 tests；本檔為使用者明確要求的狀態紀錄例外。未改保護目錄、未 commit。
+- SA 單一設計：在既有同步點以完成批次 round 決定 band 分界，原本首分界 1 / 0.5 個 band 的二相循環改成 1 / 0.5 / 1.25 / 0.75 的四相循環，後續分界仍相隔一 band。使分界兩側可輪流處於同一 worker；最小列寬與尾 band 合併邏輯沿用。
+- 不改溫度、moves、sync 頻率、接受規則、時間限制、額外預算與執行緒選擇；未用 e08/e16 調參。這是待驗證假說，不宣稱品質改善。
+- 合併沿用不相交列／cell 寫入與 barrier；每批真實 HPWL 更新及 bestP 保留不變。main 的 guardedStep 仍於例外或不合法時退回 SA 前狀態，Pool 等全部 worker 結束才傳遞例外。
+- 新功能測試：parallel_sa_test 驗證四相分界的精確位置與週期、單 band、稀疏列／薄尾處理；固定工作量兩次的 seg/site、best、accepted、attempts 相同，並檢查合法性及 HPWL cache。固定工作量測試關閉 wall-clock starvation heuristic；另保留既有 starvation 與零時間測試。
+- tests/run_tests.py 新增互斥 --tsan 模式、編譯限定可用 CPU 16–19，執行測試不綁核。一般 10/10 PASS；sanitizer 結果於下方補記。
+- tag：sa_boundary_r1；目前 src_sha256（與 phase2_train.py 同演算法）："'`{sha}`。
+- 本 session 不執行長時間訓練、不啟動背景工作。交由協調者：`python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json`。
+- 下一 session 先讀 `phase2/train/sa_boundary_r1/compare.md` 並把數值寫回本檔。注意此腳本用 --no-sa，僅能判斷 Stage 1 回歸，不能單憑它保留 SA；且目前腳本 reference 指向既有 v6 final，並非同輪重跑，不可宣稱已滿足配對規定。
+- SA 保留閘門：ibm01、ibm05、h06、h07、h08 同合法起點、自動執行緒、固定次數、3 seeds，對同輪 v6 幾何平均改善 ≥ 0.3%、無單筆退步 > 0.5%；固定次數重跑逐位一致、TSan 0 警告。另須報固定 wall-time 配對品質；不得以 Stage 1 無變化冒充 SA 品質證據。
+- 每項最多 3 輪；本 SA 為第 1 輪候選，未有保留結論。三輪仍失敗即撤回到上一保留點（目前為原始 v6 src）；記入「試過沒用」。不能在本輪訓練返回前開始下一改動。
+- B 最後仍須 final_b Stage 1（protocol hash 等於最終 src）、如保留 SA 則 final_b L1/L2 合法且 <240/<600 秒、全套一般/ASan/UBSan/TSan、各項保留或撤回數據及 hash；目前不得宣告 B 完成。
+'"''')
+print('WORK_STATE updated; src_sha256='+sha)
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+WORK_STATE updated; src_sha256=4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258
+
+ succeeded in 145907ms:
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import json
+root=Path('Testcases/results/CodexParallelChain')
+for name in ['tests','tests_sanitized','tests_tsan']:
+ records=json.loads((root/name/'records.json').read_text())
+ failures=[r['label'] for r in records if r['returncode']]
+ logs='\\n'.join((root/name/(r['label']+'.log')).read_text() for r in records)
+ issues=[w for w in ['WARNING: ThreadSanitizer','ERROR: AddressSanitizer','runtime error:'] if w in logs]
+ print(name, 'records='+str(len(records)), 'failures='+str(failures), 'sanitizer_diagnostics='+str(issues))
+ assert len(records)==28 and not failures and not issues
+p=Path('AI_Solutions/CodexParallelChain/WORK_STATE.md')
+with p.open('a') as f:
+ f.write('\\n- 本輪測試完成：一般、ASan/UBSan、TSan 均 10/10 PASS（各 28 個 build/link/run 記錄）；TSan 0 警告，ASan/UBSan 無診斷。記錄路徑：Testcases/results/CodexParallelChain/{tests,tests_sanitized,tests_tsan}/records.json 與各測試 .log。ASan 在沙箱內設 ASAN_OPTIONS=detect_leaks=0，LeakSanitizer 尚待協調者沙箱外補跑，不宣稱已驗證洩漏。\\n')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+tests records=28 failures=[] sanitizer_diagnostics=[]
+tests_sanitized records=28 failures=[] sanitizer_diagnostics=[]
+tests_tsan records=28 failures=[] sanitizer_diagnostics=[]
+
+codex
+已依診斷排序完成 SA 第 1 輪：四相 band 分界循環，未改時間、次數與接受規則。
+新增分界、稀疏列與固定次數重現測試；一般、ASan/UBSan、TSan 均 10/10 通過，TSan 0 警告。
+ASan 使用 `detect_leaks=0`；完整洩漏檢查待沙箱外補跑。
+判斷、hash、驗收門檻已寫入 WORK_STATE.md；尚未決定保留，chain 尚待實作。
+Stage 1 不執行 SA，後續仍須三 seeds 配對比較才能判定 SA 成效。
+
+RUN: python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1
+WAIT: Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json
+tokens used
+47,661
+已依診斷排序完成 SA 第 1 輪：四相 band 分界循環，未改時間、次數與接受規則。
+新增分界、稀疏列與固定次數重現測試；一般、ASan/UBSan、TSan 均 10/10 通過，TSan 0 警告。
+ASan 使用 `detect_leaks=0`；完整洩漏檢查待沙箱外補跑。
+判斷、hash、驗收門檻已寫入 WORK_STATE.md；尚未決定保留，chain 尚待實作。
+Stage 1 不執行 SA，後續仍須三 seeds 配對比較才能判定 SA 成效。
+
+RUN: python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1
+WAIT: Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json

@@ -1,0 +1,171 @@
+[read] 10162 nodes (10000 movable), 10137 nets, 71 rows, 85 segments, utilization 0.877  0.03s
+[legal] abacus: 9.4e+06 exact cost steps
+[legal] abacus  total 1622691.4  max 574.6  0.0s
+[legal] row-opt (d0 0): 44 segments  total 1622330.7  max 574.6
+[legal] max-refine 549 moves  total 1582441.3  max 508.2
+[legal] matching d0 483: 29 windows, cells above d0 289 -> 31  total 1517204.3  max 487.4
+[legal] matching d0 463: 0 windows, cells above d0 485 -> 485  total 1517204.3  max 487.4
+[legal] row-opt (d0 487): 47 segments  total 1493667.1  max 487.4
+[legal] matching sweep: total 1481932.3  max 487.4
+[legal] total-refine pass 0: 5397 moves  total 1167531.0  max 487.4
+[legal] total-refine pass 1: 3013 moves  total 1128859.4  max 487.4
+[legal] total-refine pass 2: 1532 moves  total 1117496.6  max 487.4
+[legal] total-refine pass 3: 835 moves  total 1112648.4  max 487.4
+[legal] total-refine pass 4: 463 moves  total 1110481.1  max 487.4
+[legal] total-refine pass 5: 216 moves  total 1109427.4  max 487.4
+[legal] total-refine pass 6: 101 moves  total 1109152.0  max 487.4
+[legal] max-refine 0 moves  total 1109152.0  max 487.4
+[legal] matching d0 463: 0 windows, cells above d0 316 -> 316  total 1109152.0  max 487.4
+[legal] row-opt (d0 487): 61 segments  total 1109062.8  max 487.4
+[legal] matching sweep: total 1106613.7  max 487.4
+[legal] total-refine pass 0: 1412 moves  total 1087758.4  max 487.5
+[legal] total-refine pass 1: 637 moves  total 1084300.7  max 487.5
+[legal] total-refine pass 2: 359 moves  total 1082417.6  max 487.5
+[legal] total-refine pass 3: 190 moves  total 1081552.0  max 487.5
+[legal] total-refine pass 4: 123 moves  total 1080962.9  max 487.5
+[legal] total-refine pass 5: 68 moves  total 1080709.3  max 487.5
+[spread] round 0 B 288: 138 bins over by 5431 sites, moves 3231
+[spread] round 1 B 432: 125 bins over by 2021 sites, moves 4128
+[spread] round 2 B 648: 87 bins over by 866 sites, moves 4506
+[spread] round 3 B 972: 67 bins over by 607 sites, moves 4677
+[legal] spread: 11 x 36 bins, 4677 path moves, 8686 cells retargeted, max shift 496.8, B 1458
+[legal] abacus: 3.38e+06 exact cost steps
+[legal] abacus  total 1536817.3  max 634.4  5.2s
+[legal] row-opt (d0 0): 45 segments  total 1535743.0  max 634.4
+[legal] max-refine 313 moves  total 1520773.8  max 489.7
+[legal] matching d0 465: 16 windows, cells above d0 209 -> 3  total 1493471.5  max 464.3
+[legal] matching d0 441: 15 windows, cells above d0 542 -> 4  total 1485367.1  max 442.1
+[legal] matching d0 420: 1 windows, cells above d0 599 -> 192  total 1475722.0  max 435.2
+[legal] matching d0 413: 0 windows, cells above d0 503 -> 503  total 1475722.0  max 435.2
+[legal] row-opt (d0 435): 55 segments  total 1456107.8  max 435.2
+[legal] matching sweep: total 1446330.3  max 435.2
+[legal] total-refine pass 0: 5063 moves  total 1179569.9  max 435.2
+[legal] total-refine pass 1: 2494 moves  total 1149929.0  max 435.2
+[legal] total-refine pass 2: 1242 moves  total 1141566.2  max 435.2
+[legal] total-refine pass 3: 696 moves  total 1137693.8  max 435.2
+[legal] total-refine pass 4: 317 moves  total 1136190.1  max 435.2
+[legal] total-refine pass 5: 175 moves  total 1135517.9  max 435.2
+[legal] total-refine pass 6: 93 moves  total 1135012.2  max 435.2
+[legal] max-refine 0 moves  total 1135012.2  max 435.2
+[legal] matching d0 413: 0 windows, cells above d0 487 -> 487  total 1135012.2  max 435.2
+[legal] row-opt (d0 435): 61 segments  total 1134892.1  max 435.2
+[legal] matching sweep: total 1133089.0  max 435.2
+[legal] total-refine pass 0: 1310 moves  total 1117274.7  max 435.2
+[legal] total-refine pass 1: 602 moves  total 1114512.5  max 435.2
+[legal] total-refine pass 2: 283 moves  total 1113368.8  max 435.2
+[legal] total-refine pass 3: 127 moves  total 1112744.1  max 435.2
+[legal] total-refine pass 4: 85 moves  total 1112305.6  max 435.2
+[legal] plain: total 1080709.3 max 487.5 | spread: total 1112305.6 max 435.2 -> spread
+[legal] row-opt (d0 435): 40 segments  total 1112189.3  max 435.2
+[legal] matching sweep: total 1111781.8  max 435.2
+[legal] total-refine pass 0: 672 moves  total 1105551.6  max 435.2
+[legal] total-refine pass 1: 243 moves  total 1104663.8  max 435.2
+[legal] total-refine pass 2: 112 moves  total 1104181.8  max 435.2
+[window-disp] 2 rows x 4 cells: 56834 windows solved, 14838 improved: total 1104181.8 -> 944750.5 (max 435.2200)  1.86s
+[window-disp] 3 rows x 3 cells: 24464 windows solved, 1586 improved: total 944750.5 -> 934907.8 (max 435.2200)  2.11s
+[window-disp] 2 rows x 4 cells: 10563 windows solved, 608 improved: total 934907.8 -> 931078.7 (max 435.2200)  0.45s
+[window-disp] 3 rows x 3 cells: 9306 windows solved, 407 improved: total 931078.7 -> 928657.9 (max 435.2200)  1.10s
+[window-disp] 2 rows x 4 cells: 4674 windows solved, 217 improved: total 928657.9 -> 927436.3 (max 435.2200)  0.26s
+[window-disp] 3 rows x 3 cells: 4312 windows solved, 158 improved: total 927436.3 -> 926798.2 (max 435.2200)  0.61s
+[window-disp] 2 rows x 4 cells: 1993 windows solved, 67 improved: total 926798.2 -> 926463.4 (max 435.2200)  0.10s
+[window-disp] 3 rows x 3 cells: 2114 windows solved, 65 improved: total 926463.4 -> 926041.5 (max 435.2200)  0.31s
+[window-disp] 2 rows x 4 cells: 1371 windows solved, 50 improved: total 926041.5 -> 925749.6 (max 435.2200)  0.07s
+[window-disp] 3 rows x 3 cells: 1605 windows solved, 51 improved: total 925749.6 -> 925426.5 (max 435.2200)  0.23s
+[window-disp] 2 rows x 4 cells: 1017 windows solved, 25 improved: total 925426.5 -> 925271.8 (max 435.2200)  0.05s
+[window-disp] 3 rows x 3 cells: 1485 windows solved, 81 improved: total 925271.8 -> 924660.7 (max 435.2200)  0.31s
+[window-disp] 2 rows x 4 cells: 466 windows solved, 5 improved: total 924660.7 -> 924632.5 (max 435.2200)  0.05s
+[window-disp] 3 rows x 3 cells: 126 windows solved, 4 improved: total 924632.5 -> 924605.5 (max 435.2200)  0.04s
+[window-disp] 2 rows x 4 cells: 34 windows solved, 2 improved: total 924605.5 -> 924602.5 (max 435.2200)  0.01s
+[window-disp] 3 rows x 3 cells: 71 windows solved, 4 improved: total 924602.5 -> 924591.4 (max 435.2200)  0.02s
+[legal] final round 0: total 924591.4  17.9s
+[legal] row-opt (d0 435): 28 segments  total 924510.2  max 435.2
+[legal] matching sweep: total 924107.4  max 435.2
+[legal] total-refine pass 0: 220 moves  total 922991.1  max 435.2
+[legal] total-refine pass 1: 76 moves  total 922690.2  max 435.2
+[window-disp] 2 rows x 4 cells: 8781 windows solved, 451 improved: total 922690.2 -> 920486.4 (max 435.2200)  0.29s
+[window-disp] 3 rows x 3 cells: 11447 windows solved, 358 improved: total 920486.4 -> 918691.8 (max 435.2200)  1.01s
+[window-disp] 2 rows x 4 cells: 5332 windows solved, 171 improved: total 918691.8 -> 917751.7 (max 435.2200)  0.24s
+[window-disp] 3 rows x 3 cells: 2855 windows solved, 38 improved: total 917751.7 -> 917564.6 (max 435.2200)  0.29s
+[window-disp] 2 rows x 4 cells: 879 windows solved, 14 improved: total 917564.6 -> 917500.3 (max 435.2200)  0.05s
+[window-disp] 3 rows x 3 cells: 639 windows solved, 10 improved: total 917500.3 -> 917445.1 (max 435.2200)  0.15s
+[window-disp] 2 rows x 4 cells: 163 windows solved, 1 improved: total 917445.1 -> 917435.8 (max 435.2200)  0.02s
+[window-disp] 3 rows x 3 cells: 32 windows solved, 3 improved: total 917435.8 -> 917425.8 (max 435.2200)  0.02s
+[window-disp] 2 rows x 4 cells: 51 windows solved, 2 improved: total 917425.8 -> 917418.8 (max 435.2200)  0.01s
+[window-disp] 3 rows x 3 cells: 93 windows solved, 1 improved: total 917418.8 -> 917408.1 (max 435.2200)  0.03s
+[window-disp] 2 rows x 4 cells: 42 windows solved, 0 improved: total 917408.1 -> 917408.1 (max 435.2200)  0.01s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 917408.1 -> 917408.1 (max 435.2200)  0.00s
+[legal] final round 1: total 917408.1  20.3s
+[legal] row-opt (d0 435): 18 segments  total 917392.1  max 435.2
+[legal] matching sweep: total 917273.5  max 435.2
+[legal] total-refine pass 0: 88 moves  total 917064.2  max 435.2
+[window-disp] 2 rows x 4 cells: 5052 windows solved, 174 improved: total 917064.2 -> 916169.3 (max 435.2200)  0.14s
+[window-disp] 3 rows x 3 cells: 8217 windows solved, 157 improved: total 916169.3 -> 915400.6 (max 435.2200)  0.69s
+[window-disp] 2 rows x 4 cells: 2201 windows solved, 35 improved: total 915400.6 -> 915223.6 (max 435.2200)  0.09s
+[window-disp] 3 rows x 3 cells: 966 windows solved, 21 improved: total 915223.6 -> 915028.7 (max 435.2200)  0.14s
+[window-disp] 2 rows x 4 cells: 411 windows solved, 3 improved: total 915028.7 -> 915016.7 (max 435.2200)  0.02s
+[window-disp] 3 rows x 3 cells: 52 windows solved, 0 improved: total 915016.7 -> 915016.7 (max 435.2200)  0.01s
+[window-disp] 2 rows x 4 cells: 0 windows solved, 0 improved: total 915016.7 -> 915016.7 (max 435.2200)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 915016.7 -> 915016.7 (max 435.2200)  0.00s
+[legal] final round 2: total 915016.7  21.5s
+[legal] row-opt (d0 435): 8 segments  total 914999.9  max 435.2
+[legal] matching sweep: total 914949.3  max 435.2
+[legal] total-refine pass 0: 41 moves  total 914717.2  max 435.2
+[window-disp] 2 rows x 4 cells: 4175 windows solved, 92 improved: total 914717.2 -> 914341.7 (max 435.2200)  0.14s
+[window-disp] 3 rows x 3 cells: 6003 windows solved, 122 improved: total 914341.7 -> 913924.0 (max 435.2200)  0.53s
+[window-disp] 2 rows x 4 cells: 1782 windows solved, 43 improved: total 913924.0 -> 913750.0 (max 435.2200)  0.08s
+[window-disp] 3 rows x 3 cells: 1187 windows solved, 29 improved: total 913750.0 -> 913656.9 (max 435.2200)  0.17s
+[window-disp] 2 rows x 4 cells: 328 windows solved, 6 improved: total 913656.9 -> 913654.4 (max 435.2200)  0.02s
+[window-disp] 3 rows x 3 cells: 142 windows solved, 5 improved: total 913654.4 -> 913651.6 (max 435.2200)  0.03s
+[window-disp] 2 rows x 4 cells: 85 windows solved, 4 improved: total 913651.6 -> 913645.4 (max 435.2200)  0.01s
+[window-disp] 3 rows x 3 cells: 81 windows solved, 4 improved: total 913645.4 -> 913642.4 (max 435.2200)  0.02s
+[window-disp] 2 rows x 4 cells: 58 windows solved, 0 improved: total 913642.4 -> 913642.4 (max 435.2200)  0.01s
+[window-disp] 3 rows x 3 cells: 29 windows solved, 0 improved: total 913642.4 -> 913642.4 (max 435.2200)  0.01s
+[legal] final round 3: total 913642.4  22.6s
+[legal] max-refine 2 moves  total 914533.7  max 435.2
+[legal] matching d0 413: 21 windows, cells above d0 691 -> 239  total 918135.1  max 435.2
+[legal] final max pass: max 435.2200 -> 435.2200, total 918135.1  24.9s
+[pareto] pass 1: 132 groups, total 917911.140000, max 435.220000
+[pareto] pass 2: 106 groups, total 917825.760000, max 435.220000
+[window-disp] 2 rows x 4 cells: 18927 windows solved, 2404 improved: total 917825.8 -> 894898.4 (max 435.1900)  0.81s
+[window-disp] 3 rows x 3 cells: 12948 windows solved, 403 improved: total 894898.4 -> 892857.6 (max 435.1900)  1.29s
+[window-disp] 2 rows x 4 cells: 5555 windows solved, 218 improved: total 892857.6 -> 891646.3 (max 435.1900)  0.17s
+[window-disp] 3 rows x 3 cells: 4824 windows solved, 112 improved: total 891646.3 -> 890986.7 (max 435.1900)  0.56s
+[window-disp] 2 rows x 4 cells: 2543 windows solved, 92 improved: total 890986.7 -> 890431.9 (max 435.1900)  0.12s
+[window-disp] 3 rows x 3 cells: 1841 windows solved, 35 improved: total 890431.9 -> 890309.7 (max 435.1900)  0.25s
+[window-disp] 2 rows x 4 cells: 650 windows solved, 12 improved: total 890309.7 -> 890251.9 (max 435.1900)  0.03s
+[window-disp] 3 rows x 3 cells: 285 windows solved, 7 improved: total 890251.9 -> 890236.6 (max 435.1900)  0.05s
+[window-disp] 2 rows x 4 cells: 89 windows solved, 2 improved: total 890236.6 -> 890236.3 (max 435.1900)  0.01s
+[window-disp] 3 rows x 3 cells: 122 windows solved, 2 improved: total 890236.3 -> 890230.6 (max 435.1900)  0.03s
+[window-disp] 2 rows x 4 cells: 55 windows solved, 1 improved: total 890230.6 -> 890226.6 (max 435.1900)  0.01s
+[window-disp] 3 rows x 3 cells: 22 windows solved, 0 improved: total 890226.6 -> 890226.6 (max 435.1900)  0.02s
+[window-disp] 2 rows x 4 cells: 9 windows solved, 0 improved: total 890226.6 -> 890226.6 (max 435.1900)  0.00s
+[window-disp] 3 rows x 3 cells: 0 windows solved, 0 improved: total 890226.6 -> 890226.6 (max 435.1900)  0.00s
+[diag-chain] round=0 phase=chain_stage event=begin time=28.396598134 total=890226.560000004130 max=435.190000000000 work=-1
+[diag-chain] round=1 phase=target_windows event=begin time=28.396622437 total=890226.560000004130 max=435.190000000000 work=-1
+[target-window] 26/4000 improved: total 890226.560000 -> 888614.480000, max 435.190000 -> 435.190000  0.34s
+[diag-chain] round=1 phase=target_windows event=end time=28.740290785 total=888614.480000003939 max=435.190000000000 work=26
+[diag-chain] round=1 phase=ejection_chains event=begin time=28.740293328 total=888614.480000003939 max=435.190000000000 work=-1
+[chain] pass 0: 3 chains, total 888614.480000 -> 888350.440000, max 435.190000 -> 435.190000
+[chain] 1123 roots, 179658 nodes, 717007 candidates, 3 accepted, longest 1, 0 multi-blocker placements (time limit)
+[diag-chain] round=1 phase=ejection_chains event=end time=29.737733545 total=888350.440000003902 max=435.190000000000 work=3
+[diag-chain] round=1 phase=post_chain_dp event=begin time=29.737751494 total=888350.440000003902 max=435.190000000000 work=-1
+[window-disp] 2 rows x 4 cells: 3178 windows solved, 227 improved: total 888350.4 -> 886920.6 (max 435.1900)  0.12s
+[window-disp] 3 rows x 3 cells: 2663 windows solved, 107 improved: total 886920.6 -> 886519.8 (max 435.1900)  0.29s
+[diag-chain] round=1 phase=post_chain_dp event=end time=30.156654412 total=886519.780000003637 max=435.190000000000 work=-1
+[chain-round] 1: 26 target windows, 3 chains, longest 1, total 890226.560000 -> 886519.780000, max 435.190000 -> 435.190000
+[diag-chain] round=2 phase=target_windows event=begin time=30.156691419 total=886519.780000003637 max=435.190000000000 work=-1
+[target-window] 2/4000 improved: total 886519.780000 -> 886516.680000, max 435.190000 -> 435.190000  0.34s
+[diag-chain] round=2 phase=target_windows event=end time=30.497896689 total=886516.680000003660 max=435.190000000000 work=2
+[diag-chain] round=2 phase=ejection_chains event=begin time=30.497899345 total=886516.680000003660 max=435.190000000000 work=-1
+[chain] pass 0: 0 chains, total 886516.680000 -> 886516.680000, max 435.190000 -> 435.190000
+[chain] 748 roots, 119587 nodes, 449440 candidates, 0 accepted, longest 0, 0 multi-blocker placements (time limit)
+[diag-chain] round=2 phase=ejection_chains event=end time=31.173180116 total=886516.680000003660 max=435.190000000000 work=0
+[diag-chain] round=2 phase=post_chain_dp event=begin time=31.173198273 total=886516.680000003660 max=435.190000000000 work=-1
+[window-disp] 2 rows x 4 cells: 962 windows solved, 23 improved: total 886516.7 -> 886407.9 (max 435.1900)  0.04s
+[window-disp] 3 rows x 3 cells: 629 windows solved, 10 improved: total 886407.9 -> 886354.9 (max 435.1900)  0.07s
+[diag-chain] round=2 phase=post_chain_dp event=end time=31.286378566 total=886354.920000003534 max=435.190000000000 work=-1
+[chain-round] 2: 2 target windows, 0 chains, longest 0, total 886519.780000 -> 886354.920000, max 435.190000 -> 435.190000
+[diag-chain] round=0 phase=chain_stage event=end time=31.286418952 total=886354.920000003534 max=435.190000000000 work=-1
+[extra] budget 6.000000 used 2.890170
+[stage1] done  31.29s
+[stage2] done  31.29s

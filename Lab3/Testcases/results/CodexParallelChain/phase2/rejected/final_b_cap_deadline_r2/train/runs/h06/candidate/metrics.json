@@ -1,0 +1,38 @@
+{
+  "record": {
+    "bench": "h06",
+    "status": "OK",
+    "seconds": "34.73",
+    "disp": "890307.74",
+    "max": "427.55",
+    "hpwl_legal": "2154925.5",
+    "hpwl_sa": "2154925.5",
+    "t_read": "0.028",
+    "t_legalize": "25.252",
+    "t_pareto": "0.119",
+    "t_windowdp": "3.42",
+    "t_chain": "5.894",
+    "t_global": "",
+    "t_sa": "",
+    "t_polish": "",
+    "t_stage1": "34.71325753995916",
+    "t_stage2": "34.71404165099375",
+    "sa_threads": "",
+    "sa_attempts": "",
+    "sa_internal_s": "",
+    "sa_failed_pct": "",
+    "sa_timeup": "",
+    "global_tries": "0",
+    "global_accepted": "0",
+    "global_unknown": "0",
+    "sa_seconds": ""
+  },
+  "legal": true,
+  "placements": {
+    "output_legal.pl": "d4f08541a4e6e218b69e342c9413a79169869a97ac6bd48a7a3a3d5013728439",
+    "output.pl": "d4f08541a4e6e218b69e342c9413a79169869a97ac6bd48a7a3a3d5013728439"
+  },
+  "extra_budget": 6.0,
+  "extra_used": 5.893191,
+  "extra_overshoot": false
+}

@@ -1,0 +1,19 @@
+{
+ "command": [
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/bin/sa_bench2_CPC",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e15_realistic/e15_realistic",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase1/starts/e15_realistic/output",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase1/split/split_e15_realistic_s1_sa60p30",
+  "--seed",
+  "1",
+  "--time",
+  "60",
+  "--polish",
+  "30",
+  "--starved",
+  "100"
+ ],
+ "returncode": 0,
+ "seconds": 63.17,
+ "finished": "Sat Oct 24 03:00:49 2026"
+}

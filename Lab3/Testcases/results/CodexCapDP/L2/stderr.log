@@ -1,0 +1,31 @@
+[sa] parallel: 2 bands/threads  HPWL 2633124438  T0 5495  120000000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 5495  acc 0.273  win 528 x 529  cur 2713223391  best 2633124438  1.5s
+[sa] step  20  T 1380  acc 0.350  win 46 x 46  cur 2652352961  best 2633124438  13.6s
+[sa] step  40  T 346.7  acc 0.350  win 28 x 24  cur 2519619752  best 2519619752  25.6s
+[sa] step  60  T 87.09  acc 0.335  win 28 x 24  cur 2377922414  best 2377922414  37.7s
+[sa] step  80  T 21.87  acc 0.267  win 28 x 24  cur 2247080292  best 2247080292  49.3s
+[sa] step  99  T 5.888  acc 0.204  win 28 x 24  cur 2148598274  best 2148598274  60.2s
+[sa] 100 sync rounds, 35428595 attempts (61.9% proposals failed)  60.2s (moves 50.2s, merge 9.3s)
+[polish] pass 1: 2148598273.500000 -> 1826896287.500000; slide 78634, relocate 544944, assignment 30160, reorder 714323
+[polish] pass 2: 1826896287.500000 -> 1671621238.000000; slide 74463, relocate 425285, assignment 29339, reorder 638095
+[sa] parallel: 2 bands/threads  HPWL 2633124438  T0 5495  120000000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 5495  acc 0.273  win 528 x 529  cur 2713223391  best 2633124438  1.5s
+[sa] step  20  T 1380  acc 0.345  win 42 x 42  cur 2678530438  best 2633124438  7.4s
+[sa] step  40  T 346.7  acc 0.347  win 28 x 24  cur 2596600996  best 2596600996  13.2s
+[sa] step  60  T 87.09  acc 0.332  win 28 x 24  cur 2507913763  best 2507913763  19.1s
+[sa] step  80  T 21.87  acc 0.272  win 28 x 24  cur 2422947549  best 2422947549  24.8s
+[sa] step  99  T 5.888  acc 0.218  win 28 x 24  cur 2353527634  best 2353527634  30.0s
+[sa] 100 sync rounds, 17674446 attempts (62.5% proposals failed)  30.0s (moves 24.3s, merge 5.1s)
+[polish] pass 1: 2353527634.000000 -> 1923780994.500000; slide 79620, relocate 594150, assignment 30778, reorder 745003
+[polish] pass 2: 1923780994.500000 -> 1736635091.500000; slide 71979, relocate 456537, assignment 29748, reorder 667429
+[polish] pass 3: 1736635091.500000 -> 1618789396.000000; slide 59199, relocate 375055, assignment 28824, reorder 597737
+[polish] pass 1: 2633124437.500000 -> 2039029633.000000; slide 55618, relocate 608487, assignment 30553, reorder 765692
+[polish] pass 2: 2039029633.000000 -> 1818327312.000000; slide 31993, relocate 425228, assignment 30103, reorder 699733
+[sa] parallel: 2 bands/threads  HPWL 1818327312  T0 5070  120000000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 5070  acc 0.277  win 530 x 531  cur 1949425588  best 1818327312  1.5s
+[sa] step  20  T 1273  acc 0.343  win 44 x 44  cur 2049057496  best 1818327312  13.6s
+[sa] step  40  T 319.9  acc 0.343  win 28 x 24  cur 1987654450  best 1818327312  25.6s
+[sa] step  60  T 80.35  acc 0.326  win 28 x 24  cur 1911451360  best 1818327312  37.7s
+[sa] step  80  T 20.18  acc 0.254  win 28 x 24  cur 1838192538  best 1818327312  49.3s
+[sa] step  99  T 5.432  acc 0.193  win 28 x 24  cur 1783175009  best 1783175009  60.1s
+[sa] 100 sync rounds, 36981728 attempts (62.5% proposals failed)  60.1s (moves 51.3s, merge 8.2s)

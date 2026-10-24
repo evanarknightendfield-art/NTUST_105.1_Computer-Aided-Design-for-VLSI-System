@@ -1,0 +1,3 @@
+bench,status,seconds,disp,max,hpwl_legal,hpwl_sa,t_read,t_legalize,t_pareto,t_windowdp,t_chain,t_global,t_sa,t_polish,t_stage1,t_stage2,sa_threads,sa_attempts,sa_internal_s,sa_failed_pct,sa_timeup,global_tries,global_accepted,global_unknown,sa_seconds
+e08_fragmented,OK,9.93,90357.493,71.753,709085.5,709085.5,0.021,3.777,0.006,0.216,5.888,,,,9.907850796007551,9.908272787986789,,,,,,0,0,0,
+e16_rowgaps,OK,9.68,95953.22,62.588,756423.0,756423.0,0.03,3.293,0.006,0.446,5.895,,,,9.66980006895028,9.670187790994532,,,,,,0,0,0,

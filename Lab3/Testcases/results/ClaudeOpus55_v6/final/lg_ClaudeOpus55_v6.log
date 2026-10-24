@@ -1,0 +1,67 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v6/submissions/ClaudeOpus55_v6.tgz  (53 files)
+       ClaudeOpus55_v6/CMakeLists.txt
+       ClaudeOpus55_v6/Makefile
+       ClaudeOpus55_v6/WORK_STATE.md
+       ClaudeOpus55_v6/src/annealer.cpp
+       ClaudeOpus55_v6/src/annealer.hpp
+       ClaudeOpus55_v6/src/capsearch.cpp
+       ClaudeOpus55_v6/src/capsearch.hpp
+       ClaudeOpus55_v6/src/chain.cpp
+       ClaudeOpus55_v6/src/chain.hpp
+       ClaudeOpus55_v6/src/global.cpp
+       ClaudeOpus55_v6/src/global.hpp
+       ClaudeOpus55_v6/src/guard.hpp
+       ClaudeOpus55_v6/src/legalizer.cpp
+       ClaudeOpus55_v6/src/legalizer.hpp
+       ClaudeOpus55_v6/src/main.cpp
+       ClaudeOpus55_v6/src/optimizer.cpp
+       ClaudeOpus55_v6/src/optimizer.hpp
+       ClaudeOpus55_v6/src/placedb.cpp
+       ClaudeOpus55_v6/src/placedb.hpp
+       ClaudeOpus55_v6/src/pool.hpp
+       ClaudeOpus55_v6/src/rowmap.hpp
+       ClaudeOpus55_v6/src/window.cpp
+       ClaudeOpus55_v6/src/window.hpp
+       ClaudeOpus55_v6/tests/cap_chain_prototype.cpp
+       ClaudeOpus55_v6/tests/cap_chain_prototype.hpp
+       ClaudeOpus55_v6/tests/cap_search_bench.cpp
+       ClaudeOpus55_v6/tests/cap_windows_bench.cpp
+       ClaudeOpus55_v6/tests/cap_windows_test.cpp
+       ClaudeOpus55_v6/tests/capsearch_test.cpp
+       ClaudeOpus55_v6/tests/chain_test.cpp
+       ClaudeOpus55_v6/tests/compare_methods.cpp
+       ClaudeOpus55_v6/tests/diag_chaindp_global/driver.cpp
+       ClaudeOpus55_v6/tests/diag_chaindp_global/global_diag.cpp
+       ClaudeOpus55_v6/tests/diagnostic.hpp
+       ClaudeOpus55_v6/tests/diagnostic_capsearch.cpp
+       ClaudeOpus55_v6/tests/diagnostic_experiments.cpp
+       ClaudeOpus55_v6/tests/diagnostic_main.cpp
+       ClaudeOpus55_v6/tests/diagnostic_window.cpp
+       ClaudeOpus55_v6/tests/global_preserve_prototype.cpp
+       ClaudeOpus55_v6/tests/global_preserve_prototype.hpp
+       ClaudeOpus55_v6/tests/global_test.cpp
+       ClaudeOpus55_v6/tests/guard_test.cpp
+       ClaudeOpus55_v6/tests/multirow_test.cpp
+       ClaudeOpus55_v6/tests/optimizer_test.cpp
+       ClaudeOpus55_v6/tests/parallel_sa_test.cpp
+       ClaudeOpus55_v6/tests/pool_test.cpp
+       ClaudeOpus55_v6/tests/readpl.cpp
+       ClaudeOpus55_v6/tests/repair_compare.cpp
+       ClaudeOpus55_v6/tests/run_tests.py
+       ClaudeOpus55_v6/tests/sa_bench.cpp
+       ClaudeOpus55_v6/tests/sa_bench2.cpp
+       ClaudeOpus55_v6/tests/site_repair_bench.cpp
+       ClaudeOpus55_v6/tests/window_test.cpp
+[build] OK build/dp  13.2s
+[run] ibm01    PASS  OK          86.8s  disp=23102846.5707 max=10427.027 legal=87236196.0 sa=49917114.0
+[run] ibm05    PASS  OK         102.0s  disp=1327881.229 max=199.918 legal=11833721.5 sa=9549316.0
+[run] toy      PASS  OK           2.9s  disp=43324.4 max=2004.4 legal=104094.0 sa=46530.0
+[run] h01      PASS  OK          11.5s  disp=2358.81 max=29.39 legal=25492.0 sa=14031.5
+[run] h02      PASS  OK          24.3s  disp=463886.857 max=2526.519 legal=3785092.0 sa=2282312.7
+[run] h03      PASS  OK          23.2s  disp=7066.0491 max=20.2013 legal=26511.7 sa=12022.3
+[run] h04      PASS  OK          33.1s  disp=180397.59 max=237.85 legal=534360.5 sa=230110.5
+[run] h05      PASS  OK          26.4s  disp=1551488.48 max=1337.305 legal=26205137.2 sa=17952305.4
+[run] h06      PASS  OK          95.6s  disp=890247.22 max=427.55 legal=2154850.5 sa=671773.0
+[run] h07      PASS  OK          87.8s  disp=109173.2654 max=47.6762 legal=354426.232 sa=162942.425
+[run] h08      PASS  OK         123.2s  disp=125379219.787 max=28282.01 legal=308392215.0 sa=98340908.8
+[summary] 11/11 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v6/record.csv

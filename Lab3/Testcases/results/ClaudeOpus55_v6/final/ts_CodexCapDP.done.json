@@ -1,0 +1,16 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/bin/CodexCapDP/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_CodexCapDP",
+  "--dp-args=--no-sa",
+  "Testcases/holdout",
+  "Testcases/edge"
+ ],
+ "returncode": 0,
+ "seconds": 322.7,
+ "finished": "Thu Oct 22 09:02:15 2026"
+}

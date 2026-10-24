@@ -1,0 +1,13 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py",
+  "--worker",
+  "chain",
+  "h08",
+  "default"
+ ],
+ "returncode": 0,
+ "seconds": 57.98,
+ "finished": "Fri Oct 23 00:16:38 2026"
+}

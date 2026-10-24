@@ -1,0 +1,27 @@
+{
+  "mode": "equal",
+  "out": "Testcases/results/ClaudeOpus55_v5/final/hpwl_equal",
+  "v": [
+    [
+      "ClaudeOpus55_v4",
+      "AI_Solutions/ClaudeOpus55_v4/src",
+      "Testcases/results/ClaudeOpus55_v5/phase1/ts_ClaudeOpus55_v4"
+    ],
+    [
+      "ClaudeOpus55_v5",
+      "AI_Solutions/ClaudeOpus55_v5/src",
+      "Testcases/results/ClaudeOpus55_v5/final/ts_v5_stage1"
+    ]
+  ],
+  "groups": [
+    "holdout",
+    "edge"
+  ],
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "moves": 5000000.0,
+  "benches": null
+}

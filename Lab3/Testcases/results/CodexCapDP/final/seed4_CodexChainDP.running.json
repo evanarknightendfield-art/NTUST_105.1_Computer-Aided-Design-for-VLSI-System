@@ -1,0 +1,16 @@
+{
+  "freeze": "b9d4ac797f3804a1eded6e4975ebfdb15dc2756e23212fcc5f5bcae0c67cc08b",
+  "command": [
+    "/home/evan/anaconda3/bin/python3",
+    "Grader/tools/local_grade.py",
+    "AI_Solutions/CodexChainDP",
+    "CodexChainDP",
+    "Testcases/edge_seed4",
+    "--work",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/seed4_CodexChainDP",
+    "--timeout",
+    "600",
+    "--dp-args=-v"
+  ],
+  "started": 1792584288.5422657
+}

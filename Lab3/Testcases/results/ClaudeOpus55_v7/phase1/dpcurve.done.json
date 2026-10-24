@@ -1,0 +1,17 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/bin/v7instr/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase1/dpcurve",
+  "--dp-args=--no-sa --trace-dp",
+  "Testcases/testcases",
+  "Testcases/holdout",
+  "Testcases/edge"
+ ],
+ "returncode": 0,
+ "seconds": 387.55,
+ "finished": "Sat Oct 24 01:56:50 2026"
+}

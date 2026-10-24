@@ -1,0 +1,1 @@
+/usr/bin/c++ -fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=undefined -O2 -g -DNDEBUG -Wl,--dependency-file,CMakeFiles/guard_test.dir/link.d CMakeFiles/guard_test.dir/tests/guard_test.cpp.o -o guard_test  libdp_core.a

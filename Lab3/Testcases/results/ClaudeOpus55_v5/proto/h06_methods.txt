@@ -1,0 +1,9 @@
+base total 885649.9600 max 434.810000
+D 430.7000 rows       ok  raw +11.941%  after DP +0.381% max 430.7000  (repair 2.03s, DP 4.72s)
+D 430.7000 rows-no-p2 ok  raw +41.734%  after DP -0.087% max 430.6900  (repair 0.01s, DP 5.00s)
+D 430.7000 rows-T0    ok  raw +14.944%  after DP +0.047% max 430.6400  (repair 2.07s, DP 4.52s)
+D 430.7000 sites      --- raw +0.000%  after DP +0.000% max 434.8100  (repair 0.16s, DP 0.00s)
+D 428.0000 rows       ok  raw +20.249%  after DP +0.981% max 428.0000  (repair 2.08s, DP 5.64s)
+D 428.0000 rows-no-p2 ok  raw +43.660%  after DP +0.307% max 428.0000  (repair 0.03s, DP 4.73s)
+D 428.0000 rows-T0    ok  raw +15.878%  after DP +0.635% max 428.0000  (repair 2.09s, DP 5.35s)
+D 428.0000 sites      ok  raw +5.535%  after DP +0.523% max 427.9800  (repair 0.15s, DP 4.74s)

@@ -1,0 +1,18 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/bin/v7instr/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase1/chain/def",
+  "--dp-args=--no-sa --cap-time 0 ",
+  "Testcases/testcases",
+  "Testcases/holdout",
+  "Testcases/edge/e08_fragmented/e08_fragmented",
+  "Testcases/edge/e16_rowgaps/e16_rowgaps"
+ ],
+ "returncode": 0,
+ "seconds": 217.03,
+ "finished": "Sat Oct 24 02:00:27 2026"
+}

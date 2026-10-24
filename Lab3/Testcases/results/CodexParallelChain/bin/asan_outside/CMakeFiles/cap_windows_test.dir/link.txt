@@ -1,0 +1,1 @@
+/usr/bin/c++ -fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=undefined -O2 -g -DNDEBUG -Wl,--dependency-file,CMakeFiles/cap_windows_test.dir/link.d CMakeFiles/cap_windows_test.dir/tests/cap_windows_test.cpp.o -o cap_windows_test  libdp_core.a

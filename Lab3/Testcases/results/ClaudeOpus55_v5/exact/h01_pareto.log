@@ -1,0 +1,9 @@
+h01: 300 cells; given placement: total 2367.0900, max 29.3900
+{'bench': 'h01', 'cap': 26.5, 'status': 'optimal', 'min_total': 2474.5899999923035, 'dual_bound': 2474.5899999923035, 'solution_max': 26.47999999999999, 'vs_given_total': np.float64(0.045414411785062114), 'seconds': 29.85}
+{'bench': 'h01', 'cap': 27.0, 'status': 'optimal', 'min_total': 2446.2099999983484, 'dual_bound': 2446.2099999983484, 'solution_max': 26.889999999999986, 'vs_given_total': np.float64(0.03342500707550111), 'seconds': 54.73}
+{'bench': 'h01', 'cap': 27.5, 'status': 'time_limit', 'min_total': 2409.6299999999974, 'dual_bound': 2398.74, 'solution_max': 27.47999999999999, 'vs_given_total': np.float64(0.01797143327883477), 'seconds': 402.48}
+{'bench': 'h01', 'cap': 28.0, 'status': 'time_limit', 'min_total': 5600.75, 'dual_bound': 2356.39, 'solution_max': 28.0, 'vs_given_total': np.float64(1.3660908541711545), 'seconds': 404.22}
+{'bench': 'h01', 'cap': 28.5, 'status': 'time_limit', 'min_total': 5782.33, 'dual_bound': 2329.09, 'solution_max': 28.479999999999997, 'vs_given_total': np.float64(1.4428010764271737), 'seconds': 409.13}
+{'bench': 'h01', 'cap': 29.0, 'status': 'infeasible', 'min_total': None, 'dual_bound': None, 'solution_max': None, 'vs_given_total': None, 'seconds': 479.85}
+{'bench': 'h01', 'cap': 29.39, 'status': 'infeasible', 'min_total': None, 'dual_bound': None, 'solution_max': None, 'vs_given_total': None, 'seconds': 479.27}
+{'bench': 'h01', 'cap': 30.0, 'status': 'infeasible', 'min_total': None, 'dual_bound': None, 'solution_max': None, 'vs_given_total': None, 'seconds': 458.17}

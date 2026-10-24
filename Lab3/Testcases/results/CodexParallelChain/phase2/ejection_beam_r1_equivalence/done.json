@@ -1,0 +1,6 @@
+{
+  "reference_sha256": "afb49be50cc285862609f11bdc5669eefbba1a4e5a50cd11f0dd57ca3f10da88",
+  "candidate_sha256": "583284889ca09c324f3cd141ea3286bb868e0d156643dbf2f4cccccb638b46bd",
+  "result": "PASS",
+  "random_placements": 300
+}

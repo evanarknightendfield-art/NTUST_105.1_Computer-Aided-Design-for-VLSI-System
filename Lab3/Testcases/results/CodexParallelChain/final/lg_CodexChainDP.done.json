@@ -1,0 +1,18 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "Grader/tools/local_grade.py",
+  "AI_Solutions/CodexChainDP",
+  "CodexChainDP",
+  "Testcases/testcases",
+  "Testcases/holdout",
+  "--work",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/lg_CodexChainDP",
+  "--timeout",
+  "600",
+  "--dp-args=-v"
+ ],
+ "returncode": 0,
+ "seconds": 647.58,
+ "finished": "Fri Oct 23 18:55:58 2026"
+}

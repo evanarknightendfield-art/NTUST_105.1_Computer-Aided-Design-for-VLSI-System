@@ -1,0 +1,4 @@
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/CodexParallelChain/CMakeFiles/dp_core.dir
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/CodexParallelChain/CMakeFiles/dp.dir
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/CodexParallelChain/CMakeFiles/edit_cache.dir
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/CodexParallelChain/CMakeFiles/rebuild_cache.dir

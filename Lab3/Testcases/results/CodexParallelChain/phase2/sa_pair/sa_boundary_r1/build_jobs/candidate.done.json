@@ -1,0 +1,20 @@
+{
+ "command": [
+  "taskset",
+  "-c",
+  "16-19",
+  "g++",
+  "-std=c++17",
+  "-O3",
+  "-DNDEBUG",
+  "-pthread",
+  "-I/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/candidate/src",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/driver.cpp",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/candidate/build/libdp_core.a",
+  "-o",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/candidate/sa_bench"
+ ],
+ "returncode": 0,
+ "seconds": 0.72,
+ "finished": "Fri Oct 23 05:19:02 2026"
+}

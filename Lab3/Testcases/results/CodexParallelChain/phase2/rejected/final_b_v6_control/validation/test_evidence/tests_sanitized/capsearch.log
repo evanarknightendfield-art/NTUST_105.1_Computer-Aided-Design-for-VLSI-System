@@ -1,0 +1,2 @@
+cluster: max 5.000 -> 4.000
+PASS: 59 repaired / 240 unresolved random caps (all legal, all <= D, failures untouched); one-row agreement with brute force 261 / 300 (never unsound)

@@ -1,0 +1,4 @@
+mode,seconds,total,max,legal,mask_cells,improved_windows,solved_windows
+full,0.10340148,2315.77,31.07,1,49,6,309
+local0,0.0272855750000001,2315.77,31.07,1,49,6,127
+local4,0.0406257410000002,2315.77,31.07,1,83,6,169

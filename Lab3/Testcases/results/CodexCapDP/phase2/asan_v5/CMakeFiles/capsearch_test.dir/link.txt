@@ -1,0 +1,1 @@
+/usr/bin/c++ -fsanitize=address,undefined -fno-omit-frame-pointer -fno-pie -O1 -g -fsanitize=address,undefined -no-pie -Wl,--dependency-file,CMakeFiles/capsearch_test.dir/link.d CMakeFiles/capsearch_test.dir/tests/capsearch_test.cpp.o -o capsearch_test  libdp_core.a

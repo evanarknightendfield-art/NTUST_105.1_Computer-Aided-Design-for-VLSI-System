@@ -1,0 +1,97 @@
+{
+  "mode": "large",
+  "tag": "final_b",
+  "script_sha256": "a67456f071c4a019e1eb49239dd3bf1d458ec4f7f455ea318ab531f6c7f139f3",
+  "wrapper_sha256": "eb8c8e0ce7034f945203a6c21f346c0ac45eba5f5a3049242f74b8f1113545cf",
+  "helper_sha256": {
+    "v6q.py": "899b334e15bb6432b68c5fee3acef3509d3c46508bb21b90695fc55a14441838",
+    "diag.py": "7303a824ad7aed97764d49bbd0308fed4ea1cfea247ed38eb82c2cb97558d83c"
+  },
+  "src_sha256": "d0b99109f3d04bdc33bdc7e90f55f1ef61ae8d828dc8a89b02747d85104ffc20",
+  "reference_sha256": "03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2",
+  "cmake_sha256": {
+    "candidate": "be475566a4602e86e4e11239337063d366f352de67a80efa600de8d70a1a37ab",
+    "v6": "be475566a4602e86e4e11239337063d366f352de67a80efa600de8d70a1a37ab"
+  },
+  "runner_sha256": "4e9b13e0d79088920b842b7990733ee8e07f29453fac8414510deabf0c9da9b6",
+  "checker_sha256": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3",
+  "inputs": {
+    "L1": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.aux",
+        "sha256": "011f394e0e758ff1d468a07e6b981c48a23b5bee465de57b8e9e4a8813d3fa8d"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.nodes",
+        "sha256": "a4296e3285bc74dafb7a739ee83839630a6fca6169637baa683ec7c6de6bb716"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.nets",
+        "sha256": "16b75724c432a19ff019a725fee7243fa6b597fd4008c0d06f5334d489a7ab1b"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.wts",
+        "sha256": "de1d0c8f556b1f5de6281d570858be03e27b470f0342dfba58bea3e8e84dc7bd"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.pl",
+        "sha256": "282d34c528a02873d219350232ac6dabc0ebe1a1059a48966171876153f55780"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.scl",
+        "sha256": "cb6a0bb30298c3920f4ccf15127544dc2b10e6f025ad68fd28f5cd23612fce1b"
+      }
+    },
+    "L2": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.aux",
+        "sha256": "6a49e1c305f537afe6f51c90ea5e391499b2cec3671a31c38269a33cab1928d5"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.nodes",
+        "sha256": "2a24d99e32ce592eeaf9326cfb38c54580dc221a1aee5b24c425715c0b78cc68"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.nets",
+        "sha256": "2ee2b9316672ac6b5b39e6a51ae606fd90b6263f4ef81b533241c0f98aca7b7c"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.wts",
+        "sha256": "cb5b5d3d2e85639c092e5fb4dc69e182bccf87ff6154951b71ef6a2deb7e083a"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.pl",
+        "sha256": "42a2e14e62e00c74f9a3e971fcc53958eb5b4ae180bf9b5e51cea86f9f6e80ed"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.scl",
+        "sha256": "800d6e70df25bd6be37fbd0d415731d498f9765a3b39dacde61861434910694d"
+      }
+    }
+  },
+  "cases": [
+    [
+      "L2",
+      1
+    ],
+    [
+      "L2",
+      2
+    ],
+    [
+      "L1",
+      1
+    ]
+  ],
+  "historical_chaindp_sha256": "10ede2d7948d2203a0df3926b88cb372fb4a121c09960cb0b63de3a085205e54",
+  "gates": {
+    "total_gm_at_most": 1.0011,
+    "max_gm_at_most": 1.001,
+    "each_max_at_most": 1.002,
+    "both_at_least": 8,
+    "extra_budget_overshoots": 0,
+    "L1_seconds_lt": 240,
+    "L2_seconds_lt": 600
+  },
+  "note": "SA boundary remains accepted; cap deadline repair round 2 is pending this paired validation. Coordinator WORK_STATE note 3 (2026-10-23 15:15): enlarge repairAt slice to min(left - 0.08, max(0.4, 0.5*left)); preserve cap and extra deadlines. Coordinator WORK_STATE note 2 (2026-10-23 14:35) permits 0.11% total Stage 1 run variation; max GM 0.1% and each max 0.2% gates stay unchanged (stricter than the allowed max-GM variation). No elapsed-time tolerance: all candidate and reference training extra steps must be within budget. Historical ChainDP only defines both; every v6 ratio uses this run. Large runs are legality/runtime checks, not HPWL evidence."
+}

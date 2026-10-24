@@ -1,0 +1,2 @@
+/usr/bin/ar qc libdp_core.a CMakeFiles/dp_core.dir/src/annealer.cpp.o CMakeFiles/dp_core.dir/src/capsearch.cpp.o CMakeFiles/dp_core.dir/src/chain.cpp.o CMakeFiles/dp_core.dir/src/global.cpp.o CMakeFiles/dp_core.dir/src/legalizer.cpp.o CMakeFiles/dp_core.dir/src/optimizer.cpp.o CMakeFiles/dp_core.dir/src/placedb.cpp.o CMakeFiles/dp_core.dir/src/window.cpp.o
+/usr/bin/ranlib libdp_core.a

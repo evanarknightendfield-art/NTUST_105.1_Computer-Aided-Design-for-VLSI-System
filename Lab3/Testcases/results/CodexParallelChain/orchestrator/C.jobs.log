@@ -1,0 +1,30 @@
+final/lg_CodexParallelChain 完成（631 秒）
+final/edge_CodexParallelChain 完成（584 秒）
+final/lg_ClaudeOpus55_v6 完成（630 秒）
+final/edge_ClaudeOpus55_v6 完成（587 秒）
+final/lg_CodexChainDP 完成（648 秒）
+final/edge_CodexChainDP 完成（569 秒）
+final/lg_CodexParallelChain_L1 完成（203 秒）
+final/lg_ClaudeOpus55_v6_L1 完成（204 秒）
+final/lg_CodexParallelChain_L2 完成（242 秒）
+final/lg_ClaudeOpus55_v6_L2 完成（242 秒）
+final/edge_seed6 完成（15 秒）
+final/seed_ClaudeOpus55_v4 完成（473 秒）
+final/seed_CodexChainDP 完成（575 秒）
+final/seed_ClaudeOpus55_v6 完成（589 秒）
+final/seed_CodexParallelChain 完成（589 秒）
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_TESTING
+
+
+final/ts_ClaudeOpus55_v4 完成（227 秒）
+final/ts_ClaudeOpus55_v6 完成（319 秒）
+final/ts_CodexParallelChain 完成（320 秒）
+final/hpwl_fixed 完成（812 秒）
+final/hpwl_equal 完成（1999 秒）
+final/hpwl_default 完成（5782 秒）
+final/extra_testcases_CodexParallelChain 完成（66 秒）
+final/extra_testcases_ClaudeOpus55_v6 完成（66 秒）
+final_validate.py 全部完成（final/ALL_DONE）；下一步：python3 scripts/final_report.py

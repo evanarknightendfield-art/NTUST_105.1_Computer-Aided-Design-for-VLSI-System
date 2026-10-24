@@ -1,0 +1,25 @@
+Test project /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/bin/v6_asan
+      Start  1: window
+ 1/10 Test  #1: window ...........................   Passed    0.14 sec
+      Start  2: multirow
+ 2/10 Test  #2: multirow .........................   Passed   10.82 sec
+      Start  3: optimizer
+ 3/10 Test  #3: optimizer ........................   Passed    0.81 sec
+      Start  4: chain
+ 4/10 Test  #4: chain ............................   Passed    6.37 sec
+      Start  5: parallel_sa
+ 5/10 Test  #5: parallel_sa ......................   Passed    0.84 sec
+      Start  6: pool
+ 6/10 Test  #6: pool .............................   Passed    0.01 sec
+      Start  7: global
+ 7/10 Test  #7: global ...........................   Passed    0.01 sec
+      Start  8: capsearch
+ 8/10 Test  #8: capsearch ........................   Passed   12.03 sec
+      Start  9: cap_windows
+ 9/10 Test  #9: cap_windows ......................   Passed    0.61 sec
+      Start 10: guard
+10/10 Test #10: guard ............................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) =  31.64 sec

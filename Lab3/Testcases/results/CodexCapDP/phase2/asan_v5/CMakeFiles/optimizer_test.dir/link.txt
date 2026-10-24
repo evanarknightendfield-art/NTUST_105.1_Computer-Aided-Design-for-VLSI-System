@@ -1,0 +1,1 @@
+/usr/bin/c++ -fsanitize=address,undefined -fno-omit-frame-pointer -fno-pie -O1 -g -fsanitize=address,undefined -no-pie -Wl,--dependency-file,CMakeFiles/optimizer_test.dir/link.d CMakeFiles/optimizer_test.dir/tests/optimizer_test.cpp.o -o optimizer_test  libdp_core.a

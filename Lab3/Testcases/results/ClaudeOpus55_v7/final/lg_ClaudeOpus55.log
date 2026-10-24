@@ -1,0 +1,25 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/lg_ClaudeOpus55/submissions/ClaudeOpus55.tgz  (11 files)
+       ClaudeOpus55/CMakeLists.txt
+       ClaudeOpus55/Makefile
+       ClaudeOpus55/README.md
+       ClaudeOpus55/src/annealer.cpp
+       ClaudeOpus55/src/annealer.hpp
+       ClaudeOpus55/src/legalizer.cpp
+       ClaudeOpus55/src/legalizer.hpp
+       ClaudeOpus55/src/main.cpp
+       ClaudeOpus55/src/placedb.cpp
+       ClaudeOpus55/src/placedb.hpp
+       ClaudeOpus55/src/rowmap.hpp
+[build] OK build/dp  2.8s
+[run] ibm01    PASS  OK          12.3s  disp=27235500.7959 max=10578.29 legal=90945258.0 sa=60045714.0
+[run] ibm05    PASS  OK          41.4s  disp=1431841.6898 max=217.613 legal=11997198.5 sa=10307273.0
+[run] toy      PASS  OK           0.0s  disp=46619.2 max=1987.6 legal=101556.0 sa=48054.0
+[run] h01      PASS  OK           0.2s  disp=2575.61 max=33.07 legal=25947.5 sa=14886.0
+[run] h02      PASS  OK           0.7s  disp=534211.043 max=2727.934 legal=3846611.0 sa=2424594.5
+[run] h03      PASS  OK           1.5s  disp=8477.1912 max=21.6061 legal=27853.0 sa=13182.6
+[run] h04      PASS  OK           3.8s  disp=203183.03 max=296.7 legal=576400.5 sa=250903.0
+[run] h05      PASS  OK           5.5s  disp=1658808.996 max=1398.412 legal=26246164.9 sa=18320012.1
+[run] h06      PASS  OK          12.1s  disp=1075555.1 max=504.2 legal=2365554.5 sa=805759.5
+[run] h07      PASS  OK          16.7s  disp=124696.0995 max=52.9575 legal=373823.54 sa=174292.753
+[run] h08      PASS  OK          31.5s  disp=157049936.005 max=29576.641 legal=330850139.3 sa=111886697.6
+[summary] 11/11 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/lg_ClaudeOpus55/record.csv

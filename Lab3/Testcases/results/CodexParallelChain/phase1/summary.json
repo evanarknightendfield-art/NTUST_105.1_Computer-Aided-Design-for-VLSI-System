@@ -1,0 +1,1479 @@
+{
+  "chain": [
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.40504745799999853,
+      "total_reduction": 5350.999999992549,
+      "reduction_pct_of_chain_start": 0.023210722704766703,
+      "calls": 2,
+      "work": 10
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.7924720999999941,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.25361789599999796,
+      "total_reduction": 8660.084000006318,
+      "reduction_pct_of_chain_start": 0.03756434466911107,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.451401508,
+      "total_reduction": 14011.083999998868,
+      "reduction_pct_of_chain_start": 0.06077506737387778,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.767771039000003,
+      "total_reduction": 6654.7999999932945,
+      "reduction_pct_of_chain_start": 0.028866140432767872,
+      "calls": 2,
+      "work": 14
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 3.963749492000005,
+      "total_reduction": 325.4000000022352,
+      "reduction_pct_of_chain_start": 0.0014114687288718896,
+      "calls": 2,
+      "work": 5
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.6364058969999995,
+      "total_reduction": 13532.484000001103,
+      "reduction_pct_of_chain_start": 0.058699071880238284,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.368122467000003,
+      "total_reduction": 20512.683999996632,
+      "reduction_pct_of_chain_start": 0.08897668104187804,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.46088119600000255,
+      "total_reduction": 2.709999999962747,
+      "reduction_pct_of_chain_start": 0.0002041008100339925,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.8874927299999982,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.022877170000001,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.3716361460000002,
+      "total_reduction": 2.709999999962747,
+      "reduction_pct_of_chain_start": 0.0002041008100339925,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.7621031869999939,
+      "total_reduction": 2.709999999962747,
+      "reduction_pct_of_chain_start": 0.0002041008100339925,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 4.294265214000006,
+      "total_reduction": 23.04799999971874,
+      "reduction_pct_of_chain_start": 0.0017358359666681618,
+      "calls": 2,
+      "work": 5
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.2872496510000033,
+      "total_reduction": 27.899999999906868,
+      "reduction_pct_of_chain_start": 0.0021012592619954465,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.344434423999999,
+      "total_reduction": 53.657999999588355,
+      "reduction_pct_of_chain_start": 0.004041196038697601,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.0050386460000000355,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.009441067999999997,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0,
+      "total_reduction": 0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 0,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 0.01449408799999996,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.005107088000000037,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 0.009453072999999979,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0,
+      "total_reduction": 0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 0,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 0.0145695990000001,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.009990490999999935,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.050053708000000086,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0,
+      "total_reduction": 0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 0,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 0.06005908899999968,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.01010990100000031,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 0.04938237799999978,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0,
+      "total_reduction": 0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 0,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 0.05950719400000004,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.12140236699999996,
+      "total_reduction": 79.19599999999627,
+      "reduction_pct_of_chain_start": 0.017147255289557524,
+      "calls": 2,
+      "work": 3
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 1.5626679249999995,
+      "total_reduction": 17.412000000011176,
+      "reduction_pct_of_chain_start": 0.00376998849818149,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.27996066599999914,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.964114747,
+      "total_reduction": 96.60800000000745,
+      "reduction_pct_of_chain_start": 0.020917243787739015,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.12173417300000011,
+      "total_reduction": 79.19599999999627,
+      "reduction_pct_of_chain_start": 0.017147255289557524,
+      "calls": 2,
+      "work": 3
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 1.5506025920000006,
+      "total_reduction": 17.412000000011176,
+      "reduction_pct_of_chain_start": 0.00376998849818149,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.28193085200000034,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 1.9543208110000005,
+      "total_reduction": 96.60800000000745,
+      "reduction_pct_of_chain_start": 0.020917243787739015,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.2738200200000005,
+      "total_reduction": 4.494440000002214,
+      "reduction_pct_of_chain_start": 0.06380162545434129,
+      "calls": 2,
+      "work": 11
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 2.1630098769999995,
+      "total_reduction": 0.4548400000003312,
+      "reduction_pct_of_chain_start": 0.006456762426833917,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.1946731890000004,
+      "total_reduction": 2.1205199999976685,
+      "reduction_pct_of_chain_start": 0.03010222025618862,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 2.6315507179999997,
+      "total_reduction": 7.069800000000214,
+      "reduction_pct_of_chain_start": 0.10036060813736383,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.2750143319999996,
+      "total_reduction": 4.494440000002214,
+      "reduction_pct_of_chain_start": 0.06380162545434129,
+      "calls": 2,
+      "work": 11
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 3.415993416000001,
+      "total_reduction": 0.4548400000003312,
+      "reduction_pct_of_chain_start": 0.006456762426833917,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.20099860400000047,
+      "total_reduction": 2.1205199999976685,
+      "reduction_pct_of_chain_start": 0.03010222025618862,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 3.8920523009999997,
+      "total_reduction": 7.069800000000214,
+      "reduction_pct_of_chain_start": 0.10036060813736383,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.40458225899999967,
+      "total_reduction": 260.9800000000396,
+      "reduction_pct_of_chain_start": 0.14484869948925502,
+      "calls": 2,
+      "work": 45
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.7918941190000002,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.2534229450000005,
+      "total_reduction": 131.98000000003958,
+      "reduction_pct_of_chain_start": 0.0732513271461212,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.4499925410000003,
+      "total_reduction": 392.96000000007916,
+      "reduction_pct_of_chain_start": 0.21810002663537623,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.45691651499999963,
+      "total_reduction": 252.9200000000128,
+      "reduction_pct_of_chain_start": 0.14037525126376993,
+      "calls": 2,
+      "work": 45
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 4.374086032000001,
+      "total_reduction": 3.9800000000104774,
+      "reduction_pct_of_chain_start": 0.002208973193228083,
+      "calls": 2,
+      "work": 2
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.4232190920000001,
+      "total_reduction": 152.0800000000163,
+      "reduction_pct_of_chain_start": 0.08440719679027099,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.254655093,
+      "total_reduction": 408.9800000000396,
+      "reduction_pct_of_chain_start": 0.226991421247269,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h05",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.4048022290000004,
+      "total_reduction": 709.2139999999199,
+      "reduction_pct_of_chain_start": 0.04569935600619636,
+      "calls": 2,
+      "work": 12
+    },
+    {
+      "group": "holdout",
+      "bench": "h05",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.7919942899999999,
+      "total_reduction": 1357.1380000007339,
+      "reduction_pct_of_chain_start": 0.08744939131429703,
+      "calls": 2,
+      "work": 13
+    },
+    {
+      "group": "holdout",
+      "bench": "h05",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.2543047239999998,
+      "total_reduction": 1994.053999999538,
+      "reduction_pct_of_chain_start": 0.12849010826290663,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h05",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.4512399829999998,
+      "total_reduction": 4060.406000000192,
+      "reduction_pct_of_chain_start": 0.26163885558340005,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h05",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.7976475510000007,
+      "total_reduction": 782.0379999994766,
+      "reduction_pct_of_chain_start": 0.050391888728019904,
+      "calls": 2,
+      "work": 13
+    },
+    {
+      "group": "holdout",
+      "bench": "h05",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 4.186801032,
+      "total_reduction": 2785.288000001572,
+      "reduction_pct_of_chain_start": 0.17947455618737485,
+      "calls": 2,
+      "work": 28
+    },
+    {
+      "group": "holdout",
+      "bench": "h05",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.4208750849999996,
+      "total_reduction": 1836.0940000005066,
+      "reduction_pct_of_chain_start": 0.11831169910192654,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h05",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.405482430999999,
+      "total_reduction": 5403.420000001555,
+      "reduction_pct_of_chain_start": 0.3481781440173213,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h06",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.4044519090000023,
+      "total_reduction": 1745.1000000002095,
+      "reduction_pct_of_chain_start": 0.1960287502543399,
+      "calls": 2,
+      "work": 27
+    },
+    {
+      "group": "holdout",
+      "bench": "h06",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.7912360730000003,
+      "total_reduction": 71.71999999997206,
+      "reduction_pct_of_chain_start": 0.0080563761207003,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "holdout",
+      "bench": "h06",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.25926354099999926,
+      "total_reduction": 1435.0600000004051,
+      "reduction_pct_of_chain_start": 0.16120166084467288,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h06",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.4551639330000015,
+      "total_reduction": 3251.8800000005867,
+      "reduction_pct_of_chain_start": 0.3652867872197131,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h06",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.7097514720000007,
+      "total_reduction": 1615.1800000001676,
+      "reduction_pct_of_chain_start": 0.18143471252982613,
+      "calls": 2,
+      "work": 28
+    },
+    {
+      "group": "holdout",
+      "bench": "h06",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 3.931713596000005,
+      "total_reduction": 428.9000000000233,
+      "reduction_pct_of_chain_start": 0.04817874676756682,
+      "calls": 2,
+      "work": 5
+    },
+    {
+      "group": "holdout",
+      "bench": "h06",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.7939218729999951,
+      "total_reduction": 1950.2400000004563,
+      "reduction_pct_of_chain_start": 0.21907232244345162,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h06",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.4356581890000015,
+      "total_reduction": 3994.3200000006473,
+      "reduction_pct_of_chain_start": 0.44868578174084456,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h07",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.4034107419999984,
+      "total_reduction": 115.57379999995464,
+      "reduction_pct_of_chain_start": 0.10599918796520122,
+      "calls": 2,
+      "work": 15
+    },
+    {
+      "group": "holdout",
+      "bench": "h07",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.7891844310000025,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h07",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.2611307730000014,
+      "total_reduction": 80.41684000013629,
+      "reduction_pct_of_chain_start": 0.07375477607161228,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h07",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.4540246860000003,
+      "total_reduction": 195.99064000009093,
+      "reduction_pct_of_chain_start": 0.1797539640368135,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h07",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.5128486060000021,
+      "total_reduction": 130.75270000001183,
+      "reduction_pct_of_chain_start": 0.11992060505291215,
+      "calls": 2,
+      "work": 20
+    },
+    {
+      "group": "holdout",
+      "bench": "h07",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 4.424698731999996,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h07",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.29864916999999735,
+      "total_reduction": 63.84442000009585,
+      "reduction_pct_of_chain_start": 0.05855528394949433,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h07",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.236587452000002,
+      "total_reduction": 194.59712000010768,
+      "reduction_pct_of_chain_start": 0.1784758890024065,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h08",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.419329759,
+      "total_reduction": 990.0,
+      "reduction_pct_of_chain_start": 0.0007919103357114959,
+      "calls": 2,
+      "work": 4
+    },
+    {
+      "group": "holdout",
+      "bench": "h08",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.916295826999999,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h08",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.02287520800000209,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h08",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.3590739329999977,
+      "total_reduction": 990.0,
+      "reduction_pct_of_chain_start": 0.0007919103357114959,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h08",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.6254836279999978,
+      "total_reduction": 990.0,
+      "reduction_pct_of_chain_start": 0.0007919103357114959,
+      "calls": 2,
+      "work": 4
+    },
+    {
+      "group": "holdout",
+      "bench": "h08",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 4.540980569000006,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h08",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.025924152000001754,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h08",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.192758310999999,
+      "total_reduction": 990.0,
+      "reduction_pct_of_chain_start": 0.0007919103357114959,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e08_fragmented",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.40389788900000045,
+      "total_reduction": 951.6760000000068,
+      "reduction_pct_of_chain_start": 1.0440053826268805,
+      "calls": 2,
+      "work": 86
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e08_fragmented",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.790777875999999,
+      "total_reduction": 32.108000000036554,
+      "reduction_pct_of_chain_start": 0.03522304316324233,
+      "calls": 2,
+      "work": 5
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e08_fragmented",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.2554328229999996,
+      "total_reduction": 205.2719999999681,
+      "reduction_pct_of_chain_start": 0.22518700997245933,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e08_fragmented",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.4502470619999999,
+      "total_reduction": 1189.0560000000114,
+      "reduction_pct_of_chain_start": 1.3044154357625821,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e08_fragmented",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.5861433720000004,
+      "total_reduction": 934.8040000000328,
+      "reduction_pct_of_chain_start": 1.0254965005959653,
+      "calls": 2,
+      "work": 92
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e08_fragmented",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 4.307643539,
+      "total_reduction": 177.40199999997276,
+      "reduction_pct_of_chain_start": 0.19461312767028285,
+      "calls": 2,
+      "work": 29
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e08_fragmented",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.4486861580000001,
+      "total_reduction": 694.6180000000168,
+      "reduction_pct_of_chain_start": 0.7620082158944125,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e08_fragmented",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.342633591,
+      "total_reduction": 1806.8240000000224,
+      "reduction_pct_of_chain_start": 1.9821178441606606,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e16_rowgaps",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.40426136600000007,
+      "total_reduction": 505.75800000003073,
+      "reduction_pct_of_chain_start": 0.5250765644516802,
+      "calls": 2,
+      "work": 65
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e16_rowgaps",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.7910861569999996,
+      "total_reduction": 14.75199999997858,
+      "reduction_pct_of_chain_start": 0.015315485822823304,
+      "calls": 2,
+      "work": 3
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e16_rowgaps",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.25383393799999965,
+      "total_reduction": 296.7479999999632,
+      "reduction_pct_of_chain_start": 0.30808295735881275,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e16_rowgaps",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.4493699740000006,
+      "total_reduction": 817.2579999999725,
+      "reduction_pct_of_chain_start": 0.8484750076333163,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e16_rowgaps",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.5365096190000012,
+      "total_reduction": 496.332000000024,
+      "reduction_pct_of_chain_start": 0.5152905171790225,
+      "calls": 2,
+      "work": 65
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e16_rowgaps",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 4.422998526,
+      "total_reduction": 69.8179999999411,
+      "reduction_pct_of_chain_start": 0.07248485555711279,
+      "calls": 2,
+      "work": 14
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e16_rowgaps",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.3127920350000002,
+      "total_reduction": 382.7399999999907,
+      "reduction_pct_of_chain_start": 0.3973596152274783,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "edge_diagnostic_only",
+      "bench": "e16_rowgaps",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.272468974,
+      "total_reduction": 948.8899999999558,
+      "reduction_pct_of_chain_start": 0.9851349879636137,
+      "calls": 1,
+      "work": 0
+    }
+  ],
+  "sa_pairs": [
+    {
+      "bench": "ibm01",
+      "seed": 1,
+      "auto_threads": 8,
+      "auto_attempts": 23992002,
+      "single_requested": 23992002,
+      "single_attempts": 23992000,
+      "schedule_rounding_attempts": 2,
+      "auto_hpwl": 54562032.0,
+      "single_hpwl": 53067378.0,
+      "auto_loss_pct": 2.8165212911027915,
+      "auto_seconds": 5.009135,
+      "single_seconds": 21.281258,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output"
+    },
+    {
+      "bench": "ibm01",
+      "seed": 2,
+      "auto_threads": 8,
+      "auto_attempts": 23992000,
+      "single_requested": 23992000,
+      "single_attempts": 23992000,
+      "schedule_rounding_attempts": 0,
+      "auto_hpwl": 55040712.0,
+      "single_hpwl": 53337582.0,
+      "auto_loss_pct": 3.19311437852583,
+      "auto_seconds": 5.515971,
+      "single_seconds": 21.312501,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output"
+    },
+    {
+      "bench": "ibm05",
+      "seed": 1,
+      "auto_threads": 8,
+      "auto_attempts": 23995921,
+      "single_requested": 23995921,
+      "single_attempts": 23995900,
+      "schedule_rounding_attempts": 21,
+      "auto_hpwl": 10147365.5,
+      "single_hpwl": 10013432.0,
+      "auto_loss_pct": 1.3375384183964112,
+      "auto_seconds": 5.289494,
+      "single_seconds": 25.689888,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output"
+    },
+    {
+      "bench": "ibm05",
+      "seed": 2,
+      "auto_threads": 8,
+      "auto_attempts": 23995914,
+      "single_requested": 23995914,
+      "single_attempts": 23995900,
+      "schedule_rounding_attempts": 14,
+      "auto_hpwl": 10160930.5,
+      "single_hpwl": 10033235.0,
+      "auto_loss_pct": 1.2727250981363403,
+      "auto_seconds": 5.518209,
+      "single_seconds": 25.53909,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output"
+    },
+    {
+      "bench": "h06",
+      "seed": 1,
+      "auto_threads": 5,
+      "auto_attempts": 14996036,
+      "single_requested": 14996036,
+      "single_attempts": 14996000,
+      "schedule_rounding_attempts": 36,
+      "auto_hpwl": 722323.0,
+      "single_hpwl": 706763.0,
+      "auto_loss_pct": 2.201586670496325,
+      "auto_seconds": 4.009987,
+      "single_seconds": 13.679325,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output"
+    },
+    {
+      "bench": "h06",
+      "seed": 2,
+      "auto_threads": 5,
+      "auto_attempts": 14996365,
+      "single_requested": 14996365,
+      "single_attempts": 14996300,
+      "schedule_rounding_attempts": 65,
+      "auto_hpwl": 716259.5,
+      "single_hpwl": 708454.0,
+      "auto_loss_pct": 1.101765252225273,
+      "auto_seconds": 4.025128,
+      "single_seconds": 13.784389,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output"
+    },
+    {
+      "bench": "h07",
+      "seed": 1,
+      "auto_threads": 8,
+      "auto_attempts": 23993528,
+      "single_requested": 23993528,
+      "single_attempts": 23993500,
+      "schedule_rounding_attempts": 28,
+      "auto_hpwl": 169086.71800000276,
+      "single_hpwl": 169060.05100000216,
+      "auto_loss_pct": 0.015773685056208464,
+      "auto_seconds": 5.691396,
+      "single_seconds": 22.139788,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output"
+    },
+    {
+      "bench": "h07",
+      "seed": 2,
+      "auto_threads": 8,
+      "auto_attempts": 23993660,
+      "single_requested": 23993660,
+      "single_attempts": 23993600,
+      "schedule_rounding_attempts": 60,
+      "auto_hpwl": 168116.39000000161,
+      "single_hpwl": 168157.938000002,
+      "auto_loss_pct": -0.024707724472927683,
+      "auto_seconds": 5.424431,
+      "single_seconds": 22.252772,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output"
+    },
+    {
+      "bench": "h08",
+      "seed": 1,
+      "auto_threads": 8,
+      "auto_attempts": 23996167,
+      "single_requested": 23996167,
+      "single_attempts": 23996100,
+      "schedule_rounding_attempts": 67,
+      "auto_hpwl": 105642448.30000024,
+      "single_hpwl": 104687988.20000029,
+      "auto_loss_pct": 0.9117188288846556,
+      "auto_seconds": 6.425031,
+      "single_seconds": 24.335081,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output"
+    },
+    {
+      "bench": "h08",
+      "seed": 2,
+      "auto_threads": 8,
+      "auto_attempts": 23996212,
+      "single_requested": 23996212,
+      "single_attempts": 23996200,
+      "schedule_rounding_attempts": 12,
+      "auto_hpwl": 105752219.80000028,
+      "single_hpwl": 105157226.9000003,
+      "auto_loss_pct": 0.5658126574275224,
+      "auto_seconds": 5.326113,
+      "single_seconds": 24.092898,
+      "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output"
+    }
+  ],
+  "sa_by_bench": {
+    "ibm01": {
+      "mean_loss_pct": 3.0048178348143106,
+      "min_loss_pct": 2.8165212911027915,
+      "max_loss_pct": 3.19311437852583
+    },
+    "ibm05": {
+      "mean_loss_pct": 1.3051317582663757,
+      "min_loss_pct": 1.2727250981363403,
+      "max_loss_pct": 1.3375384183964112
+    },
+    "h06": {
+      "mean_loss_pct": 1.651675961360799,
+      "min_loss_pct": 1.101765252225273,
+      "max_loss_pct": 2.201586670496325
+    },
+    "h07": {
+      "mean_loss_pct": -0.00446701970835961,
+      "min_loss_pct": -0.024707724472927683,
+      "max_loss_pct": 0.015773685056208464
+    },
+    "h08": {
+      "mean_loss_pct": 0.738765743156089,
+      "min_loss_pct": 0.5658126574275224,
+      "max_loss_pct": 0.9117188288846556
+    }
+  },
+  "toy": [
+    {
+      "version": "v5",
+      "total_displacement": 43236.6,
+      "max_displacement": 1972.0,
+      "handoff_reference_max": 1972.0,
+      "difference": 0.0,
+      "stderr": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/toy/v5/stderr.txt"
+    },
+    {
+      "version": "v6",
+      "total_displacement": 43324.4,
+      "max_displacement": 2004.4,
+      "handoff_reference_max": 2004.4,
+      "difference": 0.0,
+      "stderr": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/toy/v6/stderr.txt"
+    }
+  ],
+  "scope": "diagnosis only; two SA seeds; edge e08/e16 are not tuning data",
+  "sa_warning": "positive loss means auto HPWL is worse; serial 100-step rounding is listed",
+  "starts": {
+    "ibm01": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.aux",
+        "sha256": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.nodes",
+        "sha256": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.nets",
+        "sha256": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.wts",
+        "sha256": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.pl",
+        "sha256": "33e7e017dbe336e259ea4455c785f094fff931801747b0ee39734d33dc738bbe"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.scl",
+        "sha256": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc"
+      }
+    },
+    "ibm05": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.aux",
+        "sha256": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.nodes",
+        "sha256": "83c9acbee7c43b4c5288f8867f2db1988ffdc1d9d424aedf6cede0c935dcea41"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.nets",
+        "sha256": "7a1cbb6bab44d95893e0ca2304f84eb1737c72a9823d09a14679e9fcbfc34c2b"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.wts",
+        "sha256": "b9162b7e4dc187ee1075b155d6cc1f6bbaa13165889b1ea1d7f3fc4cde0d26bb"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.pl",
+        "sha256": "d94cfd9077a5ab08269af9cb764efcc8a4ec3dec3fce50bd8425e536c28ebb7d"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output.scl",
+        "sha256": "60c1593e1a7558bbd273731248e91cf0ab1549778a28accc7dce7e3be03e592a"
+      }
+    },
+    "h06": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h06/output.aux",
+        "sha256": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h06/output.nodes",
+        "sha256": "5516df202d293c68616f3f603439c11784f0d99765b3fe8c442690be65d983a0"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h06/output.nets",
+        "sha256": "022e018ebc24a84bcf3f8d645628940eb2549444148d3a7d902b63d559f343e7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h06/output.wts",
+        "sha256": "94dbe1e7c4bcd79b1fa1405d4db389877217c7841db8a87ac65efa5332457184"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h06/output_legal.pl",
+        "sha256": "8f4241b72e664747b67be08b1d639c997dc11d8c53de96f30763563160f60962"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h06/output.scl",
+        "sha256": "e19f929cbf3fc9b021475f3a91563b0e04e8142f0889a11cdd4de3869c733379"
+      }
+    },
+    "h07": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h07/output.aux",
+        "sha256": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h07/output.nodes",
+        "sha256": "9afd47d51cf5b62f1252b22e68fc2b35d300ca35b063c471c8c51171852264d1"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h07/output.nets",
+        "sha256": "26dfff163cc74463701c88fe6f463240a084734ee6bcab4eed8b16d197368f73"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h07/output.wts",
+        "sha256": "f5dcf7b7beda6b9a111e24be9a7bc30d7b80a480dbad9fcd28f560cfe385f828"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h07/output_legal.pl",
+        "sha256": "0c683c3dd70c4998e181e7a2aebdad1dfc72cdf0748faced7fe413fa37b725fe"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h07/output.scl",
+        "sha256": "ce1e7e759409071318358eb8d501579ef56d25147be7a64c027a6ea1c82dd712"
+      }
+    },
+    "h08": {
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output.aux": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h08/output.aux",
+        "sha256": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output.nodes": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h08/output.nodes",
+        "sha256": "bf0edfd911be22877243ff5836b1280c2ef39bf481767e0a6e33f9bc317d15fe"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output.nets": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h08/output.nets",
+        "sha256": "ab0ee74c3eda0a5c5457d7d542201320c4a91db4657e8806cb02c311b5ce0fbf"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output.wts": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h08/output.wts",
+        "sha256": "8e11c57dd514b10259adfeecd2b17afcf62259741576a42a868f9c4f9598e9ba"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output.pl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h08/output_legal.pl",
+        "sha256": "8c64feb728002ad716d5c0953a1f01e174eb192891ff78dad37c4e12bbea17ab"
+      },
+      "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output.scl": {
+        "resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/ts_ClaudeOpus55_v4/h08/output.scl",
+        "sha256": "1c920efed67adad76a0a720da06a496c7c1af06b64273f628d60e380e92b9ce8"
+      }
+    }
+  }
+}

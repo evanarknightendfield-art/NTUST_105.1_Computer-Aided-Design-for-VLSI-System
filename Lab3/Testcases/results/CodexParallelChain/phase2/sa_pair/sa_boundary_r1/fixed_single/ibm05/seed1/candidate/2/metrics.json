@@ -1,0 +1,11 @@
+{
+  "hpwl": 10916948.0,
+  "attempts": 5000000,
+  "sa_seconds": 5.417659,
+  "stage2_seconds": 5.431215,
+  "threads": 1,
+  "process_seconds": 5.623901333019603,
+  "placement_sha256": "4b5d6c698f595247348e1918ccf94ae9efac5353e7e760936ad7c6943988b875",
+  "state_sha256": "4c2b7557d9658fe85bdc2a9c0ae95c735fa4c76caed1c425c2dc167691da0613",
+  "legal": true
+}

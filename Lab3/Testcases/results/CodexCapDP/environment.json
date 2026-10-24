@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-21",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "analysis_affinity": "16-19",
+  "timed_jobs": "serial, default affinity",
+  "source_unchanged": true,
+  "instrumented_tool_sha256": {
+    "Lab3/AI_Solutions/CodexCapDP/tests/diagnostic_capsearch.cpp": "ae5f35d1231971daf463214f7626311e2c34600b146b245fe8721f1d6a84d38b",
+    "Lab3/AI_Solutions/CodexCapDP/tests/diagnostic_main.cpp": "13eb0eaedbf9fdc342beb793cf36cdc3dee61deed764c5b69471558a86305643",
+    "Lab3/AI_Solutions/CodexCapDP/tests/diagnostic_window.cpp": "8819d3286f820c5e49be8b5b6d0755937b1c9966d611dd245288927fb2b7272b",
+    "Lab3/AI_Solutions/CodexCapDP/tests/diagnostic_experiments.cpp": "c06e7044f6928348e0dae15f8c8ba2cb6a8b029ab542ef66b01238b4e14d446f",
+    "Lab3/AI_Solutions/CodexCapDP/tests/diagnostic.hpp": "215754434ccc08b1b441094c22c77041e011f5c171a078c1b9ed0c2362ae17ed"
+  }
+}

@@ -1,0 +1,4 @@
+kind,box,cells,columns,status,seconds,total,total_vs_P,cap
+hotspot_mip,1:8,808,25953,no_position,0.05,,,129.829
+hotspot_mip,1:16,1008,65010,no_position,0.07,,,129.829
+hotspot_mip,2:16,1410,153001,no_position,0.18,,,129.829

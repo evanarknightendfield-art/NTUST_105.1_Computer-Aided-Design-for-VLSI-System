@@ -1,0 +1,2 @@
+hpwl,attempts,sa_seconds,stage2_seconds
+791531.000000000000,51762495,9.995059,10.793719

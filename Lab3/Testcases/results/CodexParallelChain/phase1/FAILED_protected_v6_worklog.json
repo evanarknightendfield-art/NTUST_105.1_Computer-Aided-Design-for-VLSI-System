@@ -1,0 +1,4 @@
+{
+  "error": "Protected directories changed; do not write ALL_DONE",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py\", line 374, in main\n    run_queue()\n    ~~~~~~~~~^^\n  File \"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py\", line 349, in run_queue\n    verify_protected(R / 'provenance/protected_after.json')\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py\", line 65, in verify_protected\n    raise RuntimeError('Protected directories changed; do not write ALL_DONE')\nRuntimeError: Protected directories changed; do not write ALL_DONE\n"
+}

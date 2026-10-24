@@ -12,7 +12,9 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 V = [('v1', 'ClaudeOpus55'), ('GapSA', 'CodexGapSA'), ('v2', 'ClaudeOpus55_v2'), ('ParetoDP', 'CodexParetoDP'),
      ('v3', 'ClaudeOpus55_v3'), ('WindowDP', 'CodexWindowDP'), ('v4', 'ClaudeOpus55_v4'),
-     ('ChainDP（前次）', '../CodexChainDP/edge_before'), ('ChainDP', 'CodexChainDP'), ('AugmentDP*', 'CodexAugmentDP')]
+     ('ChainDP（前次）', '../CodexChainDP/edge_before'), ('ChainDP', 'CodexChainDP'), ('AugmentDP*', 'CodexAugmentDP'),
+     ('v5', 'ClaudeOpus55_v5'), ('CapDP', 'CodexCapDP'), ('v6', 'ClaudeOpus55_v6'),
+     ('CodexParallelChain', '../CodexParallelChain/final/edge_CodexParallelChain'), ('v7', 'ClaudeOpus55_v7')]
 V = [(l, d) for l, d in V if os.path.exists(os.path.join(HERE, d, 'record.csv'))]
 D = {d: {r['bench']: r for r in csv.DictReader(open(os.path.join(HERE, d, 'record.csv')))} for _, d in V}
 REF = {r['bench']: r for r in csv.DictReader(open(os.path.join(HERE, 'reference.csv')))}

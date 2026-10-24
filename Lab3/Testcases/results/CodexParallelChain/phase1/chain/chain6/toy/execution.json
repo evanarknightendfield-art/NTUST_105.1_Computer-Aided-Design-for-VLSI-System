@@ -1,0 +1,18 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "0-19",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/bin/dp_chain_diag",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/chain/chain6/toy/output",
+    "-v",
+    "--no-sa",
+    "--cap-time",
+    "0",
+    "--chain-time",
+    "6"
+  ],
+  "returncode": 0,
+  "wall_seconds": 0.5657889060094021
+}

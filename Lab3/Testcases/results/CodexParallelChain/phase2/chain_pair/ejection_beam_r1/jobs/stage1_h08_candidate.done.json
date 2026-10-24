@@ -1,0 +1,14 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py",
+  "ejection_beam_r1",
+  "--worker",
+  "stage1",
+  "h08",
+  "candidate"
+ ],
+ "returncode": 0,
+ "seconds": 61.49,
+ "finished": "Fri Oct 23 06:10:08 2026"
+}

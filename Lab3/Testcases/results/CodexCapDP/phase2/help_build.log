@@ -1,0 +1,14 @@
+[ 29%] Built target dp_core
+[ 51%] Built target window_test
+[ 51%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 51%] Built target optimizer_test
+[ 51%] Built target multirow_test
+[ 70%] Built target parallel_sa_test
+[ 70%] Built target chain_test
+[ 70%] Built target pool_test
+[ 90%] Built target cap_windows_test
+[ 87%] Built target capsearch_test
+[ 90%] Built target global_test
+[ 96%] Built target guard_test
+[100%] Linking CXX executable dp
+[100%] Built target dp

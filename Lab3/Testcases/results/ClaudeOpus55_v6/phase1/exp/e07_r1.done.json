@@ -1,0 +1,15 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py",
+  "--bin",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/bin/CodexCapDP/dp",
+  "--out",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/phase1/exp/e07_repeat/r1",
+  "--dp-args=--no-sa",
+  "Testcases/edge/e07_tworows/e07_tworows"
+ ],
+ "returncode": 0,
+ "seconds": 7.07,
+ "finished": "Thu Oct 22 04:49:58 2026"
+}

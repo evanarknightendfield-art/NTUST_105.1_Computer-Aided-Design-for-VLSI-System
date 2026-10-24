@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file,CMakeFiles/dp.dir/link.d CMakeFiles/dp.dir/src/main.cpp.o -o dp  libdp_core.a

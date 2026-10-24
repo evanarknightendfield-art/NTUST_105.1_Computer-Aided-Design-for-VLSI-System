@@ -1,0 +1,4 @@
+A: total 2367.0900 max 29.3900   B: total 2446.2100 max 26.8900
+cells: 300; same position 215, same row shifted 65, other row 20 (row deltas: {-2: 1, -1: 5, 1: 14})
+rows that differ: 12 of 17 used rows
+rows with the same cells but a different order: 0

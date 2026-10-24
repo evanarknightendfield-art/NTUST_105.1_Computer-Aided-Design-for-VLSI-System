@@ -1,0 +1,40 @@
+{
+  "protected_files_checked": 133,
+  "protected_changed": [],
+  "src_changed": [],
+  "completed_diagnostic_steps": 37,
+  "all_dp_legal": true,
+  "all_chain_legal": true,
+  "all_L2_legal": true,
+  "cell_accounting": [
+    {
+      "bench": "h01",
+      "materialized_raw_error": 0.0,
+      "cell_sum_error": 8.526512829121202e-14
+    },
+    {
+      "bench": "h04",
+      "materialized_raw_error": 0.0,
+      "cell_sum_error": -3.637978807091713e-12
+    },
+    {
+      "bench": "h06",
+      "materialized_raw_error": 0.0,
+      "cell_sum_error": 2.9685907065868378e-09
+    },
+    {
+      "bench": "h07",
+      "materialized_raw_error": 0.0,
+      "cell_sum_error": -1.0913936421275139e-11
+    },
+    {
+      "bench": "h08",
+      "materialized_raw_error": 0.0,
+      "cell_sum_error": -7.450580596923828e-09
+    }
+  ],
+  "L2_independent_checker_all_pass": true,
+  "report_missing_links": [],
+  "src_equals_v5": true,
+  "diagnosis_sha256": "a0b50ee42a46a201baad02e8ec58f881435e1d9c9c5328e8a991c59cf26e2c35"
+}

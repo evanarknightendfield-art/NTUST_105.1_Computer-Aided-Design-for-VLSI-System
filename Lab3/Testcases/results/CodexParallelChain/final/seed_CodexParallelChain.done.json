@@ -1,0 +1,17 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "Grader/tools/local_grade.py",
+  "AI_Solutions/CodexParallelChain",
+  "CodexParallelChain",
+  "Testcases/edge_seed6",
+  "--work",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/seed_CodexParallelChain",
+  "--timeout",
+  "600",
+  "--dp-args=-v"
+ ],
+ "returncode": 0,
+ "seconds": 589.33,
+ "finished": "Fri Oct 23 19:57:40 2026"
+}

@@ -1,0 +1,25 @@
+{
+  "src_sha256": "2fc4f106a3f84835e9f92afbf40d0befa0eb9f5ac7ab1160b58373fc96cf921a",
+  "results": {
+    "tests": {
+      "programs_passed": 11,
+      "records": 30,
+      "diagnostics": 0,
+      "seconds": 43.67873264697846
+    },
+    "tests_sanitized": {
+      "programs_passed": 11,
+      "records": 30,
+      "diagnostics": 0,
+      "seconds": 150.9361857472104
+    },
+    "tests_tsan": {
+      "programs_passed": 11,
+      "records": 30,
+      "diagnostics": 0,
+      "seconds": 78.54862014396349
+    }
+  },
+  "asan_options": "detect_leaks=0",
+  "full_leak_sanitizer": "pending outside sandbox"
+}

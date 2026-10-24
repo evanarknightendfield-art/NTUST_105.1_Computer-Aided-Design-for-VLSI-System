@@ -1,0 +1,314 @@
+{
+  "cap": [
+    {
+      "bench": "h01",
+      "old_probe": 32,
+      "old_full": 25,
+      "new_attempts": 8,
+      "new_feasible": 8,
+      "new_accepted": 2,
+      "old_candidate_mean": 0.3434746527600002,
+      "new_candidate_mean": 0.7890415,
+      "old_dp_mean": 0.0360452548000001,
+      "new_dp_mean": 0.396770125,
+      "old_cap_seconds": 10.49,
+      "new_cap_seconds": 6.4
+    },
+    {
+      "bench": "h04",
+      "old_probe": 7,
+      "old_full": 4,
+      "new_attempts": 6,
+      "new_feasible": 6,
+      "new_accepted": 2,
+      "old_candidate_mean": 1.0065395159999997,
+      "new_candidate_mean": 0.708468,
+      "old_dp_mean": 1.0022144819999999,
+      "new_dp_mean": 0.5819078333333333,
+      "old_cap_seconds": 4.55,
+      "new_cap_seconds": 4.45
+    },
+    {
+      "bench": "h06",
+      "old_probe": 7,
+      "old_full": 3,
+      "new_attempts": 2,
+      "new_feasible": 1,
+      "new_accepted": 1,
+      "old_candidate_mean": 1.3036727773333354,
+      "new_candidate_mean": 3.98935,
+      "old_dp_mean": 1.2862949583333343,
+      "new_dp_mean": 3.578729,
+      "old_cap_seconds": 4.61,
+      "new_cap_seconds": 4.39
+    },
+    {
+      "bench": "h07",
+      "old_probe": 7,
+      "old_full": 3,
+      "new_attempts": 3,
+      "new_feasible": 3,
+      "new_accepted": 1,
+      "old_candidate_mean": 1.238036028666668,
+      "new_candidate_mean": 1.479049,
+      "old_dp_mean": 1.2277176223333337,
+      "new_dp_mean": 1.2144913333333334,
+      "old_cap_seconds": 4.55,
+      "new_cap_seconds": 4.44
+    },
+    {
+      "bench": "h08",
+      "old_probe": 7,
+      "old_full": 2,
+      "new_attempts": 1,
+      "new_feasible": 1,
+      "new_accepted": 1,
+      "old_candidate_mean": 1.862768527,
+      "new_candidate_mean": 4.515737000000001,
+      "old_dp_mean": 1.84177927,
+      "new_dp_mean": 4.104058,
+      "old_cap_seconds": 4.62,
+      "new_cap_seconds": 4.52
+    }
+  ],
+  "extra_overruns": [
+    {
+      "bench": "e07_tworows",
+      "budget": 6.0,
+      "seconds": 6.245429,
+      "source": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/ts_new_stage1/e07_tworows/stderr_ts.tsv",
+      "excess": 0.24542899999999968
+    }
+  ],
+  "hpwl_protocol": {
+    "fixed": {
+      "rows": 216,
+      "passed": 216,
+      "groups": {
+        "holdout": {
+          "ClaudeOpus55_v4": {
+            "rows": 24,
+            "charged_mean": 22.476166666666668,
+            "sa_mean": 3.451585458333333,
+            "attempts_mean": 5000000.0
+          },
+          "ClaudeOpus55_v5": {
+            "rows": 24,
+            "charged_mean": 28.710666666666665,
+            "sa_mean": 3.7097515833333334,
+            "attempts_mean": 5000000.0
+          },
+          "CodexCapDP": {
+            "rows": 24,
+            "charged_mean": 28.195208333333333,
+            "sa_mean": 3.8131189166666664,
+            "attempts_mean": 5000000.0
+          }
+        },
+        "edge": {
+          "ClaudeOpus55_v4": {
+            "rows": 48,
+            "charged_mean": 8.263229166666667,
+            "sa_mean": 3.1121874375,
+            "attempts_mean": 4687500.0
+          },
+          "ClaudeOpus55_v5": {
+            "rows": 48,
+            "charged_mean": 11.850770833333334,
+            "sa_mean": 3.3464116875,
+            "attempts_mean": 4687500.0
+          },
+          "CodexCapDP": {
+            "rows": 48,
+            "charged_mean": 11.400208333333333,
+            "sa_mean": 3.4299165416666666,
+            "attempts_mean": 4687500.0
+          }
+        }
+      }
+    },
+    "equal": {
+      "rows": 144,
+      "passed": 144,
+      "groups": {
+        "holdout": {
+          "ClaudeOpus55_v4": {
+            "rows": 24,
+            "charged_mean": 28.251708333333333,
+            "sa_mean": 8.519052,
+            "attempts_mean": 18675240.375,
+            "budget_mean": 36.560125,
+            "max_excess": -1.7749999999999986
+          },
+          "CodexCapDP": {
+            "rows": 24,
+            "charged_mean": 33.37479166666667,
+            "sa_mean": 8.285716541666666,
+            "attempts_mean": 30892492.208333332,
+            "budget_mean": 36.560125,
+            "max_excess": 0.018999999999991246
+          }
+        },
+        "edge": {
+          "ClaudeOpus55_v4": {
+            "rows": 48,
+            "charged_mean": 14.38125,
+            "sa_mean": 8.615546354166666,
+            "attempts_mean": 22041969.520833332,
+            "budget_mean": 20.3225,
+            "max_excess": -1.8119999999999994
+          },
+          "CodexCapDP": {
+            "rows": 48,
+            "charged_mean": 16.684041666666666,
+            "sa_mean": 8.101719708333333,
+            "attempts_mean": 35004249.729166664,
+            "budget_mean": 20.3225,
+            "max_excess": 0.028999999999999915
+          }
+        }
+      }
+    },
+    "default": {
+      "rows": 216,
+      "passed": 216,
+      "groups": {
+        "holdout": {
+          "ClaudeOpus55_v4": {
+            "rows": 24,
+            "charged_mean": 40.28958333333333,
+            "sa_mean": 20.53085,
+            "attempts_mean": 56647603.5
+          },
+          "ClaudeOpus55_v5": {
+            "rows": 24,
+            "charged_mean": 53.901,
+            "sa_mean": 28.181671416666667,
+            "attempts_mean": 106757643.41666667
+          },
+          "CodexCapDP": {
+            "rows": 24,
+            "charged_mean": 53.49704166666667,
+            "sa_mean": 28.372582708333333,
+            "attempts_mean": 103079346.41666667
+          }
+        },
+        "edge": {
+          "ClaudeOpus55_v4": {
+            "rows": 48,
+            "charged_mean": 28.263,
+            "sa_mean": 22.46063427083333,
+            "attempts_mean": 75860321.54166667
+          },
+          "ClaudeOpus55_v5": {
+            "rows": 48,
+            "charged_mean": 36.22929166666667,
+            "sa_mean": 27.091075541666665,
+            "attempts_mean": 113391645.39583333
+          },
+          "CodexCapDP": {
+            "rows": 48,
+            "charged_mean": 36.180416666666666,
+            "sa_mean": 27.545744666666668,
+            "attempts_mean": 111436887.60416667
+          }
+        }
+      }
+    }
+  },
+  "fixed_v5_mismatches": [],
+  "seed4": {
+    "ClaudeOpus55_v4": {
+      "passed": 16,
+      "seconds": 440.49,
+      "max_over_chain": 1.032287534398323,
+      "disp_over_chain": 1.0038337224798513,
+      "hpwl_sa_over_chain": 1.003638961075932
+    },
+    "CodexChainDP": {
+      "passed": 16,
+      "seconds": 577.78,
+      "max_over_chain": 1.0,
+      "disp_over_chain": 1.0,
+      "hpwl_sa_over_chain": 1.0
+    },
+    "ClaudeOpus55_v5": {
+      "passed": 16,
+      "seconds": 578.61,
+      "max_over_chain": 0.9784168024965343,
+      "disp_over_chain": 1.0010932883730104,
+      "hpwl_sa_over_chain": 0.9970148330772605
+    },
+    "CodexCapDP": {
+      "passed": 16,
+      "seconds": 572.75,
+      "max_over_chain": 0.9617882700288206,
+      "disp_over_chain": 1.0006467800464671,
+      "hpwl_sa_over_chain": 0.9975196843433398
+    }
+  },
+  "large": {
+    "L1": {
+      "new": {
+        "bench": "L1",
+        "verdict": "PASS",
+        "status": "OK",
+        "seconds": "187.88",
+        "disp": "2458076746.474",
+        "max": "50495.975",
+        "hpwl_legal": "5582817653.1",
+        "hpwl_sa": "1741786725.8",
+        "legal_ok": "True",
+        "sa_ok": "True",
+        "missing": "",
+        "problems": ""
+      },
+      "historical_v5": {
+        "bench": "L1",
+        "verdict": "PASS",
+        "status": "OK",
+        "seconds": "186.29",
+        "disp": "2443509912.286",
+        "max": "50414.969",
+        "hpwl_legal": "5566331025.2",
+        "hpwl_sa": "1735415783.1",
+        "legal_ok": "True",
+        "sa_ok": "True",
+        "missing": "",
+        "problems": ""
+      },
+      "hpwl_change": 0.0036711333168928384
+    },
+    "L2": {
+      "new": {
+        "bench": "L2",
+        "verdict": "PASS",
+        "status": "OK",
+        "seconds": "199.42",
+        "disp": "2084119720.5399",
+        "max": "13479.34",
+        "hpwl_legal": "2822299357.5",
+        "hpwl_sa": "1724913056.0",
+        "legal_ok": "True",
+        "sa_ok": "True",
+        "missing": "",
+        "problems": ""
+      },
+      "historical_v5": {
+        "bench": "L2",
+        "verdict": "PASS",
+        "status": "OK",
+        "seconds": "215.77",
+        "disp": "2045892835.5999",
+        "max": "12381.58",
+        "hpwl_legal": "2633124437.5",
+        "hpwl_sa": "1669556062.0",
+        "legal_ok": "True",
+        "sa_ok": "True",
+        "missing": "",
+        "problems": ""
+      },
+      "hpwl_change": 0.033156714685990574
+    }
+  }
+}

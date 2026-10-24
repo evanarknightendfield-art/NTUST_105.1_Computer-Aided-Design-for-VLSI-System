@@ -1,0 +1,10 @@
+{
+ "command": [
+  "bash",
+  "Testcases/results/run_edge.sh",
+  "ClaudeOpus55_v7"
+ ],
+ "returncode": 0,
+ "seconds": 577.88,
+ "finished": "Sat Oct 24 06:12:59 2026"
+}

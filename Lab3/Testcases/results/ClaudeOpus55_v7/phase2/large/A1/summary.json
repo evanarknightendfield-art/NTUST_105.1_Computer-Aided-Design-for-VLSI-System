@@ -1,0 +1,82 @@
+{
+ "all/L1/v7": {
+  "seconds": 187.62,
+  "disp": 2433468926.186,
+  "max": 50491.364,
+  "hpwl": 1730755817.9,
+  "stage1": 105.7567664750386,
+  "extra_used": 5.719881,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "all/L1/cpc": {
+  "seconds": 187.47,
+  "disp": 2443663437.048,
+  "max": 50473.521,
+  "hpwl": 1727369915.4,
+  "stage1": 105.76021097198827,
+  "extra_used": 5.721585,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "all/L2/v7": {
+  "seconds": 198.62,
+  "disp": 1950206757.4999,
+  "max": 12446.44,
+  "hpwl": 1532054262.0,
+  "stage1": 106.89024833298754,
+  "extra_used": 6.647119,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "all/L2/cpc": {
+  "seconds": 199.33,
+  "disp": 2083944786.1199,
+  "max": 13419.61,
+  "hpwl": 1654333681.0,
+  "stage1": 107.51353282097261,
+  "extra_used": 6.16376,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "P2t2/L1/v7": {
+  "seconds": 187.93,
+  "disp": 2782535443.352,
+  "max": 50497.276,
+  "hpwl": 1764336813.7,
+  "stage1": 105.76583473104984,
+  "extra_used": 5.727809,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "P2t2/L1/cpc": {
+  "seconds": 187.57,
+  "disp": 2908256754.626,
+  "max": 50518.721,
+  "hpwl": 1756795588.7,
+  "stage1": 105.75870177702745,
+  "extra_used": 5.720564,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "P2t2/L2/v7": {
+  "seconds": 198.48,
+  "disp": 2014281261.3999,
+  "max": 12648.72,
+  "hpwl": 1506795577.5,
+  "stage1": 106.70532427902799,
+  "extra_used": 6.460546,
+  "extra_budget": 6.0,
+  "status": "OK"
+ },
+ "P2t2/L2/cpc": {
+  "seconds": 199.37,
+  "disp": 2087778084.8999,
+  "max": 13476.58,
+  "hpwl": 1654478198.5,
+  "stage1": 107.61465751798823,
+  "extra_used": 6.166403,
+  "extra_budget": 6.0,
+  "status": "OK"
+ }
+}

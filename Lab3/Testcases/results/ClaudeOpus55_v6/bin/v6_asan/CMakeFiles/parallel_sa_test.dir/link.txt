@@ -1,0 +1,1 @@
+/usr/bin/c++ -fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=undefined -O2 -g -DNDEBUG -Wl,--dependency-file,CMakeFiles/parallel_sa_test.dir/link.d CMakeFiles/parallel_sa_test.dir/tests/parallel_sa_test.cpp.o -o parallel_sa_test  libdp_core.a

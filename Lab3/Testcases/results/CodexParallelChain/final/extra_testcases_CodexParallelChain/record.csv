@@ -1,0 +1,4 @@
+bench,status,seconds,disp,max,hpwl_legal,hpwl_sa,t_read,t_legalize,t_pareto,t_windowdp,t_chain,t_global,t_sa,t_polish,t_stage1,t_stage2,sa_threads,sa_attempts,sa_internal_s,sa_failed_pct,sa_timeup,global_tries,global_accepted,global_unknown,sa_seconds
+ibm01,OK,25.41,23102891.1707,10427.027,87228318.0,87228318.0,0.035,17.789,0.101,1.529,5.895,,,,25.35016719996929,25.350731368002016,,,,,,0,0,0,
+ibm05,OK,38.98,1327889.533,199.918,11833694.5,11833694.5,0.102,30.204,0.412,2.361,5.877,,,,38.956044988997746,38.95777427201392,,,,,,0,0,0,
+toy,OK,1.17,43324.4,2004.4,104094.0,104094.0,0.001,0.393,0.0,0.076,0.65,,,,1.1207713769981638,1.120771603018511,,,,,,0,0,0,

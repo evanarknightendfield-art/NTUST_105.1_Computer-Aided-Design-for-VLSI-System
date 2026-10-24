@@ -1,0 +1,5 @@
+bench,status,seconds,disp,max,hpwl_legal,hpwl_sa,t_read,t_legalize,t_pareto,t_windowdp,t_chain,t_global,t_sa,t_polish,t_stage1,t_stage2,sa_threads,sa_attempts,sa_internal_s,sa_failed_pct,sa_timeup,global_tries,global_accepted,global_unknown,sa_seconds
+toy,OK,4.57,43456.2,1972.0,116766.0,116766.0,0.002,0.38,0.0,0.072,4.112,,,,4.565925657996559,4.56592583800375,,,,,,0,0,0,
+h01,OK,7.78,2358.69,29.43,25565.0,25565.0,0.003,2.024,0.0,1.018,4.709,,,,7.754178536008112,7.754188058999716,,,,,,0,0,0,
+e10_mixedsites,OK,5.73,62850.086,48.392,1228987.0,1228987.0,0.035,5.686,,,,,,,5.720934042998124,5.721464168003877,,,,,,0,0,0,
+e06_tallnarrow,OK,4.47,32198.583,31.27,2139497.0,2139497.0,0.014,1.305,0.015,0.682,2.428,,,,4.4449943430081476,4.445197427994572,,,,,,0,0,0,

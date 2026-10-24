@@ -1,0 +1,5 @@
+build_annealer: PASS
+build_capsearch: PASS
+build_chain: PASS
+build_global: PASS
+build_legalizer: PASS

@@ -1,0 +1,1 @@
+PASS: worker exceptions, completion barrier, idle workers, pool reuse

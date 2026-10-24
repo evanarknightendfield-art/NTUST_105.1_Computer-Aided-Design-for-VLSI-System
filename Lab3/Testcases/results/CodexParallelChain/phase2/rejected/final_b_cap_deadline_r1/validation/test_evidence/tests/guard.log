@@ -1,0 +1,4 @@
+warning: bad invariant broke an invariant, step skipped
+warning: exception failed (injected), step skipped
+warning: non-standard exception failed (non-standard exception), step skipped
+warning: worker failure failed (worker), step skipped

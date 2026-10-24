@@ -1,0 +1,12 @@
+ibm01: legal=True max=10325.5 total=23146452.2603 both=False
+ibm05: legal=True max=200.877 total=1330825.7204 both=True
+toy: legal=True max=2004.4 total=43324.4 both=True
+h01: legal=True max=31.07 total=2352.35 both=False
+h02: legal=True max=2507.215 total=464028.257 both=True
+h03: legal=True max=20.2061 total=7071.0046 both=True
+h04: legal=True max=237.85 total=180460.41 both=False
+h05: legal=True max=1337.305 total=1551495.938 both=True
+h06: legal=True max=435.19 total=886802.58 both=False
+h07: legal=True max=47.6585 total=109203.5194 both=False
+h08: legal=True max=28169.86 total=125530909.813 both=True
+{'passed': 11, 'both': 6, 'cases': 11, 'seconds': 261.1990397509653}

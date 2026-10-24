@@ -1,0 +1,40 @@
+{
+  "mode": "equal",
+  "out": "final/hpwl_equal_swap",
+  "v": [
+    [
+      "ClaudeOpus55_v6",
+      "../../../AI_Solutions/ClaudeOpus55_v6/src",
+      "final/ts_ClaudeOpus55_v6"
+    ],
+    [
+      "CodexCapDP",
+      "../../../AI_Solutions/CodexCapDP/src",
+      "final/ts_CodexCapDP"
+    ],
+    [
+      "ClaudeOpus55_v4",
+      "../../../AI_Solutions/ClaudeOpus55_v4/src",
+      "final/ts_ClaudeOpus55_v4"
+    ]
+  ],
+  "groups": [
+    "holdout",
+    "edge"
+  ],
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "moves": 5000000.0,
+  "benches": [
+    "e03_dense97",
+    "e06_tallnarrow",
+    "e07_tworows",
+    "e09_offgrid",
+    "e15_realistic",
+    "h04",
+    "h08"
+  ]
+}

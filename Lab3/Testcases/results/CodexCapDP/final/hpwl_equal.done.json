@@ -1,0 +1,23 @@
+{
+  "freeze": "b9d4ac797f3804a1eded6e4975ebfdb15dc2756e23212fcc5f5bcae0c67cc08b",
+  "command": [
+    "/home/evan/anaconda3/bin/python3",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/scripts/hpwl_compare.py",
+    "equal",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/hpwl_equal",
+    "--groups",
+    "holdout",
+    "edge",
+    "--v",
+    "ClaudeOpus55_v4",
+    "AI_Solutions/ClaudeOpus55_v4/src",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/phase1/ts_ClaudeOpus55_v4",
+    "--v",
+    "CodexCapDP",
+    "AI_Solutions/CodexCapDP/src",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/ts_new_stage1"
+  ],
+  "started": 1792580368.326943,
+  "returncode": 0,
+  "seconds": 1347.4890809059143
+}

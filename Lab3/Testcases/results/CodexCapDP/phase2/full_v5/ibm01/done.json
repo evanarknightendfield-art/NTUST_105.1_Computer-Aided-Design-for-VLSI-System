@@ -1,0 +1,14 @@
+{
+  "bench": "ibm01",
+  "group": "testcases",
+  "status": "OK",
+  "seconds": 25.658392220997484,
+  "disp": 23102846.5707,
+  "max": 10427.027,
+  "hpwl_legal": 87236196.0,
+  "hpwl_sa": 87236196.0,
+  "legal": true,
+  "max_ratio": 0.9855096339059047,
+  "total_ratio": 1.0032609224257438,
+  "both": true
+}

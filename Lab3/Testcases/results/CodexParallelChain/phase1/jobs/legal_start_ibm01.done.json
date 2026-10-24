@@ -1,0 +1,15 @@
+{
+ "command": [
+  "taskset",
+  "-c",
+  "16-19",
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py",
+  "--worker",
+  "start",
+  "ibm01"
+ ],
+ "returncode": 0,
+ "seconds": 21.39,
+ "finished": "Fri Oct 23 00:18:34 2026"
+}

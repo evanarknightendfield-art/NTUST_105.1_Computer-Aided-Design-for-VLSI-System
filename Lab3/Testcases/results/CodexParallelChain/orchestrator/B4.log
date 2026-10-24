@@ -1,0 +1,1750 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1659c-57b8-7e73-bb4b-82620c7fb887
+--------
+user
+接續 AI_Solutions/CodexParallelChain/：讀 WORK_STATE.md 的「下一步」與上一次等待的結果，從那裡繼續（階段 B）。
+規則見 AI_Solutions/ClaudeOpus55_v6/HANDOFF.md 第 0 節；保留／撤回條件、停損、B 完成的最後檢查見第 7 節。只讀需要的片段。回覆不超過 10 行。
+
+【非互動執行的規則（由協調者自動開 session，使用者在睡覺）】
+- 這是 codex exec 的單次 session，沙箱裡啟動的背景工作會在 session 結束時被殺掉（第 A 階段的 nohup 就是這樣死掉的）。
+  所以不要自己啟動超過 5 分鐘的計算；把要跑的東西寫成腳本，然後在最後回覆的最後幾行寫：
+    RUN: <從 Lab3 目錄執行的完整命令>        （可以多行，依序執行）
+    WAIT: <完成標記的路徑，相對 Lab3>
+  協調者會在沙箱外依序執行 RUN、等 WAIT 出現，再開下一個 session。命令不要加 taskset（計時程式不能綁 E-core；編譯已由 v6q 綁）。
+- 要跑的東西都在 5 分鐘內的話（例如 C++ 測試），直接在本 session 跑完，不要寫 RUN/WAIT。
+- ASan：LeakSanitizer 在沙箱內會因 ptrace 失敗，請用 ASAN_OPTIONS=detect_leaks=0 跑並註明；協調者會在沙箱外補跑完整的 ASan。
+- 階段 B 全部完成（HANDOFF.md 第 7 節）時，最後一行只寫：B_DONE
+- 不 commit、不加任何 AI 署名；不要問問題（沒有人會回答），自己依 HANDOFF.md 判斷並把判斷寫進 WORK_STATE.md。
+
+codex
+我會先讀取「下一步」、上次等待結果及 HANDOFF 指定段落，依階段 B 的保留與停損條件接續執行。
+
+exec
+/bin/bash -lc "pwd; rg --files -g AGENTS.md -g WORK_STATE.md -g HANDOFF.md -g '*DONE*' -g '*done*' AI_Solutions .agents 2>/dev/null" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+AI_Solutions/CodexChainDP/WORK_STATE.md
+AI_Solutions/CodexParallelChain/WORK_STATE.md
+AI_Solutions/CodexCapDP/WORK_STATE.md
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+AI_Solutions/ClaudeOpus55_v6/WORK_STATE.md
+
+exec
+/bin/bash -lc 'for p in /AGENTS.md /home/AGENTS.md /home/evan/AGENTS.md /home/evan/Desktop/AGENTS.md /home/evan/Desktop/NTUST/AGENTS.md /home/evan/Desktop/NTUST/105_1/AGENTS.md /home/evan/Desktop/NTUST/105_1/Class/AGENTS.md /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/AGENTS.md AGENTS.md AI_Solutions/AGENTS.md AI_Solutions/CodexParallelChain/AGENTS.md; do if [ -f "$p" ]; then printf '"'\\n%s\\n' \""'$p"; cat "$p"; fi; done
+rg -n '"'"'^#|下一步|WAIT|RUN|等待'"' AI_Solutions/CodexParallelChain/WORK_STATE.md AI_Solutions/ClaudeOpus55_v6/HANDOFF.md" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:1:# 交接：v6 之後的下一版（給 Codex，一份就夠，不必再讀其他報告）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:5:## 0. 規則（每個 session 都適用）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:16:2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:17:   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:23:## 1. 可以直接用的工具（`Testcases/results/ClaudeOpus55_v6/scripts/`）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:46:## 2. v6 現況（2026-10-22 同輪配對；細節 `Testcases/results/ClaudeOpus55_v6/final/summary.md`）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:62:## 3. 已確認的事實（不必重新量）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:74:## 4. 已經證明不值得做的（不要再試）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:86:## 5. 建議的下一版方向（依幅度 × 機會；先診斷再做）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:95:## 6. 驗收（建議）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:102:## 7. 階段 B（實作・調參）什麼時候算完成
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:104:**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:124:4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:1:# CodexParallelChain — WORK_STATE
+AI_Solutions/CodexParallelChain/WORK_STATE.md:3:- 本 session：只建立版本並啟動第一階段診斷；不等待、不查進度、不調參、不 commit。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:11:## 第一階段範圍
+AI_Solutions/CodexParallelChain/WORK_STATE.md:23:## 執行約定
+AI_Solutions/CodexParallelChain/WORK_STATE.md:37:## 第一階段執行歷史（已於 10-23 05:01 完成）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:39:歷史等待項目：scripts/diag.py，完成標記 phase1/ALL_DONE
+AI_Solutions/CodexParallelChain/WORK_STATE.md:42:- 本 session 到此結束，未等待完成、未查詢診斷進度。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:98:- 10-23 05:01 phase1/ALL_DONE：全部診斷完成，保護資料夾 SHA256 未變；等待下一個 session 分析。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:100:## 目前狀態：2026-10-23 phase1 診斷完成
+AI_Solutions/CodexParallelChain/WORK_STATE.md:110:- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:112:## 階段 B：SA 第 1/3 輪（2026-10-23，待訓練，尚未保留）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:122:- 本 session 不執行長時間訓練、不啟動背景工作。交由協調者：`python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json`。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:132:## 階段 B：SA 第 1/3 輪補足同輪配對（2026-10-23，等待中）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:143:- 等待中：協調者執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE`。完整訓練超過 5 分鐘，故交外部執行；已完成的小樣本工作會依 marker 跳過。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:144:- **下一步**：先讀上述 `ALL_DONE`、`compare.md` 與 `summary.json` 的 gate/reproducibility，將數據與判斷記回本檔。若 SA 閘門失敗，依原因決定第 2/3 輪或提前撤回，總計最多 3 輪；chain target/DP 與 ejection 尚未實作或判定。B 尚未完成，不凍結、不產生新 seed、不進 C、不 commit。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:148:## 階段 B：SA 保留；target windows 第 1/3 輪（2026-10-23）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:166:- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py target_parallel_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/ALL_DONE`。其餘訓練預計超過 5 分鐘，未在沙箱啟動。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:167:- **下一步**：先讀該 ALL_DONE、compare.md、summary.json 的 gates／budgets／實際 chain seconds，將本輪 target windows 判定寫回本檔。失敗時按主因決定第 2/3 輪或提前撤回（只撤回此輪 window 改動，保留 SA）；成功則記新保留點。接著處理尚未完成的 ejection 平行化／無效搜尋項；不可用 SA 已通過或 toy 短測宣告 B 完成。最終階段需修正既有 phase2_train.py 的歷史參考問題，讓 final_b 真正同輪配對，再做第 7 節所有檢查。
+
+exec
+/bin/bash -lc "sed -n '5,22p' AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+sed -n '102,145p' AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+sed -n '100,190p' AI_Solutions/CodexParallelChain/WORK_STATE.md
+cat Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/ALL_DONE
+cat Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/compare.md
+rg --files AI_Solutions/CodexParallelChain Testcases/results/CodexParallelChain/scripts" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+## 0. 規則（每個 session 都適用）
+
+**品質與流程**
+- 不 commit、任何檔案都不加 AI 署名。保護資料夾（不要改）：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6。
+- 新版本：`AI_Solutions/<NEW>/`，以 ClaudeOpus55_v6 為底複製 `src/ CMakeLists.txt Makefile tests/`；執行輸出全部在 `Testcases/results/<NEW>/`。
+- 調參只用 `Testcases/testcases`、`Testcases/holdout`；edge、edge_seed2~5 只當回歸。凍結（記 sha256）之後才產生新 seed。
+- 沒有數據就不宣稱進步：HPWL 至少 3 seeds、報平均與範圍，三種協定分開；新舊版本同一次配對重跑。
+- 計時中的程式一次一個（`timing.lock`）；分析與編譯 `taskset -c 16-19`。
+
+**省 token（上一輪 Codex 一個 session 用了 2,230 萬 input token：166 次呼叫、每次約 14 萬 context，其中一半的工具呼叫是在查進度）**
+1. **一個 session 只做一個階段**，做完就更新 WORK_STATE 並結束；下一階段開新 session（context 從小開始）。
+2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+   `timeout 600 bash -c 'until [ -e MARKER ]; do sleep 20; done'`，不要反覆 ls / tail / ps。
+3. **輸出都進檔案**，終端只印摘要：每個指令輸出 ≤ 40 行（`| tail -n 20`、`awk` 摘要）；不要 cat 整份 record.csv、log、.pl。
+4. **只讀需要的**：本檔 + 自己的 WORK_STATE.md + 要改的函式。原始碼用 `grep -n` 找函式再 `sed -n` 讀範圍。
+5. 不重跑已完成的步驟（每步 `.done.json`）。對話回覆 ≤ 15 行；完整內容寫在報告檔。
+
+## 7. 階段 B（實作・調參）什麼時候算完成
+
+**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+
+**單項的判定**（只看 testcases + holdout；`phase2_train.py` 的 compare.md 會列出 v6 同輪的數字）
+
+v6 在訓練集 11 筆的基準（對 ChainDP，`ClaudeOpus55_v6/final`）：雙條件 **8/11**、最大位移 GM **0.99604**、總位移 GM **0.99813**。
+Stage 1 的執行間變動：總位移最多約 0.11%、最大位移約 0.13%（ibm05）。
+
+| 改動 | 保留的條件（全部要成立） |
+|---|---|
+| chain 階段平行化 | 訓練集雙條件 ≥ 8/11；總位移 GM 比 v6 低（≥ 0.03%）；最大位移 GM 不比 v6 差超過 0.1%；逐筆最大不比 v6 差超過 0.2%；chain 階段的實際秒數不比 v6 多；h05、h06 在同 1.5 秒內的 chain 收穫至少達到 v6 給 3 秒時的水準（v6：h05 −0.29%、h06 −0.44%，HANDOFF 第 3 節） |
+| 平行 SA（只有診斷的 band 損失平均 ≥ 0.5% 才做） | 同次數協定（固定次數、自動執行緒、3 seeds）在 ibm01、ibm05、h06、h07、h08 的幾何平均比 v6 好 ≥ 0.3%，沒有一筆差超過 0.5%；固定次數下兩次執行結果逐位相同；TSan 0 警告 |
+| 其他小改動 | 有訓練集數據顯示改善，且上表的「不比 v6 差」都成立 |
+
+**停損**：同一項最多 3 輪「改程式 → 訓練」。第 3 輪仍不符合保留條件就撤回（把 src 還原到上一個保留點），數據寫進 WORK_STATE 的「試過沒用」。
+
+**B 結束前的最後檢查**（對最後一份原始碼，`phase2_train.py` 的 protocol.json 裡的 src_sha256 要等於目前 src）
+
+1. 訓練集 Stage 1 一次（`phase2_train.py final_b`），以上「不比 v6 差」都成立，額外步驟 0 超時。
+2. 有動 SA、polish 或時間分配時：`phase2_large.py final_b`（L1、L2 完整執行）全部合法，L1 < 240 秒、L2 < 600 秒。
+3. C++ 測試：一般 + ASan/UBSan 全過；動過平行程式加 TSan 0 警告。新功能各有一個測試。
+4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+
+所有改動都被撤回也算 B 完成：寫清楚數據，C 改成「不凍結新版、直接寫報告說明沒有改善」。
+## 目前狀態：2026-10-23 phase1 診斷完成
+
+- 已確認 phase1/ALL_DONE：26 chain、20 SA、2 toy；不重跑既有完成工作。
+- 已寫 Testcases/results/CodexParallelChain/diagnosis.md：三部分逐筆耗時／位移收益、band 平行資料結構與約 2–4 倍工作量假說、10 對 SA 比值／平均、toy 原因、第二階段排序與驗收。
+- 主樣本 default：target 3.312757 s / 9258.268240；ejection 9.545742 s / 1446.724840；post-DP 1.802126 s / 12303.715360。ejection 占時間 65.11%，收益 6.29%；不可直接以時間加速倍率推論品質收益。
+- SA 等權平均損失 1.339185% ≥ 0.5%；4/5 測資均值過門檻。h06 實際 5 threads，其餘 8；只有 2 seeds，僅診斷。
+- toy 兩版 cap 起點相同；v6 局部修補候選多因 total_budget 被拒，7 attempts／1 accepted，v5 51／3；最大位移 2004.4 對 1972.0。只描述，未修正。
+- 協調者已在沙箱外啟動 diag.py 並移除計時 worker 的 taskset；provenance/orchestrator_note.json 亦記載保護文件變動／基準更新，最終 unchanged 是相對更新後基準。
+- 第二階段優先序：SA 邊界改善 → target/DP 分 band → ejection 分 band與無效搜尋診斷 → toy 後續原因追蹤（需後續任務授權）。各項尚未實作。
+- 閱讀限制判斷：HANDOFF 只讀第 0 節；不擅自讀第 5／7 節。採使用者提供的 0.5% 門檻；驗收依第 0 節與已知範圍列出，第 7 節逐條對齊尚待後續允許閱讀時核對，不能宣告 B_DONE。
+- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。
+
+## 階段 B：SA 第 1/3 輪（2026-10-23，待訓練，尚未保留）
+
+- 本輪依 diagnosis.md 排序表先做 SA：訓練用五筆的診斷平均 band 損失 1.339185% ≥ 0.5%。chain target windows / ejection 分 band 尚未實作，後續仍須完成與各自判定；toy 不在本輪授權內。
+- 已閱讀 HANDOFF 第 0、4、6、7 節及本 WORK_STATE；不讀其他 HANDOFF 段落。原始碼只改本版本 src 與 tests；本檔為使用者明確要求的狀態紀錄例外。未改保護目錄、未 commit。
+- SA 單一設計：在既有同步點以完成批次 round 決定 band 分界，原本首分界 1 / 0.5 個 band 的二相循環改成 1 / 0.5 / 1.25 / 0.75 的四相循環，後續分界仍相隔一 band。使分界兩側可輪流處於同一 worker；最小列寬與尾 band 合併邏輯沿用。
+- 不改溫度、moves、sync 頻率、接受規則、時間限制、額外預算與執行緒選擇；未用 e08/e16 調參。這是待驗證假說，不宣稱品質改善。
+- 合併沿用不相交列／cell 寫入與 barrier；每批真實 HPWL 更新及 bestP 保留不變。main 的 guardedStep 仍於例外或不合法時退回 SA 前狀態，Pool 等全部 worker 結束才傳遞例外。
+- 新功能測試：parallel_sa_test 驗證四相分界的精確位置與週期、單 band、稀疏列／薄尾處理；固定工作量兩次的 seg/site、best、accepted、attempts 相同，並檢查合法性及 HPWL cache。固定工作量測試關閉 wall-clock starvation heuristic；另保留既有 starvation 與零時間測試。
+- tests/run_tests.py 新增互斥 --tsan 模式、編譯限定可用 CPU 16–19，執行測試不綁核。一般 10/10 PASS；sanitizer 結果於下方補記。
+- tag：sa_boundary_r1；目前 src_sha256（與 phase2_train.py 同演算法）：`4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。
+- 本 session 不執行長時間訓練、不啟動背景工作。交由協調者：`python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json`。
+- 下一 session 先讀 `phase2/train/sa_boundary_r1/compare.md` 並把數值寫回本檔。注意此腳本用 --no-sa，僅能判斷 Stage 1 回歸，不能單憑它保留 SA；且目前腳本 reference 指向既有 v6 final，並非同輪重跑，不可宣稱已滿足配對規定。
+- SA 保留閘門：ibm01、ibm05、h06、h07、h08 同合法起點、自動執行緒、固定次數、3 seeds，對同輪 v6 幾何平均改善 ≥ 0.3%、無單筆退步 > 0.5%；固定次數重跑逐位一致、TSan 0 警告。另須報固定 wall-time 配對品質；不得以 Stage 1 無變化冒充 SA 品質證據。
+- 每項最多 3 輪；本 SA 為第 1 輪候選，未有保留結論。三輪仍失敗即撤回到上一保留點（目前為原始 v6 src）；記入「試過沒用」。不能在本輪訓練返回前開始下一改動。
+- B 最後仍須 final_b Stage 1（protocol hash 等於最終 src）、如保留 SA 則 final_b L1/L2 合法且 <240/<600 秒、全套一般/ASan/UBSan/TSan、各項保留或撤回數據及 hash；目前不得宣告 B 完成。
+
+- 本輪測試完成：一般、ASan/UBSan、TSan 均 10/10 PASS（各 28 個 build/link/run 記錄）；TSan 0 警告，ASan/UBSan 無診斷。記錄路徑：Testcases/results/CodexParallelChain/{tests,tests_sanitized,tests_tsan}/records.json 與各測試 .log。ASan 在沙箱內設 ASAN_OPTIONS=detect_leaks=0，LeakSanitizer 尚待協調者沙箱外補跑，不宣稱已驗證洩漏。
+- 10-23 05:15 phase2/train/sa_boundary_r1/stage1 完成（258 秒）
+- 10-23 05:15 phase2/train/sa_boundary_r1 完成（預設）：見 phase2/train/sa_boundary_r1/compare.md
+
+## 階段 B：SA 第 1/3 輪補足同輪配對（2026-10-23，等待中）
+
+- 已讀上次 `phase2/train/sa_boundary_r1/stage1.done.json` 與 `compare.md`：258.37 秒、11/11 合法、雙條件 8/11、對 ChainDP 最大 GM 0.99605、總位移 GM 0.99833。歷史 v6 為 0.99604／0.99813；本輪 `--no-sa` 與歷史完整流程不等價，不能把 HPWL 2.00744 對 0.99013 當作 SA 退步，亦不能據此保留改動。既有 Stage 1 不重跑；最後仍需真正同輪 final_b。
+- 判斷：先補足本輪 SA 閘門，不消耗第 2 輪、不調參、不開始 chain 改動。src 與 tests 均未改；src hash 仍為 `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。保留／撤回結論尚未作成。
+- 新佇列 `Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py`；結果 `phase2/sa_pair/sa_boundary_r1/`。保存雙方 src 快照、共同 driver、二進位／輸入／合法起點 SHA256，v6 與候選交錯同輪執行，且交替先後順序。五筆訓練測資 ibm01、ibm05、h06、h07、h08；每筆 seeds 1、2、3，無 edge 調參。
+- 三個獨立 SA 協定：`fixed_single` 單執行緒 5M proposals；`fixed_auto` 自動執行緒每 band 3M（沿用診斷工作量）；`wall10_auto` 原預設工作量上限與自動執行緒、10 秒。全都共用合法起點、polish=0。這些是隔離 SA 的訓練協定，不冒稱最終 end-to-end fixed/equal/default。每項報三 seeds HPWL 平均／範圍與配對比值，協定不混算。
+- 固定次數兩協定各跑兩次，比對輸出 placement、完整 seg/site、浮點 initial/best/HPWL 與 attempts/accepted 的精確序列；只在固定次數 driver 關閉依速度推估的 starvation heuristic，雙方一致且不更動 production src。固定 auto 各 band 的取整會依 placement 造成小量 attempts 差異，完整記錄，不宣稱兩版本實際 proposals 逐一相等。
+- `summary.json` 預先固定判斷：固定 auto 五筆的三 seeds 平均配對比值之 GM ≤0.997，且所有單 seed 比值 ≤1.005（比逐筆均值不退步 >0.5% 更嚴格）；重跑一致與 TSan 仍獨立核對。無條件提前保留；失敗也保留數據供下一 session 判斷剩餘輪次。
+- 計時雙鎖：本版本 `timing.lock`＋唯讀開啟 v6 `timing.lock`，worker 不使用 taskset；只有 build 使用 v6q 的 CPU 16–19。每項 `.done.json` 可續跑；worker 最多 240 秒、每次另以 check_pl 驗證合法性。保護資料夾 hash 前後核對，全部成功才寫 ALL_DONE；出錯寫 FAILED.json。
+- 已完成雙版本編譯與輸入預檢：`phase2/sa_pair_prepare.log`；沒有啟動背景工作。既有一般／ASan/UBSan／TSan 測試對應同一份 src，無須本輪重跑；ASan 先前為 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 仍待沙箱外補跑。
+- 本 session 已直接跑完短驗證：ibm05 seed1 fixed_auto，雙方各兩次共 4 個 checkpoint；均合法、8 threads，各自重跑完整狀態逐位一致。v6 HPWL 10147365.5／23995921 attempts；候選 10093594.5／23995835 attempts。單 seed 僅驗證佇列與重現性，不能推論保留；詳見 `phase2/sa_pair_smoke.log` 與 `phase2/sa_pair/sa_boundary_r1/fixed_auto/ibm05/seed1/`。保護資料夾 hash 檢查通過。
+- 等待中：協調者執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE`。完整訓練超過 5 分鐘，故交外部執行；已完成的小樣本工作會依 marker 跳過。
+- **下一步**：先讀上述 `ALL_DONE`、`compare.md` 與 `summary.json` 的 gate/reproducibility，將數據與判斷記回本檔。若 SA 閘門失敗，依原因決定第 2/3 輪或提前撤回，總計最多 3 輪；chain target/DP 與 ejection 尚未實作或判定。B 尚未完成，不凍結、不產生新 seed、不進 C、不 commit。
+- 10-23 05:35 phase2/sa_pair/sa_boundary_r1 completed; see compare.md and summary.json
+
+
+## 階段 B：SA 保留；target windows 第 1/3 輪（2026-10-23）
+
+- 已讀上次 `phase2/sa_pair/sa_boundary_r1/{ALL_DONE,compare.md,summary.json}`。固定單緒 GM 1.00000000；固定自動緒 GM 0.99174693（改善 0.825307%）；wall10 自動緒 GM 0.99143710（改善 0.856290%）。五筆各 3 seeds 的平均與範圍見 compare.md，三協定不混算；wall10 不是完整 end-to-end。
+- **保留 SA 四相邊界**：固定自動緒改善 ≥0.3%，最差單 seed h07 +0.423939% <0.5%，固定工作量 60 組重跑逐位相同；該份 src 的 TSan 10/10 PASS、0 警告。判定與 src／測試證據已另存 `phase2/accepted/sa_boundary_r1/`；這是撤回用的保留點，不是階段 C 凍結。保留點 hash `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。既有 ASan 是 detect_leaks=0，未宣稱完整洩漏驗證。
+- 原碼核對修正：`optimizeWindowsDisp` 已有平行 row bands、移動邊界與 atomic memo clock，故本輪不重做 post-chain DP；先實作仍為序列的 `targetedWindowsDisp`。ejection 的 Search 平行化／無效搜尋仍未實作或判定，後續不能忽略。
+- **target windows 第 1/3 輪候選，尚未保留**：依原 anchor 順序收集來源／目標完整 segment 互不相交的 windows；遇到衝突先完成前批，再建下一個 window。每批至多 min(threads,8)，worker 只讀 DB 與 window 求解，主緒按原順序套用 RowMap 更新。涵蓋遠列及同列不相交 regions，不禁止跨 band 候選；沒有減少 roots、passes、時間或改 cap。
+- 完整 segment 保留包含 region 邊界 cell，避免只看 anchor 或 cell set 的漏判；Pool barrier 之後才更新，例外時既有 safe Placement rollback。固定工作量應與原序列語意等價；deadline 僅可能多完成已收集的一批，仍須以實際秒數驗收，不預先宣稱加速。
+- 新增 `TargetWindowStats`（attempted/solved/batches/maxBatch）與 `target_window_test`：獨立遠列並行、共享 segment／同列 region 衝突、60 個隨機 fixture，序列/4 workers/repeat 的 seg/site、接受與求解數相同，合法、總／最大不增加，以及零時間無動作。CMake 與 run_tests.py 都列入第 11 個測試。
+- 此候選 src hash：`e3ee1e62c7f1fdd8bc7ef3c48e3cab98ed0108ab06e93ea04045259c64a7371e`。一般測試 11/11 PASS；ASan/UBSan、TSan 結果後補。日志 `phase2/target_r1_tests.log` 與 tests/records.json。
+- 新佇列 `scripts/phase2_chain_pair.py target_parallel_r1`：同輪交錯 candidate/v6，11 筆訓練 Stage 1（--no-sa）；另配對 h05/h06 candidate 1.5 s 與 v6 3 s（cap 關閉）。保留 phase1 的相同 8 行 chain 計時插樁，移除後須與各自 production main 逐字一致，src 快照及編譯結果皆記 SHA256。HPWL 不作本輪宣稱；雙條件 8/11 用歷史 ChainDP 定義，其餘改善／退步／時間閘門均比較同輪 v6。
+- 佇列每筆獨立 .done.json、輸入與 protocol/hash 固定；check_pl 驗證合法、拒絕 TIMEOUT／guard fallback；同持本版本與 v6 timing.lock，計時 worker 不綁核，僅 v6q 編譯綁 CPU 16–19。保護目錄 hash 前後核對，成功才寫 ALL_DONE。準備階段修正 guard 日誌辨識，初版 metadata 已存 .precheck；當時尚無測資執行，不曾丟棄訓練結果。
+- 第 7 節 chain gate 原樣保留：雙條件 ≥8/11、總 GM≤0.9997、最大 GM≤1.001、逐筆最大≤1.002、chain 實秒總和不增加，h05/h06 1.5s 收益須至少達歷史 0.29%/0.44% 且不低於同輪 v6 3s。最多 3 輪；失敗可依資料提前撤回到上述 SA 保留點。B 最後仍須 final_b 同輪 Stage 1、對應最終 src hash、L1/L2 與完整測試；目前不能 B_DONE。
+- 10-23 05:44 phase2/chain_pair/target_parallel_r1/jobs/stage1_toy_v6 完成（1 秒）
+- 10-23 05:44 phase2/chain_pair/target_parallel_r1/jobs/stage1_toy_candidate 完成（1 秒）
+
+- 本輪驗證已完成：一般／ASan+UBSan／TSan 均 **11/11 PASS**，各 30 筆 build/link/run 記錄；TSan 0 警告，ASan/UBSan 0 診斷。ASan 沙箱內使用 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 仍待協調者沙箱外補跑。候選 src/hash 與測試證據封存於 `phase2/chain_pair/target_parallel_r1/test_evidence/verification.json` 及子目錄，後續測試不會覆蓋此輪證據。
+- 雙版本已編譯、protocol／src／script hash 相符；短測 toy 同輪配對已直接完成（2 個 .done.json）。兩版均合法、總位移 43324.4、最大 2004.4；chain 實秒 v6 0.013843／candidate 0.015304。此小樣本僅驗證流程，不宣稱加速或通過保留閘門。詳見 `phase2/target_r1_smoke.log` 與 `phase2/chain_pair/target_parallel_r1/stage1/toy/`；正式佇列會跳過此兩筆。
+- 已核對保護目錄 hash 未變；本輪只在 SA 保留點之上改 window.cpp/window.hpp，SA 邊界功能未變。沒有 commit、沒有新 seed、沒有進 C；session 結束時無背景工作。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py target_parallel_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/ALL_DONE`。其餘訓練預計超過 5 分鐘，未在沙箱啟動。
+- **下一步**：先讀該 ALL_DONE、compare.md、summary.json 的 gates／budgets／實際 chain seconds，將本輪 target windows 判定寫回本檔。失敗時按主因決定第 2/3 輪或提前撤回（只撤回此輪 window 改動，保留 SA）；成功則記新保留點。接著處理尚未完成的 ejection 平行化／無效搜尋項；不可用 SA 已通過或 toy 短測宣告 B 完成。最終階段需修正既有 phase2_train.py 的歷史參考問題，讓 final_b 真正同輪配對，再做第 7 節所有檢查。
+- 10-23 05:54 phase2/chain_pair/target_parallel_r1 completed; see compare.md and summary.json
+{
+  "protocol_sha256": "a6e36b43a8c375eafc08064a319c112107af2ec31d472de49548df2091cad3bd",
+  "finished": "Fri Oct 23 05:54:58 2026"
+}
+# Chain target windows: same-round Stage 1 pairs
+
+Ratio = candidate / v6. No SA; HPWL is not a quality gate in this report.
+
+| Case | Total ratio | Max ratio | Chain seconds candidate / v6 | Both vs historical ChainDP |
+|---|---:|---:|---:|:---:|
+| ibm01 | 1.00015385 | 1.00000000 | 1.384007 / 1.450737 | True |
+| ibm05 | 1.00000799 | 1.00000000 | 1.336789 / 1.369443 | True |
+| toy | 1.00000000 | 1.00000000 | 0.015304 / 0.013843 | True |
+| h01 | 1.00000000 | 1.00000000 | 0.059558 / 0.056060 | True |
+| h02 | 1.00000000 | 1.00000000 | 1.826305 / 1.870798 | True |
+| h03 | 1.00000000 | 1.00000000 | 2.580758 / 2.627096 | True |
+| h04 | 1.00053649 | 1.00260668 | 1.446571 / 1.449012 | False |
+| h05 | 1.00000000 | 1.00000000 | 1.450185 / 1.450986 | True |
+| h06 | 1.00357714 | 0.98244445 | 1.446123 / 1.454442 | False |
+| h07 | 0.99998274 | 1.00000000 | 1.372210 / 1.457566 | False |
+| h08 | 1.00029528 | 1.00000000 | 1.322027 / 1.358798 | True |
+
+Both: 8/11; total GM 1.00041344; max GM 0.99862747.
+Chain seconds: {'v6': 14.558779537000001, 'candidate': 14.239835988999996}.
+
+Candidate 1.5 s vs v6 3 s chain gain:
+- h05: candidate 0.261639%, v6 0.288901%, historical requirement 0.29%; pass False; actual chain seconds 1.447799 / 2.848087.
+- h06: candidate 0.364283%, v6 0.434934%, historical requirement 0.44%; pass False; actual chain seconds 1.444832 / 2.890684.
+
+Gates:
+- both_at_least_8: True
+- total_improved_003pct: False
+- max_gm_not_worse_01pct: True
+- every_max_not_worse_02pct: False
+- chain_seconds_not_more: True
+- h05_h06_gain: False
+Testcases/results/CodexParallelChain/scripts/final_report.py
+Testcases/results/CodexParallelChain/scripts/phase1_runs.py
+Testcases/results/CodexParallelChain/scripts/phase2_final.py
+Testcases/results/CodexParallelChain/scripts/phase2_stage2_sweep.py
+Testcases/results/CodexParallelChain/scripts/repair_compare.sh
+Testcases/results/CodexParallelChain/scripts/__pycache__/v6q.cpython-314.pyc
+Testcases/results/CodexParallelChain/scripts/phase1_tables.py
+Testcases/results/CodexParallelChain/scripts/diag.py
+Testcases/results/CodexParallelChain/scripts/stage1_phases.py
+Testcases/results/CodexParallelChain/scripts/v6q.py
+Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py
+Testcases/results/CodexParallelChain/scripts/phase1_exp3.py
+Testcases/results/CodexParallelChain/scripts/phase2_train.py
+Testcases/results/CodexParallelChain/scripts/phase1_exp2.py
+Testcases/results/CodexParallelChain/scripts/final_summary.py
+Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+Testcases/results/CodexParallelChain/scripts/phase2_large.py
+Testcases/results/CodexParallelChain/scripts/cap_headroom.py
+Testcases/results/CodexParallelChain/scripts/final_validate.py
+Testcases/results/CodexParallelChain/scripts/codex_after.sh
+Testcases/results/CodexParallelChain/scripts/toolbin/cmake
+Testcases/results/CodexParallelChain/scripts/phase1_exp.py
+Testcases/results/CodexParallelChain/scripts/compare_lg.py
+AI_Solutions/CodexParallelChain/CMakeLists.txt
+AI_Solutions/CodexParallelChain/Makefile
+AI_Solutions/CodexParallelChain/WORK_STATE.md
+AI_Solutions/CodexParallelChain/src/guard.hpp
+AI_Solutions/CodexParallelChain/src/chain.cpp
+AI_Solutions/CodexParallelChain/src/sa_bands.hpp
+AI_Solutions/CodexParallelChain/src/legalizer.hpp
+AI_Solutions/CodexParallelChain/src/legalizer.cpp
+AI_Solutions/CodexParallelChain/src/capsearch.cpp
+AI_Solutions/CodexParallelChain/src/global.cpp
+AI_Solutions/CodexParallelChain/src/annealer.hpp
+AI_Solutions/CodexParallelChain/src/capsearch.hpp
+AI_Solutions/CodexParallelChain/src/global.hpp
+AI_Solutions/CodexParallelChain/src/optimizer.hpp
+AI_Solutions/CodexParallelChain/src/chain.hpp
+AI_Solutions/CodexParallelChain/src/annealer.cpp
+AI_Solutions/CodexParallelChain/src/placedb.cpp
+AI_Solutions/CodexParallelChain/src/main.cpp
+AI_Solutions/CodexParallelChain/src/rowmap.hpp
+AI_Solutions/CodexParallelChain/src/window.cpp
+AI_Solutions/CodexParallelChain/src/placedb.hpp
+AI_Solutions/CodexParallelChain/src/optimizer.cpp
+AI_Solutions/CodexParallelChain/src/window.hpp
+AI_Solutions/CodexParallelChain/src/pool.hpp
+AI_Solutions/CodexParallelChain/tests/chain_test.cpp
+AI_Solutions/CodexParallelChain/tests/global_preserve_prototype.cpp
+AI_Solutions/CodexParallelChain/tests/multirow_test.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_window.cpp
+AI_Solutions/CodexParallelChain/tests/cap_chain_prototype.hpp
+AI_Solutions/CodexParallelChain/tests/cap_windows_test.cpp
+AI_Solutions/CodexParallelChain/tests/sa_bench2.cpp
+AI_Solutions/CodexParallelChain/tests/cap_windows_bench.cpp
+AI_Solutions/CodexParallelChain/tests/site_repair_bench.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_main.cpp
+AI_Solutions/CodexParallelChain/tests/pool_test.cpp
+AI_Solutions/CodexParallelChain/tests/sa_bench.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_capsearch.cpp
+AI_Solutions/CodexParallelChain/tests/global_test.cpp
+AI_Solutions/CodexParallelChain/tests/guard_test.cpp
+AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp
+AI_Solutions/CodexParallelChain/tests/optimizer_test.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_experiments.cpp
+AI_Solutions/CodexParallelChain/tests/target_window_test.cpp
+AI_Solutions/CodexParallelChain/tests/readpl.cpp
+AI_Solutions/CodexParallelChain/tests/window_test.cpp
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp
+AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp
+AI_Solutions/CodexParallelChain/tests/compare_methods.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic.hpp
+AI_Solutions/CodexParallelChain/tests/cap_chain_prototype.cpp
+AI_Solutions/CodexParallelChain/tests/global_preserve_prototype.hpp
+AI_Solutions/CodexParallelChain/tests/repair_compare.cpp
+AI_Solutions/CodexParallelChain/tests/diag_chaindp_global/global_diag.cpp
+AI_Solutions/CodexParallelChain/tests/run_tests.py
+AI_Solutions/CodexParallelChain/tests/diag_chaindp_global/driver.cpp
+
+exec
+/bin/bash -lc "rg -n 'struct |class |Search|ejection|Pool|improve|chain|for \\(' AI_Solutions/CodexParallelChain/src/chain.cpp | head -n 40
+" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+1:#include "chain.hpp"
+14:struct Candidate {
+20:class Search {
+52:        for (; it != list.end() && p.site[*it] < x + width; ++it) {
+64:        for (int r = target - 4; r <= target + 4; ++r)
+66:        for (int r = current - 2; r <= current + 2; ++r)
+72:        for (int r : rr) for (int s : db.rows[r].segs) {
+95:            for (int k = std::max(0, at - 4); k < std::min(int(list.size()), at + 4); ++k) {
+97:                for (int x : {a, b, a - w, b - w}) xx.push_back(std::clamp(x, lo, hi));
+101:            for (int x : xx) {
+111:                for (int j = 0; j < c.count; ++j) c.score -= 0.5 * oldDistance[c.blocker[j]];
+122:        // prevents an attractive but infeasible chain from hiding every exit.
+143:        for (const auto& c : choices) {
+150:            for (int j = 0; j < c.count; ++j) {
+165:            for (int j = 0; j < c.count; ++j) rows.insert(c.blocker[j], oldBS[j], oldBX[j]);
+171:    Search(const PlaceDB& d, Placement& q, const ChainOptions& o)
+175:        for (int v : db.movable) {
+179:        for (int pass = 0; pass < opt.passes && !expired(); ++pass) {
+188:            for (int root : order) {
+200:                    // Essential: every successful chain refreshes its touched
+203:                    for (int v : path) {
+212:                std::fprintf(stderr, "[chain] pass %d: %ld chains, total %.6f -> %.6f, max %.6f -> %.6f\n",
+221:ChainResult chainDisplacement(const PlaceDB& db, Placement& p, const ChainOptions& opt) {
+224:        throw std::runtime_error("invalid chain options");
+226:    if (!checkLegal(db, p).empty()) throw std::runtime_error("chain search requires a legal input");
+230:        auto result = Search(db, p, opt).run();
+233:            throw std::runtime_error("chain invariant failed");
+235:            std::fprintf(stderr, "[chain] %ld roots, %ld nodes, %ld candidates, %ld accepted, longest %d, "
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+import json
+p='Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/summary.json'
+x=json.load(open(p));print('keys:',list(x));print(json.dumps({k:v for k,v in x.items() if k in ['gates','budgets','chain_seconds','budget_checks']},indent=2))
+PY
+rg -n '"'^def |''^class |argparse|add_argument'"' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+keys: ['rows', 'both', 'total_gm', 'max_gm', 'chain_seconds', 'budgets', 'gates', 'all_numeric_gates', 'note']
+{
+  "chain_seconds": {
+    "v6": 14.558779537000001,
+    "candidate": 14.239835988999996
+  },
+  "budgets": [
+    {
+      "bench": "h05",
+      "candidate_gain_fraction": 0.0026163885558340002,
+      "paired_v6_3s_gain_fraction": 0.002889012180494453,
+      "historical_required": 0.0029,
+      "candidate_seconds": 1.4477993590000002,
+      "v6_seconds": 2.848087014,
+      "pass_gate": false
+    },
+    {
+      "bench": "h06",
+      "candidate_gain_fraction": 0.0036428254847850317,
+      "paired_v6_3s_gain_fraction": 0.004349342261817828,
+      "historical_required": 0.0044,
+      "candidate_seconds": 1.4448321700000015,
+      "v6_seconds": 2.89068434,
+      "pass_gate": false
+    }
+  ],
+  "gates": {
+    "both_at_least_8": true,
+    "total_improved_003pct": false,
+    "max_gm_not_worse_01pct": true,
+    "every_max_not_worse_02pct": false,
+    "chain_seconds_not_more": true,
+    "h05_h06_gain": false
+  }
+}
+3:import argparse
+28:def dump(path, value):
+35:def src_hash(path):
+39:def protocol(tag):
+51:def prepare(d, tag):
+80:def worker(d, mode, bench, version):
+105:def gm(values):
+109:def ratio(a, b):
+113:def summarize(d):
+177:def run(d, tag):
+210:    parser = argparse.ArgumentParser(description=__doc__)
+211:    parser.add_argument('tag')
+212:    parser.add_argument('--prepare', action='store_true')
+213:    parser.add_argument('--worker', nargs=3)
+
+codex
+target windows 首輪未過保留條件：總位移 GM 退步 0.0413%、h04 最大位移退步 0.2607%，h05／h06 收益也不足。我會撤回此項、保留已通過的 SA，接著檢查 ejection 的無效搜尋。
+
+exec
+/bin/bash -lc "sed -n '1,40p' AI_Solutions/CodexParallelChain/src/chain.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#include "chain.hpp"
+#include "rowmap.hpp"
+#include <algorithm>
+#include <array>
+#include <chrono>
+#include <cmath>
+#include <cstdio>
+#include <queue>
+#include <stdexcept>
+#include <tuple>
+
+namespace {
+constexpr double EPS = 1e-7;
+struct Candidate {
+    int seg = 0, site = 0, count = 0;
+    std::array<int, 2> blocker{{-1, -1}};
+    double distance = 0, score = 0;
+};
+
+class Search {
+    const PlaceDB& db;
+    Placement& p;
+    const ChainOptions& opt;
+    RowMap rows;
+    std::vector<char> locked;
+    std::vector<double> oldDistance;
+    std::priority_queue<std::pair<double, int>> maximum;
+    std::vector<int> path;
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+    int holeSeg = 0, holeSite = 0, remaining = 0;
+    double cap = 0, rootDistance = 0;
+    ChainResult stats;
+
+    bool expired() {
+        if (std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count() >= opt.seconds)
+            stats.timedOut = true;
+        return stats.timedOut;
+    }
+    double distance(int v, int s, int x) const {
+        const auto& sg = db.segs[s];
+
+exec
+/bin/bash -lc "sed -n '41,80p' AI_Solutions/CodexParallelChain/src/chain.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '121,160p' AI_Solutions/CodexParallelChain/src/chain.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        const auto& n = db.nodes[v];
+        return std::abs(sg.x0 + x * sg.sp - n.gx) + std::abs(sg.y - n.gy);
+    }
+
+    // A position is usable iff it touches at most maxBlockers unlocked cells.
+    // Pending cells are absent from RowMap; committed ancestors are locked.
+    bool blockers(int s, int x, int width, Candidate& c) const {
+        const auto& list = rows.cells(s);
+        auto it = std::lower_bound(list.begin(), list.end(), x,
+                                   [&](int v, int a) { return p.site[v] < a; });
+        if (it != list.begin()) --it;
+        for (; it != list.end() && p.site[*it] < x + width; ++it) {
+            int v = *it;
+            if (p.site[v] + db.sitesOf(v, db.segs[s]) <= x) continue;
+            if (locked[v] || c.count == opt.maxBlockers) return false;
+            c.blocker[c.count++] = v;
+        }
+        return true;
+    }
+
+    std::vector<Candidate> candidates(int v, bool root, int placed, int pending) {
+        std::vector<int> rr;
+        int target = db.nearestRow(db.nodes[v].gy), current = db.segs[p.seg[v]].row;
+        for (int r = target - 4; r <= target + 4; ++r)
+            if (r >= 0 && r < int(db.rows.size())) rr.push_back(r);
+        for (int r = current - 2; r <= current + 2; ++r)
+            if (r >= 0 && r < int(db.rows.size())) rr.push_back(r);
+        rr.push_back(db.segs[holeSeg].row);
+        std::sort(rr.begin(), rr.end());
+        rr.erase(std::unique(rr.begin(), rr.end()), rr.end());
+        std::vector<Candidate> result;
+        for (int r : rr) for (int s : db.rows[r].segs) {
+            if (expired()) return {};
+            const auto& sg = db.segs[s];
+            const auto& n = db.nodes[v];
+            int w = db.sitesOf(v, sg);
+            if (std::abs(n.h - sg.height) > 1e-6 || w < 1 || w > sg.numSites) continue;
+            double reach = cap - std::abs(sg.y - n.gy);
+            if (reach < -EPS) continue;
+            // Clamp in floating point before converting: distant global
+
+ succeeded in 0ms:
+        // Retain the best empty positions as well as the occupied beam. This
+        // prevents an attractive but infeasible chain from hiding every exit.
+        int occupied = 0, empty = 0;
+        result.erase(std::remove_if(result.begin(), result.end(), [&](const Candidate& c) {
+            return c.count ? ++occupied > opt.branches : ++empty > std::max(4, opt.branches / 2);
+        }), result.end());
+        return result;
+    }
+
+    // Every cell in pending is absent from RowMap, but retains its original
+    // coordinates in p until placed. On failure this entire state is restored.
+    bool dfs(std::vector<int> pending, double delta) {
+        if (remaining == 0 || expired()) return false;
+        --remaining; ++stats.nodes;
+        // Wider pending cells have fewer exits; place them before narrow ones.
+        auto next = std::max_element(pending.begin(), pending.end(), [&](int a, int b) {
+            return std::tie(db.nodes[a].w, oldDistance[a], a) < std::tie(db.nodes[b].w, oldDistance[b], b);
+        });
+        int v = *next;
+        pending.erase(next);
+        int oldS = p.seg[v], oldX = p.site[v];
+        auto choices = candidates(v, path.empty(), int(path.size()), int(pending.size()));
+        for (const auto& c : choices) {
+            if (expired()) break;
+            double value = delta + c.distance - oldDistance[v];
+            if (pending.empty() && c.count == 0 && value >= -EPS) continue;
+            if ((!pending.empty() || c.count) && remaining == 0) continue;
+            std::array<int, 2> oldBS{}, oldBX{};
+            std::vector<int> rest = pending;
+            for (int j = 0; j < c.count; ++j) {
+                int b = c.blocker[j];
+                oldBS[j] = p.seg[b]; oldBX[j] = p.site[b];
+                rows.remove(b); rest.push_back(b);
+            }
+            rows.insert(v, c.seg, c.site);
+            locked[v] = 1; path.push_back(v);
+            bool found = rest.empty() ? value < -EPS : dfs(std::move(rest), value);
+            locked[v] = 0;
+            if (found) {
+                if (c.count > 1) ++stats.multiBlocker;
+
+exec
+/bin/bash -lc "sed -n '81,120p' AI_Solutions/CodexParallelChain/src/chain.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+            // placements must not overflow a site index.
+            double low = std::max(0.0, (n.gx - reach - sg.x0) / sg.sp);
+            double high = std::min(double(sg.numSites - w), (n.gx + reach - sg.x0) / sg.sp);
+            if (low > high + 1e-9) continue;
+            int lo = int(std::ceil(low - 1e-9)), hi = int(std::floor(high + 1e-9));
+            if (lo > hi) continue;
+            double ideal = std::clamp((n.gx - sg.x0) / sg.sp, double(lo), double(hi));
+            std::vector<int> xx{int(std::floor(ideal)), int(std::ceil(ideal)), lo, hi};
+            if (s == holeSeg) xx.push_back(std::clamp(holeSite, lo, hi));
+            const auto& list = rows.cells(s);
+            int at = int(std::lower_bound(list.begin(), list.end(), ideal,
+                         [&](int u, double x) { return p.site[u] < x; }) - list.begin());
+            // The ideal site and nearby obstacle edges expose both gaps and
+            // useful unequal-width exchanges without scanning every site.
+            for (int k = std::max(0, at - 4); k < std::min(int(list.size()), at + 4); ++k) {
+                int u = list[k], a = p.site[u], b = a + db.sitesOf(u, sg);
+                for (int x : {a, b, a - w, b - w}) xx.push_back(std::clamp(x, lo, hi));
+            }
+            std::sort(xx.begin(), xx.end());
+            xx.erase(std::unique(xx.begin(), xx.end()), xx.end());
+            for (int x : xx) {
+                if (s == p.seg[v] && x == p.site[v]) continue;
+                double d = distance(v, s, x);
+                if (d > cap + EPS || (root && d >= rootDistance - EPS)) continue;
+                Candidate c;
+                c.seg = s; c.site = x; c.distance = d;
+                if (!blockers(s, x, w, c) || placed + 1 + pending + c.count > opt.depth) continue;
+                // This optimistic score only orders candidates; it never
+                // certifies infeasibility or substitutes for the final delta.
+                c.score = d - oldDistance[v];
+                for (int j = 0; j < c.count; ++j) c.score -= 0.5 * oldDistance[c.blocker[j]];
+                result.push_back(c);
+            }
+        }
+        stats.candidates += long(result.size());
+        auto less = [](const Candidate& a, const Candidate& b) {
+            return std::tie(a.score, a.distance, a.count, a.seg, a.site) <
+                   std::tie(b.score, b.distance, b.count, b.seg, b.site);
+        };
+        std::sort(result.begin(), result.end(), less);
+
+exec
+/bin/bash -lc "sed -n '161,200p' AI_Solutions/CodexParallelChain/src/chain.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+                return true;
+            }
+            path.pop_back();
+            rows.remove(v); p.seg[v] = oldS; p.site[v] = oldX;
+            for (int j = 0; j < c.count; ++j) rows.insert(c.blocker[j], oldBS[j], oldBX[j]);
+        }
+        return false;
+    }
+
+public:
+    Search(const PlaceDB& d, Placement& q, const ChainOptions& o)
+        : db(d), p(q), opt(o), rows(d, q), locked(d.nodes.size()), oldDistance(d.nodes.size()) {}
+
+    ChainResult run() {
+        for (int v : db.movable) {
+            oldDistance[v] = displacementOf(db, p, v);
+            maximum.push({oldDistance[v], v});
+        }
+        for (int pass = 0; pass < opt.passes && !expired(); ++pass) {
+            const auto before = displacement(db, p);
+            auto order = db.movable;
+            int count = std::min(int(order.size()), opt.roots);
+            std::partial_sort(order.begin(), order.begin() + count, order.end(), [&](int a, int b) {
+                return oldDistance[a] != oldDistance[b] ? oldDistance[a] > oldDistance[b] : a < b;
+            });
+            order.resize(count);
+            long accepted = stats.accepted;
+            for (int root : order) {
+                if (expired()) break;
+                ++stats.roots;
+                rootDistance = oldDistance[root];
+                if (rootDistance < EPS) continue;
+                while (!maximum.empty() && maximum.top().first != oldDistance[maximum.top().second]) maximum.pop();
+                cap = maximum.top().first;
+                holeSeg = p.seg[root]; holeSite = p.site[root]; remaining = opt.expansions;
+                path.clear(); rows.remove(root);
+                if (dfs({root}, 0)) {
+                    ++stats.accepted;
+                    stats.longest = std::max(stats.longest, int(path.size()));
+                    // Essential: every successful chain refreshes its touched
+
+exec
+/bin/bash -lc "sed -n '201,245p' AI_Solutions/CodexParallelChain/src/chain.cpp | head -n 40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+                    // cells BEFORE another root computes a delta. A pass-old
+                    // cache can otherwise accept a worsening subsequent move.
+                    for (int v : path) {
+                        oldDistance[v] = displacementOf(db, p, v);
+                        maximum.push({oldDistance[v], v});
+                        ++stats.refreshed;
+                    }
+                } else rows.insert(root, holeSeg, holeSite);
+            }
+            const auto after = displacement(db, p);
+            if (opt.verbose)
+                std::fprintf(stderr, "[chain] pass %d: %ld chains, total %.6f -> %.6f, max %.6f -> %.6f\n",
+                             pass, stats.accepted - accepted, before.total, after.total, before.max, after.max);
+            if (stats.accepted == accepted) break;
+        }
+        return stats;
+    }
+};
+}  // namespace
+
+ChainResult chainDisplacement(const PlaceDB& db, Placement& p, const ChainOptions& opt) {
+    if (opt.passes < 0 || opt.depth < 1 || opt.depth > 32 || opt.branches < 1 || opt.expansions < 1 ||
+        opt.roots < 1 || opt.maxBlockers < 1 || opt.maxBlockers > 2 || !std::isfinite(opt.seconds) || opt.seconds < 0)
+        throw std::runtime_error("invalid chain options");
+    if (db.movable.empty() || opt.passes == 0 || opt.seconds == 0) return {};
+    if (!checkLegal(db, p).empty()) throw std::runtime_error("chain search requires a legal input");
+    const Placement safe = p;
+    const auto before = displacement(db, p);
+    try {
+        auto result = Search(db, p, opt).run();
+        const auto after = displacement(db, p);
+        if (!checkLegal(db, p).empty() || after.total > before.total + 1e-5 || after.max > before.max + 1e-6)
+            throw std::runtime_error("chain invariant failed");
+        if (opt.verbose)
+            std::fprintf(stderr, "[chain] %ld roots, %ld nodes, %ld candidates, %ld accepted, longest %d, "
+                         "%ld multi-blocker placements%s\n", result.roots, result.nodes, result.candidates,
+                         result.accepted, result.longest, result.multiBlocker, result.timedOut ? " (time limit)" : "");
+        return result;
+    } catch (...) {
+        p = safe;
+
+exec
+/bin/bash -lc "sed -n '1,40p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py
+" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#!/usr/bin/env python3
+"""Checkpointed same-round Stage 1 and chain-budget pairs; no SA or edge tuning."""
+import argparse
+import csv
+import fcntl
+import hashlib
+import json
+import math
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+
+sys.dont_write_bytecode = True
+from v6q import LAB, R, PY, V5S, Queue, build, note
+from diag import original_prefix, prefix_hashes, sha, verify_protected, parse_chain
+
+SELF = Path(__file__).resolve()
+SOLUTION = LAB / 'AI_Solutions' / R.name
+BASE = LAB / 'AI_Solutions/ClaudeOpus55_v6'
+CASES = ['ibm01', 'ibm05', 'toy'] + [f'h{i:02d}' for i in range(1, 9)]
+MODES = {'stage1': '--no-sa', 'chain15': '--no-sa --cap-time 0 --chain-time 1.5',
+         'chain30': '--no-sa --cap-time 0 --chain-time 3'}
+
+
+def dump(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + '.tmp')
+    tmp.write_text(json.dumps(value, indent=2) + '\n')
+    tmp.replace(path)
+
+
+def src_hash(path):
+    return hashlib.sha256(b''.join(p.read_bytes() for p in sorted(path.iterdir()))).hexdigest()
+
+
+def protocol(tag):
+    return dict(tag=tag, script_sha256=sha(SELF), src_sha256=src_hash(SOLUTION / 'src'),
+
+exec
+/bin/bash -lc "rg -n 'ejection|第二階段|band|無效' Testcases/results/CodexParallelChain/diagnosis.md | tail -n 20
+cat AI_Solutions/CodexParallelChain/src/chain.hpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '41,80p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+1:# CodexParallelChain：phase1 診斷與第二階段計畫
+22:|default|ejection_chains|9.545742|65.11%|1446.724840|6.29%|
+25:|chain6|ejection_chains|34.741726|80.50%|3584.482840|11.32%|
+34:|測資|設定|target windows|ejection chains|post-chain DP|整段 s|整段 ΔΣd / 起點 %|
+63:default 的 target + DP 占時間 34.89%，提供收益 93.71%；ejection 占時間 65.11%，收益只有 6.29%。ejection 的 1,446.72484 收益中 h05 貢獻 1,357.138（約 93.81%），機會集中。chain6 的額外總收益主要在 ibm01、h05、h06；ibm05 雖相對倍數大，絕對量仍小。h08 沒有額外收益，h07 甚至由 195.99064 降至 194.59712，表示限時路徑與階段分配會改變結果。toy/h01 延長時間也無收益。
+65:### 可分 band 的部分、共用結構與限制
+69:|target windows|來源與目標 region 都落在同一 band 的不相交 windows；跨 band 配對需另批排程|唯讀 PlaceDB 可共用；Placement 的 seg/site 與 RowMap 的 occupancy/cell lists 會更新。targetedWindowsDisp 直接配對目前位置與全域目標所在 row，不能只以 anchor 所在 band 判定獨立。|
+70:|ejection chains|整條 blocker/候選搜尋及移動範圍均屬同一 band 的 root 搜尋|Search 持有 Placement&、RowMap、locked、oldDistance、maximum priority_queue、path、holeSeg/holeSite/remaining、cap/rootDistance、stats。每個 worker 要有搜尋暫存／局部 row map；不能共用一個可變 Search。全域 maximum/cap 需輪次快照與合併重驗，跨 band chain 需序列或有序鎖定。|
+71:|post-chain DP|不重疊的 2/3-row windows；分顏色輪次或 band 內工作，邊界另做|Placement、RowMap 及 stage1Memo（WindowMemo.mod、seen、seg/site、clock、cap 等）有相依更新。memo 分片或 worker 私有，再於 barrier 同步／失效；不能多執行緒共用目前 clock/cache 更新流程。|
+73:建議共同設計：唯讀 PlaceDB + 固定輪次 Placement 快照；worker 持有局部占用結構、候選與 DP 暫存；依 cell/segment 寫入集合偵測衝突，固定順序合併，重算合法性、總位移、最大位移後才接受。跨 band 操作必須保留補做機制；直接禁止會犧牲搜尋空間。現有 guarded 的整份 Placement rollback 也不能在其他 worker 正寫入時執行。
+77:- 若只平行 ejection（default 時間占 65.11%），Amdahl 理想上限：4 workers 約 1.95 倍、8 workers 約 2.32 倍，尚未扣同步、負載不均與邊界損失。
+79:- 以上未量測可平行比例與 band 負載，沒有吞吐保證。SA 現有 3.41–4.86 倍的單／多執行緒耗時比只能說機器有平行機會，不能當 chain 的 speedup。toy/h01 已耗盡候選，估計倍數不適用。
+80:- 驗證要新增 attempted roots、nodes、candidates、solved windows 等工作計數；CSV 的 work 多為 accepted moves/chains，不能把接受數直接當吞吐。固定 1.5 秒比較工作量、實際 wall time 與品質；chain6 只能提供延長搜尋的參考，不能代表分 band 演算法。
+82:## 2. band 邊界損失
+110:h06 實際為 5 threads，其餘 8 threads；不可統稱全是 8 bands。single 少做 0–67 attempts，相對約 1,500–2,400 萬次可忽略但已明列，並非完全同次數。auto/serial 的 RNG 路徑、溫度分配及 band 限制均不同，因此 1.339185% 是「band 模式相關的品質差」，尚不能把全部差額因果歸到邊界；下一階段需要固定 band 算法、只開關邊界交換的消融。只有 2 seeds，本輪僅診斷，不作正式 HPWL 進步宣稱。
+120:## 4. 第二階段計畫：依「幅度 × 機會」排序
+126:|1|SA 邊界交換／重分 band：平均 1.339% 品質空間，4/5 測資超過門檻，機會最廣|在同步點做鄰 band 邊界交換或移動分界；以單一設計做消融，避免同時改溫度、moves、接受規則|同合法起點、同次數及固定 wall-time 各自配對至少 3 seeds；報五筆各自平均／範圍、attempts、時間與合法性。以 auto 原版為直接基線，serial 作診斷參照；目標平均差距降至 <0.5%，且固定時間 HPWL 不因同步成本變差。未達標則保留否定結果，不宣告改善。|
+127:|2|target windows + post-chain DP 分 band：default 占收益 93.71%，有可分割 windows；同時存在跨 band 依賴|先做不重疊 windows 的批次排程與 worker 私有 memo，再保留跨 band 補做；保持總位移／最大位移接受約束|先以已知移動集合驗證衝突、row occupancy、memo 失效與 rollback；單 worker 與原版固定工作量對照，再驗證多 worker 全部合法。固定 1.5 秒報 solved/attempted windows 倍率與逐筆位移，完整 default 預算另跑配對；至少不能用降低覆蓋率換吞吐。|
+128:|3|ejection 搜尋分 band／減少無效搜尋：占 65.11% 時間，但收益集中 h05；延長預算提升有限|先加 nodes/candidates/失敗原因計數；worker 隔離 Search，限定完整 touched set、跨界序列補做，global max 在 barrier 合併。是否提前停低收益搜尋需獨立消融|固定工作量核對回滾、所有 blocker、最大位移與合法性；1.5 秒評估 attempted nodes/roots 的實際倍數（約 2–4 倍為假說），並逐筆比較總／最大位移。重點觀察 h05/h06，但接受判定用全部 testcases+holdout；不能以 6 秒收益冒充 1.5 秒成果。|
+#pragma once
+#include "placedb.hpp"
+
+struct ChainOptions {
+    int passes = 2;
+    int depth = 10;         // maximum number of distinct cells in one complete chain
+    int branches = 12;      // occupied candidates retained at each search node
+    int expansions = 160;  // maximum search nodes per root
+    int roots = 12000;      // worst-displaced roots inspected per pass
+    int maxBlockers = 2;    // 1: path; 2: also allow a wide cell to eject two narrow cells
+    double seconds = 10;
+    bool verbose = false;
+};
+
+struct ChainResult {
+    long roots = 0, nodes = 0, candidates = 0, accepted = 0;
+    long multiBlocker = 0, refreshed = 0;
+    int longest = 0;
+    bool timedOut = false;
+};
+
+// Bounded ejection search across row boundaries. Intermediate displacements may
+// rise, but only complete legal chains with strictly lower total displacement
+// and no larger maximum are committed. Failure/time/node exhaustion restores
+// every tentative move; exceptions restore the input placement.
+// This is a heuristic search (beam/depth/position limits), not a global solver.
+ChainResult chainDisplacement(const PlaceDB&, Placement&, const ChainOptions&);
+
+ succeeded in 0ms:
+                reference_sha256=src_hash(BASE / 'src'), modes=MODES, cases=CASES,
+                cmake_sha256=sha(SOLUTION / 'CMakeLists.txt'),
+                runner_sha256=sha(V5S / 'run_ts.py'),
+                instrumentation_sha256=sha(R / 'phase1/instrumented/src/main.cpp'),
+                inputs={b: prefix_hashes(original_prefix(b)) for b in CASES},
+                chain_reference_sha256=sha(R.parent / 'ClaudeOpus55_v6/final/lg_CodexChainDP/record.csv'),
+                note='Stage 1 only; no HPWL quality claims. Candidate/v6 interleaved per case. '
+                     'ChainDP historical reference only defines 8/11; all improvement ratios use paired v6.')
+
+
+def prepare(d, tag):
+    verify_protected()
+    p = protocol(tag)
+    if (d / 'protocol.json').exists() and json.loads((d / 'protocol.json').read_text()) != p:
+        raise RuntimeError('Protocol changed; use a new tag')
+    dump(d / 'protocol.json', p)
+    # The same eight measurement lines used in phase 1. Strip them and demand
+    # exact identity with each production main; never silently substitute code.
+    instrumented = (R / 'phase1/instrumented/src/main.cpp').read_text()
+    stripped = ''.join(x for x in instrumented.splitlines(keepends=True) if '[diag-chain]' not in x)
+    assert instrumented.count('[diag-chain]') == 8
+    binaries = {}
+    for name, source in [('v6', BASE), ('candidate', SOLUTION)]:
+        assert stripped == (source / 'src/main.cpp').read_text()
+        root = d / name
+        if not (root / 'src').exists():
+            shutil.copytree(source / 'src', root / 'src')
+        if src_hash(root / 'src') != src_hash(source / 'src'):
+            raise RuntimeError('Snapshot changed')
+        shadow = root / 'instrumented'
+        if not (shadow / 'src').exists():
+            shutil.copytree(root / 'src', shadow / 'src')
+        (shadow / 'src/main.cpp').write_text(instrumented)
+        shutil.copy2(source / 'CMakeLists.txt', shadow / 'CMakeLists.txt')
+        exe = build(name, root / 'build', src=shadow)
+        binaries[name] = sha(exe)
+    dump(d / 'prepared.json', dict(protocol_sha256=sha(d / 'protocol.json'), binaries=binaries))
+
+
+def worker(d, mode, bench, version):
+
+exec
+/bin/bash -lc "sed -n '113,152p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def summarize(d):
+    historic = {x['bench']: x for x in csv.DictReader(
+        (R.parent / 'ClaudeOpus55_v6/final/lg_CodexChainDP/record.csv').open())}
+    rows, both, max_ratios, total_ratios = [], 0, [], []
+    times = dict(v6=0.0, candidate=0.0)
+    for bench in CASES:
+        data = {v: json.loads((d / 'stage1' / bench / v / 'metrics.json').read_text())
+                for v in times}
+        a, b = data['candidate']['record'], data['v6']['record']
+        total, maximum = float(a['disp']), float(a['max'])
+        rt, rm = ratio(total, float(b['disp'])), ratio(maximum, float(b['max']))
+        if float(b['disp']) or total:
+            total_ratios.append(rt)
+        if float(b['max']) or maximum:
+            max_ratios.append(rm)
+        old = historic[bench]
+        ok = maximum <= float(old['max']) + 1e-9 and total <= float(old['disp']) * 1.005 + 1e-9
+        both += ok
+        for v in times:
+            times[v] += data[v]['chain']['seconds']
+        rows.append(dict(bench=bench, total_ratio=rt, max_ratio=rm, both=ok,
+                         candidate_total=total, v6_total=float(b['disp']),
+                         candidate_max=maximum, v6_max=float(b['max']),
+                         candidate_chain_seconds=data['candidate']['chain']['seconds'],
+                         v6_chain_seconds=data['v6']['chain']['seconds']))
+    budget = []
+    for bench, required in [('h05', .0029), ('h06', .0044)]:
+        data = {v: json.loads((d / m / bench / v / 'metrics.json').read_text())['chain']
+                for v, m in [('candidate', 'chain15'), ('v6', 'chain30')]}
+        gains = {v: x['total_reduction'] / x['total_before'] for v, x in data.items()}
+        budget.append(dict(bench=bench, candidate_gain_fraction=gains['candidate'],
+                           paired_v6_3s_gain_fraction=gains['v6'], historical_required=required,
+                           candidate_seconds=data['candidate']['seconds'],
+                           v6_seconds=data['v6']['seconds'],
+                           pass_gate=gains['candidate'] >= max(required, gains['v6'])))
+    total_gm, max_gm = gm(total_ratios), gm(max_ratios)
+    gates = dict(both_at_least_8=both >= 8, total_improved_003pct=total_gm <= .9997,
+                 max_gm_not_worse_01pct=max_gm <= 1.001,
+                 every_max_not_worse_02pct=all(x['max_ratio'] <= 1.002 for x in rows),
+                 chain_seconds_not_more=times['candidate'] <= times['v6'],
+
+exec
+/bin/bash -lc "rg -n 'def |add_argument|chain_test|target_window|sources|tests =' AI_Solutions/CodexParallelChain/tests/run_tests.py
+rg -n 'int main|void test|static void|ChainOptions|assert' AI_Solutions/CodexParallelChain/tests/chain_test.cpp | head -n 25" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+13:def main():
+16:    mode.add_argument('--sanitize', action='store_true')
+17:    mode.add_argument('--tsan', action='store_true')
+18:    parser.add_argument('--compiler', default='g++')
+29:    def run(command, label, timeout=180):
+52:    for name in ('window', 'multirow', 'optimizer', 'chain', 'target_window', 'parallel_sa', 'pool', 'global', 'capsearch', 'cap_windows', 'guard'):
+33:int main() {
+34:    ChainOptions opt;
+
+exec
+/bin/bash -lc "sed -n '41,80p' AI_Solutions/CodexParallelChain/tests/run_tests.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        if process.returncode:
+            print(process.stdout)
+            raise SystemExit(process.returncode)
+
+    objects = []
+    for source in sorted((ROOT / 'src').glob('*.cpp')):
+        if source.stem == 'main':
+            continue
+        obj = out / (source.stem + '.o')
+        run([args.compiler, *flags, '-c', str(source), '-o', str(obj)], 'build_' + source.stem)
+        objects.append(str(obj))
+    for name in ('window', 'multirow', 'optimizer', 'chain', 'target_window', 'parallel_sa', 'pool', 'global', 'capsearch', 'cap_windows', 'guard'):
+        exe = out / (name + '_test')
+        run([args.compiler, *flags, str(ROOT / 'tests' / (name + '_test.cpp')),
+             *objects, '-o', str(exe)], 'link_' + name)
+        run([str(exe)], name)
+    print('All 11 C++ test programs passed. Logs: ' + str(out), flush=True)
+
+
+if __name__ == '__main__':
+    main()
+
+exec
+/bin/bash -lc "sed -n '1,40p' AI_Solutions/CodexParallelChain/tests/chain_test.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#include "../src/chain.hpp"
+#include <cmath>
+#include <iostream>
+#include <random>
+#include <stdexcept>
+#include <string>
+
+namespace {
+void require(bool condition, const char* message) {
+    if (!condition) throw std::runtime_error(message);
+}
+void row(PlaceDB& db, double y, double h, double x, double spacing, int sites) {
+    int r = int(db.rows.size()), s = int(db.segs.size());
+    db.rows.push_back({y, h, {s}});
+    db.segs.push_back({r, y, h, x, spacing, sites});
+}
+void cell(PlaceDB& db, Placement& p, int s, int site, double width, double gx, double gy) {
+    Node n;
+    n.name = "c" + std::to_string(db.nodes.size());
+    n.w = width; n.h = db.segs[s].height; n.gx = gx; n.gy = gy;
+    db.movable.push_back(int(db.nodes.size())); db.nodes.push_back(n);
+    p.seg.push_back(s); p.site.push_back(site);
+}
+void pareto(const PlaceDB& db, const Placement& before, const Placement& after) {
+    require(checkLegal(db, after).empty(), "chain produced an illegal placement");
+    const auto a = displacement(db, before), b = displacement(db, after);
+    require(b.total <= a.total + 1e-7, "chain increased total displacement");
+    require(b.max <= a.max + 1e-7, "chain increased maximum displacement");
+}
+bool same(const Placement& a, const Placement& b) { return a.seg == b.seg && a.site == b.site; }
+}
+
+int main() {
+    ChainOptions opt;
+    opt.seconds = 60; opt.passes = 1; opt.depth = 10; opt.branches = 12;
+    opt.expansions = 160; opt.maxBlockers = 1;
+
+    // Closing the root's hole takes an eight-row ejection path. No site is
+    // initially empty; intermediate missing cells must not appear as obstacles.
+    PlaceDB cycle;
+
+exec
+/bin/bash -lc "sed -n '41,80p' AI_Solutions/CodexParallelChain/tests/chain_test.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    Placement original;
+    for (int r = 0; r < 8; ++r) row(cycle, r, 1, 0, 1, 1);
+    for (int r = 0; r < 8; ++r) cell(cycle, original, r, 0, 1, 0, (r + 1) % 8);
+    Placement p = original;
+    auto result = chainDisplacement(cycle, p, opt);
+    pareto(cycle, original, p);
+    require(displacement(cycle, p).total == 0, "eight-row ejection cycle did not reach its known optimum");
+    require(result.longest == 8 && result.accepted == 1 && result.refreshed == 8,
+            "eight-row chain did not record and refresh every moved cell");
+
+    // Cache-refresh regression: two exchanges reach zero cost. The partners
+    // are still later roots in this SAME pass and must now be skipped. A stale
+    // pass-level cache accepts extra chains that leave/revisit the optimum.
+    PlaceDB revisited;
+    Placement revisitStart;
+    for (int r = 0; r < 4; ++r) row(revisited, r, 1, 0, 1, 1);
+    for (int r = 0; r < 4; ++r) cell(revisited, revisitStart, r, 0, 1, 0, (r + 2) % 4);
+    p = revisitStart;
+    auto refreshed = chainDisplacement(revisited, p, opt);
+    require(displacement(revisited, p).total == 0 && refreshed.accepted == 2 && refreshed.refreshed == 4,
+            "successful chains left stale distances for later roots in the same pass");
+
+    // Search-node and depth exhaustion must roll back a partially assembled
+    // path, including its RowMap entries. A repeated full search must still work.
+    for (int budget : {1, 2, 4}) {
+        p = original;
+        auto small = opt; small.expansions = budget; small.roots = 1;
+        auto limited = chainDisplacement(cycle, p, small);
+        require(limited.nodes <= budget, "per-root expansion limit exceeded");
+        pareto(cycle, original, p);
+        auto full = chainDisplacement(cycle, p, opt);
+        (void)full;
+        require(displacement(cycle, p).total == 0, "failed search corrupted a subsequent full search");
+    }
+    p = original;
+    auto one = opt; one.depth = 1;
+    chainDisplacement(cycle, p, one);
+    require(same(p, original), "depth-one search could not restore its rejected occupied candidates");
+
+    // A wide root needs to remove TWO narrow blockers at once. Restrict roots
+
+exec
+/bin/bash -lc "find Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1 -maxdepth 2 -type f | head -n 35
+rg -n 'target_window' AI_Solutions/CodexParallelChain/CMakeLists.txt" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_window.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_parallel_sa.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_cap_windows.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/records.json
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/cap_windows.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_optimizer.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/build_window.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/optimizer.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_guard.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/global.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/build_global.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_global.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_pool.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/parallel_sa.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/build_chain.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/build_placedb.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_multirow.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/pool.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/build_optimizer.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_chain.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/build_annealer.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/link_capsearch.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/capsearch.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/window.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/build_capsearch.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/multirow.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/guard.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/chain.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/tests_tsan/build_legalizer.log
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/src/pool.hpp
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/src/window.hpp
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/src/placedb.hpp
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/src/window.cpp
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/src/main.cpp
+Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/src/annealer.cpp
+24:  foreach(name window multirow optimizer chain target_window parallel_sa pool global capsearch cap_windows guard)
+
+exec
+/bin/bash -lc "sed -n '1,40p' AI_Solutions/CodexParallelChain/tests/run_tests.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '177,220p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py | head -n 40
+" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#!/usr/bin/env python3
+"""Build and run the invariant/exhaustive regression suite without CMake."""
+import argparse
+import json
+import os
+from pathlib import Path
+import subprocess
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--sanitize', action='store_true')
+    mode.add_argument('--tsan', action='store_true')
+    parser.add_argument('--compiler', default='g++')
+    args = parser.parse_args()
+    out = ROOT.parents[1] / 'Testcases/results' / ROOT.name / ('tests_tsan' if args.tsan else 'tests_sanitized' if args.sanitize else 'tests')
+    out.mkdir(parents=True, exist_ok=True)
+    flags = ['-std=c++17', '-O1' if args.sanitize or args.tsan else '-O2', '-pthread', '-UNDEBUG']
+    if args.sanitize:
+        flags += ['-g', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']
+    if args.tsan:
+        flags += ['-g', '-fsanitize=thread', '-fno-omit-frame-pointer']
+    records = []
+
+    def run(command, label, timeout=180):
+        start = time.perf_counter()
+        # Pin compilation only; runtime checks retain the caller's CPU set.
+        compile_cpus = set(range(16, 20)) & os.sched_getaffinity(0)
+        pin = (lambda: os.sched_setaffinity(0, compile_cpus)) if command[0] == args.compiler and compile_cpus else None
+        process = subprocess.run(command, text=True, stdout=subprocess.PIPE,
+                                 stderr=subprocess.STDOUT, timeout=timeout, preexec_fn=pin)
+        (out / (label + '.log')).write_text(process.stdout)
+        records.append({'label': label, 'command': command, 'returncode': process.returncode,
+                        'seconds': time.perf_counter() - start})
+        (out / 'records.json').write_text(json.dumps(records, indent=2) + '\n')
+        print(label + ': ' + ('PASS' if process.returncode == 0 else 'FAIL'), flush=True)
+
+ succeeded in 0ms:
+def run(d, tag):
+    if not (d / 'prepared.json').exists():
+        prepare(d, tag)
+    if json.loads((d / 'protocol.json').read_text()) != protocol(tag):
+        raise RuntimeError('Protocol changed after preparation')
+    prepared = json.loads((d / 'prepared.json').read_text())
+    if prepared['protocol_sha256'] != sha(d / 'protocol.json'):
+        raise RuntimeError('Protocol hash changed')
+    for v, digest in prepared['binaries'].items():
+        if sha(d / v / 'build/dp') != digest:
+            raise RuntimeError('Binary changed')
+    verify_protected()
+    q = Queue(d / 'jobs')
+    with (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        for i, bench in enumerate(CASES):
+            for version in (['v6', 'candidate'] if i % 2 == 0 else ['candidate', 'v6']):
+                if not q.run('stage1_' + bench + '_' + version,
+                             [PY, SELF, tag, '--worker', 'stage1', bench, version], quiet=True):
+                    raise RuntimeError('Stage 1 worker failed')
+        for i, bench in enumerate(['h05', 'h06']):
+            jobs = [('chain15', 'candidate'), ('chain30', 'v6')]
+            for mode, version in (jobs if i == 0 else jobs[::-1]):
+                if not q.run(mode + '_' + bench + '_' + version,
+                             [PY, SELF, tag, '--worker', mode, bench, version], quiet=True):
+                    raise RuntimeError('Chain budget worker failed')
+        summarize(d)
+        verify_protected(d / 'protected_after.json')
+        dump(d / 'ALL_DONE', dict(protocol_sha256=sha(d / 'protocol.json'), finished=time.ctime()))
+    note(f'phase2/chain_pair/{tag} completed; see compare.md and summary.json')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('tag')
+    parser.add_argument('--prepare', action='store_true')
+    parser.add_argument('--worker', nargs=3)
+    args = parser.parse_args()
+    directory = R / 'phase2/chain_pair' / args.tag
+    directory.mkdir(parents=True, exist_ok=True)
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import shutil,json
+r=Path('Testcases/results/CodexParallelChain/phase2');s=Path('AI_Solutions/CodexParallelChain')
+accepted=r/'accepted/sa_boundary_r1/src'
+for name in ['window.cpp','window.hpp']:
+ shutil.copy2(accepted/name,s/'src'/name)
+p=s/'CMakeLists.txt';p.write_text(p.read_text().replace('chain target_window parallel_sa','chain chain_beam parallel_sa'))
+p=s/'tests/run_tests.py';p.write_text(p.read_text().replace(\"'chain', 'target_window', 'parallel_sa'\",\"'chain', 'chain_beam', 'parallel_sa'\"))
+# Archive the withdrawn feature test alongside its immutable source snapshot.
+target=r/'chain_pair/target_parallel_r1/test_evidence/target_window_test.cpp'
+shutil.copy2(s/'tests/target_window_test.cpp',target)
+(s/'tests/target_window_test.cpp').unlink()
+x=json.loads((r/'chain_pair/target_parallel_r1/summary.json').read_text())
+(r/'chain_pair/target_parallel_r1/decision.json').write_text(json.dumps(dict(decision='withdraw',round=1,reason='Total GM, per-case maximum and both half-budget gains fail; 2.19% chain-time saving is insufficient. Return to accepted SA source before independent ejection experiment.',gates=x['gates']),indent=2)+'\\n')
+print('Withdrawn target windows; SA retained; decision and feature test archived.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Withdrawn target windows; SA retained; decision and feature test archived.
+
+apply patch
+patch: completed
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/chain_beam.hpp
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/tests/chain_beam_test.cpp
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp b/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp
+index 63d7dee1fb51272a5eec16f8d26baa0333948396..4a805d36fbabc7ebd3bb944d9ae3361a894764f0
+--- a/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp
++++ b/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp
+@@ -1,4 +1,5 @@
+ #include "chain.hpp"
++#include "chain_beam.hpp"
+ #include "rowmap.hpp"
+ #include <algorithm>
+ #include <array>
+@@ -117,13 +118,9 @@
+             return std::tie(a.score, a.distance, a.count, a.seg, a.site) <
+                    std::tie(b.score, b.distance, b.count, b.seg, b.site);
+         };
+-        std::sort(result.begin(), result.end(), less);
+         // Retain the best empty positions as well as the occupied beam. This
+         // prevents an attractive but infeasible chain from hiding every exit.
+-        int occupied = 0, empty = 0;
+-        result.erase(std::remove_if(result.begin(), result.end(), [&](const Candidate& c) {
+-            return c.count ? ++occupied > opt.branches : ++empty > std::max(4, opt.branches / 2);
+-        }), result.end());
++        retainChainBeam(result, opt.branches, less);
+         return result;
+     }
+ 
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/src/chain_beam.hpp b/Lab3/AI_Solutions/CodexParallelChain/src/chain_beam.hpp
+new file mode 100644
+index 0000000000000000000000000000000000000000..c3d21c1f9dda36936bdb016425bce907bbec89e3
+--- /dev/null
++++ b/Lab3/AI_Solutions/CodexParallelChain/src/chain_beam.hpp
+@@ -0,0 +1,24 @@
++#pragma once
++#include <algorithm>
++#include <vector>
++
++// Select the same occupied and empty beams as a full sort, without sorting
++// the candidates that will be discarded. The comparator must totally order
++// candidates (the production comparator ends with unique segment/site keys).
++template<class Candidate, class Less>
++void retainChainBeam(std::vector<Candidate>& values, int branches, Less less) {
++    auto split = std::partition(values.begin(), values.end(),
++                               [](const Candidate& c) { return c.count == 0; });
++    const auto emptyCount = std::min(split - values.begin(),
++                                    decltype(split - values.begin())(std::max(4, branches / 2)));
++    const auto occupiedCount = std::min(values.end() - split,
++                                       decltype(values.end() - split)(branches));
++    std::partial_sort(values.begin(), values.begin() + emptyCount, split, less);
++    std::partial_sort(split, split + occupiedCount, values.end(), less);
++    // Copy forward: the destination never lies after its source. This also
++    // handles overlap when few empty candidates were discarded.
++    for (decltype(occupiedCount) i = 0; i < occupiedCount; ++i)
++        values[emptyCount + i] = split[i];
++    values.resize(emptyCount + occupiedCount);
++    std::sort(values.begin(), values.end(), less);
++}
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/tests/chain_beam_test.cpp b/Lab3/AI_Solutions/CodexParallelChain/tests/chain_beam_test.cpp
+new file mode 100644
+index 0000000000000000000000000000000000000000..f2da2186adf37d459bd38f9f8a180598b76a3e19
+--- /dev/null
++++ b/Lab3/AI_Solutions/CodexParallelChain/tests/chain_beam_test.cpp
+@@ -0,0 +1,41 @@
++#include "../src/chain_beam.hpp"
++#include <iostream>
++#include <random>
++#include <stdexcept>
++#include <tuple>
++
++struct Choice { int count, score, distance, seg, site; };
++
++int main() {
++    std::mt19937 rng(81273);
++    auto less = [](const Choice& a, const Choice& b) {
++        return std::tie(a.score, a.distance, a.count, a.seg, a.site) <
++               std::tie(b.score, b.distance, b.count, b.seg, b.site);
++    };
++    // Independent oracle: v6's complete ordering followed by beam filtering.
++    // Exercise empty/occupied imbalance, overlapping compaction, score ties,
++    // odd beam sizes, empty input, and beams larger than the candidate set.
++    for (int trial = 0; trial < 2400; ++trial) {
++        std::vector<Choice> input;
++        int n = trial < 100 ? trial : int(rng() % 1000);
++        int branches = 1 + rng() % 32;
++        for (int i = 0; i < n; ++i) {
++            int count = trial % 4 == 0 ? 0 : trial % 4 == 1 ? 1 : int(rng() % 3);
++            input.push_back({count, int(rng() % 17) - 8, int(rng() % 7), i / 8, i % 8});
++        }
++        std::shuffle(input.begin(), input.end(), rng);
++        auto actual = input, ordered = input;
++        std::sort(ordered.begin(), ordered.end(), less);
++        std::vector<Choice> expected;
++        int occupied = 0, empty = 0;
++        for (const auto& c : ordered)
++            if (c.count ? ++occupied <= branches : ++empty <= std::max(4, branches / 2))
++                expected.push_back(c);
++        retainChainBeam(actual, branches, less);
++        if (actual.size() != expected.size()) throw std::runtime_error("beam size mismatch");
++        for (size_t i = 0; i < actual.size(); ++i)
++            if (less(actual[i], expected[i]) || less(expected[i], actual[i]))
++                throw std::runtime_error("beam differs from full-sort oracle");
++    }
++    std::cout << "2400 exact beam comparisons passed\n";
++}
+
+codex
+ejection 本輪先減少候選排序工作：只排序會保留的 beam，維持 v6 的候選選擇與搜尋順序。這尚未量得收益；我會先驗證等價性，再交由外部跑完整配對訓練。
+
+apply patch
+patch: completed
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain/src/chain_beam.hpp
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp b/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp
+index 63d7dee1fb51272a5eec16f8d26baa0333948396..4a805d36fbabc7ebd3bb944d9ae3361a894764f0
+--- a/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp
++++ b/Lab3/AI_Solutions/CodexParallelChain/src/chain.cpp
+@@ -1,4 +1,5 @@
+ #include "chain.hpp"
++#include "chain_beam.hpp"
+ #include "rowmap.hpp"
+ #include <algorithm>
+ #include <array>
+@@ -117,13 +118,9 @@
+             return std::tie(a.score, a.distance, a.count, a.seg, a.site) <
+                    std::tie(b.score, b.distance, b.count, b.seg, b.site);
+         };
+-        std::sort(result.begin(), result.end(), less);
+         // Retain the best empty positions as well as the occupied beam. This
+         // prevents an attractive but infeasible chain from hiding every exit.
+-        int occupied = 0, empty = 0;
+-        result.erase(std::remove_if(result.begin(), result.end(), [&](const Candidate& c) {
+-            return c.count ? ++occupied > opt.branches : ++empty > std::max(4, opt.branches / 2);
+-        }), result.end());
++        retainChainBeam(result, opt.branches, less);
+         return result;
+     }
+ 
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/src/chain_beam.hpp b/Lab3/AI_Solutions/CodexParallelChain/src/chain_beam.hpp
+new file mode 100644
+index 0000000000000000000000000000000000000000..120590d6994ce902648a3f1283c3bab1b0e225a5
+--- /dev/null
++++ b/Lab3/AI_Solutions/CodexParallelChain/src/chain_beam.hpp
+@@ -0,0 +1,24 @@
++#pragma once
++#include <algorithm>
++#include <vector>
++
++// Select the same occupied and empty beams as a full sort, without sorting
++// the candidates that will be discarded. The comparator must totally order
++// candidates (the production comparator ends with unique segment/site keys).
++template<class Candidate, class Less>
++void retainChainBeam(std::vector<Candidate>& values, int branches, Less less) {
++    auto split = std::partition(values.begin(), values.end(),
++                               [](const Candidate& c) { return c.count == 0; });
++    auto emptyCount = std::min(split - values.begin(),
++                                    decltype(split - values.begin())(std::max(4, branches / 2)));
++    auto occupiedCount = std::min(values.end() - split,
++                                       decltype(values.end() - split)(branches));
++    std::partial_sort(values.begin(), values.begin() + emptyCount, split, less);
++    std::partial_sort(split, split + occupiedCount, values.end(), less);
++    // Copy forward: the destination never lies after its source. This also
++    // handles overlap when few empty candidates were discarded.
++    for (decltype(occupiedCount) i = 0; i < occupiedCount; ++i)
++        values[emptyCount + i] = split[i];
++    values.resize(emptyCount + occupiedCount);
++    std::sort(values.begin(), values.end(), less);
++}
+diff --git a/Lab3/AI_Solutions/CodexParallelChain/tests/chain_beam_test.cpp b/Lab3/AI_Solutions/CodexParallelChain/tests/chain_beam_test.cpp
+new file mode 100644
+index 0000000000000000000000000000000000000000..f2da2186adf37d459bd38f9f8a180598b76a3e19
+--- /dev/null
++++ b/Lab3/AI_Solutions/CodexParallelChain/tests/chain_beam_test.cpp
+@@ -0,0 +1,41 @@
++#include "../src/chain_beam.hpp"
++#include <iostream>
++#include <random>
++#include <stdexcept>
++#include <tuple>
++
++struct Choice { int count, score, distance, seg, site; };
++
++int main() {
++    std::mt19937 rng(81273);
++    auto less = [](const Choice& a, const Choice& b) {
++        return std::tie(a.score, a.distance, a.count, a.seg, a.site) <
++               std::tie(b.score, b.distance, b.count, b.seg, b.site);
++    };
++    // Independent oracle: v6's complete ordering followed by beam filtering.
++    // Exercise empty/occupied imbalance, overlapping compaction, score ties,
++    // odd beam sizes, empty input, and beams larger than the candidate set.
++    for (int trial = 0; trial < 2400; ++trial) {
++        std::vector<Choice> input;
++        int n = trial < 100 ? trial : int(rng() % 1000);
++        int branches = 1 + rng() % 32;
++        for (int i = 0; i < n; ++i) {
++            int count = trial % 4 == 0 ? 0 : trial % 4 == 1 ? 1 : int(rng() % 3);
++            input.push_back({count, int(rng() % 17) - 8, int(rng() % 7), i / 8, i % 8});
++        }
++        std::shuffle(input.begin(), input.end(), rng);
++        auto actual = input, ordered = input;
++        std::sort(ordered.begin(), ordered.end(), less);
++        std::vector<Choice> expected;
++        int occupied = 0, empty = 0;
++        for (const auto& c : ordered)
++            if (c.count ? ++occupied <= branches : ++empty <= std::max(4, branches / 2))
++                expected.push_back(c);
++        retainChainBeam(actual, branches, less);
++        if (actual.size() != expected.size()) throw std::runtime_error("beam size mismatch");
++        for (size_t i = 0; i < actual.size(); ++i)
++            if (less(actual[i], expected[i]) || less(expected[i], actual[i]))
++                throw std::runtime_error("beam differs from full-sort oracle");
++    }
++    std::cout << "2400 exact beam comparisons passed\n";
++}
+
+exec
+/bin/bash -lc 'python3 AI_Solutions/CodexParallelChain/tests/run_tests.py > Testcases/results/CodexParallelChain/phase2/ejection_r1_tests.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '161,200p' AI_Solutions/CodexParallelChain/tests/chain_test.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '81,120p' AI_Solutions/CodexParallelChain/tests/chain_test.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        }
+    }
+    require(totalChains > 300 && totalMulti > 0, "random tests did not exercise enough accepted/revisited chains");
+    std::cout << "PASS: eight-row cycle, two-blocker split, partial rollback, budgets, determinism; 300 random "
+              << "placements (" << totalChains << " accepted chains, " << totalMulti << " multi-blocker steps)\n";
+}
+
+ succeeded in 0ms:
+    // to that root so starting the reverse path from a narrow cell cannot hide
+    // the difference between a single-blocker path and a branching ejection.
+    PlaceDB split;
+    Placement splitStart;
+    row(split, 0, 1, 0, 1, 3); row(split, 1, 1, 0, 1, 3);
+    cell(split, splitStart, 0, 0, 3, 0, 1);
+    cell(split, splitStart, 1, 0, 1, 0, 0);
+    cell(split, splitStart, 1, 1, 2, 1, 0);
+    auto branch = opt; branch.roots = 1;
+    p = splitStart;
+    chainDisplacement(split, p, branch);
+    require(same(p, splitStart), "single-blocker fixture unexpectedly found a root move");
+    branch.maxBlockers = 2;
+    p = splitStart;
+    auto two = chainDisplacement(split, p, branch);
+    require(displacement(split, p).total == 0 && two.longest == 3 && two.multiBlocker == 1,
+            "two-blocker chain failed its known optimum");
+    pareto(split, splitStart, p);
+    branch.expansions = 2;
+    p = splitStart;
+    auto exhausted = chainDisplacement(split, p, branch);
+    require(exhausted.nodes == 2 && exhausted.accepted == 0 && same(p, splitStart),
+            "two-blocker partial-search rollback failed");
+
+    // Cancellation and validation must preserve the exact original placement.
+    p = splitStart;
+    auto stopped = branch; stopped.seconds = 0;
+    require(chainDisplacement(split, p, stopped).nodes == 0 && same(p, splitStart), "zero-time search changed input");
+    stopped.seconds = 1e-12;
+    auto deadline = chainDisplacement(split, p, stopped);
+    require(deadline.timedOut && deadline.nodes == 0 && same(p, splitStart), "expired search changed input");
+    bool threw = false;
+    try { auto invalid = opt; invalid.maxBlockers = 3; chainDisplacement(split, p, invalid); }
+    catch (const std::runtime_error&) { threw = true; }
+    require(threw && same(p, splitStart), "invalid options did not preserve the placement");
+
+    // Multiple accepted chains revisit cells within the same pass. These
+    // fixtures catch stale pass-level displacement caches, failed DFS undo,
+    // cap violations, unequal widths, different site spacings/heights, and
+    // fixed-object mutation. Every run is checked against the original data.
+
+exec
+/bin/bash -lc "sed -n '121,160p' AI_Solutions/CodexParallelChain/tests/chain_test.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+    std::mt19937 random(20261019);
+    long totalChains = 0, totalMulti = 0;
+    for (int trial = 0; trial < 300; ++trial) {
+        PlaceDB db;
+        Placement start;
+        int nr = 2 + random() % 6;
+        for (int r = 0; r < nr; ++r) {
+            double sp = (r + trial) % 2 ? 0.5 : 1;
+            row(db, r * 3.0, r % 2 ? 2 : 1, -2, sp, 24);
+            int site = int(random() % 2);
+            while (site + 5 <= 24) {
+                double w = (1 + random() % 5) * 0.5;
+                double gx = (int(random() % 64) - 10) * 0.25;
+                double gy = (int(random() % (12 * nr)) - 3) * 0.25;
+                cell(db, start, r, site, w, gx, gy);
+                site += db.sitesOf(int(db.nodes.size()) - 1, db.segs[r]) + int(random() % 3);
+            }
+        }
+        Node fixed;
+        fixed.name = "fixed"; fixed.fixed = true; fixed.gx = -10; fixed.gy = -10; fixed.orient = "FS";
+        db.nodes.push_back(fixed); start.seg.push_back(-1); start.site.push_back(7);
+        require(checkLegal(db, start).empty(), "random fixture is illegal");
+        auto options = opt;
+        options.passes = 2; options.depth = 7; options.branches = 6;
+        options.expansions = 50; options.maxBlockers = 1 + trial % 2;
+        p = start;
+        auto found = chainDisplacement(db, p, options);
+        pareto(db, start, p);
+        require(p.seg.back() == -1 && p.site.back() == 7, "fixed node coordinates changed");
+        require(found.nodes <= found.roots * options.expansions, "search exceeded its node bound");
+        require(found.longest <= options.depth && found.refreshed >= found.accepted,
+                "chain length or refreshed-cell accounting is wrong");
+        require(!found.timedOut, "random test unexpectedly hit its generous time limit");
+        totalChains += found.accepted; totalMulti += found.multiBlocker;
+        // With inactive time limits, work bounds and tie-breaking are deterministic.
+        if (trial % 30 == 0) {
+            Placement again = start;
+            auto repeat = chainDisplacement(db, again, options);
+            require(same(p, again) && found.nodes == repeat.nodes && found.accepted == repeat.accepted,
+                    "fixed-work chain search is not deterministic");
+
+exec
+/bin/bash -lc "sed -n '80,105p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py
+rg -n 'chain|nodes|candidates' Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/stage1/h05/candidate/metrics.json | head -n 12" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def worker(d, mode, bench, version):
+    root = d / mode / bench / version
+    root.mkdir(parents=True, exist_ok=True)
+    command = [PY, V5S / 'run_ts.py', '--bin', d / version / 'build/dp', '--out', root,
+               '--timeout', '240', '--dp-args=' + MODES[mode], original_prefix(bench)]
+    subprocess.run([str(x) for x in command], check=True, timeout=270)
+    records = list(csv.DictReader((root / 'record.csv').open()))
+    if len(records) != 1 or records[0]['status'] != 'OK':
+        raise RuntimeError('Run failed or timed out')
+    case = root / bench
+    with (case / 'check.txt').open('w') as log:
+        subprocess.run([str(x) for x in [PY, LAB / 'Grader/tools/check_pl.py',
+                        original_prefix(bench), case / 'output_legal.pl', '--quiet']],
+                       stdout=log, stderr=subprocess.STDOUT, check=True)
+    lines = [x.partition('\t')[2] for x in (case / 'stderr_ts.tsv').read_text().splitlines()]
+    (case / 'stderr.txt').write_text('\n'.join(lines) + '\n')
+    if any('invariant failed' in x or 'step skipped' in x for x in lines):
+        raise RuntimeError('Guard or invariant failure; inspect stderr')
+    parse_chain(case)
+    phases = json.loads((case / 'phases.json').read_text())
+    stage = next(x for x in phases if x['phase'] == 'chain_stage')
+    dump(root / 'metrics.json', dict(record=records[0], legal=True, chain=stage,
+                                    phases=phases, placement_sha256=sha(case / 'output_legal.pl')))
+
+
+def gm(values):
+14:    "t_chain": "4.09",
+31:  "chain": {
+33:    "phase": "chain_stage",
+56:      "phase": "ejection_chains",
+67:      "phase": "post_chain_dp",
+89:      "phase": "ejection_chains",
+100:      "phase": "post_chain_dp",
+111:      "phase": "chain_stage",
+
+exec
+/bin/bash -lc 'tail -n 4 Testcases/results/CodexParallelChain/phase2/ejection_r1_tests.log
+ASAN_OPTIONS=detect_leaks=0 python3 AI_Solutions/CodexParallelChain/tests/run_tests.py --sanitize > Testcases/results/CodexParallelChain/phase2/ejection_r1_sanitized.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "rg '\\[chain\\].*roots' Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/stage1/h05/candidate/h05/stderr.txt
+sed -n '151,176p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py
+rg -n 'seconds|returncode' Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/test_evidence/verification.json | head -n 5" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+[chain] 1194 roots, 180480 nodes, 1791129 candidates, 11 accepted, longest 10, 3 multi-blocker placements (time limit)
+[chain] 812 roots, 123510 nodes, 1172899 candidates, 2 accepted, longest 7, 1 multi-blocker placements (time limit)
+                 every_max_not_worse_02pct=all(x['max_ratio'] <= 1.002 for x in rows),
+                 chain_seconds_not_more=times['candidate'] <= times['v6'],
+                 h05_h06_gain=all(x['pass_gate'] for x in budget))
+    summary = dict(rows=rows, both=both, total_gm=total_gm, max_gm=max_gm,
+                   chain_seconds=times, budgets=budget, gates=gates,
+                   all_numeric_gates=all(gates.values()),
+                   note='No automatic keep decision: inspect budget overshoot and tests independently.')
+    dump(d / 'summary.json', summary)
+    lines = ['# Chain target windows: same-round Stage 1 pairs', '',
+             'Ratio = candidate / v6. No SA; HPWL is not a quality gate in this report.', '',
+             '| Case | Total ratio | Max ratio | Chain seconds candidate / v6 | Both vs historical ChainDP |',
+             '|---|---:|---:|---:|:---:|']
+    for x in rows:
+        lines.append(f"| {x['bench']} | {x['total_ratio']:.8f} | {x['max_ratio']:.8f} | "
+                     f"{x['candidate_chain_seconds']:.6f} / {x['v6_chain_seconds']:.6f} | {x['both']} |")
+    lines += ['', f'Both: {both}/11; total GM {total_gm:.8f}; max GM {max_gm:.8f}.',
+              f'Chain seconds: {times}.', '', 'Candidate 1.5 s vs v6 3 s chain gain:']
+    for x in budget:
+        lines.append(f"- {x['bench']}: candidate {100*x['candidate_gain_fraction']:.6f}%, "
+                     f"v6 {100*x['paired_v6_3s_gain_fraction']:.6f}%, "
+                     f"historical requirement {100*x['historical_required']:.2f}%; pass {x['pass_gate']}; "
+                     f"actual chain seconds {x['candidate_seconds']:.6f} / {x['v6_seconds']:.6f}.")
+    lines += ['', 'Gates:'] + [f'- {k}: {v}' for k, v in gates.items()]
+    (d / 'compare.md').write_text('\n'.join(lines) + '\n')
+
+
+5:    "seconds": 41.9167497199378
+10:    "seconds": 149.97453636897262
+15:    "seconds": 71.03959814808331
+
+ succeeded in 43641ms:
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path('Testcases/results/CodexParallelChain/scripts')
+s=(p/'phase2_chain_pair.py').read_text().replace('import math\\n','import math\\nimport re\\n')
+s=s.replace('# Chain target windows: same-round Stage 1 pairs','# Ejection beam selection: same-round Stage 1 pairs')
+s=s.replace(\"    parse_chain(case)\\n\", \"\"\"    work = [dict(zip(('roots', 'nodes', 'candidates', 'accepted'), map(int, m)))
+            for m in re.findall(r'\\\\[chain\\\\] (\\\\d+) roots, (\\\\d+) nodes, (\\\\d+) candidates, (\\\\d+) accepted', '\\\\n'.join(lines))]
+    if not work:
+        raise RuntimeError('Missing ejection work counters')
+    dump(root / 'ejection_work.json', dict(passes=work,
+         totals={k: sum(x[k] for x in work) for k in work[0]}))
+    parse_chain(case)
+\"\"\")
+s=s.replace(\"    budget = []\\n\", \"\"\"    work_report = {b: {v: json.loads((d / 'stage1' / b / v / 'ejection_work.json').read_text())
+                       for v in ('v6', 'candidate')} for b in CASES}
+    dump(d / 'ejection_work.json', work_report)
+    budget = []
+\"\"\")
+(p/'phase2_ejection_pair.py').write_text(s)
+print('Prepared ejection queue with unchanged conservative chain gates and per-pass work counters.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Prepared ejection queue with unchanged conservative chain gates and per-pass work counters.
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+s=Path('AI_Solutions/CodexParallelChain').resolve();r=Path('Testcases/results/CodexParallelChain/phase2/ejection_beam_r1_equivalence');r.mkdir(exist_ok=True)
+t=(s/'tests/chain_test.cpp').read_text().replace('#include \"../src/chain.hpp\"', '#include \"'+str(s/'src/chain.hpp')+'\"').replace('chainDisplacement(', 'checkedChain(')
+wrapper='''ChainResult referenceChainDisplacement(const PlaceDB&, Placement&, const ChainOptions&);
+ChainResult checkedChain(const PlaceDB& db, Placement& p, const ChainOptions& opt) {
+    Placement ref = p;
+    auto result = chainDisplacement(db, p, opt);
+    if (opt.seconds < 1) return result;
+    auto expected = referenceChainDisplacement(db, ref, opt);
+    require("'!result.timedOut && !expected.timedOut, "differential run reached deadline");
+    require(same(p, ref), "candidate placement differs from v6 at fixed work");
+    require(result.roots == expected.roots && result.nodes == expected.nodes &&
+            result.candidates == expected.candidates && result.accepted == expected.accepted &&
+            result.longest == expected.longest && result.multiBlocker == expected.multiBlocker &&
+            result.refreshed == expected.refreshed, "candidate work differs from v6 at fixed work");
+    return result;
+}
+'"'''
+t=t.replace('int main() {',wrapper+'\\nint main() {')
+(r/'driver.cpp').write_text(t)
+print('Generated fixed-work differential driver for all existing chain fixtures plus 300 random placements.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Generated fixed-work differential driver for all existing chain fixtures plus 300 random placements.
+
+exec
+/bin/bash -lc "tail -n 3 Testcases/results/CodexParallelChain/phase2/ejection_r1_tests.log
+python3 - <<'PY'
+from pathlib import Path
+import os, subprocess, json, hashlib
+r=Path('Testcases/results/CodexParallelChain/phase2/ejection_beam_r1_equivalence').resolve()
+s=Path('Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/src').resolve()
+o=Path('Testcases/results/CodexParallelChain/tests').resolve()
+cpus=set(range(16,20)) & os.sched_getaffinity(0)
+def compile(args):
+ with (r/'build.log').open('a') as log:
+  subprocess.run(['g++','-std=c++17','-O2','-pthread',*map(str,args)],stdout=log,stderr=subprocess.STDOUT,check=True,timeout=60,preexec_fn=lambda:os.sched_setaffinity(0,cpus))
+compile(['-DchainDisplacement=referenceChainDisplacement','-c',s/'chain.cpp','-o',r/'reference.o'])
+compile([r/'driver.cpp',r/'reference.o',*sorted(o.glob('*.o')),'-o',r/'verify'])
+with (r/'run.log').open('w') as log:
+ subprocess.run([r/'verify'],stdout=log,stderr=subprocess.STDOUT,check=True,timeout=60)
+(r/'done.json').write_text(json.dumps(dict(reference_sha256=hashlib.sha256((s/'chain.cpp').read_bytes()).hexdigest(),candidate_sha256=hashlib.sha256(Path('AI_Solutions/CodexParallelChain/src/chain.cpp').read_bytes()).hexdigest(),result='PASS',random_placements=300),indent=2)+'\\n')
+print((r/'run.log').read_text())
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 3274ms:
+link_guard: PASS
+guard: PASS
+All 11 C++ test programs passed. Logs: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/tests
+PASS: eight-row cycle, two-blocker split, partial rollback, budgets, determinism; 300 random placements (6569 accepted chains, 2673 multi-blocker steps)
+
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+import ast
+from pathlib import Path
+p=Path('Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py')
+ast.parse(p.read_text());print('Queue syntax OK')
+PY
+python3 Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py ejection_beam_r1 --prepare > Testcases/results/CodexParallelChain/phase2/ejection_r1_prepare.log 2>&1" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+codex
+一般測試 11/11 通過，新增的 2,400 組測試確認 beam 選擇與完整排序完全一致。接著核對完整 chain 搜尋的逐位等價性，並完成 ASan/UBSan、TSan 驗證。
+
+exec
+/bin/bash -lc 'python3 AI_Solutions/CodexParallelChain/tests/run_tests.py --tsan > Testcases/results/CodexParallelChain/phase2/ejection_r1_tsan.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 30980ms:
+Queue syntax OK
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import hashlib,json
+s=Path('AI_Solutions/CodexParallelChain/src');h=hashlib.sha256(b''.join(p.read_bytes() for p in sorted(s.iterdir()))).hexdigest()
+p=Path('AI_Solutions/CodexParallelChain/WORK_STATE.md')
+with p.open('a') as f:
+ f.write('''\\n## 階段 B：target windows 撤回；ejection 第 1/3 輪（2026-10-23）
+
+- 已讀上次 "'`phase2/chain_pair/target_parallel_r1/{ALL_DONE,compare.md,summary.json}`。雙條件 8/11；總位移 GM 1.00041344（退步 0.041344%）、最大 GM 0.99862747；h04 最大比 1.00260668，超過逐筆 +0.2% 門檻。chain 實秒合計 candidate 14.239835989 / v6 14.558779537（僅省 2.19%）。h05 在 1.5s 收益 0.261639% < 配對 v6 3s 0.288901%／歷史門檻 0.29%；h06 0.364283% < 0.434934%／0.44%。三個品質閘門失敗。
+- **試過沒用／撤回 target windows（第 1 輪提前停損）**：節省時間太小，且總位移、h04 最大位移與半預算收益均未達標，沒有證據支持只調 batch 大小可補足差距，不消耗第 2/3 輪。window.cpp/window.hpp 已逐檔還原到 SA 保留點；target_window_test.cpp 封存於該輪 test_evidence 並退出目前測試清單。決策 `phase2/chain_pair/target_parallel_r1/decision.json`；該輪數據及程式快照保留。SA 四相邊界仍保留，post-chain DP 本來即已平行，沒有新增 DP 改動。
+- **ejection 第 1/3 輪候選，尚未保留**：先處理診斷所列無效搜尋工作，將每個 DFS node 的完整候選排序改成 occupied／empty 各自 partial_sort，只對最後保留的 beam 合併排序。保留原 empty 與 occupied 配額、總排序鍵、候選生成、roots/depth/expansions、時間預算及接受規則。保留候選的 seg/site 唯一，排序鍵為全序，因此固定工作量應逐位相同；限時吞吐與品質必須實測。
+- 本輪**沒有**把可變 Search／RowMap 交給多執行緒；ejection 分 band 仍未實作。依 diagnosis 第 3 優先項先評估精確等價的少排序方案，避免一次混入跨 band 搜尋覆蓋率變動。不可將此輪通過視為分 band 已驗證，也不可因 SA 已保留而跳過 ejection 的明確決策。
+- 新功能測試 chain_beam_test：2,400 組以 v6 全排序加過濾為獨立 oracle，涵蓋空集合、全空位／全 occupied、重疊壓縮、大量同分、奇數 beam 與候選不足；全部保留候選及次序相同。另用保留點 chain.cpp 獨立編譯 reference，套用現有 chain_test 全部固定工作量 fixture＋300 個隨機 placement，seg/site、roots/nodes/candidates/accepted/longest/multiBlocker/refreshed 全相同（6,569 accepted chains、2,673 multi-blocker steps）。證據 `phase2/ejection_beam_r1_equivalence/{driver.cpp,build.log,run.log,done.json}`；極短 wall deadline 不作逐位配對，仍由原測試檢查回滾。
+- 一般 11/11 PASS（新增 chain_beam 替換已撤回 target_window）；ASan/UBSan、TSan 正在本 session 執行，結果另補。沙箱 ASan 明確設 `ASAN_OPTIONS=detect_leaks=0`；完整 LeakSanitizer 仍待協調者沙箱外補跑，不宣稱洩漏已驗證。
+- 新佇列 `scripts/phase2_ejection_pair.py ejection_beam_r1`，沿用先前成功的同輪交錯雙版本 Stage 1 11 筆，以及 h05/h06 candidate 1.5s / v6 3s 配對。未修改原 target 輪腳本及證據；新增每次 ejection 的 roots/nodes/candidates/accepted 計數，存個別與彙整 ejection_work.json。仍採第 7 節完整 chain 閘門（包括總 GM≤0.9997、雙條件≥8/11、最大 GM≤1.001、逐筆最大≤1.002、實秒不增加與兩筆半預算收益）；本候選不以較寬鬆門檻事後挑選。
+'"''')
+ f.write('- 此輪候選 src_sha256："'`'"'+h+'"'`。未 commit、未改保護目錄、未產生新 seed、不進 C。'"\\n')
+print('WORK_STATE updated; candidate src_sha256:',h)
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+WORK_STATE updated; candidate src_sha256: 2fc4f106a3f84835e9f92afbf40d0befa0eb9f5ac7ab1160b58373fc96cf921a
+
+ succeeded in 150859ms:
+build_legalizer: PASS
+build_optimizer: PASS
+build_placedb: PASS
+build_window: PASS
+
+ succeeded in 78465ms:
+codex
+完整 chain 對照也逐位一致；ASan/UBSan 11/11 通過（依規則關閉 LeakSanitizer）。配對訓練腳本與雙版本編譯已備妥，目前在完成 TSan 與證據封存。
+
+exec
+/bin/bash -lc "python3 - <<'PY' > Testcases/results/CodexParallelChain/phase2/ejection_r1_smoke.log 2>&1
+import sys,fcntl,json
+sys.dont_write_bytecode=True
+sys.path.insert(0,'Testcases/results/CodexParallelChain/scripts')
+import phase2_ejection_pair as m
+tag='ejection_beam_r1';d=m.R/'phase2/chain_pair'/tag
+assert json.loads((d/'protocol.json').read_text())==m.protocol(tag)
+m.verify_protected()
+q=m.Queue(d/'jobs')
+with (m.R.parent/'ClaudeOpus55_v6/timing.lock').open('r') as lock:
+ fcntl.flock(lock,fcntl.LOCK_EX)
+ for version in ['v6','candidate']:
+  assert q.run('stage1_toy_'+version,[m.PY,m.SELF,tag,'--worker','stage1','toy',version],quiet=True)
+m.verify_protected(d/'protected_smoke.json')
+print('toy pair passed; checkpoints saved')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 2569ms:
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import hashlib,json,shutil
+r=Path('Testcases/results/CodexParallelChain');d=r/'phase2/chain_pair/ejection_beam_r1/test_evidence';d.mkdir(exist_ok=True)
+s=Path('AI_Solutions/CodexParallelChain/src');h=hashlib.sha256(b''.join(p.read_bytes() for p in sorted(s.iterdir()))).hexdigest()
+p=json.loads((d.parent/'protocol.json').read_text());assert p['src_sha256']==h
+out={}
+for name in ['tests','tests_sanitized','tests_tsan']:
+ records=json.loads((r/name/'records.json').read_text());assert len(records)==30 and all(x['returncode']==0 for x in records)
+ logs=list((r/name).glob('*.log'));diagnostics=[str(f) for f in logs if any(k in f.read_text() for k in ['WARNING: ThreadSanitizer','ERROR: AddressSanitizer','runtime error:'])];assert not diagnostics,diagnostics
+ dest=d/name;dest.mkdir(exist_ok=True)
+ for f in [r/name/'records.json',*logs]:shutil.copy2(f,dest/f.name)
+ out[name]={'programs_passed':11,'records':len(records),'diagnostics':0,'seconds':sum(x['seconds'] for x in records)}
+shutil.copy2('AI_Solutions/CodexParallelChain/tests/chain_beam_test.cpp',d/'chain_beam_test.cpp')
+(d/'verification.json').write_text(json.dumps(dict(src_sha256=h,results=out,asan_options='detect_leaks=0',full_leak_sanitizer='pending outside sandbox'),indent=2)+'\\n')
+print(json.dumps(out,indent=2))
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+{
+  "tests": {
+    "programs_passed": 11,
+    "records": 30,
+    "diagnostics": 0,
+    "seconds": 43.67873264697846
+  },
+  "tests_sanitized": {
+    "programs_passed": 11,
+    "records": 30,
+    "diagnostics": 0,
+    "seconds": 150.9361857472104
+  },
+  "tests_tsan": {
+    "programs_passed": 11,
+    "records": 30,
+    "diagnostics": 0,
+    "seconds": 78.54862014396349
+  }
+}
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import json
+r=Path('Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1')
+for v in ['v6','candidate']:
+ p=r/'stage1/toy'/v
+ x=json.loads((p/'metrics.json').read_text());w=json.loads((p/'ejection_work.json').read_text())
+ print(v, 'total',x['record']['disp'],'max',x['record']['max'],'chain seconds',x['chain']['seconds'],'ejection',w['totals'])
+assert (r/'protected_smoke.json').exists()
+p=Path('AI_Solutions/CodexParallelChain/WORK_STATE.md')
+with p.open('a') as f:
+ f.write('''- 本輪最終短驗證：一般／ASan+UBSan／TSan 均 **11/11 PASS**，各 30 筆 build/link/run，TSan 0 警告、ASan/UBSan 0 診斷；ASan 使用 detect_leaks=0。用時約 44／151／79 秒，各工作均小於 5 分鐘。對應候選 hash 的不可覆寫證據已封存於 "'`phase2/chain_pair/ejection_beam_r1/test_evidence/verification.json` 與各子目錄。
+- 雙版本編譯、protocol/src hash、保護目錄 hash 核對通過。toy 同輪配對短測已完成兩筆 jobs/*.done.json，均合法；各 root/node/candidate/accepted counter 皆記錄成功。這僅驗證訓練流程，不作收益宣稱；正式佇列會跳過已完成的 toy。詳見 `phase2/ejection_r1_{prepare,smoke}.log` 與 `phase2/chain_pair/ejection_beam_r1/stage1/toy/`。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py ejection_beam_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ALL_DONE`。完整訓練預計超過 5 分鐘，未在沙箱啟動；沒有殘留背景工作。
+- **下一步**：先讀上述 ALL_DONE、compare.md、summary.json 的 gates/budgets/chain_seconds，必要時只讀 ejection_work.json 的 h05/h06 計數，判定此輪保留或撤回。ejection 最多 3 輪，若幾乎沒有吞吐或品質收益可依停損提前撤回至 SA 保留點；如考慮第 2 輪分 band，必須先解決完整 Search touched-set 隔離、跨界補做與 barrier cap 重驗，不能因目前排序等價就假設分 band 安全。所有 ejection 方案須有明確保留／撤回結論才能進最後驗收。B 尚未完成；最終仍須修正 phase2_train.py 歷史參考問題後做真正同輪 final_b Stage 1、protocol hash 對應最終 src、final_b L1/L2 合法及 <240/<600 秒、全套測試與最終 hash。未凍結、不產生新 seed、不進 C、不 commit。
+'"''')
+print('Final WORK_STATE saved; external training pending.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+v6 total 43324.4 max 2004.4 chain seconds 0.013958022999999986 ejection {'roots': 31, 'nodes': 4960, 'candidates': 13703, 'accepted': 0}
+candidate total 43324.4 max 2004.4 chain seconds 0.01340380400000002 ejection {'roots': 31, 'nodes': 4960, 'candidates': 13703, 'accepted': 0}
+Final WORK_STATE saved; external training pending.
+
+codex
+已撤回未達門檻的 target windows，保留 SA，並更新 WORK_STATE.md。
+ejection 第 1 輪改為減少候選排序；固定工作量與原版逐位一致。
+一般、ASan/UBSan、TSan 均 11/11 通過；ASan 使用 detect_leaks=0。
+B 尚未完成，待完整同輪訓練判定。
+RUN: python3 Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py ejection_beam_r1
+WAIT: Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ALL_DONE
+tokens used
+60,210
+已撤回未達門檻的 target windows，保留 SA，並更新 WORK_STATE.md。
+ejection 第 1 輪改為減少候選排序；固定工作量與原版逐位一致。
+一般、ASan/UBSan、TSan 均 11/11 通過；ASan 使用 detect_leaks=0。
+B 尚未完成，待完整同輪訓練判定。
+RUN: python3 Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py ejection_beam_r1
+WAIT: Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ALL_DONE

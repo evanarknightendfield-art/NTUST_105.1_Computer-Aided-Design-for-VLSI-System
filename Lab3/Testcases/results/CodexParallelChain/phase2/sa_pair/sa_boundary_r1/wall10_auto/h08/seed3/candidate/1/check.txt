@@ -1,0 +1,4 @@
+LEGAL
+Total displacement: 454423209.6
+Maximum displacement: 145746.6
+Total HPWL: 103879395.9

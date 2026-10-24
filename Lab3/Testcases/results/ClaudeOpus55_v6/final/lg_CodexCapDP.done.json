@@ -1,0 +1,18 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "Grader/tools/local_grade.py",
+  "AI_Solutions/CodexCapDP",
+  "CodexCapDP",
+  "Testcases/testcases",
+  "Testcases/holdout",
+  "--work",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_CodexCapDP",
+  "--timeout",
+  "600",
+  "--dp-args=-v"
+ ],
+ "returncode": 0,
+ "seconds": 630.62,
+ "finished": "Thu Oct 22 06:51:30 2026"
+}

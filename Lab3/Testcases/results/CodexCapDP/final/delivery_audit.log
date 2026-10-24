@@ -1,0 +1,104 @@
+{
+  "checked_at": "2026-10-21T17:26:10.773174+00:00",
+  "experiments_rerun": false,
+  "algorithms_changed_after_freeze": false,
+  "frozen_files": 51,
+  "frozen_changed": [],
+  "manifest_sha256": "b9d4ac797f3804a1eded6e4975ebfdb15dc2756e23212fcc5f5bcae0c67cc08b",
+  "protected_files": 133,
+  "protected_changed": [],
+  "parallel_sa_unchanged": {
+    "annealer.cpp": true,
+    "annealer.hpp": true,
+    "pool.hpp": true,
+    "rowmap.hpp": true
+  },
+  "normal_cpp": "10/10 PASS",
+  "asan_ubsan_cpp": "10/10 PASS",
+  "tsan": "Not rerun: parallel SA sources unchanged; fixed-work determinism test passed in both suites",
+  "records": {
+    "lg_new": {
+      "rows": 11,
+      "passed": 11,
+      "sha256": "377d5a84bb39c947968808c970be7fafd9fed76f6a61794c7119c8d96a1ebdca"
+    },
+    "lg_new_L1": {
+      "rows": 1,
+      "passed": 1,
+      "sha256": "3a3209f0f46c43667c6de8b6aff0911437c865a1e56b517dc436303ace5fd40f"
+    },
+    "lg_new_L2": {
+      "rows": 1,
+      "passed": 1,
+      "sha256": "4c7ad956d04c66d522357349ece556b94b056d9c5bb5d4055e71cb07c22c6871"
+    },
+    "seed4_ClaudeOpus55_v4": {
+      "rows": 16,
+      "passed": 16,
+      "sha256": "ac23c65cb10d4e7dfb9a29f2af2eef10d95a0c9528de4ff4f20af016e52c52f2"
+    },
+    "seed4_CodexChainDP": {
+      "rows": 16,
+      "passed": 16,
+      "sha256": "ed6e4edd6cb1acc197537ceeb7af0506defc7506f1e1999b270ace50e9ff7d9b"
+    },
+    "seed4_ClaudeOpus55_v5": {
+      "rows": 16,
+      "passed": 16,
+      "sha256": "dcf5d43b2e2e7a2d0e46b39b9f535935e2a1a7cac57af15e20af48a931cae18c"
+    },
+    "seed4_CodexCapDP": {
+      "rows": 16,
+      "passed": 16,
+      "sha256": "687d8b9a73d72cb887d80d3eb0cc7ea76cd8a422de23ba4347b77c63b2c6c849"
+    },
+    "edge_new": {
+      "rows": 16,
+      "passed": 16,
+      "sha256": "c8d3e5823f81aac364f9b08f0d1cd236bc56383b270afe0a340e6b4605a406d7"
+    }
+  },
+  "hpwl": {
+    "fixed": {
+      "rows": 216,
+      "passed": 216,
+      "by_version": {
+        "ClaudeOpus55_v5": 72,
+        "ClaudeOpus55_v4": 72,
+        "CodexCapDP": 72
+      }
+    },
+    "equal": {
+      "rows": 144,
+      "passed": 144,
+      "by_version": {
+        "CodexCapDP": 72,
+        "ClaudeOpus55_v4": 72
+      }
+    },
+    "default": {
+      "rows": 216,
+      "passed": 216,
+      "by_version": {
+        "ClaudeOpus55_v5": 72,
+        "ClaudeOpus55_v4": 72,
+        "CodexCapDP": 72
+      }
+    }
+  },
+  "completed_steps": 44,
+  "seed4_generated_after_freeze": true,
+  "seed4_generated_utc": "2026-10-21T11:57:04.591157+00:00",
+  "comparison_existing_prefix_unchanged": true,
+  "edge_version_added": true,
+  "missing_doc_links": [],
+  "delivery_files": {
+    "AI_Solutions/CodexCapDP/README.md": "718e8490b696b9ae734fadf2aa4c7189b9f09487f4bb4cb9b64bc7fa8fa31fe9",
+    "Testcases/results/CodexCapDP/final/summary.md": "883fa553d280d9fece8c58fa9bdbb906a22507b1460ba4a5cf8b855b5f124632",
+    "Testcases/results/CodexCapDP/final/details.md": "17ef12795c2898a0b2ef1d10213091ecaf27ba32177e643663cc395d76a2146e",
+    "AI_Solutions/COMPARISON.md": "3e9dd977fb96703b942ad6d92aaa2c8e022ee1fb8956a6dd445cf087037f11c3",
+    "Testcases/results/edge/make_table.py": "2f9f540540e65126435ba1bd3157176456816e4315f9f58c4155b648d482d624",
+    "Testcases/results/edge/tables.md": "90ee962f4ff019aafc0512385604831ce068128b8e87c3a4cc7d2400681f7172"
+  },
+  "note": "Audit verifies saved evidence; quality and deadline failures remain documented, not waived."
+}

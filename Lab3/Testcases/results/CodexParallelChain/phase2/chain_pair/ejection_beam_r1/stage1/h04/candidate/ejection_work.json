@@ -1,0 +1,22 @@
+{
+  "passes": [
+    {
+      "roots": 552,
+      "nodes": 85760,
+      "candidates": 340113,
+      "accepted": 0
+    },
+    {
+      "roots": 353,
+      "nodes": 54542,
+      "candidates": 196309,
+      "accepted": 0
+    }
+  ],
+  "totals": {
+    "roots": 905,
+    "nodes": 140302,
+    "candidates": 536422,
+    "accepted": 0
+  }
+}

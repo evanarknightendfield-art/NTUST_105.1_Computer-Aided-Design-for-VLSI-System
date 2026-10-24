@@ -1,0 +1,17 @@
+[cap-local] D 20.453091750 method 1 repair 0.482773 DP 0.948733 windows 175 remaining 2 raw 7174.686950 total 7075.227330 max 20.425840000 total_budget
+[cap-local] D 20.715310875 method 1 repair 0.445542 DP 0.977670 windows 100 remaining 2 raw 7154.605030 total 7073.780070 max 20.696030000 total_budget
+[cap-local] D 20.846420438 method 1 repair 0.434481 DP 0.711177 windows 42 remaining 1 raw 7083.761770 total 7055.081070 max 20.840360000 accepted
+[cap-local] D 20.658006850 method 1 repair 0.422045 DP 0.490258 windows 54 remaining 1 raw 7145.280890 total 7091.690150 max 20.640360000 total_budget
+[cap-local] D 20.749183425 method 1 repair 0.422825 DP 0.582118 windows 38 remaining 1 raw 7154.022390 total 7072.371250 max 20.738010000 total_budget
+[cap-local] D 20.794771713 method 1 repair 0.430704 DP 0.468766 windows 26 remaining 1 raw 7093.900530 total 7054.667010 max 20.793780000 accepted
+[cap-local] D 20.730099049 method 3 repair 0.002303 DP 0.123180 windows 16 remaining 0 raw 7062.714430 total 7061.676530 max 20.729030000 accepted
+[cap-local] D 20.640154284 method 3 repair 0.002774 DP 0.206959 windows 12 remaining 0 raw 7077.243770 total 7065.012370 max 20.640040000 accepted
+[cap-local] D 20.516148160 method 3 repair 0.023487 DP 0.319492 windows 42 remaining 0 raw 7098.618890 total 7079.632190 max 20.507850000 total_budget
+[cap-local] D 20.578094080 method 3 repair 0.019862 DP 0.219018 windows 30 remaining 0 raw 7085.994550 total 7075.740550 max 20.576960000 total_budget
+[cap-local] D 20.609067040 method 3 repair 0.002753 DP 0.115381 windows 12 remaining 0 raw 7074.209110 total 7068.543690 max 20.606090000 accepted
+[cap-local] D 20.562799181 method 3 repair 0.018317 DP 0.220519 windows 18 remaining 0 raw 7082.468590 total 7073.266210 max 20.555160000 total_budget
+[cap-local] D 20.584444590 method 3 repair 0.001953 DP 0.132215 windows 8 remaining 0 raw 7076.611990 total 7069.953750 max 20.582360000 accepted
+[cap-local] D 20.552091324 method 3 repair 0.017601 DP 0.148347 windows 10 remaining 0 raw 7078.172710 total 7068.924410 max 20.547200000 accepted
+[cap-local] D 20.504896243 method 3 repair 0.003384 DP 0.141711 windows 16 remaining 0 raw 7079.492290 total 7074.694530 max 20.502130000 total_budget
+[cap-local] D 20.526048122 method 3 repair 0.002593 DP 0.064230 windows 12 remaining 0 raw 7073.020290 total 7073.004570 max 20.523020000 total_budget
+[cap] 16 attempts, 16 feasible, 7 accepted: max 20.977530 -> 20.547200, total 7042.6044 -> 7068.9244 (+0.374%)  8.61s

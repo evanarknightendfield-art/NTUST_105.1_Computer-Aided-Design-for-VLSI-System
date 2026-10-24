@@ -1,0 +1,11 @@
+{
+  "executables": {
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/build/v6/dp": "62b18a49c64d9b8ea1a563841ffa772d3ec525df00f1e2b2582ea5a9f08db8d1",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/build/v5/dp": "eb94caca947706d24400c7fc4432f3a8d2107d2c62b9400ef5f648fff00a46d2",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/bin/dp_chain_diag": "da1ee9ca388eb46285a0f64f4cbbc02c8dafa9448109bf3c0c1d2bd34df1f19d",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/bin/sa_bench": "a4ece054d6466635f4d4199252487c71b848a91d85757083f91b23c4cc497e2f",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/build/v4/dp": "78c101b29ce56eca08b4d469a13774c583efa117e608639de6e238050ba79f93"
+  },
+  "script_sha256": "7303a824ad7aed97764d49bbd0308fed4ea1cfea247ed38eb82c2cb97558d83c",
+  "benchmarks_executed": 0
+}

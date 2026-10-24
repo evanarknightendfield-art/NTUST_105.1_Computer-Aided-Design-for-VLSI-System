@@ -1,0 +1,14 @@
+{
+  "bench": "h08",
+  "group": "holdout",
+  "status": "OK",
+  "seconds": 64.52291704999516,
+  "disp": 125530909.813,
+  "max": 28169.86,
+  "hpwl_legal": 308162713.9,
+  "hpwl_sa": 308162713.9,
+  "legal": true,
+  "max_ratio": 0.9911412571547595,
+  "total_ratio": 0.9956711967879825,
+  "both": true
+}

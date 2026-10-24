@@ -1,0 +1,5 @@
+[run] h01              OK     9.3s  stage1 9.277115557983052  sa None att None  max 29.39  hpwl 25492.0
+[run] h04              OK    16.6s  stage1 16.55371546599781  sa None att None  max 237.85  hpwl 534299.0
+[run] h06              OK    36.7s  stage1 36.69947001198307  sa None att None  max 435.19  hpwl 2149649.0
+[run] h07              OK    29.0s  stage1 28.980704043002333  sa None att None  max 47.6762  hpwl 354500.732
+[run] ibm05            OK    45.8s  stage1 45.77110877999803  sa None att None  max 199.0305  hpwl 11835588.5

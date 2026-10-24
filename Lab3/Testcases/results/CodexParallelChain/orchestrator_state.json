@@ -1,0 +1,8 @@
+{
+ "A2": true,
+ "B_runs": 10,
+ "B_DONE": true,
+ "asan": true,
+ "C": true,
+ "D": true
+}

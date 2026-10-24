@@ -1,0 +1,9 @@
+{
+  "freeze": "b9d4ac797f3804a1eded6e4975ebfdb15dc2756e23212fcc5f5bcae0c67cc08b",
+  "command": [
+    "bash",
+    "Testcases/results/run_edge.sh",
+    "CodexCapDP"
+  ],
+  "started": 1792578900.4229407
+}

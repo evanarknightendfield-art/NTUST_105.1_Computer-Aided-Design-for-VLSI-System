@@ -1,0 +1,928 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a165ab-5ce2-7cb0-8227-0b9ab078bac7
+--------
+user
+接續 AI_Solutions/CodexParallelChain/：讀 WORK_STATE.md 的「下一步」與上一次等待的結果，從那裡繼續（階段 B）。
+規則見 AI_Solutions/ClaudeOpus55_v6/HANDOFF.md 第 0 節；保留／撤回條件、停損、B 完成的最後檢查見第 7 節。只讀需要的片段。回覆不超過 10 行。
+
+【非互動執行的規則（由協調者自動開 session，使用者在睡覺）】
+- 這是 codex exec 的單次 session，沙箱裡啟動的背景工作會在 session 結束時被殺掉（第 A 階段的 nohup 就是這樣死掉的）。
+  所以不要自己啟動超過 5 分鐘的計算；把要跑的東西寫成腳本，然後在最後回覆的最後幾行寫：
+    RUN: <從 Lab3 目錄執行的完整命令>        （可以多行，依序執行）
+    WAIT: <完成標記的路徑，相對 Lab3>
+  協調者會在沙箱外依序執行 RUN、等 WAIT 出現，再開下一個 session。命令不要加 taskset（計時程式不能綁 E-core；編譯已由 v6q 綁）。
+- 要跑的東西都在 5 分鐘內的話（例如 C++ 測試），直接在本 session 跑完，不要寫 RUN/WAIT。
+- ASan：LeakSanitizer 在沙箱內會因 ptrace 失敗，請用 ASAN_OPTIONS=detect_leaks=0 跑並註明；協調者會在沙箱外補跑完整的 ASan。
+- 階段 B 全部完成（HANDOFF.md 第 7 節）時，最後一行只寫：B_DONE
+- 不 commit、不加任何 AI 署名；不要問問題（沒有人會回答），自己依 HANDOFF.md 判斷並把判斷寫進 WORK_STATE.md。
+
+codex
+我會先讀取「下一步」、上次等待結果，以及 HANDOFF 指定章節，再接續階段 B。
+
+exec
+/bin/bash -lc "pwd; rg --files -g AGENTS.md -g WORK_STATE.md -g HANDOFF.md -g '*DONE*' -g '*done*' AI_Solutions .agents 2>/dev/null" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+AI_Solutions/CodexChainDP/WORK_STATE.md
+AI_Solutions/CodexCapDP/WORK_STATE.md
+AI_Solutions/CodexParallelChain/WORK_STATE.md
+AI_Solutions/ClaudeOpus55_v6/WORK_STATE.md
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+
+exec
+/bin/bash -lc 'for p in /AGENTS.md /home/AGENTS.md /home/evan/AGENTS.md /home/evan/Desktop/AGENTS.md /home/evan/Desktop/NTUST/AGENTS.md /home/evan/Desktop/NTUST/105_1/AGENTS.md /home/evan/Desktop/NTUST/105_1/Class/AGENTS.md /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/AGENTS.md AGENTS.md AI_Solutions/AGENTS.md AI_Solutions/CodexParallelChain/AGENTS.md; do if [ -f "$p" ]; then cat "$p"; fi; done
+rg -n '"'"'^#|下一步|WAIT|RUN|等待'"' AI_Solutions/CodexParallelChain/WORK_STATE.md AI_Solutions/ClaudeOpus55_v6/HANDOFF.md" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:1:# 交接：v6 之後的下一版（給 Codex，一份就夠，不必再讀其他報告）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:5:## 0. 規則（每個 session 都適用）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:16:2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:17:   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:23:## 1. 可以直接用的工具（`Testcases/results/ClaudeOpus55_v6/scripts/`）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:46:## 2. v6 現況（2026-10-22 同輪配對；細節 `Testcases/results/ClaudeOpus55_v6/final/summary.md`）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:62:## 3. 已確認的事實（不必重新量）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:74:## 4. 已經證明不值得做的（不要再試）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:86:## 5. 建議的下一版方向（依幅度 × 機會；先診斷再做）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:95:## 6. 驗收（建議）
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:102:## 7. 階段 B（實作・調參）什麼時候算完成
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:104:**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md:124:4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:1:# CodexParallelChain — WORK_STATE
+AI_Solutions/CodexParallelChain/WORK_STATE.md:3:- 本 session：只建立版本並啟動第一階段診斷；不等待、不查進度、不調參、不 commit。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:11:## 第一階段範圍
+AI_Solutions/CodexParallelChain/WORK_STATE.md:23:## 執行約定
+AI_Solutions/CodexParallelChain/WORK_STATE.md:37:## 第一階段執行歷史（已於 10-23 05:01 完成）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:39:歷史等待項目：scripts/diag.py，完成標記 phase1/ALL_DONE
+AI_Solutions/CodexParallelChain/WORK_STATE.md:42:- 本 session 到此結束，未等待完成、未查詢診斷進度。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:98:- 10-23 05:01 phase1/ALL_DONE：全部診斷完成，保護資料夾 SHA256 未變；等待下一個 session 分析。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:100:## 目前狀態：2026-10-23 phase1 診斷完成
+AI_Solutions/CodexParallelChain/WORK_STATE.md:110:- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:112:## 階段 B：SA 第 1/3 輪（2026-10-23，待訓練，尚未保留）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:122:- 本 session 不執行長時間訓練、不啟動背景工作。交由協調者：`python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json`。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:132:## 階段 B：SA 第 1/3 輪補足同輪配對（2026-10-23，等待中）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:143:- 等待中：協調者執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE`。完整訓練超過 5 分鐘，故交外部執行；已完成的小樣本工作會依 marker 跳過。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:144:- **下一步**：先讀上述 `ALL_DONE`、`compare.md` 與 `summary.json` 的 gate/reproducibility，將數據與判斷記回本檔。若 SA 閘門失敗，依原因決定第 2/3 輪或提前撤回，總計最多 3 輪；chain target/DP 與 ejection 尚未實作或判定。B 尚未完成，不凍結、不產生新 seed、不進 C、不 commit。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:148:## 階段 B：SA 保留；target windows 第 1/3 輪（2026-10-23）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:166:- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py target_parallel_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/ALL_DONE`。其餘訓練預計超過 5 分鐘，未在沙箱啟動。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:167:- **下一步**：先讀該 ALL_DONE、compare.md、summary.json 的 gates／budgets／實際 chain seconds，將本輪 target windows 判定寫回本檔。失敗時按主因決定第 2/3 輪或提前撤回（只撤回此輪 window 改動，保留 SA）；成功則記新保留點。接著處理尚未完成的 ejection 平行化／無效搜尋項；不可用 SA 已通過或 toy 短測宣告 B 完成。最終階段需修正既有 phase2_train.py 的歷史參考問題，讓 final_b 真正同輪配對，再做第 7 節所有檢查。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:170:## 階段 B：target windows 撤回；ejection 第 1/3 輪（2026-10-23）
+AI_Solutions/CodexParallelChain/WORK_STATE.md:182:- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py ejection_beam_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ALL_DONE`。完整訓練預計超過 5 分鐘，未在沙箱啟動；沒有殘留背景工作。
+AI_Solutions/CodexParallelChain/WORK_STATE.md:183:- **下一步**：先讀上述 ALL_DONE、compare.md、summary.json 的 gates/budgets/chain_seconds，必要時只讀 ejection_work.json 的 h05/h06 計數，判定此輪保留或撤回。ejection 最多 3 輪，若幾乎沒有吞吐或品質收益可依停損提前撤回至 SA 保留點；如考慮第 2 輪分 band，必須先解決完整 Search touched-set 隔離、跨界補做與 barrier cap 重驗，不能因目前排序等價就假設分 band 安全。所有 ejection 方案須有明確保留／撤回結論才能進最後驗收。B 尚未完成；最終仍須修正 phase2_train.py 歷史參考問題後做真正同輪 final_b Stage 1、protocol hash 對應最終 src、final_b L1/L2 合法及 <240/<600 秒、全套測試與最終 hash。未凍結、不產生新 seed、不進 C、不 commit。
+
+exec
+/bin/bash -lc "sed -n '5,22p' AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+sed -n '102,132p' AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+sed -n '148,190p' AI_Solutions/CodexParallelChain/WORK_STATE.md
+cat Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ALL_DONE Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/compare.md
+rg --files AI_Solutions/CodexParallelChain Testcases/results/CodexParallelChain/scripts | head -65" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+## 0. 規則（每個 session 都適用）
+
+**品質與流程**
+- 不 commit、任何檔案都不加 AI 署名。保護資料夾（不要改）：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6。
+- 新版本：`AI_Solutions/<NEW>/`，以 ClaudeOpus55_v6 為底複製 `src/ CMakeLists.txt Makefile tests/`；執行輸出全部在 `Testcases/results/<NEW>/`。
+- 調參只用 `Testcases/testcases`、`Testcases/holdout`；edge、edge_seed2~5 只當回歸。凍結（記 sha256）之後才產生新 seed。
+- 沒有數據就不宣稱進步：HPWL 至少 3 seeds、報平均與範圍，三種協定分開；新舊版本同一次配對重跑。
+- 計時中的程式一次一個（`timing.lock`）；分析與編譯 `taskset -c 16-19`。
+
+**省 token（上一輪 Codex 一個 session 用了 2,230 萬 input token：166 次呼叫、每次約 14 萬 context，其中一半的工具呼叫是在查進度）**
+1. **一個 session 只做一個階段**，做完就更新 WORK_STATE 並結束；下一階段開新 session（context 從小開始）。
+2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+   `timeout 600 bash -c 'until [ -e MARKER ]; do sleep 20; done'`，不要反覆 ls / tail / ps。
+3. **輸出都進檔案**，終端只印摘要：每個指令輸出 ≤ 40 行（`| tail -n 20`、`awk` 摘要）；不要 cat 整份 record.csv、log、.pl。
+4. **只讀需要的**：本檔 + 自己的 WORK_STATE.md + 要改的函式。原始碼用 `grep -n` 找函式再 `sed -n` 讀範圍。
+5. 不重跑已完成的步驟（每步 `.done.json`）。對話回覆 ≤ 15 行；完整內容寫在報告檔。
+
+## 7. 階段 B（實作・調參）什麼時候算完成
+
+**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+
+**單項的判定**（只看 testcases + holdout；`phase2_train.py` 的 compare.md 會列出 v6 同輪的數字）
+
+v6 在訓練集 11 筆的基準（對 ChainDP，`ClaudeOpus55_v6/final`）：雙條件 **8/11**、最大位移 GM **0.99604**、總位移 GM **0.99813**。
+Stage 1 的執行間變動：總位移最多約 0.11%、最大位移約 0.13%（ibm05）。
+
+| 改動 | 保留的條件（全部要成立） |
+|---|---|
+| chain 階段平行化 | 訓練集雙條件 ≥ 8/11；總位移 GM 比 v6 低（≥ 0.03%）；最大位移 GM 不比 v6 差超過 0.1%；逐筆最大不比 v6 差超過 0.2%；chain 階段的實際秒數不比 v6 多；h05、h06 在同 1.5 秒內的 chain 收穫至少達到 v6 給 3 秒時的水準（v6：h05 −0.29%、h06 −0.44%，HANDOFF 第 3 節） |
+| 平行 SA（只有診斷的 band 損失平均 ≥ 0.5% 才做） | 同次數協定（固定次數、自動執行緒、3 seeds）在 ibm01、ibm05、h06、h07、h08 的幾何平均比 v6 好 ≥ 0.3%，沒有一筆差超過 0.5%；固定次數下兩次執行結果逐位相同；TSan 0 警告 |
+| 其他小改動 | 有訓練集數據顯示改善，且上表的「不比 v6 差」都成立 |
+
+**停損**：同一項最多 3 輪「改程式 → 訓練」。第 3 輪仍不符合保留條件就撤回（把 src 還原到上一個保留點），數據寫進 WORK_STATE 的「試過沒用」。
+
+**B 結束前的最後檢查**（對最後一份原始碼，`phase2_train.py` 的 protocol.json 裡的 src_sha256 要等於目前 src）
+
+1. 訓練集 Stage 1 一次（`phase2_train.py final_b`），以上「不比 v6 差」都成立，額外步驟 0 超時。
+2. 有動 SA、polish 或時間分配時：`phase2_large.py final_b`（L1、L2 完整執行）全部合法，L1 < 240 秒、L2 < 600 秒。
+3. C++ 測試：一般 + ASan/UBSan 全過；動過平行程式加 TSan 0 警告。新功能各有一個測試。
+4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+
+所有改動都被撤回也算 B 完成：寫清楚數據，C 改成「不凍結新版、直接寫報告說明沒有改善」。
+## 階段 B：SA 保留；target windows 第 1/3 輪（2026-10-23）
+
+- 已讀上次 `phase2/sa_pair/sa_boundary_r1/{ALL_DONE,compare.md,summary.json}`。固定單緒 GM 1.00000000；固定自動緒 GM 0.99174693（改善 0.825307%）；wall10 自動緒 GM 0.99143710（改善 0.856290%）。五筆各 3 seeds 的平均與範圍見 compare.md，三協定不混算；wall10 不是完整 end-to-end。
+- **保留 SA 四相邊界**：固定自動緒改善 ≥0.3%，最差單 seed h07 +0.423939% <0.5%，固定工作量 60 組重跑逐位相同；該份 src 的 TSan 10/10 PASS、0 警告。判定與 src／測試證據已另存 `phase2/accepted/sa_boundary_r1/`；這是撤回用的保留點，不是階段 C 凍結。保留點 hash `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。既有 ASan 是 detect_leaks=0，未宣稱完整洩漏驗證。
+- 原碼核對修正：`optimizeWindowsDisp` 已有平行 row bands、移動邊界與 atomic memo clock，故本輪不重做 post-chain DP；先實作仍為序列的 `targetedWindowsDisp`。ejection 的 Search 平行化／無效搜尋仍未實作或判定，後續不能忽略。
+- **target windows 第 1/3 輪候選，尚未保留**：依原 anchor 順序收集來源／目標完整 segment 互不相交的 windows；遇到衝突先完成前批，再建下一個 window。每批至多 min(threads,8)，worker 只讀 DB 與 window 求解，主緒按原順序套用 RowMap 更新。涵蓋遠列及同列不相交 regions，不禁止跨 band 候選；沒有減少 roots、passes、時間或改 cap。
+- 完整 segment 保留包含 region 邊界 cell，避免只看 anchor 或 cell set 的漏判；Pool barrier 之後才更新，例外時既有 safe Placement rollback。固定工作量應與原序列語意等價；deadline 僅可能多完成已收集的一批，仍須以實際秒數驗收，不預先宣稱加速。
+- 新增 `TargetWindowStats`（attempted/solved/batches/maxBatch）與 `target_window_test`：獨立遠列並行、共享 segment／同列 region 衝突、60 個隨機 fixture，序列/4 workers/repeat 的 seg/site、接受與求解數相同，合法、總／最大不增加，以及零時間無動作。CMake 與 run_tests.py 都列入第 11 個測試。
+- 此候選 src hash：`e3ee1e62c7f1fdd8bc7ef3c48e3cab98ed0108ab06e93ea04045259c64a7371e`。一般測試 11/11 PASS；ASan/UBSan、TSan 結果後補。日志 `phase2/target_r1_tests.log` 與 tests/records.json。
+- 新佇列 `scripts/phase2_chain_pair.py target_parallel_r1`：同輪交錯 candidate/v6，11 筆訓練 Stage 1（--no-sa）；另配對 h05/h06 candidate 1.5 s 與 v6 3 s（cap 關閉）。保留 phase1 的相同 8 行 chain 計時插樁，移除後須與各自 production main 逐字一致，src 快照及編譯結果皆記 SHA256。HPWL 不作本輪宣稱；雙條件 8/11 用歷史 ChainDP 定義，其餘改善／退步／時間閘門均比較同輪 v6。
+- 佇列每筆獨立 .done.json、輸入與 protocol/hash 固定；check_pl 驗證合法、拒絕 TIMEOUT／guard fallback；同持本版本與 v6 timing.lock，計時 worker 不綁核，僅 v6q 編譯綁 CPU 16–19。保護目錄 hash 前後核對，成功才寫 ALL_DONE。準備階段修正 guard 日誌辨識，初版 metadata 已存 .precheck；當時尚無測資執行，不曾丟棄訓練結果。
+- 第 7 節 chain gate 原樣保留：雙條件 ≥8/11、總 GM≤0.9997、最大 GM≤1.001、逐筆最大≤1.002、chain 實秒總和不增加，h05/h06 1.5s 收益須至少達歷史 0.29%/0.44% 且不低於同輪 v6 3s。最多 3 輪；失敗可依資料提前撤回到上述 SA 保留點。B 最後仍須 final_b 同輪 Stage 1、對應最終 src hash、L1/L2 與完整測試；目前不能 B_DONE。
+- 10-23 05:44 phase2/chain_pair/target_parallel_r1/jobs/stage1_toy_v6 完成（1 秒）
+- 10-23 05:44 phase2/chain_pair/target_parallel_r1/jobs/stage1_toy_candidate 完成（1 秒）
+
+- 本輪驗證已完成：一般／ASan+UBSan／TSan 均 **11/11 PASS**，各 30 筆 build/link/run 記錄；TSan 0 警告，ASan/UBSan 0 診斷。ASan 沙箱內使用 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 仍待協調者沙箱外補跑。候選 src/hash 與測試證據封存於 `phase2/chain_pair/target_parallel_r1/test_evidence/verification.json` 及子目錄，後續測試不會覆蓋此輪證據。
+- 雙版本已編譯、protocol／src／script hash 相符；短測 toy 同輪配對已直接完成（2 個 .done.json）。兩版均合法、總位移 43324.4、最大 2004.4；chain 實秒 v6 0.013843／candidate 0.015304。此小樣本僅驗證流程，不宣稱加速或通過保留閘門。詳見 `phase2/target_r1_smoke.log` 與 `phase2/chain_pair/target_parallel_r1/stage1/toy/`；正式佇列會跳過此兩筆。
+- 已核對保護目錄 hash 未變；本輪只在 SA 保留點之上改 window.cpp/window.hpp，SA 邊界功能未變。沒有 commit、沒有新 seed、沒有進 C；session 結束時無背景工作。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py target_parallel_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/ALL_DONE`。其餘訓練預計超過 5 分鐘，未在沙箱啟動。
+- **下一步**：先讀該 ALL_DONE、compare.md、summary.json 的 gates／budgets／實際 chain seconds，將本輪 target windows 判定寫回本檔。失敗時按主因決定第 2/3 輪或提前撤回（只撤回此輪 window 改動，保留 SA）；成功則記新保留點。接著處理尚未完成的 ejection 平行化／無效搜尋項；不可用 SA 已通過或 toy 短測宣告 B 完成。最終階段需修正既有 phase2_train.py 的歷史參考問題，讓 final_b 真正同輪配對，再做第 7 節所有檢查。
+- 10-23 05:54 phase2/chain_pair/target_parallel_r1 completed; see compare.md and summary.json
+
+## 階段 B：target windows 撤回；ejection 第 1/3 輪（2026-10-23）
+
+- 已讀上次 `phase2/chain_pair/target_parallel_r1/{ALL_DONE,compare.md,summary.json}`。雙條件 8/11；總位移 GM 1.00041344（退步 0.041344%）、最大 GM 0.99862747；h04 最大比 1.00260668，超過逐筆 +0.2% 門檻。chain 實秒合計 candidate 14.239835989 / v6 14.558779537（僅省 2.19%）。h05 在 1.5s 收益 0.261639% < 配對 v6 3s 0.288901%／歷史門檻 0.29%；h06 0.364283% < 0.434934%／0.44%。三個品質閘門失敗。
+- **試過沒用／撤回 target windows（第 1 輪提前停損）**：節省時間太小，且總位移、h04 最大位移與半預算收益均未達標，沒有證據支持只調 batch 大小可補足差距，不消耗第 2/3 輪。window.cpp/window.hpp 已逐檔還原到 SA 保留點；target_window_test.cpp 封存於該輪 test_evidence 並退出目前測試清單。決策 `phase2/chain_pair/target_parallel_r1/decision.json`；該輪數據及程式快照保留。SA 四相邊界仍保留，post-chain DP 本來即已平行，沒有新增 DP 改動。
+- **ejection 第 1/3 輪候選，尚未保留**：先處理診斷所列無效搜尋工作，將每個 DFS node 的完整候選排序改成 occupied／empty 各自 partial_sort，只對最後保留的 beam 合併排序。保留原 empty 與 occupied 配額、總排序鍵、候選生成、roots/depth/expansions、時間預算及接受規則。保留候選的 seg/site 唯一，排序鍵為全序，因此固定工作量應逐位相同；限時吞吐與品質必須實測。
+- 本輪**沒有**把可變 Search／RowMap 交給多執行緒；ejection 分 band 仍未實作。依 diagnosis 第 3 優先項先評估精確等價的少排序方案，避免一次混入跨 band 搜尋覆蓋率變動。不可將此輪通過視為分 band 已驗證，也不可因 SA 已保留而跳過 ejection 的明確決策。
+- 新功能測試 chain_beam_test：2,400 組以 v6 全排序加過濾為獨立 oracle，涵蓋空集合、全空位／全 occupied、重疊壓縮、大量同分、奇數 beam 與候選不足；全部保留候選及次序相同。另用保留點 chain.cpp 獨立編譯 reference，套用現有 chain_test 全部固定工作量 fixture＋300 個隨機 placement，seg/site、roots/nodes/candidates/accepted/longest/multiBlocker/refreshed 全相同（6,569 accepted chains、2,673 multi-blocker steps）。證據 `phase2/ejection_beam_r1_equivalence/{driver.cpp,build.log,run.log,done.json}`；極短 wall deadline 不作逐位配對，仍由原測試檢查回滾。
+- 一般 11/11 PASS（新增 chain_beam 替換已撤回 target_window）；ASan/UBSan、TSan 正在本 session 執行，結果另補。沙箱 ASan 明確設 `ASAN_OPTIONS=detect_leaks=0`；完整 LeakSanitizer 仍待協調者沙箱外補跑，不宣稱洩漏已驗證。
+- 新佇列 `scripts/phase2_ejection_pair.py ejection_beam_r1`，沿用先前成功的同輪交錯雙版本 Stage 1 11 筆，以及 h05/h06 candidate 1.5s / v6 3s 配對。未修改原 target 輪腳本及證據；新增每次 ejection 的 roots/nodes/candidates/accepted 計數，存個別與彙整 ejection_work.json。仍採第 7 節完整 chain 閘門（包括總 GM≤0.9997、雙條件≥8/11、最大 GM≤1.001、逐筆最大≤1.002、實秒不增加與兩筆半預算收益）；本候選不以較寬鬆門檻事後挑選。
+- 此輪候選 src_sha256：`2fc4f106a3f84835e9f92afbf40d0befa0eb9f5ac7ab1160b58373fc96cf921a`。未 commit、未改保護目錄、未產生新 seed、不進 C。
+- 本輪最終短驗證：一般／ASan+UBSan／TSan 均 **11/11 PASS**，各 30 筆 build/link/run，TSan 0 警告、ASan/UBSan 0 診斷；ASan 使用 detect_leaks=0。用時約 44／151／79 秒，各工作均小於 5 分鐘。對應候選 hash 的不可覆寫證據已封存於 `phase2/chain_pair/ejection_beam_r1/test_evidence/verification.json` 與各子目錄。
+- 雙版本編譯、protocol/src hash、保護目錄 hash 核對通過。toy 同輪配對短測已完成兩筆 jobs/*.done.json，均合法；各 root/node/candidate/accepted counter 皆記錄成功。這僅驗證訓練流程，不作收益宣稱；正式佇列會跳過已完成的 toy。詳見 `phase2/ejection_r1_{prepare,smoke}.log` 與 `phase2/chain_pair/ejection_beam_r1/stage1/toy/`。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py ejection_beam_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ALL_DONE`。完整訓練預計超過 5 分鐘，未在沙箱啟動；沒有殘留背景工作。
+- **下一步**：先讀上述 ALL_DONE、compare.md、summary.json 的 gates/budgets/chain_seconds，必要時只讀 ejection_work.json 的 h05/h06 計數，判定此輪保留或撤回。ejection 最多 3 輪，若幾乎沒有吞吐或品質收益可依停損提前撤回至 SA 保留點；如考慮第 2 輪分 band，必須先解決完整 Search touched-set 隔離、跨界補做與 barrier cap 重驗，不能因目前排序等價就假設分 band 安全。所有 ejection 方案須有明確保留／撤回結論才能進最後驗收。B 尚未完成；最終仍須修正 phase2_train.py 歷史參考問題後做真正同輪 final_b Stage 1、protocol hash 對應最終 src、final_b L1/L2 合法及 <240/<600 秒、全套測試與最終 hash。未凍結、不產生新 seed、不進 C、不 commit。
+- 10-23 06:11 phase2/chain_pair/ejection_beam_r1 completed; see compare.md and summary.json
+{
+  "protocol_sha256": "3ed05ed3291d769f9191aa998a3dc5eb94201a141012f7078a71fb1d7c0c9160",
+  "finished": "Fri Oct 23 06:11:22 2026"
+}
+# Ejection beam selection: same-round Stage 1 pairs
+
+Ratio = candidate / v6. No SA; HPWL is not a quality gate in this report.
+
+| Case | Total ratio | Max ratio | Chain seconds candidate / v6 | Both vs historical ChainDP |
+|---|---:|---:|---:|:---:|
+| ibm01 | 0.99994857 | 1.00000000 | 1.450060 / 1.451364 | True |
+| ibm05 | 0.99999645 | 1.00000000 | 1.369419 / 1.369574 | True |
+| toy | 1.00000000 | 1.00000000 | 0.013404 / 0.013958 | True |
+| h01 | 1.00000000 | 1.00000000 | 0.056883 / 0.056107 | True |
+| h02 | 1.00000000 | 1.00000000 | 1.861640 / 1.862599 | True |
+| h03 | 1.00000000 | 1.00000000 | 2.627778 / 2.626243 | True |
+| h04 | 1.00000554 | 1.00000000 | 1.448978 / 1.450646 | False |
+| h05 | 1.00000000 | 1.00000000 | 1.451876 / 1.450464 | True |
+| h06 | 0.99994590 | 1.00000000 | 1.455686 / 1.455356 | False |
+| h07 | 0.99998160 | 1.00000000 | 1.452919 / 1.451376 | False |
+| h08 | 0.99937074 | 1.00000000 | 1.359083 / 1.360135 | True |
+
+Both: 8/11; total GM 0.99993169; max GM 1.00000000.
+Chain seconds: {'v6': 14.547820981999996, 'candidate': 14.547725445}.
+
+Candidate 1.5 s vs v6 3 s chain gain:
+- h05: candidate 0.261639%, v6 0.288901%, historical requirement 0.29%; pass False; actual chain seconds 1.451768 / 2.872168.
+- h06: candidate 0.367677%, v6 0.434905%, historical requirement 0.44%; pass False; actual chain seconds 1.455389 / 2.889821.
+
+Gates:
+- both_at_least_8: True
+- total_improved_003pct: False
+- max_gm_not_worse_01pct: True
+- every_max_not_worse_02pct: True
+- chain_seconds_not_more: True
+- h05_h06_gain: False
+Testcases/results/CodexParallelChain/scripts/final_report.py
+Testcases/results/CodexParallelChain/scripts/phase1_runs.py
+Testcases/results/CodexParallelChain/scripts/phase2_final.py
+Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py
+Testcases/results/CodexParallelChain/scripts/phase2_stage2_sweep.py
+Testcases/results/CodexParallelChain/scripts/repair_compare.sh
+Testcases/results/CodexParallelChain/scripts/phase1_exp2.py
+Testcases/results/CodexParallelChain/scripts/final_summary.py
+Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py
+Testcases/results/CodexParallelChain/scripts/phase2_large.py
+Testcases/results/CodexParallelChain/scripts/cap_headroom.py
+Testcases/results/CodexParallelChain/scripts/final_validate.py
+Testcases/results/CodexParallelChain/scripts/codex_after.sh
+Testcases/results/CodexParallelChain/scripts/v6q.py
+Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py
+Testcases/results/CodexParallelChain/scripts/phase1_exp3.py
+Testcases/results/CodexParallelChain/scripts/phase2_train.py
+Testcases/results/CodexParallelChain/scripts/diag.py
+Testcases/results/CodexParallelChain/scripts/stage1_phases.py
+Testcases/results/CodexParallelChain/scripts/phase1_tables.py
+Testcases/results/CodexParallelChain/scripts/__pycache__/v6q.cpython-314.pyc
+AI_Solutions/CodexParallelChain/tests/diagnostic_window.cpp
+AI_Solutions/CodexParallelChain/tests/cap_chain_prototype.hpp
+AI_Solutions/CodexParallelChain/tests/cap_windows_test.cpp
+AI_Solutions/CodexParallelChain/tests/sa_bench2.cpp
+AI_Solutions/CodexParallelChain/tests/cap_windows_bench.cpp
+AI_Solutions/CodexParallelChain/tests/site_repair_bench.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_main.cpp
+AI_Solutions/CodexParallelChain/tests/pool_test.cpp
+AI_Solutions/CodexParallelChain/tests/sa_bench.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_experiments.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic_capsearch.cpp
+AI_Solutions/CodexParallelChain/tests/readpl.cpp
+AI_Solutions/CodexParallelChain/tests/global_test.cpp
+AI_Solutions/CodexParallelChain/tests/repair_compare.cpp
+AI_Solutions/CodexParallelChain/tests/guard_test.cpp
+AI_Solutions/CodexParallelChain/tests/window_test.cpp
+AI_Solutions/CodexParallelChain/tests/cap_search_bench.cpp
+AI_Solutions/CodexParallelChain/tests/capsearch_test.cpp
+AI_Solutions/CodexParallelChain/tests/chain_test.cpp
+AI_Solutions/CodexParallelChain/tests/global_preserve_prototype.cpp
+AI_Solutions/CodexParallelChain/tests/multirow_test.cpp
+AI_Solutions/CodexParallelChain/tests/diag_chaindp_global/driver.cpp
+AI_Solutions/CodexParallelChain/tests/chain_beam_test.cpp
+AI_Solutions/CodexParallelChain/tests/diag_chaindp_global/global_diag.cpp
+AI_Solutions/CodexParallelChain/tests/cap_chain_prototype.cpp
+AI_Solutions/CodexParallelChain/tests/global_preserve_prototype.hpp
+AI_Solutions/CodexParallelChain/tests/parallel_sa_test.cpp
+AI_Solutions/CodexParallelChain/tests/optimizer_test.cpp
+AI_Solutions/CodexParallelChain/tests/run_tests.py
+AI_Solutions/CodexParallelChain/tests/compare_methods.cpp
+AI_Solutions/CodexParallelChain/tests/diagnostic.hpp
+Testcases/results/CodexParallelChain/scripts/phase1_exp.py
+Testcases/results/CodexParallelChain/scripts/compare_lg.py
+Testcases/results/CodexParallelChain/scripts/toolbin/cmake
+AI_Solutions/CodexParallelChain/CMakeLists.txt
+AI_Solutions/CodexParallelChain/Makefile
+AI_Solutions/CodexParallelChain/WORK_STATE.md
+AI_Solutions/CodexParallelChain/src/guard.hpp
+AI_Solutions/CodexParallelChain/src/sa_bands.hpp
+AI_Solutions/CodexParallelChain/src/legalizer.hpp
+AI_Solutions/CodexParallelChain/src/legalizer.cpp
+AI_Solutions/CodexParallelChain/src/global.cpp
+AI_Solutions/CodexParallelChain/src/global.hpp
+AI_Solutions/CodexParallelChain/src/chain.hpp
+
+exec
+/bin/bash -lc "taskset -c 16-19 python3 - <<'PY'
+import json,pathlib
+p=pathlib.Path('Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1')
+s=json.loads((p/'summary.json').read_text())
+for k,v in s.items():
+ if k"'!='"'cases': print(k, json.dumps(v)[:5000])
+p=pathlib.Path('Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1')
+print('accepted files:',[str(x.relative_to(p)) for x in p.rglob('*') if x.is_file()][:40])
+PY
+rg -n '"'^def |''^class |REF|reference|final_b|sha256|stage1'"' Testcases/results/CodexParallelChain/scripts/phase2_train.py | head -25" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+rows [{"bench": "ibm01", "total_ratio": 0.9999485702464155, "max_ratio": 1.0, "both": true, "candidate_total": 23101702.9947, "v6_total": 23102891.1707, "candidate_max": 10427.027, "v6_max": 10427.027, "candidate_chain_seconds": 1.4500595169999997, "v6_chain_seconds": 1.4513638559999968}, {"bench": "ibm05", "total_ratio": 0.9999964454439696, "max_ratio": 1.0, "both": true, "candidate_total": 1327868.567, "v6_total": 1327873.287, "candidate_max": 199.918, "v6_max": 199.918, "candidate_chain_seconds": 1.369418992, "v6_chain_seconds": 1.3695737159999979}, {"bench": "toy", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate_total": 43324.4, "v6_total": 43324.4, "candidate_max": 2004.4, "v6_max": 2004.4, "candidate_chain_seconds": 0.01340380400000002, "v6_chain_seconds": 0.013958022999999986}, {"bench": "h01", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate_total": 2358.81, "v6_total": 2358.81, "candidate_max": 29.39, "v6_max": 29.39, "candidate_chain_seconds": 0.056882982000000304, "v6_chain_seconds": 0.05610726200000027}, {"bench": "h02", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate_total": 463886.857, "v6_total": 463886.857, "candidate_max": 2526.519, "v6_max": 2526.519, "candidate_chain_seconds": 1.8616402910000005, "v6_chain_seconds": 1.862598664}, {"bench": "h03", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate_total": 7066.0491, "v6_total": 7066.0491, "candidate_max": 20.2013, "v6_max": 20.2013, "candidate_chain_seconds": 2.6277782060000003, "v6_chain_seconds": 2.626242617}, {"bench": "h04", "total_ratio": 1.0000055433444914, "max_ratio": 1.0, "both": false, "candidate_total": 180397.51, "v6_total": 180396.51, "candidate_max": 237.85, "v6_max": 237.85, "candidate_chain_seconds": 1.4489780040000007, "v6_chain_seconds": 1.4506464799999996}, {"bench": "h05", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate_total": 1551488.48, "v6_total": 1551488.48, "candidate_max": 1337.305, "v6_max": 1337.305, "candidate_chain_seconds": 1.4518762750000005, "v6_chain_seconds": 1.4504638140000004}, {"bench": "h06", "total_ratio": 0.9999459028478553, "max_ratio": 1.0, "both": false, "candidate_total": 889462.66, "v6_total": 889510.78, "candidate_max": 427.56, "v6_max": 427.56, "candidate_chain_seconds": 1.4556862809999984, "v6_chain_seconds": 1.4553558029999998}, {"bench": "h07", "total_ratio": 0.9999816040410491, "max_ratio": 1.0, "both": false, "candidate_total": 109179.5789, "v6_total": 109181.5874, "candidate_max": 47.6762, "v6_max": 47.6762, "candidate_chain_seconds": 1.4529185560000002, "v6_chain_seconds": 1.4513755320000001}, {"bench": "h08", "total_ratio": 0.9993707420374389, "max_ratio": 1.0, "both": true, "candidate_total": 125434126.901, "v6_total": 125513107.023, "candidate_max": 28282.309, "v6_max": 28282.309, "candidate_chain_seconds": 1.359082536999999, "v6_chain_seconds": 1.3601352149999997}]
+both 8
+total_gm 0.9999316938710231
+max_gm 1.0
+chain_seconds {"v6": 14.547820981999996, "candidate": 14.547725445}
+budgets [{"bench": "h05", "candidate_gain_fraction": 0.0026163885558340002, "paired_v6_3s_gain_fraction": 0.002889012180494453, "historical_required": 0.0029, "candidate_seconds": 1.4517682189999999, "v6_seconds": 2.8721680280000004, "pass_gate": false}, {"bench": "h06", "candidate_gain_fraction": 0.0036767718995044173, "paired_v6_3s_gain_fraction": 0.004349050201333668, "historical_required": 0.0044, "candidate_seconds": 1.4553890500000009, "v6_seconds": 2.889820817999997, "pass_gate": false}]
+gates {"both_at_least_8": true, "total_improved_003pct": false, "max_gm_not_worse_01pct": true, "every_max_not_worse_02pct": true, "chain_seconds_not_more": true, "h05_h06_gain": false}
+all_numeric_gates false
+note "No automatic keep decision: inspect budget overshoot and tests independently."
+accepted files: ['decision.json', 'tests_tsan/link_window.log', 'tests_tsan/link_parallel_sa.log', 'tests_tsan/link_cap_windows.log', 'tests_tsan/records.json', 'tests_tsan/cap_windows.log', 'tests_tsan/link_optimizer.log', 'tests_tsan/build_window.log', 'tests_tsan/optimizer.log', 'tests_tsan/link_guard.log', 'tests_tsan/global.log', 'tests_tsan/build_global.log', 'tests_tsan/link_global.log', 'tests_tsan/link_pool.log', 'tests_tsan/parallel_sa.log', 'tests_tsan/build_chain.log', 'tests_tsan/build_placedb.log', 'tests_tsan/link_multirow.log', 'tests_tsan/pool.log', 'tests_tsan/build_optimizer.log', 'tests_tsan/link_chain.log', 'tests_tsan/build_annealer.log', 'tests_tsan/link_capsearch.log', 'tests_tsan/capsearch.log', 'tests_tsan/window.log', 'tests_tsan/build_capsearch.log', 'tests_tsan/multirow.log', 'tests_tsan/guard.log', 'tests_tsan/chain.log', 'tests_tsan/build_legalizer.log', 'src/pool.hpp', 'src/window.hpp', 'src/placedb.hpp', 'src/window.cpp', 'src/main.cpp', 'src/annealer.cpp', 'src/optimizer.hpp', 'src/capsearch.hpp', 'src/annealer.hpp', 'src/capsearch.cpp']
+20:src_hash = hashlib.sha256(b''.join(p.read_bytes() for p in sorted((d / 'src').iterdir()))).hexdigest()
+21:(d / 'protocol.json').write_text(json.dumps(dict(tag=tag, src_sha256=src_hash, dp_args=extra), indent=1) + '\n')
+24:q.run('stage1', [PY, V5S / 'run_ts.py', '--bin', exe, '--out', d / 'ts', f'--dp-args=--no-sa {extra}',
+26:# references: this results folder's own phase1/lg (v6's diagnosis) if present, else v6's final paired run
+33:subprocess.run([PY, R / 'scripts/stage1_phases.py', d / 'stage1', d / 'ts'], check=True)
+
+codex
+ejection 第 1 輪只改善總位移 0.00683%，且 h05／h06 半預算收益未達標；我會提前停損、撤回至 SA 保留點，再準備最終同輪驗收。
+
+exec
+/bin/bash -lc 'nl -ba Testcases/results/CodexParallelChain/scripts/phase2_train.py | head -40' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+     1	#!/usr/bin/env python3
+     2	"""phase2_train.py TAG [extra dp args] — Stage 1 of the current v6 source on the tuning set (testcases + holdout).
+     3	
+     4	Copies AI_Solutions/<this results folder's name> (src + CMakeLists) to phase2/train/TAG/src, builds it there, records the
+     5	source hash, runs run_ts.py --no-sa -v on the 11 cases, and compares with this session's ChainDP / CodexCapDP
+     6	local_grade records (phase1/lg; for a later version: ClaudeOpus55_v6/final). Only testcases + holdout: edge is never used for tuning.
+     7	"""
+     8	import hashlib, json, shutil, subprocess, sys
+     9	from pathlib import Path
+    10	sys.path.insert(0, str(Path(__file__).resolve().parent))
+    11	from v6q import Queue, R, LAB, PY, V5S, build, note  # noqa: E402
+    12	
+    13	tag = sys.argv[1]
+    14	extra = ' '.join(sys.argv[2:])
+    15	d = R / 'phase2' / 'train' / tag
+    16	if not (d / 'src').exists():
+    17	    d.mkdir(parents=True, exist_ok=True)
+    18	    shutil.copytree(LAB / 'AI_Solutions' / R.name / 'src', d / 'src')
+    19	    shutil.copy(LAB / 'AI_Solutions' / R.name / 'CMakeLists.txt', d / 'CMakeLists.txt')
+    20	src_hash = hashlib.sha256(b''.join(p.read_bytes() for p in sorted((d / 'src').iterdir()))).hexdigest()
+    21	(d / 'protocol.json').write_text(json.dumps(dict(tag=tag, src_sha256=src_hash, dp_args=extra), indent=1) + '\n')
+    22	exe = build('v6', d / 'build', src=d)
+    23	q = Queue(d)
+    24	q.run('stage1', [PY, V5S / 'run_ts.py', '--bin', exe, '--out', d / 'ts', f'--dp-args=--no-sa {extra}',
+    25	                 'Testcases/testcases', 'Testcases/holdout'])
+    26	# references: this results folder's own phase1/lg (v6's diagnosis) if present, else v6's final paired run
+    27	ref = R / 'phase1/lg' if (R / 'phase1/lg/CodexChainDP_27/record.csv').exists() else None
+    28	V6F = R.parent / 'ClaudeOpus55_v6' / 'final'
+    29	refs = (['CodexChainDP', ref / 'CodexChainDP_27/record.csv', 'CodexCapDP', ref / 'CodexCapDP_27/record.csv'] if ref else
+    30	        ['CodexChainDP', V6F / 'lg_CodexChainDP/record.csv', 'ClaudeOpus55_v6', V6F / 'lg_ClaudeOpus55_v6/record.csv'])
+    31	subprocess.run([PY, R / 'scripts/compare_lg.py', d / 'compare.md', *refs, f'{R.name}_{tag}', d / 'ts/record.csv', '--csv', d / 'compare.csv'],
+    32	               check=True)
+    33	subprocess.run([PY, R / 'scripts/stage1_phases.py', d / 'stage1', d / 'ts'], check=True)
+    34	note(f'phase2/train/{tag} 完成（{extra or "預設"}）：見 phase2/train/{tag}/compare.md')
+
+exec
+/bin/bash -lc 'nl -ba Testcases/results/CodexParallelChain/scripts/phase2_large.py | head -40' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+     1	#!/usr/bin/env python3
+     2	"""phase2_large.py TAG — full default dp runs of the current v6 source on L2 (seeds 1, 2) and L1 (seed 1), run_ts -v.
+     3	Source copied to phase2/large/TAG/src and built there (hash in protocol.json)."""
+     4	import hashlib, json, shutil, sys
+     5	from pathlib import Path
+     6	sys.path.insert(0, str(Path(__file__).resolve().parent))
+     7	from v6q import Queue, R, LAB, PY, V5S, build, note  # noqa: E402
+     8	
+     9	tag = sys.argv[1]
+    10	d = R / 'phase2' / 'large' / tag
+    11	if not (d / 'src').exists():
+    12	    d.mkdir(parents=True, exist_ok=True)
+    13	    shutil.copytree(LAB / 'AI_Solutions' / R.name / 'src', d / 'src')
+    14	    shutil.copy(LAB / 'AI_Solutions' / R.name / 'CMakeLists.txt', d / 'CMakeLists.txt')
+    15	(d / 'protocol.json').write_text(json.dumps(dict(tag=tag, src_sha256=hashlib.sha256(
+    16	    b''.join(p.read_bytes() for p in sorted((d / 'src').iterdir()))).hexdigest()), indent=1) + '\n')
+    17	exe = build('v6', d / 'build', src=d)
+    18	q = Queue(d)
+    19	for design, seed in [('L2', 1), ('L2', 2), ('L1', 1)]:
+    20	    q.run(f'{design}_s{seed}', [PY, V5S / 'run_ts.py', '--bin', exe, '--out', d / f'{design}_s{seed}', '--timeout', 900,
+    21	                                f'--dp-args=--seed {seed}', f'Testcases/large/{design}/{design}'])
+    22	note(f'phase2/large/{tag} 完成')
+
+exec
+/bin/bash -lc "rg -n '"'^def |''^class |''^if |protocol|gates|summary|compile|snapshot|sha256|def main'"' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py | head -40
+" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+28:def dump(path, value):
+35:def src_hash(path):
+36:    return hashlib.sha256(b''.join(p.read_bytes() for p in sorted(path.iterdir()))).hexdigest()
+39:def protocol(tag):
+40:    return dict(tag=tag, script_sha256=sha(SELF), src_sha256=src_hash(SOLUTION / 'src'),
+41:                reference_sha256=src_hash(BASE / 'src'), modes=MODES, cases=CASES,
+42:                cmake_sha256=sha(SOLUTION / 'CMakeLists.txt'),
+43:                runner_sha256=sha(V5S / 'run_ts.py'),
+44:                instrumentation_sha256=sha(R / 'phase1/instrumented/src/main.cpp'),
+46:                chain_reference_sha256=sha(R.parent / 'ClaudeOpus55_v6/final/lg_CodexChainDP/record.csv'),
+51:def prepare(d, tag):
+53:    p = protocol(tag)
+54:    if (d / 'protocol.json').exists() and json.loads((d / 'protocol.json').read_text()) != p:
+56:    dump(d / 'protocol.json', p)
+77:    dump(d / 'prepared.json', dict(protocol_sha256=sha(d / 'protocol.json'), binaries=binaries))
+80:def worker(d, mode, bench, version):
+102:                                    phases=phases, placement_sha256=sha(case / 'output_legal.pl')))
+105:def gm(values):
+109:def ratio(a, b):
+113:def summarize(d):
+149:    gates = dict(both_at_least_8=both >= 8, total_improved_003pct=total_gm <= .9997,
+154:    summary = dict(rows=rows, both=both, total_gm=total_gm, max_gm=max_gm,
+155:                   chain_seconds=times, budgets=budget, gates=gates,
+156:                   all_numeric_gates=all(gates.values()),
+158:    dump(d / 'summary.json', summary)
+173:    lines += ['', 'Gates:'] + [f'- {k}: {v}' for k, v in gates.items()]
+177:def run(d, tag):
+180:    if json.loads((d / 'protocol.json').read_text()) != protocol(tag):
+183:    if prepared['protocol_sha256'] != sha(d / 'protocol.json'):
+205:        dump(d / 'ALL_DONE', dict(protocol_sha256=sha(d / 'protocol.json'), finished=time.ctime()))
+206:    note(f'phase2/chain_pair/{tag} completed; see compare.md and summary.json')
+209:if __name__ == '__main__':
+
+exec
+/bin/bash -lc "sed -n '1,39p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#!/usr/bin/env python3
+"""Checkpointed same-round Stage 1 and chain-budget pairs; no SA or edge tuning."""
+import argparse
+import csv
+import fcntl
+import hashlib
+import json
+import math
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+
+sys.dont_write_bytecode = True
+from v6q import LAB, R, PY, V5S, Queue, build, note
+from diag import original_prefix, prefix_hashes, sha, verify_protected, parse_chain
+
+SELF = Path(__file__).resolve()
+SOLUTION = LAB / 'AI_Solutions' / R.name
+BASE = LAB / 'AI_Solutions/ClaudeOpus55_v6'
+CASES = ['ibm01', 'ibm05', 'toy'] + [f'h{i:02d}' for i in range(1, 9)]
+MODES = {'stage1': '--no-sa', 'chain15': '--no-sa --cap-time 0 --chain-time 1.5',
+         'chain30': '--no-sa --cap-time 0 --chain-time 3'}
+
+
+def dump(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + '.tmp')
+    tmp.write_text(json.dumps(value, indent=2) + '\n')
+    tmp.replace(path)
+
+
+def src_hash(path):
+    return hashlib.sha256(b''.join(p.read_bytes() for p in sorted(path.iterdir()))).hexdigest()
+
+
+def protocol(tag):
+
+exec
+/bin/bash -lc "sed -n '51,104p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py | fold -w 200 | head -40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def prepare(d, tag):
+    verify_protected()
+    p = protocol(tag)
+    if (d / 'protocol.json').exists() and json.loads((d / 'protocol.json').read_text()) != p:
+        raise RuntimeError('Protocol changed; use a new tag')
+    dump(d / 'protocol.json', p)
+    # The same eight measurement lines used in phase 1. Strip them and demand
+    # exact identity with each production main; never silently substitute code.
+    instrumented = (R / 'phase1/instrumented/src/main.cpp').read_text()
+    stripped = ''.join(x for x in instrumented.splitlines(keepends=True) if '[diag-chain]' not in x)
+    assert instrumented.count('[diag-chain]') == 8
+    binaries = {}
+    for name, source in [('v6', BASE), ('candidate', SOLUTION)]:
+        assert stripped == (source / 'src/main.cpp').read_text()
+        root = d / name
+        if not (root / 'src').exists():
+            shutil.copytree(source / 'src', root / 'src')
+        if src_hash(root / 'src') != src_hash(source / 'src'):
+            raise RuntimeError('Snapshot changed')
+        shadow = root / 'instrumented'
+        if not (shadow / 'src').exists():
+            shutil.copytree(root / 'src', shadow / 'src')
+        (shadow / 'src/main.cpp').write_text(instrumented)
+        shutil.copy2(source / 'CMakeLists.txt', shadow / 'CMakeLists.txt')
+        exe = build(name, root / 'build', src=shadow)
+        binaries[name] = sha(exe)
+    dump(d / 'prepared.json', dict(protocol_sha256=sha(d / 'protocol.json'), binaries=binaries))
+
+
+def worker(d, mode, bench, version):
+    root = d / mode / bench / version
+    root.mkdir(parents=True, exist_ok=True)
+    command = [PY, V5S / 'run_ts.py', '--bin', d / version / 'build/dp', '--out', root,
+               '--timeout', '240', '--dp-args=' + MODES[mode], original_prefix(bench)]
+    subprocess.run([str(x) for x in command], check=True, timeout=270)
+    records = list(csv.DictReader((root / 'record.csv').open()))
+    if len(records) != 1 or records[0]['status'] != 'OK':
+        raise RuntimeError('Run failed or timed out')
+    case = root / bench
+    with (case / 'check.txt').open('w') as log:
+
+exec
+/bin/bash -lc "sed -n '177,216p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def run(d, tag):
+    if not (d / 'prepared.json').exists():
+        prepare(d, tag)
+    if json.loads((d / 'protocol.json').read_text()) != protocol(tag):
+        raise RuntimeError('Protocol changed after preparation')
+    prepared = json.loads((d / 'prepared.json').read_text())
+    if prepared['protocol_sha256'] != sha(d / 'protocol.json'):
+        raise RuntimeError('Protocol hash changed')
+    for v, digest in prepared['binaries'].items():
+        if sha(d / v / 'build/dp') != digest:
+            raise RuntimeError('Binary changed')
+    verify_protected()
+    q = Queue(d / 'jobs')
+    with (R.parent / 'ClaudeOpus55_v6/timing.lock').open('r') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        for i, bench in enumerate(CASES):
+            for version in (['v6', 'candidate'] if i % 2 == 0 else ['candidate', 'v6']):
+                if not q.run('stage1_' + bench + '_' + version,
+                             [PY, SELF, tag, '--worker', 'stage1', bench, version], quiet=True):
+                    raise RuntimeError('Stage 1 worker failed')
+        for i, bench in enumerate(['h05', 'h06']):
+            jobs = [('chain15', 'candidate'), ('chain30', 'v6')]
+            for mode, version in (jobs if i == 0 else jobs[::-1]):
+                if not q.run(mode + '_' + bench + '_' + version,
+                             [PY, SELF, tag, '--worker', mode, bench, version], quiet=True):
+                    raise RuntimeError('Chain budget worker failed')
+        summarize(d)
+        verify_protected(d / 'protected_after.json')
+        dump(d / 'ALL_DONE', dict(protocol_sha256=sha(d / 'protocol.json'), finished=time.ctime()))
+    note(f'phase2/chain_pair/{tag} completed; see compare.md and summary.json')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('tag')
+    parser.add_argument('--prepare', action='store_true')
+    parser.add_argument('--worker', nargs=3)
+    args = parser.parse_args()
+    directory = R / 'phase2/chain_pair' / args.tag
+    directory.mkdir(parents=True, exist_ok=True)
+
+exec
+/bin/bash -lc "rg -n '"'^def |''^class |lock|timeout|sanit|argparse|chain_beam'"' Testcases/results/CodexParallelChain/scripts/v6q.py AI_Solutions/CodexParallelChain/tests/run_tests.py AI_Solutions/CodexParallelChain/CMakeLists.txt | head -40" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+AI_Solutions/CodexParallelChain/CMakeLists.txt:24:  foreach(name window multirow optimizer chain chain_beam parallel_sa pool global capsearch cap_windows guard)
+AI_Solutions/CodexParallelChain/tests/run_tests.py:3:import argparse
+AI_Solutions/CodexParallelChain/tests/run_tests.py:13:def main():
+AI_Solutions/CodexParallelChain/tests/run_tests.py:14:    parser = argparse.ArgumentParser(description=__doc__)
+AI_Solutions/CodexParallelChain/tests/run_tests.py:16:    mode.add_argument('--sanitize', action='store_true')
+AI_Solutions/CodexParallelChain/tests/run_tests.py:20:    out = ROOT.parents[1] / 'Testcases/results' / ROOT.name / ('tests_tsan' if args.tsan else 'tests_sanitized' if args.sanitize else 'tests')
+AI_Solutions/CodexParallelChain/tests/run_tests.py:22:    flags = ['-std=c++17', '-O1' if args.sanitize or args.tsan else '-O2', '-pthread', '-UNDEBUG']
+AI_Solutions/CodexParallelChain/tests/run_tests.py:23:    if args.sanitize:
+AI_Solutions/CodexParallelChain/tests/run_tests.py:24:        flags += ['-g', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']
+AI_Solutions/CodexParallelChain/tests/run_tests.py:26:        flags += ['-g', '-fsanitize=thread', '-fno-omit-frame-pointer']
+AI_Solutions/CodexParallelChain/tests/run_tests.py:29:    def run(command, label, timeout=180):
+AI_Solutions/CodexParallelChain/tests/run_tests.py:35:                                 stderr=subprocess.STDOUT, timeout=timeout, preexec_fn=pin)
+AI_Solutions/CodexParallelChain/tests/run_tests.py:52:    for name in ('window', 'multirow', 'optimizer', 'chain', 'chain_beam', 'parallel_sa', 'pool', 'global', 'capsearch', 'cap_windows', 'guard'):
+Testcases/results/CodexParallelChain/scripts/v6q.py:4:Reusable: copy this scripts/ folder to Testcases/results/<VER>/scripts/; R, the lock and WORK_STATE follow.
+Testcases/results/CodexParallelChain/scripts/v6q.py:8:results/ClaudeOpus55_v6/timing.lock, so only one timed program runs at a time.
+Testcases/results/CodexParallelChain/scripts/v6q.py:23:def sha(path):
+Testcases/results/CodexParallelChain/scripts/v6q.py:27:def note(msg):
+Testcases/results/CodexParallelChain/scripts/v6q.py:33:class Queue:
+Testcases/results/CodexParallelChain/scripts/v6q.py:37:        self.lock = None
+Testcases/results/CodexParallelChain/scripts/v6q.py:39:            self.lock = (R / 'timing.lock').open('w')
+Testcases/results/CodexParallelChain/scripts/v6q.py:40:            fcntl.flock(self.lock, fcntl.LOCK_EX)
+Testcases/results/CodexParallelChain/scripts/v6q.py:63:def env_with_pinned_cmake():
+Testcases/results/CodexParallelChain/scripts/v6q.py:73:def build(version, out_dir, src=None):
+
+exec
+/bin/bash -lc "sed -n '33,62p' Testcases/results/CodexParallelChain/scripts/v6q.py
+sed -n '73,82p' Testcases/results/CodexParallelChain/scripts/v6q.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '128,167p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+class Queue:
+    def __init__(self, out, timed=True):
+        self.out = Path(out)
+        self.out.mkdir(parents=True, exist_ok=True)
+        self.lock = None
+        if timed:
+            self.lock = (R / 'timing.lock').open('w')
+            fcntl.flock(self.lock, fcntl.LOCK_EX)
+
+    def run(self, name, cmd, env=None, cwd=LAB, quiet=False):
+        cmd = [str(c) for c in cmd]
+        marker = self.out / f'{name}.done.json'
+        if marker.exists():
+            if json.loads(marker.read_text())['command'] == cmd:
+                return True
+            raise RuntimeError(f'{name}: finished with a different command')
+        t = time.time()
+        with (self.out / f'{name}.log').open('w') as f:
+            rc = subprocess.run(cmd, cwd=cwd, env=env, stdout=f, stderr=subprocess.STDOUT).returncode
+        info = dict(command=cmd, returncode=rc, seconds=round(time.time() - t, 2), finished=time.ctime())
+        if rc:
+            (self.out / f'{name}.failed.json').write_text(json.dumps(info, indent=1) + '\n')
+            note(f'{self.out.name}/{name} FAILED rc={rc}，看 {name}.log')
+            return False
+        marker.write_text(json.dumps(info, indent=1) + '\n')
+        if not quiet:
+            note(f'{self.out.relative_to(R)}/{name} 完成（{info["seconds"]:.0f} 秒）')
+        return True
+
+
+def build(version, out_dir, src=None):
+    """cmake Release build of a solution into out_dir (pinned to the E-cores)."""
+    src = src or LAB / 'AI_Solutions' / version
+    e = env_with_pinned_cmake()
+    subprocess.run(['cmake', '-S', src, '-B', out_dir, '-DBUILD_TESTING=OFF', '-DCMAKE_BUILD_TYPE=Release'],
+                   env=e, check=True, stdout=subprocess.DEVNULL)
+    subprocess.run(PIN + ['/home/evan/anaconda3/envs/eda/bin/cmake', '--build', out_dir, '-j4'],
+                   env=e, check=True, stdout=subprocess.DEVNULL)
+    return Path(out_dir) / 'dp'
+
+ succeeded in 0ms:
+        old = historic[bench]
+        ok = maximum <= float(old['max']) + 1e-9 and total <= float(old['disp']) * 1.005 + 1e-9
+        both += ok
+        for v in times:
+            times[v] += data[v]['chain']['seconds']
+        rows.append(dict(bench=bench, total_ratio=rt, max_ratio=rm, both=ok,
+                         candidate_total=total, v6_total=float(b['disp']),
+                         candidate_max=maximum, v6_max=float(b['max']),
+                         candidate_chain_seconds=data['candidate']['chain']['seconds'],
+                         v6_chain_seconds=data['v6']['chain']['seconds']))
+    budget = []
+    for bench, required in [('h05', .0029), ('h06', .0044)]:
+        data = {v: json.loads((d / m / bench / v / 'metrics.json').read_text())['chain']
+                for v, m in [('candidate', 'chain15'), ('v6', 'chain30')]}
+        gains = {v: x['total_reduction'] / x['total_before'] for v, x in data.items()}
+        budget.append(dict(bench=bench, candidate_gain_fraction=gains['candidate'],
+                           paired_v6_3s_gain_fraction=gains['v6'], historical_required=required,
+                           candidate_seconds=data['candidate']['seconds'],
+                           v6_seconds=data['v6']['seconds'],
+                           pass_gate=gains['candidate'] >= max(required, gains['v6'])))
+    total_gm, max_gm = gm(total_ratios), gm(max_ratios)
+    gates = dict(both_at_least_8=both >= 8, total_improved_003pct=total_gm <= .9997,
+                 max_gm_not_worse_01pct=max_gm <= 1.001,
+                 every_max_not_worse_02pct=all(x['max_ratio'] <= 1.002 for x in rows),
+                 chain_seconds_not_more=times['candidate'] <= times['v6'],
+                 h05_h06_gain=all(x['pass_gate'] for x in budget))
+    summary = dict(rows=rows, both=both, total_gm=total_gm, max_gm=max_gm,
+                   chain_seconds=times, budgets=budget, gates=gates,
+                   all_numeric_gates=all(gates.values()),
+                   note='No automatic keep decision: inspect budget overshoot and tests independently.')
+    dump(d / 'summary.json', summary)
+    lines = ['# Chain target windows: same-round Stage 1 pairs', '',
+             'Ratio = candidate / v6. No SA; HPWL is not a quality gate in this report.', '',
+             '| Case | Total ratio | Max ratio | Chain seconds candidate / v6 | Both vs historical ChainDP |',
+             '|---|---:|---:|---:|:---:|']
+    for x in rows:
+        lines.append(f"| {x['bench']} | {x['total_ratio']:.8f} | {x['max_ratio']:.8f} | "
+                     f"{x['candidate_chain_seconds']:.6f} / {x['v6_chain_seconds']:.6f} | {x['both']} |")
+    lines += ['', f'Both: {both}/11; total GM {total_gm:.8f}; max GM {max_gm:.8f}.',
+              f'Chain seconds: {times}.', '', 'Candidate 1.5 s vs v6 3 s chain gain:']
+
+exec
+/bin/bash -lc "sed -n '88,127p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+        raise RuntimeError('Run failed or timed out')
+    case = root / bench
+    with (case / 'check.txt').open('w') as log:
+        subprocess.run([str(x) for x in [PY, LAB / 'Grader/tools/check_pl.py',
+                        original_prefix(bench), case / 'output_legal.pl', '--quiet']],
+                       stdout=log, stderr=subprocess.STDOUT, check=True)
+    lines = [x.partition('\t')[2] for x in (case / 'stderr_ts.tsv').read_text().splitlines()]
+    (case / 'stderr.txt').write_text('\n'.join(lines) + '\n')
+    if any('invariant failed' in x or 'step skipped' in x for x in lines):
+        raise RuntimeError('Guard or invariant failure; inspect stderr')
+    parse_chain(case)
+    phases = json.loads((case / 'phases.json').read_text())
+    stage = next(x for x in phases if x['phase'] == 'chain_stage')
+    dump(root / 'metrics.json', dict(record=records[0], legal=True, chain=stage,
+                                    phases=phases, placement_sha256=sha(case / 'output_legal.pl')))
+
+
+def gm(values):
+    return math.exp(sum(math.log(x) for x in values) / len(values))
+
+
+def ratio(a, b):
+    return a / b if b else (1.0 if a == 0 else float('inf'))
+
+
+def summarize(d):
+    historic = {x['bench']: x for x in csv.DictReader(
+        (R.parent / 'ClaudeOpus55_v6/final/lg_CodexChainDP/record.csv').open())}
+    rows, both, max_ratios, total_ratios = [], 0, [], []
+    times = dict(v6=0.0, candidate=0.0)
+    for bench in CASES:
+        data = {v: json.loads((d / 'stage1' / bench / v / 'metrics.json').read_text())
+                for v in times}
+        a, b = data['candidate']['record'], data['v6']['record']
+        total, maximum = float(a['disp']), float(a['max'])
+        rt, rm = ratio(total, float(b['disp'])), ratio(maximum, float(b['max']))
+        if float(b['disp']) or total:
+            total_ratios.append(rt)
+        if float(b['max']) or maximum:
+            max_ratios.append(rm)
+
+exec
+/bin/bash -lc "sed -n '1,40p' AI_Solutions/CodexParallelChain/tests/run_tests.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+#!/usr/bin/env python3
+"""Build and run the invariant/exhaustive regression suite without CMake."""
+import argparse
+import json
+import os
+from pathlib import Path
+import subprocess
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--sanitize', action='store_true')
+    mode.add_argument('--tsan', action='store_true')
+    parser.add_argument('--compiler', default='g++')
+    args = parser.parse_args()
+    out = ROOT.parents[1] / 'Testcases/results' / ROOT.name / ('tests_tsan' if args.tsan else 'tests_sanitized' if args.sanitize else 'tests')
+    out.mkdir(parents=True, exist_ok=True)
+    flags = ['-std=c++17', '-O1' if args.sanitize or args.tsan else '-O2', '-pthread', '-UNDEBUG']
+    if args.sanitize:
+        flags += ['-g', '-fsanitize=address,undefined', '-fno-omit-frame-pointer']
+    if args.tsan:
+        flags += ['-g', '-fsanitize=thread', '-fno-omit-frame-pointer']
+    records = []
+
+    def run(command, label, timeout=180):
+        start = time.perf_counter()
+        # Pin compilation only; runtime checks retain the caller's CPU set.
+        compile_cpus = set(range(16, 20)) & os.sched_getaffinity(0)
+        pin = (lambda: os.sched_setaffinity(0, compile_cpus)) if command[0] == args.compiler and compile_cpus else None
+        process = subprocess.run(command, text=True, stdout=subprocess.PIPE,
+                                 stderr=subprocess.STDOUT, timeout=timeout, preexec_fn=pin)
+        (out / (label + '.log')).write_text(process.stdout)
+        records.append({'label': label, 'command': command, 'returncode': process.returncode,
+                        'seconds': time.perf_counter() - start})
+        (out / 'records.json').write_text(json.dumps(records, indent=2) + '\n')
+        print(label + ': ' + ('PASS' if process.returncode == 0 else 'FAIL'), flush=True)
+
+exec
+/bin/bash -lc "taskset -c 16-19 python3 - <<'PY'
+from pathlib import Path
+import json
+s=Path('AI_Solutions/CodexParallelChain/src'); a=Path('Testcases/results/CodexParallelChain/phase2/accepted/sa_boundary_r1/src')
+print('src differences:',[p.name for p in s.iterdir() if not (a/p.name).exists() or p.read_bytes()"'!=(a/p.name).read_bytes()])
+p=Path('"'Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ejection_work.json')
+j=json.loads(p.read_text());print('work type:',type(j).__name__)
+if isinstance(j,dict):
+ for k,v in j.items():
+  if 'h05' in k or 'h06' in k: print(k,str(v)[:1600])
+else:
+ for r in j:
+  if r.get('bench') in ('h05','h06'): print(str(r)[:1600])
+PY
+sed -n '40,63p' AI_Solutions/CodexParallelChain/tests/run_tests.py
+rg -n 'TIMEOUT|timeout|guard|step skipped' Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py | head -10" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+src differences: ['chain_beam.hpp', 'chain.cpp']
+work type: dict
+h05 {'v6': {'passes': [{'roots': 1199, 'nodes': 181509, 'candidates': 1798678, 'accepted': 10}, {'roots': 818, 'nodes': 124368, 'candidates': 1181366, 'accepted': 3}], 'totals': {'roots': 2017, 'nodes': 305877, 'candidates': 2980044, 'accepted': 13}}, 'candidate': {'passes': [{'roots': 1211, 'nodes': 183287, 'candidates': 1817337, 'accepted': 10}, {'roots': 796, 'nodes': 121067, 'candidates': 1148391, 'accepted': 3}], 'totals': {'roots': 2007, 'nodes': 304354, 'candidates': 2965728, 'accepted': 13}}}
+h06 {'v6': {'passes': [{'roots': 534, 'nodes': 85350, 'candidates': 310634, 'accepted': 1}, {'roots': 344, 'nodes': 55012, 'candidates': 205080, 'accepted': 0}], 'totals': {'roots': 878, 'nodes': 140362, 'candidates': 515714, 'accepted': 1}}, 'candidate': {'passes': [{'roots': 527, 'nodes': 84218, 'candidates': 306615, 'accepted': 1}, {'roots': 341, 'nodes': 54464, 'candidates': 203563, 'accepted': 0}], 'totals': {'roots': 868, 'nodes': 138682, 'candidates': 510178, 'accepted': 1}}}
+        print(label + ': ' + ('PASS' if process.returncode == 0 else 'FAIL'), flush=True)
+        if process.returncode:
+            print(process.stdout)
+            raise SystemExit(process.returncode)
+
+    objects = []
+    for source in sorted((ROOT / 'src').glob('*.cpp')):
+        if source.stem == 'main':
+            continue
+        obj = out / (source.stem + '.o')
+        run([args.compiler, *flags, '-c', str(source), '-o', str(obj)], 'build_' + source.stem)
+        objects.append(str(obj))
+    for name in ('window', 'multirow', 'optimizer', 'chain', 'chain_beam', 'parallel_sa', 'pool', 'global', 'capsearch', 'cap_windows', 'guard'):
+        exe = out / (name + '_test')
+        run([args.compiler, *flags, str(ROOT / 'tests' / (name + '_test.cpp')),
+             *objects, '-o', str(exe)], 'link_' + name)
+        run([str(exe)], name)
+    print('All 11 C++ test programs passed. Logs: ' + str(out), flush=True)
+
+
+if __name__ == '__main__':
+    main()
+9:usage: run_ts.py --bin BIN --out DIR BENCH_DIR_OR_PREFIX ... [--dp-args "..."] [--timeout S]
+32:def run_one(binary, prefix, rdir, dp_args, timeout):
+53:        rc = p.wait(timeout=timeout)
+59:        status = 'TIMEOUT'
+90:    ap.add_argument('--timeout', type=float, default=900)
+105:            status, sec, lines, out = run_one(os.path.abspath(a.bin), prefix, rdir, a.dp_args, a.timeout)
+
+exec
+/bin/bash -lc "rg -n 'timeout|timed.out|skipped|invariant|\\[guard' AI_Solutions/CodexParallelChain/src/main.cpp AI_Solutions/CodexParallelChain/src/guard.hpp | head -30
+head -2 Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/stage1/toy/candidate/record.csv
+sed -n '23,34p' Testcases/results/CodexParallelChain/scripts/v6q.py
+sed -n '102,110p' AI_Solutions/CodexParallelChain/WORK_STATE.md" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+AI_Solutions/CodexParallelChain/src/guard.hpp:6:// Every optional optimization commits only after its invariant is checked.
+AI_Solutions/CodexParallelChain/src/guard.hpp:13:        std::fprintf(stderr, "warning: %s broke an invariant, step skipped\n", name);
+AI_Solutions/CodexParallelChain/src/guard.hpp:15:        std::fprintf(stderr, "warning: %s failed (%s), step skipped\n", name, e.what());
+AI_Solutions/CodexParallelChain/src/guard.hpp:17:        std::fprintf(stderr, "warning: %s failed (non-standard exception), step skipped\n", name);
+AI_Solutions/CodexParallelChain/src/main.cpp:257:    // v4: every optional step is guarded. If one throws or breaks its invariant,
+AI_Solutions/CodexParallelChain/src/main.cpp:259:    // crash or a missing output scores zero, a skipped step only costs quality.
+bench,status,seconds,disp,max,hpwl_legal,hpwl_sa,t_read,t_legalize,t_pareto,t_windowdp,t_chain,t_global,t_sa,t_polish,t_stage1,t_stage2,sa_threads,sa_attempts,sa_internal_s,sa_failed_pct,sa_timeup,global_tries,global_accepted,global_unknown,sa_seconds
+toy,OK,1.22,43324.4,2004.4,104094.0,104094.0,0.002,0.392,0.0,0.075,0.712,,,,1.1819812600151636,1.1819814299815334,,,,,,0,0,0,
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def note(msg):
+    with WORK_STATE.open('a') as f:
+        f.write(f'- {time.strftime("%m-%d %H:%M")} {msg}\n')
+    print(msg, flush=True)
+
+
+class Queue:
+    def __init__(self, out, timed=True):
+- 已確認 phase1/ALL_DONE：26 chain、20 SA、2 toy；不重跑既有完成工作。
+- 已寫 Testcases/results/CodexParallelChain/diagnosis.md：三部分逐筆耗時／位移收益、band 平行資料結構與約 2–4 倍工作量假說、10 對 SA 比值／平均、toy 原因、第二階段排序與驗收。
+- 主樣本 default：target 3.312757 s / 9258.268240；ejection 9.545742 s / 1446.724840；post-DP 1.802126 s / 12303.715360。ejection 占時間 65.11%，收益 6.29%；不可直接以時間加速倍率推論品質收益。
+- SA 等權平均損失 1.339185% ≥ 0.5%；4/5 測資均值過門檻。h06 實際 5 threads，其餘 8；只有 2 seeds，僅診斷。
+- toy 兩版 cap 起點相同；v6 局部修補候選多因 total_budget 被拒，7 attempts／1 accepted，v5 51／3；最大位移 2004.4 對 1972.0。只描述，未修正。
+- 協調者已在沙箱外啟動 diag.py 並移除計時 worker 的 taskset；provenance/orchestrator_note.json 亦記載保護文件變動／基準更新，最終 unchanged 是相對更新後基準。
+- 第二階段優先序：SA 邊界改善 → target/DP 分 band → ejection 分 band與無效搜尋診斷 → toy 後續原因追蹤（需後續任務授權）。各項尚未實作。
+- 閱讀限制判斷：HANDOFF 只讀第 0 節；不擅自讀第 5／7 節。採使用者提供的 0.5% 門檻；驗收依第 0 節與已知範圍列出，第 7 節逐條對齊尚待後續允許閱讀時核對，不能宣告 B_DONE。
+- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。
+
+exec
+/bin/bash -lc "rg -n 'timeout|TIMEOUT|timed.out|time.?up|budget' AI_Solutions/CodexParallelChain/src/{main,capsearch}.cpp | head -30
+rg -n '"'^def prefix_hashes|''^def original_prefix|''^def verify_protected'"' Testcases/results/CodexParallelChain/scripts/diag.py
+sed -n '39,50p' Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+AI_Solutions/CodexParallelChain/src/capsearch.cpp:772:                         !ok ? "unresolved" : accept ? "accepted" : "total_budget");
+AI_Solutions/CodexParallelChain/src/main.cpp:6://   * the extra Stage 1 steps (chains, cap search) get a budget scaled with the
+AI_Solutions/CodexParallelChain/src/main.cpp:13:// v4: every stage has a time budget and every optional step is guarded, so
+AI_Solutions/CodexParallelChain/src/main.cpp:47:                 "  --extra-time S          budget of the extra Stage 1 steps (chains + cap search);\n"
+AI_Solutions/CodexParallelChain/src/main.cpp:49:                 "  --cap-time S            cap search budget (default: what the chains leave of --extra-time; 0 disables)\n"
+AI_Solutions/CodexParallelChain/src/main.cpp:54:                 "  --global-time S         legacy global cap repair budget (16 seconds; with --legacy-global)\n"
+AI_Solutions/CodexParallelChain/src/main.cpp:55:                 "  --chain-time S          chain + DP budget (default: 25 %% of --extra-time, at most 3 seconds)\n"
+AI_Solutions/CodexParallelChain/src/main.cpp:64:                 "  --stage1-time S         Stage 1 refinement budget, seconds from start (90)\n"
+AI_Solutions/CodexParallelChain/src/main.cpp:66:                 "  --polish-time S         post-SA polish budget in seconds (30)\n"
+AI_Solutions/CodexParallelChain/src/main.cpp:124:    double chainTime = -1;                // v5: -1 = 25 % of the extra budget, at most 3 s
+AI_Solutions/CodexParallelChain/src/main.cpp:133:    double stage1Time = 90;   // v4: Stage 1 refinement budget (seconds since start)
+AI_Solutions/CodexParallelChain/src/main.cpp:134:    double polishTime = 30;   // v4: post-SA deterministic polish budget (seconds)
+AI_Solutions/CodexParallelChain/src/main.cpp:317:    // This is an explicit EXTRA budget, not an equal-total-time comparison.
+AI_Solutions/CodexParallelChain/src/main.cpp:379:    if (lopt.verbose) std::fprintf(stderr, "[extra] budget %.6f used %.6f\n", extraTime, wallSeconds() - extraStart);
+61:def verify_protected(output=None):
+80:def original_prefix(bench):
+94:def prefix_hashes(prefix):
+def protocol(tag):
+    return dict(tag=tag, script_sha256=sha(SELF), src_sha256=src_hash(SOLUTION / 'src'),
+                reference_sha256=src_hash(BASE / 'src'), modes=MODES, cases=CASES,
+                cmake_sha256=sha(SOLUTION / 'CMakeLists.txt'),
+                runner_sha256=sha(V5S / 'run_ts.py'),
+                instrumentation_sha256=sha(R / 'phase1/instrumented/src/main.cpp'),
+                inputs={b: prefix_hashes(original_prefix(b)) for b in CASES},
+                chain_reference_sha256=sha(R.parent / 'ClaudeOpus55_v6/final/lg_CodexChainDP/record.csv'),
+                note='Stage 1 only; no HPWL quality claims. Candidate/v6 interleaved per case. '
+                     'ChainDP historical reference only defines 8/11; all improvement ratios use paired v6.')
+
+
+
+exec
+/bin/bash -lc "taskset -c 16-19 python3 - <<'PY'
+from pathlib import Path
+import json,shutil,hashlib
+s=Path('AI_Solutions/CodexParallelChain');r=Path('Testcases/results/CodexParallelChain');d=r/'phase2/chain_pair/ejection_beam_r1';a=r/'phase2/accepted/sa_boundary_r1/src'
+j=json.loads((d/'summary.json').read_text())
+decision=dict(decision='revert',round=1,reason='Total improvement 0.00683% < 0.03%; h05/h06 half-budget gain failed; same-budget nodes decreased 0.50%/1.20%, no throughput evidence to justify another round.',summary_sha256=hashlib.sha256((d/'summary.json').read_bytes()).hexdigest(),gates=j['gates'],ejection_bands='Deferred/rejected for B: no proven complete Search touched-set isolation, boundary replay or barrier cap validation; no band code retained.',restore='phase2/accepted/sa_boundary_r1/src')
+(d/'decision.json').write_text(json.dumps(decision,indent=2)+'\\n')
+shutil.copy2(a/'chain.cpp',s/'src/chain.cpp')
+(s/'src/chain_beam.hpp').unlink()
+shutil.copy2(s/'tests/chain_beam_test.cpp',d/'test_evidence/chain_beam_test.cpp')
+(s/'tests/chain_beam_test.cpp').unlink()
+p=s/'CMakeLists.txt';p.write_text(p.read_text().replace('chain chain_beam parallel_sa','chain parallel_sa'))
+p=s/'tests/run_tests.py';p.write_text(p.read_text().replace(\"'chain', 'chain_beam', 'parallel_sa'\",\"'chain', 'parallel_sa'\").replace('All 11 C++','All 10 C++'))
+assert sorted(x.name for x in (s/'src').iterdir())==sorted(x.name for x in a.iterdir())
+assert all(p.read_bytes()==(a/p.name).read_bytes() for p in (s/'src').iterdir())
+print('Restored exact SA accepted source:',hashlib.sha256(b''.join(p.read_bytes() for p in sorted((s/'src').iterdir()))).hexdigest())
+archive=r/'phase2/final_b_preparation';archive.mkdir(exist_ok=True)
+for f in ('phase2_train.py','phase2_large.py'): shutil.copy2(r/'scripts'/f,archive/(f+'.before'))
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Restored exact SA accepted source: 4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258
+
+exec
+/bin/bash -lc 'python3 AI_Solutions/CodexParallelChain/tests/run_tests.py > Testcases/results/CodexParallelChain/phase2/final_b_preparation/tests_normal.log 2>&1' in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+exec
+/bin/bash -lc "sed -n '80,106p' Testcases/results/CodexParallelChain/scripts/diag.py
+sed -n '315,325p' AI_Solutions/CodexParallelChain/src/main.cpp" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+def original_prefix(bench):
+    group = 'testcases' if bench in ['ibm01', 'ibm05', 'toy'] else 'holdout'
+    return LAB / 'Testcases' / group / bench / bench
+
+
+def start_prefix(bench):
+    original = STARTS / bench / 'output'
+    if original.with_suffix('.aux').is_file() and original.with_suffix('.pl').is_file():
+        return original
+    if bench not in ['ibm01', 'ibm05']:
+        raise RuntimeError(f'Required supplied legal start missing: {original}')
+    return P / 'sa/legal_starts/ClaudeOpus55_v4' / bench / 'output'
+
+
+def prefix_hashes(prefix):
+    aux = prefix.with_suffix('.aux')
+    if not aux.is_file():
+        raise RuntimeError(f'Missing auxiliary file: {aux}')
+    paths = [aux] + [aux.parent / token for token in aux.read_text().split(':', 1)[1].split()]
+    return {str(path): {'resolved': str(path.resolve()), 'sha256': sha(path)} for path in paths}
+
+
+def check_static():
+    verify_protected()
+    baseline = LAB / 'AI_Solutions/ClaudeOpus55_v6'
+    for name in ['src', 'tests']:
+        if tree_hashes(baseline / name) != tree_hashes(SOLUTION / name):
+    // Keep v4's incumbent intact, then extend its neighbourhood beyond three
+    // adjacent rows. Every phase is checked against its immediate predecessor.
+    // This is an explicit EXTRA budget, not an equal-total-time comparison.
+    const double chainUntil = wallSeconds() + chainTime;
+    for (int round = 0; round < chainRounds && wallSeconds() < chainUntil; ++round) {
+        const DispStats before = displacement(db, legal);
+        auto paretoNow = [&] {
+            const auto after = displacement(db, legal);
+            return checkLegal(db, legal).empty() && after.total <= before.total + 1e-5 && after.max <= before.max + 1e-6;
+        };
+        long targetMoves = 0;
+
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:23 AM.
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:23 AM.
+2026-10-22T22:12:50.990592Z ERROR codex_core::session: failed to record rollout items: thread 01a165ab-5ce2-7cb0-8227-0b9ab078bac7 not found
+tokens used
+33,454

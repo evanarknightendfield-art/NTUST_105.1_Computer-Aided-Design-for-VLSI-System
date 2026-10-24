@@ -1,0 +1,626 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a16837-16af-7520-bbbe-b3d37fe6cb35
+--------
+user
+接續 AI_Solutions/CodexParallelChain/。只讀 HANDOFF.md（AI_Solutions/ClaudeOpus55_v6/）第 0、1、6、7 節與 WORK_STATE.md。
+協調者在沙箱外補跑的完整 ASan/UBSan 結果在 Testcases/results/CodexParallelChain/phase2/asan_outside.log（最後幾行），請記進 WORK_STATE。
+1. 確認 WORK_STATE 有「B 完成」，而且第 7 節的最後檢查都有紀錄（最後一次訓練的 src_sha256 等於目前 src）。
+   如果所有改動都撤回了：不凍結，寫 WORK_STATE「沒有保留的改動，跳過最終驗證」，最後一行寫 NO_FINAL。
+2. 凍結：在 Testcases/results/CodexParallelChain/ 寫 frozen_sources.sha256（AI_Solutions/CodexParallelChain 下 src、tests、CMakeLists.txt、Makefile 的相對路徑，格式 "sha256  相對路徑"）與 freeze.json。
+3. 確認 Testcases/edge_seed6 不存在，然後交給協調者：
+   RUN: python3 Testcases/results/CodexParallelChain/scripts/final_validate.py --seed-dir edge_seed6 --seed 20261024
+   WAIT: Testcases/results/CodexParallelChain/final/ALL_DONE
+4. WORK_STATE 寫「等待中：final_validate.py，完成標記 final/ALL_DONE；之後跑 final_report.py」，然後結束。
+回覆不超過 8 行。
+
+【非互動執行的規則（由協調者自動開 session，使用者在睡覺）】
+- 這是 codex exec 的單次 session，沙箱裡啟動的背景工作會在 session 結束時被殺掉（第 A 階段的 nohup 就是這樣死掉的）。
+  所以不要自己啟動超過 5 分鐘的計算；把要跑的東西寫成腳本，然後在最後回覆的最後幾行寫：
+    RUN: <從 Lab3 目錄執行的完整命令>        （可以多行，依序執行）
+    WAIT: <完成標記的路徑，相對 Lab3>
+  協調者會在沙箱外依序執行 RUN、等 WAIT 出現，再開下一個 session。命令不要加 taskset（計時程式不能綁 E-core；編譯已由 v6q 綁）。
+- 要跑的東西都在 5 分鐘內的話（例如 C++ 測試），直接在本 session 跑完，不要寫 RUN/WAIT。
+- ASan：LeakSanitizer 在沙箱內會因 ptrace 失敗，請用 ASAN_OPTIONS=detect_leaks=0 跑並註明；協調者會在沙箱外補跑完整的 ASan。
+- 階段 B 全部完成（HANDOFF.md 第 7 節）時，最後一行只寫：B_DONE
+- 不 commit、不加任何 AI 署名；不要問問題（沒有人會回答），自己依 HANDOFF.md 判斷並把判斷寫進 WORK_STATE.md。
+
+codex
+我會只讀指定的交接章節與 WORK_STATE，核對驗證紀錄及來源雜湊，再建立凍結檔並交接最終驗證命令。
+
+exec
+/bin/bash -lc "pwd; rg --files -g AGENTS.md -g WORK_STATE.md -g HANDOFF.md -g final_validate.py -g final_report.py -g freeze.json -g '*sha256*' AI_Solutions Testcases" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+AI_Solutions/CodexChainDP/WORK_STATE.md
+AI_Solutions/CodexCapDP/WORK_STATE.md
+AI_Solutions/ClaudeOpus55_v6/WORK_STATE.md
+AI_Solutions/ClaudeOpus55_v6/HANDOFF.md
+AI_Solutions/CodexParallelChain/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/comparison_before.sha256
+Testcases/results/CodexParallelChain/scripts/final_report.py
+Testcases/results/CodexParallelChain/provenance/base.sha256
+Testcases/results/CodexParallelChain/provenance/protected_roots.sha256
+Testcases/results/CodexParallelChain/scripts/final_validate.py
+Testcases/results/ClaudeOpus55_v6/base_CodexCapDP.sha256
+Testcases/results/ClaudeOpus55_v6/freeze.json
+Testcases/results/ClaudeOpus55_v6/protected_sources.sha256
+Testcases/results/ClaudeOpus55_v6/frozen_sources.sha256
+Testcases/results/ClaudeOpus55_v6/scripts/final_report.py
+Testcases/results/ClaudeOpus55_v6/scripts/final_validate.py
+Testcases/results/CodexChainDP/edge_CodexChainDP/home/CodexChainDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexCapDP_27/home/CodexCapDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexChainDP_L1/home/CodexChainDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/seed5_ClaudeOpus55_v6/home/ClaudeOpus55_v6/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexChainDP_27/home/CodexChainDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexCapDP_L1/home/CodexCapDP/WORK_STATE.md
+Testcases/results/CodexChainDP/large_L1/home/CodexChainDP/WORK_STATE.md
+Testcases/results/CodexChainDP/edge_seed2/home/CodexChainDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexChainDP_L2/home/CodexChainDP/WORK_STATE.md
+Testcases/results/CodexCapDP/frozen_sources.sha256
+Testcases/results/ClaudeOpus55_v6/final/seed5_CodexCapDP/home/CodexCapDP/WORK_STATE.md
+Testcases/results/CodexCapDP/run_A_local_grade/home/CodexCapDP/WORK_STATE.md
+Testcases/results/CodexCapDP/freeze.json
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_cap_deadline_r2/scripts/final_report.py
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_cap_deadline_r2/scripts/final_validate.py
+Testcases/results/ClaudeOpus55_v6/final/lg_CodexCapDP/home/CodexCapDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/phase1/lg/CodexCapDP_L2/home/CodexCapDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v6_L1/home/ClaudeOpus55_v6/WORK_STATE.md
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_cap_deadline_r1/scripts/final_report.py
+Testcases/results/CodexParallelChain/phase2/rejected/final_b_cap_deadline_r1/scripts/final_validate.py
+Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v6/home/ClaudeOpus55_v6/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v6_L2/home/ClaudeOpus55_v6/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/lg_CodexChainDP/home/CodexChainDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/edge_CodexChainDP/home/CodexChainDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/seed5_CodexChainDP/home/CodexChainDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/lg_CodexCapDP_L1/home/CodexCapDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/edge_CodexCapDP/home/CodexCapDP/WORK_STATE.md
+Testcases/results/CodexCapDP/final/seed4_CodexChainDP/home/CodexChainDP/WORK_STATE.md
+Testcases/results/CodexCapDP/final/edge_CodexCapDP/home/CodexCapDP/WORK_STATE.md
+Testcases/results/CodexCapDP/final/lg_new_L2/home/CodexCapDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/lg_CodexCapDP_L2/home/CodexCapDP/WORK_STATE.md
+Testcases/results/CodexCapDP/final/seed4_CodexCapDP/home/CodexCapDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v6/final/edge_ClaudeOpus55_v6/home/ClaudeOpus55_v6/WORK_STATE.md
+Testcases/results/CodexCapDP/final/lg_new_L1/home/CodexCapDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v5/phase1/lg_chain/home/CodexChainDP/WORK_STATE.md
+Testcases/results/CodexCapDP/final/lg_new/home/CodexCapDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v5/frozen_sources.sha256
+Testcases/results/ClaudeOpus55_v5/phase1/lg_chain_L1/home/CodexChainDP/WORK_STATE.md
+Testcases/results/ClaudeOpus55_v5/final/seed3_CodexChainDP/home/CodexChainDP/WORK_STATE.md
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+p=Path.cwd()
+for d in [*reversed(p.parents),p,p/'AI_Solutions',p/'AI_Solutions/CodexParallelChain',p/'Testcases',p/'Testcases/results',p/'Testcases/results/CodexParallelChain']:
+ f=d/'AGENTS.md'
+ if f.exists(): print(str(f)+'\\n'+f.read_text())
+f=p/'AI_Solutions/ClaudeOpus55_v6/HANDOFF.md'
+import re
+active=False
+for line in f.read_text().splitlines():
+ if re.match(r'"'^## '"',line): active=bool(re.match(r'"'^## [0167][.、'"\\s：:]',line))
+ if active: print(line)
+print('\\n--- WORK_STATE ---\\n'+(p/'AI_Solutions/CodexParallelChain/WORK_STATE.md').read_text())
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+## 0. 規則（每個 session 都適用）
+
+**品質與流程**
+- 不 commit、任何檔案都不加 AI 署名。保護資料夾（不要改）：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6。
+- 新版本：`AI_Solutions/<NEW>/`，以 ClaudeOpus55_v6 為底複製 `src/ CMakeLists.txt Makefile tests/`；執行輸出全部在 `Testcases/results/<NEW>/`。
+- 調參只用 `Testcases/testcases`、`Testcases/holdout`；edge、edge_seed2~5 只當回歸。凍結（記 sha256）之後才產生新 seed。
+- 沒有數據就不宣稱進步：HPWL 至少 3 seeds、報平均與範圍，三種協定分開；新舊版本同一次配對重跑。
+- 計時中的程式一次一個（`timing.lock`）；分析與編譯 `taskset -c 16-19`。
+
+**省 token（上一輪 Codex 一個 session 用了 2,230 萬 input token：166 次呼叫、每次約 14 萬 context，其中一半的工具呼叫是在查進度）**
+1. **一個 session 只做一個階段**，做完就更新 WORK_STATE 並結束；下一階段開新 session（context 從小開始）。
+2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+   `timeout 600 bash -c 'until [ -e MARKER ]; do sleep 20; done'`，不要反覆 ls / tail / ps。
+3. **輸出都進檔案**，終端只印摘要：每個指令輸出 ≤ 40 行（`| tail -n 20`、`awk` 摘要）；不要 cat 整份 record.csv、log、.pl。
+4. **只讀需要的**：本檔 + 自己的 WORK_STATE.md + 要改的函式。原始碼用 `grep -n` 找函式再 `sed -n` 讀範圍。
+5. 不重跑已完成的步驟（每步 `.done.json`）。對話回覆 ≤ 15 行；完整內容寫在報告檔。
+
+## 1. 可以直接用的工具（`Testcases/results/ClaudeOpus55_v6/scripts/`）
+
+**複製整個資料夾到 `Testcases/results/<NEW>/scripts/` 就能用**：路徑由資料夾名推得（`v6q.py` 的 R 與 WORK_STATE = `AI_Solutions/<資料夾名>/WORK_STATE.md`）。
+
+| 腳本 | 用途 |
+|---|---|
+| `v6q.py` | 串行佇列：`Queue(out).run(name, cmd)`，每步 `.done.json`、拿 timing.lock、完成自動寫 WORK_STATE；`build(ver, out_dir, src=)` |
+| `phase2_train.py TAG [dp 參數]` | 把目前原始碼複製到 `phase2/train/TAG/` 編譯，跑 testcases+holdout 的 Stage 1（`--no-sa`），對 ChainDP / CapDP 出 `compare.md` |
+| `phase2_large.py TAG` | 完整 dp：L2 seed 1、2 與 L1 |
+| `phase2_stage2_sweep.py TAG L2分配 L1分配` | 同一 L1/L2 合法起點的 SA / polish 分配掃描（sa_bench） |
+| `stage1_phases.py OUT DIR…` | 從 run_ts 輸出切 Stage 1 階段時間、每次 cap 嘗試 |
+| `compare_lg.py OUT.md REF REF_CSV NAME CSV…` | 逐筆對參考（最大 ≤、總 ≤ ×1.005） |
+| `cap_headroom.py` | 熱點 MIP（scipy；只動違規 cell 附近，上限 D 下最小總位移） |
+| **`final_validate.py --seed-dir edge_seed6 --seed 20261024`** | **凍結後整套驗證**（27 + L1/L2 + 新 seed + 三種 HPWL 協定 + 額外時間），約 7 小時；完成標記 `final/ALL_DONE` |
+| **`final_report.py`** | 從 final/ 產生 `summary.md / summary.json`（只印 5 行） |
+| `codex_after.sh MARKER PROMPT_FILE LOG` | 等完成標記出現再自動開下一個 Codex session（可選） |
+
+其他：`Testcases/results/ClaudeOpus55_v5/scripts/run_ts.py`（stderr 時間戳）、`Testcases/results/CodexCapDP/scripts/hpwl_compare.py`（三種 HPWL 協定）、
+`AI_Solutions/CodexChainDP/tests/sa_bench.cpp`（共同 Stage 2 driver）、`AI_Solutions/ClaudeOpus55_v6/tests/repair_compare.cpp`。
+已知的坑：local_grade 只留 stderr 最後 3000 字；它的 TESTCASE_DIR 是「裝 benchmark 資料夾的資料夾」（只跑 L1/L2 時做 symlink 資料夾）；
+Bookshelf 前綴要跟 .aux 裡寫的檔名一樣（symlink 起點要叫 `L2.*` / `h07.*`）；`run_edge.sh` 會覆寫 `Testcases/results/edge/<ver>/`，只對新版本用；
+`pkill -f` 會殺到自己的 shell，用 PID；`rm` 的目標用 `"${VAR:?}"`。
+
+## 6. 驗收（建議）
+
+- 27 + L1 + L2 + 新 seed 全部 PASS；L1 < 240 秒、L2 < 600 秒；額外步驟 0 超時；任何步驟出錯退回前一步。
+- 對 v6（同輪）：27 筆雙條件 ≥ 19、總位移幾何平均 ≤ v6、逐筆最大位移不比 v6 差超過 Stage 1 的執行間變動；
+  HPWL 預設與同總時間協定 holdout、edge 平均不比 v6 差（報範圍）；同次數協定若 SA 有改要報。
+- C++ 測試一般 + ASan/UBSan 通過；動到平行程式要 TSan，並確認同 seed / 同執行緒數 / 固定次數結果一樣。
+
+## 7. 階段 B（實作・調參）什麼時候算完成
+
+**每一項改動各自判定「保留」或「撤回」**，全部判定完、而且最後一份原始碼通過下面的檢查，B 就完成，在 WORK_STATE 寫「B 完成」並停（下一步是 C）。
+
+**單項的判定**（只看 testcases + holdout；`phase2_train.py` 的 compare.md 會列出 v6 同輪的數字）
+
+v6 在訓練集 11 筆的基準（對 ChainDP，`ClaudeOpus55_v6/final`）：雙條件 **8/11**、最大位移 GM **0.99604**、總位移 GM **0.99813**。
+Stage 1 的執行間變動：總位移最多約 0.11%、最大位移約 0.13%（ibm05）。
+
+| 改動 | 保留的條件（全部要成立） |
+|---|---|
+| chain 階段平行化 | 訓練集雙條件 ≥ 8/11；總位移 GM 比 v6 低（≥ 0.03%）；最大位移 GM 不比 v6 差超過 0.1%；逐筆最大不比 v6 差超過 0.2%；chain 階段的實際秒數不比 v6 多；h05、h06 在同 1.5 秒內的 chain 收穫至少達到 v6 給 3 秒時的水準（v6：h05 −0.29%、h06 −0.44%，HANDOFF 第 3 節） |
+| 平行 SA（只有診斷的 band 損失平均 ≥ 0.5% 才做） | 同次數協定（固定次數、自動執行緒、3 seeds）在 ibm01、ibm05、h06、h07、h08 的幾何平均比 v6 好 ≥ 0.3%，沒有一筆差超過 0.5%；固定次數下兩次執行結果逐位相同；TSan 0 警告 |
+| 其他小改動 | 有訓練集數據顯示改善，且上表的「不比 v6 差」都成立 |
+
+**停損**：同一項最多 3 輪「改程式 → 訓練」。第 3 輪仍不符合保留條件就撤回（把 src 還原到上一個保留點），數據寫進 WORK_STATE 的「試過沒用」。
+
+**B 結束前的最後檢查**（對最後一份原始碼，`phase2_train.py` 的 protocol.json 裡的 src_sha256 要等於目前 src）
+
+1. 訓練集 Stage 1 一次（`phase2_train.py final_b`），以上「不比 v6 差」都成立，額外步驟 0 超時。
+2. 有動 SA、polish 或時間分配時：`phase2_large.py final_b`（L1、L2 完整執行）全部合法，L1 < 240 秒、L2 < 600 秒。
+3. C++ 測試：一般 + ASan/UBSan 全過；動過平行程式加 TSan 0 警告。新功能各有一個測試。
+4. WORK_STATE 寫：保留了哪些、撤回了哪些（各附數據路徑）、最後原始碼的 hash、「B 完成，下一步 C」。
+
+所有改動都被撤回也算 B 完成：寫清楚數據，C 改成「不凍結新版、直接寫報告說明沒有改善」。
+
+--- WORK_STATE ---
+# CodexParallelChain — WORK_STATE
+
+- 本 session：只建立版本並啟動第一階段診斷；不等待、不查進度、不調參、不 commit。
+- 專案根目錄：Lab3。底版：ClaudeOpus55_v6；src、tests、CMakeLists.txt、Makefile 原樣複製。
+- 只閱讀 HANDOFF.md 與必要原始碼／工具片段，未閱讀其他報告。
+- 執行輸出：Testcases/results/CodexParallelChain/；scripts/ 已完整複製 v6 scripts/。
+- 保護：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6，均不得修改。
+- SHA256：provenance/protected_before.json（逐檔）、protected_roots.sha256（各目錄 aggregate；按相對路徑排序的 sha256  雙空白  路徑 + 換行）、base.sha256（底版複製項目）、copied_scripts.json。
+- v6 整個保護目錄 aggregate SHA256：2702e487b8f7be35de32daab56d71d9ac5fc74444c1b19fe20b1e24f8f15b2e3。
+
+## 第一階段範圍
+
+1. chain：testcases 3 + holdout 8 = 11 筆，另 e08_fragmented、e16_rowgaps 僅診斷；default 與額外指定 --chain-time 6，共 26 次。
+   使用 -v --no-sa --cap-time 0；default 保留原本 1.5/3 秒 chain 預算。cap 關閉以隔離 chain 收穫；不改接受規則或額外預算。
+   phase1/instrumented/ 是獨立副本，只有 main.cpp 增加 8 個 fprintf；記錄每輪 target windows、ejection chains、post-chain DP 的實際耗時與前後總位移，以及整段 chain。
+2. SA：ibm01、ibm05、h06、h07、h08，seed 1、2；自動執行緒 moves=3,000,000（8 bands 約 2,400 萬實際次數），再把其實際 attempts 原值傳給單執行緒。
+   sa_bench：seconds=100000、polish_seconds=0，避免時間截止；保留 100 溫度步驟，明列單執行緒整除步驟可能少做的 0–99 次，不冒稱完全相等。
+   原始演算法不改；診斷 driver 只加 fprintf 印實際 threads。逐筆、平均與範圍均由完成後腳本生成，僅診斷不宣稱進步。
+   指定起點：Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/<bench>/output。
+   例外：該目錄沒有 ibm01、ibm05；在新目錄 phase1/sa/legal_starts/ClaudeOpus55_v4/ 以未修改 v4 -v --no-sa 補建；每對 SA 共用同一份起點並保存 SHA256。
+3. toy：未插樁 v5 與 v6 各一次 -v --no-sa，保留完整 cap stderr；HANDOFF 參考最大位移分別 1972.0、2004.4，實測另列。
+
+## 執行約定
+
+- 使用複製的 v6q.Queue，每步 .done.json；拿新版本 timing.lock，同時拿既有 v6 timing.lock（唯讀開啟、不更動檔案），計時程式一次一個。
+- 編譯、分析固定 CPU 16–19；計時程式可用 CPU 0–19，無其他診斷同時執行。
+- 完成輸出 phase1/chain_summary.csv、chain_rounds.csv、sa_pairs.csv、toy_summary.csv、summary.json；只有全部成功且保護資料夾 SHA256 未變才寫 phase1/ALL_DONE。
+- 失敗寫 phase1/FAILED.json，保留每步 log/.failed.json；修正後可重跑佇列，已成功步驟跳過。
+- 尚未啟動；先做編譯與輸入檢查，不執行計時診斷。
+- 10-22 23:55 phase1/build_jobs/build_v6 完成（12 秒）
+- 10-22 23:55 phase1/build_jobs/build_chain 完成（2 秒）
+- 10-22 23:55 phase1/build_jobs/build_sa 完成（1 秒）
+- 10-22 23:55 phase1/build_jobs/build_v5 完成（12 秒）
+- 10-22 23:55 phase1/build_jobs/build_v4 完成（8 秒）
+- 10-22 23:55 phase1 啟動前檢查完成：編譯成功、輸入有效、插樁僅 fprintf；尚未執行診斷。
+
+## 第一階段執行歷史（已於 10-23 05:01 完成）
+
+歷史等待項目：scripts/diag.py，完成標記 phase1/ALL_DONE
+- 已 nohup 啟動，PID 4；日誌 phase1/diag.nohup.log。
+- 啟動前編譯與輸入檢查成功；保護資料夾 SHA256 未變（provenance/protected_after_setup.json）。
+- 本 session 到此結束，未等待完成、未查詢診斷進度。
+- 10-23 00:09 phase1 診斷失敗：Protected directories changed; do not write ALL_DONE；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+- 10-23 00:09 phase1 診斷失敗：Prepared script/binaries changed; rerun --prepare；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+- 10-23 00:10 phase1 啟動前檢查完成：編譯成功、輸入有效、插樁僅 fprintf；尚未執行診斷。
+- 10-23 00:10 phase1/jobs/chain_ibm01_default 完成（22 秒）
+- 10-23 00:10 phase1/jobs/chain_ibm01_chain6 完成（26 秒）
+- 10-23 00:11 phase1/jobs/chain_ibm05_default 完成（37 秒）
+- 10-23 00:12 phase1/jobs/chain_ibm05_chain6 完成（41 秒）
+- 10-23 00:12 phase1/jobs/chain_toy_default 完成（1 秒）
+- 10-23 00:12 phase1/jobs/chain_toy_chain6 完成（1 秒）
+- 10-23 00:12 phase1/jobs/chain_h01_default 完成（3 秒）
+- 10-23 00:12 phase1/jobs/chain_h01_chain6 完成（3 秒）
+- 10-23 00:12 phase1/jobs/chain_h02_default 完成（14 秒）
+- 10-23 00:12 phase1/jobs/chain_h02_chain6 完成（14 秒）
+- 10-23 00:12 phase1/jobs/chain_h03_default 完成（8 秒）
+- 10-23 00:13 phase1/jobs/chain_h03_chain6 完成（9 秒）
+- 10-23 00:13 phase1/jobs/chain_h04_default 完成（13 秒）
+- 10-23 00:13 phase1/jobs/chain_h04_chain6 完成（16 秒）
+- 10-23 00:13 phase1/jobs/chain_h05_default 完成（5 秒）
+- 10-23 00:13 phase1/jobs/chain_h05_chain6 完成（9 秒）
+- 10-23 00:14 phase1/jobs/chain_h06_default 完成（30 秒）
+- 10-23 00:14 phase1/jobs/chain_h06_chain6 完成（34 秒）
+- 10-23 00:15 phase1/jobs/chain_h07_default 完成（22 秒）
+- 10-23 00:15 phase1/jobs/chain_h07_chain6 完成（26 秒）
+- 10-23 00:16 phase1/jobs/chain_h08_default 完成（58 秒）
+- 10-23 00:17 phase1/jobs/chain_h08_chain6 完成（63 秒）
+- 10-23 00:17 phase1/jobs/chain_e08_fragmented_default 完成（6 秒）
+- 10-23 00:17 phase1/jobs/chain_e08_fragmented_chain6 完成（10 秒）
+- 10-23 00:18 phase1/jobs/chain_e16_rowgaps_default 完成（6 秒）
+- 10-23 00:18 phase1/jobs/chain_e16_rowgaps_chain6 完成（10 秒）
+- 10-23 00:18 phase1/jobs/legal_start_ibm01 完成（21 秒）
+- 10-23 00:19 phase1/jobs/legal_start_ibm05 完成（35 秒）
+- 10-23 00:19 phase1/jobs/sa_ibm01_s1_auto 完成（5 秒）
+- 10-23 00:19 phase1/jobs/sa_ibm01_s1_single 完成（21 秒）
+- 10-23 00:19 phase1/jobs/sa_ibm01_s2_auto 完成（6 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm01_s2_single 完成（21 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm05_s1_auto 完成（6 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm05_s1_single 完成（26 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm05_s2_auto 完成（6 秒）
+- 10-23 00:21 phase1/jobs/sa_ibm05_s2_single 完成（26 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s1_auto 完成（4 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s1_single 完成（14 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s2_auto 完成（4 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s2_single 完成（14 秒）
+- 10-23 00:21 phase1/jobs/sa_h07_s1_auto 完成（6 秒）
+- 10-23 00:22 phase1/jobs/sa_h07_s1_single 完成（22 秒）
+- 10-23 00:22 phase1/jobs/sa_h07_s2_auto 完成（6 秒）
+- 10-23 00:22 phase1/jobs/sa_h07_s2_single 完成（22 秒）
+- 10-23 00:22 phase1/jobs/sa_h08_s1_auto 完成（7 秒）
+- 10-23 00:23 phase1/jobs/sa_h08_s1_single 完成（25 秒）
+- 10-23 00:23 phase1/jobs/sa_h08_s2_auto 完成（6 秒）
+- 10-23 00:23 phase1/jobs/sa_h08_s2_single 完成（24 秒）
+- 10-23 00:23 phase1/jobs/toy_v5 完成（5 秒）
+- 10-23 00:23 phase1/jobs/toy_v6 完成（1 秒）
+- 10-23 00:23 phase1/jobs/summarize 完成（0 秒）
+- 10-23 00:23 phase1 診斷失敗：Protected directories changed; do not write ALL_DONE；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+- 10-23 05:01 phase1/ALL_DONE：全部診斷完成，保護資料夾 SHA256 未變；等待下一個 session 分析。
+
+## 目前狀態：2026-10-23 phase1 診斷完成
+
+- 已確認 phase1/ALL_DONE：26 chain、20 SA、2 toy；不重跑既有完成工作。
+- 已寫 Testcases/results/CodexParallelChain/diagnosis.md：三部分逐筆耗時／位移收益、band 平行資料結構與約 2–4 倍工作量假說、10 對 SA 比值／平均、toy 原因、第二階段排序與驗收。
+- 主樣本 default：target 3.312757 s / 9258.268240；ejection 9.545742 s / 1446.724840；post-DP 1.802126 s / 12303.715360。ejection 占時間 65.11%，收益 6.29%；不可直接以時間加速倍率推論品質收益。
+- SA 等權平均損失 1.339185% ≥ 0.5%；4/5 測資均值過門檻。h06 實際 5 threads，其餘 8；只有 2 seeds，僅診斷。
+- toy 兩版 cap 起點相同；v6 局部修補候選多因 total_budget 被拒，7 attempts／1 accepted，v5 51／3；最大位移 2004.4 對 1972.0。只描述，未修正。
+- 協調者已在沙箱外啟動 diag.py 並移除計時 worker 的 taskset；provenance/orchestrator_note.json 亦記載保護文件變動／基準更新，最終 unchanged 是相對更新後基準。
+- 第二階段優先序：SA 邊界改善 → target/DP 分 band → ejection 分 band與無效搜尋診斷 → toy 後續原因追蹤（需後續任務授權）。各項尚未實作。
+- 閱讀限制判斷：HANDOFF 只讀第 0 節；不擅自讀第 5／7 節。採使用者提供的 0.5% 門檻；驗收依第 0 節與已知範圍列出，第 7 節逐條對齊尚待後續允許閱讀時核對，不能宣告 B_DONE。
+- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。
+
+## 階段 B：SA 第 1/3 輪（2026-10-23，待訓練，尚未保留）
+
+- 本輪依 diagnosis.md 排序表先做 SA：訓練用五筆的診斷平均 band 損失 1.339185% ≥ 0.5%。chain target windows / ejection 分 band 尚未實作，後續仍須完成與各自判定；toy 不在本輪授權內。
+- 已閱讀 HANDOFF 第 0、4、6、7 節及本 WORK_STATE；不讀其他 HANDOFF 段落。原始碼只改本版本 src 與 tests；本檔為使用者明確要求的狀態紀錄例外。未改保護目錄、未 commit。
+- SA 單一設計：在既有同步點以完成批次 round 決定 band 分界，原本首分界 1 / 0.5 個 band 的二相循環改成 1 / 0.5 / 1.25 / 0.75 的四相循環，後續分界仍相隔一 band。使分界兩側可輪流處於同一 worker；最小列寬與尾 band 合併邏輯沿用。
+- 不改溫度、moves、sync 頻率、接受規則、時間限制、額外預算與執行緒選擇；未用 e08/e16 調參。這是待驗證假說，不宣稱品質改善。
+- 合併沿用不相交列／cell 寫入與 barrier；每批真實 HPWL 更新及 bestP 保留不變。main 的 guardedStep 仍於例外或不合法時退回 SA 前狀態，Pool 等全部 worker 結束才傳遞例外。
+- 新功能測試：parallel_sa_test 驗證四相分界的精確位置與週期、單 band、稀疏列／薄尾處理；固定工作量兩次的 seg/site、best、accepted、attempts 相同，並檢查合法性及 HPWL cache。固定工作量測試關閉 wall-clock starvation heuristic；另保留既有 starvation 與零時間測試。
+- tests/run_tests.py 新增互斥 --tsan 模式、編譯限定可用 CPU 16–19，執行測試不綁核。一般 10/10 PASS；sanitizer 結果於下方補記。
+- tag：sa_boundary_r1；目前 src_sha256（與 phase2_train.py 同演算法）：`4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。
+- 本 session 不執行長時間訓練、不啟動背景工作。交由協調者：`python3 Testcases/results/CodexParallelChain/scripts/phase2_train.py sa_boundary_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/train/sa_boundary_r1/stage1.done.json`。
+- 下一 session 先讀 `phase2/train/sa_boundary_r1/compare.md` 並把數值寫回本檔。注意此腳本用 --no-sa，僅能判斷 Stage 1 回歸，不能單憑它保留 SA；且目前腳本 reference 指向既有 v6 final，並非同輪重跑，不可宣稱已滿足配對規定。
+- SA 保留閘門：ibm01、ibm05、h06、h07、h08 同合法起點、自動執行緒、固定次數、3 seeds，對同輪 v6 幾何平均改善 ≥ 0.3%、無單筆退步 > 0.5%；固定次數重跑逐位一致、TSan 0 警告。另須報固定 wall-time 配對品質；不得以 Stage 1 無變化冒充 SA 品質證據。
+- 每項最多 3 輪；本 SA 為第 1 輪候選，未有保留結論。三輪仍失敗即撤回到上一保留點（目前為原始 v6 src）；記入「試過沒用」。不能在本輪訓練返回前開始下一改動。
+- B 最後仍須 final_b Stage 1（protocol hash 等於最終 src）、如保留 SA 則 final_b L1/L2 合法且 <240/<600 秒、全套一般/ASan/UBSan/TSan、各項保留或撤回數據及 hash；目前不得宣告 B 完成。
+
+- 本輪測試完成：一般、ASan/UBSan、TSan 均 10/10 PASS（各 28 個 build/link/run 記錄）；TSan 0 警告，ASan/UBSan 無診斷。記錄路徑：Testcases/results/CodexParallelChain/{tests,tests_sanitized,tests_tsan}/records.json 與各測試 .log。ASan 在沙箱內設 ASAN_OPTIONS=detect_leaks=0，LeakSanitizer 尚待協調者沙箱外補跑，不宣稱已驗證洩漏。
+- 10-23 05:15 phase2/train/sa_boundary_r1/stage1 完成（258 秒）
+- 10-23 05:15 phase2/train/sa_boundary_r1 完成（預設）：見 phase2/train/sa_boundary_r1/compare.md
+
+## 階段 B：SA 第 1/3 輪補足同輪配對（2026-10-23，等待中）
+
+- 已讀上次 `phase2/train/sa_boundary_r1/stage1.done.json` 與 `compare.md`：258.37 秒、11/11 合法、雙條件 8/11、對 ChainDP 最大 GM 0.99605、總位移 GM 0.99833。歷史 v6 為 0.99604／0.99813；本輪 `--no-sa` 與歷史完整流程不等價，不能把 HPWL 2.00744 對 0.99013 當作 SA 退步，亦不能據此保留改動。既有 Stage 1 不重跑；最後仍需真正同輪 final_b。
+- 判斷：先補足本輪 SA 閘門，不消耗第 2 輪、不調參、不開始 chain 改動。src 與 tests 均未改；src hash 仍為 `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。保留／撤回結論尚未作成。
+- 新佇列 `Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py`；結果 `phase2/sa_pair/sa_boundary_r1/`。保存雙方 src 快照、共同 driver、二進位／輸入／合法起點 SHA256，v6 與候選交錯同輪執行，且交替先後順序。五筆訓練測資 ibm01、ibm05、h06、h07、h08；每筆 seeds 1、2、3，無 edge 調參。
+- 三個獨立 SA 協定：`fixed_single` 單執行緒 5M proposals；`fixed_auto` 自動執行緒每 band 3M（沿用診斷工作量）；`wall10_auto` 原預設工作量上限與自動執行緒、10 秒。全都共用合法起點、polish=0。這些是隔離 SA 的訓練協定，不冒稱最終 end-to-end fixed/equal/default。每項報三 seeds HPWL 平均／範圍與配對比值，協定不混算。
+- 固定次數兩協定各跑兩次，比對輸出 placement、完整 seg/site、浮點 initial/best/HPWL 與 attempts/accepted 的精確序列；只在固定次數 driver 關閉依速度推估的 starvation heuristic，雙方一致且不更動 production src。固定 auto 各 band 的取整會依 placement 造成小量 attempts 差異，完整記錄，不宣稱兩版本實際 proposals 逐一相等。
+- `summary.json` 預先固定判斷：固定 auto 五筆的三 seeds 平均配對比值之 GM ≤0.997，且所有單 seed 比值 ≤1.005（比逐筆均值不退步 >0.5% 更嚴格）；重跑一致與 TSan 仍獨立核對。無條件提前保留；失敗也保留數據供下一 session 判斷剩餘輪次。
+- 計時雙鎖：本版本 `timing.lock`＋唯讀開啟 v6 `timing.lock`，worker 不使用 taskset；只有 build 使用 v6q 的 CPU 16–19。每項 `.done.json` 可續跑；worker 最多 240 秒、每次另以 check_pl 驗證合法性。保護資料夾 hash 前後核對，全部成功才寫 ALL_DONE；出錯寫 FAILED.json。
+- 已完成雙版本編譯與輸入預檢：`phase2/sa_pair_prepare.log`；沒有啟動背景工作。既有一般／ASan/UBSan／TSan 測試對應同一份 src，無須本輪重跑；ASan 先前為 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 仍待沙箱外補跑。
+- 本 session 已直接跑完短驗證：ibm05 seed1 fixed_auto，雙方各兩次共 4 個 checkpoint；均合法、8 threads，各自重跑完整狀態逐位一致。v6 HPWL 10147365.5／23995921 attempts；候選 10093594.5／23995835 attempts。單 seed 僅驗證佇列與重現性，不能推論保留；詳見 `phase2/sa_pair_smoke.log` 與 `phase2/sa_pair/sa_boundary_r1/fixed_auto/ibm05/seed1/`。保護資料夾 hash 檢查通過。
+- 等待中：協調者執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py sa_boundary_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/sa_pair/sa_boundary_r1/ALL_DONE`。完整訓練超過 5 分鐘，故交外部執行；已完成的小樣本工作會依 marker 跳過。
+- **下一步**：先讀上述 `ALL_DONE`、`compare.md` 與 `summary.json` 的 gate/reproducibility，將數據與判斷記回本檔。若 SA 閘門失敗，依原因決定第 2/3 輪或提前撤回，總計最多 3 輪；chain target/DP 與 ejection 尚未實作或判定。B 尚未完成，不凍結、不產生新 seed、不進 C、不 commit。
+- 10-23 05:35 phase2/sa_pair/sa_boundary_r1 completed; see compare.md and summary.json
+
+
+## 階段 B：SA 保留；target windows 第 1/3 輪（2026-10-23）
+
+- 已讀上次 `phase2/sa_pair/sa_boundary_r1/{ALL_DONE,compare.md,summary.json}`。固定單緒 GM 1.00000000；固定自動緒 GM 0.99174693（改善 0.825307%）；wall10 自動緒 GM 0.99143710（改善 0.856290%）。五筆各 3 seeds 的平均與範圍見 compare.md，三協定不混算；wall10 不是完整 end-to-end。
+- **保留 SA 四相邊界**：固定自動緒改善 ≥0.3%，最差單 seed h07 +0.423939% <0.5%，固定工作量 60 組重跑逐位相同；該份 src 的 TSan 10/10 PASS、0 警告。判定與 src／測試證據已另存 `phase2/accepted/sa_boundary_r1/`；這是撤回用的保留點，不是階段 C 凍結。保留點 hash `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。既有 ASan 是 detect_leaks=0，未宣稱完整洩漏驗證。
+- 原碼核對修正：`optimizeWindowsDisp` 已有平行 row bands、移動邊界與 atomic memo clock，故本輪不重做 post-chain DP；先實作仍為序列的 `targetedWindowsDisp`。ejection 的 Search 平行化／無效搜尋仍未實作或判定，後續不能忽略。
+- **target windows 第 1/3 輪候選，尚未保留**：依原 anchor 順序收集來源／目標完整 segment 互不相交的 windows；遇到衝突先完成前批，再建下一個 window。每批至多 min(threads,8)，worker 只讀 DB 與 window 求解，主緒按原順序套用 RowMap 更新。涵蓋遠列及同列不相交 regions，不禁止跨 band 候選；沒有減少 roots、passes、時間或改 cap。
+- 完整 segment 保留包含 region 邊界 cell，避免只看 anchor 或 cell set 的漏判；Pool barrier 之後才更新，例外時既有 safe Placement rollback。固定工作量應與原序列語意等價；deadline 僅可能多完成已收集的一批，仍須以實際秒數驗收，不預先宣稱加速。
+- 新增 `TargetWindowStats`（attempted/solved/batches/maxBatch）與 `target_window_test`：獨立遠列並行、共享 segment／同列 region 衝突、60 個隨機 fixture，序列/4 workers/repeat 的 seg/site、接受與求解數相同，合法、總／最大不增加，以及零時間無動作。CMake 與 run_tests.py 都列入第 11 個測試。
+- 此候選 src hash：`e3ee1e62c7f1fdd8bc7ef3c48e3cab98ed0108ab06e93ea04045259c64a7371e`。一般測試 11/11 PASS；ASan/UBSan、TSan 結果後補。日志 `phase2/target_r1_tests.log` 與 tests/records.json。
+- 新佇列 `scripts/phase2_chain_pair.py target_parallel_r1`：同輪交錯 candidate/v6，11 筆訓練 Stage 1（--no-sa）；另配對 h05/h06 candidate 1.5 s 與 v6 3 s（cap 關閉）。保留 phase1 的相同 8 行 chain 計時插樁，移除後須與各自 production main 逐字一致，src 快照及編譯結果皆記 SHA256。HPWL 不作本輪宣稱；雙條件 8/11 用歷史 ChainDP 定義，其餘改善／退步／時間閘門均比較同輪 v6。
+- 佇列每筆獨立 .done.json、輸入與 protocol/hash 固定；check_pl 驗證合法、拒絕 TIMEOUT／guard fallback；同持本版本與 v6 timing.lock，計時 worker 不綁核，僅 v6q 編譯綁 CPU 16–19。保護目錄 hash 前後核對，成功才寫 ALL_DONE。準備階段修正 guard 日誌辨識，初版 metadata 已存 .precheck；當時尚無測資執行，不曾丟棄訓練結果。
+- 第 7 節 chain gate 原樣保留：雙條件 ≥8/11、總 GM≤0.9997、最大 GM≤1.001、逐筆最大≤1.002、chain 實秒總和不增加，h05/h06 1.5s 收益須至少達歷史 0.29%/0.44% 且不低於同輪 v6 3s。最多 3 輪；失敗可依資料提前撤回到上述 SA 保留點。B 最後仍須 final_b 同輪 Stage 1、對應最終 src hash、L1/L2 與完整測試；目前不能 B_DONE。
+- 10-23 05:44 phase2/chain_pair/target_parallel_r1/jobs/stage1_toy_v6 完成（1 秒）
+- 10-23 05:44 phase2/chain_pair/target_parallel_r1/jobs/stage1_toy_candidate 完成（1 秒）
+
+- 本輪驗證已完成：一般／ASan+UBSan／TSan 均 **11/11 PASS**，各 30 筆 build/link/run 記錄；TSan 0 警告，ASan/UBSan 0 診斷。ASan 沙箱內使用 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 仍待協調者沙箱外補跑。候選 src/hash 與測試證據封存於 `phase2/chain_pair/target_parallel_r1/test_evidence/verification.json` 及子目錄，後續測試不會覆蓋此輪證據。
+- 雙版本已編譯、protocol／src／script hash 相符；短測 toy 同輪配對已直接完成（2 個 .done.json）。兩版均合法、總位移 43324.4、最大 2004.4；chain 實秒 v6 0.013843／candidate 0.015304。此小樣本僅驗證流程，不宣稱加速或通過保留閘門。詳見 `phase2/target_r1_smoke.log` 與 `phase2/chain_pair/target_parallel_r1/stage1/toy/`；正式佇列會跳過此兩筆。
+- 已核對保護目錄 hash 未變；本輪只在 SA 保留點之上改 window.cpp/window.hpp，SA 邊界功能未變。沒有 commit、沒有新 seed、沒有進 C；session 結束時無背景工作。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_chain_pair.py target_parallel_r1`；WAIT：`Testcases/results/CodexParallelChain/phase2/chain_pair/target_parallel_r1/ALL_DONE`。其餘訓練預計超過 5 分鐘，未在沙箱啟動。
+- **下一步**：先讀該 ALL_DONE、compare.md、summary.json 的 gates／budgets／實際 chain seconds，將本輪 target windows 判定寫回本檔。失敗時按主因決定第 2/3 輪或提前撤回（只撤回此輪 window 改動，保留 SA）；成功則記新保留點。接著處理尚未完成的 ejection 平行化／無效搜尋項；不可用 SA 已通過或 toy 短測宣告 B 完成。最終階段需修正既有 phase2_train.py 的歷史參考問題，讓 final_b 真正同輪配對，再做第 7 節所有檢查。
+- 10-23 05:54 phase2/chain_pair/target_parallel_r1 completed; see compare.md and summary.json
+
+## 階段 B：target windows 撤回；ejection 第 1/3 輪（2026-10-23）
+
+- 已讀上次 `phase2/chain_pair/target_parallel_r1/{ALL_DONE,compare.md,summary.json}`。雙條件 8/11；總位移 GM 1.00041344（退步 0.041344%）、最大 GM 0.99862747；h04 最大比 1.00260668，超過逐筆 +0.2% 門檻。chain 實秒合計 candidate 14.239835989 / v6 14.558779537（僅省 2.19%）。h05 在 1.5s 收益 0.261639% < 配對 v6 3s 0.288901%／歷史門檻 0.29%；h06 0.364283% < 0.434934%／0.44%。三個品質閘門失敗。
+- **試過沒用／撤回 target windows（第 1 輪提前停損）**：節省時間太小，且總位移、h04 最大位移與半預算收益均未達標，沒有證據支持只調 batch 大小可補足差距，不消耗第 2/3 輪。window.cpp/window.hpp 已逐檔還原到 SA 保留點；target_window_test.cpp 封存於該輪 test_evidence 並退出目前測試清單。決策 `phase2/chain_pair/target_parallel_r1/decision.json`；該輪數據及程式快照保留。SA 四相邊界仍保留，post-chain DP 本來即已平行，沒有新增 DP 改動。
+- **ejection 第 1/3 輪候選，尚未保留**：先處理診斷所列無效搜尋工作，將每個 DFS node 的完整候選排序改成 occupied／empty 各自 partial_sort，只對最後保留的 beam 合併排序。保留原 empty 與 occupied 配額、總排序鍵、候選生成、roots/depth/expansions、時間預算及接受規則。保留候選的 seg/site 唯一，排序鍵為全序，因此固定工作量應逐位相同；限時吞吐與品質必須實測。
+- 本輪**沒有**把可變 Search／RowMap 交給多執行緒；ejection 分 band 仍未實作。依 diagnosis 第 3 優先項先評估精確等價的少排序方案，避免一次混入跨 band 搜尋覆蓋率變動。不可將此輪通過視為分 band 已驗證，也不可因 SA 已保留而跳過 ejection 的明確決策。
+- 新功能測試 chain_beam_test：2,400 組以 v6 全排序加過濾為獨立 oracle，涵蓋空集合、全空位／全 occupied、重疊壓縮、大量同分、奇數 beam 與候選不足；全部保留候選及次序相同。另用保留點 chain.cpp 獨立編譯 reference，套用現有 chain_test 全部固定工作量 fixture＋300 個隨機 placement，seg/site、roots/nodes/candidates/accepted/longest/multiBlocker/refreshed 全相同（6,569 accepted chains、2,673 multi-blocker steps）。證據 `phase2/ejection_beam_r1_equivalence/{driver.cpp,build.log,run.log,done.json}`；極短 wall deadline 不作逐位配對，仍由原測試檢查回滾。
+- 一般 11/11 PASS（新增 chain_beam 替換已撤回 target_window）；ASan/UBSan、TSan 正在本 session 執行，結果另補。沙箱 ASan 明確設 `ASAN_OPTIONS=detect_leaks=0`；完整 LeakSanitizer 仍待協調者沙箱外補跑，不宣稱洩漏已驗證。
+- 新佇列 `scripts/phase2_ejection_pair.py ejection_beam_r1`，沿用先前成功的同輪交錯雙版本 Stage 1 11 筆，以及 h05/h06 candidate 1.5s / v6 3s 配對。未修改原 target 輪腳本及證據；新增每次 ejection 的 roots/nodes/candidates/accepted 計數，存個別與彙整 ejection_work.json。仍採第 7 節完整 chain 閘門（包括總 GM≤0.9997、雙條件≥8/11、最大 GM≤1.001、逐筆最大≤1.002、實秒不增加與兩筆半預算收益）；本候選不以較寬鬆門檻事後挑選。
+- 此輪候選 src_sha256：`2fc4f106a3f84835e9f92afbf40d0befa0eb9f5ac7ab1160b58373fc96cf921a`。未 commit、未改保護目錄、未產生新 seed、不進 C。
+- 本輪最終短驗證：一般／ASan+UBSan／TSan 均 **11/11 PASS**，各 30 筆 build/link/run，TSan 0 警告、ASan/UBSan 0 診斷；ASan 使用 detect_leaks=0。用時約 44／151／79 秒，各工作均小於 5 分鐘。對應候選 hash 的不可覆寫證據已封存於 `phase2/chain_pair/ejection_beam_r1/test_evidence/verification.json` 與各子目錄。
+- 雙版本編譯、protocol/src hash、保護目錄 hash 核對通過。toy 同輪配對短測已完成兩筆 jobs/*.done.json，均合法；各 root/node/candidate/accepted counter 皆記錄成功。這僅驗證訓練流程，不作收益宣稱；正式佇列會跳過已完成的 toy。詳見 `phase2/ejection_r1_{prepare,smoke}.log` 與 `phase2/chain_pair/ejection_beam_r1/stage1/toy/`。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_ejection_pair.py ejection_beam_r1`；完成標記 `Testcases/results/CodexParallelChain/phase2/chain_pair/ejection_beam_r1/ALL_DONE`。完整訓練預計超過 5 分鐘，未在沙箱啟動；沒有殘留背景工作。
+- **下一步**：先讀上述 ALL_DONE、compare.md、summary.json 的 gates/budgets/chain_seconds，必要時只讀 ejection_work.json 的 h05/h06 計數，判定此輪保留或撤回。ejection 最多 3 輪，若幾乎沒有吞吐或品質收益可依停損提前撤回至 SA 保留點；如考慮第 2 輪分 band，必須先解決完整 Search touched-set 隔離、跨界補做與 barrier cap 重驗，不能因目前排序等價就假設分 band 安全。所有 ejection 方案須有明確保留／撤回結論才能進最後驗收。B 尚未完成；最終仍須修正 phase2_train.py 歷史參考問題後做真正同輪 final_b Stage 1、protocol hash 對應最終 src、final_b L1/L2 合法及 <240/<600 秒、全套測試與最終 hash。未凍結、不產生新 seed、不進 C、不 commit。
+- 10-23 06:11 phase2/chain_pair/ejection_beam_r1 completed; see compare.md and summary.json
+
+## 階段 B：ejection 撤回；最終驗收準備（2026-10-23）
+
+- 已讀上次 `phase2/chain_pair/ejection_beam_r1/{ALL_DONE,compare.md,summary.json,ejection_work.json}`。雙條件 8/11；總位移 GM 0.999931693871（僅改善 0.006831% < 0.03%）、最大 GM 1.00000000；chain 實秒合計 candidate 14.547725445 / v6 14.547820982，沒有實質加速。h05 半預算收益 0.261639% < v6 3s 0.288901%／歷史 0.29%；h06 0.367677% < 0.434905%／0.44%。同預算 h05 nodes 304354 / 305877、h06 138682 / 140362，吞吐分別減少約 0.50%／1.20%。
+- **試過沒用／ejection 第 1 輪提前撤回**：沿用已存在的 `phase2/chain_pair/ejection_beam_r1/decision.json`（本 session 開始時已存在），沒有收益證據支持第 2/3 輪。檢查發現 src 已與 `phase2/accepted/sa_boundary_r1/src` 逐檔相同；故不重做還原，確認 hash `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。chain_beam 測試亦已退出目前清單，候選證據仍保留。上次 WORK_STATE 未記錄這些落盤結果，本節補齊。
+- **ejection 分 band 本次 B 不採用**：沒有完整 Search touched-set 隔離、跨界補做及 barrier cap 重驗的已驗證實作；先前精確等價少排序亦沒有吞吐收益，因此不擴展第 2 輪風險。這是提前停損／不保留的決策，並非宣稱已測得分 band 無效。target windows 已撤回；post-chain DP 本來就平行，沒有新增改動。所有項目已明確判定，最後僅保留 SA 四相邊界。
+- 已修正 `scripts/phase2_train.py` 與 `phase2_large.py`，共用新 `phase2_acceptance.py`。舊腳本存 `phase2/final_b_setup/*.before`。train 使用最後 production 原碼（無計時插樁）對 11 筆訓練逐筆交錯重跑 candidate/v6；歷史 ChainDP 僅用雙條件 8/11 定義，所有 v6 比率都來自本輪。protocol 記錄 src、腳本、helper、輸入、checker、binary hashes，快照或協定變更拒絕沿用 marker；雙 timing.lock，只有編譯綁核。
+- 最後僅保留 SA，故 final Stage 1 檢查總 GM≤1、最大 GM≤1.001、逐筆最大≤1.002、雙條件≥8/11、額外步驟 used≤budget（0 超時），不再要求已撤回 chain 功能的 0.03%／半預算改善。兩種輸出 placement 都 check_pl；TIMEOUT、guard fallback、非法 placement 直接失敗。large 沿用既有 L2 seed 1/2、L1 seed 1，完整預設執行，L1<240s、L2<600s；不新生 seed，不用大例調參或宣稱 HPWL 改善。
+- `scripts/phase2_final_b_queue.py` 供協調者依序完成 train final_b、large final_b，以及沙箱外完整 ASan/UBSan（detect_leaks=1）；最後 marker 是驗收資料完成，非自動 B_DONE。沙箱內正做最後原碼一般／ASan+UBSan（detect_leaks=0）／TSan 驗證，結果後補。一般已 10/10 PASS，28 筆 build/link/run；證據保存在 `phase2/final_b_validation/test_evidence/tests/`。
+
+- 本 session 最後短驗證完成：一般、ASan/UBSan、TSan 均 **10/10 PASS**，各 28 筆 build/link/run；用時 41.2／139.1／68.5 秒，單項都少於 5 分鐘。TSan 0 警告、ASan/UBSan 0 診斷。沙箱 ASan 使用 `ASAN_OPTIONS=detect_leaks=0`、UBSan `halt_on_error=1`，不能據此宣稱洩漏驗證通過。完整 test/source hashes 與不可覆寫日志已存 `phase2/final_b_validation/test_evidence/verification.json` 及各子目錄。
+- train final_b 的雙 production binaries 與 large final_b candidate 已編譯，protocol／src／binary hashes 核對通過。toy 同輪短測 2 個 jobs/*.done.json 已完成，兩版均合法、總位移 43324.4、最大 2004.4；extra used candidate 0.668260／v6 0.654251，budget 12 秒。這只驗證流程，不是最終訓練結論。正式佇列跳過這兩筆；記錄 `phase2/final_b_setup/{train_smoke,large_prepare}.log`。保護目錄 hash 未變；本 session 未修改 production src，未 commit、未新生 seed、未凍結、未進 C，無殘留背景工作。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。依序 train final_b 剩餘同輪配對、large final_b L2 seed1/2 + L1 seed1、沙箱外完整 ASan/UBSan（detect_leaks=1）。計時程式不綁核；只有 v6q／測試 runner 的編譯綁 16–19。佇列過程若程序失敗會寫 FAILED.json，不寫成功 marker；若只是數值門檻失敗，ALL_DONE 中 gates=false，仍須人工判定，不能視為通過。
+- **下一步**：只讀 `phase2/final_b_validation/ALL_DONE`、`phase2/{train,large}/final_b/{ALL_DONE,compare.md,summary.json,protocol.json}` 與 `phase2/final_b_validation/{test_evidence/verification.json,tests_full_asan/records.json}`，核對 final src hash、每項門檻、0 額外步驟超時、全合法及 L1<240／L2<600。完整 ASan 日志須無診斷；一般／TSan 證據不可被 full ASan 覆蓋。若全通過，回顧 SA 保留與 target/ejection 撤回的數據路徑、寫最終 hash 及「B 完成，下一步 C」，最後一行 B_DONE；未全通過則按失敗原因處理，不重跑已完成成功步驟、不放寬門檻、不先進 C。目前 **B 尚未完成**。
+- 10-23 13:43 phase2/train/final_b completed; all_gates=False
+- 10-23 13:54 phase2/large/final_b completed; all_gates=False
+
+## 階段 B：最終驗收失敗，保守撤回 SA（2026-10-23）
+
+- 已核對上次完成標記、train/large summary 與 protocol：來源 hash 均為 `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`；marker 只是資料完成，train=false、large=false，不能 B_DONE。Stage 1 總 GM 0.99956280、最大 GM 1.00160930、雙條件 8/11、額外步驟 0 超時；h06 最大比 1.017845448592（+1.784545%，超過 +0.2%），最大 GM 亦超過 +0.1%。L1 187.50s、L2 seed1/2 211.42/212.77s，全部合法且在限制內；L2 seed2 額外步驟 6.336646s > 6s，不能略去該失敗。
+- 原碼差異只有 annealer.cpp 與 sa_bands.hpp；Stage 1 使用 --no-sa，兩項失敗均在 SA 之前。h06 日志顯示微小 chain/DP 起點差異後，v6 cap 首候選 accepted（total 891019.06），candidate 首候選 total_budget（892648.88），後者最後最大仍 435.19、v6 427.56。L2 seed2 第二次 cap repair 用 1.793603s，結束後 extra 已超時。這些是日誌證據，**不能歸因 SA**，亦不把它們當成調整大例參數的理由。
+- **最終保守撤回 SA**：單項固定自動緒改善 0.825307% 與 wall10 0.856290% 的證據仍有效（`phase2/sa_pair/sa_boundary_r1/`），但候選未取得完整 final_b 通過證據。不對未改原碼反覆抽樣直到通過，不放寬門檻；停止保留新版，還原 v6。這是最終驗收失敗後的風險決策，不宣稱已證明 SA 無效，也不消耗 SA 第 2/3 輪調參。target/ejection 的撤回理由維持原決策路徑。
+- 所有舊 final_b 資料、production src/tests 與 helper 已封存於 `phase2/rejected/final_b_sa_boundary_r1/`：原 `train/final_b` → `train/`、`large/final_b` → `large/`、`final_b_validation` → `validation/`；原日志中的絕對路徑依此映射，不修改歷史數值。決策見該目錄 `decision.json`。先前一般／ASan+UBSan／TSan 各 28 記錄及逐檔 SHA 已核對；沙箱外完整 ASan+UBSan 28 記錄全成功、日志 0 診斷，原證據未遺失。
+- 最終 production src 現已與保護 v6 **逐檔逐位一致**，hash `03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2`；還原 parallel_sa_test.cpp，保留 tests runner 的編譯綁核／TSan 選項。沒有 production 改動保留；若最後驗收通過，下一步 C 必須是「不凍結新版、直接寫報告說明沒有通過完整驗收的改善」，並誠實保留 SA 單項改善結果。
+- 原碼已改為 v6，因此舊 hash 的成功步驟不能充作新 final 原碼驗收。安排新 `phase2_train.py final_b`／`phase2_large.py final_b`，**所有既有數值門檻原樣保留**，不共用舊 marker；連同 L1/L2 與額外超時條件都保留。只修 protocol 說明為全部撤回，沒有改 acceptance 算法或 gate。若基線也不通過，要如實記為基線／量測限制並處理，不可當作自動豁免。
+- 新 `phase2_short_validation.py` 每次只執行一套 <5 分鐘測試，雙 timing lock、只有編譯綁核，僅封存本套 records 實際引用的日志，避免殘留已撤回測試混入證據。final queue 現會驗證最後 src/tests 與三套證據 hash，再接受沙箱外完整 ASan 的 records／日志；Python 語法檢查成功。
+
+- 還原後最終短驗證：一般／ASan+UBSan／TSan 均 **10/10 PASS**，各 28 筆記錄；耗時 40.9／138.1／68.3 秒。ASan 使用 `ASAN_OPTIONS=detect_leaks=0`，TSan 0 警告；對應原碼／測試／日志 SHA 已封存並重新核對於 `phase2/final_b_validation/test_evidence/verification.json`。這份原碼的完整 LeakSanitizer 仍由協調者補跑，舊 SA 原碼通過證據不能冒用。
+- 新 final_b 的 train 雙 production binaries 與 large candidate 已編譯，protocol/src/binary hashes 核對成功；`src_sha256` 與 `reference_sha256` 都是 `03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2`。日誌 `phase2/final_b_rollback_setup/{train,large}_prepare.log`；保護目錄 hash 未變，未 commit、未新生 seed、未凍結、未進 C，沒有殘留背景工作。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。此為還原後 hash 的新驗收，不沿用舊 marker；正式計時不綁核，完整佇列超過 5 分鐘，未在本 session 啟動。
+- **下一步**：讀新的 `phase2/final_b_validation/ALL_DONE`、`phase2/{train,large}/final_b/{compare.md,summary.json,protocol.json}` 與短／完整 sanitizer 證據，只判斷還原後來源。保持全部門檻；若全過，最終結論為「全部 production 改動撤回，B 完成，下一步 C：不凍結新版、直接寫報告」，須保留 SA 單項改善與最終驗收失敗的區別。若基線也失敗，先核對失敗原因與協定，不以 source 相同為由跳過 gate、不對同份原碼反覆抽樣直到通過；仍不得 B_DONE。
+
+## 協調者備註（Claude，10-23 14:10；給下一個 B session）
+- SA 的 band 分界改動只在 Stage 2（annealer.cpp），不會影響 Stage 1：h06 的最大位移、L2 的額外步驟時間都是 Stage 1 的結果。
+- 正在跑的還原版（等同 v6）final_b 驗收，就是判斷這兩項是不是「v6 本身的執行間變動／既有問題」的對照：
+  - 若還原版也出現同樣的 h06 最大位移變動或 L2 額外時間超出 → 不是 SA 造成的；SA 應依 HANDOFF 第 7 節的同次數協定（已量到 GM 改善 0.825%）判定保留，
+    並把 h06／L2 記為 v6 既有的變動（v6 的 0/27 超時只量了 27 筆，沒有量 L1/L2 的額外步驟）。
+  - 若還原版沒有這兩個問題 → 才表示和 SA 有關，維持撤回。
+- 10-23 14:13 phase2/train/final_b completed; all_gates=False
+- 10-23 14:24 phase2/large/final_b completed; all_gates=False
+
+## 階段 B：v6 對照仍失敗；依協調者備註恢復 SA 單項保留（2026-10-23）
+
+- 已消化上次等待結果：`final_b_validation/ALL_DONE` 的 train=false、large=false、full_asan_ubsan=true；沒有把完成標記當通過。還原版原碼、train/large protocol、snapshot、binary、輸入及 helper hashes 已由 `validate()` 核對，來源確為 v6 hash `03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2`。
+- Stage 1：總位移 GM **1.0000003706805136**（退步 0.0000370681%，雖小仍未通過 ≤1），最大 GM 1、逐筆最大比全為 1、雙條件 8/11、額外步驟 0 超時。h06 最大兩版皆 427.55；上次 h06 最大退步沒有重現。相同來源的總位移仍有執行間變動，但不因此放寬 gate 或重抽樣。
+- L1 seed1 **187.59 s**、L2 seed1/2 **199.26/199.24 s**，全部 placement 合法且符合 <240/<600 s；L2 額外步驟 **6.127434/6.135080 s > 6 s**，兩筆失敗。L1 extra=5.721812 s。L2 的超時在 byte-identical v6 亦出現，支持其為既有問題，不能歸因 SA；v6 歷史 0/27 並未涵蓋 L1/L2，不能用來否定這次觀測。
+- 唯讀定位：`src/capsearch.cpp` 的 `capSearch()` 將 repair 時間限制設為 min(.4,.15*left)，`repairAt()` 雖傳入 phase1/phase2 deadline，L2 日誌第二個 unresolved repair 仍耗 1.589675/1.593705 s。這指出子程序期限涵蓋範圍有待檢查，尚未證明哪一段初始化／收尾造成超時；沒有依大例調參、縮減搜尋或擅自更改 acceptance。
+- **更正上節保守撤回決策：恢復 SA 單項保留。** 協調者 14:10 備註的「還原版 L2 亦超時」條件已成立；恢復 `annealer.cpp`、`sa_bands.hpp`、`tests/parallel_sa_test.cpp` 至原保留點。固定自動緒三 seeds GM 改善 0.825307%、最差單 seed +0.423939%、60 組逐位相同、TSan 0 警告的證據仍在 `phase2/sa_pair/sa_boundary_r1/` 與 `phase2/accepted/sa_boundary_r1/`。h06 未重現也不能反過來證明是 SA 所致：Stage 1 未執行 SA，這一因果判定仍不成立。**單項保留不等於 final_b 通過。**
+- target windows、ejection 繼續撤回，數據分別在 `phase2/chain_pair/target_parallel_r1/`、`phase2/chain_pair/ejection_beam_r1/`；本 session 未開新的實作／調參輪。SA 最終失敗資料仍在 `phase2/rejected/final_b_sa_boundary_r1/`。
+- v6 對照整包已封存至 `phase2/rejected/final_b_v6_control/{train,large,validation,src,tests,phase2_acceptance.py,decision.json}`；原 final_b 路徑已移走，以免把舊來源 marker 誤認為目前 SA 原碼的驗收。檔內歷史絕對路徑按此搬移映射，未修改原數據。decision.json 記錄此輪 gates、完整 sanitizer 日誌 hash 與判定。
+- 對照版一般／沙箱 ASan+UBSan／TSan 各 28 records、10/10 PASS，逐檔 SHA 已重驗；沙箱 ASan 使用 `ASAN_OPTIONS=detect_leaks=0`。協調者沙箱外完整 ASan+UBSan（detect_leaks=1）亦 28 records 全成功；四套日志均無 sanitizer 診斷。恢復後的 src/tests hashes 與先前 SA 最終驗收測試證據完全一致，不重跑已成功測試；沒有用對照版測試冒充 SA 證據。
+- **目前 source hash：`4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。B 尚未完成。** 恢復的 SA 原碼仍只有先前失敗的 final_b，未放寬或豁免任何 gate，也不能直接重跑這份原碼取較好數字。`phase2_acceptance.py` 的 note 仍是歷史「全部撤回」，故未準備新 protocol／final queue；禁止直接執行既有 final queue。
+- **下一步／阻塞原因**：先處理 v6 既有的 cap deadline 正確性與相同來源 Stage 1 量測變動。若實作期限修正，必須先用 testcases/holdout 的新功能測試及新一輪同輪訓練判定（小改動最多 3 輪），不得以 L2 調參，也不得讓 v6 reference 的失敗被忽略；只有來源或有明確依據的協定修正後才建立新 final_b。若維持目前原碼與全部現有 gate，兩份來源均已有失敗證據，沒有可合法直接宣告 B_DONE 的路徑。無等待中工作、無 RUN/WAIT；本 session 停在 B 驗收阻塞，不進 C、不凍結、不新增 seed、不 commit。保護資料夾 hashes 核對未變。
+
+## 協調者備註 2（Claude，10-23 14:35）
+- HANDOFF 第 7 節「不比 v6 差」的 Stage 1 項目，以第 7 節寫的執行間變動為容許範圍（總位移約 0.11%、最大約 0.13%）；
+  總位移 GM 1.00000037（差 0.00004%）在範圍內，算通過，不是退步。SA 改動不碰 Stage 1，這項不需要再花一輪。
+- L2 額外時間超出是 v6 既有問題（還原版也出現），修正它是正確的下一步；修好之後的最後檢查只需要讓 L1/L2 與 27 筆的額外步驟都在預算內。
+- B 的 session 上限還剩 3 次（第 10 次會強制收尾）；請以「cap deadline 修正 → 一次 final_b → B_DONE」為目標。
+
+## 階段 B：cap deadline 第 1/3 輪；修正後 final_b 等待中（2026-10-23）
+
+- 已實讀上次封存的 `phase2/rejected/final_b_v6_control/validation/ALL_DONE` 與 train/large summaries：train=false、large=false、full ASan=true；總 GM 1.0000003706805136、最大 GM 1、雙條件 8/11、train 額外步驟 0 超時，large 僅 extra gate 失敗。沒有未消化的背景工作。依協調者備註 2，採取期限修正後一次 final_b；不對原封不動的來源重抽樣。
+- **期限修正第 1 輪，尚未判定保留**：`src/capsearch.cpp` 的 `Repair` 建構子會在進入原有 deadline-aware 搜尋迴圈之前，建立全體細胞／逐列 lateness；逐列評分與最後 placement 亦缺乏期限檢查。新增只由 `rowRepair` 捕捉的內部取消例外；建構、逐列 lateness、候選列、排序 key／window 的每 256 次操作、clumping 及最後提交都檢查既有 phase2Until。超時直接回傳 false，caller placement 逐位不變；不增加預算、不改 L2 參數、不修改保護 v6。這證明並修正可重現的期限缺口，但完整 L1/L2 是否消除超時仍待驗收，不提前宣稱已解決所有期限路徑。
+- 新功能測試 `tests/cap_deadline_test.cpp`：60,000-cell 合成案例中，過期期限拒絕、2ms 初始化中斷後 placement 不變（實測含清理 2.659ms；單元測試 0.5s 上限只容許 sanitizer/allocator 開銷，**正式 extra gate 不加任何寬限**）。相同測試連結 v6 capsearch 時於 expired-deadline assertion 失敗（SIGABRT，關閉 core）；證據 `phase2/cap_deadline_r1/fixtures/{ALL_DONE,v6_expected_failure.log}`。另用 testcases/toy 與 holdout/h06 的既有合法 placement 驗證，期限／合法性／失敗不改 placement 均通過；未以 edge 或 L2 調參。
+- 最終來源一般／ASan+UBSan／TSan 均 **11/11 PASS**，各 30 records；42.66／144.00／76.23 秒。TSan 0 警告、sanitizer 0 診斷；沙箱 ASan 使用 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 由外部佇列補跑。精確 source/tests/log hashes：`phase2/final_b_validation/test_evidence/verification.json`。新增測試使舊 10-test 證據不可冒用；三套新證據皆已重新核對。
+- 協定修正有明確依據：依備註 2 的 0.11% 執行間變動，Stage 1 總 GM gate 改為 ≤1.0011；最大 GM ≤1.001、逐筆最大 ≤1.002、雙條件 ≥8/11 維持原限制。protocol 記載此授權來源及 SA 保留／deadline 第 1 輪待判定；不再沿用「全部撤回」歷史 note。train 仍同輪交錯重跑 candidate/v6，兩版 extra 都必須 0 超時，不忽略 reference 失敗；歷史控制資料不改寫。
+- 新 `scripts/phase2_deadline_regression.py` 為最後 27 筆 deadline/合法性回歸：沿用本輪已完成的 11 筆 candidate train，另跑原始 edge 16 筆，避免重跑成功步驟；edge 只看合法性／額外步驟時限，不判定品質收益。已預檢 16 筆實際完整名稱、輸入 hashes。final queue 驗證新功能證據、全部短測 hashes，依序 train、large、27 筆回歸、完整 ASan；ALL_DONE 的 gates 增加 `deadline_regression_27`，任何數值失敗仍不能 B_DONE。
+- train/large production snapshots 與 binaries 已編譯並通過 `validate()`；兩份 protocol src_sha256 都等於目前 **`00e81c9d621384e51cecfce2a1943c478e9e4df287451c2b55a378fa47a96746`**。toy 同輪 smoke 的兩筆 jobs marker 已完成：兩版 total=43324.4、max=2004.4、合法，extra candidate 0.700882／v6 0.680769 <12s。這只驗證流程，不能充作整體訓練結論。保護資料夾 hashes 未變；不 commit、不凍結、不新增 seed、不進 C。
+- **現行判定**：SA 四相邊界依原三-seed 同次數改善 0.825307% 與 TSan／重現證據繼續單項保留，數據 `phase2/sa_pair/sa_boundary_r1/`、`phase2/accepted/sa_boundary_r1/`；target windows 與 ejection 繼續撤回，數據 `phase2/chain_pair/{target_parallel_r1,ejection_beam_r1}/`。deadline 修正待這一次新來源同輪資料判定；未新增其他調參輪。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。整個佇列超過 5 分鐘，未在沙箱啟動；計時程式不綁核，僅編譯由既有 runner 綁核。
+- **下一步**：讀上述 marker、`phase2/{train,large}/final_b/{summary.json,compare.md,protocol.json}`、`phase2/deadline_regression/final_b/{ALL_DONE,summary.json,protocol.json}` 與 sanitizer 證據，逐項核對新 hash、同輪最大／總位移 gates、27 筆全合法及 0 額外超時、L1<240/L2<600、完整 ASan 0 診斷。全部通過才將 deadline 第 1 輪判定保留，寫最終 hash、「B 完成，下一步 C」，回覆末行 B_DONE。若未通過，按失敗路徑針對性處理或撤回，維持最多 3 輪停損及協調者 session 上限，不對同份來源重抽樣、不以既有 v6 問題直接豁免時間 gate。**B 尚未完成。**
+- 10-23 14:50 phase2/train/final_b completed; all_gates=False
+- 10-23 15:01 phase2/large/final_b completed; all_gates=True
+
+## 協調者備註 3（Claude，10-23 15:15；B 只剩 2 個 session：B9 與強制收尾 B10）
+- 15:05 的 final_b：large 全過（L2 額外時間已在預算內）、27 筆 deadline 回歸 0 超時；**train 失敗**：h01 最大 +2.31%、h03 +1.23%、h06 +1.79%（h06 停在 cap 前的 435.19，一步都沒接受）。
+- 原因判讀：v6 的 repair 預算是 `min(.4, .15*left)`，原本 rowRepair 常常超出這個小預算卻成功（v6 的 e07 診斷：0.56~1.83 秒）；
+  現在照期限中止，中型設計（h01/h03/h06）的修復就做不完。問題不是「要不要守期限」，而是「每次修復的預算太小」。
+- 建議 B9 一次做完：**保留整體期限（cap 搜尋的 until 與 [extra] 預算）為硬上限**，但把每次 repairAt 的預算放大到
+  例如 `min(left - 保留量, max(.4, .5*left))`（或依 cell 數），讓修復在整體預算內做得完；然後**直接跑 phase2_final_b_queue.py**（含 train + large + 27 筆 deadline），不要另跑小訓練。
+- B10（強制收尾）讀結果：若 train/large/deadline 全過 → B_DONE；若 train 仍失敗 → 撤回 deadline 修正與預算改動、只保留 SA，
+  並把「L2 額外時間超出 0.13 秒是 v6 既有問題」寫進 WORK_STATE 的已知限制，然後 B_DONE（SA 在同次數協定已達標）。
+
+
+## 階段 B9：cap deadline 第 2/3 輪；放大單次修復預算（2026-10-23）
+
+- 已讀並核對上次等待結果：`phase2/final_b_validation/ALL_DONE` 的 train=false、large=true、deadline_regression_27=true、full_asan_ubsan=true；來源 hash `00e81c9d621384e51cecfce2a1943c478e9e4df287451c2b55a378fa47a96746` 與 train/large/regression protocol 一致，兩份 production snapshot/binary 通過 validate；短測文件 hashes、完整 sanitizer 無診斷、保護資料夾 hashes 均核對成功。
+- 第 1 輪不保留：總位移 GM 0.9996810689553765、最大 GM 1.0048161292150548、雙條件 7/11；h01/h03/h06 最大比分別 1.0231371214698877／1.0123407899491619／1.0178692550578878，未達門檻。L2 seed1/2 212.26／212.20 s、extra 5.910547／5.844463 s；L1 187.53 s、extra 5.720506 s；全部合法，27 筆合法且 0 額外超時。一般／ASan+UBSan／TSan 各 11/11、30 records；完整 ASan+UBSan 30 records 無診斷。不能因時間已過就視為品質過關。
+- 原輪 train、large、deadline_regression、validation 已完整移至 `phase2/rejected/final_b_cap_deadline_r1/`，同處另存原 src/tests/scripts 與 decision.json（含完整 ASan logs hashes）。原 cap_deadline_r1/fixtures 保留。封存檔中的歷史絕對路徑按搬移映射解讀，不改寫舊數據。新 final_b 不沿用舊 marker。
+- 依協調者備註 3，僅更改 capsearch.cpp 的 repairAt 時間分配：`repairUntil=min(until-0.08, now+max(0.4, 0.5*(until-now)))`，即 `min(left-0.08, max(0.4,0.5*left))`；給初始化及修復較完整的時間並留下 0.08s 收尾。保留第 1 輪 deadline cancellation、cap 搜尋整體 until、[extra] 預算及所有驗收門檻；不改 window repair 時間、不調 L2、不以 edge 品質選參數。這是第 2 輪，尚未保留；本 session 不另跑小訓練。
+- 新來源 hash：`d0b99109f3d04bdc33bdc7e90f55f1ef61ae8d828dc8a89b02747d85104ffc20`。toy/h06 deadline fixtures 新來源通過，`phase2/cap_deadline_r2/fixtures/ALL_DONE` 已記錄；v6 negative control 的 test/helper/非 capsearch 來源未變，逐檔核對後複用第 1 輪成功證據，未重跑已完成 control。
+- SA 四相邊界仍單項保留（3-seed 同次數 GM 改善 0.825307%，證據 `phase2/sa_pair/sa_boundary_r1/`、`phase2/accepted/sa_boundary_r1/`）；target windows／ejection 仍撤回（`phase2/chain_pair/{target_parallel_r1,ejection_beam_r1}/`）。不得把這些單項結論當本輪 final_b 通過。
+- 本輪一般／ASan+UBSan／TSan **各 11/11 PASS、30 records**，42.96／143.83／70.86 s；TSan 0 警告、sanitizer 0 診斷。沙箱 ASan 使用 `ASAN_OPTIONS=detect_leaks=0`；完整 LeakSanitizer 由外部佇列執行 detect_leaks=1。精確來源、tests 及逐檔日誌 hashes 已寫入並重驗 `phase2/final_b_validation/test_evidence/verification.json`。本次改動是既有 deadline 功能的預算調整，沿用 cap_deadline_test（合成取消／rollback）、toy/h06 fixtures 與 capsearch_test；收益由下列同輪完整驗收判定。
+- 新 train/large final_b 的 snapshot/binary 已 prepare 並通過 validate()；兩份 protocol.src_sha256 均為 `d0b99109f3d04bdc33bdc7e90f55f1ef61ae8d828dc8a89b02747d85104ffc20`，protocol 明列第 2 輪與備註 3 依據。所有 gates 維持第 1 輪值；兩份 ALL_DONE 及總驗收舊 marker 均未沿用。未啟動訓練、未重抽舊原碼、未改保護目錄、未 commit、未凍結、不產生新 seed、不進 C。
+- **等待中**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。整個佇列超過 5 分鐘，未在本 session 啟動；依序同輪 train、large、27 筆 deadline/合法性、沙箱外完整 ASan。計時不綁核，編譯沿用 v6q／測試 runner 的 16–19。程序失敗寫 FAILED.json；數值門檻失敗仍可能寫 ALL_DONE，必須讀 gates 判斷。
+- **下一步（B10 強制收尾）**：先讀本輪 `final_b_validation/ALL_DONE`、`{train,large}/final_b/{summary.json,compare.md,protocol.json}`、`deadline_regression/final_b/{ALL_DONE,summary.json,protocol.json}`、短測 verification 及完整 sanitizer logs/records。核對此輪 hash、train 全部門檻、27 筆合法與 0 額外超時、L1<240/L2<600 及完整 ASan 0 診斷。全過才保留 deadline 第 2 輪並寫最終 hash、「B 完成，下一步 C」。若 train 仍失敗，依協調者備註 3 撤回 deadline 與本輪預算改動至 SA 單項保留點 `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`，明列「L2 額外超出約 0.13 秒為 v6 既有問題」及協調者指定收尾例外，核對恢復來源與對應測試證據，再寫 B 完成；不可聲稱未過的 gate 已過。若是程序／證據缺失，先處理該失敗，不能把缺少結果當 train 品質失敗。遵守 session 上限，不再開第三輪調參。**目前 B 尚未完成，沒有 B_DONE。**
+- 10-23 17:12 phase2/train/final_b completed; all_gates=False
+- 10-23 17:23 phase2/large/final_b completed; all_gates=False
+
+
+## 階段 B10 強制收尾：撤回未達標改動，回到最後 SA 保留點（2026-10-23）
+
+- 已核對 B9 的 `phase2/final_b_validation/ALL_DONE`，不是只看檔案存在：train=false、large=false、deadline_regression_27=true、full_asan_ubsan=true。來源 `d0b99109f3d04bdc33bdc7e90f55f1ef61ae8d828dc8a89b02747d85104ffc20` 與 train/large protocol、production snapshots/binaries、regression marker 一致；validate()、短測逐檔 hashes、完整 ASan 30 records 與無診斷均通過核對。
+- **撤回 deadline 取消機制與 repairAt 預算放大，結束調參，不開第 3 輪。** 第 2 輪 train：雙條件 8/11、總位移 GM 1.0005056030750525、最大 GM 0.9998015013793347；但 ibm05 最大 +0.326784%、h03 +1.234079%，均超過逐筆 +0.2% 上限。L1 187.68s、L2 seed1/2 211.46/212.88s，placement 全合法且總時間通過；L2 seed2 extra=6.421174s >6s，時間修正也未完整成立。27 筆合法且 extra 0 超時不能抵銷前述失敗。
+- 第 2 輪完整資料已封存 `Testcases/results/CodexParallelChain/phase2/rejected/final_b_cap_deadline_r2/{train,large,deadline_regression,validation,src,tests,scripts,decision.json}`。封存 regression 的 candidate symlink 改指向同包 train/candidate；其他歷史絕對路徑按搬移映射解讀。第 1 輪仍在 `phase2/rejected/final_b_cap_deadline_r1/`：train 7/11、最大 GM 1.0048161292，h01/h03/h06 最大不合格。兩輪均歸入「試過沒用」，不保留其功能或測試於最終版本。
+- **保留 SA 四相邊界**：`phase2/sa_pair/sa_boundary_r1/` 與 `phase2/accepted/sa_boundary_r1/decision.json`：固定次數、自動執行緒、五案例各三 seeds 的 HPWL GM 比 v6 為 0.9917469293203764（改善 0.825307%），最差單 seed +0.423939% <0.5%，60 組固定次數重跑逐位相同，TSan 0 警告。此單項達標結論與 final_b 是否全部通過分開記錄。
+- **維持撤回 target windows 與 ejection**：`phase2/chain_pair/target_parallel_r1/summary.json` 總 GM=1.0004134401、h05/h06 收穫 0.261639%/0.364283%；`phase2/chain_pair/ejection_beam_r1/summary.json` 總 GM=0.9999316939（只改善 0.006831%）、h05/h06 收穫 0.261639%/0.367677%。均不足總 GM 改善至少 0.03% 及 h05/h06 0.29%/0.44% 條件。
+- 最後 `src/` 已逐檔還原至 `phase2/accepted/sa_boundary_r1/src/`，hash **`4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`**（現有 src_hash：按檔名排序串接內容後 SHA256）。與 v6 原碼差異僅 `annealer.cpp`、新增 `sa_bands.hpp`；capsearch.cpp 已回復 v6。tests 回復該 SA 原碼的對應測試與 runner，deadline 測試保留於撤回證據包。
+- **已知限制**：byte-identical v6 對照的 L2 extra=6.127434/6.135080s，超出約 0.13 秒，證據 `phase2/rejected/final_b_v6_control/large/summary.json`。協調者備註 3 曾允許記錄限制後收尾；本次使用者明確要求「最後檢查 RUN 已跑完且都成立」才 B_DONE，因此不以舊備註自動豁免 gate、不把已知超時說成通過。
+- 依本次使用者指示，對還原後原碼建立新的 `phase2_train.py final_b`、`phase2_large.py final_b` 與 27 筆 deadline/合法性回歸；這是撤回後最後確認，不是新實作／調參或對同一失敗輸出反覆抽樣。原有數值 gates 保留（總 GM 的 0.11% 容許沿用協調者備註 2）；沒有放寬超時限制。舊 final_b 全部封存，不沿用任何 marker。queue 已改為檢查 SA 保留點與其測試，不再要求已撤回 deadline 的 fixtures。
+- 本 session 直接重跑最後來源一般／ASan+UBSan／TSan，結果與新 production prepare 狀態記在下方；ASan 使用 `ASAN_OPTIONS=detect_leaks=0`，完整 LeakSanitizer 交外部 queue。全部長計算由協調者執行，未在沙箱啟動。
+
+- 最後來源 C++ 已直接完成：一般、ASan+UBSan、TSan **各 10/10 PASS、28 records**；wrapper wall（含可能的鎖等待）41.25／153.63／69.83s，所有 returncode=0、sanitizer 0 診斷、TSan 0 警告。ASan 確實使用 `ASAN_OPTIONS=detect_leaks=0`，不能宣稱 LeakSanitizer 已檢查。逐檔 logs、src/tests hashes 位於 `phase2/final_b_validation/test_evidence/verification.json`；SA 的新功能測試 parallel_sa_test 保留並通過。
+- 短測由雙 timing lock 串行。發現短測 wrapper 在等鎖前讀取 manifest，可能覆蓋前一套的 metadata；已修正為完成時重讀合併。本輪保留了 sanitizer 完成時 manifest，三套均已依原始 records／逐檔 log SHA、src/tests SHA 合併重驗，沒有重跑測試或補造成功資料。
+- **等待中（最後檢查，不再調參）**：協調者從 Lab3 執行 `python3 Testcases/results/CodexParallelChain/scripts/phase2_final_b_queue.py`；WAIT：`Testcases/results/CodexParallelChain/phase2/final_b_validation/ALL_DONE`。queue 依序同輪 train、L1/L2 完整執行、27 筆合法性／deadline 回歸、沙箱外 `ASAN_OPTIONS=detect_leaks=1` 完整 ASan+UBSan；計時不綁核，僅編譯沿用 v6q／runner 的 CPU 16–19。
+- **目前不能寫 B 完成／B_DONE**：最後來源還沒有這次 RUN 的結果。下一次只讀結果與核對 hashes，不開新一輪實作／調參；ALL_DONE 僅表示跑完，必須逐項讀 train/large/regression gates 與完整 ASan 證據。全部成立才寫「B 完成，下一步 C」及 B_DONE；若有門檻未過，照實列出（包含已知 v6 L2 限制），不可將備註 3 的舊收尾例外冒稱本次使用者要求的全部通過。未 commit、未凍結、未產生新 seed、未進 C。
+- 最終預檢完成：新 train 的 candidate/v6 與 large candidate production binaries 均已編譯，validate() 通過；兩份 protocol.src_sha256 都等於最後 SA 保留點 `4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258`。三套測試逐檔 hashes 再核對成功，保護目錄 hashes 未變，沒有舊 ALL_DONE 或本 session 啟動的背景工作。證據 `phase2/final_b_validation/setup_verified.json`，編譯日誌 `{train,large}_prepare.log`。最終狀態仍為等待上述 RUN／WAIT，不宣告 B_DONE。
+- 10-23 17:45 phase2/train/final_b completed; all_gates=True
+- 10-23 17:56 phase2/large/final_b completed; all_gates=True
+
+## B 完成（協調者判定，10-23 18:02）
+- B10 留下的最後驗收已由協調者執行：`phase2/final_b_validation/ALL_DONE`（src_sha256 4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258，等於目前 src）。
+- gates：train **true**（雙條件 8/11、總位移 GM 在變動內、最大 GM 與逐筆最大都不比 v6 差、0 超時）、large **true**（L1 187.5 秒、L2 210.9 / 210.9 秒，全部合法，L2 額外步驟 5.06 / 5.06 秒、L1 5.72 秒，0 超時）、27 筆 deadline 回歸 **true**、沙箱外完整 ASan/UBSan（detect_leaks=1）**true**。
+- 保留：平行 SA band 分界四相循環（同次數、自動執行緒、3 seeds HPWL GM −0.825%，固定次數逐位相同，TSan 0 警告）。
+- 撤回：target windows 平行化、ejection 縮小候選、rowRepair 期限修正與修復預算調整（數據見前面各節）。
+- 已知限制：先前一次 L2 額外步驟 6.13 秒（> 6 秒）在 v6 原碼也出現，屬執行間變動／v6 既有問題；本次驗收 L2 為 5.06 秒。
+- **B 完成，下一步 C**（凍結 + final_validate.py）。
+
+
+exec
+/bin/bash -lc "tail -n 12 Testcases/results/CodexParallelChain/phase2/asan_outside.log
+rg -n 'freeze|sha256|frozen|seed.dir|edge_seed' Testcases/results/CodexParallelChain/scripts/final_validate.py Testcases/results/CodexParallelChain/scripts/final_report.py Testcases/results/CodexParallelChain/scripts/phase2_train.py" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+      Start 10: guard
+10/10 Test #10: guard ............................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) =  31.71 sec
+
+[orchestrator] cmake -S /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Solutions/CodexParallelChain rc=0
+
+[orchestrator] cmake --build /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/bin/asan_outside rc=0
+
+[orchestrator] ctest --output-on-failure --timeout rc=0
+Testcases/results/CodexParallelChain/scripts/final_validate.py:2:"""final_validate.py — reusable, serial, checkpointed final validation of a frozen version.
+Testcases/results/CodexParallelChain/scripts/final_validate.py:5:folder's name. Requires Testcases/results/<NEW>/frozen_sources.sha256 (paths relative to AI_Solutions/<NEW>).
+Testcases/results/CodexParallelChain/scripts/final_validate.py:11:  final/<seeddir>                gen_edge.py Testcases/<seeddir> --seed S --check   (generated only here, after the freeze)
+Testcases/results/CodexParallelChain/scripts/final_validate.py:16:usage: final_validate.py [--new NAME] [--base ClaudeOpus55_v6] --seed-dir edge_seed6 --seed 20261024
+Testcases/results/CodexParallelChain/scripts/final_validate.py:27:ap.add_argument('--seed-dir', required=True)
+Testcases/results/CodexParallelChain/scripts/final_validate.py:34:def check_frozen():
+Testcases/results/CodexParallelChain/scripts/final_validate.py:35:    for line in (R / 'frozen_sources.sha256').read_text().splitlines():
+Testcases/results/CodexParallelChain/scripts/final_validate.py:37:        if hashlib.sha256((SRC / name).read_bytes()).hexdigest() != h:
+Testcases/results/CodexParallelChain/scripts/final_validate.py:38:            raise SystemExit(f'frozen source changed: {name}')
+Testcases/results/CodexParallelChain/scripts/final_validate.py:41:check_frozen()
+Testcases/results/CodexParallelChain/scripts/final_validate.py:42:if (LAB / 'Testcases' / a.seed_dir).exists() and not (R / 'final' / f'{a.seed_dir}.done.json').exists():
+Testcases/results/CodexParallelChain/scripts/final_validate.py:43:    raise SystemExit(f'Testcases/{a.seed_dir} already exists before this validation: pick a new seed directory')
+Testcases/results/CodexParallelChain/scripts/final_validate.py:50:    check_frozen()
+Testcases/results/CodexParallelChain/scripts/final_validate.py:58:        check_frozen()
+Testcases/results/CodexParallelChain/scripts/final_validate.py:70:check_frozen()
+Testcases/results/CodexParallelChain/scripts/final_validate.py:71:q.run(a.seed_dir, ['taskset', '-c', '16-19', PY, 'Grader/tools/gen_edge.py', f'Testcases/{a.seed_dir}', '--seed', a.seed, '--check'])
+Testcases/results/CodexParallelChain/scripts/final_validate.py:73:    grade(f'seed_{v}', v, [f'Testcases/{a.seed_dir}'])
+Testcases/results/CodexParallelChain/scripts/final_validate.py:77:    check_frozen()
+Testcases/results/CodexParallelChain/scripts/final_validate.py:84:    check_frozen()
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import json,hashlib
+r=Path('Testcases/results/CodexParallelChain'); s=Path('AI_Solutions/CodexParallelChain/src')
+h=hashlib.sha256(b''.join(p.read_bytes() for p in sorted(s.glob('*')) if p.is_file())).hexdigest(); print('current src_sha256',h)
+for name in ['phase2/train/final_b/protocol.json','phase2/large/final_b/protocol.json','phase2/final_b_validation/ALL_DONE','phase2/train/final_b/summary.json','phase2/large/final_b/summary.json','phase2/deadline_regression/final_b/ALL_DONE','phase2/final_b_validation/test_evidence/verification.json']:
+ d=json.loads((r/name).read_text()); print(name, json.dumps(d,ensure_ascii=False)[:12000])
+print('seed path exists/issymlink',Path('Testcases/edge_seed6').exists(),Path('Testcases/edge_seed6').is_symlink())
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+current src_sha256 4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258
+phase2/train/final_b/protocol.json {"mode": "train", "tag": "final_b", "script_sha256": "bb0bbf80772dc94e32a36f2989683720784b0dba7f4d898d868af3ac1e607caf", "wrapper_sha256": "bad16bb5e4ffc13715be86beb90b95db77d6d35c49353cc70af1358864899079", "helper_sha256": {"v6q.py": "899b334e15bb6432b68c5fee3acef3509d3c46508bb21b90695fc55a14441838", "diag.py": "7303a824ad7aed97764d49bbd0308fed4ea1cfea247ed38eb82c2cb97558d83c"}, "src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258", "reference_sha256": "03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2", "cmake_sha256": {"candidate": "be475566a4602e86e4e11239337063d366f352de67a80efa600de8d70a1a37ab", "v6": "be475566a4602e86e4e11239337063d366f352de67a80efa600de8d70a1a37ab"}, "runner_sha256": "4e9b13e0d79088920b842b7990733ee8e07f29453fac8414510deabf0c9da9b6", "checker_sha256": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3", "inputs": {"ibm01": {"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.aux": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.aux", "sha256": "62a6aa78b37e6c23dd0426b106b4920ff069ba3d070af35934bc9fcf4a6decf7"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.nodes": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.nodes", "sha256": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.nets": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.nets", "sha256": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.wts": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.wts", "sha256": "1d8133c17769c5c33bfaf13bab5188daa242dda69381dcf35e58f19a331c28e7"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.pl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.pl", "sha256": "d003573ae03d3413714c3ac89d99e00bc5f131e5f0cbff1e3a7f9430cbfdcaca"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.scl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01.scl", "sha256": "7ace8a6c9cbbb91703ed95d69a6289195752e51775e4f7cdddaf42457ff6dacc"}}, "ibm05": {"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.aux": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.aux", "sha256": "173db66078531d61e1b94b0c47f2b007d3024d52984649dd89d233e376062a06"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.nodes": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.nodes", "sha256": "83c9acbee7c43b4c5288f8867f2db1988ffdc1d9d424aedf6cede0c935dcea41"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.nets": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.nets", "sha256": "7a1cbb6bab44d95893e0ca2304f84eb1737c72a9823d09a14679e9fcbfc34c2b"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.wts": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.wts", "sha256": "b9162b7e4dc187ee1075b155d6cc1f6bbaa13165889b1ea1d7f3fc4cde0d26bb"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.pl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.pl", "sha256": "bdbfcceef50fb3260d60f8b52c7292a41c9d77d9afec297e17ecd492c1ed584f"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.scl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05.scl", "sha256": "60c1593e1a7558bbd273731248e91cf0ab1549778a28accc7dce7e3be03e592a"}}, "toy": {"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.aux": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.aux", "sha256": "7c1e2044cc41a001647823bc969831b3f7d5bbdc90720fe357896e8445442ad9"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nodes": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nodes", "sha256": "775f0bf23ddb00bfc20d26cdbe2d1ea99e266d6e6f848ad107f2d3509605d17a"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nets": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.nets", "sha256": "038aca10169c0f07636444898d4cfceccd89ac602014cb481b8d5c639f5c4c84"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.wts": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.wts", "sha256": "78487846435e8114a65b9eb061d8e90da63be644b89a484426c905f455d1f3f3"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.pl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.pl", "sha256": "57e2575466c488e20ed8871ffd2a6733f0a46d5eba8b4a4463de1d563e562eca"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.scl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy.scl", "sha256": "c27e581e161d0f4fbe540a2f8a19ee8fcf9708355f3c4af113b19fd672630e38"}}, "h01": {"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.aux": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.aux", "sha256": "1b1b685a53ae5cdaf1cdaa2257dca9cbfe9b8d1a4b0e2a2120a6607efc34edbd"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.nodes": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.nodes", "sha256": "c848add221ed66bb484bc9321477f3cc02bcff7e29eae09dc91f6ee184a20e21"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.nets": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.nets", "sha256": "c0347a3286ca2f742ecf361bfb32c1eec2abce23c2eb67931ce96fdecd9c4462"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.wts": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.wts", "sha256": "2c6f8cb43f3688b210d8274ee4f664e2280432d42b8ae4c2b3b46284121c1536"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.pl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.pl", "sha256": "8630fbe758b479c20dea3e53090a793ac91ea87298fe3ea3dead4b4c0ca33aa8"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.scl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01.scl", "sha256": "12c7f725802d81ec5e35f1fec337d6f48a2a71285c8e926db5fb5bc601b386ab"}}, "h02": {"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.aux": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.aux", "sha256": "2db103abc7646ae4d0dfa942cff4c63f29ffafa04c49f850b51157f7c5f42c48"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.nodes": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.nodes", "sha256": "6a285c8d292d1bb9123628bcdc48cf5e5cf7b5b6bd522b443c9d8d100deddb49"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.nets": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.nets", "sha256": "4266e66864c6f28f07a90eb4fc306aa20d1030e55ba507172732f825c7d3aadf"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.wts": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.wts", "sha256": "fd21c09b348da236d7e40629e40e84897a0488d7dd600913bfa658b885a4abb9"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.pl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.pl", "sha256": "16895312438cf757e56f16d013bb9e00783a6454f5d4a21970a64490235562c3"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.scl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02.scl", "sha256": "5a7e233d004d9ddc3b0d1db6d22fe298da4f3b105982f171402823508c8e7bbc"}}, "h03": {"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.aux": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.aux", "sha256": "30e59164904bfece7696c5492397f599872933bb5b871d93bff3dde19d8f3b68"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.nodes": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.nodes", "sha256": "7932e5e2a98c7a483a3663b5366436c1677b05b96d8c239f5638996d95d3c6cb"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.nets": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.nets", "sha256": "29e1ebfd5e708d09ceb39c993a95e7ea4e01d9f23bcf304994b944c5aa2334b8"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.wts": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03.wts", "sha256": "6566591a4cb6e2c287dce4f6cec308775fa2fbc1d82527baf7ed172633a61a29"}, "/home/evan/Desktop/NTUST/105
+phase2/large/final_b/protocol.json {"mode": "large", "tag": "final_b", "script_sha256": "bb0bbf80772dc94e32a36f2989683720784b0dba7f4d898d868af3ac1e607caf", "wrapper_sha256": "eb8c8e0ce7034f945203a6c21f346c0ac45eba5f5a3049242f74b8f1113545cf", "helper_sha256": {"v6q.py": "899b334e15bb6432b68c5fee3acef3509d3c46508bb21b90695fc55a14441838", "diag.py": "7303a824ad7aed97764d49bbd0308fed4ea1cfea247ed38eb82c2cb97558d83c"}, "src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258", "reference_sha256": "03e62094172ff94a039d552fdc38e556dc1c16f0786b7dd5d8a7e579a85c47b2", "cmake_sha256": {"candidate": "be475566a4602e86e4e11239337063d366f352de67a80efa600de8d70a1a37ab", "v6": "be475566a4602e86e4e11239337063d366f352de67a80efa600de8d70a1a37ab"}, "runner_sha256": "4e9b13e0d79088920b842b7990733ee8e07f29453fac8414510deabf0c9da9b6", "checker_sha256": "54eccfe24ec8dfe35809074a7dcc3e072e076c60244b3b5d4c81a8c4aa1359b3", "inputs": {"L1": {"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.aux": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.aux", "sha256": "011f394e0e758ff1d468a07e6b981c48a23b5bee465de57b8e9e4a8813d3fa8d"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.nodes": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.nodes", "sha256": "a4296e3285bc74dafb7a739ee83839630a6fca6169637baa683ec7c6de6bb716"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.nets": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.nets", "sha256": "16b75724c432a19ff019a725fee7243fa6b597fd4008c0d06f5334d489a7ab1b"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.wts": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.wts", "sha256": "de1d0c8f556b1f5de6281d570858be03e27b470f0342dfba58bea3e8e84dc7bd"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.pl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.pl", "sha256": "282d34c528a02873d219350232ac6dabc0ebe1a1059a48966171876153f55780"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.scl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L1/L1.scl", "sha256": "cb6a0bb30298c3920f4ccf15127544dc2b10e6f025ad68fd28f5cd23612fce1b"}}, "L2": {"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.aux": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.aux", "sha256": "6a49e1c305f537afe6f51c90ea5e391499b2cec3671a31c38269a33cab1928d5"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.nodes": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.nodes", "sha256": "2a24d99e32ce592eeaf9326cfb38c54580dc221a1aee5b24c425715c0b78cc68"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.nets": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.nets", "sha256": "2ee2b9316672ac6b5b39e6a51ae606fd90b6263f4ef81b533241c0f98aca7b7c"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.wts": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.wts", "sha256": "cb5b5d3d2e85639c092e5fb4dc69e182bccf87ff6154951b71ef6a2deb7e083a"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.pl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.pl", "sha256": "42a2e14e62e00c74f9a3e971fcc53958eb5b4ae180bf9b5e51cea86f9f6e80ed"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.scl": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/large/L2/L2.scl", "sha256": "800d6e70df25bd6be37fbd0d415731d498f9765a3b39dacde61861434910694d"}}}, "cases": [["L2", 1], ["L2", 2], ["L1", 1]], "historical_chaindp_sha256": "10ede2d7948d2203a0df3926b88cb372fb4a121c09960cb0b63de3a085205e54", "gates": {"total_gm_at_most": 1.0011, "max_gm_at_most": 1.001, "each_max_at_most": 1.002, "both_at_least": 8, "extra_budget_overshoots": 0, "L1_seconds_lt": 240, "L2_seconds_lt": 600}, "note": "Final session rollback: only the accepted SA boundary change remains. Cap deadline cancellation and repairAt budget changes were rejected after round 2. User explicitly requests final checks on the restored source; this is not another tuning round. Coordinator WORK_STATE note 2 (2026-10-23 14:35) permits 0.11% total Stage 1 run variation; max GM 0.1% and each max 0.2% gates stay unchanged (stricter than the allowed max-GM variation). No elapsed-time tolerance: all candidate and reference training extra steps must be within budget. Known v6 L2 extra overrun is recorded separately, never silently converted to a passing gate. Historical ChainDP only defines both; every v6 ratio uses this run. Large runs are legality/runtime checks, not HPWL evidence."}
+phase2/final_b_validation/ALL_DONE {"src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258", "gates": {"train": true, "large": true, "deadline_regression_27": true}, "full_asan_ubsan": true, "finished": "Fri Oct 23 18:01:07 2026", "note": "Read all evidence and update WORK_STATE before declaring B_DONE."}
+phase2/train/final_b/summary.json {"rows": [{"bench": "ibm01", "total_ratio": 1.0000514323987402, "max_ratio": 1.0, "both": true, "candidate": {"bench": "ibm01", "status": "OK", "seconds": "25.31", "disp": "23102891.1707", "max": "10427.027", "hpwl_legal": "87228450.0", "hpwl_sa": "87228450.0", "t_read": "0.034", "t_legalize": "17.774", "t_pareto": "0.094", "t_windowdp": "1.49", "t_chain": "5.891", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "25.284009151975624", "t_stage2": "25.284675496979617", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "ibm01", "status": "OK", "seconds": "25.31", "disp": "23101702.9947", "max": "10427.027", "hpwl_legal": "87250206.0", "hpwl_sa": "87250206.0", "t_read": "0.035", "t_legalize": "17.742", "t_pareto": "0.098", "t_windowdp": "1.521", "t_chain": "5.894", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "25.290829979989212", "t_stage2": "25.29147355997702", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "extra_overshoots": 0}, {"bench": "ibm05", "total_ratio": 0.9999937464641475, "max_ratio": 1.0, "both": true, "candidate": {"bench": "ibm05", "status": "OK", "seconds": "39.04", "disp": "1327880.461", "max": "199.918", "hpwl_legal": "11833717.5", "hpwl_sa": "11833717.5", "t_read": "0.092", "t_legalize": "30.267", "t_pareto": "0.417", "t_windowdp": "2.334", "t_chain": "5.878", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "38.98822712601395", "t_stage2": "38.98988714203006", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "ibm05", "status": "OK", "seconds": "38.78", "disp": "1327888.765", "max": "199.918", "hpwl_legal": "11833690.5", "hpwl_sa": "11833690.5", "t_read": "0.099", "t_legalize": "29.996", "t_pareto": "0.411", "t_windowdp": "2.354", "t_chain": "5.878", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "38.73801717400784", "t_stage2": "38.739672034047544", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "extra_overshoots": 0}, {"bench": "toy", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate": {"bench": "toy", "status": "OK", "seconds": "1.17", "disp": "43324.4", "max": "2004.4", "hpwl_legal": "104094.0", "hpwl_sa": "104094.0", "t_read": "0.002", "t_legalize": "0.398", "t_pareto": "0.0", "t_windowdp": "0.077", "t_chain": "0.671", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "1.1482670900295489", "t_stage2": "1.148267280019354", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "toy", "status": "OK", "seconds": "1.17", "disp": "43324.4", "max": "2004.4", "hpwl_legal": "104094.0", "hpwl_sa": "104094.0", "t_read": "0.002", "t_legalize": "0.403", "t_pareto": "0.0", "t_windowdp": "0.077", "t_chain": "0.674", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "1.1568898559780791", "t_stage2": "1.1568909430061467", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "extra_overshoots": 0}, {"bench": "h01", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate": {"bench": "h01", "status": "OK", "seconds": "8.98", "disp": "2358.81", "max": "29.39", "hpwl_legal": "25492.0", "hpwl_sa": "25492.0", "t_read": "0.002", "t_legalize": "1.781", "t_pareto": "0.0", "t_windowdp": "1.045", "t_chain": "6.145", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "8.97282557800645", "t_stage2": "8.972833272011485", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "h01", "status": "OK", "seconds": "9.13", "disp": "2358.81", "max": "29.39", "hpwl_legal": "25492.0", "hpwl_sa": "25492.0", "t_read": "0.002", "t_legalize": "1.778", "t_pareto": "0.0", "t_windowdp": "1.063", "t_chain": "6.25", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "9.094019734009635", "t_stage2": "9.094025029044133", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "extra_overshoots": 0}, {"bench": "h02", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate": {"bench": "h02", "status": "OK", "seconds": "21.55", "disp": "463886.857", "max": "2526.519", "hpwl_legal": "3785092.0", "hpwl_sa": "3785092.0", "t_read": "0.004", "t_legalize": "8.303", "t_pareto": "0.001", "t_windowdp": "2.891", "t_chain": "10.348", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "21.547293279028963", "t_stage2": "21.54737732099602", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "h02", "status": "OK", "seconds": "21.7", "disp": "463886.857", "max": "2526.519", "hpwl_legal": "3785092.0", "hpwl_sa": "3785092.0", "t_read": "0.004", "t_legalize": "8.402", "t_pareto": "0.001", "t_windowdp": "2.895", "t_chain": "10.374", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "21.675525231985375", "t_stage2": "21.67552649299614", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "extra_overshoots": 0}, {"bench": "h03", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate": {"bench": "h03", "status": "OK", "seconds": "15.65", "disp": "7066.0491", "max": "20.2013", "hpwl_legal": "26511.7", "hpwl_sa": "26511.7", "t_read": "0.006", "t_legalize": "3.916", "t_pareto": "0.009", "t_windowdp": "0.627", "t_chain": "11.083", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "15.641389561991673", "t_stage2": "15.641474645992275", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "h03", "status": "OK", "seconds": "15.78", "disp": "7066.0491", "max": "20.2013", "hpwl_legal": "26511.7", "hpwl_sa": "26511.7", "t_read": "0.01", "t_legalize": "3.998", "t_pareto": "0.009", "t_windowdp": "0.64", "t_chain": "11.104", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "15.761213044985197", "t_stage2": "15.761310898989905", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "extra_overshoots": 0}, {"bench": "h04", "total_ratio": 0.9999940132237909, "max_ratio": 1.0, "both": false, "candidate": {"bench": "h04", "status": "OK", "seconds": "16.64", "disp": "180396.51", "max": "237.85", "hpwl_legal": "534303.5", "hpwl_sa": "534303.5", "t_read": "0.011", "t_legalize": "9.488", "t_pareto": "0.035", "t_windowdp": "1.163", "t_chain": "5.899", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "16.595255257969256", "t_stage2": "16.595443104975857", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "h04", "status": "OK", "seconds": "16.55", "disp": "180397.59", "max": "237.85", "hpwl_legal": "534360.5", "hpwl_sa": "534360.5", "t_read": "0.011", "t_legalize": "9.406", "t_pareto": "0.035", "t_windowdp": "1.178", "t_chain": "5.898", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "16.5290527070174", "t_stage2": "16.529253042011987", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "extra_overshoots": 0}, {"bench": "h05", "total_ratio": 1.0, "max_ratio": 1.0, "both": true, "candidate": {"bench": "h05", "status": "OK", "seconds": "7.58", "disp": "1551488.48", "max": "1337.305", "hpwl_legal": "26205137.2", "hpwl_sa": "26205137.2", "t_read": "0.017", "t_legalize": "2.428", "t_pareto": "0.007", "t_windowdp": "0.996", "t_chain": "4.094", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "7.541778879996855", "t_stage2": "7.542075763980392", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "h05", "status": "OK", "seconds": "7.58", "disp": "1551488.48", "max": "1337.305", "hpwl_legal": "26205137.2", "hpwl_sa": "26205137.2", "t_read": "0.017", "t_legalize": "2.416", "t_pareto": "0.007", "t_windowdp": "1.01", "t_chain": "4.086", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "7.536404903046787", "t_stage2": "7.536699968040921", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "extra_overshoots": 0}, {"bench": "h06", "total_ratio": 1.0003442823037525, "max_ratio": 0.9999766109226991, "both": false, "candidate": {"bench": "h06", "status": "OK", "seconds": "34.73", "disp": "889576.38", "max": "427.54", "hpwl_legal": "2154621.0", "hpwl_sa": "2154621.0", "t_read": "0.028", "t_legalize": "25.252", "t_pareto": "0.119", "t_windowdp": "3.408", "t_chain": "5.885", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "34.69195496401517", "t_stage2": "34.69287904701196", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "h06", "status": "OK", "seconds": "34.52", "disp": "889270.22", "max": "427.55", "hpwl_legal": "2153400.5", "hpwl_sa": "2153400.5", "t_read": "0.032", "t_legalize": "25.029", "t_pareto": "0.116", "t_windowdp": "3.409", "t_chain": "5.893", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "34.47883108298993", "t_stage2": "34.479392806009855", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "extra_overshoots": 0}, {"bench": "h07", "total_ratio": 1.0001697610729219, "max_ratio": 1.0, "both": false, "candidate": {"bench": "h07", "status": "OK", "seconds": "26.41", "disp": "109177.2425", "max": "47.6762", "hpwl_legal": "354375.732", "hpwl_sa": "354375.732", "t_read": "0.043", "t_legalize": "18.583", "t_pareto": "0.107", "t_windowdp": "1.756", "t_chain": "5.888", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "26.37783724797191", "t_stage2": "26.378723941976205", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": ""}, "v6": {"bench": "h07", "status": "OK", "seconds": "26.36", "disp": "109158.7116", "max": "47.6762", "hpwl_legal": "354436.692", "hpwl_sa": "354436.692", "t_read": "0.048", "t_legalize": "18.524", "t_pareto": "0.106", "t_windowdp": "1.761", "t_chain": "5.889", "t_global": "", "t_sa": "", "t_polish": "", "t_stage1": "26.32809730799636", "t_stage2": "26.328969903988764", "sa_threads": "", "sa_attempts": "", "sa_internal_s": "", "sa_failed_pct": "", "sa_timeup": "", "global_tries": "0", "glo
+phase2/large/final_b/summary.json {"rows": [{"bench": "L2", "seed": 1, "record": {"bench": "L2", "status": "OK", "seconds": "210.85", "disp": "2048729757.0799", "max": "13147.74", "hpwl_legal": "2642579412.5", "hpwl_sa": "1547695759.0", "t_read": "3.945", "t_legalize": "95.154", "t_pareto": "13.629", "t_windowdp": "1.116", "t_chain": "5.247", "t_global": "", "t_sa": "6.157", "t_polish": "85.1", "t_stage1": "119.091001265042", "t_stage2": "210.3476532010245", "sa_threads": "4", "sa_attempts": "4274850", "sa_internal_s": "6.0", "sa_failed_pct": "66.1", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": "6.157"}, "legal": true, "placements": {"output_legal.pl": "ff9351c4e4742d406751b095abecd789780e1405cf22015c0f2021bff81fa742", "output.pl": "a9b55727ad4ceea2ad52a5a69fdddb567ae82a472a2cb5f1c2a1695c7c492b0b"}, "extra_budget": 6.0, "extra_used": 5.062614, "extra_overshoot": false, "time_limit": 600}, {"bench": "L2", "seed": 2, "record": {"bench": "L2", "status": "OK", "seconds": "210.89", "disp": "2048625670.0999", "max": "13147.74", "hpwl_legal": "2642430331.5", "hpwl_sa": "1545952035.0", "t_read": "3.965", "t_legalize": "95.403", "t_pareto": "13.433", "t_windowdp": "1.112", "t_chain": "5.242", "t_global": "", "t_sa": "6.158", "t_polish": "85.069", "t_stage1": "119.15527006197954", "t_stage2": "210.38246994197834", "sa_threads": "4", "sa_attempts": "4225735", "sa_internal_s": "6.0", "sa_failed_pct": "66.1", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": "6.158"}, "legal": true, "placements": {"output_legal.pl": "47a17d61b097967296bed00cfa0f5defd7ced4222126e5ebbbfa7e166dddaa44", "output.pl": "6b81d0a3ea73b6a6c10bcf22366f91a677419569f6900695289d65fe60ca3c49"}, "extra_budget": 6.0, "extra_used": 5.055658, "extra_overshoot": false, "time_limit": 600}, {"bench": "L1", "seed": 1, "record": {"bench": "L1", "status": "OK", "seconds": "187.53", "disp": "2444507485.378", "max": "50496.167", "hpwl_legal": "5570254600.1", "hpwl_sa": "1726794823.7", "t_read": "0.634", "t_legalize": "89.386", "t_pareto": "3.444", "t_windowdp": "6.547", "t_chain": "5.749", "t_global": "", "t_sa": "60.041", "t_polish": "21.599", "t_stage1": "105.76018889795523", "t_stage2": "187.40018123399932", "sa_threads": "4", "sa_attempts": "74192241", "sa_internal_s": "60.0", "sa_failed_pct": "12.7", "sa_timeup": "", "global_tries": "0", "global_accepted": "0", "global_unknown": "0", "sa_seconds": "60.041"}, "legal": true, "placements": {"output_legal.pl": "ffeea21a3da79e492a2aed32fc0245deeb87a82c6b6f8905ede8bc028a2684f1", "output.pl": "8b08e9935f1f8adfe0f1b5f464ad5f31b3b87c653ef10326ff8c75763b88d954"}, "extra_budget": 6.0, "extra_used": 5.722419, "extra_overshoot": false, "time_limit": 240}], "gates": {"all_legal": true, "all_within_time": true, "zero_extra_overshoots": true}, "all_gates": true}
+phase2/deadline_regression/final_b/ALL_DONE {"src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258", "protocol_sha256": "b2cc885c515e8db1649b2eccb334dec625e69b16231b0cbf59f80b4362aeddc9", "gates": {"all_27_legal": true, "zero_extra_overshoots": true}, "all_gates": true, "finished": "Fri Oct 23 17:58:47 2026"}
+phase2/final_b_validation/test_evidence/verification.json {"src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258", "tests_sha256": {"cap_chain_prototype.cpp": "aa94ab5ae0b750c2b315030b435e1d043c586b9fdaceec4b7be727375486b6cb", "cap_chain_prototype.hpp": "d9ee6dd1ea89d3fe0f46e8097a0993192003cbaaa9aaad54788b737545b6a949", "cap_search_bench.cpp": "3ebdc9f169eb85e69442d6a9db4aa94ff38d7ad2c504b586d16431c5967e5fca", "cap_windows_bench.cpp": "5e6578d13302ec88cf7f5e3d6b6872dbf549a210f2f0bc4eb75c6bd6e2aca86b", "cap_windows_test.cpp": "afc889aa0cf024c30a2dfb82231320e852423cabf3d17c64603793e264bf3466", "capsearch_test.cpp": "24152ff188808fb6b11772f26b984fec3a94cd8f0b5c0a7c55f8e04f569f0d21", "chain_test.cpp": "1b03ceb9c832dfec4b3e0a28855e52bbe144ff5cb053d628f72f6a5ce71db067", "compare_methods.cpp": "87aa77d6f5b7dc07718ffb64a6097dee51a5104f12f8cb10ae236236b4e0af80", "diagnostic.hpp": "84b0f358806d53341acf3049befcc7984775619e2ffc847b01e5cf778e6b92fe", "diagnostic_capsearch.cpp": "ae5f35d1231971daf463214f7626311e2c34600b146b245fe8721f1d6a84d38b", "diagnostic_experiments.cpp": "82dee493f6b6b0ea21e65c21157a292ffe87e85e9b48d9dc3f52515aa0a47816", "diagnostic_main.cpp": "13eb0eaedbf9fdc342beb793cf36cdc3dee61deed764c5b69471558a86305643", "diagnostic_window.cpp": "7ae2c3725b7f97a8204fbd130a22263953a544fa6eef154da50a75d6fff32c4d", "global_preserve_prototype.cpp": "9afef7d0e1f793b2234a2b9ffc94f444047684d45b343dc4dfb49cb66dc5979d", "global_preserve_prototype.hpp": "dd3e9dbf995e21049535a57594aacbce50b9d3bbc01cf50c761954ef1c23a401", "global_test.cpp": "b7ec2dfc9553e4639b96a9f030a1c1e69c3417e3cb8d472355db4ee5d64f8e1a", "guard_test.cpp": "31a47a8449812a392be9edb546e56b78bd3ac522d642836aa2f1a3e64d7e1fcf", "multirow_test.cpp": "7f18c66752ad7af2ce3240fa79efec4ed46f8a27eb04a89ed541b4430ae3857f", "optimizer_test.cpp": "59518f877b850b22b67e349613ce168efc0d9d57a7ab1726c81dc911a25f8afa", "parallel_sa_test.cpp": "032fc318cbee7186331f435bca30d988ce2960d02e257b83b83c6fcc630efb63", "pool_test.cpp": "36c939619cf6a13c9813d90e9f5dc59e5d765e07abd5061f0089a0cb7146939f", "readpl.cpp": "05dbf88ec1009880331f9b36e8778fa8f0153495771468fb90d2f293513d697d", "repair_compare.cpp": "8dc396006b4351b3ed9f673de14d1803ab641acbbdbbc3268bd6fb5e9ac0751b", "run_tests.py": "e4301e1a21c35bbb974dc4c54791291dde1f95c40f059116d5f75b4d1297013c", "sa_bench.cpp": "0814bfcae5a5911257a78a0c41427d8676e0715ada91b5994420e4e5aaba39bd", "sa_bench2.cpp": "5d88b287f40b9ae971f67627f68e1998fe8c3c3a4f6aec000f909243fc3f72d1", "site_repair_bench.cpp": "ea784bd75ed9020df6b57210ae39ee878b8b7a9a4c6e352a0ce926f9ea275949", "window_test.cpp": "717a4a12d1f674dd9f1a520be934438d0830ef87583343511c6096f7108f198a"}, "asan_options": "detect_leaks=0", "ubsan_options": "halt_on_error=1", "tsan_warnings": 0, "suites": {"tests": {"programs": 10, "records": 28, "seconds": 41.25036283995723, "files": {"records.json": "90da84738eb6b83b0d22697c83f26f3ed1749c63822bc32370abbd6eee562f31", "build_annealer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_capsearch.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_chain.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_global.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_legalizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_optimizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_placedb.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_window.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "link_window.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "window.log": "46fc3c57ca69322541515b4f2ec6aab3054ed446e072c39fe83db9cb9398eecc", "link_multirow.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "multirow.log": "e60b9d97c6b05f4307a677d4a8847afaa9da1000a8e308405703c1e3bc3d6e89", "link_optimizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "optimizer.log": "58231cbc8599c9dee94a7ca8e96b83571826724a482e085ed472a87d2d7cf723", "link_chain.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "chain.log": "fb13d61af96833b7432d15bbce356e1a1f530f54327d6b09f414f65caeaff117", "link_parallel_sa.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "parallel_sa.log": "032d71d68bed491dfaf28cf7e06dc0aed1dcbe3be6216e82851fc881ac95fe7c", "link_pool.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "pool.log": "d86957e1321c19813e1677812f4d52f78b0014da80f62c6f1dc89b875c825ca6", "link_global.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "global.log": "b45e960cfb6b25d6cee360772d7f96b162c3f563df199b3a5d2aa8cce9e3fe6e", "link_capsearch.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "capsearch.log": "8128c557d73bcd0154549afc775118e8c88aef8231bfe0a4b5f6685a8c1e3e3c", "link_cap_windows.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "cap_windows.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "link_guard.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "guard.log": "600b8716de9e7cb4bb9fa35ee80f0086d290fe0f5244a9d7e2bff508ed17c932"}}, "tests_tsan": {"programs": 10, "records": 28, "seconds": 69.82556676800596, "files": {"records.json": "5328a28b834d66ce309b745c31b2e784f4cbc11e454315b1e64d41fa91412530", "build_annealer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_capsearch.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_chain.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_global.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_legalizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_optimizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_placedb.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_window.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "link_window.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "window.log": "46fc3c57ca69322541515b4f2ec6aab3054ed446e072c39fe83db9cb9398eecc", "link_multirow.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "multirow.log": "e60b9d97c6b05f4307a677d4a8847afaa9da1000a8e308405703c1e3bc3d6e89", "link_optimizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "optimizer.log": "58231cbc8599c9dee94a7ca8e96b83571826724a482e085ed472a87d2d7cf723", "link_chain.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "chain.log": "fb13d61af96833b7432d15bbce356e1a1f530f54327d6b09f414f65caeaff117", "link_parallel_sa.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "parallel_sa.log": "032d71d68bed491dfaf28cf7e06dc0aed1dcbe3be6216e82851fc881ac95fe7c", "link_pool.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "pool.log": "d86957e1321c19813e1677812f4d52f78b0014da80f62c6f1dc89b875c825ca6", "link_global.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "global.log": "b45e960cfb6b25d6cee360772d7f96b162c3f563df199b3a5d2aa8cce9e3fe6e", "link_capsearch.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "capsearch.log": "8128c557d73bcd0154549afc775118e8c88aef8231bfe0a4b5f6685a8c1e3e3c", "link_cap_windows.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "cap_windows.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "link_guard.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "guard.log": "600b8716de9e7cb4bb9fa35ee80f0086d290fe0f5244a9d7e2bff508ed17c932"}}, "tests_sanitized": {"programs": 10, "records": 28, "seconds": 153.62752221501432, "files": {"records.json": "08e73aa6512238d0b96dac1e4e9027af33d7cf1fb5ab43caf677dd118f758558", "build_annealer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_capsearch.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_chain.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_global.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_legalizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_optimizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_placedb.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "build_window.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "link_window.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "window.log": "46fc3c57ca69322541515b4f2ec6aab3054ed446e072c39fe83db9cb9398eecc", "link_multirow.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "multirow.log": "e60b9d97c6b05f4307a677d4a8847afaa9da1000a8e308405703c1e3bc3d6e89", "link_optimizer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "optimizer.log": "58231cbc8599c9dee94a7ca8e96b83571826724a482e085ed472a87d2d7cf723", "link_chain.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "chain.log": "fb13d61af96833b7432d15bbce356e1a1f530f54327d6b09f414f65caeaff117", "link_parallel_sa.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "parallel_sa.log": "032d71d68bed491dfaf28cf7e06dc0aed1dcbe3be6216e82851fc881ac95fe7c", "link_pool.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "pool.log": "d86957e1321c19813e1677812f4d52f78b0014da80f62c6f1dc89b875c825ca6", "link_global.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "global.log": "b45e960cfb6b25d6cee360772d7f96b162c3f563df199b3a5d2aa8cce9e3fe6e", "link_capsearch.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "capsearch.log": "8128c557d73bcd0154549afc775118e8c88aef8231bfe0a4b5f6685a8c1e3e3c", "link_cap_windows.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "cap_windows.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "link_guard.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "guard.log": "600b8716de9e7cb4bb9fa35ee80f0086d290fe0f5244a9d7e2bff508ed17c932"}}}}
+seed path exists/issymlink False False
+
+codex
+已確認 WORK_STATE 記有「B 完成」，目前仍保留 SA 四相邊界，且最後訓練的來源雜湊與目前 src 相同。沙箱外 ASan/UBSan 為 10/10 通過；我會將結果補入紀錄，完成凍結後交給協調者執行。
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import json
+r=Path('Testcases/results/CodexParallelChain')
+for n in ['phase2/final_b_validation/ALL_DONE','phase2/train/final_b/summary.json','phase2/large/final_b/summary.json']:
+ d=json.loads((r/n).read_text()); print(n); print(json.dumps({k:v for k,v in d.items() if k not in ['rows','cases','protocol','inputs','pairs']},ensure_ascii=False)[:2500])
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+phase2/final_b_validation/ALL_DONE
+{"src_sha256": "4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258", "gates": {"train": true, "large": true, "deadline_regression_27": true}, "full_asan_ubsan": true, "finished": "Fri Oct 23 18:01:07 2026", "note": "Read all evidence and update WORK_STATE before declaring B_DONE."}
+phase2/train/final_b/summary.json
+{"total_gm": 1.0001009443594198, "max_gm": 0.9999978736976397, "both": 8, "gates": {"total_gm_within_011pct_variation": true, "max_gm_not_worse_01pct": true, "every_max_not_worse_02pct": true, "both_at_least_8": true, "zero_extra_overshoots": true}, "all_gates": true}
+phase2/large/final_b/summary.json
+{"gates": {"all_legal": true, "all_within_time": true, "zero_extra_overshoots": true}, "all_gates": true}
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+from pathlib import Path
+import json,hashlib,datetime
+root=Path('AI_Solutions/CodexParallelChain'); r=Path('Testcases/results/CodexParallelChain'); ws=root/'WORK_STATE.md'
+sha=lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+h=hashlib.sha256(b''.join(p.read_bytes() for p in sorted((root/'src').glob('*')) if p.is_file())).hexdigest()
+assert '## B 完成' in ws.read_text()
+evidence=['phase2/train/final_b/protocol.json','phase2/large/final_b/protocol.json','phase2/final_b_validation/ALL_DONE','phase2/deadline_regression/final_b/ALL_DONE','phase2/final_b_validation/test_evidence/verification.json']
+for n in evidence: assert json.loads((r/n).read_text())['src_sha256']==h,n
+for n in ['phase2/train/final_b/summary.json','phase2/large/final_b/summary.json','phase2/deadline_regression/final_b/ALL_DONE']:
+ d=json.loads((r/n).read_text()); assert d['all_gates'] and all(d['gates'].values()); evidence.append(n) if n not in evidence else None
+v=json.loads((r/'phase2/final_b_validation/ALL_DONE').read_text()); assert all(v['gates'].values()) and v['full_asan_ubsan']
+t=json.loads((r/'phase2/final_b_validation/test_evidence/verification.json').read_text()); assert t['tsan_warnings']==0
+for n,expected in t['tests_sha256'].items(): assert sha(root/'tests'/n)==expected,n
+assert all(s['programs']==10 and s['records']==28 for s in t['suites'].values())
+seed=Path('Testcases/edge_seed6'); assert not seed.exists() and not seed.is_symlink()
+log=r/'phase2/asan_outside.log'; tail='\\n'.join(log.read_text().splitlines()[-12:]); assert '100% tests passed, 0 tests failed out of 10' in tail and tail.count('rc=0')==3
+files=sorted([p for d in ['src','tests'] for p in (root/d).rglob('*') if p.is_file()]+[root/'CMakeLists.txt',root/'Makefile'],key=lambda p:p.relative_to(root).as_posix())
+manifest=''.join(f'{sha(p)}  {p.relative_to(root).as_posix()}\\n' for p in files)
+f=r/'frozen_sources.sha256'; assert not f.exists(); assert not (r/'freeze.json').exists(); f.write_text(manifest)
+info={'version':'CodexParallelChain','frozen_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source_root':str(root),'manifest':str(f),'path_base':str(root),'file_count':len(files),'manifest_sha256':sha(f),'src_sha256':h,'src_hash_algorithm':'SHA256 of concatenated immediate src file contents sorted by filename','retained':['SA four-phase band boundaries'],'reverted':['target windows parallelization','ejection candidate reduction','rowRepair deadline cancellation and repair budget changes'],'b_complete':True,'evidence_sha256':{n:sha(r/n) for n in evidence},'asan_outside':{'path':str(log),'sha256':sha(log),'passed':10,'failed':0,'test_seconds':31.71,'configure_build_ctest_returncodes':[0,0,0]},'seed_dir':'edge_seed6','seed':20261024,'seed_directory_absent_at_freeze':True,'run':'python3 Testcases/results/CodexParallelChain/scripts/final_validate.py --seed-dir edge_seed6 --seed 20261024','wait':'Testcases/results/CodexParallelChain/final/ALL_DONE','next':'final_report.py'}
+(r/'freeze.json').write_text(json.dumps(info,ensure_ascii=False,indent=2)+'\\n')
+with ws.open('a') as out:
+ out.write(f'''\\n## 階段 C：凍結與最終驗證交接（2026-10-23）\\n\\n- 已確認「B 完成，下一步 C」及第 7 節最後檢查完整紀錄。保留 SA 四相邊界，其餘改動撤回；不是全撤回，因此進行凍結。\\n- 最後 train/large final_b protocol、驗收 ALL_DONE、27 筆回歸與短測 verification 的 src_sha256 均等於目前 src："'`{h}`；目前 tests 逐檔 hash 與 verification 相符。'"\\n- 最後 Stage 1：雙條件 8/11、總位移 GM 1.0001009443594198、最大 GM 0.9999978736976397；全部 gates=true、額外步驟 0 超時。large 全合法且 L1<240s、L2<600s、0 額外超時；27 筆回歸全部合法且 0 額外超時。證據："'`phase2/{{train,large}}/final_b/summary.json`、`phase2/deadline_regression/final_b/ALL_DONE`。'"\\n- 一般／沙箱 ASan+UBSan／TSan 各 10/10、28 records，新功能 parallel_sa_test 已有紀錄，TSan 0 警告；沙箱 ASan 使用 detect_leaks=0。協調者沙箱外完整 ASan/UBSan 補跑："'`phase2/asan_outside.log` 最後幾行為 100% tests passed、0/10 failed，測試 31.71 秒；configure、build、ctest 均 rc=0。log SHA256：`{sha(log)}`；完整 detect_leaks=1 通過亦記於既有 B 完成紀錄及驗收 ALL_DONE。'"\\n- 已寫 "'`Testcases/results/CodexParallelChain/frozen_sources.sha256` 與 `freeze.json`；manifest 包含 src、tests 全部檔案及 CMakeLists.txt、Makefile，共 {len(files)} 檔，路徑相對於 AI_Solutions/CodexParallelChain，格式為 sha256 + 兩空白 + 相對路徑。manifest SHA256：`{sha(f)}`。'"\\n- 已確認 "'`Testcases/edge_seed6` 不存在（亦非 symlink），本 session 未產生 seed、未啟動長計算、未 commit。'"\\n- RUN: python3 Testcases/results/CodexParallelChain/scripts/final_validate.py --seed-dir edge_seed6 --seed 20261024\\n- WAIT: Testcases/results/CodexParallelChain/final/ALL_DONE\\n- 等待中：final_validate.py，完成標記 final/ALL_DONE；之後跑 final_report.py\\n''')
+for line in f.read_text().splitlines():
+ expected,name=line.split('  ',1); assert sha(root/name)==expected
+assert json.loads((r/'freeze.json').read_text())['manifest_sha256']==sha(f)
+print(f'Freeze verified: {len(files)} files; src {h}; edge_seed6 absent; WORK_STATE updated.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Freeze verified: 53 files; src 4e59ed648a9cfb4f859e2c8cde8dca84f8e38571db5c0f94508232d2f2613258; edge_seed6 absent; WORK_STATE updated.
+
+codex
+已確認 B 完成、最後檢查紀錄齊全，訓練 src_sha256 等於目前 src。
+沙箱外 ASan/UBSan 10/10 通過，已補入 WORK_STATE。
+已建立 frozen_sources.sha256（53 檔）與 freeze.json，確認 edge_seed6 不存在。
+WORK_STATE 已記錄等待狀態，完成後跑 final_report.py。
+RUN: python3 Testcases/results/CodexParallelChain/scripts/final_validate.py --seed-dir edge_seed6 --seed 20261024
+WAIT: Testcases/results/CodexParallelChain/final/ALL_DONE
+tokens used
+39,512
+已確認 B 完成、最後檢查紀錄齊全，訓練 src_sha256 等於目前 src。
+沙箱外 ASan/UBSan 10/10 通過，已補入 WORK_STATE。
+已建立 frozen_sources.sha256（53 檔）與 freeze.json，確認 edge_seed6 不存在。
+WORK_STATE 已記錄等待狀態，完成後跑 final_report.py。
+RUN: python3 Testcases/results/CodexParallelChain/scripts/final_validate.py --seed-dir edge_seed6 --seed 20261024
+WAIT: Testcases/results/CodexParallelChain/final/ALL_DONE

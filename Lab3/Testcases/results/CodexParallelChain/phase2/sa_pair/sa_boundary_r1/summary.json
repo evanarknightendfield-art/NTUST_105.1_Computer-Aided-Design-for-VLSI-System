@@ -1,0 +1,695 @@
+{
+  "by_protocol": {
+    "fixed_single": {
+      "ibm01": {
+        "ratio_mean": 1.0,
+        "ratio_min": 1.0,
+        "ratio_max": 1.0,
+        "hpwl": {
+          "v6": {
+            "mean": 58853284.0,
+            "min": 58684248.0,
+            "max": 59126784.0
+          },
+          "candidate": {
+            "mean": 58853284.0,
+            "min": 58684248.0,
+            "max": 59126784.0
+          }
+        }
+      },
+      "ibm05": {
+        "ratio_mean": 1.0,
+        "ratio_min": 1.0,
+        "ratio_max": 1.0,
+        "hpwl": {
+          "v6": {
+            "mean": 10902425.5,
+            "min": 10894293.0,
+            "max": 10916948.0
+          },
+          "candidate": {
+            "mean": 10902425.5,
+            "min": 10894293.0,
+            "max": 10916948.0
+          }
+        }
+      },
+      "h06": {
+        "ratio_mean": 1.0,
+        "ratio_min": 1.0,
+        "ratio_max": 1.0,
+        "hpwl": {
+          "v6": {
+            "mean": 744587.6666666666,
+            "min": 742500.0,
+            "max": 746556.0
+          },
+          "candidate": {
+            "mean": 744587.6666666666,
+            "min": 742500.0,
+            "max": 746556.0
+          }
+        }
+      },
+      "h07": {
+        "ratio_mean": 1.0,
+        "ratio_min": 1.0,
+        "ratio_max": 1.0,
+        "hpwl": {
+          "v6": {
+            "mean": 175724.25600000154,
+            "min": 175156.10100000145,
+            "max": 176099.95000000153
+          },
+          "candidate": {
+            "mean": 175724.25600000154,
+            "min": 175156.10100000145,
+            "max": 176099.95000000153
+          }
+        }
+      },
+      "h08": {
+        "ratio_mean": 1.0,
+        "ratio_min": 1.0,
+        "ratio_max": 1.0,
+        "hpwl": {
+          "v6": {
+            "mean": 118059895.73333365,
+            "min": 117645694.90000035,
+            "max": 118451792.40000033
+          },
+          "candidate": {
+            "mean": 118059895.73333365,
+            "min": 117645694.90000035,
+            "max": 118451792.40000033
+          }
+        }
+      }
+    },
+    "fixed_auto": {
+      "ibm01": {
+        "ratio_mean": 0.9880121012798793,
+        "ratio_min": 0.9813182649236079,
+        "ratio_max": 0.9996837361189187,
+        "hpwl": {
+          "v6": {
+            "mean": 55031690.0,
+            "min": 54562032.0,
+            "max": 55492326.0
+          },
+          "candidate": {
+            "mean": 54369364.0,
+            "min": 54012456.0,
+            "max": 54550860.0
+          }
+        }
+      },
+      "ibm05": {
+        "ratio_mean": 0.9944494326889279,
+        "ratio_min": 0.9935977413714432,
+        "ratio_max": 0.9950495675568296,
+        "hpwl": {
+          "v6": {
+            "mean": 10156856.333333334,
+            "min": 10147365.5,
+            "max": 10162273.0
+          },
+          "candidate": {
+            "mean": 10100478.5,
+            "min": 10093594.5,
+            "max": 10110629.5
+          }
+        }
+      },
+      "h06": {
+        "ratio_mean": 0.9853380466205678,
+        "ratio_min": 0.9822572450275016,
+        "ratio_max": 0.9876574062892011,
+        "hpwl": {
+          "v6": {
+            "mean": 718127.8333333334,
+            "min": 715801.0,
+            "max": 722323.0
+          },
+          "candidate": {
+            "mean": 707592.3333333334,
+            "min": 705851.0,
+            "max": 709507.0
+          }
+        }
+      },
+      "h07": {
+        "ratio_mean": 1.000886106956368,
+        "ratio_min": 0.9969451710571323,
+        "ratio_max": 1.0042393910666143,
+        "hpwl": {
+          "v6": {
+            "mean": 168526.6280000022,
+            "min": 168116.39000000161,
+            "max": 169086.71800000276
+          },
+          "candidate": {
+            "mean": 168674.9770000019,
+            "min": 168364.15300000197,
+            "max": 169090.59100000194
+          }
+        }
+      },
+      "h08": {
+        "ratio_mean": 0.9901236649879073,
+        "ratio_min": 0.984436312046358,
+        "ratio_max": 0.9944387502712294,
+        "hpwl": {
+          "v6": {
+            "mean": 105584285.70000027,
+            "min": 105358189.00000028,
+            "max": 105752219.80000028
+          },
+          "candidate": {
+            "mean": 104541141.26666695,
+            "min": 103998262.20000027,
+            "max": 104852895.8000003
+          }
+        }
+      }
+    },
+    "wall10_auto": {
+      "ibm01": {
+        "ratio_mean": 0.9823255968535048,
+        "ratio_min": 0.9768993955597409,
+        "ratio_max": 0.9914675679218249,
+        "hpwl": {
+          "v6": {
+            "mean": 53014400.0,
+            "min": 52729728.0,
+            "max": 53214192.0
+          },
+          "candidate": {
+            "mean": 52077652.0,
+            "min": 51601830.0,
+            "max": 52646214.0
+          }
+        }
+      },
+      "ibm05": {
+        "ratio_mean": 0.9948015106485751,
+        "ratio_min": 0.9818585083255353,
+        "ratio_max": 1.0092152330886661,
+        "hpwl": {
+          "v6": {
+            "mean": 10009190.333333334,
+            "min": 9963665.5,
+            "max": 10099831.0
+          },
+          "candidate": {
+            "mean": 9956570.0,
+            "min": 9897622.0,
+            "max": 10055483.0
+          }
+        }
+      },
+      "h06": {
+        "ratio_mean": 0.9970407906765618,
+        "ratio_min": 0.98922178144132,
+        "ratio_max": 1.0030847671640122,
+        "hpwl": {
+          "v6": {
+            "mean": 692646.1666666666,
+            "min": 688220.5,
+            "max": 695987.0
+          },
+          "candidate": {
+            "mean": 690579.5,
+            "min": 688485.5,
+            "max": 692909.5
+          }
+        }
+      },
+      "h07": {
+        "ratio_mean": 0.9949784796340104,
+        "ratio_min": 0.992703989100451,
+        "ratio_max": 0.9988256510621112,
+        "hpwl": {
+          "v6": {
+            "mean": 168009.78300000238,
+            "min": 167445.1210000027,
+            "max": 168344.59500000242
+          },
+          "candidate": {
+            "mean": 167165.02000000203,
+            "min": 167116.35100000224,
+            "max": 167248.48200000168
+          }
+        }
+      },
+      "h08": {
+        "ratio_mean": 0.9881146143573406,
+        "ratio_min": 0.9718961317908581,
+        "ratio_max": 0.998697781307076,
+        "hpwl": {
+          "v6": {
+            "mean": 105403961.46666695,
+            "min": 104532732.80000031,
+            "max": 106695479.70000029
+          },
+          "candidate": {
+            "mean": 104141093.36666697,
+            "min": 103696924.0000003,
+            "max": 104846960.20000029
+          }
+        }
+      }
+    }
+  },
+  "geometric_mean_ratios": {
+    "fixed_single": 1.0,
+    "fixed_auto": 0.9917469293203764,
+    "wall10_auto": 0.9914371007411955
+  },
+  "reproducibility": [
+    {
+      "mode": "fixed_single",
+      "bench": "ibm01",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm01",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm01",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm01",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm01",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm01",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm05",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm05",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm05",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm05",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm05",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "ibm05",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h06",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h06",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h06",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h06",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h06",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h06",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h07",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h07",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h07",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h07",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h07",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h07",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h08",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h08",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h08",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h08",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h08",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_single",
+      "bench": "h08",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm01",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm01",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm01",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm01",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm01",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm01",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm05",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm05",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm05",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm05",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm05",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "ibm05",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h06",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h06",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h06",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h06",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h06",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h06",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h07",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h07",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h07",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h07",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h07",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h07",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h08",
+      "seed": 1,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h08",
+      "seed": 1,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h08",
+      "seed": 2,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h08",
+      "seed": 2,
+      "version": "candidate",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h08",
+      "seed": 3,
+      "version": "v6",
+      "identical": true
+    },
+    {
+      "mode": "fixed_auto",
+      "bench": "h08",
+      "seed": 3,
+      "version": "candidate",
+      "identical": true
+    }
+  ],
+  "quality_gate_pass": true,
+  "all_fixed_identical": true,
+  "note": "SA gate only. TSan and final B checks remain separate; no automatic retain decision."
+}

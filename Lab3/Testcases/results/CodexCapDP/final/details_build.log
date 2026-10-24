@@ -1,0 +1,60 @@
+# 最終驗證補充：計時、協定與四版本新 seed
+
+只讀取已完成的紀錄；沒有補跑或用 edge 調參。
+
+## cap 嘗試成本
+
+舊版是第一階段 run C 儀器化執行，新版是 phase2/full_v5（凍結演算法，最後只有 help 字串修正）。
+兩次的目標 D、起點與候選數不同，這是搜尋成本觀察，不能視為同一候選的加速比。
+舊版 full 不含 feasibility probe；新版沒有 probe。表中平均只計找到可行解的完整候選，時間為修復＋DP；
+新版 DP 欄也包含候選的短 chain 回收與統計。remaining 是局部修復後、fallback 前的違規數。
+
+| bench | 舊 probe/full | 新嘗試/可行/接受 | 舊 full 平均秒 | 新可行平均秒 | 舊 DP 平均秒 | 新 DP 平均秒 | 舊 cap 秒 | 新 cap 秒 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| h01 | 32/25 | 8/8/2 | 0.3435 | 0.7890 | 0.0360 | 0.3968 | 10.49 | 6.40 |
+| h04 | 7/4 | 6/6/2 | 1.0065 | 0.7085 | 1.0022 | 0.5819 | 4.55 | 4.45 |
+| h06 | 7/3 | 2/1/1 | 1.3037 | 3.9893 | 1.2863 | 3.5787 | 4.61 | 4.39 |
+| h07 | 7/3 | 3/3/1 | 1.2380 | 1.4790 | 1.2277 | 1.2145 | 4.55 | 4.44 |
+| h08 | 7/2 | 1/1/1 | 1.8628 | 4.5157 | 1.8418 | 4.1041 | 4.62 | 4.52 |
+{
+  "extra_overruns": [
+    {
+      "bench": "e07_tworows",
+      "budget": 6.0,
+      "seconds": 6.245429,
+      "source": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/ts_new_stage1/e07_tworows/stderr_ts.tsv",
+      "excess": 0.24542899999999968
+    }
+  ],
+  "fixed_mismatches": [],
+  "seed4": {
+    "ClaudeOpus55_v4": {
+      "passed": 16,
+      "seconds": 440.49,
+      "max_over_chain": 1.032287534398323,
+      "disp_over_chain": 1.0038337224798513,
+      "hpwl_sa_over_chain": 1.003638961075932
+    },
+    "CodexChainDP": {
+      "passed": 16,
+      "seconds": 577.78,
+      "max_over_chain": 1.0,
+      "disp_over_chain": 1.0,
+      "hpwl_sa_over_chain": 1.0
+    },
+    "ClaudeOpus55_v5": {
+      "passed": 16,
+      "seconds": 578.61,
+      "max_over_chain": 0.9784168024965343,
+      "disp_over_chain": 1.0010932883730104,
+      "hpwl_sa_over_chain": 0.9970148330772605
+    },
+    "CodexCapDP": {
+      "passed": 16,
+      "seconds": 572.75,
+      "max_over_chain": 0.9617882700288206,
+      "disp_over_chain": 1.0006467800464671,
+      "hpwl_sa_over_chain": 0.9975196843433398
+    }
+  }
+}

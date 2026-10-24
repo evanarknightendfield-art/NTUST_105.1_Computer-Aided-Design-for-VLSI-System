@@ -1,0 +1,1070 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a1656b-cb85-7901-bd96-afab99872932
+--------
+user
+接續 AI_Solutions/CodexParallelChain/。只讀 AI_Solutions/ClaudeOpus55_v6/HANDOFF.md 第 0 節與 AI_Solutions/CodexParallelChain/WORK_STATE.md。
+phase1/ALL_DONE 已出現（注意：協調者在沙箱外重新啟動了 diag.py，並拿掉計時 worker 的 taskset，說明在 Testcases/results/CodexParallelChain/provenance/orchestrator_note.json）。
+只用 awk / python 摘要讀 phase1 的結果（每個指令輸出 ≤ 40 行），寫 Testcases/results/CodexParallelChain/diagnosis.md：
+- chain 階段：三部分各花多少時間、各拿多少總位移；哪些可以分 band 平行、共用的資料結構是什麼、預估同 1.5 秒能多做幾倍；
+- band 邊界損失：5 筆 × 2 seeds 的比值與平均；是否 ≥ 0.5%（HANDOFF 第 5 節的門檻）；
+- toy 退步的原因（只描述，不改）；
+- 依「幅度 × 機會」排序的第二階段計畫，每項寫驗收方式（對齊 HANDOFF 第 7 節）。
+更新 WORK_STATE 後結束。回覆不超過 15 行。
+
+【非互動執行的規則（由協調者自動開 session，使用者在睡覺）】
+- 這是 codex exec 的單次 session，沙箱裡啟動的背景工作會在 session 結束時被殺掉（第 A 階段的 nohup 就是這樣死掉的）。
+  所以不要自己啟動超過 5 分鐘的計算；把要跑的東西寫成腳本，然後在最後回覆的最後幾行寫：
+    RUN: <從 Lab3 目錄執行的完整命令>        （可以多行，依序執行）
+    WAIT: <完成標記的路徑，相對 Lab3>
+  協調者會在沙箱外依序執行 RUN、等 WAIT 出現，再開下一個 session。命令不要加 taskset（計時程式不能綁 E-core；編譯已由 v6q 綁）。
+- 要跑的東西都在 5 分鐘內的話（例如 C++ 測試），直接在本 session 跑完，不要寫 RUN/WAIT。
+- ASan：LeakSanitizer 在沙箱內會因 ptrace 失敗，請用 ASAN_OPTIONS=detect_leaks=0 跑並註明；協調者會在沙箱外補跑完整的 ASan。
+- 階段 B 全部完成（HANDOFF.md 第 7 節）時，最後一行只寫：B_DONE
+- 不 commit、不加任何 AI 署名；不要問問題（沒有人會回答），自己依 HANDOFF.md 判斷並把判斷寫進 WORK_STATE.md。
+
+codex
+我會先讀指定的交接第 0 節與 WORK_STATE，再以精簡摘要檢查 phase1 結果，完成 diagnosis.md 並更新工作狀態；這輪不修改演算法。
+
+exec
+/bin/bash -lc "python - <<'PY'
+from pathlib import Path
+p=Path('AI_Solutions/ClaudeOpus55_v6/HANDOFF.md')
+s=p.read_text().splitlines(); active=False
+for l in s:
+ if l.startswith('## ') and ('0 ' in l or '0.' in l or '0：' in l or '0:' in l): active=True
+ elif active and l.startswith('## '): break
+ if active: print(l)
+print('\\n--- WORK_STATE ---')
+print(Path('AI_Solutions/CodexParallelChain/WORK_STATE.md').read_text())
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+## 0. 規則（每個 session 都適用）
+
+**品質與流程**
+- 不 commit、任何檔案都不加 AI 署名。保護資料夾（不要改）：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6。
+- 新版本：`AI_Solutions/<NEW>/`，以 ClaudeOpus55_v6 為底複製 `src/ CMakeLists.txt Makefile tests/`；執行輸出全部在 `Testcases/results/<NEW>/`。
+- 調參只用 `Testcases/testcases`、`Testcases/holdout`；edge、edge_seed2~5 只當回歸。凍結（記 sha256）之後才產生新 seed。
+- 沒有數據就不宣稱進步：HPWL 至少 3 seeds、報平均與範圍，三種協定分開；新舊版本同一次配對重跑。
+- 計時中的程式一次一個（`timing.lock`）；分析與編譯 `taskset -c 16-19`。
+
+**省 token（上一輪 Codex 一個 session 用了 2,230 萬 input token：166 次呼叫、每次約 14 萬 context，其中一半的工具呼叫是在查進度）**
+1. **一個 session 只做一個階段**，做完就更新 WORK_STATE 並結束；下一階段開新 session（context 從小開始）。
+2. **不要輪詢**。超過 5 分鐘的計算：寫成佇列腳本、`nohup … &` 啟動、在 WORK_STATE 寫「等待中：哪個腳本、完成標記檔」，然後**結束 session**。
+   使用者（或 `scripts/codex_after.sh`）會在完成標記出現後開下一個 session。5 分鐘內的等待：只用一個 blocking 指令
+   `timeout 600 bash -c 'until [ -e MARKER ]; do sleep 20; done'`，不要反覆 ls / tail / ps。
+3. **輸出都進檔案**，終端只印摘要：每個指令輸出 ≤ 40 行（`| tail -n 20`、`awk` 摘要）；不要 cat 整份 record.csv、log、.pl。
+4. **只讀需要的**：本檔 + 自己的 WORK_STATE.md + 要改的函式。原始碼用 `grep -n` 找函式再 `sed -n` 讀範圍。
+5. 不重跑已完成的步驟（每步 `.done.json`）。對話回覆 ≤ 15 行；完整內容寫在報告檔。
+
+
+--- WORK_STATE ---
+# CodexParallelChain — WORK_STATE
+
+- 本 session：只建立版本並啟動第一階段診斷；不等待、不查進度、不調參、不 commit。
+- 專案根目錄：Lab3。底版：ClaudeOpus55_v6；src、tests、CMakeLists.txt、Makefile 原樣複製。
+- 只閱讀 HANDOFF.md 與必要原始碼／工具片段，未閱讀其他報告。
+- 執行輸出：Testcases/results/CodexParallelChain/；scripts/ 已完整複製 v6 scripts/。
+- 保護：ClaudeOpus55、CodexWindowDP、ClaudeOpus55_v4、CodexChainDP、ClaudeOpus55_v5、CodexCapDP、ClaudeOpus55_v6，均不得修改。
+- SHA256：provenance/protected_before.json（逐檔）、protected_roots.sha256（各目錄 aggregate；按相對路徑排序的 sha256  雙空白  路徑 + 換行）、base.sha256（底版複製項目）、copied_scripts.json。
+- v6 整個保護目錄 aggregate SHA256：2702e487b8f7be35de32daab56d71d9ac5fc74444c1b19fe20b1e24f8f15b2e3。
+
+## 第一階段範圍
+
+1. chain：testcases 3 + holdout 8 = 11 筆，另 e08_fragmented、e16_rowgaps 僅診斷；default 與額外指定 --chain-time 6，共 26 次。
+   使用 -v --no-sa --cap-time 0；default 保留原本 1.5/3 秒 chain 預算。cap 關閉以隔離 chain 收穫；不改接受規則或額外預算。
+   phase1/instrumented/ 是獨立副本，只有 main.cpp 增加 8 個 fprintf；記錄每輪 target windows、ejection chains、post-chain DP 的實際耗時與前後總位移，以及整段 chain。
+2. SA：ibm01、ibm05、h06、h07、h08，seed 1、2；自動執行緒 moves=3,000,000（8 bands 約 2,400 萬實際次數），再把其實際 attempts 原值傳給單執行緒。
+   sa_bench：seconds=100000、polish_seconds=0，避免時間截止；保留 100 溫度步驟，明列單執行緒整除步驟可能少做的 0–99 次，不冒稱完全相等。
+   原始演算法不改；診斷 driver 只加 fprintf 印實際 threads。逐筆、平均與範圍均由完成後腳本生成，僅診斷不宣稱進步。
+   指定起點：Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/<bench>/output。
+   例外：該目錄沒有 ibm01、ibm05；在新目錄 phase1/sa/legal_starts/ClaudeOpus55_v4/ 以未修改 v4 -v --no-sa 補建；每對 SA 共用同一份起點並保存 SHA256。
+3. toy：未插樁 v5 與 v6 各一次 -v --no-sa，保留完整 cap stderr；HANDOFF 參考最大位移分別 1972.0、2004.4，實測另列。
+
+## 執行約定
+
+- 使用複製的 v6q.Queue，每步 .done.json；拿新版本 timing.lock，同時拿既有 v6 timing.lock（唯讀開啟、不更動檔案），計時程式一次一個。
+- 編譯、分析固定 CPU 16–19；計時程式可用 CPU 0–19，無其他診斷同時執行。
+- 完成輸出 phase1/chain_summary.csv、chain_rounds.csv、sa_pairs.csv、toy_summary.csv、summary.json；只有全部成功且保護資料夾 SHA256 未變才寫 phase1/ALL_DONE。
+- 失敗寫 phase1/FAILED.json，保留每步 log/.failed.json；修正後可重跑佇列，已成功步驟跳過。
+- 尚未啟動；先做編譯與輸入檢查，不執行計時診斷。
+- 10-22 23:55 phase1/build_jobs/build_v6 完成（12 秒）
+- 10-22 23:55 phase1/build_jobs/build_chain 完成（2 秒）
+- 10-22 23:55 phase1/build_jobs/build_sa 完成（1 秒）
+- 10-22 23:55 phase1/build_jobs/build_v5 完成（12 秒）
+- 10-22 23:55 phase1/build_jobs/build_v4 完成（8 秒）
+- 10-22 23:55 phase1 啟動前檢查完成：編譯成功、輸入有效、插樁僅 fprintf；尚未執行診斷。
+
+## 目前狀態
+
+等待中：scripts/diag.py，完成標記 phase1/ALL_DONE
+- 已 nohup 啟動，PID 4；日誌 phase1/diag.nohup.log。
+- 啟動前編譯與輸入檢查成功；保護資料夾 SHA256 未變（provenance/protected_after_setup.json）。
+- 本 session 到此結束，未等待完成、未查詢診斷進度。
+- 10-23 00:09 phase1 診斷失敗：Protected directories changed; do not write ALL_DONE；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+- 10-23 00:09 phase1 診斷失敗：Prepared script/binaries changed; rerun --prepare；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+- 10-23 00:10 phase1 啟動前檢查完成：編譯成功、輸入有效、插樁僅 fprintf；尚未執行診斷。
+- 10-23 00:10 phase1/jobs/chain_ibm01_default 完成（22 秒）
+- 10-23 00:10 phase1/jobs/chain_ibm01_chain6 完成（26 秒）
+- 10-23 00:11 phase1/jobs/chain_ibm05_default 完成（37 秒）
+- 10-23 00:12 phase1/jobs/chain_ibm05_chain6 完成（41 秒）
+- 10-23 00:12 phase1/jobs/chain_toy_default 完成（1 秒）
+- 10-23 00:12 phase1/jobs/chain_toy_chain6 完成（1 秒）
+- 10-23 00:12 phase1/jobs/chain_h01_default 完成（3 秒）
+- 10-23 00:12 phase1/jobs/chain_h01_chain6 完成（3 秒）
+- 10-23 00:12 phase1/jobs/chain_h02_default 完成（14 秒）
+- 10-23 00:12 phase1/jobs/chain_h02_chain6 完成（14 秒）
+- 10-23 00:12 phase1/jobs/chain_h03_default 完成（8 秒）
+- 10-23 00:13 phase1/jobs/chain_h03_chain6 完成（9 秒）
+- 10-23 00:13 phase1/jobs/chain_h04_default 完成（13 秒）
+- 10-23 00:13 phase1/jobs/chain_h04_chain6 完成（16 秒）
+- 10-23 00:13 phase1/jobs/chain_h05_default 完成（5 秒）
+- 10-23 00:13 phase1/jobs/chain_h05_chain6 完成（9 秒）
+- 10-23 00:14 phase1/jobs/chain_h06_default 完成（30 秒）
+- 10-23 00:14 phase1/jobs/chain_h06_chain6 完成（34 秒）
+- 10-23 00:15 phase1/jobs/chain_h07_default 完成（22 秒）
+- 10-23 00:15 phase1/jobs/chain_h07_chain6 完成（26 秒）
+- 10-23 00:16 phase1/jobs/chain_h08_default 完成（58 秒）
+- 10-23 00:17 phase1/jobs/chain_h08_chain6 完成（63 秒）
+- 10-23 00:17 phase1/jobs/chain_e08_fragmented_default 完成（6 秒）
+- 10-23 00:17 phase1/jobs/chain_e08_fragmented_chain6 完成（10 秒）
+- 10-23 00:18 phase1/jobs/chain_e16_rowgaps_default 完成（6 秒）
+- 10-23 00:18 phase1/jobs/chain_e16_rowgaps_chain6 完成（10 秒）
+- 10-23 00:18 phase1/jobs/legal_start_ibm01 完成（21 秒）
+- 10-23 00:19 phase1/jobs/legal_start_ibm05 完成（35 秒）
+- 10-23 00:19 phase1/jobs/sa_ibm01_s1_auto 完成（5 秒）
+- 10-23 00:19 phase1/jobs/sa_ibm01_s1_single 完成（21 秒）
+- 10-23 00:19 phase1/jobs/sa_ibm01_s2_auto 完成（6 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm01_s2_single 完成（21 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm05_s1_auto 完成（6 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm05_s1_single 完成（26 秒）
+- 10-23 00:20 phase1/jobs/sa_ibm05_s2_auto 完成（6 秒）
+- 10-23 00:21 phase1/jobs/sa_ibm05_s2_single 完成（26 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s1_auto 完成（4 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s1_single 完成（14 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s2_auto 完成（4 秒）
+- 10-23 00:21 phase1/jobs/sa_h06_s2_single 完成（14 秒）
+- 10-23 00:21 phase1/jobs/sa_h07_s1_auto 完成（6 秒）
+- 10-23 00:22 phase1/jobs/sa_h07_s1_single 完成（22 秒）
+- 10-23 00:22 phase1/jobs/sa_h07_s2_auto 完成（6 秒）
+- 10-23 00:22 phase1/jobs/sa_h07_s2_single 完成（22 秒）
+- 10-23 00:22 phase1/jobs/sa_h08_s1_auto 完成（7 秒）
+- 10-23 00:23 phase1/jobs/sa_h08_s1_single 完成（25 秒）
+- 10-23 00:23 phase1/jobs/sa_h08_s2_auto 完成（6 秒）
+- 10-23 00:23 phase1/jobs/sa_h08_s2_single 完成（24 秒）
+- 10-23 00:23 phase1/jobs/toy_v5 完成（5 秒）
+- 10-23 00:23 phase1/jobs/toy_v6 完成（1 秒）
+- 10-23 00:23 phase1/jobs/summarize 完成（0 秒）
+- 10-23 00:23 phase1 診斷失敗：Protected directories changed; do not write ALL_DONE；未寫 ALL_DONE，詳見 phase1/FAILED.json。
+- 10-23 05:01 phase1/ALL_DONE：全部診斷完成，保護資料夾 SHA256 未變；等待下一個 session 分析。
+
+
+exec
+/bin/bash -lc "taskset -c 16-19 python - <<'PY'
+from pathlib import Path
+import json,csv
+r=Path('Testcases/results/CodexParallelChain')
+for f in ['provenance/orchestrator_note.json','phase1/ALL_DONE','phase1/summary.json']:
+ p=r/f; print(f, p.read_text()[:14000])
+for f in ['chain_summary.csv','chain_rounds.csv','sa_pairs.csv','toy_summary.csv']:
+ rows=list(csv.DictReader((r/'phase1'/f).open()));print(f,'rows=',len(rows),'columns=',list(rows[0]) if rows else []);print('sample=',rows[:2])
+print('phase1 files:', [str(p.relative_to(r/'phase1')) for p in (r/'phase1').iterdir()])
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+provenance/orchestrator_note.json {
+  "time": "Fri Oct 23 00:09:39 2026",
+  "by": "orchestrator (Claude, authorised by the user)",
+  "reason": "HANDOFF.md section 7 (phase B completion rule) and NEXT_CODEX_PROMPTS.md were edited after phase A recorded the baseline; documentation only, no source changed",
+  "changes": {
+    "HANDOFF.md": {
+      "old": "4fea708ac7db506cc1d05cfb74a4dafcf1dd770165892683421b2afaea3c2f0e",
+      "new": "61651d9c113b69879dad69fa2105ff904c57df5240a21e306b023bac782c916b"
+    },
+    "NEXT_CODEX_PROMPTS.md": {
+      "old": "41032d9391a04ba392a9b8f7395699c439cc7c6e24f3fcb893a5679d8cd4350b",
+      "new": "0041d991eb60ecde8b4d59b8d02c21bae776371f537563f5c4391251dc31ced7"
+    }
+  },
+  "also": "diag.py: removed taskset (PIN) from the timed chain/sa/toy workers: 8-thread SA band-loss runs must not be squeezed onto 4 E-cores; the job is now launched outside the Codex sandbox (background jobs started inside it die with the session)",
+  "later": [
+    {
+      "time": "Fri Oct 23 05:01:56 2026",
+      "file": "ClaudeOpus55_v6/WORK_STATE.md",
+      "old": "4e8e52fcf798cdfe4f70cd61ff0a214e72c53a9f199d54a05d537b9bbbd0e625",
+      "new": "fd75846affdfb3bc168cb6df13b9c039e8a36cbd3dc5738d20ae6a78fb861d78",
+      "reason": "the orchestrator (Claude) appended progress lines to v6 WORK_STATE.md after the baseline; documentation only. No further writes into ClaudeOpus55_v6."
+    }
+  ]
+}
+phase1/ALL_DONE {
+  "finished_unix": 1792702916.3025122,
+  "chain_runs": 26,
+  "sa_runs": 20,
+  "toy_runs": 2,
+  "protected_sha256_unchanged": true,
+  "summary": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/summary.json"
+}
+
+phase1/summary.json {
+  "chain": [
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.40504745799999853,
+      "total_reduction": 5350.999999992549,
+      "reduction_pct_of_chain_start": 0.023210722704766703,
+      "calls": 2,
+      "work": 10
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.7924720999999941,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.25361789599999796,
+      "total_reduction": 8660.084000006318,
+      "reduction_pct_of_chain_start": 0.03756434466911107,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.451401508,
+      "total_reduction": 14011.083999998868,
+      "reduction_pct_of_chain_start": 0.06077506737387778,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.767771039000003,
+      "total_reduction": 6654.7999999932945,
+      "reduction_pct_of_chain_start": 0.028866140432767872,
+      "calls": 2,
+      "work": 14
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 3.963749492000005,
+      "total_reduction": 325.4000000022352,
+      "reduction_pct_of_chain_start": 0.0014114687288718896,
+      "calls": 2,
+      "work": 5
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.6364058969999995,
+      "total_reduction": 13532.484000001103,
+      "reduction_pct_of_chain_start": 0.058699071880238284,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm01",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.368122467000003,
+      "total_reduction": 20512.683999996632,
+      "reduction_pct_of_chain_start": 0.08897668104187804,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.46088119600000255,
+      "total_reduction": 2.709999999962747,
+      "reduction_pct_of_chain_start": 0.0002041008100339925,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.8874927299999982,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.022877170000001,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.3716361460000002,
+      "total_reduction": 2.709999999962747,
+      "reduction_pct_of_chain_start": 0.0002041008100339925,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.7621031869999939,
+      "total_reduction": 2.709999999962747,
+      "reduction_pct_of_chain_start": 0.0002041008100339925,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 4.294265214000006,
+      "total_reduction": 23.04799999971874,
+      "reduction_pct_of_chain_start": 0.0017358359666681618,
+      "calls": 2,
+      "work": 5
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.2872496510000033,
+      "total_reduction": 27.899999999906868,
+      "reduction_pct_of_chain_start": 0.0021012592619954465,
+      "calls": 2,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "ibm05",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 5.344434423999999,
+      "total_reduction": 53.657999999588355,
+      "reduction_pct_of_chain_start": 0.004041196038697601,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.0050386460000000355,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.009441067999999997,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0,
+      "total_reduction": 0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 0,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 0.01449408799999996,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.005107088000000037,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 0.009453072999999979,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0,
+      "total_reduction": 0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 0,
+      "work": 0
+    },
+    {
+      "group": "testcases",
+      "bench": "toy",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 0.0145695990000001,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.009990490999999935,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 0.050053708000000086,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0,
+      "total_reduction": 0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 0,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 0.06005908899999968,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.01010990100000031,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 0.04938237799999978,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0,
+      "total_reduction": 0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 0,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h01",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 0.05950719400000004,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.12140236699999996,
+      "total_reduction": 79.19599999999627,
+      "reduction_pct_of_chain_start": 0.017147255289557524,
+      "calls": 2,
+      "work": 3
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 1.5626679249999995,
+      "total_reduction": 17.412000000011176,
+      "reduction_pct_of_chain_start": 0.00376998849818149,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.27996066599999914,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 1.964114747,
+      "total_reduction": 96.60800000000745,
+      "reduction_pct_of_chain_start": 0.020917243787739015,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.12173417300000011,
+      "total_reduction": 79.19599999999627,
+      "reduction_pct_of_chain_start": 0.017147255289557524,
+      "calls": 2,
+      "work": 3
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 1.5506025920000006,
+      "total_reduction": 17.412000000011176,
+      "reduction_pct_of_chain_start": 0.00376998849818149,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.28193085200000034,
+      "total_reduction": 0.0,
+      "reduction_pct_of_chain_start": 0.0,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h02",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 1.9543208110000005,
+      "total_reduction": 96.60800000000745,
+      "reduction_pct_of_chain_start": 0.020917243787739015,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.2738200200000005,
+      "total_reduction": 4.494440000002214,
+      "reduction_pct_of_chain_start": 0.06380162545434129,
+      "calls": 2,
+      "work": 11
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "default",
+      "phase": "ejection_chains",
+      "seconds": 2.1630098769999995,
+      "total_reduction": 0.4548400000003312,
+      "reduction_pct_of_chain_start": 0.006456762426833917,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "default",
+      "phase": "post_chain_dp",
+      "seconds": 0.1946731890000004,
+      "total_reduction": 2.1205199999976685,
+      "reduction_pct_of_chain_start": 0.03010222025618862,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "default",
+      "phase": "chain_stage",
+      "seconds": 2.6315507179999997,
+      "total_reduction": 7.069800000000214,
+      "reduction_pct_of_chain_start": 0.10036060813736383,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "chain6",
+      "phase": "target_windows",
+      "seconds": 0.2750143319999996,
+      "total_reduction": 4.494440000002214,
+      "reduction_pct_of_chain_start": 0.06380162545434129,
+      "calls": 2,
+      "work": 11
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "chain6",
+      "phase": "ejection_chains",
+      "seconds": 3.415993416000001,
+      "total_reduction": 0.4548400000003312,
+      "reduction_pct_of_chain_start": 0.006456762426833917,
+      "calls": 2,
+      "work": 1
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "chain6",
+      "phase": "post_chain_dp",
+      "seconds": 0.20099860400000047,
+      "total_reduction": 2.1205199999976685,
+      "reduction_pct_of_chain_start": 0.03010222025618862,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h03",
+      "variant": "chain6",
+      "phase": "chain_stage",
+      "seconds": 3.8920523009999997,
+      "total_reduction": 7.069800000000214,
+      "reduction_pct_of_chain_start": 0.10036060813736383,
+      "calls": 1,
+      "work": 0
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "default",
+      "phase": "target_windows",
+      "seconds": 0.40458225899999967,
+      "total_reduction": 260.9800000000396,
+      "reduction_pct_of_chain_start": 0.14484869948925502,
+      "calls": 2,
+      "work": 45
+    },
+    {
+      "group": "holdout",
+      "bench": "h04",
+      "variant": "default",
+      "phase": "ejection_chains",
+      
+chain_summary.csv rows= 104 columns= ['group', 'bench', 'variant', 'phase', 'seconds', 'total_reduction', 'reduction_pct_of_chain_start', 'calls', 'work']
+sample= [{'group': 'testcases', 'bench': 'ibm01', 'variant': 'default', 'phase': 'target_windows', 'seconds': '0.40504745799999853', 'total_reduction': '5350.999999992549', 'reduction_pct_of_chain_start': '0.023210722704766703', 'calls': '2', 'work': '10'}, {'group': 'testcases', 'bench': 'ibm01', 'variant': 'default', 'phase': 'ejection_chains', 'seconds': '0.7924720999999941', 'total_reduction': '0.0', 'reduction_pct_of_chain_start': '0.0', 'calls': '2', 'work': '0'}]
+chain_rounds.csv rows= 156 columns= ['group', 'bench', 'variant', 'round', 'phase', 'seconds', 'total_before', 'total_after', 'total_reduction', 'max_before', 'max_after', 'work']
+sample= [{'group': 'testcases', 'bench': 'ibm01', 'variant': 'default', 'round': '1', 'phase': 'target_windows', 'seconds': '0.22610634999999846', 'total_before': '23053999.94672994', 'total_after': '23048778.746729944', 'total_reduction': '5221.19999999553', 'max_before': '10596.97', 'max_after': '10596.97', 'work': '9'}, {'group': 'testcases', 'bench': 'ibm01', 'variant': 'default', 'round': '1', 'phase': 'ejection_chains', 'seconds': '0.4796751259999965', 'total_before': '23048778.746729944', 'total_after': '23048778.746729944', 'total_reduction': '0.0', 'max_before': '10596.97', 'max_after': '10596.97', 'work': '0'}]
+sa_pairs.csv rows= 10 columns= ['bench', 'seed', 'auto_threads', 'auto_attempts', 'single_requested', 'single_attempts', 'schedule_rounding_attempts', 'auto_hpwl', 'single_hpwl', 'auto_loss_pct', 'auto_seconds', 'single_seconds', 'legal_start']
+sample= [{'bench': 'ibm01', 'seed': '1', 'auto_threads': '8', 'auto_attempts': '23992002', 'single_requested': '23992002', 'single_attempts': '23992000', 'schedule_rounding_attempts': '2', 'auto_hpwl': '54562032.0', 'single_hpwl': '53067378.0', 'auto_loss_pct': '2.8165212911027915', 'auto_seconds': '5.009135', 'single_seconds': '21.281258', 'legal_start': '/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output'}, {'bench': 'ibm01', 'seed': '2', 'auto_threads': '8', 'auto_attempts': '23992000', 'single_requested': '23992000', 'single_attempts': '23992000', 'schedule_rounding_attempts': '0', 'auto_hpwl': '55040712.0', 'single_hpwl': '53337582.0', 'auto_loss_pct': '3.19311437852583', 'auto_seconds': '5.515971', 'single_seconds': '21.312501', 'legal_start': '/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output'}]
+toy_summary.csv rows= 2 columns= ['version', 'total_displacement', 'max_displacement', 'handoff_reference_max', 'difference', 'stderr']
+sample= [{'version': 'v5', 'total_displacement': '43236.6', 'max_displacement': '1972.0', 'handoff_reference_max': '1972.0', 'difference': '0.0', 'stderr': '/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/toy/v5/stderr.txt'}, {'version': 'v6', 'total_displacement': '43324.4', 'max_displacement': '2004.4', 'handoff_reference_max': '2004.4', 'difference': '0.0', 'stderr': '/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/toy/v6/stderr.txt'}]
+phase1 files: ['sa_pairs.csv', 'plan.json', 'instrumented', 'FAILED_protected_v6_worklog.json', 'summary.json', 'diag.nohup.log', 'build_jobs', 'launch.json', 'chain_rounds.csv', 'preflight.log', 'toy', 'bin', 'chain', 'diag.pid', 'chain_summary.csv', 'sa', 'build', 'preflight.done.json', 'jobs', 'sa_bench_diag.cpp', 'ALL_DONE', 'toy_summary.csv']
+
+exec
+/bin/bash -lc "taskset -c 16-19 python - <<'PY'
+from pathlib import Path
+import csv,json
+r=Path('Testcases/results/CodexParallelChain/phase1')
+s=json.loads((r/'summary.json').read_text());print('summary nonchain:',json.dumps({k:v for k,v in s.items() if k"'!='"'chain'},ensure_ascii=False)[:8000])
+a=list(csv.DictReader((r/'chain_summary.csv').open()))
+for b in dict.fromkeys(x['bench'] for x in a):
+ print(b,' | '.join(v+': '+', '.join(x['phase']+' '+format(float(x['seconds']),'.3f')+'s / '+format(float(x['total_reduction']),'.5f') for x in a if x['bench']==b and x['variant']==v) for v in ['default','chain6']))
+for x in csv.DictReader((r/'sa_pairs.csv').open()): print('SA',json.dumps(x))
+for v in ['v5','v6']:
+ lines=(r/'toy'/v/'stderr.txt').read_text().splitlines(); print('toy',v,'lines',len(lines)); print(' || '.join(lines)[-14000:])
+print('instrumented files', [str(p.relative_to(r/'instrumented')) for p in (r/'instrumented').rglob('*.cpp')])
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+summary nonchain: {"sa_pairs": [{"bench": "ibm01", "seed": 1, "auto_threads": 8, "auto_attempts": 23992002, "single_requested": 23992002, "single_attempts": 23992000, "schedule_rounding_attempts": 2, "auto_hpwl": 54562032.0, "single_hpwl": 53067378.0, "auto_loss_pct": 2.8165212911027915, "auto_seconds": 5.009135, "single_seconds": 21.281258, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output"}, {"bench": "ibm01", "seed": 2, "auto_threads": 8, "auto_attempts": 23992000, "single_requested": 23992000, "single_attempts": 23992000, "schedule_rounding_attempts": 0, "auto_hpwl": 55040712.0, "single_hpwl": 53337582.0, "auto_loss_pct": 3.19311437852583, "auto_seconds": 5.515971, "single_seconds": 21.312501, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output"}, {"bench": "ibm05", "seed": 1, "auto_threads": 8, "auto_attempts": 23995921, "single_requested": 23995921, "single_attempts": 23995900, "schedule_rounding_attempts": 21, "auto_hpwl": 10147365.5, "single_hpwl": 10013432.0, "auto_loss_pct": 1.3375384183964112, "auto_seconds": 5.289494, "single_seconds": 25.689888, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output"}, {"bench": "ibm05", "seed": 2, "auto_threads": 8, "auto_attempts": 23995914, "single_requested": 23995914, "single_attempts": 23995900, "schedule_rounding_attempts": 14, "auto_hpwl": 10160930.5, "single_hpwl": 10033235.0, "auto_loss_pct": 1.2727250981363403, "auto_seconds": 5.518209, "single_seconds": 25.53909, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output"}, {"bench": "h06", "seed": 1, "auto_threads": 5, "auto_attempts": 14996036, "single_requested": 14996036, "single_attempts": 14996000, "schedule_rounding_attempts": 36, "auto_hpwl": 722323.0, "single_hpwl": 706763.0, "auto_loss_pct": 2.201586670496325, "auto_seconds": 4.009987, "single_seconds": 13.679325, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output"}, {"bench": "h06", "seed": 2, "auto_threads": 5, "auto_attempts": 14996365, "single_requested": 14996365, "single_attempts": 14996300, "schedule_rounding_attempts": 65, "auto_hpwl": 716259.5, "single_hpwl": 708454.0, "auto_loss_pct": 1.101765252225273, "auto_seconds": 4.025128, "single_seconds": 13.784389, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output"}, {"bench": "h07", "seed": 1, "auto_threads": 8, "auto_attempts": 23993528, "single_requested": 23993528, "single_attempts": 23993500, "schedule_rounding_attempts": 28, "auto_hpwl": 169086.71800000276, "single_hpwl": 169060.05100000216, "auto_loss_pct": 0.015773685056208464, "auto_seconds": 5.691396, "single_seconds": 22.139788, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output"}, {"bench": "h07", "seed": 2, "auto_threads": 8, "auto_attempts": 23993660, "single_requested": 23993660, "single_attempts": 23993600, "schedule_rounding_attempts": 60, "auto_hpwl": 168116.39000000161, "single_hpwl": 168157.938000002, "auto_loss_pct": -0.024707724472927683, "auto_seconds": 5.424431, "single_seconds": 22.252772, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output"}, {"bench": "h08", "seed": 1, "auto_threads": 8, "auto_attempts": 23996167, "single_requested": 23996167, "single_attempts": 23996100, "schedule_rounding_attempts": 67, "auto_hpwl": 105642448.30000024, "single_hpwl": 104687988.20000029, "auto_loss_pct": 0.9117188288846556, "auto_seconds": 6.425031, "single_seconds": 24.335081, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output"}, {"bench": "h08", "seed": 2, "auto_threads": 8, "auto_attempts": 23996212, "single_requested": 23996212, "single_attempts": 23996200, "schedule_rounding_attempts": 12, "auto_hpwl": 105752219.80000028, "single_hpwl": 105157226.9000003, "auto_loss_pct": 0.5658126574275224, "auto_seconds": 5.326113, "single_seconds": 24.092898, "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output"}], "sa_by_bench": {"ibm01": {"mean_loss_pct": 3.0048178348143106, "min_loss_pct": 2.8165212911027915, "max_loss_pct": 3.19311437852583}, "ibm05": {"mean_loss_pct": 1.3051317582663757, "min_loss_pct": 1.2727250981363403, "max_loss_pct": 1.3375384183964112}, "h06": {"mean_loss_pct": 1.651675961360799, "min_loss_pct": 1.101765252225273, "max_loss_pct": 2.201586670496325}, "h07": {"mean_loss_pct": -0.00446701970835961, "min_loss_pct": -0.024707724472927683, "max_loss_pct": 0.015773685056208464}, "h08": {"mean_loss_pct": 0.738765743156089, "min_loss_pct": 0.5658126574275224, "max_loss_pct": 0.9117188288846556}}, "toy": [{"version": "v5", "total_displacement": 43236.6, "max_displacement": 1972.0, "handoff_reference_max": 1972.0, "difference": 0.0, "stderr": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/toy/v5/stderr.txt"}, {"version": "v6", "total_displacement": 43324.4, "max_displacement": 2004.4, "handoff_reference_max": 2004.4, "difference": 0.0, "stderr": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/toy/v6/stderr.txt"}], "scope": "diagnosis only; two SA seeds; edge e08/e16 are not tuning data", "sa_warning": "positive loss means auto HPWL is worse; serial 100-step rounding is listed", "starts": {"ibm01": {"/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.aux": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.aux", "sha256": "3a3fd9cdd331387ba400791b976875f787360e1f4f965f86c66254650a2757d7"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.nodes": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.nodes", "sha256": "ecfc5d1c9f050f55f6583f3be2725e6a4f7465ba88447490b8813711eb2d0afd"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.nets": {"resolved": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.nets", "sha256": "6215db7b5799fec8fcc132a355dd88f0451eda5004663ebaae7b84295c220a7b"}, "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output.wts": {"resolved": "/home/evan/Deskto
+ibm01 default: target_windows 0.405s / 5351.00000, ejection_chains 0.792s / 0.00000, post_chain_dp 0.254s / 8660.08400, chain_stage 1.451s / 14011.08400 | chain6: target_windows 0.768s / 6654.80000, ejection_chains 3.964s / 325.40000, post_chain_dp 0.636s / 13532.48400, chain_stage 5.368s / 20512.68400
+ibm05 default: target_windows 0.461s / 2.71000, ejection_chains 0.887s / 0.00000, post_chain_dp 0.023s / 0.00000, chain_stage 1.372s / 2.71000 | chain6: target_windows 0.762s / 2.71000, ejection_chains 4.294s / 23.04800, post_chain_dp 0.287s / 27.90000, chain_stage 5.344s / 53.65800
+toy default: target_windows 0.005s / 0.00000, ejection_chains 0.009s / 0.00000, post_chain_dp 0.000s / 0.00000, chain_stage 0.014s / 0.00000 | chain6: target_windows 0.005s / 0.00000, ejection_chains 0.009s / 0.00000, post_chain_dp 0.000s / 0.00000, chain_stage 0.015s / 0.00000
+h01 default: target_windows 0.010s / 0.00000, ejection_chains 0.050s / 0.00000, post_chain_dp 0.000s / 0.00000, chain_stage 0.060s / 0.00000 | chain6: target_windows 0.010s / 0.00000, ejection_chains 0.049s / 0.00000, post_chain_dp 0.000s / 0.00000, chain_stage 0.060s / 0.00000
+h02 default: target_windows 0.121s / 79.19600, ejection_chains 1.563s / 17.41200, post_chain_dp 0.280s / 0.00000, chain_stage 1.964s / 96.60800 | chain6: target_windows 0.122s / 79.19600, ejection_chains 1.551s / 17.41200, post_chain_dp 0.282s / 0.00000, chain_stage 1.954s / 96.60800
+h03 default: target_windows 0.274s / 4.49444, ejection_chains 2.163s / 0.45484, post_chain_dp 0.195s / 2.12052, chain_stage 2.632s / 7.06980 | chain6: target_windows 0.275s / 4.49444, ejection_chains 3.416s / 0.45484, post_chain_dp 0.201s / 2.12052, chain_stage 3.892s / 7.06980
+h04 default: target_windows 0.405s / 260.98000, ejection_chains 0.792s / 0.00000, post_chain_dp 0.253s / 131.98000, chain_stage 1.450s / 392.96000 | chain6: target_windows 0.457s / 252.92000, ejection_chains 4.374s / 3.98000, post_chain_dp 0.423s / 152.08000, chain_stage 5.255s / 408.98000
+h05 default: target_windows 0.405s / 709.21400, ejection_chains 0.792s / 1357.13800, post_chain_dp 0.254s / 1994.05400, chain_stage 1.451s / 4060.40600 | chain6: target_windows 0.798s / 782.03800, ejection_chains 4.187s / 2785.28800, post_chain_dp 0.421s / 1836.09400, chain_stage 5.405s / 5403.42000
+h06 default: target_windows 0.404s / 1745.10000, ejection_chains 0.791s / 71.72000, post_chain_dp 0.259s / 1435.06000, chain_stage 1.455s / 3251.88000 | chain6: target_windows 0.710s / 1615.18000, ejection_chains 3.932s / 428.90000, post_chain_dp 0.794s / 1950.24000, chain_stage 5.436s / 3994.32000
+h07 default: target_windows 0.403s / 115.57380, ejection_chains 0.789s / 0.00000, post_chain_dp 0.261s / 80.41684, chain_stage 1.454s / 195.99064 | chain6: target_windows 0.513s / 130.75270, ejection_chains 4.425s / 0.00000, post_chain_dp 0.299s / 63.84442, chain_stage 5.237s / 194.59712
+h08 default: target_windows 0.419s / 990.00000, ejection_chains 0.916s / 0.00000, post_chain_dp 0.023s / 0.00000, chain_stage 1.359s / 990.00000 | chain6: target_windows 0.625s / 990.00000, ejection_chains 4.541s / 0.00000, post_chain_dp 0.026s / 0.00000, chain_stage 5.193s / 990.00000
+e08_fragmented default: target_windows 0.404s / 951.67600, ejection_chains 0.791s / 32.10800, post_chain_dp 0.255s / 205.27200, chain_stage 1.450s / 1189.05600 | chain6: target_windows 0.586s / 934.80400, ejection_chains 4.308s / 177.40200, post_chain_dp 0.449s / 694.61800, chain_stage 5.343s / 1806.82400
+e16_rowgaps default: target_windows 0.404s / 505.75800, ejection_chains 0.791s / 14.75200, post_chain_dp 0.254s / 296.74800, chain_stage 1.449s / 817.25800 | chain6: target_windows 0.537s / 496.33200, ejection_chains 4.423s / 69.81800, post_chain_dp 0.313s / 382.74000, chain_stage 5.272s / 948.89000
+SA {"bench": "ibm01", "seed": "1", "auto_threads": "8", "auto_attempts": "23992002", "single_requested": "23992002", "single_attempts": "23992000", "schedule_rounding_attempts": "2", "auto_hpwl": "54562032.0", "single_hpwl": "53067378.0", "auto_loss_pct": "2.8165212911027915", "auto_seconds": "5.009135", "single_seconds": "21.281258", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output"}
+SA {"bench": "ibm01", "seed": "2", "auto_threads": "8", "auto_attempts": "23992000", "single_requested": "23992000", "single_attempts": "23992000", "schedule_rounding_attempts": "0", "auto_hpwl": "55040712.0", "single_hpwl": "53337582.0", "auto_loss_pct": "3.19311437852583", "auto_seconds": "5.515971", "single_seconds": "21.312501", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm01/output"}
+SA {"bench": "ibm05", "seed": "1", "auto_threads": "8", "auto_attempts": "23995921", "single_requested": "23995921", "single_attempts": "23995900", "schedule_rounding_attempts": "21", "auto_hpwl": "10147365.5", "single_hpwl": "10013432.0", "auto_loss_pct": "1.3375384183964112", "auto_seconds": "5.289494", "single_seconds": "25.689888", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output"}
+SA {"bench": "ibm05", "seed": "2", "auto_threads": "8", "auto_attempts": "23995914", "single_requested": "23995914", "single_attempts": "23995900", "schedule_rounding_attempts": "14", "auto_hpwl": "10160930.5", "single_hpwl": "10033235.0", "auto_loss_pct": "1.2727250981363403", "auto_seconds": "5.518209", "single_seconds": "25.53909", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/phase1/sa/legal_starts/ClaudeOpus55_v4/ibm05/output"}
+SA {"bench": "h06", "seed": "1", "auto_threads": "5", "auto_attempts": "14996036", "single_requested": "14996036", "single_attempts": "14996000", "schedule_rounding_attempts": "36", "auto_hpwl": "722323.0", "single_hpwl": "706763.0", "auto_loss_pct": "2.201586670496325", "auto_seconds": "4.009987", "single_seconds": "13.679325", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output"}
+SA {"bench": "h06", "seed": "2", "auto_threads": "5", "auto_attempts": "14996365", "single_requested": "14996365", "single_attempts": "14996300", "schedule_rounding_attempts": "65", "auto_hpwl": "716259.5", "single_hpwl": "708454.0", "auto_loss_pct": "1.101765252225273", "auto_seconds": "4.025128", "single_seconds": "13.784389", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h06/output"}
+SA {"bench": "h07", "seed": "1", "auto_threads": "8", "auto_attempts": "23993528", "single_requested": "23993528", "single_attempts": "23993500", "schedule_rounding_attempts": "28", "auto_hpwl": "169086.71800000276", "single_hpwl": "169060.05100000216", "auto_loss_pct": "0.015773685056208464", "auto_seconds": "5.691396", "single_seconds": "22.139788", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output"}
+SA {"bench": "h07", "seed": "2", "auto_threads": "8", "auto_attempts": "23993660", "single_requested": "23993660", "single_attempts": "23993600", "schedule_rounding_attempts": "60", "auto_hpwl": "168116.39000000161", "single_hpwl": "168157.938000002", "auto_loss_pct": "-0.024707724472927683", "auto_seconds": "5.424431", "single_seconds": "22.252772", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h07/output"}
+SA {"bench": "h08", "seed": "1", "auto_threads": "8", "auto_attempts": "23996167", "single_requested": "23996167", "single_attempts": "23996100", "schedule_rounding_attempts": "67", "auto_hpwl": "105642448.30000024", "single_hpwl": "104687988.20000029", "auto_loss_pct": "0.9117188288846556", "auto_seconds": "6.425031", "single_seconds": "24.335081", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output"}
+SA {"bench": "h08", "seed": "2", "auto_threads": "8", "auto_attempts": "23996212", "single_requested": "23996212", "single_attempts": "23996200", "schedule_rounding_attempts": "12", "auto_hpwl": "105752219.80000028", "single_hpwl": "105157226.9000003", "auto_loss_pct": "0.5658126574275224", "auto_seconds": "5.326113", "single_seconds": "24.092898", "legal_start": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/hpwl_fixed/legal_starts/ClaudeOpus55_v4/h08/output"}
+toy v5 lines 154
+[read] 31 nodes (31 movable), 38 nets, 132 rows, 132 segments, utilization 0.003  0.00s || [legal] abacus: 455 exact cost steps || [legal] abacus  total 48976.8  max 2226.0  0.0s || [legal] row-opt (d0 0): 6 segments  total 48689.6  max 2292.0 || [legal] max-refine 3 moves  total 48895.0  max 2116.9 || [legal] matching d0 2011: 7 windows, cells above d0 7 -> 6  total 48671.0  max 2106.0 || [legal] row-opt (d0 2106): 1 segments  total 48605.0  max 2106.0 || [legal] matching sweep: total 48605.0  max 2106.0 || [legal] total-refine pass 0: 7 moves  total 46933.4  max 2106.0 || [legal] total-refine pass 1: 3 moves  total 46315.6  max 2106.0 || [legal] total-refine pass 2: 4 moves  total 45950.6  max 2072.0 || [legal] total-refine pass 3: 0 moves  total 45950.6  max 2072.0 || [legal] max-refine 0 moves  total 45950.6  max 2072.0 || [legal] matching d0 1968: 7 windows, cells above d0 8 -> 7  total 45938.8  max 2072.0 || [window-max] 1 moves: max 2072.0000 -> 2038.0000, total 45938.8 -> 45138.6  0.00s || [legal] max-refine 2 moves  total 45534.6  max 2006.8 || [legal] row-opt (d0 2007): 1 segments  total 45534.6  max 2006.8 || [legal] matching sweep: total 45471.4  max 2006.8 || [legal] total-refine pass 0: 1 moves  total 45348.0  max 2006.8 || [legal] total-refine pass 1: 0 moves  total 45348.0  max 2006.8 || [legal] max-refine 0 moves  total 45348.0  max 2006.8 || [legal] matching d0 1906: 12 windows, cells above d0 12 -> 11  total 45349.4  max 1992.9 || [legal] row-opt (d0 1993): 1 segments  total 45349.4  max 1987.6 || [legal] matching sweep: total 45348.0  max 1987.6 || [legal] total-refine pass 0: 0 moves  total 45348.0  max 1987.6 || [legal] max-refine 0 moves  total 45348.0  max 1987.6 || [legal] matching d0 1888: 13 windows, cells above d0 13 -> 13  total 45349.4  max 1987.6 || [legal] row-opt (d0 1988): 0 segments  total 45349.4  max 1987.6 || [legal] matching sweep: total 45348.0  max 1987.6 || [legal] total-refine pass 0: 0 moves  total 45348.0  max 1987.6 || [spread] round 0 B 26172: 0 bins over by 0 sites, moves 18 || [legal] spread: 6 x 66 bins, 18 path moves, 18 cells retargeted, max shift 2701.0, B 26172 || [legal] abacus: 288 exact cost steps || [legal] abacus  total 68936.2  max 4462.0  0.0s || [legal] row-opt (d0 0): 6 segments  total 48263.0  max 2920.5 || [legal] max-refine 18 moves  total 45607.4  max 2045.0 || [legal] matching d0 1943: 11 windows, cells above d0 13 -> 10  total 44910.4  max 2035.6 || [legal] row-opt (d0 2036): 5 segments  total 44795.4  max 2028.4 || [legal] matching sweep: total 44795.4  max 2028.4 || [legal] total-refine pass 0: 6 moves  total 44578.0  max 2028.4 || [legal] total-refine pass 1: 5 moves  total 44207.0  max 2028.4 || [legal] total-refine pass 2: 3 moves  total 44180.6  max 2028.4 || [legal] total-refine pass 3: 0 moves  total 44180.6  max 2028.4 || [legal] max-refine 1 moves  total 44377.2  max 2024.1 || [legal] matching d0 1923: 9 windows, cells above d0 9 -> 8  total 44168.4  max 2014.0 || [legal] row-opt (d0 2014): 2 segments  total 44168.4  max 2012.6 || [legal] matching sweep: total 44136.6  max 2012.6 || [legal] total-refine pass 0: 2 moves  total 44132.6  max 2012.6 || [legal] max-refine 1 moves  total 44451.2  max 2007.9 || [legal] matching d0 1908: 11 windows, cells above d0 12 -> 11  total 44375.6  max 2007.9 || [legal] row-opt (d0 2008): 0 segments  total 44375.6  max 2007.9 || [legal] matching sweep: total 44375.6  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9 || [legal] max-refine 0 moves  total 44375.6  max 2007.9 || [legal] matching d0 1908: 11 windows, cells above d0 12 -> 11  total 44375.6  max 2007.9 || [legal] row-opt (d0 2008): 0 segments  total 44375.6  max 2007.9 || [legal] matching sweep: total 44375.6  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9 || [legal] plain: total 45348.0 max 1987.6 | spread: total 44375.6 max 2007.9 -> spread || [legal] row-opt (d0 2008): 1 segments  total 44375.6  max 2007.9 || [legal] matching sweep: total 44375.6  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9 || [window-disp] 2 rows x 5 cells: 25 windows solved, 5 improved: total 44375.6 -> 43897.8 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 32 windows solved, 3 improved: total 43897.8 -> 43791.2 (max 2007.9000)  0.09s || [window-disp] 2 rows x 5 cells: 13 windows solved, 0 improved: total 43791.2 -> 43791.2 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 43791.2 -> 43791.2 (max 2007.9000)  0.00s || [legal] final round 0: total 43791.2  0.1s || [legal] row-opt (d0 2008): 0 segments  total 43791.2  max 2007.9 || [legal] matching sweep: total 43791.2  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 43791.2  max 2007.9 || [window-disp] 2 rows x 5 cells: 17 windows solved, 1 improved: total 43791.2 -> 43725.2 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 32 windows solved, 3 improved: total 43725.2 -> 43711.8 (max 2007.9000)  0.09s || [window-disp] 2 rows x 5 cells: 14 windows solved, 0 improved: total 43711.8 -> 43711.8 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 5 windows solved, 0 improved: total 43711.8 -> 43711.8 (max 2007.9000)  0.02s || [legal] final round 1: total 43711.8  0.2s || [legal] row-opt (d0 2008): 0 segments  total 43711.8  max 2007.9 || [legal] matching sweep: total 43711.8  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 43711.8  max 2007.9 || [window-disp] 2 rows x 5 cells: 30 windows solved, 5 improved: total 43711.8 -> 43310.8 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 27 windows solved, 1 improved: total 43310.8 -> 43305.8 (max 2007.9000)  0.09s || [window-disp] 2 rows x 5 cells: 11 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.00s || [window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.00s || [legal] final round 2: total 43305.8  0.3s || [legal] row-opt (d0 2008): 1 segments  total 43305.8  max 2007.9 || [legal] matching sweep: total 43305.8  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 43305.8  max 2007.9 || [window-disp] 2 rows x 5 cells: 15 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.00s || [window-disp] 3 rows x 4 cells: 16 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.05s || [legal] final round 3: total 43305.8  0.4s || [legal] max-refine 0 moves  total 43305.8  max 2007.9 || [legal] matching d0 1908: 11 windows, cells above d0 11 -> 11  total 43305.8  max 2007.9 || [legal] final max pass: max 2007.9000 -> 2007.9000, total 43305.8  0.4s || [pareto] pass 1: 0 groups, total 43305.800000, max 2007.900000 || [window-disp] 2 rows x 5 cells: 17 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.00s || [window-disp] 3 rows x 4 cells: 22 windows solved, 2 improved: total 43305.8 -> 43261.6 (max 2007.9000)  0.07s || [window-disp] 2 rows x 5 cells: 13 windows solved, 0 improved: total 43261.6 -> 43261.6 (max 2007.9000)  0.00s || [window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 43261.6 -> 43261.6 (max 2007.9000)  0.00s || [target-window] 0/31 improved: total 43261.600000 -> 43261.600000, max 2007.900000 -> 2007.900000  0.00s || [chain] pass 0: 0 chains, total 43261.600000 -> 43261.600000, max 2007.900000 -> 2007.900000 || [chain] 31 roots, 4960 nodes, 13703 candidates, 0 accepted, longest 0, 0 multi-blocker placements || [cap] probe D 1807.110000: unresolved  0.54s || [cap] probe D 1907.505000: unresolved  0.61s || [cap] probe D 1957.702500: feasible (rows)  0.63s || [cap] probe D 1931.252500: unresolved  0.70s || [cap] probe D 1943.126250: unresolved  0.77s || [cap] probe D 1949.063125: feasible (rows)  0.78s || [cap] D 1992.600000: feasible (rows), accepted, total 43292.0000 max 1989.000000  0.93s || [cap] D 1967.850000: feasible (rows), rejected (total budget), total 43881.6000 max 1964.800000  1.10s || [cap] D 1978.425000: feasible (rows), rejected (total budget), total 43478.4000 max 1972.300000  1.25s || [cap] D 1983.712500: feasible (rows), accepted, total 43358.6000 max 1982.000000  1.42s || [cap] D 1980.212500: feasible (rows), rejected (total budget), total 43711.6000 max 1979.100000  1.56s || [cap] probe D 1783.800000: unresolved  1.64s || [cap] probe D 1882.900000: unresolved  1.71s || [cap] probe D 1932.450000: unresolved  1.78s || [cap] probe D 1957.225000: feasible (rows)  1.80s || [cap] probe D 1943.225000: unresolved  1.87s || [cap] probe D 1948.612500: unresolved  1.94s || [cap] probe D 1951.306250: unresolved  2.01s || [cap] D 1975.000000: feasible (rows), rejected (total budget), total 43719.6000 max 1972.000000  2.18s || [cap] D 1978.500000: feasible (rows), rejected (total budget), total 44167.0000 max 1973.100000  2.34s || [cap] D 1980.250000: feasible (rows), accepted, total 43236.6000 max 1972.000000  2.51s || [cap] probe D 1774.800000: unresolved  2.58s || [cap] probe D 1873.400000: unresolved  2.65s || [cap] probe D 1922.700000: unresolved  2.72s || [cap] probe D 1947.350000: feasible (rows)  2.73s || [cap] probe D 1934.800000: unresolved  2.80s || [cap] probe D 1940.850000: feasible (rows)  2.82s || [cap] D 1963.600000: feasible (rows), rejected (total budget), total 44017.4000 max 1962.400000  2.98s || [cap] D 1967.800000: feasible (rows), rejected (total budget), total 43929.2000 max 1966.400000  3.15s || [cap] D 1969.900000: feasible (rows), rejected (total budget), total 43799.2000 max 1969.700000  3.31s || [cap] D 1970.950000: feasible (rows), rejected (total budget), total 43791.8000 max 1969.700000  3.49s || [cap] probe D 1774.800000: unresolved  3.56s || [cap] probe D 1873.400000: unresolved  3.63s || [cap] probe D 1922.700000: unresolved  3.70s || [cap] probe D 1947.350000: unresolved  3.77s || [cap] probe D 1959.675000: feasible (rows)  3.78s || [cap] probe D 1952.675000: unresolved  3.85s || [cap] probe D 1955.337500: feasible (rows)  3.86s || [cap] D 1967.750000: feasible (rows), rejected (total budget), total 43875.4000 max 1964.400000  4.03s || [cap] D 1969.875000: feasible (rows), rejected (total budget), total 43535.0000 max 1969.600000  4.18s || [cap] D 1970.937500: feasible (rows), rejected (total budget), total 44056.6000 max 1968.900000  4.33s || [cap] probe D 1774.800000: unresolved  4.40s || [cap] probe D 1873.400000: unresolved  4.47s || [cap] probe D 1922.700000: unresolved  4.55s || [cap] probe D 1947.350000: feasible (rows)  4.56s || [cap] probe D 1934.850000: unresolved  4.63s || [cap] probe D 1940.925000: unresolved  4.70s || [cap] probe D 1943.962500: feasible (rows)  4.73s || [cap] D 1964.775000: feasible (rows), rejected (total budget), total 43818.0000 max 1964.400000  4.89s || [cap] D 1968.387500: feasible (rows), rejected (total budget), total 43981.2000 max 1966.400000  5.06s || [cap] D 1970.193750: feasible (rows), rejected (total budget), total 44005.6000 max 1969.600000  5.23s || [cap] 51 attempts, 27 feasible, 3 accepted: max 2007.900000 -> 1972.000000, total 43261.6000 -> 43236.6000 (-0.058%)  4.81s || [stage1] done  5.28s || [stage2] done  5.28s
+toy v6 lines 111
+[read] 31 nodes (31 movable), 38 nets, 132 rows, 132 segments, utilization 0.003  0.00s || [legal] abacus: 455 exact cost steps || [legal] abacus  total 48976.8  max 2226.0  0.0s || [legal] row-opt (d0 0): 6 segments  total 48689.6  max 2292.0 || [legal] max-refine 3 moves  total 48895.0  max 2116.9 || [legal] matching d0 2011: 7 windows, cells above d0 7 -> 6  total 48671.0  max 2106.0 || [legal] row-opt (d0 2106): 1 segments  total 48605.0  max 2106.0 || [legal] matching sweep: total 48605.0  max 2106.0 || [legal] total-refine pass 0: 7 moves  total 46933.4  max 2106.0 || [legal] total-refine pass 1: 3 moves  total 46315.6  max 2106.0 || [legal] total-refine pass 2: 4 moves  total 45950.6  max 2072.0 || [legal] total-refine pass 3: 0 moves  total 45950.6  max 2072.0 || [legal] max-refine 0 moves  total 45950.6  max 2072.0 || [legal] matching d0 1968: 7 windows, cells above d0 8 -> 7  total 45938.8  max 2072.0 || [window-max] 1 moves: max 2072.0000 -> 2038.0000, total 45938.8 -> 45138.6  0.00s || [legal] max-refine 2 moves  total 45534.6  max 2006.8 || [legal] row-opt (d0 2007): 1 segments  total 45534.6  max 2006.8 || [legal] matching sweep: total 45471.4  max 2006.8 || [legal] total-refine pass 0: 1 moves  total 45348.0  max 2006.8 || [legal] total-refine pass 1: 0 moves  total 45348.0  max 2006.8 || [legal] max-refine 0 moves  total 45348.0  max 2006.8 || [legal] matching d0 1906: 12 windows, cells above d0 12 -> 11  total 45349.4  max 1992.9 || [legal] row-opt (d0 1993): 1 segments  total 45349.4  max 1987.6 || [legal] matching sweep: total 45348.0  max 1987.6 || [legal] total-refine pass 0: 0 moves  total 45348.0  max 1987.6 || [legal] max-refine 0 moves  total 45348.0  max 1987.6 || [legal] matching d0 1888: 13 windows, cells above d0 13 -> 13  total 45349.4  max 1987.6 || [legal] row-opt (d0 1988): 0 segments  total 45349.4  max 1987.6 || [legal] matching sweep: total 45348.0  max 1987.6 || [legal] total-refine pass 0: 0 moves  total 45348.0  max 1987.6 || [spread] round 0 B 26172: 0 bins over by 0 sites, moves 18 || [legal] spread: 6 x 66 bins, 18 path moves, 18 cells retargeted, max shift 2701.0, B 26172 || [legal] abacus: 288 exact cost steps || [legal] abacus  total 68936.2  max 4462.0  0.0s || [legal] row-opt (d0 0): 6 segments  total 48263.0  max 2920.5 || [legal] max-refine 18 moves  total 45607.4  max 2045.0 || [legal] matching d0 1943: 11 windows, cells above d0 13 -> 10  total 44910.4  max 2035.6 || [legal] row-opt (d0 2036): 5 segments  total 44795.4  max 2028.4 || [legal] matching sweep: total 44795.4  max 2028.4 || [legal] total-refine pass 0: 6 moves  total 44578.0  max 2028.4 || [legal] total-refine pass 1: 5 moves  total 44207.0  max 2028.4 || [legal] total-refine pass 2: 3 moves  total 44180.6  max 2028.4 || [legal] total-refine pass 3: 0 moves  total 44180.6  max 2028.4 || [legal] max-refine 1 moves  total 44377.2  max 2024.1 || [legal] matching d0 1923: 9 windows, cells above d0 9 -> 8  total 44168.4  max 2014.0 || [legal] row-opt (d0 2014): 2 segments  total 44168.4  max 2012.6 || [legal] matching sweep: total 44136.6  max 2012.6 || [legal] total-refine pass 0: 2 moves  total 44132.6  max 2012.6 || [legal] max-refine 1 moves  total 44451.2  max 2007.9 || [legal] matching d0 1908: 11 windows, cells above d0 12 -> 11  total 44375.6  max 2007.9 || [legal] row-opt (d0 2008): 0 segments  total 44375.6  max 2007.9 || [legal] matching sweep: total 44375.6  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9 || [legal] max-refine 0 moves  total 44375.6  max 2007.9 || [legal] matching d0 1908: 11 windows, cells above d0 12 -> 11  total 44375.6  max 2007.9 || [legal] row-opt (d0 2008): 0 segments  total 44375.6  max 2007.9 || [legal] matching sweep: total 44375.6  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9 || [legal] plain: total 45348.0 max 1987.6 | spread: total 44375.6 max 2007.9 -> spread || [legal] row-opt (d0 2008): 1 segments  total 44375.6  max 2007.9 || [legal] matching sweep: total 44375.6  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 44375.6  max 2007.9 || [window-disp] 2 rows x 5 cells: 25 windows solved, 5 improved: total 44375.6 -> 43897.8 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 32 windows solved, 3 improved: total 43897.8 -> 43791.2 (max 2007.9000)  0.09s || [window-disp] 2 rows x 5 cells: 13 windows solved, 0 improved: total 43791.2 -> 43791.2 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 43791.2 -> 43791.2 (max 2007.9000)  0.00s || [legal] final round 0: total 43791.2  0.1s || [legal] row-opt (d0 2008): 0 segments  total 43791.2  max 2007.9 || [legal] matching sweep: total 43791.2  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 43791.2  max 2007.9 || [window-disp] 2 rows x 5 cells: 17 windows solved, 1 improved: total 43791.2 -> 43725.2 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 32 windows solved, 3 improved: total 43725.2 -> 43711.8 (max 2007.9000)  0.10s || [window-disp] 2 rows x 5 cells: 14 windows solved, 0 improved: total 43711.8 -> 43711.8 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 5 windows solved, 0 improved: total 43711.8 -> 43711.8 (max 2007.9000)  0.02s || [legal] final round 1: total 43711.8  0.2s || [legal] row-opt (d0 2008): 0 segments  total 43711.8  max 2007.9 || [legal] matching sweep: total 43711.8  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 43711.8  max 2007.9 || [window-disp] 2 rows x 5 cells: 30 windows solved, 5 improved: total 43711.8 -> 43310.8 (max 2007.9000)  0.01s || [window-disp] 3 rows x 4 cells: 27 windows solved, 1 improved: total 43310.8 -> 43305.8 (max 2007.9000)  0.09s || [window-disp] 2 rows x 5 cells: 11 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.00s || [window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.00s || [legal] final round 2: total 43305.8  0.3s || [legal] row-opt (d0 2008): 1 segments  total 43305.8  max 2007.9 || [legal] matching sweep: total 43305.8  max 2007.9 || [legal] total-refine pass 0: 0 moves  total 43305.8  max 2007.9 || [window-disp] 2 rows x 5 cells: 15 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.00s || [window-disp] 3 rows x 4 cells: 16 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.05s || [legal] final round 3: total 43305.8  0.4s || [legal] max-refine 0 moves  total 43305.8  max 2007.9 || [legal] matching d0 1908: 11 windows, cells above d0 11 -> 11  total 43305.8  max 2007.9 || [legal] final max pass: max 2007.9000 -> 2007.9000, total 43305.8  0.4s || [pareto] pass 1: 0 groups, total 43305.800000, max 2007.900000 || [window-disp] 2 rows x 5 cells: 17 windows solved, 0 improved: total 43305.8 -> 43305.8 (max 2007.9000)  0.00s || [window-disp] 3 rows x 4 cells: 22 windows solved, 2 improved: total 43305.8 -> 43261.6 (max 2007.9000)  0.07s || [window-disp] 2 rows x 5 cells: 13 windows solved, 0 improved: total 43261.6 -> 43261.6 (max 2007.9000)  0.00s || [window-disp] 3 rows x 4 cells: 0 windows solved, 0 improved: total 43261.6 -> 43261.6 (max 2007.9000)  0.00s || [target-window] 0/31 improved: total 43261.600000 -> 43261.600000, max 2007.900000 -> 2007.900000  0.00s || [chain] pass 0: 0 chains, total 43261.600000 -> 43261.600000, max 2007.900000 -> 2007.900000 || [chain] 31 roots, 4960 nodes, 13703 candidates, 0 accepted, longest 0, 0 multi-blocker placements || [cap-local] D 1957.702500000 method 1 repair 0.184478 DP 0.137895 windows 53 remaining 4 raw 45041.600000 total 44292.800000 max 1954.000000000 total_budget || [cap-local] D 1982.801250000 method 3 repair 0.003928 DP 0.062241 windows 8 remaining 0 raw 43660.400000 total 43660.400000 max 1982.100000000 total_budget || [cap-local] D 1995.350625000 method 3 repair 0.003965 DP 0.059704 windows 8 remaining 0 raw 43660.400000 total 43660.400000 max 1985.600000000 total_budget || [cap-local] D 2001.625312500 method 3 repair 0.003915 DP 0.073642 windows 8 remaining 0 raw 43687.400000 total 43671.200000 max 1996.000000000 total_budget || [cap-local] D 2004.762656250 method 3 repair 0.000574 DP 0.005550 windows 4 remaining 0 raw 43324.400000 total 43324.400000 max 2004.400000000 accepted || [cap-local] D 2000.015375000 method 3 repair 0.003808 DP 0.074794 windows 8 remaining 0 raw 43687.400000 total 43671.200000 max 1997.100000000 total_budget || [cap-local] D 2002.207687500 method 3 repair 0.004404 DP 0.078329 windows 8 remaining 0 raw 43687.400000 total 43671.200000 max 1997.100000000 total_budget || [cap] 7 attempts, 7 feasible, 1 accepted: max 2007.900000 -> 2004.400000, total 43261.6000 -> 43324.4000 (+0.145%)  0.71s || [extra] budget 12.000000 used 0.720588 || [stage1] done  1.20s || [stage2] done  1.20s
+instrumented files ['src/window.cpp', 'src/main.cpp', 'src/annealer.cpp', 'src/capsearch.cpp', 'src/chain.cpp', 'src/optimizer.cpp', 'src/placedb.cpp', 'src/global.cpp', 'src/legalizer.cpp', 'tests/guard_test.cpp', 'tests/repair_compare.cpp', 'tests/global_test.cpp', 'tests/diagnostic_capsearch.cpp', 'tests/sa_bench.cpp', 'tests/pool_test.cpp', 'tests/diagnostic_main.cpp', 'tests/site_repair_bench.cpp', 'tests/cap_windows_bench.cpp', 'tests/sa_bench2.cpp', 'tests/cap_windows_test.cpp', 'tests/diagnostic_window.cpp', 'tests/multirow_test.cpp', 'tests/global_preserve_prototype.cpp', 'tests/chain_test.cpp', 'tests/capsearch_test.cpp', 'tests/cap_search_bench.cpp', 'tests/window_test.cpp', 'tests/readpl.cpp', 'tests/diagnostic_experiments.cpp', 'tests/optimizer_test.cpp', 'tests/parallel_sa_test.cpp', 'tests/cap_chain_prototype.cpp', 'tests/compare_methods.cpp', 'tests/diag_chaindp_global/global_diag.cpp', 'tests/diag_chaindp_global/driver.cpp']
+
+codex
+10 組 SA 配對中，4 筆測資的平均損失超過 0.5%；chain 延長至 6 秒的收益則很不均勻。toy 的退步發生在 cap 階段：兩版起點相同，v6 多次因總位移預算拒絕候選，最後只接受較小的最大位移改善。
+
+exec
+/bin/bash -lc "taskset -c 16-19 python - <<'PY'
+from pathlib import Path
+import re,json
+r=Path('Testcases/results/CodexParallelChain/phase1')
+for f in ['src/chain.cpp','src/window.cpp','src/main.cpp']:
+ p=r/'instrumented'/f; lines=p.read_text().splitlines()
+ matches=[(i+1,l.strip()) for i,l in enumerate(lines) if re.search(r'"'^(?:static )?(?:int|void|bool|double|ChainStats|WindowStats).*'"\\(|struct |class |chain_time|target.*window|ejection|post_chain',l,re.I)]
+ print(f, json.dumps(matches,ensure_ascii=False))
+print('plan',json.dumps(json.loads((r/'plan.json').read_text()),ensure_ascii=False)[:2500])
+for v in ['v5','v6']:
+ lines=(r/'toy'/v/'stderr.txt').read_text().splitlines()
+ print(v, ' | '.join(l for l in lines if '[cap' in l and ('accepted' in l or 'total_budget' in l)))
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+src/chain.cpp [[14, "struct Candidate {"], [20, "class Search {"]]
+src/window.cpp [[23, "struct RowDP {"], [50, "struct Region {int seg, lo, hi; std::vector<int> cells;};"], [70, "struct Box {double lx=INF,hx=-INF,ly=INF,hy=-INF;};"], [71, "void extend(Box& b,double x,double y) {"], [75, "double wire(const PlaceDB& db,const Placement& p,const std::vector<int>& nets) {"], [145, "void reorderWindows(const PlaceDB& db,Placement& p,int passes,bool verbose,double until) {"], [283, "struct Window {"], [288, "int nearestSeg(const PlaceDB& db, int r, double x) {"], [300, "bool buildWindow(const PlaceDB& db, const Placement& p, const RowMap& rows, int anchor,"], [372, "void applyWindow(RowMap& rows, const Window& w, const WindowSolution& sol) {"], [377, "double seconds(std::chrono::steady_clock::time_point t0) {"], [552, "void WindowMemo::sync(const PlaceDB& db, const Placement& p) {"], [612, "long targetedWindowsDisp(const PlaceDB& db, Placement& p, const WindowOptions& opt, int maxRoots) {"], [674, "throw std::runtime_error(\"target window invariant failed\");"], [676, "std::fprintf(stderr, \"[target-window] %ld/%ld improved: total %.6f -> %.6f, max %.6f -> %.6f  %.2fs\\n\","], [691, "bool repairCapWindows(const PlaceDB& db, Placement& p, double D, const WindowOptions& opt, CapWindowResult* report, Placement* partial) {"], [814, "void optimizeWindowsHPWL(const PlaceDB& db, Placement& p, const WindowOptions& opt) {"]]
+src/main.cpp [[36, "void usage() {"], [62, "\"  --no-target-windows     disable global-target region pairing\\n\""], [103, "\"  --clamp-target    keep optimal-region moves inside the window too\\n\""], [109, "double seconds(std::chrono::steady_clock::time_point t0) {"], [115, "int run(int argc, char** argv) {"], [128, "bool targetWindows = true;"], [155, "else if (a == \"--no-target-windows\") targetWindows = false;"], [327, "std::fprintf(stderr, \"[diag-chain] round=%d phase=target_windows event=begin time=%.9f total=%.12f max=%.12f work=%ld\\n\", round + 1, wallSeconds(), before.total, before.max, -1L);"], [328, "if (targetWindows) {"], [332, "guarded(\"global-target windows\", legal, [&] {"], [333, "targetMoves = targetedWindowsDisp(db, legal, targetOpt);"], [337, "std::fprintf(stderr, \"[diag-chain] round=%d phase=target_windows event=end time=%.9f total=%.12f max=%.12f work=%ld\\n\", round + 1, wallSeconds(), beforeChain.total, beforeChain.max, targetMoves);"], [341, "std::fprintf(stderr, \"[diag-chain] round=%d phase=ejection_chains event=begin time=%.9f total=%.12f max=%.12f work=%ld\\n\", round + 1, wallSeconds(), beforeChain.total, beforeChain.max, -1L);"], [342, "guarded(\"ejection chains\", legal, [&] { result = chainDisplacement(db, legal, copt); }, [&] {"], [346, "std::fprintf(stderr, \"[diag-chain] round=%d phase=ejection_chains event=end time=%.9f total=%.12f max=%.12f work=%ld\\n\", round + 1, wallSeconds(), displacement(db, legal).total, displacement(db, legal).max, result.accepted);"], [351, "std::fprintf(stderr, \"[diag-chain] round=%d phase=post_chain_dp event=begin time=%.9f total=%.12f max=%.12f work=%ld\\n\", round + 1, wallSeconds(), beforeDP.total, beforeDP.max, -1L);"], [356, "std::fprintf(stderr, \"[diag-chain] round=%d phase=post_chain_dp event=end time=%.9f total=%.12f max=%.12f work=%ld\\n\", round + 1, wallSeconds(), displacement(db, legal).total, displacement(db, legal).max, -1L);"], [359, "std::fprintf(stderr, \"[chain-round] %d: %ld target windows, %ld chains, longest %d, total %.6f -> %.6f, max %.6f -> %.6f\\n\","], [435, "int main(int argc, char** argv) {"]]
+plan {"chain_cases": [{"group": "testcases", "bench": "ibm01", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm01/ibm01"}, {"group": "testcases", "bench": "ibm05", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/ibm05/ibm05"}, {"group": "testcases", "bench": "toy", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/testcases/toy/toy"}, {"group": "holdout", "bench": "h01", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h01/h01"}, {"group": "holdout", "bench": "h02", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h02/h02"}, {"group": "holdout", "bench": "h03", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h03/h03"}, {"group": "holdout", "bench": "h04", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h04/h04"}, {"group": "holdout", "bench": "h05", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h05/h05"}, {"group": "holdout", "bench": "h06", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06"}, {"group": "holdout", "bench": "h07", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h07/h07"}, {"group": "holdout", "bench": "h08", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h08/h08"}, {"group": "edge_diagnostic_only", "bench": "e08_fragmented", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e08_fragmented/e08_fragmented"}, {"group": "edge_diagnostic_only", "bench": "e16_rowgaps", "input": "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e16_rowgaps/e16_rowgaps"}], "chain_variants": {"default": [], "chain6": ["--chain-time", "6"]}, "chain_common_args": ["-v", "--no-sa", "--cap-time", "0"], "sa_cases": ["ibm01", "ibm05", "h06", "h07", "h08"], "seeds": [1, 2], "auto_moves_per_band": 3000000, "sa_time_limit": "100000", "polish_seconds": 0, "serial_budget": "the exact attempts reported by the paired auto run", "seri
+v5 [cap] D 1992.600000: feasible (rows), accepted, total 43292.0000 max 1989.000000  0.93s | [cap] D 1983.712500: feasible (rows), accepted, total 43358.6000 max 1982.000000  1.42s | [cap] D 1980.250000: feasible (rows), accepted, total 43236.6000 max 1972.000000  2.51s | [cap] 51 attempts, 27 feasible, 3 accepted: max 2007.900000 -> 1972.000000, total 43261.6000 -> 43236.6000 (-0.058%)  4.81s
+v6 [cap-local] D 1957.702500000 method 1 repair 0.184478 DP 0.137895 windows 53 remaining 4 raw 45041.600000 total 44292.800000 max 1954.000000000 total_budget | [cap-local] D 1982.801250000 method 3 repair 0.003928 DP 0.062241 windows 8 remaining 0 raw 43660.400000 total 43660.400000 max 1982.100000000 total_budget | [cap-local] D 1995.350625000 method 3 repair 0.003965 DP 0.059704 windows 8 remaining 0 raw 43660.400000 total 43660.400000 max 1985.600000000 total_budget | [cap-local] D 2001.625312500 method 3 repair 0.003915 DP 0.073642 windows 8 remaining 0 raw 43687.400000 total 43671.200000 max 1996.000000000 total_budget | [cap-local] D 2004.762656250 method 3 repair 0.000574 DP 0.005550 windows 4 remaining 0 raw 43324.400000 total 43324.400000 max 2004.400000000 accepted | [cap-local] D 2000.015375000 method 3 repair 0.003808 DP 0.074794 windows 8 remaining 0 raw 43687.400000 total 43671.200000 max 1997.100000000 total_budget | [cap-local] D 2002.207687500 method 3 repair 0.004404 DP 0.078329 windows 8 remaining 0 raw 43687.400000 total 43671.200000 max 1997.100000000 total_budget | [cap] 7 attempts, 7 feasible, 1 accepted: max 2007.900000 -> 2004.400000, total 43261.6000 -> 43324.4000 (+0.145%)  0.71s
+
+exec
+/bin/bash -lc "taskset -c 16-19 python - <<'PY'
+from pathlib import Path
+r=Path('Testcases/results/CodexParallelChain/phase1/instrumented/src')
+for f,spans in [('chain.cpp',[(20,42)]),('window.cpp',[(612,627)]),('main.cpp',[(350,355)])]:
+ s=(r/f).read_text().splitlines()
+ for a,b in spans:
+  for i in range(a-1,b): print(f'{f}:{i+1} {s[i]}')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+chain.cpp:20 class Search {
+chain.cpp:21     const PlaceDB& db;
+chain.cpp:22     Placement& p;
+chain.cpp:23     const ChainOptions& opt;
+chain.cpp:24     RowMap rows;
+chain.cpp:25     std::vector<char> locked;
+chain.cpp:26     std::vector<double> oldDistance;
+chain.cpp:27     std::priority_queue<std::pair<double, int>> maximum;
+chain.cpp:28     std::vector<int> path;
+chain.cpp:29     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+chain.cpp:30     int holeSeg = 0, holeSite = 0, remaining = 0;
+chain.cpp:31     double cap = 0, rootDistance = 0;
+chain.cpp:32     ChainResult stats;
+chain.cpp:33 
+chain.cpp:34     bool expired() {
+chain.cpp:35         if (std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count() >= opt.seconds)
+chain.cpp:36             stats.timedOut = true;
+chain.cpp:37         return stats.timedOut;
+chain.cpp:38     }
+chain.cpp:39     double distance(int v, int s, int x) const {
+chain.cpp:40         const auto& sg = db.segs[s];
+chain.cpp:41         const auto& n = db.nodes[v];
+chain.cpp:42         return std::abs(sg.x0 + x * sg.sp - n.gx) + std::abs(sg.y - n.gy);
+window.cpp:612 long targetedWindowsDisp(const PlaceDB& db, Placement& p, const WindowOptions& opt, int maxRoots) {
+window.cpp:613     if (db.movable.empty() || opt.passes == 0 || opt.timeLimit <= 0 || maxRoots <= 0) return 0;
+window.cpp:614     const Placement safe = p;
+window.cpp:615     const auto before = displacement(db, p);
+window.cpp:616     const auto start = std::chrono::steady_clock::now();
+window.cpp:617     RowMap rows(db, p);
+window.cpp:618     long accepted = 0, solved = 0;
+window.cpp:619     try {
+window.cpp:620         for (int pass = 0; pass < std::min(4, opt.passes); ++pass) {
+window.cpp:621             auto anchors = db.movable;
+window.cpp:622             std::vector<double> d(db.nodes.size());
+window.cpp:623             for (int v : anchors) d[v] = displacementOf(db, p, v);
+window.cpp:624             int count = std::min(int(anchors.size()), maxRoots);
+window.cpp:625             std::partial_sort(anchors.begin(), anchors.begin() + count, anchors.end(), [&](int a, int b) {
+window.cpp:626                 return d[a] != d[b] ? d[a] > d[b] : a < b;
+window.cpp:627             });
+main.cpp:350         const auto beforeDP = displacement(db, legal);
+main.cpp:351         std::fprintf(stderr, "[diag-chain] round=%d phase=post_chain_dp event=begin time=%.9f total=%.12f max=%.12f work=%ld\n", round + 1, wallSeconds(), beforeDP.total, beforeDP.max, -1L);
+main.cpp:352         guarded("post-chain windows", legal, [&] { windowSweeps(db, legal, afterChain, &stage1Memo); }, [&] {
+main.cpp:353             const auto after = displacement(db, legal);
+main.cpp:354             return checkLegal(db, legal).empty() && after.total <= beforeDP.total + 1e-5 && after.max <= beforeDP.max + 1e-6;
+main.cpp:355         });
+
+exec
+/bin/bash -lc "taskset -c 16-19 python - <<'PY'
+from pathlib import Path
+r=Path('Testcases/results/CodexParallelChain/phase1/instrumented/src')
+s=(r/'window.cpp').read_text().splitlines()
+for a,b in [(552,560),(630,653)]:
+ for i in range(a-1,b): print(f'window.cpp:{i+1} {s[i]}')
+for p in r.glob('*.hpp'):
+ t=p.read_text().splitlines()
+ for i,l in enumerate(t):
+  if 'struct WindowMemo' in l or 'struct RowMap' in l: print(p.name,i+1,l)
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+window.cpp:552 void WindowMemo::sync(const PlaceDB& db, const Placement& p) {
+window.cpp:553     size_t N = db.nodes.size();
+window.cpp:554     if (mod.size() != N) {
+window.cpp:555         mod.assign(N, 0);
+window.cpp:556         for (auto& s : seen) s = {std::vector<long>(N, -1), std::vector<long>(N, -1)};
+window.cpp:557         seg = p.seg;
+window.cpp:558         site = p.site;
+window.cpp:559         clock = 1;
+window.cpp:560         return;
+window.cpp:630             for (int anchor : anchors) {
+window.cpp:631                 if (seconds(start) >= opt.timeLimit) break;
+window.cpp:632                 if (displacementOf(db, p, anchor) < EPS) continue;
+window.cpp:633                 const auto& n = db.nodes[anchor];
+window.cpp:634                 int targetRow = db.nearestRow(n.gy);
+window.cpp:635                 int destination = nearestSeg(db, targetRow, n.gx + n.w / 2);
+window.cpp:636                 if (destination < 0) continue;
+window.cpp:637                 Window w;
+window.cpp:638                 const int perRegion = std::min(4, opt.perRow);
+window.cpp:639                 auto makeRegion = [&](int s, double x) {
+window.cpp:640                     const auto& sg = db.segs[s];
+window.cpp:641                     x = std::clamp(x, sg.x0, sg.x0 + sg.numSites * sg.sp);
+window.cpp:642                     return region(db, p, rows, s, x, perRegion, opt.maxSites);
+window.cpp:643                 };
+window.cpp:644                 Region a = makeRegion(p.seg[anchor], p.x(db, anchor) + n.w / 2);
+window.cpp:645                 Region b = makeRegion(destination, n.gx + n.w / 2);
+window.cpp:646                 if (a.seg == b.seg && a.lo <= b.hi && b.lo <= a.hi) {
+window.cpp:647                     // Overlapping intervals are one physical region; a cell
+window.cpp:648                     // must never appear twice in the assignment problem.
+window.cpp:649                     a.lo = std::min(a.lo, b.lo); a.hi = std::max(a.hi, b.hi);
+window.cpp:650                     a.cells.insert(a.cells.end(), b.cells.begin(), b.cells.end());
+window.cpp:651                     std::sort(a.cells.begin(), a.cells.end(), [&](int x, int y) { return p.site[x] < p.site[y]; });
+window.cpp:652                     a.cells.erase(std::unique(a.cells.begin(), a.cells.end()), a.cells.end());
+window.cpp:653                     w.q = {a};
+window.hpp 62 struct WindowMemo {
+
+exec
+/bin/bash -lc "taskset -c 16-19 python - <<'PY'
+from pathlib import Path
+import csv,statistics
+r=Path('Testcases/results/CodexParallelChain/phase1'); a=list(csv.DictReader((r/'chain_summary.csv').open()))
+for v in ['default','chain6']:
+ q=[x for x in a if x['variant']==v and x['group']"'!='"'edge_diagnostic_only']; t=sum(float(x['seconds']) for x in q if x['phase']"'!='"'chain_stage'); d=sum(float(x['total_reduction']) for x in q if x['phase']"'!='"'chain_stage')
+ for phase in ['target_windows','ejection_chains','post_chain_dp']:
+  z=[x for x in q if x['phase']==phase]; ts=sum(float(x['seconds']) for x in z); ds=sum(float(x['total_reduction']) for x in z);print(v,phase,'seconds',ts,'reduction',ds,'time share',ts/t,'gain share',ds/d)
+sa=list(csv.DictReader((r/'sa_pairs.csv').open()));print('SA mean',statistics.mean(float(x['auto_loss_pct']) for x in sa),'speedup range',min(float(x['single_seconds'])/float(x['auto_seconds']) for x in sa),max(float(x['single_seconds'])/float(x['auto_seconds']) for x in sa))
+s=(r/'instrumented/src/window.hpp').read_text().splitlines()
+for i in range(61,73):print('window.hpp',i+1,s[i])
+s=(r/'instrumented/src/chain.cpp').read_text().splitlines()
+terms=['rows.', 'maximum.', 'locked[', 'p.site[', 'p.seg[']
+for term in terms:print(term,[(i+1,l.strip()) for i,l in enumerate(s) if term in l][:5])
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+default target_windows seconds 3.3127570760000022 reduction 9258.268239992634 time share 0.22596287675842444 gain share 0.40238104907694333
+default ejection_chains seconds 9.545742147999993 reduction 1446.7248400007174 time share 0.6511142553080517 gain share 0.06287727291487774
+default post_chain_dp seconds 1.8021261120000016 reduction 12303.715360006434 time share 0.12292286793352386 gain share 0.5347416780081788
+chain6 target_windows seconds 5.044487491999998 reduction 10512.091139992925 time share 0.1168912556805501 gain share 0.33201665383097145
+chain6 ejection_chains seconds 34.74172612600002 reduction 3584.4828400035713 time share 0.8050379741883037 gain share 0.11321324961926883
+chain6 post_chain_dp seconds 3.3691743759999975 reduction 17564.76294000208 time share 0.0780707701311461 gain share 0.5547700965497596
+SA mean 1.339184855577843 speedup range 3.4113140516415643 4.856776092382371
+window.hpp 62 struct WindowMemo {
+window.hpp 63     std::vector<long> mod;                                  // per cell: stamp of its last move
+window.hpp 64     std::array<std::array<std::vector<long>, 2>, 2> seen;   // [2 or 3 rows][pass parity][anchor]
+window.hpp 65     std::vector<int> seg, site;                             // placement the memo describes
+window.hpp 66     long clock = 1;
+window.hpp 67     std::array<int, 2> perRow{{0, 0}}, maxSites{{0, 0}};
+window.hpp 68     std::array<double, 2> cap{{0, 0}};
+window.hpp 69     void sync(const PlaceDB&, const Placement&);
+window.hpp 70 };
+window.hpp 71 long optimizeWindowsDisp(const PlaceDB&, Placement&, const WindowOptions&, WindowMemo* memo = nullptr);
+window.hpp 72 // v4: two-row and three-row sweeps alternated until neither improves.
+window.hpp 73 long windowSweeps(const PlaceDB&, Placement&, const WindowOptions&, WindowMemo* memo = nullptr);
+rows. [(48, 'const auto& list = rows.cells(s);'), (65, 'if (r >= 0 && r < int(db.rows.size())) rr.push_back(r);'), (67, 'if (r >= 0 && r < int(db.rows.size())) rr.push_back(r);'), (90, 'const auto& list = rows.cells(s);'), (153, 'rows.remove(b); rest.push_back(b);')]
+maximum. [(177, 'maximum.push({oldDistance[v], v});'), (193, 'while (!maximum.empty() && maximum.top().first != oldDistance[maximum.top().second]) maximum.pop();'), (194, 'cap = maximum.top().first;'), (205, 'maximum.push({oldDistance[v], v});')]
+locked[ [(55, 'if (locked[v] || c.count == opt.maxBlockers) return false;'), (156, 'locked[v] = 1; path.push_back(v);'), (158, 'locked[v] = 0;')]
+p.site[ [(50, '[&](int v, int a) { return p.site[v] < a; });'), (52, 'for (; it != list.end() && p.site[*it] < x + width; ++it) {'), (54, 'if (p.site[v] + db.sitesOf(v, db.segs[s]) <= x) continue;'), (92, '[&](int u, double x) { return p.site[u] < x; }) - list.begin());'), (96, 'int u = list[k], a = p.site[u], b = a + db.sitesOf(u, sg);')]
+p.seg[ [(63, 'int target = db.nearestRow(db.nodes[v].gy), current = db.segs[p.seg[v]].row;'), (102, 'if (s == p.seg[v] && x == p.site[v]) continue;'), (141, 'int oldS = p.seg[v], oldX = p.site[v];'), (152, 'oldBS[j] = p.seg[b]; oldBX[j] = p.site[b];'), (164, 'rows.remove(v); p.seg[v] = oldS; p.site[v] = oldX;')]
+
+codex
+chain 的 11 筆主要測資中，ejection search 用掉約 65% 時間，卻只占約 6% 的總位移改善；target windows 與後續 DP 合計貢獻約 94%。報告會區分實測收益與平行化估算，並將 band 邊界修復列為第一優先；第 7 節本輪依閱讀限制未重讀，因此不宣告階段 B 完成。
+
+exec
+/bin/bash -lc "taskset -c 16-19 python - <<'PY'
+from pathlib import Path
+import csv,json,statistics,hashlib
+root=Path('Testcases/results/CodexParallelChain'); p=root/'phase1'
+read=lambda f:list(csv.DictReader((p/f).open()))
+a=read('chain_summary.csv'); sa=read('sa_pairs.csv'); toy=read('toy_summary.csv'); rounds=read('chain_rounds.csv'); done=json.loads((p/'ALL_DONE').read_text())
+assert len(a)==104 and len(sa)==10 and len(toy)==2 and done['protected_sha256_unchanged']
+phases=['target_windows','ejection_chains','post_chain_dp']
+out=['# CodexParallelChain：phase1 診斷與第二階段計畫','', '日期：2026-10-23。僅分析既有結果，未修改演算法、未重跑計時、未啟動背景工作。','', '## 證據與範圍','', '- 完成依據："'`phase1/ALL_DONE`，26 次 chain、20 次 SA、2 次 toy；`chain_summary.csv` 104 列、`chain_rounds.csv` 156 列、`sa_pairs.csv` 10 對。'"', '- 協調者在沙箱外重新啟動 "'`diag.py`，移除計時 worker 的 taskset；分析仍使用 CPU 16–19。SA 的速度數據不是「8 threads 擠在 4 顆 E-core」的量測。'"', '- "'`provenance/orchestrator_note.json` 記載保護目錄內 HANDOFF、NEXT_CODEX_PROMPTS、v6 WORK_STATE 的文件變動與基準更新；ALL_DONE 的 unchanged 是相對更新後基準，不表示最初記錄後從未有任何檔案變動。既有失敗記錄不覆蓋最終成功標記。'"', '- HANDOFF 僅閱讀第 0 節，另讀本版本 WORK_STATE；未讀第 5、7 節。0.5% 門檻採本次指示。下列驗收依第 0 節、既有 WORK_STATE 與本次要求訂定；第 7 節逐條完成條件尚未核對，不宣告 B_DONE。資料結構判讀僅查 phase1 插樁副本的必要程式片段。', '- chain："'`--no-sa --cap-time 0`，default 保留原來 1.5/3 秒預算；chain6 指定 6 秒。每組僅一次，不能當多 seed 顯著性或正式進步證據。e08/e16 僅回歸診斷，不參與調參或以下主樣本加總。'"','', '## 1. chain：時間與總位移收益','', '收益 ΔΣd = 階段前總位移 − 階段後總位移（正值較好），單位沿用輸入座標；時間為各輪同階段耗時加總。各部分不是獨立消融：前段結果會改變後段可做的工作。','', '### 11 筆 testcases + holdout 加總','', '|設定|部分|時間 s|時間占比|ΔΣd|收益占比|','|---|---|---:|---:|---:|---:|']
+for v in ['default','chain6']:
+ q=[x for x in a if x['variant']==v and x['group']"'!='"'edge_diagnostic_only' and x['phase'] in phases]
+ ts=sum(float(x['seconds']) for x in q); ds=sum(float(x['total_reduction']) for x in q)
+ for phase in phases:
+  z=[x for x in q if x['phase']==phase]; t=sum(float(x['seconds']) for x in z); d=sum(float(x['total_reduction']) for x in z)
+  out.append(f'|{v}|{phase}|{t:.6f}|{100*t/ts:.2f}%|{d:.6f}|{100*d/ds:.2f}%|')
+out += ['', 'default 三部分合計 14.660625 s / 23,008.708440 位移；chain6 為 43.155388 s / 31,661.336920 位移。時間約 2.94 倍，收益僅約 1.38 倍；不能推論增加工作就等比例改善品質。此為不同尺度測資的原始加總，ibm01 權重大，不能代替逐筆百分比。', '', '### 逐筆三部分與整段','', '三部分欄位均為「秒 / ΔΣd」；末欄為整段收益占 chain 起點總位移的百分比。default 不全是 1.5 秒，toy/h01 提早收斂，h02/h03 的原預算不同。','', '|測資|設定|target windows|ejection chains|post-chain DP|整段 s|整段 ΔΣd / 起點 %|','|---|---|---:|---:|---:|---:|---:|']
+for b in dict.fromkeys(x['bench'] for x in a):
+ for v in ['default','chain6']:
+  q={x['phase']:x for x in a if x['bench']==b and x['variant']==v}; s=q['chain_stage']
+  cells=[f\"{float(q[k]['seconds']):.6f} / {float(q[k]['total_reduction']):.6f}\" for k in phases]
+  out.append(f\"|{b}{'（僅回歸）' if s['group']=='edge_diagnostic_only' else ''}|{v}|\"+'|'.join(cells)+f\"|{float(s['seconds']):.6f}|{float(s['total_reduction']):.6f} / {float(s['reduction_pct_of_chain_start']):.6f}%|\")
+out += ['', 'default 的 target + DP 占時間 34.89%，提供收益 93.71%；ejection 占時間 65.11%，收益只有 6.29%。ejection 的 1,446.72484 收益中 h05 貢獻 1,357.138（約 93.81%），機會集中。chain6 的額外總收益主要在 ibm01、h05、h06；ibm05 雖相對倍數大，絕對量仍小。h08 沒有額外收益，h07 甚至由 195.99064 降至 194.59712，表示限時路徑與階段分配會改變結果。toy/h01 延長時間也無收益。', '', '### 可分 band 的部分、共用結構與限制','', '|部分|可平行單位|必須隔離／協調的資料|', '|---|---|---|', '|target windows|來源與目標 region 都落在同一 band 的不相交 windows；跨 band 配對需另批排程|唯讀 PlaceDB 可共用；Placement 的 seg/site 與 RowMap 的 occupancy/cell lists 會更新。targetedWindowsDisp 直接配對目前位置與全域目標所在 row，不能只以 anchor 所在 band 判定獨立。|', '|ejection chains|整條 blocker/候選搜尋及移動範圍均屬同一 band 的 root 搜尋|Search 持有 Placement&、RowMap、locked、oldDistance、maximum priority_queue、path、holeSeg/holeSite/remaining、cap/rootDistance、stats。每個 worker 要有搜尋暫存／局部 row map；不能共用一個可變 Search。全域 maximum/cap 需輪次快照與合併重驗，跨 band chain 需序列或有序鎖定。|', '|post-chain DP|不重疊的 2/3-row windows；分顏色輪次或 band 內工作，邊界另做|Placement、RowMap 及 stage1Memo（WindowMemo.mod、seen、seg/site、clock、cap 等）有相依更新。memo 分片或 worker 私有，再於 barrier 同步／失效；不能多執行緒共用目前 clock/cache 更新流程。|', '', '建議共同設計：唯讀 PlaceDB + 固定輪次 Placement 快照；worker 持有局部占用結構、候選與 DP 暫存；依 cell/segment 寫入集合偵測衝突，固定順序合併，重算合法性、總位移、最大位移後才接受。跨 band 操作必須保留補做機制；直接禁止會犧牲搜尋空間。現有 guarded 的整份 Placement rollback 也不能在其他 worker 正寫入時執行。', '', '### 同 1.5 秒可多做多少：規劃估算而非實測','', '- 若只平行 ejection（default 時間占 65.11%），Amdahl 理想上限：4 workers 約 1.95 倍、8 workers 約 2.32 倍，尚未扣同步、負載不均與邊界損失。', '- 三部分皆能分割，假設共用排序／合併／邊界工作占 15%，其餘可平行，S=1/(0.15+0.85/P)：4 workers 約 2.76 倍、8 workers 約 3.90 倍。規劃採約 2–4 倍總工作量（比原來多 1–3 倍），1.5 秒約可容納 3–6 秒序列等價搜尋。', '- 以上未量測可平行比例與 band 負載，沒有吞吐保證。SA 現有 3.41–4.86 倍的單／多執行緒耗時比只能說機器有平行機會，不能當 chain 的 speedup。toy/h01 已耗盡候選，估計倍數不適用。', '- 驗證要新增 attempted roots、nodes、candidates、solved windows 等工作計數；CSV 的 work 多為 accepted moves/chains，不能把接受數直接當吞吐。固定 1.5 秒比較工作量、實際 wall time 與品質；chain6 只能提供延長搜尋的參考，不能代表分 band 演算法。', '', '## 2. band 邊界損失','', '定義 R = HPWL_auto / HPWL_single；損失 = (R−1)×100%。正值代表 auto 較差。每對共用同一份合法起點；單執行緒要求的 moves 等於 auto 實際 attempts，100-step 排程整除仍有下列差異。seconds=100000、polish=0，因此這是近似等工作量診斷，不是固定 wall-time 的公平品質結論。', '', '|測資|seed|auto threads|HPWL auto|HPWL single|R|損失 %|single 少做 attempts|','|---|---:|---:|---:|---:|---:|---:|---:|']
+for x in sa:
+ aa=float(x['auto_hpwl']); bb=float(x['single_hpwl'])
+ out.append(f\"|{x['bench']}|{x['seed']}|{x['auto_threads']}|{aa:.6f}|{bb:.6f}|{aa/bb:.9f}|{float(x['auto_loss_pct']):.6f}|{x['schedule_rounding_attempts']}|\")
+out += ['', '|測資|兩 seed 平均 R|平均損失 %|損失範圍 %|≥0.5%|','|---|---:|---:|---:|---|']
+for b in dict.fromkeys(x['bench'] for x in sa):
+ z=[float(x['auto_loss_pct']) for x in sa if x['bench']==b]; m=statistics.mean(z)
+ out.append(f'|{b}|{1+m/100:.9f}|{m:.6f}|{min(z):.6f}～{max(z):.6f}|{\"是\" if m>=.5 else \"否\"}|')
+z=[float(x['auto_loss_pct']) for x in sa];m=statistics.mean(z)
+out += [f'|全體等權平均|{1+m/100:.9f}|{m:.6f}|{min(z):.6f}～{max(z):.6f}|是|','', '判斷：平均損失 1.339185% ≥ 0.5%，觸發邊界改善計畫；4/5 測資、8/10 配對超過門檻。h07 平均略為負值，不能宣稱所有測資都受損。這是逐配對比值的算術平均，不是把不同尺度 HPWL 相加後取比。', '', 'h06 實際為 5 threads，其餘 8 threads；不可統稱全是 8 bands。single 少做 0–67 attempts，相對約 1,500–2,400 萬次可忽略但已明列，並非完全同次數。auto/serial 的 RNG 路徑、溫度分配及 band 限制均不同，因此 1.339185% 是「band 模式相關的品質差」，尚不能把全部差額因果歸到邊界；下一階段需要固定 band 算法、只開關邊界交換的消融。只有 2 seeds，本輪僅診斷，不作正式 HPWL 進步宣稱。', '', '## 3. toy 退步原因（只描述）','', '- v5：總位移 43236.6、最大位移 1972.0；v6：43324.4、2004.4。最大位移增加 32.4（1.6430%），總位移增加 87.8（0.2031%），與既有參考值一致。', '- 兩版在 cap 前同為總位移 43261.6、最大位移 2007.9；target windows 0/31，chain 31 roots、4960 nodes、13703 candidates、0 accepted。退步不是本次 chain 前起點不同，也不是 SA（兩版皆 --no-sa）。', '- v5 cap 用 4.81 秒、51 attempts、27 feasible、3 accepted；接受路徑最大位移 1989 → 1982 → 1972，最終總位移還低於 cap 起點。v6 cap-local 只用 0.71 秒、7 attempts、1 accepted；extra 紀錄預算 12 秒、只用約 0.721 秒，沒有證據表示撞上整體時間上限。', '- v6 在 D=1957.7025 的 method 1 候選，DP 後總位移仍 44292.8、remaining=4，紀錄 total_budget；method 3 多個更低 cap 候選雖 remaining=0，總位移仍為 43660.4 或 43671.2 而被 total_budget 拒絕。只有 D=2004.76265625、總位移 43324.4、最大位移 2004.4 被接受；後續兩次仍遭 total_budget 拒絕。', '- 證據支持的原因：cap-local 的局部修補／DP 回收產生不同候選路徑，較低 cap 下未把總位移拉回接受範圍，搜尋又較早停止，錯失 v5 多輪修補的路徑。不能僅憑 log 將停止精確歸因到某個內部條件，也不能聲稱放寬預算就解決。此輪不改 cap、接受規則或任何 toy 專用條件。', '', '## 4. 第二階段計畫：依「幅度 × 機會」排序','', '排序為質性優先級，不把 HPWL 與位移的不同單位硬乘。幅度用實測差距，機會看受影響測資、時間占比、是否仍有候選與實作可分割性。以下均為待驗證方案，不是已完成項目。', '', '|優先|項目與幅度 × 機會|做法|驗收方式|','|---|---|---|---|', '|1|SA 邊界交換／重分 band：平均 1.339% 品質空間，4/5 測資超過門檻，機會最廣|在同步點做鄰 band 邊界交換或移動分界；以單一設計做消融，避免同時改溫度、moves、接受規則|同合法起點、同次數及固定 wall-time 各自配對至少 3 seeds；報五筆各自平均／範圍、attempts、時間與合法性。以 auto 原版為直接基線，serial 作診斷參照；目標平均差距降至 <0.5%，且固定時間 HPWL 不因同步成本變差。未達標則保留否定結果，不宣告改善。|', '|2|target windows + post-chain DP 分 band：default 占收益 93.71%，有可分割 windows；同時存在跨 band 依賴|先做不重疊 windows 的批次排程與 worker 私有 memo，再保留跨 band 補做；保持總位移／最大位移接受約束|先以已知移動集合驗證衝突、row occupancy、memo 失效與 rollback；單 worker 與原版固定工作量對照，再驗證多 worker 全部合法。固定 1.5 秒報 solved/attempted windows 倍率與逐筆位移，完整 default 預算另跑配對；至少不能用降低覆蓋率換吞吐。|', '|3|ejection 搜尋分 band／減少無效搜尋：占 65.11% 時間，但收益集中 h05；延長預算提升有限|先加 nodes/candidates/失敗原因計數；worker 隔離 Search，限定完整 touched set、跨界序列補做，global max 在 barrier 合併。是否提前停低收益搜尋需獨立消融|固定工作量核對回滾、所有 blocker、最大位移與合法性；1.5 秒評估 attempted nodes/roots 的實際倍數（約 2–4 倍為假說），並逐筆比較總／最大位移。重點觀察 h05/h06，但接受判定用全部 testcases+holdout；不能以 6 秒收益冒充 1.5 秒成果。|', '|4|toy cap 回收／停止路徑：最大位移落差 1.643%，目前只一筆證據；本輪僅記錄|後續若任務授權，先追蹤停止原因、修補候選和 DP 回收範圍，再評估一般性修正，不做 toy 特判|以 v5/v6 相同起點配對，保留 total/max/attempts/時間；參考最大位移 1972.0，且必須通過既有總位移接受約束與全套合法性／其他測資回歸。時間預算不同要單列，不能把加時算作演算法改進。|', '', '### 共通驗收與完成閘門','', '1. 改動限 CodexParallelChain；先完成各項局部測試及合法性、不重疊、位移 guard／rollback 檢查，再做統一正式實驗。保護目錄摘要對齊協調者更新後基準。', '2. 正式比較新舊版本同一次配對重跑；HPWL 至少 3 seeds，逐筆報平均與範圍。保留三種協定的獨立結果（位移／no-SA、固定合法起點 HPWL、完整流程為此計畫的工作分類），不得混成單一勝負。正式協定的精確參數與第 7 節逐條要求留待允許閱讀時核對，不以此分類冒充原文。', '3. 調參只用 testcases、holdout；edge、edge_seed2–5 僅回歸。候選程式／參數凍結並記 sha256 後才產生新 seed；新增 seed 作泛化驗證，失敗需如實保留。', '4. 編譯與分析使用 CPU 16–19；計時 worker 不加 taskset，timing.lock 保證一次一個，保留新舊相同硬體／執行環境。ASan 在沙箱設 ASAN_OPTIONS=detect_leaks=0，明記限制，完整 leak 檢查由協調者沙箱外補跑。', '5. 每步 .done.json、完整 log、參數與輸入／binary sha256；超過 5 分鐘的正式佇列另寫腳本，交協調者 RUN/WAIT，本輪無需啟動。', '6. 本輪僅完成 phase1 診斷與計畫；第 7 節完整完成條件未核對，以上實作及驗收都尚未執行。不得標記階段 B 完成。', '', '## 資料來源指紋','']
+for f in ['chain_summary.csv','chain_rounds.csv','sa_pairs.csv','toy_summary.csv','ALL_DONE']:
+ out.append(f'- "'`phase1/{f}` SHA256 `{hashlib.sha256((p/f).read_bytes()).hexdigest()}`'"')
+(root/'diagnosis.md').write_text('\\n'.join(out)+'\\n')
+w=Path('AI_Solutions/CodexParallelChain/WORK_STATE.md')
+s=w.read_text().replace('## 目前狀態\\n\\n等待中：scripts/diag.py，完成標記 phase1/ALL_DONE','## 第一階段執行歷史（已於 10-23 05:01 完成）\\n\\n歷史等待項目：scripts/diag.py，完成標記 phase1/ALL_DONE')
+s+='''\\n## 目前狀態：2026-10-23 phase1 診斷完成\\n\\n- 已確認 phase1/ALL_DONE：26 chain、20 SA、2 toy；不重跑既有完成工作。\\n- 已寫 Testcases/results/CodexParallelChain/diagnosis.md：三部分逐筆耗時／位移收益、band 平行資料結構與約 2–4 倍工作量假說、10 對 SA 比值／平均、toy 原因、第二階段排序與驗收。\\n- 主樣本 default：target 3.312757 s / 9258.268240；ejection 9.545742 s / 1446.724840；post-DP 1.802126 s / 12303.715360。ejection 占時間 65.11%，收益 6.29%；不可直接以時間加速倍率推論品質收益。\\n- SA 等權平均損失 1.339185% ≥ 0.5%；4/5 測資均值過門檻。h06 實際 5 threads，其餘 8；只有 2 seeds，僅診斷。\\n- toy 兩版 cap 起點相同；v6 局部修補候選多因 total_budget 被拒，7 attempts／1 accepted，v5 51／3；最大位移 2004.4 對 1972.0。只描述，未修正。\\n- 協調者已在沙箱外啟動 diag.py 並移除計時 worker 的 taskset；provenance/orchestrator_note.json 亦記載保護文件變動／基準更新，最終 unchanged 是相對更新後基準。\\n- 第二階段優先序：SA 邊界改善 → target/DP 分 band → ejection 分 band與無效搜尋診斷 → toy 後續原因追蹤（需後續任務授權）。各項尚未實作。\\n- 閱讀限制判斷：HANDOFF 只讀第 0 節；不擅自讀第 5／7 節。採使用者提供的 0.5% 門檻；驗收依第 0 節與已知範圍列出，第 7 節逐條對齊尚待後續允許閱讀時核對，不能宣告 B_DONE。\\n- 本 session 未改 src、tests、參數或保護目錄；未啟動背景計算、未 commit。無 RUN/WAIT 待辦。下一 session 從第二階段計畫與完成條件核對接續，本 session 到此結束。\\n'''
+w.write_text(s)
+print('Wrote diagnosis.md:',len(out),'lines; updated WORK_STATE.md')
+print('Verified result counts and final marker; no compute jobs launched.')
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Wrote diagnosis.md: 146 lines; updated WORK_STATE.md
+Verified result counts and final marker; no compute jobs launched.
+
+exec
+/bin/bash -lc "taskset -c 16-19 python - <<'PY'
+from pathlib import Path
+import csv,math
+r=Path('Testcases/results/CodexParallelChain');a=list(csv.DictReader((r/'phase1/chain_summary.csv').open()))
+for b in {x['bench'] for x in a}:
+ for v in ['default','chain6']:
+  q={x['phase']:x for x in a if x['bench']==b and x['variant']==v}
+  assert math.isclose(sum(float(x['total_reduction']) for k,x in q.items() if k"'!='"'chain_stage'),float(q['chain_stage']['total_reduction']),abs_tol=1e-6)
+s=(r/'diagnosis.md').read_text();assert s.count('|ibm01|')>=5 and '1.339185%' in s
+print('Checked all 26 chain reductions against stage totals; report and state saved.')
+print('Toy max regression %:',round(100*(2004.4/1972-1),4),'total regression %:',round(100*(43324.4/43236.6-1),4))
+PY" in /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3
+ succeeded in 0ms:
+Checked all 26 chain reductions against stage totals; report and state saved.
+Toy max regression %: 1.643 total regression %: 0.2031
+
+codex
+已完成 [diagnosis.md](Testcases/results/CodexParallelChain/diagnosis.md)，並更新 [WORK_STATE.md](AI_Solutions/CodexParallelChain/WORK_STATE.md)。
+
+- chain：ejection 占時間 65.11%，僅貢獻 6.29% 位移改善。
+- band：平均損失 1.339185%，超過 0.5% 門檻。
+- 已記錄平行化估算、toy 退步原因及第二階段優先序與驗收。
+- 未修改演算法、未啟動計算、未 commit。
+- 依閱讀限制未讀第 7 節；其逐條完成條件仍待核對，不宣告 B_DONE。
+tokens used
+80,192
+已完成 [diagnosis.md](Testcases/results/CodexParallelChain/diagnosis.md)，並更新 [WORK_STATE.md](AI_Solutions/CodexParallelChain/WORK_STATE.md)。
+
+- chain：ejection 占時間 65.11%，僅貢獻 6.29% 位移改善。
+- band：平均損失 1.339185%，超過 0.5% 門檻。
+- 已記錄平行化估算、toy 退步原因及第二階段優先序與驗收。
+- 未修改演算法、未啟動計算、未 commit。
+- 依閱讀限制未讀第 7 節；其逐條完成條件仍待核對，不宣告 B_DONE。

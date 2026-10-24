@@ -1,0 +1,5 @@
+{
+ "frozen": "2026-10-22 06:20:13",
+ "manifest_sha256": "a5d9adcfaec931471fcfd97ffce875d8de2d2e8306bc61e7ecbd2bc2fc04e1b8",
+ "note": "v6 algorithm frozen before edge_seed5 is generated; edge_seed5 does not exist yet"
+}

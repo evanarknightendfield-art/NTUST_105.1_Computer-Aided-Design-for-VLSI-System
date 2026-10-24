@@ -1,0 +1,43 @@
+[  6%] Building CXX object CMakeFiles/dp_core.dir/src/capsearch.cpp.o
+[  6%] Building CXX object CMakeFiles/dp_core.dir/src/annealer.cpp.o
+[  9%] Building CXX object CMakeFiles/dp_core.dir/src/chain.cpp.o
+[ 12%] Building CXX object CMakeFiles/dp_core.dir/src/global.cpp.o
+[ 16%] Building CXX object CMakeFiles/dp_core.dir/src/legalizer.cpp.o
+[ 19%] Building CXX object CMakeFiles/dp_core.dir/src/optimizer.cpp.o
+[ 22%] Building CXX object CMakeFiles/dp_core.dir/src/placedb.cpp.o
+[ 25%] Building CXX object CMakeFiles/dp_core.dir/src/window.cpp.o
+[ 29%] Linking CXX static library libdp_core.a
+[ 29%] Built target dp_core
+[ 38%] Building CXX object CMakeFiles/window_test.dir/tests/window_test.cpp.o
+[ 38%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 38%] Building CXX object CMakeFiles/multirow_test.dir/tests/multirow_test.cpp.o
+[ 41%] Building CXX object CMakeFiles/optimizer_test.dir/tests/optimizer_test.cpp.o
+[ 45%] Linking CXX executable multirow_test
+[ 48%] Linking CXX executable window_test
+[ 48%] Built target multirow_test
+[ 51%] Building CXX object CMakeFiles/chain_test.dir/tests/chain_test.cpp.o
+[ 51%] Built target window_test
+[ 54%] Building CXX object CMakeFiles/parallel_sa_test.dir/tests/parallel_sa_test.cpp.o
+[ 58%] Linking CXX executable optimizer_test
+[ 58%] Built target optimizer_test
+[ 61%] Building CXX object CMakeFiles/pool_test.dir/tests/pool_test.cpp.o
+[ 64%] Linking CXX executable dp
+[ 64%] Built target dp
+[ 67%] Building CXX object CMakeFiles/global_test.dir/tests/global_test.cpp.o
+[ 70%] Linking CXX executable parallel_sa_test
+[ 74%] Linking CXX executable pool_test
+[ 74%] Built target parallel_sa_test
+[ 74%] Built target pool_test
+[ 80%] Building CXX object CMakeFiles/cap_windows_test.dir/tests/cap_windows_test.cpp.o
+[ 80%] Building CXX object CMakeFiles/capsearch_test.dir/tests/capsearch_test.cpp.o
+[ 83%] Linking CXX executable chain_test
+[ 83%] Built target chain_test
+[ 87%] Building CXX object CMakeFiles/guard_test.dir/tests/guard_test.cpp.o
+[ 90%] Linking CXX executable global_test
+[ 90%] Built target global_test
+[ 93%] Linking CXX executable guard_test
+[ 93%] Built target guard_test
+[ 96%] Linking CXX executable cap_windows_test
+[ 96%] Built target cap_windows_test
+[100%] Linking CXX executable capsearch_test
+[100%] Built target capsearch_test

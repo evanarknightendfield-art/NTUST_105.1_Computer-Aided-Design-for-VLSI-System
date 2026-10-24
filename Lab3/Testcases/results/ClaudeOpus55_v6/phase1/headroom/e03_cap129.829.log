@@ -1,0 +1,4 @@
+e03_dense97: 5872 movable, P total 141132.0380 max 137.7950, cap 129.829: 96 violators
+  box 1:8: 808 cells, 25953 columns -> no_position total None (0.0s)
+  box 1:16: 1008 cells, 65010 columns -> no_position total None (0.1s)
+  box 2:16: 1410 cells, 153001 columns -> no_position total None (0.2s)

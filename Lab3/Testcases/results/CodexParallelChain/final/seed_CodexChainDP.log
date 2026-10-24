@@ -1,0 +1,61 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/seed_CodexChainDP/submissions/CodexChainDP.tgz  (42 files)
+       CodexChainDP/CMakeLists.txt
+       CodexChainDP/Makefile
+       CodexChainDP/READING_NOTES.md
+       CodexChainDP/README.md
+       CodexChainDP/WORK_STATE.md
+       CodexChainDP/src/annealer.cpp
+       CodexChainDP/src/annealer.hpp
+       CodexChainDP/src/chain.cpp
+       CodexChainDP/src/chain.hpp
+       CodexChainDP/src/global.cpp
+       CodexChainDP/src/global.hpp
+       CodexChainDP/src/legalizer.cpp
+       CodexChainDP/src/legalizer.hpp
+       CodexChainDP/src/main.cpp
+       CodexChainDP/src/optimizer.cpp
+       CodexChainDP/src/optimizer.hpp
+       CodexChainDP/src/placedb.cpp
+       CodexChainDP/src/placedb.hpp
+       CodexChainDP/src/pool.hpp
+       CodexChainDP/src/rowmap.hpp
+       CodexChainDP/src/window.cpp
+       CodexChainDP/src/window.hpp
+       CodexChainDP/tests/acceptance.py
+       CodexChainDP/tests/certify.py
+       CodexChainDP/tests/chain_test.cpp
+       CodexChainDP/tests/compare.py
+       CodexChainDP/tests/edge_cases.py
+       CodexChainDP/tests/fair_time.py
+       CodexChainDP/tests/final_audit.py
+       CodexChainDP/tests/final_validation.py
+       CodexChainDP/tests/global_test.cpp
+       CodexChainDP/tests/measure.py
+       CodexChainDP/tests/multirow_test.cpp
+       CodexChainDP/tests/optimizer_test.cpp
+       CodexChainDP/tests/parallel_sa_test.cpp
+       CodexChainDP/tests/pool_test.cpp
+       CodexChainDP/tests/run_tests.py
+       CodexChainDP/tests/sa_bench.cpp
+       CodexChainDP/tests/sanitize_global.py
+       CodexChainDP/tests/summarize.py
+       CodexChainDP/tests/update_docs.py
+       CodexChainDP/tests/window_test.cpp
+[build] OK build/dp  10.6s
+[run] e01_nearlegal PASS  OK          49.1s  disp=23391.174 max=5.286 legal=683496.0 sa=470632.0
+[run] e02_legalgp PASS  OK          19.4s  disp=0.0 max=0.0 legal=15259651.5 sa=10219683.5
+[run] e03_dense97 PASS  OK          45.8s  disp=120654.899 max=117.033 legal=536488.0 sa=282431.5
+[run] e04_sparse10 PASS  OK          10.4s  disp=751.9408 max=1.5039 legal=48980.367 sa=13919.9
+[run] e05_bignets PASS  OK          46.6s  disp=75251.659 max=39.583 legal=990462.0 sa=695951.0
+[run] e06_tallnarrow PASS  OK          22.0s  disp=32884.688 max=40.372 legal=2123019.5 sa=936924.0
+[run] e07_tworows PASS  OK          28.7s  disp=20441.545 max=25.684 legal=983184.5 sa=208764.5
+[run] e08_fragmented PASS  OK          38.6s  disp=59716.16 max=49.444 legal=649332.5 sa=407941.0
+[run] e09_offgrid PASS  OK          58.2s  disp=14684.254 max=38.1293 legal=192697.1583 sa=58468.5216
+[run] e10_mixedsites PASS  OK          62.0s  disp=63469.348 max=61.435 legal=1219467.5 sa=797020.0
+[run] e11_format PASS  OK          15.2s  disp=10866.955 max=22.507 legal=127170.0 sa=78339.0
+[run] e12_collapse PASS  OK          37.5s  disp=329471.022 max=233.0 legal=2461245.5 sa=192114.0
+[run] e13_onecell PASS  OK           0.3s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          71.0s  disp=13196741.878 max=3779.126 legal=123323148.5 sa=89213767.0
+[run] e16_rowgaps PASS  OK          58.3s  disp=81151.269 max=50.752 legal=706422.5 sa=434978.0
+[summary] 16/16 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/seed_CodexChainDP/record.csv

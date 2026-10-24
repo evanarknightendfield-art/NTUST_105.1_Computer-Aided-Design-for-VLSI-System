@@ -1,0 +1,51 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/submissions/ClaudeOpus55_v5.tgz  (32 files)
+       ClaudeOpus55_v5/CMakeLists.txt
+       ClaudeOpus55_v5/Makefile
+       ClaudeOpus55_v5/README.md
+       ClaudeOpus55_v5/src/annealer.cpp
+       ClaudeOpus55_v5/src/annealer.hpp
+       ClaudeOpus55_v5/src/capsearch.cpp
+       ClaudeOpus55_v5/src/capsearch.hpp
+       ClaudeOpus55_v5/src/chain.cpp
+       ClaudeOpus55_v5/src/chain.hpp
+       ClaudeOpus55_v5/src/global.cpp
+       ClaudeOpus55_v5/src/global.hpp
+       ClaudeOpus55_v5/src/legalizer.cpp
+       ClaudeOpus55_v5/src/legalizer.hpp
+       ClaudeOpus55_v5/src/main.cpp
+       ClaudeOpus55_v5/src/optimizer.cpp
+       ClaudeOpus55_v5/src/optimizer.hpp
+       ClaudeOpus55_v5/src/placedb.cpp
+       ClaudeOpus55_v5/src/placedb.hpp
+       ClaudeOpus55_v5/src/pool.hpp
+       ClaudeOpus55_v5/src/rowmap.hpp
+       ClaudeOpus55_v5/src/window.cpp
+       ClaudeOpus55_v5/src/window.hpp
+       ClaudeOpus55_v5/tests/capsearch_test.cpp
+       ClaudeOpus55_v5/tests/chain_test.cpp
+       ClaudeOpus55_v5/tests/global_test.cpp
+       ClaudeOpus55_v5/tests/multirow_test.cpp
+       ClaudeOpus55_v5/tests/optimizer_test.cpp
+       ClaudeOpus55_v5/tests/parallel_sa_test.cpp
+       ClaudeOpus55_v5/tests/pool_test.cpp
+       ClaudeOpus55_v5/tests/run_tests.py
+       ClaudeOpus55_v5/tests/sa_bench.cpp
+       ClaudeOpus55_v5/tests/window_test.cpp
+[build] OK build/dp  4.2s
+[run] e01_nearlegal PASS  OK          66.0s  disp=23151.014 max=5.402 legal=689413.0 sa=479361.0
+[run] e02_legalgp PASS  OK          19.0s  disp=0.0 max=0.0 legal=15276993.0 sa=10247848.5
+[run] e03_dense97 PASS  OK          36.9s  disp=135831.754 max=111.567 legal=554634.5 sa=290657.0
+[run] e04_sparse10 PASS  OK           8.5s  disp=714.1647 max=1.5869 legal=46884.498 sa=15293.936
+[run] e05_bignets PASS  OK          72.0s  disp=80393.314 max=41.639 legal=1004564.0 sa=708027.0
+[run] e06_tallnarrow PASS  OK          18.1s  disp=32181.656 max=32.0 legal=2076492.0 sa=914346.0
+[run] e07_tworows PASS  OK          21.7s  disp=20429.46 max=26.42 legal=983775.5 sa=191798.0
+[run] e08_fragmented PASS  OK          38.2s  disp=84078.388 max=59.516 legal=686602.5 sa=420110.5
+[run] e09_offgrid PASS  OK          54.1s  disp=13137.4045 max=38.513 legal=183679.0873 sa=57670.4618
+[run] e10_mixedsites PASS  OK          59.1s  disp=61376.645 max=34.047 legal=1240454.5 sa=812043.5
+[run] e11_format PASS  OK          17.4s  disp=8990.186 max=13.711 legal=123543.5 sa=76275.5
+[run] e12_collapse PASS  OK          27.0s  disp=320209.716 max=237.0 legal=2307010.0 sa=181907.5
+[run] e13_onecell PASS  OK           0.3s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          91.9s  disp=20428777.946 max=5005.084 legal=133120956.0 sa=85280213.0
+[run] e16_rowgaps PASS  OK          70.2s  disp=91570.856 max=69.531 legal=747273.0 sa=455045.0
+[summary] 16/16 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v5/final/seed3_ClaudeOpus55_v5/record.csv

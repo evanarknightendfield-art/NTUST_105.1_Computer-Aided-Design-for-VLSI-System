@@ -1,0 +1,1 @@
+/usr/bin/c++ -fsanitize=address,undefined -fno-omit-frame-pointer -fno-pie -O1 -g -fsanitize=address,undefined -no-pie -Wl,--dependency-file,CMakeFiles/global_test.dir/link.d CMakeFiles/global_test.dir/tests/global_test.cpp.o -o global_test  libdp_core.a

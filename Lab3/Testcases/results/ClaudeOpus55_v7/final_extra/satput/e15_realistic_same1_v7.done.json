@@ -1,0 +1,16 @@
+{
+ "command": [
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/hpwl_default/ClaudeOpus55_v7_sa",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e15_realistic/e15_realistic",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/hpwl_default/legal_starts/ClaudeOpus55_v7/e15_realistic/output",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final_extra/satput/e15_realistic_same1_v7",
+  "1",
+  "default",
+  "20",
+  "0",
+  "0"
+ ],
+ "returncode": 0,
+ "seconds": 20.19,
+ "finished": "Sat Oct 24 11:12:18 2026"
+}

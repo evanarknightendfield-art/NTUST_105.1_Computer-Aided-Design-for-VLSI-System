@@ -1,0 +1,16 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_sa_pair.py",
+  "sa_boundary_r1",
+  "--worker",
+  "fixed_auto",
+  "h08",
+  "2",
+  "candidate",
+  "2"
+ ],
+ "returncode": 0,
+ "seconds": 5.65,
+ "finished": "Fri Oct 23 05:29:58 2026"
+}

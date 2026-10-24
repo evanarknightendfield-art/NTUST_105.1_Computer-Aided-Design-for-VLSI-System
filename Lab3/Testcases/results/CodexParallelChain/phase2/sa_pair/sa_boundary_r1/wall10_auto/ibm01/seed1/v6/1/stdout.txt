@@ -1,0 +1,3 @@
+threads,8
+hpwl,attempts,sa_seconds,stage2_seconds
+53099280.000000000000,51124874,10.003889,10.009148

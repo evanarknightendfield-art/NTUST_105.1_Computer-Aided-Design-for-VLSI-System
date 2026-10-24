@@ -1,0 +1,118 @@
+$ cmake -S . -B build
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v5_L1/home/ClaudeOpus55_v5/build
+
+$ cmake --build build -j
+[  3%] Building CXX object CMakeFiles/dp_core.dir/src/capsearch.cpp.o
+[  7%] Building CXX object CMakeFiles/dp_core.dir/src/annealer.cpp.o
+[ 11%] Building CXX object CMakeFiles/dp_core.dir/src/chain.cpp.o
+[ 18%] Building CXX object CMakeFiles/dp_core.dir/src/global.cpp.o
+[ 14%] Building CXX object CMakeFiles/dp_core.dir/src/legalizer.cpp.o
+[ 25%] Building CXX object CMakeFiles/dp_core.dir/src/optimizer.cpp.o
+[ 29%] Building CXX object CMakeFiles/dp_core.dir/src/window.cpp.o
+[ 22%] Building CXX object CMakeFiles/dp_core.dir/src/placedb.cpp.o
+[ 33%] Linking CXX static library libdp_core.a
+[ 33%] Built target dp_core
+[ 37%] Building CXX object CMakeFiles/window_test.dir/tests/window_test.cpp.o
+[ 40%] Building CXX object CMakeFiles/multirow_test.dir/tests/multirow_test.cpp.o
+[ 48%] Building CXX object CMakeFiles/parallel_sa_test.dir/tests/parallel_sa_test.cpp.o
+[ 48%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 51%] Building CXX object CMakeFiles/optimizer_test.dir/tests/optimizer_test.cpp.o
+[ 55%] Building CXX object CMakeFiles/capsearch_test.dir/tests/capsearch_test.cpp.o
+[ 59%] Building CXX object CMakeFiles/global_test.dir/tests/global_test.cpp.o
+[ 62%] Building CXX object CMakeFiles/pool_test.dir/tests/pool_test.cpp.o
+[ 66%] Building CXX object CMakeFiles/chain_test.dir/tests/chain_test.cpp.o
+[ 70%] Linking CXX executable pool_test
+[ 70%] Built target pool_test
+[ 74%] Linking CXX executable parallel_sa_test
+[ 77%] Linking CXX executable global_test
+[ 77%] Built target parallel_sa_test
+[ 77%] Built target global_test
+[ 81%] Linking CXX executable multirow_test
+[ 85%] Linking CXX executable chain_test
+[ 88%] Linking CXX executable optimizer_test
+[ 92%] Linking CXX executable window_test
+[ 92%] Built target chain_test
+[ 92%] Built target multirow_test
+[ 92%] Built target optimizer_test
+[ 92%] Built target window_test
+[ 96%] Linking CXX executable capsearch_test
+[ 96%] Built target capsearch_test
+[100%] Linking CXX executable dp
+[100%] Built target dp
+In file included from /usr/include/x86_64-linux-gnu/c++/15/bits/c++allocator.h:33,
+                 from /usr/include/c++/15/bits/allocator.h:46,
+                 from /usr/include/c++/15/string:45,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v5_L1/home/ClaudeOpus55_v5/src/placedb.hpp:4,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v5_L1/home/ClaudeOpus55_v5/src/global.hpp:2,
+                 from /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v5_L1/home/ClaudeOpus55_v5/src/global.cpp:1:
+In member function ‘void std::__new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = int; _Args = {int}; _Tp = int]’,
+    inlined from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = int; _Args = {int}; _Tp = int]’ at /usr/include/c++/15/bits/alloc_traits.h:674:17,
+    inlined from ‘void std::vector<_Tp, _Alloc>::_M_insert_aux(iterator, _Arg&&) [with _Arg = int; _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/vector.tcc:430:31,
+    inlined from ‘std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::insert(const_iterator, const value_type&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/vector.tcc:162:21,
+    inlined from ‘bool {anonymous}::constructCap(const PlaceDB&, Placement&, double, double)’ at /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v5_L1/home/ClaudeOpus55_v5/src/global.cpp:101:45:
+/usr/include/c++/15/bits/new_allocator.h:191:11: warning: array subscript -1 is outside array bounds of ‘int [2305843009213693951]’ [-Warray-bounds=]
+  191 |         { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In member function ‘_Tp* std::__new_allocator<_Tp>::allocate(size_type, const void*) [with _Tp = int]’,
+    inlined from ‘static _Tp* std::allocator_traits<std::allocator<_CharT> >::allocate(allocator_type&, size_type) [with _Tp = int]’ at /usr/include/c++/15/bits/alloc_traits.h:614:28,
+    inlined from ‘std::_Vector_base<_Tp, _Alloc>::pointer std::_Vector_base<_Tp, _Alloc>::_M_allocate(std::size_t) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:387:33,
+    inlined from ‘void std::_Vector_base<_Tp, _Alloc>::_M_create_storage(std::size_t) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:405:44,
+    inlined from ‘std::_Vector_base<_Tp, _Alloc>::_Vector_base(std::size_t, const allocator_type&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:341:26,
+    inlined from ‘std::vector<_Tp, _Alloc>::vector(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]’ at /usr/include/c++/15/bits/stl_vector.h:633:61,
+    inlined from ‘bool {anonymous}::constructCap(const PlaceDB&, Placement&, double, double)’ at /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v5_L1/home/ClaudeOpus55_v5/src/global.cpp:101:30:
+/usr/include/c++/15/bits/new_allocator.h:151:73: note: at offset -4 into object of size [0, 9223372036854775804] allocated by ‘operator new’
+  151 |         return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+      |                                                                         ^
+
+
+===== L1: OK 186.6s
+$ /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/lg_ClaudeOpus55_v5_L1/home/ClaudeOpus55_v5/build/dp /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v6/final/only_L1/L1/L1 output -v
+Total displacement (legal): 2445881162.406
+Maximum displacement (legal): 50495.926
+Total HPWL (legal): 5575697258.2
+Total HPWL (SA): 1736877136.3
+12 -> 2447125516.544011, max 50495.926000 -> 50495.926000  0.23s
+[chain] pass 0: 1 chains, total 2447125516.544011 -> 2447125488.568011, max 50495.926000 -> 50495.926000
+[chain] 337 roots, 52672 nodes, 171364 candidates, 1 accepted, longest 1, 0 multi-blocker placements (time limit)
+[window-disp] 2 rows x 4 cells: 14950 windows solved, 3011 improved: total 2447125488.6 -> 2446040016.3 (max 50495.9260)  0.21s
+[chain-round] 1: 144 target windows, 1 chains, longest 1, total 2447171715.246012 -> 2446040016.286008, max 50495.926000 -> 50495.926000
+[target-window] 65/1567 improved: total 2446040016.286008 -> 2446015454.706008, max 50495.926000 -> 50495.926000  0.17s
+[chain] pass 0: 0 chains, total 2446015454.706008 -> 2446015454.706008, max 50495.926000 -> 50495.926000
+[chain] 186 roots, 29333 nodes, 92190 candidates, 0 accepted, longest 0, 0 multi-blocker placements (time limit)
+[window-disp] 2 rows x 4 cells: 1894 windows solved, 367 improved: total 2446015454.7 -> 2445881162.4 (max 50495.9260)  0.05s
+[chain-round] 2: 65 target windows, 0 chains, longest 0, total 2446040016.286008 -> 2445881162.406006, max 50495.926000 -> 50495.926000
+[cap] probe D 45446.333400: unresolved  102.64s
+[cap] probe D 47971.129700: unresolved  103.13s
+[cap] probe D 45446.333400: unresolved  104.15s
+[cap] probe D 45446.333400: unresolved  104.81s
+[cap] 4 attempts, 0 feasible, 0 accepted: max 50495.926000 -> 50495.926000, total 2445881162.4060 -> 2445881162.4060 (+0.000%)  3.26s
+[stage1] done  104.84s
+[sa] parallel: 4 bands/threads  HPWL 5575697258  T0 1.404e+05  240000000 moves in 100 steps, sync every 1.0 moves/cell
+[sa] step   0  T 1.404e+05  acc 0.668  win 14836 x 14881  cur 10384993315  best 5575697258  1.9s
+[sa] step  20  T 3.526e+04  acc 0.597  win 24169 x 24242  cur 8614143113  best 5575697258  13.6s
+[sa] step  40  T 8858  acc 0.439  win 24135 x 24208  cur 3142792334  best 3142792334  25.3s
+[sa] step  60  T 2225  acc 0.379  win 13502 x 13543  cur 2033217080  best 2033217080  37.2s
+[sa] step  80  T 558.9  acc 0.292  win 1847 x 1222  cur 1820199644  best 1820199644  48.9s
+[sa] step  99  T 150.4  acc 0.134  win 1847 x 756  cur 1751049986  best 1751049986  60.0s
+[sa] 376 sync rounds, 74925920 attempts (12.9% proposals failed)  60.0s (moves 53.6s, merge 6.0s)
+[polish] pass 1: 1751049986.100006 -> 1743105765.400006; slide 5197, relocate 6314, assignment 537, reorder 12325
+[polish] pass 2: 1743105765.400006 -> 1741537921.700006; slide 1244, relocate 1603, assignment 169, reorder 1461
+[polish] pass 3: 1741537921.700006 -> 1740932295.300005; slide 312, relocate 509, assignment 80, reorder 325
+[window-hpwl] pass 0: 5735/50077 accepted, 1740932295.300005 -> 1739234658.800005
+[window-hpwl] pass 1: 4904/49793 accepted, 1739234658.800005 -> 1737909195.500005
+[order-hpwl] pass 0: 3240 accepted, 1737909195.500005 -> 1737106650.200005
+[order-hpwl] pass 1: 739 accepted, 1737106650.200005 -> 1736877136.300005
+[polish-total] 1751049986.100006 -> 1736877136.300005
+[stage2] done  186.53s
+

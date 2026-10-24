@@ -1,0 +1,72 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/seed4_CodexCapDP/submissions/CodexCapDP.tgz  (53 files)
+       CodexCapDP/CMakeLists.txt
+       CodexCapDP/Makefile
+       CodexCapDP/README.md
+       CodexCapDP/WORK_STATE.md
+       CodexCapDP/src/annealer.cpp
+       CodexCapDP/src/annealer.hpp
+       CodexCapDP/src/capsearch.cpp
+       CodexCapDP/src/capsearch.hpp
+       CodexCapDP/src/chain.cpp
+       CodexCapDP/src/chain.hpp
+       CodexCapDP/src/global.cpp
+       CodexCapDP/src/global.hpp
+       CodexCapDP/src/guard.hpp
+       CodexCapDP/src/legalizer.cpp
+       CodexCapDP/src/legalizer.hpp
+       CodexCapDP/src/main.cpp
+       CodexCapDP/src/optimizer.cpp
+       CodexCapDP/src/optimizer.hpp
+       CodexCapDP/src/placedb.cpp
+       CodexCapDP/src/placedb.hpp
+       CodexCapDP/src/pool.hpp
+       CodexCapDP/src/rowmap.hpp
+       CodexCapDP/src/window.cpp
+       CodexCapDP/src/window.hpp
+       CodexCapDP/tests/cap_chain_prototype.cpp
+       CodexCapDP/tests/cap_chain_prototype.hpp
+       CodexCapDP/tests/cap_search_bench.cpp
+       CodexCapDP/tests/cap_windows_bench.cpp
+       CodexCapDP/tests/cap_windows_test.cpp
+       CodexCapDP/tests/capsearch_test.cpp
+       CodexCapDP/tests/chain_test.cpp
+       CodexCapDP/tests/compare_methods.cpp
+       CodexCapDP/tests/diag_chaindp_global/driver.cpp
+       CodexCapDP/tests/diag_chaindp_global/global_diag.cpp
+       CodexCapDP/tests/diagnostic.hpp
+       CodexCapDP/tests/diagnostic_capsearch.cpp
+       CodexCapDP/tests/diagnostic_experiments.cpp
+       CodexCapDP/tests/diagnostic_main.cpp
+       CodexCapDP/tests/diagnostic_window.cpp
+       CodexCapDP/tests/global_preserve_prototype.cpp
+       CodexCapDP/tests/global_preserve_prototype.hpp
+       CodexCapDP/tests/global_test.cpp
+       CodexCapDP/tests/guard_test.cpp
+       CodexCapDP/tests/multirow_test.cpp
+       CodexCapDP/tests/optimizer_test.cpp
+       CodexCapDP/tests/parallel_sa_test.cpp
+       CodexCapDP/tests/pool_test.cpp
+       CodexCapDP/tests/readpl.cpp
+       CodexCapDP/tests/run_tests.py
+       CodexCapDP/tests/sa_bench.cpp
+       CodexCapDP/tests/sa_bench2.cpp
+       CodexCapDP/tests/site_repair_bench.cpp
+       CodexCapDP/tests/window_test.cpp
+[build] OK build/dp  12.8s
+[run] e01_nearlegal PASS  OK          64.5s  disp=23264.919 max=5.43 legal=696234.5 sa=487411.5
+[run] e02_legalgp PASS  OK          19.8s  disp=0.0 max=0.0 legal=14965152.5 sa=10027896.0
+[run] e03_dense97 PASS  OK          37.5s  disp=129392.861 max=113.671 legal=534423.5 sa=285927.5
+[run] e04_sparse10 PASS  OK          10.6s  disp=718.434 max=1.4413 legal=51411.632 sa=16738.169
+[run] e05_bignets PASS  OK          72.2s  disp=125226.156 max=54.724 legal=1066514.5 sa=717514.5
+[run] e06_tallnarrow PASS  OK          20.6s  disp=34373.679 max=27.94 legal=2195014.5 sa=978387.0
+[run] e07_tworows PASS  OK          21.7s  disp=20098.689 max=20.258 legal=974998.5 sa=203604.0
+[run] e08_fragmented PASS  OK          37.7s  disp=67966.127 max=52.809 legal=650350.0 sa=391584.0
+[run] e09_offgrid PASS  OK          58.6s  disp=13359.405 max=40.1359 legal=189915.3334 sa=58848.954
+[run] e10_mixedsites PASS  OK          60.3s  disp=65082.17 max=27.64 legal=1224546.0 sa=796130.0
+[run] e11_format PASS  OK          12.3s  disp=9582.571 max=17.837 legal=122506.0 sa=75285.0
+[run] e12_collapse PASS  OK          28.2s  disp=319801.215 max=241.0 legal=2344084.5 sa=181886.0
+[run] e13_onecell PASS  OK           0.3s  disp=4.57 max=4.57 legal=36.5 sa=36.5
+[run] e14_fixedonly PASS  OK           0.0s  disp=0.0 max=0.0 legal=73.0 sa=73.0
+[run] e15_realistic PASS  OK          84.5s  disp=14211856.273 max=4282.269 legal=124831899.0 sa=85430030.0
+[run] e16_rowgaps PASS  OK          44.1s  disp=97857.599 max=67.404 legal=701059.5 sa=421145.5
+[summary] 16/16 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexCapDP/final/seed4_CodexCapDP/record.csv

@@ -1,0 +1,16 @@
+{
+ "command": [
+  "taskset",
+  "-c",
+  "16-19",
+  "/home/evan/anaconda3/bin/python3",
+  "Grader/tools/gen_edge.py",
+  "Testcases/edge_seed7",
+  "--seed",
+  "20261025",
+  "--check"
+ ],
+ "returncode": 0,
+ "seconds": 14.79,
+ "finished": "Sat Oct 24 07:39:50 2026"
+}

@@ -1,0 +1,11 @@
+{
+ "command": [
+  "/home/evan/anaconda3/bin/python3",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/phase2_deadline_regression.py",
+  "--worker",
+  "e13_onecell"
+ ],
+ "returncode": 0,
+ "seconds": 0.18,
+ "finished": "Fri Oct 23 15:03:02 2026"
+}

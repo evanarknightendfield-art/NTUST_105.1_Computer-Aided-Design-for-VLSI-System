@@ -1,0 +1,16 @@
+{
+ "command": [
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/hpwl_default/CodexParallelChain_sa",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/edge/e05_bignets/e05_bignets",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final/hpwl_default/legal_starts/ClaudeOpus55_v7/e05_bignets/output",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/final_extra/satput/e05_bignets_same2_cpc",
+  "1",
+  "default",
+  "20",
+  "0",
+  "0"
+ ],
+ "returncode": 0,
+ "seconds": 20.07,
+ "finished": "Sat Oct 24 11:08:36 2026"
+}

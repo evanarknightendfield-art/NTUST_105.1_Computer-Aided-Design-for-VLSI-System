@@ -1,0 +1,38 @@
+{
+  "record": {
+    "bench": "ibm05",
+    "status": "OK",
+    "seconds": "38.89",
+    "disp": "1328902.6876",
+    "max": "200.5713",
+    "hpwl_legal": "11831652.0",
+    "hpwl_sa": "11831652.0",
+    "t_read": "0.093",
+    "t_legalize": "30.133",
+    "t_pareto": "0.412",
+    "t_windowdp": "2.337",
+    "t_chain": "5.878",
+    "t_global": "",
+    "t_sa": "",
+    "t_polish": "",
+    "t_stage1": "38.85207470896421",
+    "t_stage2": "38.853784820996225",
+    "sa_threads": "",
+    "sa_attempts": "",
+    "sa_internal_s": "",
+    "sa_failed_pct": "",
+    "sa_timeup": "",
+    "global_tries": "0",
+    "global_accepted": "0",
+    "global_unknown": "0",
+    "sa_seconds": ""
+  },
+  "legal": true,
+  "placements": {
+    "output_legal.pl": "dcec0d9fb4a72e7058b7524e7e8b102e0f070994230bcbd7df555e79ab33b094",
+    "output.pl": "dcec0d9fb4a72e7058b7524e7e8b102e0f070994230bcbd7df555e79ab33b094"
+  },
+  "extra_budget": 6.0,
+  "extra_used": 5.875065,
+  "extra_overshoot": false
+}

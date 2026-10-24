@@ -1,0 +1,68 @@
+[
+  {
+    "round": 1,
+    "phase": "target_windows",
+    "seconds": 0.306070085,
+    "total_before": 180174.21000000022,
+    "total_after": 179921.2900000002,
+    "total_reduction": 252.9200000000128,
+    "max_before": 241.55,
+    "max_after": 241.55,
+    "work": 45
+  },
+  {
+    "round": 1,
+    "phase": "ejection_chains",
+    "seconds": 2.135735513,
+    "total_before": 179921.2900000002,
+    "total_after": 179917.3100000002,
+    "total_reduction": 3.9800000000104774,
+    "max_before": 241.55,
+    "max_after": 241.55,
+    "work": 2
+  },
+  {
+    "round": 1,
+    "phase": "post_chain_dp",
+    "seconds": 0.4232190920000001,
+    "total_before": 179917.3100000002,
+    "total_after": 179765.23000000019,
+    "total_reduction": 152.0800000000163,
+    "max_before": 241.55,
+    "max_after": 241.55,
+    "work": -1
+  },
+  {
+    "round": 2,
+    "phase": "target_windows",
+    "seconds": 0.15084642999999964,
+    "total_before": 179765.23000000019,
+    "total_after": 179765.23000000019,
+    "total_reduction": 0.0,
+    "max_before": 241.55,
+    "max_after": 241.55,
+    "work": 0
+  },
+  {
+    "round": 2,
+    "phase": "ejection_chains",
+    "seconds": 2.238350519000001,
+    "total_before": 179765.23000000019,
+    "total_after": 179765.23000000019,
+    "total_reduction": 0.0,
+    "max_before": 241.55,
+    "max_after": 241.55,
+    "work": 0
+  },
+  {
+    "round": 0,
+    "phase": "chain_stage",
+    "seconds": 5.254655093,
+    "total_before": 180174.21000000022,
+    "total_after": 179765.23000000019,
+    "total_reduction": 408.9800000000396,
+    "max_before": 241.55,
+    "max_after": 241.55,
+    "work": -1
+  }
+]

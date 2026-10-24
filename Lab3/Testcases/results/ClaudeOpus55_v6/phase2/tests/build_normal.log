@@ -1,0 +1,26 @@
+[  3%] Building CXX object CMakeFiles/dp_core.dir/src/annealer.cpp.o
+[  6%] Linking CXX static library libdp_core.a
+[ 29%] Built target dp_core
+[ 41%] Building CXX object CMakeFiles/dp.dir/src/main.cpp.o
+[ 41%] Linking CXX executable optimizer_test
+[ 41%] Linking CXX executable multirow_test
+[ 41%] Linking CXX executable window_test
+[ 48%] Built target multirow_test
+[ 48%] Built target window_test
+[ 51%] Built target optimizer_test
+[ 61%] Linking CXX executable pool_test
+[ 61%] Linking CXX executable parallel_sa_test
+[ 61%] Linking CXX executable chain_test
+[ 64%] Built target pool_test
+[ 67%] Built target chain_test
+[ 70%] Built target parallel_sa_test
+[ 74%] Linking CXX executable global_test
+[ 77%] Linking CXX executable capsearch_test
+[ 80%] Linking CXX executable cap_windows_test
+[ 83%] Built target global_test
+[ 87%] Built target cap_windows_test
+[ 90%] Built target capsearch_test
+[ 93%] Linking CXX executable guard_test
+[ 96%] Built target guard_test
+[100%] Linking CXX executable dp
+[100%] Built target dp

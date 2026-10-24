@@ -1,0 +1,15 @@
+[cap-local] D 20.453091750 method 1 repair 0.489978 DP 0.969251 windows 175 remaining 2 raw 7174.686950 total 7075.227330 max 20.425840000 accepted
+[cap-local] D 19.710935600 method 3 repair 0.064643 DP 0.587264 windows 174 remaining 0 raw 7192.698150 total 7127.245130 max 19.706450000 total_budget
+[cap-local] D 20.068387800 method 3 repair 0.029031 DP 0.720067 windows 120 remaining 0 raw 7165.570390 total 7106.255090 max 20.040040000 total_budget
+[cap-local] D 20.247113900 method 3 repair 0.010546 DP 0.355183 windows 66 remaining 0 raw 7124.638230 total 7094.105470 max 20.239960000 total_budget
+[cap-local] D 20.336476950 method 3 repair 0.005128 DP 0.287155 windows 34 remaining 0 raw 7095.503870 total 7077.447610 max 20.318270000 accepted
+[cap-local] D 20.193820596 method 3 repair 0.003097 DP 0.260870 windows 20 remaining 0 raw 7101.516290 total 7076.263130 max 20.188060000 accepted
+[cap-local] D 20.014947385 method 3 repair 0.011352 DP 0.461665 windows 63 remaining 0 raw 7130.864470 total 7101.160050 max 20.013790000 total_budget
+[cap-local] D 20.101503693 method 3 repair 0.004508 DP 0.375300 windows 23 remaining 0 raw 7101.800290 total 7078.655730 max 20.096030000 accepted
+[cap-local] D 19.975403580 method 3 repair 0.009519 DP 0.213097 windows 54 remaining 0 raw 7124.680790 total 7105.692110 max 19.970680000 total_budget
+[cap-local] D 20.035716790 method 3 repair 0.005078 DP 0.152567 windows 30 remaining 0 raw 7107.449430 total 7096.450090 max 20.033940000 total_budget
+[cap-local] D 20.065873395 method 3 repair 0.004072 DP 0.208772 windows 22 remaining 0 raw 7097.640290 total 7086.244190 max 20.063820000 accepted
+[cap-local] D 20.021668422 method 3 repair 0.002660 DP 0.131110 windows 16 remaining 0 raw 7099.366470 total 7095.624070 max 20.006090000 total_budget
+[cap-local] D 20.042744211 method 3 repair 0.000491 DP 0.070435 windows 0 remaining 0 raw 7086.797610 total 7086.419530 max 20.039960000 accepted
+[cap-local] D 20.010488984 method 3 repair 0.002646 DP 0.079026 windows 16 remaining 0 raw 7098.988390 total 7095.624070 max 20.006090000 total_budget
+[cap] 14 attempts, 14 feasible, 6 accepted: max 20.977530 -> 20.039960, total 7042.6044 -> 7086.4195 (+0.622%)  5.52s

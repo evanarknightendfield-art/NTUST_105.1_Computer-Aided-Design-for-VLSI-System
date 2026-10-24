@@ -29,6 +29,7 @@ Testcases/
 ├── testcases/  holdout/  edge/  large/  ← 產生的測資（不進 git，./make_testcases.sh [--large] 重建）
 │     edge/ = 16 筆現有測資沒測到的情況（過擬合 / 穩健度檢查，結果比較在 results/edge/README.md）
 │     edge_seed2/ = 同一個產生器換 seed 的另一組（CodexChainDP 最後驗證用；gen_edge.py --seed 20261020）
+│     edge_seed3/ = 再換一個 seed（ClaudeOpus55_v5 最後驗證用；gen_edge.py --seed 20261021）
 └── results/<誰跑的>/<實驗>/           ← 任何程式跑出來的東西（git 只追蹤小的紀錄檔，見下面）
     ├── local_grade/<學號>/            ← Grader/tools/local_grade.py 的預設輸出（不進 git）
     ├── manual/                        ← 自己手動跑的輸出放這裡（不進 git）
@@ -50,6 +51,7 @@ Testcases/
 1. 這份 README
 2. `Project03.pdf`
 3. `AI_Solutions/COMPARISON.md`：各版本比較、離最佳解多遠、還能改良的地方
+   （v1 → v6 每一版做了什麼、進步多少的總表：`AI_Solutions/HISTORY.md`）
 4. 要改的那個版本的 `README.md` 和 `src/`
 5. 教學：`AI_Workspace/TUTORIAL.md`
 
@@ -72,6 +74,7 @@ Testcases/
 | `CodexWindowDP/` | Codex：v3 + 兩個 row 的子集合 DP（v4 的前一代） |
 | `ClaudeOpus55_v4/` | 兩 / 三個 row 的視窗 DP 跑到收斂、多執行緒 SA、每個階段都有時間預算（20 萬 cell 3 分鐘）。**HPWL 最好** |
 | `CodexChainDP/` | Codex：v4 + 最大位移的全域上限修復、ejection chain、多候選 swap。**位移最好**（最大位移比 v4 少 4.2%，總位移一樣）；同樣時間下 HPWL 比 v4 差約 1.5% |
+| `ClaudeOpus55_v5/` | ChainDP + SA 用滿時間、平行 merge 變便宜、row 重新分配的最大位移搜尋。同樣時間下 HPWL 比 v4 好約 1%；最大位移比 v4 少 4.3%、跟 ChainDP 平均差不多（逐筆互有勝負）。診斷在 `Testcases/results/ClaudeOpus55_v5/diagnosis.md` |
 
 已移除的版本：v2、v3、CodexGapSA、CodexParetoDP 的原始碼在 git 歷史裡，commit `e1fd81f`（lab3-01-CodexWindowDP）：
 `git show e1fd81f:Lab3/AI_Solutions/ClaudeOpus55_v2/README.md` 看，`git checkout e1fd81f -- Lab3/AI_Solutions/ClaudeOpus55_v2` 拿回來；

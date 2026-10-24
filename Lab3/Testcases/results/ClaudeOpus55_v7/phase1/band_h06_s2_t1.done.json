@@ -1,0 +1,21 @@
+{
+ "command": [
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/bin/sa_bench2_CPC",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/holdout/h06/h06",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase1/starts/h06/output",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/ClaudeOpus55_v7/phase1/band/band_h06_s2_t1",
+  "--seed",
+  "2",
+  "--moves",
+  "20000000.0",
+  "--time",
+  "100000.0",
+  "--polish",
+  "0",
+  "--threads",
+  "1"
+ ],
+ "returncode": 0,
+ "seconds": 18.23,
+ "finished": "Sat Oct 24 02:42:01 2026"
+}

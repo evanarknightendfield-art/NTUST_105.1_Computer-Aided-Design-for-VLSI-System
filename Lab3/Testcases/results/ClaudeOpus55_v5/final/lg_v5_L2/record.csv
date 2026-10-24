@@ -1,0 +1,2 @@
+bench,verdict,status,seconds,disp,max,hpwl_legal,hpwl_sa,legal_ok,sa_ok,missing,problems
+L2,PASS,OK,215.77,2045892835.5999,12381.58,2633124437.5,1669556062.0,True,True,,

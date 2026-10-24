@@ -1,0 +1,68 @@
+[pack] /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/lg_CodexParallelChain/submissions/CodexParallelChain.tgz  (54 files)
+       CodexParallelChain/CMakeLists.txt
+       CodexParallelChain/Makefile
+       CodexParallelChain/WORK_STATE.md
+       CodexParallelChain/src/annealer.cpp
+       CodexParallelChain/src/annealer.hpp
+       CodexParallelChain/src/capsearch.cpp
+       CodexParallelChain/src/capsearch.hpp
+       CodexParallelChain/src/chain.cpp
+       CodexParallelChain/src/chain.hpp
+       CodexParallelChain/src/global.cpp
+       CodexParallelChain/src/global.hpp
+       CodexParallelChain/src/guard.hpp
+       CodexParallelChain/src/legalizer.cpp
+       CodexParallelChain/src/legalizer.hpp
+       CodexParallelChain/src/main.cpp
+       CodexParallelChain/src/optimizer.cpp
+       CodexParallelChain/src/optimizer.hpp
+       CodexParallelChain/src/placedb.cpp
+       CodexParallelChain/src/placedb.hpp
+       CodexParallelChain/src/pool.hpp
+       CodexParallelChain/src/rowmap.hpp
+       CodexParallelChain/src/sa_bands.hpp
+       CodexParallelChain/src/window.cpp
+       CodexParallelChain/src/window.hpp
+       CodexParallelChain/tests/cap_chain_prototype.cpp
+       CodexParallelChain/tests/cap_chain_prototype.hpp
+       CodexParallelChain/tests/cap_search_bench.cpp
+       CodexParallelChain/tests/cap_windows_bench.cpp
+       CodexParallelChain/tests/cap_windows_test.cpp
+       CodexParallelChain/tests/capsearch_test.cpp
+       CodexParallelChain/tests/chain_test.cpp
+       CodexParallelChain/tests/compare_methods.cpp
+       CodexParallelChain/tests/diag_chaindp_global/driver.cpp
+       CodexParallelChain/tests/diag_chaindp_global/global_diag.cpp
+       CodexParallelChain/tests/diagnostic.hpp
+       CodexParallelChain/tests/diagnostic_capsearch.cpp
+       CodexParallelChain/tests/diagnostic_experiments.cpp
+       CodexParallelChain/tests/diagnostic_main.cpp
+       CodexParallelChain/tests/diagnostic_window.cpp
+       CodexParallelChain/tests/global_preserve_prototype.cpp
+       CodexParallelChain/tests/global_preserve_prototype.hpp
+       CodexParallelChain/tests/global_test.cpp
+       CodexParallelChain/tests/guard_test.cpp
+       CodexParallelChain/tests/multirow_test.cpp
+       CodexParallelChain/tests/optimizer_test.cpp
+       CodexParallelChain/tests/parallel_sa_test.cpp
+       CodexParallelChain/tests/pool_test.cpp
+       CodexParallelChain/tests/readpl.cpp
+       CodexParallelChain/tests/repair_compare.cpp
+       CodexParallelChain/tests/run_tests.py
+       CodexParallelChain/tests/sa_bench.cpp
+       CodexParallelChain/tests/sa_bench2.cpp
+       CodexParallelChain/tests/site_repair_bench.cpp
+       CodexParallelChain/tests/window_test.cpp
+[build] OK build/dp  13.2s
+[run] ibm01    PASS  OK          86.4s  disp=23102891.1707 max=10427.027 legal=87228318.0 sa=48890652.0
+[run] ibm05    PASS  OK         101.9s  disp=1327873.287 max=199.918 legal=11833433.5 sa=9529895.5
+[run] toy      PASS  OK           2.8s  disp=43324.4 max=2004.4 legal=104094.0 sa=46530.0
+[run] h01      PASS  OK          11.5s  disp=2358.81 max=29.39 legal=25492.0 sa=14031.5
+[run] h02      PASS  OK          24.0s  disp=463886.857 max=2526.519 legal=3785092.0 sa=2282312.7
+[run] h03      PASS  OK          23.1s  disp=7066.0491 max=20.2013 legal=26511.7 sa=12022.3
+[run] h04      PASS  OK          33.0s  disp=180389.07 max=237.85 legal=534157.0 sa=230546.5
+[run] h05      PASS  OK          26.2s  disp=1551488.48 max=1337.305 legal=26205137.2 sa=17952305.4
+[run] h06      PASS  OK          95.2s  disp=886834.3 max=435.19 legal=2149816.0 sa=662041.0
+[run] h07      PASS  OK          87.8s  disp=109216.1864 max=47.6762 legal=354364.932 sa=162549.006
+[run] h08      PASS  OK         123.6s  disp=125447760.379 max=28282.309 legal=308642630.3 sa=99044573.6
+[summary] 11/11 PASS  →  /home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/final/lg_CodexParallelChain/record.csv

@@ -1,0 +1,4 @@
+e12_collapse: 3623 movable, P total 322246.9730 max 233.0000, cap 228.259: 97 violators
+  box 1:8: 633 cells, 21615 columns -> infeasible total None (103.8s)
+  box 1:16: 742 cells, 51125 columns -> infeasible total None (415.5s)
+  box 2:16: 966 cells, 111416 columns -> unknown_status1 total None (790.9s)

@@ -1,0 +1,13 @@
+{
+  "pid": 4,
+  "command": [
+    "nohup",
+    "taskset",
+    "-c",
+    "16-19",
+    "/home/evan/anaconda3/bin/python3",
+    "-u",
+    "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/Testcases/results/CodexParallelChain/scripts/diag.py"
+  ],
+  "progress_checked": false
+}
