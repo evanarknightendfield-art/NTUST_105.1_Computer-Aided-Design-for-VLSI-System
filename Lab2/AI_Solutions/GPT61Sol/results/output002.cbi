@@ -1,0 +1,8 @@
+.buffer 1
+B1 LARGE 46 48
+.e
+
+.level 2
+1 SRC:{B1 S4}
+2 B1:{S5 S2 S1 S3}
+.e

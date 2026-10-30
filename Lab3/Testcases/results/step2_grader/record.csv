@@ -1,0 +1,12 @@
+case,change,checker,expected,ok,first_problem
+GOOD,參考解的 Stage 1 輸出,LEGAL,LEGAL,True,2575.6 (total disp)
+BAD_OVERLAP,c1 搬到 c0 的位置,ILLEGAL,ILLEGAL,True,c0 overlaps c1 in row y=64.0
+BAD_OFF_SITE,c0 的 x 偏半個 site,ILLEGAL,ILLEGAL,True,"c0 at (133.5, 64.0) is off-site or outside every subrow"
+BAD_OFF_ROW,c0 的 y 偏半個 row,ILLEGAL,ILLEGAL,True,c0 y=72.0 is not on a row
+BAD_OUTSIDE,c0 超出 row 的右端,ILLEGAL,ILLEGAL,True,"c0 at (1000000.0, 64.0) is off-site or outside every subrow"
+BAD_IN_GAP,c0 放在 split row 的缺口（兩個 subrow 中間）,ILLEGAL,ILLEGAL,True,"c0 at (153.0, 0.0) is off-site or outside every subrow"
+BAD_ON_MACRO,c0 疊在 fixed macro m0 上,ILLEGAL,ILLEGAL,True,c0 overlaps m0 in row y=80.0
+BAD_FIXED_MOVED,fixed macro m0 被移動,ILLEGAL,ILLEGAL,True,fixed m0 moved
+BAD_ORIENT,c0 的方向 N → FS,ILLEGAL,ILLEGAL,True,c0 orientation changed N -> FS
+BAD_MISSING_CELL,c0 那一行被刪掉,ILLEGAL,ILLEGAL,True,c0 missing from output
+NO_OUTPUT,沒有產生輸出檔,ILLEGAL,ILLEGAL,True,output_legal.pl not found

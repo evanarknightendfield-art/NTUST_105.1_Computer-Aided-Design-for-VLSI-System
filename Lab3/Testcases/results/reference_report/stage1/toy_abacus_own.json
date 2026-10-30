@@ -1,0 +1,16 @@
+{
+ "bench": "toy",
+ "tag": "abacus_own",
+ "args": [
+  "--own-cost",
+  "--no-refine",
+  "--no-sa"
+ ],
+ "seconds": 0.002560853958129883,
+ "returncode": 0,
+ "total_disp": 49700.6,
+ "max_disp": 2548.0,
+ "hpwl_legal": 112356.0,
+ "hpwl_sa": 112356.0,
+ "stderr": ""
+}

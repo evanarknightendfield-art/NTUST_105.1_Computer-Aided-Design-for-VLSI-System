@@ -1,0 +1,89 @@
+# C++ / CMake build artifacts
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local grader runtime artifacts
+/Lab2/Grader/step2_grader/local_run/
+/Lab2/Grader/local_grade_*/
+
+# Generated testcases (regenerate with Lab2/Testcases/make_testcases.sh)
+/Lab2/Testcases/*/
+
+# Generated results from student projects
+/Lab2/MyCode/*/results/
+/Lab2/M*/results/
+/Lab2/B*/results/
+
+# Lab3: testcases AND everything produced by running programs live under
+# Lab3/Testcases/ (layout in Lab3/README.md).
+# Testcases are not tracked: Lab3/Testcases/make_testcases.sh rebuilds / downloads them.
+/Lab3/Testcases/testcases/
+/Lab3/Testcases/holdout/
+/Lab3/Testcases/edge*/
+/Lab3/Testcases/ibm-place2/
+/Lab3/Testcases/large/
+# Run outputs: only the small records are tracked (tables, csv records, json
+# summaries, logs, stdout, figures, scripts). Placements (.pl), per-run SA
+# traces, binaries, extracted packages, source snapshots and the input copies
+# dp writes next to every output stay on disk only.
+/Lab3/Testcases/results/**
+!/Lab3/Testcases/results/**/
+!/Lab3/Testcases/results/**/*.md
+!/Lab3/Testcases/results/**/*.csv
+!/Lab3/Testcases/results/**/*.json
+!/Lab3/Testcases/results/**/*.log
+!/Lab3/Testcases/results/**/*.txt
+!/Lab3/Testcases/results/**/*.png
+!/Lab3/Testcases/results/**/*.py
+!/Lab3/Testcases/results/**/*.sh
+!/Lab3/Testcases/results/**/.gitkeep
+/Lab3/Testcases/results/**/trace.csv
+/Lab3/Testcases/results/**/*.trace.csv
+/Lab3/Testcases/results/**/*.polish.csv
+/Lab3/Testcases/results/**/CMakeFiles/
+/Lab3/Testcases/results/**/CMakeCache.txt
+/Lab3/Testcases/results/**/home/
+/Lab3/Testcases/results/**/submissions/
+/Lab3/Testcases/results/local_grade/
+/Lab3/Testcases/results/manual/
+# manual runs anywhere, and the dp binary `make` leaves in a solution folder
+/Lab3/**/out/
+/Lab3/AI_Solutions/*/dp
+
+# Everything else is tracked: source code, reports, examples and course PDFs.
+
+# Editor and operating system temporary files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Local secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+.aws/

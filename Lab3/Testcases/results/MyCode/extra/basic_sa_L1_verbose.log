@@ -1,0 +1,11 @@
+== v3 large/L1/L1 -v
+[legal] abacus  total 4113200221.0  max 117643.6
+Total displacement (legal): 4113200221.044
+Maximum displacement (legal): 117643.608
+Total HPWL (legal): 4767648614.6
+[sa] HPWL 4767648615  T0 1.939e+05  alpha 0.9333  400000000 moves in 100 steps  window 12085 x 12121
+[sa] step   0  T 1.939e+05  acc 0.282  cur 12857342751  best 4767648615  2.6s
+[sa] time limit reached (T = 6.881e+04, T0 = 1.939e+05)
+[done] 50.34s
+Total HPWL (SA): 4767648614.6
+wall 50.43s

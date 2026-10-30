@@ -1,0 +1,1 @@
+15 verified pairs; wins/ties/losses=6/4/5; geometric ratio=0.999451

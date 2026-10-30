@@ -1,0 +1,87 @@
+# Grader — 檢查與評分工具
+
+Project 3 沒有給 TA 的 grader / verifier，這裡是自己做的版本。
+
+| 路徑 | 內容 |
+|---|---|
+| `tools/check_pl.py` | **獨立檢查器**：合法性（row、site、subrow、重疊、fixed 物件、方向）＋總位移、最大位移、HPWL |
+| `tools/plot_pl.py` | 畫 placement（`--heat` 位移熱圖、`--arrows N` 位移最大的 N 個箭頭、`--window` 放大） |
+| `tools/plot_trace.py` | 畫 SA 的 current / best-so-far 曲線（`dp --trace` 的 CSV） |
+| `tools/local_grade.py` | 模擬繳交：打包 tgz → 解壓 → 編譯 → 每筆測資執行 → 檢查 |
+| `tools/gen_bench.py` | 產生 Bookshelf 測資（`Testcases/large/` 就是它產生的；以前的 holdout 也是，`--suite DIR --seed 2026`） |
+| `tools/gen_edge.py` | 產生 16 筆「現有測資沒測到的情況」（以前的 `Testcases/edge/`，已刪除；`gen_edge.py Testcases/edge --check` 可重建）；先排出保證合法的 placement 再推出 global placement，`--check` 會驗證並留下 `NAME_ref.pl` |
+| `tools/exact_bound.py` | Stage 1 的**下界 / 最佳解**：site 層級的 LP（column generation）＝總位移下界；`--ilp` 整數規劃；`--full` 列舉上限內所有位置（完整模型，`--ilp` 才是證明過的最佳解）；`--max` 最大位移的 LP 下界、`--max-ilp` 最大位移的精確最小值；`--cap -1` 限制最大位移不超過自己的（公平比較）。需要 scipy（`/home/evan/anaconda3/bin/python3`） |
+| `tools/lower_bound.py` | 比較粗的 bin 版下界（很鬆，只當參考） |
+| `step2_grader/run_demo.py` | 示範：檢查器對 1 個正確、10 個故意做錯的輸出的判斷；結果在 `../Testcases/results/step2_grader/`（`record.csv`） |
+
+跑出來的東西都不放在這裡：`local_grade.py` 的輸出預設在 `../Testcases/results/local_grade/<SID>/`（不放進 git），
+step2_grader 的輸入和結果在 `../Testcases/results/step2_grader/`。
+
+## 常用指令
+
+```bash
+cd Lab3
+
+# 檢查一個輸出
+python3 Grader/tools/check_pl.py Testcases/testcases/ibm01/ibm01 out/ibm01_legal.pl
+
+# 模擬繳交：課程 3 筆（再加 ibm-place2 的 16 筆：把 Testcases/ibm-place2 加在後面）
+python3 Grader/tools/local_grade.py M11502102 M11502102 Testcases/testcases
+```
+
+`local_grade.py` 每筆測資會在 `Testcases/results/local_grade/<SID>/results/<SID>/<bench>/` 執行 `dp <bench> output`（跟 PDF 範例一樣），
+然後檢查：
+
+1. 7 個輸出檔都有（`output.{aux,nodes,nets,wts,scl,pl}`、`output_legal.pl`）
+2. stdout 有 4 行，而且數字跟 `check_pl.py` 算的一樣
+3. `output_legal.pl`、`output.pl` 都合法
+4. `Total HPWL (SA) <= Total HPWL (legal)`
+
+結果在 `Testcases/results/local_grade/<SID>/record.csv`（每筆）、`summary.csv`、`logs/<SID>.log`（編譯和執行的完整輸出）；
+要交的檔案在 `Testcases/results/local_grade/<SID>/submissions/<SID>.tgz`。
+
+參考解的結果：課程 3 筆 PASS（ibm05 最久，約 41 秒；以前的 holdout 8 筆也全 PASS）。
+
+## 離最佳解還有多遠（Stage 1）
+
+```bash
+P=/home/evan/anaconda3/bin/python3          # 有 scipy 的環境
+# 最大位移不變的前提下，總位移的最佳解（完整模型、零 gap → 印 OPTIMAL 才算證明）
+$P Grader/tools/exact_bound.py Testcases/testcases/toy/toy out/toy_legal.pl --cap -1 --full --ilp
+# 最大位移能低到多少：LP 下界 + 整數規劃二分出的精確最小值（h01 約 15 分鐘）
+$P Grader/tools/exact_bound.py Testcases/testcases/toy/toy out/toy_legal.pl --max --max-ilp
+```
+
+- `total displacement: LP lower bound` 一定 ≤ 任何合法解的總位移。
+- `ILP ... [OPTIMAL (complete model, zero gap)]` 才是證明過的最佳解；沒加 `--full` 時只在 column generation
+  留下的位置上解，結果標成 `upper bound (restricted columns)`，只是一個可行解。
+- `--cap -1`：只允許位移 ≤ 自己的最大位移 → 「在最大位移不變的前提下，總位移最低能到多少」。
+- 1000 個 cell 以上會很慢（h02 的 ILP 要 10 分鐘以上），大設計只能算 LP 或放棄。
+
+**2026-10-19 修正**：晶片左邊外面的 pad 讓 numpy 切片的右端變負數，
+把那幾個 row 幾乎整條封住；`--max` 原本在「column generation 留下的位置」上判斷不可行，那不代表真的不可行；
+MIP 用的是 HiGHS 預設的非零 gap。三個都改了：兩端都夾在 `[0, ns]`、`--max` 每一步列舉完整的位置集合、
+MIP gap 設 0。舊版用這支工具得到的「最大位移離下界 2 ~ 4%」等結論已經在 `AI_Solutions/COMPARISON.md` 更正。
+
+結果整理在 `AI_Solutions/COMPARISON.md`。
+
+## step2_grader
+
+```bash
+cmake -S AI_Solutions/ClaudeOpus55 -B AI_Solutions/ClaudeOpus55/build && cmake --build AI_Solutions/ClaudeOpus55/build   # 用參考解產生 GOOD
+cd Grader/step2_grader && python3 run_demo.py     # 輸出到 Testcases/results/step2_grader/
+```
+
+| case | 改了什麼 | check_pl.py |
+|---|---|---|
+| GOOD | 參考解在 h01 的 Stage 1 輸出 | LEGAL |
+| BAD_OVERLAP | 一個 cell 搬到另一個 cell 上 | overlaps |
+| BAD_OFF_SITE | x 偏半個 site | off-site |
+| BAD_OFF_ROW | y 偏半個 row | not on a row |
+| BAD_OUTSIDE | 超出 row 的右端 | outside every subrow |
+| BAD_IN_GAP | 放在 split row 的缺口 | outside every subrow |
+| BAD_ON_MACRO | 疊在 fixed macro 上 | overlaps m0 |
+| BAD_FIXED_MOVED | fixed macro 被移動 | fixed moved |
+| BAD_ORIENT | 方向 N → FS | orientation changed |
+| BAD_MISSING_CELL | 少了一行 | missing |
+| NO_OUTPUT | 沒有輸出檔 | not found |

@@ -1,0 +1,12 @@
+== nolowp0 large/L1/L1 --p0-low 0 0.05
+Total displacement (legal): 4106534032.3721
+Maximum displacement (legal): 59240.394
+Total HPWL (legal): 5265772161.2
+Total HPWL (SA): 2765979580.4
+wall 49.22s
+== nolowp0 large/L2/L2 --p0-low 0 0.05
+Total displacement (legal): 2086974997.5999
+Maximum displacement (legal): 14297.73
+Total HPWL (legal): 2849868244
+Total HPWL (SA): 2629338036
+wall 48.13s

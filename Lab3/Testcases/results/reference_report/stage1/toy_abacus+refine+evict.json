@@ -1,0 +1,14 @@
+{
+ "bench": "toy",
+ "tag": "abacus+refine+evict",
+ "args": [
+  "--no-sa"
+ ],
+ "seconds": 0.003262042999267578,
+ "returncode": 0,
+ "total_disp": 46619.2,
+ "max_disp": 1987.6,
+ "hpwl_legal": 101556.0,
+ "hpwl_sa": 101556.0,
+ "stderr": ""
+}

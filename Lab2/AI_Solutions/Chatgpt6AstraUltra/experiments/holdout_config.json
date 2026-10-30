@@ -1,0 +1,122 @@
+[
+  {
+    "n": 30,
+    "dim": 150,
+    "lscale": 1,
+    "lib": "wide",
+    "dist": "uniform",
+    "w": 1,
+    "srcF": 1,
+    "seed": 612880
+  },
+  {
+    "n": 120,
+    "dim": 500,
+    "lscale": 1,
+    "lib": "default",
+    "dist": "uniform",
+    "w": 3,
+    "srcF": 2,
+    "seed": 612881
+  },
+  {
+    "n": 500,
+    "dim": 800,
+    "lscale": 2,
+    "lib": "default",
+    "dist": "uniform",
+    "w": 10,
+    "srcF": 4,
+    "seed": 612882
+  },
+  {
+    "n": 1800,
+    "dim": 1800,
+    "lscale": 3,
+    "lib": "wide",
+    "dist": "uniform",
+    "w": 1,
+    "srcF": 1,
+    "seed": 612883
+  },
+  {
+    "n": 4000,
+    "dim": 3000,
+    "lscale": 4,
+    "lib": "default",
+    "dist": "uniform",
+    "w": 3,
+    "srcF": 2,
+    "seed": 612884
+  },
+  {
+    "n": 8000,
+    "dim": 4000,
+    "lscale": 5,
+    "lib": "default",
+    "dist": "uniform",
+    "w": 10,
+    "srcF": 4,
+    "seed": 612885
+  },
+  {
+    "n": 30,
+    "dim": 150,
+    "lscale": 1,
+    "lib": "wide",
+    "dist": "cluster",
+    "w": 1,
+    "srcF": 1,
+    "seed": 612886
+  },
+  {
+    "n": 120,
+    "dim": 500,
+    "lscale": 1,
+    "lib": "default",
+    "dist": "cluster",
+    "w": 3,
+    "srcF": 2,
+    "seed": 612887
+  },
+  {
+    "n": 500,
+    "dim": 800,
+    "lscale": 2,
+    "lib": "default",
+    "dist": "cluster",
+    "w": 10,
+    "srcF": 4,
+    "seed": 612888
+  },
+  {
+    "n": 1800,
+    "dim": 1800,
+    "lscale": 3,
+    "lib": "wide",
+    "dist": "cluster",
+    "w": 1,
+    "srcF": 1,
+    "seed": 612889
+  },
+  {
+    "n": 4000,
+    "dim": 3000,
+    "lscale": 4,
+    "lib": "default",
+    "dist": "cluster",
+    "w": 3,
+    "srcF": 2,
+    "seed": 612890
+  },
+  {
+    "n": 8000,
+    "dim": 4000,
+    "lscale": 5,
+    "lib": "default",
+    "dist": "cluster",
+    "w": 10,
+    "srcF": 4,
+    "seed": 612891
+  }
+]

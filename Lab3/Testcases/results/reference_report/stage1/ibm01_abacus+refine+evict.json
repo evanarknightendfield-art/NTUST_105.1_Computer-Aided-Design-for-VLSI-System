@@ -1,0 +1,14 @@
+{
+ "bench": "ibm01",
+ "tag": "abacus+refine+evict",
+ "args": [
+  "--no-sa"
+ ],
+ "seconds": 1.1103270053863525,
+ "returncode": 0,
+ "total_disp": 27235500.7959,
+ "max_disp": 10578.29,
+ "hpwl_legal": 90945258.0,
+ "hpwl_sa": 90945258.0,
+ "stderr": ""
+}

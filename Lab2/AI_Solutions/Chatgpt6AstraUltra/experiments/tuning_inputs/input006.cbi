@@ -1,0 +1,121 @@
+.limit
+fanout 1		# maximum fanouts for SRC
+length 700	# maximum length for SRC
+.dimx 1000	# chip dimension in x-axis
+.dimy 1000	# chip dimension in y-axis
+.e
+
+.buflib 3
+# type	#F	#L	#C #fanout/length/cost
+SMALL	3	90	10
+MEDIUM	6	120	16
+LARGE	9	190	22
+.e
+
+.objective
+w_skew 1
+.e
+
+.pin 101		# number of pins
+72 392		# clock SRC coordinates
+178 553		# clock sink S1 coordinates
+417 129		# clock sink S2 coordinates
+617 966		# clock sink S3 coordinates
+768 225		# clock sink S4 coordinates
+648 394		# clock sink S5 coordinates
+605 364		# clock sink S6 coordinates
+148 70		# clock sink S7 coordinates
+918 76		# clock sink S8 coordinates
+548 854		# clock sink S9 coordinates
+350 942		# clock sink S10 coordinates
+924 892		# clock sink S11 coordinates
+830 610		# clock sink S12 coordinates
+661 148		# clock sink S13 coordinates
+876 347		# clock sink S14 coordinates
+366 213		# clock sink S15 coordinates
+484 586		# clock sink S16 coordinates
+432 850		# clock sink S17 coordinates
+648 672		# clock sink S18 coordinates
+660 883		# clock sink S19 coordinates
+327 415		# clock sink S20 coordinates
+387 77		# clock sink S21 coordinates
+805 307		# clock sink S22 coordinates
+144 771		# clock sink S23 coordinates
+433 284		# clock sink S24 coordinates
+903 470		# clock sink S25 coordinates
+242 10		# clock sink S26 coordinates
+904 652		# clock sink S27 coordinates
+362 900		# clock sink S28 coordinates
+579 781		# clock sink S29 coordinates
+627 386		# clock sink S30 coordinates
+77 274		# clock sink S31 coordinates
+488 261		# clock sink S32 coordinates
+336 536		# clock sink S33 coordinates
+637 518		# clock sink S34 coordinates
+374 680		# clock sink S35 coordinates
+346 690		# clock sink S36 coordinates
+358 73		# clock sink S37 coordinates
+785 933		# clock sink S38 coordinates
+836 858		# clock sink S39 coordinates
+892 911		# clock sink S40 coordinates
+638 824		# clock sink S41 coordinates
+22 967		# clock sink S42 coordinates
+29 62		# clock sink S43 coordinates
+367 136		# clock sink S44 coordinates
+863 627		# clock sink S45 coordinates
+969 813		# clock sink S46 coordinates
+273 197		# clock sink S47 coordinates
+978 785		# clock sink S48 coordinates
+848 712		# clock sink S49 coordinates
+703 122		# clock sink S50 coordinates
+476 600		# clock sink S51 coordinates
+832 239		# clock sink S52 coordinates
+925 739		# clock sink S53 coordinates
+52 609		# clock sink S54 coordinates
+319 843		# clock sink S55 coordinates
+982 943		# clock sink S56 coordinates
+155 533		# clock sink S57 coordinates
+698 802		# clock sink S58 coordinates
+544 588		# clock sink S59 coordinates
+196 920		# clock sink S60 coordinates
+445 796		# clock sink S61 coordinates
+257 395		# clock sink S62 coordinates
+955 995		# clock sink S63 coordinates
+675 597		# clock sink S64 coordinates
+653 877		# clock sink S65 coordinates
+5 469		# clock sink S66 coordinates
+620 29		# clock sink S67 coordinates
+912 489		# clock sink S68 coordinates
+434 28		# clock sink S69 coordinates
+20 822		# clock sink S70 coordinates
+38 480		# clock sink S71 coordinates
+47 463		# clock sink S72 coordinates
+446 809		# clock sink S73 coordinates
+947 472		# clock sink S74 coordinates
+916 136		# clock sink S75 coordinates
+123 994		# clock sink S76 coordinates
+560 748		# clock sink S77 coordinates
+66 819		# clock sink S78 coordinates
+843 387		# clock sink S79 coordinates
+284 977		# clock sink S80 coordinates
+282 102		# clock sink S81 coordinates
+336 498		# clock sink S82 coordinates
+177 662		# clock sink S83 coordinates
+411 847		# clock sink S84 coordinates
+935 94		# clock sink S85 coordinates
+653 971		# clock sink S86 coordinates
+992 767		# clock sink S87 coordinates
+456 197		# clock sink S88 coordinates
+435 285		# clock sink S89 coordinates
+74 312		# clock sink S90 coordinates
+275 900		# clock sink S91 coordinates
+539 689		# clock sink S92 coordinates
+810 170		# clock sink S93 coordinates
+920 541		# clock sink S94 coordinates
+799 158		# clock sink S95 coordinates
+34 393		# clock sink S96 coordinates
+892 706		# clock sink S97 coordinates
+223 986		# clock sink S98 coordinates
+886 185		# clock sink S99 coordinates
+304 733		# clock sink S100 coordinates
+.e

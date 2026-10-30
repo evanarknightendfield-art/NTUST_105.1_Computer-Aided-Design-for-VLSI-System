@@ -1,0 +1,17 @@
+{
+ "bench": "ibm01",
+ "tag": "tetris",
+ "args": [
+  "--legalizer",
+  "tetris",
+  "--no-refine",
+  "--no-sa"
+ ],
+ "seconds": 0.04129528999328613,
+ "returncode": 1,
+ "total_disp": null,
+ "max_disp": null,
+ "hpwl_legal": null,
+ "hpwl_sa": null,
+ "stderr": "error: no room for a6614\n"
+}

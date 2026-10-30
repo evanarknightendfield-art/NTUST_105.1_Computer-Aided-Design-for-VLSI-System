@@ -1,0 +1,53 @@
+{
+  "platform": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "threads": 2,
+  "cpu_affinity": [
+    0,
+    1
+  ],
+  "files": {
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/balance.cpp": "7c9e72c362018ad320f8366e5aa414bee087b1f47b8b493d425ea9eb01779b9c",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/balance.h": "0f0fd68a78daa4f3bb73472c68191780045d227a488d7b25782098844a1040f8",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/construct.cpp": "03579776a2c8f5f6bf2be7d766c545e324f5111d3b1f3d88e20f7830a5c19570",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/construct.h": "78da20edb41d5c3ff4447f08eb99c2364fd599782eb8a5d02a0e8258511028e3",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/main.cpp": "70e5ae0c21d13f01f13740fbbacec8aebb521159aeae395ddba6f9cc65788422",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/optimizer.cpp": "6731b9e5e167dc205302b4793431049c7cf1bd9e41623ffa3c9a55a12f46928f",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/optimizer.h": "90f9160c5a94a2061e87d1e4ed49788502748dbfcaa598657db8114655f81867",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/parallel.cpp": "070fe151cf4f48806d53f41a11875652769ae985d93646a5c7d472beb9bb3818",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/parallel.h": "3d7cfbe577cac8ca624c9c2e56054ec8f54aabba35add843cc23f291f9ccd546",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/placement.cpp": "aecb89932845258806373c5375ef2a24b6b6f98d89a33c9c9b643bc83b5c076c",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/placement.h": "ff8a92953bf4e6dd29997045e720b00a322eca431b9a8a5a4968a3757840c2e2",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/problem.cpp": "553bfeaf57c4d75052252615703dc91931f9818fc0f0e41172090f2609e6cb17",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/problem.h": "409aab8c8c3576df9c7f95fd55cdfaa1021ddfbac6f3fe482f12309debb7f3e4",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/solution_io.cpp": "0dd25bd6d2b23206feb9fe222bf5d8c402297f243b51d5017eb9d3d3d155424f",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/solution_io.h": "0a4040a92cbcd14cacbb723940dbdcd2934643dca65073b183d6178995485c1e",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/tree.cpp": "8fbc9af424d1365becc87c1b6c3225721297cbd603c42bf16cf9f38d962c9c04",
+    "Lab2/M11502102_ClaudeOpus55Ultracode_2/src/tree.h": "85a39cc64444cfcd661d4b0e0f333e40ba740d11bfc6bfd7a32f563b6c059ae3",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/balance.cpp": "1cc83523a52ca2b0b00d809485cd860cd0357b4a962158c985fc44eab7cf3279",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/balance.h": "0f0fd68a78daa4f3bb73472c68191780045d227a488d7b25782098844a1040f8",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/construct.cpp": "03579776a2c8f5f6bf2be7d766c545e324f5111d3b1f3d88e20f7830a5c19570",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/construct.h": "9e463d507e2e83c1dc6ebb480cacfe02da630a09de4a71026fed41028c61b272",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/construct_spatial.cpp": "f40c3c9ce7a91faf04fd1ed3d8526108bb2552b4d06d76f60b64f4df56c831bf",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/diamond.h": "20ab831546213c73e8ba94fb32fc60c5814fa66fa6c8deb2fbdadc7bb70e5553",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/exact_placement.cpp": "57d956e701f2fd459cdce280d45f2523ac1c423f7764a7311f4ab7e22162f516",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/exact_placement.h": "fecd54a6fca5ede29f5d14c8fe116441d19831a75454b61f96734e8bd65825ce",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/main.cpp": "adc914c894ec7903b6ad8bccf3aa4386472c1c082ec83b8aaa090d7c5ae901a7",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/optimizer.cpp": "40de07c00796fdce658610b236f982d3e92ade5a648c9baba7c0dbf6ba309274",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/optimizer.h": "90f9160c5a94a2061e87d1e4ed49788502748dbfcaa598657db8114655f81867",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/parallel.cpp": "070fe151cf4f48806d53f41a11875652769ae985d93646a5c7d472beb9bb3818",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/parallel.h": "3d7cfbe577cac8ca624c9c2e56054ec8f54aabba35add843cc23f291f9ccd546",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/placement.cpp": "aecb89932845258806373c5375ef2a24b6b6f98d89a33c9c9b643bc83b5c076c",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/placement.h": "ff8a92953bf4e6dd29997045e720b00a322eca431b9a8a5a4968a3757840c2e2",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/problem.cpp": "553bfeaf57c4d75052252615703dc91931f9818fc0f0e41172090f2609e6cb17",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/problem.h": "409aab8c8c3576df9c7f95fd55cdfaa1021ddfbac6f3fe482f12309debb7f3e4",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/solution_io.cpp": "0dd25bd6d2b23206feb9fe222bf5d8c402297f243b51d5017eb9d3d3d155424f",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/solution_io.h": "0a4040a92cbcd14cacbb723940dbdcd2934643dca65073b183d6178995485c1e",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/tree.cpp": "57605d40cb8136c1a9f6319c5222f8ac2f8b02eefec6f889d9f0afb46c4b594f",
+    "Lab2/M11502102_Chatgpt6AstraUltra/src/tree.h": "a37b458a4f8e24481aae331538e58bdbd669152252cdfcc79553a228535861e0"
+  },
+  "binaries": {
+    "/tmp/astra_ultra_baseline/cbi": "837f618937e83591a2de7a21a865042d00f3256aa01d756ac8cc722225f8c3a6",
+    "Lab2/M11502102_Chatgpt6AstraUltra/build/cbi": "b832d978ef5b4a6a30dee4e29f0290569ef6f4e6a71d82159ec7c1c3e75e39fe"
+  }
+}

@@ -1,0 +1,9 @@
+.buffer 2
+B1 MEDIUM 60 61
+B2 SMALL 77 38
+.e
+
+.level 2
+1 SRC:{B1 B2}
+2 B1:{S1 S3 S5} B2:{S2 S4}
+.e

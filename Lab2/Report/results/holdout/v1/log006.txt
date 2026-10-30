@@ -1,0 +1,2 @@
+T_max: 1207, T_min: 258, Score: 3631
+[stage1] legal=1 buffers=37 cost=784 skew=949 T_max=1207 T_min=258 score=3631 time=0.00s

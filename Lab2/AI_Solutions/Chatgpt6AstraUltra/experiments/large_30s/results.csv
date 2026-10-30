@@ -1,0 +1,2 @@
+input,seed,budget,baseline_seconds,baseline,candidate_seconds,candidate,ratio
+input001.cbi,1,30.0,30.1185,281768,30.1124,281142,0.99777831407399

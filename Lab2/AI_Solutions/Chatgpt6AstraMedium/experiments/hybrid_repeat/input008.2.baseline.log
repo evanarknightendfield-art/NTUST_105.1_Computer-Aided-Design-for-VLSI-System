@@ -1,0 +1,9 @@
+[input] sinks=1000 chip=1000x1000 buflib=3 w_skew=3 SRC(F=2,L=900)
+[stage1-construct(attach-early)] legal=1 buffers=204 cost=3840 skew=156 T_max=1544 T_min=1388 score=4308 levels=12 time=0.00s
+  (+11 delay buffers)
+[stage2-balance(attach-early)] legal=1 buffers=215 cost=3950 skew=97 T_max=1544 T_min=1447 score=4241 levels=13 time=0.00s
+[stage1-construct(single-root)] legal=1 buffers=204 cost=3840 skew=156 T_max=1544 T_min=1388 score=4308 levels=12 time=0.00s
+  (+11 delay buffers)
+[stage2-balance(single-root)] legal=1 buffers=215 cost=3950 skew=97 T_max=1544 T_min=1447 score=4241 levels=13 time=0.01s
+[anneal run 1/1] score=3546 iterations=2208512 accepted=13.0% 737368 it/s
+[stage3-anneal] legal=1 buffers=192 cost=3390 skew=52 T_max=1383 T_min=1331 score=3546 levels=13 time=3.00s

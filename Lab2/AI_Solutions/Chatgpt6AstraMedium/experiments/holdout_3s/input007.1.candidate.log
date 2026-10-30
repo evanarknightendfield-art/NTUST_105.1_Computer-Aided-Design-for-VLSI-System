@@ -1,0 +1,10 @@
+[input] sinks=250 chip=700x700 buflib=3 w_skew=1 SRC(F=2,L=630)
+[stage1-construct(attach-early)] legal=1 buffers=36 cost=750 skew=174 T_max=1249 T_min=1075 score=924 levels=5 time=0.00s
+  (+0 delay buffers)
+[stage2-balance(attach-early)] legal=1 buffers=36 cost=750 skew=174 T_max=1249 T_min=1075 score=924 levels=5 time=0.00s
+[stage1-construct(single-root)] legal=1 buffers=36 cost=750 skew=174 T_max=1249 T_min=1075 score=924 levels=5 time=0.00s
+  (+0 delay buffers)
+[stage2-balance(single-root)] legal=1 buffers=36 cost=750 skew=174 T_max=1249 T_min=1075 score=924 levels=5 time=0.00s
+[anneal run 1/2] score=815 iterations=1188352 accepted=14.2% 792510 it/s
+[anneal run 2/2] score=810 iterations=1257216 accepted=10.8% 838519 it/s
+[stage3-anneal] legal=1 buffers=37 cost=742 skew=68 T_max=1074 T_min=1006 score=810 levels=6 time=3.00s

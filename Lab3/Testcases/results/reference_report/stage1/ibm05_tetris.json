@@ -1,0 +1,17 @@
+{
+ "bench": "ibm05",
+ "tag": "tetris",
+ "args": [
+  "--legalizer",
+  "tetris",
+  "--no-refine",
+  "--no-sa"
+ ],
+ "seconds": 0.12110280990600586,
+ "returncode": 0,
+ "total_disp": 2606792.5751,
+ "max_disp": 1027.04,
+ "hpwl_legal": 12101833.0,
+ "hpwl_sa": 12101833.0,
+ "stderr": ""
+}

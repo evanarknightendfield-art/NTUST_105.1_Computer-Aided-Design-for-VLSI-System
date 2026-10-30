@@ -1,0 +1,20 @@
+[Unit]
+Description=Run grader executor once and power off
+# 只有 host 放入 executor.py 時才執行, 避免維護 base image 時開機就關機
+ConditionPathExists=/opt/grader/executor.py
+After=local-fs.target
+# 跑完不論成敗都關機, host 端等 qemu 結束
+SuccessAction=poweroff
+FailureAction=poweroff
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/grade.sh
+# systemd 預設服務啟動超過 90 秒會被砍掉, grade.sh 會跑好幾分鐘, 因此取消限制
+# 整體時間上限改由 host 端的 timeout 控制
+TimeoutStartSec=infinity
+StandardOutput=journal+console
+StandardError=journal+console
+
+[Install]
+WantedBy=multi-user.target

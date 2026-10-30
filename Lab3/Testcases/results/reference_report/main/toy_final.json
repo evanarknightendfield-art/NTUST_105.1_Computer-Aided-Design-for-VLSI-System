@@ -1,0 +1,15 @@
+{
+ "bench": "toy",
+ "tag": "final",
+ "args": [
+  "--trace",
+  "/home/evan/Desktop/NTUST/105_1/Class/Computer_Aided_Design_for_VLSI_System/Lab3/AI_Workspace/reference_report/results/main/toy_trace.csv"
+ ],
+ "seconds": 0.01938176155090332,
+ "returncode": 0,
+ "total_disp": 46619.2,
+ "max_disp": 1987.6,
+ "hpwl_legal": 101556.0,
+ "hpwl_sa": 48054.0,
+ "stderr": ""
+}

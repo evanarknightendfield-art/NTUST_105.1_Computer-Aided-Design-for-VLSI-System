@@ -1,0 +1,60 @@
+== abacus testcases/ibm01/ibm01 --no-sa --no-refine
+Total displacement (legal): 36759608.4457
+Maximum displacement (legal): 17782.66
+Total HPWL (legal): 87346806
+Total HPWL (SA): 87346806
+wall 0.05s
+== noevict testcases/ibm01/ibm01 --no-sa --no-evict
+Total displacement (legal): 27070625.8381
+Maximum displacement (legal): 11607.02
+Total HPWL (legal): 91113834
+Total HPWL (SA): 91113834
+wall 0.94s
+== refine testcases/ibm01/ibm01 --no-sa
+Total displacement (legal): 27235500.7959
+Maximum displacement (legal): 10578.29
+Total HPWL (legal): 90945258
+Total HPWL (SA): 90945258
+wall 0.90s
+== abacus testcases/ibm05/ibm05 --no-sa --no-refine
+Total displacement (legal): 1771546.9182
+Maximum displacement (legal): 330.41
+Total HPWL (legal): 12029591.5
+Total HPWL (SA): 12029591.5
+wall 0.13s
+== noevict testcases/ibm05/ibm05 --no-sa --no-evict
+Total displacement (legal): 1432266.8858
+Maximum displacement (legal): 229.372
+Total HPWL (legal): 12010849.5
+Total HPWL (SA): 12010849.5
+wall 3.49s
+== refine testcases/ibm05/ibm05 --no-sa
+Total displacement (legal): 1432229.3682
+Maximum displacement (legal): 217.613
+Total HPWL (legal): 11999247.5
+Total HPWL (SA): 11999247.5
+wall 4.76s
+== refine large/L1/L1 --no-sa -v
+[legal] abacus  total 4208583396.9  max 152813.6  3.26s
+[legal] max-refine 15311 moves  total 4106918245.1  max 59212.8
+[legal] refine stopped at its time budget
+Total displacement (legal): 4106918245.0941
+Maximum displacement (legal): 59212.805
+Total HPWL (legal): 5267691931.2
+[stage1] done  17.46s
+[stage2] done  17.47s
+[done] 17.56s
+Total HPWL (SA): 5267691931.2
+wall 17.58s
+== refine large/L2/L2 --no-sa -v
+[legal] abacus  total 2089256682.6  max 15519.8  11.04s
+[legal] max-refine 248 moves  total 2086982521.1  max 14298.4
+[legal] refine stopped at its time budget
+Total displacement (legal): 2086982521.1399
+Maximum displacement (legal): 14298.38
+Total HPWL (legal): 2849958207
+[stage1] done  24.86s
+[stage2] done  24.94s
+[done] 25.39s
+Total HPWL (SA): 2849958207
+wall 25.52s

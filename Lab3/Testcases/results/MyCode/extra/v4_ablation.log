@@ -1,0 +1,72 @@
+== testcases/ibm01/ibm01 --no-sa --no-match --no-nswap
+Total displacement (legal): 27235500.7959
+Maximum displacement (legal): 10578.29
+Total HPWL (legal): 90945258
+Total HPWL (SA): 90945258
+wall 0.94s
+== testcases/ibm01/ibm01 --no-sa --no-nswap
+Total displacement (legal): 27108370.3639
+Maximum displacement (legal): 10578.29
+Total HPWL (legal): 90385170
+Total HPWL (SA): 90385170
+wall 0.94s
+== testcases/ibm01/ibm01 --no-sa
+Total displacement (legal): 26995105.257
+Maximum displacement (legal): 10578.29
+Total HPWL (legal): 80965878
+Total HPWL (SA): 80965878
+wall 1.01s
+== testcases/ibm05/ibm05 --no-sa --no-match --no-nswap
+Total displacement (legal): 1432229.3682
+Maximum displacement (legal): 217.613
+Total HPWL (legal): 11999247.5
+Total HPWL (SA): 11999247.5
+wall 4.93s
+== testcases/ibm05/ibm05 --no-sa --no-nswap
+Total displacement (legal): 1426017.926
+Maximum displacement (legal): 217.613
+Total HPWL (legal): 11983949.5
+Total HPWL (SA): 11983949.5
+wall 4.94s
+== testcases/ibm05/ibm05 --no-sa
+Total displacement (legal): 1415026.6414
+Maximum displacement (legal): 217.53
+Total HPWL (legal): 11413099.5
+Total HPWL (SA): 11413099.5
+wall 5.15s
+== testcases/ibm01/ibm01 --effort 2000
+Total displacement (legal): 26995105.257
+Maximum displacement (legal): 10578.29
+Total HPWL (legal): 80965878
+Total HPWL (SA): 60348060
+wall 12.04s
+== testcases/ibm01/ibm01 --no-nswap
+Total displacement (legal): 27108370.3639
+Maximum displacement (legal): 10578.29
+Total HPWL (legal): 90385170
+Total HPWL (SA): 54611688
+wall 42.19s
+== large/L1/L1 --no-nswap
+Total displacement (legal): 4056592042.664
+Maximum displacement (legal): 59437.708
+Total HPWL (legal): 5632596675.9
+Total HPWL (SA): 2841405893
+wall 44.86s
+== large/L2/L2 --no-nswap
+Total displacement (legal): 2043274233.9399
+Maximum displacement (legal): 14343.23
+Total HPWL (legal): 3155778206
+Total HPWL (SA): 2780297951
+wall 48.22s
+== large/L1/L1 --polish-share 0
+Total displacement (legal): 3997587449.048
+Maximum displacement (legal): 60441.823
+Total HPWL (legal): 2462206795.3
+Total HPWL (SA): 2186105027.8
+wall 49.21s
+== large/L2/L2 --polish-share 0
+Total displacement (legal): 2001119223.7799
+Maximum displacement (legal): 14337.99
+Total HPWL (legal): 2039716012.5
+Total HPWL (SA): 1997334295
+wall 48.26s
